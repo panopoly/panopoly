@@ -11,6 +11,12 @@ function panopoly_install_tasks($install_state) {
   // Summon the power of the Apps module
   require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
 
+  // Setup a task to verify capability to run apps
+  $tasks['panopoly_apps_check'] = array(
+    'display_name' => t('Enable apps support'),
+    'type' => 'form',
+  );
+
   // Setup the Panopoly Apps install task
   $panopoly_server = array(
     'machine name' => 'panopoly',
@@ -147,6 +153,52 @@ function panopoly_default_content(&$modules) {
       $modules[] = $module . '_democontent';
     }
   }
+}
+
+/**
+ * Form to check to see if Apps support is possible
+ */
+function panopoly_apps_check($form, &$form_state) {
+  $form = array();
+
+  $form['opening'] = array(
+    '#markup' => '<h1>' . t('Enable Support for Apps') . '</h1>',
+  );
+
+  $form['openingtext'] = array(
+    '#markup' => '<p>' . t('Apps uses the same mechanism for installing modules as the update module in core. This depends on certain php extensions to be installed on your server. Below is the documentation for the various methods of installing.') . '</p>',
+  );
+
+  $form['pantheon'] = array(
+    '#title' => t('Pantheon'),
+    '#type' => 'fieldset',
+    '#description' => theme('image', array('path' => drupal_get_path('profile', 'openacademy') . '/images/enable-apps-pantheon.png')) . t('If you are installing Panopoly on Pantheon, you need to enable "On Server Development" to use apps.<br /><br />After you install your apps, you will need to use the "Commit" button to add them to the version control system.'),
+  );
+
+  $form['ftp'] = array(
+    '#title' => t('FTP'),
+    '#type' => 'fieldset',
+    '#description' => 'In order to install via ftp, you must have the ftp php extension enabled. Most apache2/php installs have this by default which is by it probably shows up on most installs. <br /><br />You may run into a server that doesn\'t have ftp so then you will need to install it or use an alternative method. See <a href="http://us2.php.net/manual/en/book.ftp.php">http://us2.php.net/manual/en/book.ftp.php</a> for how to install the ftp php extension. You will also need an ftp username and password that has rights to write to your site directory on your server. Be aware that FTP is not an encrypted protocol and your credentials will be transmitted in the clear.',
+  );
+
+  $form['ssh'] = array(
+    '#title' => t('SSH'),
+    '#type' => 'fieldset',
+    '#description' => 'In order to install via ssh, you must have the ssh2 php extension installed and enabled. This does not come by default with many apache2/php installs so it commonly needs to be added. <br /><br />See <a href="http://us2.php.net/manual/en/book.ssh2.php">http://us2.php.net/manual/en/book.ssh2.php</a> for how to install the ssh2 php extension. You will also need a username and password of a user that can ssh into the server and has write permissions to your site directory on your server.',
+  );
+
+  $form['webserver'] = array(
+    '#title' => 'Webserver Direct Install',
+    '#type' => 'fieldset',
+    '#description' => 'In order to install directly to the sites/all/modules directory it needs to be writable. In order to do this go to the root of your drupal install and type <strong>sudo chmod -R 777 sites/all/modules</strong>. Be aware that there are security issues with leaving your site in this state.',
+  );
+
+  $form['continue'] = array(
+    '#type' => 'submit',
+    '#value' => 'Continue',
+  );
+
+  return $form;
 }
                 
 /**
