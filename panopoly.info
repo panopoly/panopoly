@@ -30,8 +30,8 @@ dependencies[] = views
 dependencies[] = views_content
 dependencies[] = views_ui
 dependencies[] = token
-; dependencies[] = ds
-; dependencies[] = ds_extras
+dependencies[] = ds
+dependencies[] = ds_extras
 
 ; Contrib - Field UI and Content Types
 dependencies[] = tablefield
@@ -71,7 +71,6 @@ dependencies[] = better_formats
 dependencies[] = caption_filter
 dependencies[] = image_resize_filter
 dependencies[] = date_popup_authored
-dependencies[] = read_more
 dependencies[] = admin
 dependencies[] = module_filter
 dependencies[] = views_bulk_operations

@@ -1,6 +1,5 @@
 api = 2
 core = 7.0
-projects[drupal][type] = core
 
 ; Contrib - Foundation
 projects[ctools][subdir] = contrib
@@ -164,10 +163,6 @@ projects[image_resize_filter][subdir] = contrib
 projects[date_popup_authored][version] = 1.1-beta2
 projects[date_popup_authored][subdir] = contrib
 projects[date_popup_authored][type] = module
-
-projects[read_more][version] = 1.x-dev
-projects[read_more][type] = module
-projects[read_more][subdir] = contrib
 
 projects[admin][version] = 2.0-beta3
 projects[admin][type] = module
