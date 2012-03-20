@@ -104,6 +104,7 @@ projects[calendar][version] = 3.0
 projects[calendar][subdir] = contrib
 projects[calendar][type] = module
 projects[calendar][patch][1489092] = http://drupal.org/files/panopoly-calendar-neg-taxonomy.patch
+projects[calendar][patch][1489092] = http://drupal.org/files/panopoly-calendar-check-entity-info.patch
 
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][type] = module
