@@ -287,16 +287,16 @@ projects[fontyourface][version] = 2.2
 
 ; Libraries
 libraries[tinymce][download][type] = get
-libraries[tinymce][download][url] = http://apps.getpantheon.com/sites/all/libraries/tinymce-panopoly.tar.gz
+libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.4.8.zip
 
 libraries[SolrPhpClient][download][type] = get
 libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
 
 libraries[markitup][download][type] = get
-libraries[markitup][download][url] = http://apps.getpantheon.com/sites/all/libraries/markitup-panopoly.tar.gz
+libraries[markitup][download][url] = https://github.com/markitup/1.x/tarball/master
 
 libraries[jquery.cycle][download][type] = get
-libraries[jquery.cycle][download][url] = http://apps.getpantheon.com/sites/all/libraries/jquery-cycle.tar.gz
+libraries[jquery.cycle][download][url] = https://github.com/malsup/cycle/zipball/master
 
 libraries[respondjs][download][type] = get
-libraries[respondjs][download][url] = http://apps.getpantheon.com/sites/all/libraries/panopoly-respondjs.tar.gz
+libraries[respondjs][download][url] = https://github.com/scottjehl/Respond/tarball/master
