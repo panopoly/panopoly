@@ -1,5 +1,5 @@
 api = 2
-core = 7.0
+core = 7.x
 
 ; Contrib - Foundation
 projects[ctools][subdir] = contrib
