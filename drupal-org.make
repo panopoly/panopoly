@@ -2,43 +2,44 @@ api = 2
 core = 7.x
 
 ; Contrib - Foundation
+projects[ctools][version] = 1.0
 projects[ctools][subdir] = contrib
-projects[ctools][version] = 1.0-rc2
 projects[ctools][type] = module
-projects[ctools][patch][1489084] = http://drupal.org/files/ctools-modal-sizing.patch
 
+projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][type] = module
-projects[panels][version] = 3.2
-projects[panels][patch][1489088] = http://drupal.org/files/panels-lazy-css-loading.patch
+projects[panels][download][type] = git
+projects[panels][download][revision] = d3f1f07
+projects[panels][download][branch] = 7.x-3.x
 
+projects[panels_breadcrumbs][version] = 1.6
 projects[panels_breadcrumbs][subdir] = contrib
 projects[panels_breadcrumbs][type] = module
-projects[panels_breadcrumbs][version] = 1.6
 
+projects[panelizer][version] = 2.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][type] = module
-projects[panelizer][version] = 2.0
+projects[panelizer][download][type] = git
+projects[panelizer][download][revision] = 142cccc
+projects[panelizer][download][branch] = 7.x-2.x
 
-projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][version] = 1.x-dev
+projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][type] = module
 projects[fieldable_panels_panes][download][type] = git
 projects[fieldable_panels_panes][download][revision] = 3833248
 projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
-projects[pm_existing_pages][version] = 1.x-dev
+projects[pm_existing_pages][version] = 1.2
 projects[pm_existing_pages][type] = module
 projects[pm_existing_pages][subdir] = contrib
-projects[pm_existing_pages][download][type] = git
-projects[pm_existing_pages][download][revision] = 8be3b27
-projects[pm_existing_pages][download][branch] = 7.x-1.x
 
 projects[views][version] = 3.3
 projects[views][type] = module
 projects[views][subdir] = contrib
 
-projects[token][version] = 1.0-rc1
+projects[token][version] = 1.0
 projects[token][type] = module
 projects[token][subdir] = contrib
 
@@ -47,7 +48,7 @@ projects[ds][type] = module
 projects[ds][subdir] = contrib
 
 ; Contrib - Field UI and Content Types
-projects[tablefield][version] = 2.0-beta6
+projects[tablefield][version] = 2.0
 projects[tablefield][type] = module
 projects[tablefield][subdir] = contrib
 
@@ -55,7 +56,7 @@ projects[link][version] = 1.0
 projects[link][type] = module
 projects[link][subdir] = contrib
 
-projects[date][version] = 2.2
+projects[date][version] = 2.5
 projects[date][type] = module
 projects[date][subdir] = contrib
 
@@ -82,29 +83,17 @@ projects[field_group][version] = 1.1
 projects[field_group][type] = module
 projects[field_group][subdir] = contrib
 
-projects[office_hours][version] = 1.x-dev
+projects[office_hours][version] = 1.0
 projects[office_hours][type] = module
 projects[office_hours][subdir] = contrib
-projects[office_hours][download][type] = git
-projects[office_hours][download][revision] = ff04ef1
-projects[office_hours][download][branch] = 7.x-1.x
 
-projects[entityreference][version] = 1.0-beta5
+projects[entityreference][version] = 1.0-rc1
 projects[entityreference][type] = module
 projects[entityreference][subdir] = contrib
 
-projects[biblio][version] = 1.x-dev
-projects[biblio][type] = module
-projects[biblio][subdir] = contrib
-projects[biblio][download][type] = git
-projects[biblio][download][revision] = 4fe4471
-projects[biblio][download][branch] = 7.x-1.x
-
-projects[calendar][version] = 3.0
+projects[calendar][version] = 3.3
 projects[calendar][subdir] = contrib
 projects[calendar][type] = module
-projects[calendar][patch][1489092] = http://drupal.org/files/panopoly-calendar-neg-taxonomy.patch
-projects[calendar][patch][1489092] = http://drupal.org/files/panopoly-calendar-check-entity-info.patch
 
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][type] = module
