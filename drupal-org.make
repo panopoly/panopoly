@@ -12,7 +12,7 @@ projects[panels][type] = module
 projects[panels][download][type] = git
 projects[panels][download][revision] = 9c467ad
 projects[panels][download][branch] = 7.x-3.x
-projects[panels][patch][1555352] = http://drupal.org/files/panels-ipe-reset-html-ids-take2.patch
+projects[panels][patch][1555352] = http://drupal.org/files/panels-ipe-reset-html-ids-take3.patch
 
 projects[panels_breadcrumbs][version] = 1.6
 projects[panels_breadcrumbs][subdir] = contrib
