@@ -219,7 +219,7 @@ function panopoly_theme_form($form, &$form_state) {
     '#title' => t('Starting Theme'),
     '#type' => 'radios',
     '#options' => $themes,
-    '#default_value' => 'panopoly_default',
+    '#default_value' => 'bartik',
   );
 
   $form['submit'] = array(
