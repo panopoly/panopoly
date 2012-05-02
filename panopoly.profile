@@ -29,6 +29,7 @@ function panopoly_install_tasks($install_state) {
       'panopoly_pages',
       'panopoly_search',
       'panopoly_theme',
+      'panopoly_users',
       'panopoly_widgets',
       'panopoly_wysiwyg',
     ),
