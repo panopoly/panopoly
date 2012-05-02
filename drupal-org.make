@@ -221,6 +221,7 @@ projects[apps][patch][1479164] = http://drupal.org/files/1479164-apps-permission
 projects[apps][patch][1479536] = http://drupal.org/files/apps-multiple-install-servers-1479536-4.patch
 projects[apps][patch][1480912] = http://drupal.org/files/apps-clean-up-the-cleanup.patch
 projects[apps][patch][1482684] = http://drupal.org/files/apps-single-item-style.patch
+projects[apps][patch][1558280] = http://drupal.org/files/apps-screen-design-css.patch
 
 projects[features][version] = 1.0-rc2
 projects[features][subdir] = contrib
