@@ -144,11 +144,6 @@ projects[menu_block][version] = 2.3
 projects[menu_block][subdir] = contrib
 projects[menu_block][type] = module
 
-projects[taxonomy_menu][version] = 1.2
-projects[taxonomy_menu][subdir] = contrib
-projects[taxonomy_menu][type] = module
-projects[taxonomy_menu][patch][1486510] = http://drupal.org/files/taxonomy-menu-no-vid-checking.patch
-
 ; Contrib - User Experience
 projects[wysiwyg][subdir] = contrib
 projects[wysiwyg][type] = module
