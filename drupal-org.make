@@ -65,32 +65,9 @@ projects[simple_gmap][version] = 1.0-rc1
 projects[simple_gmap][type] = module
 projects[simple_gmap][subdir] = contrib
 
-projects[email][version] = 1.0
-projects[email][type] = module
-projects[email][subdir] = contrib
-
-projects[phone][version] = 1.x-dev
-projects[phone][type] = module
-projects[phone][subdir] = contrib
-projects[phone][download][type] = git
-projects[phone][download][revision] = c45a7e4
-projects[phone][download][branch] = 7.x-1.x
-
 projects[field_group][version] = 1.1
 projects[field_group][type] = module
 projects[field_group][subdir] = contrib
-
-projects[office_hours][version] = 1.0
-projects[office_hours][type] = module
-projects[office_hours][subdir] = contrib
-
-projects[entityreference][version] = 1.0-rc1
-projects[entityreference][type] = module
-projects[entityreference][subdir] = contrib
-
-projects[calendar][version] = 3.3
-projects[calendar][subdir] = contrib
-projects[calendar][type] = module
 
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][type] = module

@@ -42,12 +42,7 @@ dependencies[] = date_views
 dependencies[] = views_slideshow
 dependencies[] = views_slideshow_cycle
 dependencies[] = simple_gmap
-dependencies[] = email
-dependencies[] = phone
 dependencies[] = field_group
-dependencies[] = office_hours
-dependencies[] = entityreference
-dependencies[] = calendar
 dependencies[] = file_entity
 
 ; Contrib - Media
