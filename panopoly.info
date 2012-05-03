@@ -31,8 +31,6 @@ dependencies[] = views
 dependencies[] = views_content
 dependencies[] = views_ui
 dependencies[] = token
-dependencies[] = ds
-dependencies[] = ds_extras
 
 ; Contrib - Field UI and Content Types
 dependencies[] = tablefield
@@ -90,7 +88,6 @@ dependencies[] = apps
 dependencies[] = features
 dependencies[] = entity
 dependencies[] = uuid
-dependencies[] = uuid_features
 dependencies[] = defaultcontent
 dependencies[] = strongarm
 dependencies[] = libraries
