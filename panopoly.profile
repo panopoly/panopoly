@@ -38,7 +38,13 @@ function panopoly_install_tasks($install_state) {
     ),
   );
   $tasks = $tasks + apps_profile_install_tasks($install_state, $panopoly_server);
-  $tasks['apps_profile_apps_select_form_panopoly']['display_name'] = t('Install apps for Panopoly');
+
+  // Rename one of the default apps tasks. In the case of a non-interactive
+  // installation, apps_profile_install_tasks() never defines this task, so we
+  // need to make sure we don't accidentally create it when it doesn't exist.
+  if (isset($tasks['apps_profile_apps_select_form_panopoly'])) {
+    $tasks['apps_profile_apps_select_form_panopoly']['display_name'] = t('Install apps for Panopoly');
+  }
 
   // Set up the theme selection and configuration tasks
   $tasks['panopoly_theme_form'] = array(
@@ -345,5 +351,10 @@ function panopoly_finished_yah_submit($form, &$form_state) {
   drupal_flush_all_caches();
 
   // And away we go
-  drupal_goto('<front>');
+  // $form_state['redirect'] won't work here since we are still in the
+  // installer, so use drupal_goto() (for interactive installs only) instead.
+  $install_state = $form_state['build_info']['args'][0];
+  if ($install_state['interactive']) {
+    drupal_goto('<front>');
+  }
 }
