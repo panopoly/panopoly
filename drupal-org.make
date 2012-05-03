@@ -44,10 +44,6 @@ projects[token][version] = 1.0
 projects[token][type] = module
 projects[token][subdir] = contrib
 
-projects[ds][version] = 1.5
-projects[ds][type] = module
-projects[ds][subdir] = contrib
-
 ; Contrib - Field UI and Content Types
 projects[tablefield][version] = 2.0
 projects[tablefield][type] = module
