@@ -11,13 +11,13 @@ function panopoly_install_tasks($install_state) {
   // Summon the power of the Apps module
   require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
 
-  // Setup a task to verify capability to run apps
+  // Set up a task to verify capability to run apps
   $tasks['panopoly_apps_check'] = array(
     'display_name' => t('Enable apps support'),
     'type' => 'form',
   );
 
-  // Setup the Panopoly Apps install task
+  // Set up the Panopoly Apps install task
   $panopoly_server = array(
     'machine name' => 'panopoly',
     'default apps' => array(
@@ -40,7 +40,7 @@ function panopoly_install_tasks($install_state) {
   $tasks = $tasks + apps_profile_install_tasks($install_state, $panopoly_server);
   $tasks['apps_profile_apps_select_form_panopoly']['display_name'] = t('Install apps for Panopoly');
 
-  // Setup the theme selection and configuration tasks
+  // Set up the theme selection and configuration tasks
   $tasks['panopoly_theme_form'] = array(
     'display_name' => t('Choose a theme'),
     'type' => 'form',
@@ -50,7 +50,7 @@ function panopoly_install_tasks($install_state) {
     'type' => 'form',
   );
 
-  // Setup the prepare task to close it out
+  // Set up the prepare task to close it out
   $tasks['panopoly_prepare'] = array(
     'display_name' => t('Prepare site'),
     'type' => 'form',
@@ -267,7 +267,7 @@ function panopoly_prepare($form, &$form_state) {
   );
 
   $form['openingtext'] = array(
-    '#markup' => '<h2>' . t('Panopoly now needs to do a bit more Drupal magic to get everything setup.') . '</h2>',
+    '#markup' => '<h2>' . t('Panopoly now needs to do a bit more Drupal magic to get everything set up.') . '</h2>',
   );
 
   $form['submit'] = array(
