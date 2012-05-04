@@ -190,6 +190,7 @@ projects[apps][patch][1479536] = http://drupal.org/files/apps-multiple-install-s
 projects[apps][patch][1480912] = http://drupal.org/files/apps-clean-up-the-cleanup.patch
 projects[apps][patch][1482684] = http://drupal.org/files/apps-single-item-style.patch
 projects[apps][patch][1558280] = http://drupal.org/files/apps-screen-design-css-p0.patch
+projects[apps][patch][1561652] = http://drupal.org/files/apps-allow-drush-site-install.patch
 
 projects[features][version] = 1.0-rc2
 projects[features][subdir] = contrib
