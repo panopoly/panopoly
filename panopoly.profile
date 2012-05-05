@@ -143,7 +143,7 @@ function panopoly_apps_servers_info() {
       'description' => 'Apps for Panopoly',
       'manifest' => 'http://apps.getpantheon.com/panopoly',
       'profile' => $profile,
-      'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.0-beta3',
+      'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.x-dev',
       'server_name' => $_SERVER['SERVER_NAME'],
       'server_ip' => $_SERVER['SERVER_ADDR'],
     ),
