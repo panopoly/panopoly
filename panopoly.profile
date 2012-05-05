@@ -141,9 +141,9 @@ function panopoly_apps_servers_info() {
     'panopoly' => array(
       'title' => 'Panopoly',
       'description' => 'Apps for Panopoly',
-      'manifest' => 'http://apps.getpantheon.com/panopoly-dev',
+      'manifest' => 'http://apps.getpantheon.com/panopoly',
       'profile' => $profile,
-      'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.x',
+      'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.0-beta3',
       'server_name' => $_SERVER['SERVER_NAME'],
       'server_ip' => $_SERVER['SERVER_ADDR'],
     ),
@@ -346,6 +346,10 @@ function panopoly_finished_yah($form, &$form_state) {
  * Submit form to finish it out and send us on our way!
  */
 function panopoly_finished_yah_submit($form, &$form_state) {
+
+  // Allow anonymous and authenticated users to see content
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 
   // Once more for good measure
   drupal_flush_all_caches();
