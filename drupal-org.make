@@ -253,6 +253,7 @@ projects[fontyourface][type] = module
 ; Libraries
 libraries[tinymce][download][type] = get
 libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.4.8.zip
+libraries[tinymce][patch][1561882] = http://drupal.org/files/tinymce-add-circkuit-theme.patch
 
 libraries[SolrPhpClient][download][type] = get
 libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/files/SolrPhpClient.r60.2011-05-04.zip
