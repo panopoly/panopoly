@@ -1,7 +1,7 @@
 api = 2
 core = 7.x
 
-; Contrib - Foundation
+; Panopoly - Contrib - Foundation
 projects[ctools][version] = 1.0
 projects[ctools][subdir] = contrib
 projects[ctools][type] = module
@@ -44,7 +44,7 @@ projects[token][version] = 1.0
 projects[token][type] = module
 projects[token][subdir] = contrib
 
-; Contrib - Field UI and Content Types
+; Panopoly - Contrib - Field UI and Content Types
 projects[tablefield][version] = 2.0
 projects[tablefield][type] = module
 projects[tablefield][subdir] = contrib
@@ -76,7 +76,7 @@ projects[file_entity][download][type] = git
 projects[file_entity][download][revision] = d897533
 projects[file_entity][download][branch] = 7.x-2.x
 
-; Contrib - Search
+; Panopoly - Contrib - Search
 projects[search_api][version] = 1.x-dev
 projects[search_api][type] = module
 projects[search_api][subdir] = contrib
@@ -96,7 +96,7 @@ projects[facetapi][version] = 1.0-rc4
 projects[facetapi][type] = module
 projects[facetapi][subdir] = contrib
 
-; Contrib - Media
+; Panopoly - Contrib - Media
 projects[media][version] = 2.x-dev
 projects[media][type] = module
 projects[media][subdir] = contrib
@@ -112,7 +112,7 @@ projects[media_vimeo][version] = 1.0-beta5
 projects[media_vimeo][type] = module
 projects[media_vimeo][subdir] = contrib
 
-; Contrib - Menus and URLs
+; Panopoly - Contrib - Menus and URLs
 projects[pathauto][version] = 1.0
 projects[pathauto][subdir] = contrib
 projects[pathauto][type] = module
@@ -121,7 +121,7 @@ projects[menu_block][version] = 2.3
 projects[menu_block][subdir] = contrib
 projects[menu_block][type] = module
 
-; Contrib - User Experience
+; Panopoly - Contrib - User Experience
 projects[wysiwyg][subdir] = contrib
 projects[wysiwyg][type] = module
 projects[wysiwyg][version] = 2.x-dev 
@@ -181,7 +181,7 @@ projects[backports][version] = 1.0-alpha1
 projects[backports][type] = module
 projects[backports][subdir] = contrib
 
-; Contrib - Products
+; Panopoly - Contrib - Products
 projects[apps][version] = 1.0-beta6
 projects[apps][subdir] = contrib
 projects[apps][type] = module
@@ -227,17 +227,17 @@ projects[libraries][version] = 2.0-alpha2
 projects[libraries][type] = module
 projects[libraries][subdir] = contrib
 
-; Contrib - Performance
+; Panopoly - Contrib - Performance
 projects[redis][version] = 2.0-alpha8
 projects[redis][type] = module
 projects[redis][subdir] = contrib
 
-; Contrib - Development
+; Panopoly - Contrib - Development
 projects[devel][version] = 1.2
 projects[devel][subdir] = contrib
 projects[devel][type] = module
 
-; Contrib - Theme
+; Panopoly - Contrib - Theme
 projects[conditional_styles][version] = 2.1
 projects[conditional_styles][subdir] = contrib
 projects[conditional_styles][type] = module
