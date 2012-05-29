@@ -3,7 +3,7 @@ description = A magical framework for building Drupal products based on the Pane
 version = 7.x-1.x-dev
 core = 7.x
 
-; Core
+; Panopoly - Core
 dependencies[] = menu
 dependencies[] = image
 dependencies[] = list
@@ -18,7 +18,7 @@ dependencies[] = file
 dependencies[] = block
 dependencies[] = dblog
 
-; Contrib - Foundation 
+; Panopoly - Contrib - Foundation 
 dependencies[] = ctools
 dependencies[] = panels
 dependencies[] = panels_ipe
@@ -32,7 +32,7 @@ dependencies[] = views_content
 dependencies[] = views_ui
 dependencies[] = token
 
-; Contrib - Field UI and Content Types
+; Panopoly - Contrib - Field UI and Content Types
 dependencies[] = tablefield
 dependencies[] = link
 dependencies[] = date
@@ -45,18 +45,18 @@ dependencies[] = simple_gmap
 dependencies[] = field_group
 dependencies[] = file_entity
 
-; Contrib - Media
+; Panopoly - Contrib - Media
 dependencies[] = media
 dependencies[] = media_internet
 dependencies[] = mediafield
 dependencies[] = media_youtube
 dependencies[] = media_vimeo
 
-; Contrib - Menus and URLS
+; Panopoly - Contrib - Menus and URLS
 dependencies[] = pathauto
 dependencies[] = menu_block
 
-; Contrib - User Experience
+; Panopoly - Contrib - User Experience
 dependencies[] = wysiwyg
 dependencies[] = wysiwyg_filter
 dependencies[] = better_formats
@@ -70,14 +70,14 @@ dependencies[] = simplified_menu_admin
 dependencies[] = references_dialog 
 dependencies[] = backports
 
-; Contrib - Search 
+; Panopoly - Contrib - Search 
 dependencies[] = search_api
 dependencies[] = search_api_solr
 dependencies[] = facetapi
 dependencies[] = search_api_facetapi
 dependencies[] = search_api_views
 
-; Contrib - Products
+; Panopoly - Contrib - Products
 dependencies[] = apps 
 dependencies[] = features
 dependencies[] = entity
@@ -86,14 +86,14 @@ dependencies[] = defaultcontent
 dependencies[] = strongarm
 dependencies[] = libraries
 
-; Contrib - Performance
+; Panopoly - Contrib - Performance
 dependencies[] = redis
 
-; Contrib - Development
+; Panopoly - Contrib - Development
 dependencies[] = devel
 dependencies[] = devel_generate
 
-; Contrib - Theme
+; Panopoly - Contrib - Theme
 dependencies[] = conditional_styles
 dependencies[] = respondjs
 dependencies[] = fontyourface
@@ -102,6 +102,3 @@ dependencies[] = fontsquirrel
 
 ; CSS Stylesheets
 stylesheets[all][] = panopoly.css
-
-; Files
-files[] = panopoly.profile
