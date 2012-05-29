@@ -182,9 +182,8 @@ function panopoly_default_content(&$modules) {
 function panopoly_apps_check($form, &$form_state) {
   $form = array();
 
-  $form['opening'] = array(
-    '#markup' => '<h1>' . t('Enable Support for Apps') . '</h1>',
-  );
+  // Set the title
+  drupal_set_title(t('Enable Support for Apps'));
 
   $form['openingtext'] = array(
     '#markup' => '<p>' . t('Apps uses the same mechanism for installing modules as the update module in core. This depends on certain php extensions to be installed on your server. Below is the documentation for the various methods of installing.') . '</p>',
@@ -226,6 +225,9 @@ function panopoly_apps_check($form, &$form_state) {
  * Form to choose the starting theme from list of available options
  */
 function panopoly_theme_form($form, &$form_state) {
+
+  // Set the page title
+  drupal_set_title(t('Choose a theme!'));
 
   // Create list of theme options, minus admin + testing + starter themes
   $themes = array();
@@ -281,9 +283,8 @@ function panopoly_theme_configure_form($form, &$form_state) {
 function panopoly_prepare($form, &$form_state) {
   $form = array();
 
-  $form['opening'] = array(
-    '#markup' => '<h1>' . t('Prepare Site'),
-  );
+  // Set the title 
+  drupal_set_title(t('Prepare Site'));
 
   $form['openingtext'] = array(
     '#markup' => '<h2>' . t('Panopoly now needs to do a bit more Drupal magic to get everything set up.') . '</h2>',
@@ -331,9 +332,8 @@ function panopoly_prepare_submit($form, &$form_state) {
 function panopoly_finished_yah($form, &$form_state) {
   $form = array();
 
-  $form['opening'] = array(
-    '#markup' => '<h1>' . t('Finished!') . '</h1>',
-  );
+  // Set the title
+  drupal_set_title(t('Finished!'));
 
   $form['openingtext'] = array(
     '#markup' => '<h2>' . t('Congratulations, you just installed Panopoly!') . '</h2>',
