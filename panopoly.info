@@ -86,9 +86,6 @@ dependencies[] = defaultcontent
 dependencies[] = strongarm
 dependencies[] = libraries
 
-; Panopoly - Contrib - Performance
-dependencies[] = redis
-
 ; Panopoly - Contrib - Development
 dependencies[] = devel
 dependencies[] = devel_generate
