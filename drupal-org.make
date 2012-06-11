@@ -10,7 +10,7 @@ projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][type] = module
 projects[panels][download][type] = git
-projects[panels][download][revision] = 9c467ad
+projects[panels][download][revision] = 9c467ad 
 projects[panels][download][branch] = 7.x-3.x
 projects[panels][patch][1555352] = http://drupal.org/files/panels-ipe-reset-html-ids-take3.patch
 
@@ -22,17 +22,17 @@ projects[panelizer][version] = 2.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][type] = module
 projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = 142cccc
+projects[panelizer][download][revision] = c7942f3
 projects[panelizer][download][branch] = 7.x-2.x
 
 projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][type] = module
 projects[fieldable_panels_panes][download][type] = git
-projects[fieldable_panels_panes][download][revision] = 3833248
+projects[fieldable_panels_panes][download][revision] = 57000ec
 projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
-projects[pm_existing_pages][version] = 1.2
+projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][type] = module
 projects[pm_existing_pages][subdir] = contrib
 
@@ -40,7 +40,7 @@ projects[views][version] = 3.3
 projects[views][type] = module
 projects[views][subdir] = contrib
 
-projects[token][version] = 1.0
+projects[token][version] = 1.1
 projects[token][type] = module
 projects[token][subdir] = contrib
 
@@ -73,24 +73,18 @@ projects[file_entity][version] = 2.x-dev
 projects[file_entity][type] = module
 projects[file_entity][subdir] = contrib
 projects[file_entity][download][type] = git
-projects[file_entity][download][revision] = d897533
+projects[file_entity][download][revision] = 0739c8a
 projects[file_entity][download][branch] = 7.x-2.x
 
 ; Panopoly - Contrib - Search
-projects[search_api][version] = 1.x-dev
+projects[search_api][version] = 1.1
 projects[search_api][type] = module
 projects[search_api][subdir] = contrib
-projects[search_api][download][type] = git
-projects[search_api][download][revision] = 65de6a2 
-projects[search_api][download][branch] = 7.x-1.x
 
-projects[search_api_solr][version] = 1.x-dev
+projects[search_api_solr][version] = 1.0-rc2
 projects[search_api_solr][type] = module
 projects[search_api_solr][subdir] = contrib
-projects[search_api_solr][download][type] = git
-projects[search_api_solr][download][revision] = 8452317
-projects[search_api_solr][download][branch] = 7.x-1.x
-projects[search_api_solr][patch][1407282] = http://drupal.org/files/1407282-6-reroll.patch
+projects[search_api_solr][patch][1407282] = http://drupal.org/files/1407282-search-api-custom-connection-class.patch
 
 projects[facetapi][version] = 1.0-rc4
 projects[facetapi][type] = module
@@ -113,7 +107,7 @@ projects[media_vimeo][type] = module
 projects[media_vimeo][subdir] = contrib
 
 ; Panopoly - Contrib - Menus and URLs
-projects[pathauto][version] = 1.0
+projects[pathauto][version] = 1.1
 projects[pathauto][subdir] = contrib
 projects[pathauto][type] = module
 
@@ -196,7 +190,7 @@ projects[features][version] = 1.0-rc2
 projects[features][subdir] = contrib
 projects[features][type] = module
 
-projects[entity][version] = 1.0-rc2
+projects[entity][version] = 1.0-rc3
 projects[entity][type] = module
 projects[entity][subdir] = contrib
 
@@ -227,13 +221,8 @@ projects[libraries][version] = 2.0-alpha2
 projects[libraries][type] = module
 projects[libraries][subdir] = contrib
 
-; Panopoly - Contrib - Performance
-projects[redis][version] = 2.0-alpha8
-projects[redis][type] = module
-projects[redis][subdir] = contrib
-
 ; Panopoly - Contrib - Development
-projects[devel][version] = 1.2
+projects[devel][version] = 1.3
 projects[devel][subdir] = contrib
 projects[devel][type] = module
 
