@@ -5,8 +5,12 @@
  */
 function panopoly_install_tasks($install_state) {
 
-  // Kick off the tasks
+  // Kick off the tasks and attempt to increase the memory if
+  // provided with less than 196M
   $tasks = array();
+  if (ini_get('memory_limit') != '-1' && ini_get('memory_limit') <= '196M') {    
+    ini_set('memory_limit', '196M');
+  }
 
   // Summon the power of the Apps module
   require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
