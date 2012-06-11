@@ -95,7 +95,7 @@ projects[media][version] = 2.x-dev
 projects[media][type] = module
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = 454c7a0
+projects[media][download][revision] = 2666215
 projects[media][download][branch] = 7.x-2.x
 
 projects[media_youtube][version] = 1.0-beta3
@@ -164,12 +164,9 @@ projects[simplified_menu_admin][version] = 1.0-beta2
 projects[simplified_menu_admin][type] = module
 projects[simplified_menu_admin][subdir] = contrib
 
-projects[references_dialog][version] = 1.x-dev
+projects[references_dialog][version] = 1.0-alpha4
 projects[references_dialog][type] = module
 projects[references_dialog][subdir] = contrib
-projects[references_dialog][download][type] = git
-projects[references_dialog][download][revision] = fd90c4f 
-projects[references_dialog][download][branch] = 7.x-1.x
 
 projects[backports][version] = 1.0-alpha1
 projects[backports][type] = module
@@ -198,15 +195,8 @@ projects[uuid][version] = 1.x-dev
 projects[uuid][type] = module
 projects[uuid][subdir] = contrib
 projects[uuid][download][type] = git
-projects[uuid][download][revision] = 68f7c09
+projects[uuid][download][revision] = bf06527
 projects[uuid][download][branch] = 7.x-1.x
-
-projects[uuid_features][version] = 1.x-dev
-projects[uuid_features][type] = module
-projects[uuid_features][subdir] = contrib
-projects[uuid_features][download][type] = git
-projects[uuid_features][download][revision] = bea7d9d
-projects[uuid_features][download][branch] = 7.x-1.x
 
 projects[defaultcontent][version] = 1.0-alpha5
 projects[defaultcontent][type] = module
