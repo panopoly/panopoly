@@ -120,6 +120,13 @@ function panopoly_form_apps_profile_apps_select_form_alter(&$form, $form_state) 
     ksort($options);
     $form['apps_fieldset']['apps']['#options'] = $options;
   }
+
+  // Remove the demo content selection option since this is
+  // handled through the Panopoly demo module.
+  $form['default_content_fieldset']['#access'] = FALSE;
+
+  // Remove the "skip this step" option since why would we want that?
+  $form['actions']['skip']['#access'] = FALSE;
 }
 
 /**
