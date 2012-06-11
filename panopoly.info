@@ -93,9 +93,6 @@ dependencies[] = devel_generate
 ; Panopoly - Contrib - Theme
 dependencies[] = conditional_styles
 dependencies[] = respondjs
-dependencies[] = fontyourface
-dependencies[] = fontyourface_ui
-dependencies[] = fontsquirrel
 
 ; CSS Stylesheets
 stylesheets[all][] = panopoly.css

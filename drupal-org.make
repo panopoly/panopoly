@@ -246,10 +246,6 @@ projects[respondjs][version] = 1.1
 projects[respondjs][subdir] = contrib
 projects[respondjs][type] = module
 
-projects[fontyourface][version] = 2.2
-projects[fontyourface][subdir] = contrib
-projects[fontyourface][type] = module
-
 ; Libraries
 libraries[tinymce][download][type] = get
 libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.4.8.zip
