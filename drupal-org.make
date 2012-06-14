@@ -77,6 +77,10 @@ projects[file_entity][download][revision] = 0739c8a
 projects[file_entity][download][branch] = 7.x-2.x
 
 ; Panopoly - Contrib - Search
+projects[facetapi][version] = 1.0-rc4
+projects[facetapi][type] = module
+projects[facetapi][subdir] = contrib
+
 projects[search_api][version] = 1.1
 projects[search_api][type] = module
 projects[search_api][subdir] = contrib
@@ -86,9 +90,9 @@ projects[search_api_solr][type] = module
 projects[search_api_solr][subdir] = contrib
 projects[search_api_solr][patch][1407282] = http://drupal.org/files/1407282-search-api-custom-connection-class.patch
 
-projects[facetapi][version] = 1.0-rc4
-projects[facetapi][type] = module
-projects[facetapi][subdir] = contrib
+projects[search_api_db][version] = 1.0-beta3
+projects[search_api_db][type] = module
+projects[search_api_db][subdir] = contrib
 
 ; Panopoly - Contrib - Media
 projects[media][version] = 2.x-dev
