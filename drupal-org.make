@@ -180,7 +180,7 @@ projects[apps][patch][1482684] = http://drupal.org/files/apps-single-item-style.
 projects[apps][patch][1558280] = http://drupal.org/files/apps-screen-design-css-p0.patch
 projects[apps][patch][1561652] = http://drupal.org/files/apps-allow-drush-site-install.patch
 
-projects[features][version] = 1.0-rc2
+projects[features][version] = 1.0-rc3
 projects[features][subdir] = contrib
 projects[features][type] = module
 
