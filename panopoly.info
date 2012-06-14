@@ -59,7 +59,6 @@ dependencies[] = menu_block
 ; Panopoly - Contrib - User Experience
 dependencies[] = wysiwyg
 dependencies[] = wysiwyg_filter
-dependencies[] = better_formats
 dependencies[] = caption_filter
 dependencies[] = image_resize_filter
 dependencies[] = date_popup_authored

@@ -133,13 +133,6 @@ projects[wysiwyg_filter][version] = 1.6-rc2
 projects[wysiwyg_filter][subdir] = contrib
 projects[wysiwyg_filter][type] = module
 
-projects[better_formats][version] = 1.x-dev
-projects[better_formats][subdir] = contrib
-projects[better_formats][type] = module
-projects[better_formats][download][type] = git
-projects[better_formats][download][revision] = 9106bcf
-projects[better_formats][download][branch] = 7.x-1.x
-
 projects[caption_filter][version] = 1.2
 projects[caption_filter][type] = module
 projects[caption_filter][subdir] = contrib
