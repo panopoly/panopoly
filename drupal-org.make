@@ -99,7 +99,7 @@ projects[media][version] = 2.x-dev
 projects[media][type] = module
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = 2666215
+projects[media][download][revision] = 0bc43d9
 projects[media][download][branch] = 7.x-2.x
 
 projects[media_youtube][version] = 1.0-beta3
@@ -200,7 +200,7 @@ projects[defaultcontent][type] = module
 projects[defaultcontent][subdir] = contrib
 projects[defaultcontent][patch][1263536] = http://drupal.org/files/base64_encode_files-1263536-1_0.patch
 
-projects[strongarm][version] = 2.0-rc1
+projects[strongarm][version] = 2.0
 projects[strongarm][type] = module
 projects[strongarm][subdir] = contrib
 
