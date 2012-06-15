@@ -18,12 +18,12 @@ projects[panels_breadcrumbs][version] = 1.6
 projects[panels_breadcrumbs][subdir] = contrib
 projects[panels_breadcrumbs][type] = module
 
-projects[panelizer][version] = 2.x-dev
+projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][type] = module
 projects[panelizer][download][type] = git
 projects[panelizer][download][revision] = c7942f3
-projects[panelizer][download][branch] = 7.x-2.x
+projects[panelizer][download][branch] = 7.x-3.x
 
 projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
