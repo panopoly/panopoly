@@ -114,6 +114,7 @@ projects[media_vimeo][subdir] = contrib
 projects[pathauto][version] = 1.1
 projects[pathauto][subdir] = contrib
 projects[pathauto][type] = module
+projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-persist.patch
 
 projects[menu_block][version] = 2.3
 projects[menu_block][subdir] = contrib
