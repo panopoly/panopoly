@@ -65,13 +65,7 @@ function panopoly_install_tasks($install_state) {
     'type' => 'form',
   );
   $tasks['panopoly_theme_configure_form'] = array(
-    'display_name' => t('Configure theme settings'),
-    'type' => 'form',
-  );
-
-  // Set up the prepare task to close it out
-  $tasks['panopoly_prepare'] = array(
-    'display_name' => t('Prepare site'),
+    'display_name' => t('Theme settings'),
     'type' => 'form',
   );
 
@@ -137,9 +131,9 @@ function panopoly_install_tasks_alter(&$tasks, $install_state) {
   // Since we only offer one language, define a callback to set this
   $tasks['install_select_locale']['function'] = 'panopoly_locale_selection';
 
-  // Create a more fun finished page with our Open Academy Saurus
+  // Create a more fun finished page with our Panopoly square
   $tasks['install_finished']['function'] = 'panopoly_finished_yah';
-  $tasks['install_finished']['display_name'] = t('Finished!');
+  $tasks['install_finished']['display_name'] = t('Finish up');
   $tasks['install_finished']['type'] = 'form';
 }
 
@@ -162,29 +156,12 @@ function panopoly_apps_servers_info() {
       'title' => 'Panopoly',
       'description' => 'Apps for Panopoly',
       'manifest' => 'http://apps.getpantheon.com/panopoly',
-      'profile' => $profile,
-      'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.x-dev',
-      'server_name' => (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : NULL,
-      'server_ip' => (!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : NULL,
+  //    'profile' => $profile,
+  //    'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.x-dev',
+  //    'server_name' => (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : NULL,
+  //    'server_ip' => (!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : NULL,
     ),
   );
-}
-
-/**
- * Apps installer default content callback.
- *
- * Adapted from openenterprise_default_content()
- */
-function panopoly_default_content(&$modules) {
-  $files = system_rebuild_module_data();
-  foreach($modules as $module) {
-    // This assumes a pattern MYMODULE_democontent which is probably not always true. Might be 
-    // better to check $_SESSION['apps_manifest'] and check to see if this exists:
-    // function_exists($_SESSION['module']['configure form'])
-    if (isset($files[$module . '_democontent'])) {
-      $modules[] = $module . '_democontent';
-    }
-  }
 }
 
 /**
@@ -238,7 +215,7 @@ function panopoly_apps_check($form, &$form_state) {
 function panopoly_theme_form($form, &$form_state) {
 
   // Set the page title
-  drupal_set_title(t('Choose a theme!'));
+  drupal_set_title(t('Choose a theme'));
 
   // Create list of theme options, minus admin + testing + starter themes
   $themes = array();
@@ -248,8 +225,12 @@ function panopoly_theme_form($form, &$form_state) {
     }
   }
 
-  $form['theme'] = array(
+  $form['theme_wrapper'] = array(
     '#title' => t('Starting Theme'),
+    '#type' => 'fieldset',
+  );
+
+  $form['theme_wrapper']['theme'] = array(
     '#type' => 'radios',
     '#options' => $themes,
     '#default_value' => 'bartik',
@@ -289,65 +270,15 @@ function panopoly_theme_configure_form($form, &$form_state) {
 }
 
 /**
- * Form to talk about preparing the site for prime time
- */
-function panopoly_prepare($form, &$form_state) {
-  $form = array();
-
-  // Set the title 
-  drupal_set_title(t('Prepare Site'));
-
-  $form['openingtext'] = array(
-    '#markup' => '<h2>' . t('Panopoly now needs to do a bit more Drupal magic to get everything set up.') . '</h2>',
-  );
-
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Prepare your site',
-  );
-
-  return $form;
-}
-
-/**
- * Submit form to prepare site for prime time
- */
-function panopoly_prepare_submit($form, &$form_state) {
-  // Flush all caches to ensure that any full bootstraps during the installer
-  // do not leave stale cached data, and that any content types or other items
-  // registered by the install profile are registered correctly.
-  drupal_flush_all_caches();
-
-  // Remember the profile which was used.
-  variable_set('install_profile', drupal_get_profile());
-
-  // Install profiles are always loaded last
-  db_update('system')
-    ->fields(array('weight' => 1000))
-    ->condition('type', 'module')
-    ->condition('name', drupal_get_profile())
-    ->execute();
-
-  // Cache a fully-built schema.
-  drupal_get_schema(NULL, TRUE);
-
-  // Run cron to populate update status tables (if available) so that users
-  // will be warned if they've installed an out of date Drupal version.
-  // Will also trigger indexing of profile-supplied content or feeds.
-  drupal_cron_run();
-}
-
-/**
  * Form to finish it all out and send us on our way
  */
 function panopoly_finished_yah($form, &$form_state) {
   $form = array();
 
-  // Set the title
+  // Setup the title for the install task
   drupal_set_title(t('Finished!'));
-
   $form['openingtext'] = array(
-    '#markup' => '<h2>' . t('Congratulations, you just installed Panopoly!') . '</h2>',
+    '#markup' => '<h2>' . t('Congratulations, you just installed Panopoly!') . '</h2>'
   );
   
   $form['panopoly_icon'] = array(
@@ -367,16 +298,35 @@ function panopoly_finished_yah($form, &$form_state) {
  */
 function panopoly_finished_yah_submit($form, &$form_state) {
 
+  // Flush all caches to ensure that any full bootstraps during the installer
+  // do not leave stale cached data, and that any content types or other items
+  // registered by the install profile are registered correctly.
+  drupal_flush_all_caches();
+
+  // Remember the profile which was used.
+  variable_set('install_profile', drupal_get_profile());
+
+  // Install profiles are always loaded last
+  db_update('system')
+    ->fields(array('weight' => 1000))
+    ->condition('type', 'module')
+    ->condition('name', drupal_get_profile())
+    ->execute();
+
   // Allow anonymous and authenticated users to see content
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 
-  // Once more for good measure
-  drupal_flush_all_caches();
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
 
-  // And away we go
-  // $form_state['redirect'] won't work here since we are still in the
-  // installer, so use drupal_goto() (for interactive installs only) instead.
+  // Run cron to populate update status tables (if available) so that users
+  // will be warned if they've installed an out of date Drupal version.
+  // Will also trigger indexing of profile-supplied content or feeds.
+  drupal_cron_run();
+
+  // And away we go! Redirect the user to the front page if they are using
+  // the interactive mode installer.
   $install_state = $form_state['build_info']['args'][0];
   if ($install_state['interactive']) {
     drupal_goto('<front>');
