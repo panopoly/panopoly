@@ -273,6 +273,10 @@ function panopoly_theme_configure_form($form, &$form_state) {
  * Form to finish it all out and send us on our way
  */
 function panopoly_finished_yah($form, &$form_state) {
+
+  // Hide some messages from various modules that are just too chatty!
+  drupal_get_messages('status');
+
   $form = array();
 
   // Setup the title for the install task
