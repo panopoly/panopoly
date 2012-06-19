@@ -155,11 +155,7 @@ function panopoly_apps_servers_info() {
     'panopoly' => array(
       'title' => 'Panopoly',
       'description' => 'Apps for Panopoly',
-      'manifest' => 'http://apps.getpantheon.com/panopoly',
-  //    'profile' => $profile,
-  //    'profile_version' => isset($info['version']) ? $info['version'] : '7.x-1.x-dev',
-  //    'server_name' => (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : NULL,
-  //    'server_ip' => (!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : NULL,
+      'manifest' => (empty($info['version']) || $info['version'] == '7.x-1.x-dev') ? 'http://apps.getpantheon.com/panopoly-dev' : 'http://apps.getpantheon.com/panopoly',
     ),
   );
 }
