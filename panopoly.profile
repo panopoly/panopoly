@@ -287,10 +287,6 @@ function panopoly_finished_yah($form, &$form_state) {
     '#markup' => '<h2>' . t('Congratulations, you just installed Panopoly!') . '</h2>'
   );
   
-  $form['panopoly_icon'] = array(
-    '#markup' => theme('image', array('path' => drupal_get_path('profile', 'panopoly') . '/images/panopoly_icon.png')),
-  );
-
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Visit your new site!',
