@@ -329,9 +329,6 @@ function panopoly_finished_yah_submit($form, &$form_state) {
   // Will also trigger indexing of profile-supplied content or feeds.
   drupal_cron_run();
 
-  // Flush all caches one last time
-  drupal_flush_all_caches();
-
   // And away we go! Redirect the user to the front page if they are using
   // the interactive mode installer.
   $install_state = $form_state['build_info']['args'][0];
