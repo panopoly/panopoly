@@ -77,7 +77,7 @@ function panopoly_install_tasks($install_state) {
  */
 function panopoly_form_install_configure_form_alter(&$form, $form_state) {
 
-  // Set the logo for Panopoly to be awesomer
+  // Set the Seven logo to be Panopoly's logo
   $theme_data = _system_rebuild_theme_data();
   $seven_data = $theme_data['seven']->info['settings'];
   $seven_data['default_logo'] = 0;
@@ -255,7 +255,15 @@ function panopoly_theme_form_submit($form, &$form_state) {
   $theme = $form_state['input']['theme'];
   theme_enable(array($theme));
   variable_set('theme_default', $theme);
- 
+
+  // Set the Bartik or Garland logo to be Panopoly's logo
+  if ($theme == 'bartik' || $theme == 'garland') {
+    $theme_data = _system_rebuild_theme_data();
+    $theme_data[$theme]->info['settings']['default_logo'] = 0;
+    $theme_data[$theme]->info['settings']['logo_path'] = 'profiles/panopoly/images/panopoly_icon_theme.png';
+    variable_set('theme_' . $theme . '_settings', $theme_data[$theme]->info['settings']);
+  }
+
   // Flush theme caches so things are right
   system_rebuild_theme_data();
   drupal_theme_rebuild();
