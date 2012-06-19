@@ -85,7 +85,6 @@ projects[facetapi][subdir] = contrib
 projects[search_api][version] = 1.1
 projects[search_api][type] = module
 projects[search_api][subdir] = contrib
-projects[search_api][patch][1600986] = http://drupal.org/files/search_api-n1600986-3.patch
 
 projects[search_api_solr][version] = 1.0-rc2
 projects[search_api_solr][type] = module
