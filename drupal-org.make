@@ -24,6 +24,7 @@ projects[panelizer][type] = module
 projects[panelizer][download][type] = git
 projects[panelizer][download][revision] = c7942f3
 projects[panelizer][download][branch] = 7.x-3.x
+projects[panelizer][patch][1648040] = http://drupal.org/files/panelizer-no-notice-view-modes-updated.patch
 
 projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
