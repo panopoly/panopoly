@@ -77,6 +77,12 @@ function panopoly_install_tasks($install_state) {
  */
 function panopoly_form_install_configure_form_alter(&$form, $form_state) {
 
+  // Set the logo for Panopoly to be awesomer
+  $theme_data = _system_rebuild_theme_data();
+  $seven_data = $theme_data['seven']->info['settings'];
+  $seven_data['default_logo'] = 0;
+  $seven_data['logo_path'] = 'profiles/panopoly/images/panopoly_icon_install.png';  variable_set('theme_seven_settings', $seven_data);
+
   // Hide some messages from various modules that are just too chatty!
   drupal_get_messages('status');
   drupal_get_messages('warning');
