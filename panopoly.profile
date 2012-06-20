@@ -311,6 +311,8 @@ function panopoly_finished_yah_submit($form, &$form_state) {
   // Flush all caches to ensure that any full bootstraps during the installer
   // do not leave stale cached data, and that any content types or other items
   // registered by the install profile are registered correctly.
+  _field_info_collate_fields(TRUE);
+  _field_info_collate_fields();
   drupal_flush_all_caches();
 
   // Remember the profile which was used.
