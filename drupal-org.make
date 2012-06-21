@@ -227,7 +227,7 @@ projects[respondjs][type] = module
 
 ; Libraries
 libraries[tinymce][download][type] = get
-libraries[tinymce][download][url] = http://github.com/downloads/tinymce/tinymce/tinymce_3.5.2.zip
+libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.5.2.zip
 libraries[tinymce][patch][1561882] = http://drupal.org/files/1561882-cirkuit-theme-tinymce-3.5.2.patch
 
 libraries[SolrPhpClient][download][type] = get
