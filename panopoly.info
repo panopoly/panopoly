@@ -16,6 +16,7 @@ dependencies[] = field_ui
 dependencies[] = file
 dependencies[] = block
 dependencies[] = dblog
+dependencies[] = update
 
 ; Panopoly - Contrib - Foundation 
 dependencies[] = ctools
