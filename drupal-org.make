@@ -10,7 +10,7 @@ projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][type] = module
 projects[panels][download][type] = git
-projects[panels][download][revision] = a0647d4
+projects[panels][download][revision] = 3f50718
 projects[panels][download][branch] = 7.x-3.x
 
 projects[panels_breadcrumbs][version] = 1.6
