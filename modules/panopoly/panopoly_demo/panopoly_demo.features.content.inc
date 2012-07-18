@@ -67,7 +67,7 @@ function panopoly_demo_content_defaults() {
           'filesize' => '180166',
           'status' => '1',
           'type' => 'image',
-          'uuid' => '1a0372a2-6595-5b04-2dc6-6cc47ebba063',
+          'uuid' => 'ac8569f8-7ead-e354-f12d-79a54a85c489',
           'image_dimensions' => array(
             'width' => '1024',
             'height' => '505',
@@ -135,7 +135,7 @@ function panopoly_demo_content_defaults() {
           'filesize' => '223582',
           'status' => '1',
           'type' => 'image',
-          'uuid' => '8af14d5f-c9dc-b074-d528-94955a409e36',
+          'uuid' => '26c0f2da-c977-9b74-41e8-6f8273b5a832',
           'image_dimensions' => array(
             'width' => '1024',
             'height' => '419',
@@ -203,7 +203,7 @@ function panopoly_demo_content_defaults() {
           'filesize' => '94626',
           'status' => '1',
           'type' => 'image',
-          'uuid' => '159b9f30-3742-55e4-5118-1ff1d902a0dd',
+          'uuid' => 'ee840450-4f39-c904-59b8-67bbb1609dbd',
           'image_dimensions' => array(
             'width' => '600',
             'height' => '308',
@@ -270,7 +270,7 @@ function panopoly_demo_content_defaults() {
           'filesize' => '139120',
           'status' => '1',
           'type' => 'image',
-          'uuid' => '8ef00443-91e9-4644-e17d-8f06edbb3870',
+          'uuid' => '7308a8b0-870a-45f4-85c3-cd991a349c6e',
           'image_dimensions' => array(
             'width' => '1024',
             'height' => '605',

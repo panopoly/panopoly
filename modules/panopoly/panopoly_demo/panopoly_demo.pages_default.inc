@@ -63,9 +63,12 @@ function panopoly_demo_default_page_manager_pages() {
     'style_settings' => array(
       'default' => NULL,
       'header' => NULL,
-      'sidebar' => NULL,
       'contentmain' => NULL,
       'footer' => NULL,
+      'sidebar' => NULL,
+    ),
+    'sidebar' => array(
+      'style' => '-1',
     ),
   );
   $display->cache = array();
@@ -108,7 +111,13 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->configuration = array(
       'items_per_page' => '5',
       'view_mode' => 'teaser',
-      'widget_title' => 'More Content',
+      'widget_title' => '',
+      'exposed' => array(
+        'sort_by' => 'created',
+        'sort_order' => 'DESC',
+        'widget_title' => '',
+        'items_per_page' => '5',
+      ),
     );
     $pane->cache = array();
     $pane->style = array(
@@ -155,15 +164,21 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'items_per_page' => '10',
+      'items_per_page' => '2',
       'fields_override' => array(
         'field_featured_image' => 1,
         'title' => 1,
         'created' => 1,
-        'body' => 0,
+        'body' => 1,
       ),
       'view_mode' => NULL,
       'widget_title' => 'Recent Content',
+      'exposed' => array(
+        'sort_by' => 'created',
+        'sort_order' => 'DESC',
+        'widget_title' => 'Recent Content',
+        'items_per_page' => '2',
+      ),
     );
     $pane->cache = array();
     $pane->style = array(
@@ -185,7 +200,13 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->configuration = array(
       'items_per_page' => '10',
       'view_mode' => 'teaser',
-      'widget_title' => 'Demo Slideshow',
+      'widget_title' => '',
+      'exposed' => array(
+        'sort_by' => 'created',
+        'sort_order' => 'DESC',
+        'widget_title' => '',
+        'items_per_page' => '10',
+      ),
     );
     $pane->cache = array();
     $pane->style = array(
