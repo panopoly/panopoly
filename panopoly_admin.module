@@ -109,7 +109,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Improve authoring options
-  if (isset($form['author'])) {
+  if (isset($form['author']) && isset($form['#entity_type']) && $form['#entity_type'] == 'node') {
     unset($form['author']['name']['#description']);
     $form['author']['name']['#title'] = t('Author');
     $form['author']['name']['#size'] = '40';
