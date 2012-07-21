@@ -83,7 +83,7 @@ projects[facetapi][version] = 1.0
 projects[facetapi][type] = module
 projects[facetapi][subdir] = contrib
 
-projects[search_api][version] = 1.2
+projects[search_api][version] = 1.1
 projects[search_api][type] = module
 projects[search_api][subdir] = contrib
 
