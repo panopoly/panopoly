@@ -103,8 +103,43 @@ function panopoly_widgets_field_formatter_info() {
     'panopoly_spotlight_default' => array(
       'label' => t('Default'),
       'field types' => array('panopoly_spotlight'),
+      'settings' => array(
+        'image_style' => 'panopoly_image_spotlight',
+      ),
     ),
   );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function panopoly_widgets_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $element = array();
+
+  if ($display['type'] == 'panopoly_spotlight_default') {
+    $element['image_style'] = array(
+      '#title' => t('Image style'), 
+      '#type' => 'select',
+      '#options' => image_style_options(),
+      '#default_value' => $settings['image_style'],
+      '#required' => TRUE,
+    );
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function panopoly_widgets_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  
+  $summary = t('Image Style: @style', array('@style' => $settings['image_style']));
+  return $summary;
 }
 
 /**
@@ -125,7 +160,7 @@ function panopoly_widgets_field_formatter_view($entity_type, $entity, $field, $i
 
   // Assemble the tabs content
   foreach($items as $delta => $item_data) {
-    $element[$delta]['#markup'] = ($delta == 0) ? $header . theme('panopoly_spotlight_view', array('items' => $item_data, 'delta' => $delta)) : theme('panopoly_spotlight_view', array('items' => $item_data, 'delta' => $delta));
+    $element[$delta]['#markup'] = ($delta == 0) ? $header . theme('panopoly_spotlight_view', array('items' => $item_data, 'delta' => $delta, 'settings' => $settings)) : theme('panopoly_spotlight_view', array('items' => $item_data, 'delta' => $delta, 'settings' => $settings));
   }
   return $element;
 }
@@ -251,9 +286,10 @@ function theme_panopoly_spotlight_view($variables) {
   $image_entity = entity_uuid_load('file', array($variables['items']['uuid']));
   $image = file_load(array_pop($image_entity)->fid);
   $link = $variables['items']['link'];
+  $settings = $variables['settings'];
 
   $output = '<div id="' . 'panopoly-spotlight-' . $variables['delta'] . '" class="' . 'panopoly-spotlight' . '">';
-  $output .= theme('image_style', array('style_name' => 'panopoly_image_spotlight', 'path' => $image->uri));
+  $output .= theme('image_style', array('style_name' => $settings['image_style'], 'path' => $image->uri));
   $output .= '<div class="panopoly-spotlight-wrapper">';
   $output .= '<h3 class="panopoly-spotlight-label">' . t('Spotlight') . '</h3>';
   $output .= '<div class="panopoly-spotlight-info">';

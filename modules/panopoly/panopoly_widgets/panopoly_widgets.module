@@ -247,6 +247,7 @@ function panopoly_widgets_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'items' => NULL,
         'delta' => NULL,
+        'settings' => NULL,
       ),
     ),
   );
