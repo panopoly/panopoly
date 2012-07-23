@@ -69,6 +69,11 @@ function panopoly_search_default_page_manager_pages() {
           'settings' => NULL,
           'not' => FALSE,
         ),
+        2 => array(
+          'name' => 'search_api_index',
+          'settings' => NULL,
+          'not' => FALSE,
+        ),
       ),
       'logic' => 'and',
     ),
