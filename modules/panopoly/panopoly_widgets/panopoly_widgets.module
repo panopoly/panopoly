@@ -136,7 +136,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
       'bundle argument' => 5,
-      'real path' => 'admin/structure/fieldable-panels-panes/manage/quick_links',
+      'real path' => 'admin/structure/fieldable-panels-panes/manage/quick-links',
       'access arguments' => array('administer fieldable panels panes'),
     ),
   );
@@ -150,7 +150,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
       'bundle argument' => 5,
-      'real path' => 'admin/structure/fieldable-panels-panes/manage/basic_file',
+      'real path' => 'admin/structure/fieldable-panels-panes/manage/basic-file',
       'access arguments' => array('administer fieldable panels panes'),
     ),
   );
