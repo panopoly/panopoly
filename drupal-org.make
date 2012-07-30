@@ -16,9 +16,12 @@ projects[panels][download][type] = git
 projects[panels][download][revision] = 3f50718
 projects[panels][download][branch] = 7.x-3.x
 
-projects[panels_breadcrumbs][version] = 1.6
+projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
 projects[panels_breadcrumbs][type] = module
+projects[panels_breadcrumbs][download][type] = git
+projects[panels_breadcrumbs][download][revision] = 531f589
+projects[panels_breadcrumbs][download][branch] = 7.x-2.x
 
 projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
