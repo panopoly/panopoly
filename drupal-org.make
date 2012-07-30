@@ -27,12 +27,9 @@ projects[panelizer][download][type] = git
 projects[panelizer][download][revision] = 186f4bc
 projects[panelizer][download][branch] = 7.x-3.x
 
-projects[fieldable_panels_panes][version] = 1.x-dev
+projects[fieldable_panels_panes][version] = 1.1
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][type] = module
-projects[fieldable_panels_panes][download][type] = git
-projects[fieldable_panels_panes][download][revision] = 851c1b1
-projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][type] = module
@@ -130,7 +127,7 @@ projects[wysiwyg][version] = 2.x-dev
 projects[wysiwyg][patch][1489096] = http://drupal.org/files/wysiwyg-table-format.patch
 projects[wysiwyg][patch][356480] = http://drupal.org/files/356480-by-zhangtaihao-Shawn_Smiley-sun.-Lazy-load-ed-p0.patch
 projects[wysiwyg][download][type] = git
-projects[wysiwyg][download][revision] = 7e6609e
+projects[wysiwyg][download][revision] = d17bf11
 projects[wysiwyg][download][branch] = 7.x-2.x
 
 projects[wysiwyg_filter][version] = 1.6-rc2
@@ -184,10 +181,9 @@ projects[apps][patch][1482684] = http://drupal.org/files/apps-single-item-style.
 projects[apps][patch][1558280] = http://drupal.org/files/apps-screen-design-css-p0.patch
 projects[apps][patch][1561652] = http://drupal.org/files/apps-allow-drush-site-install.patch
 
-projects[features][version] = 1.0-rc3
+projects[features][version] = 1.0
 projects[features][subdir] = contrib
 projects[features][type] = module
-projects[features][patch][1647894] = http://drupal.org/files/features-1647894-1.patch
 
 projects[entity][version] = 1.0-rc3
 projects[entity][type] = module
@@ -209,7 +205,7 @@ projects[strongarm][version] = 2.0
 projects[strongarm][type] = module
 projects[strongarm][subdir] = contrib
 
-projects[libraries][version] = 2.0-alpha2
+projects[libraries][version] = 2.0
 projects[libraries][type] = module
 projects[libraries][subdir] = contrib
 
