@@ -65,6 +65,7 @@ dependencies[] = date_popup_authored
 dependencies[] = admin
 dependencies[] = module_filter
 dependencies[] = views_bulk_operations
+dependencies[] = views_autocomplete_filters
 dependencies[] = simplified_menu_admin
 dependencies[] = references_dialog 
 dependencies[] = backports
