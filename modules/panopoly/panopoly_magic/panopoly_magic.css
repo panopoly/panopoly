@@ -85,11 +85,19 @@ div.ctools-ajaxing {
   background-color: #DDD;
 }
 
-.form-item-exposed-sort-order, .form-item-exposed-sort-by {
+/**
+ * Custom styling for exposed views filter options
+ */
+#edit-exposed .form-item-exposed-sort-order, 
+#edit-exposed .form-item-exposed-sort-by {
   float: left;
 }
 
-.form-item-exposed-sort-order {
+#edit-exposed .form-item-exposed-sort-order {
   padding-left: 20px;
   clear: none;
+}
+
+#edit-exposed #views-exposed-pane div.form-item {
+  display: inline;
 }

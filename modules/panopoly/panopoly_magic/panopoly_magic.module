@@ -134,15 +134,17 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       '#default_value' => (isset($conf['widget_title'])) ? $conf['widget_title'] : $form_state['view']->display_handler->options['title'],
     );
 
-    // Improve presentation of exposed sort options
-    if (!empty($form['exposed']['sort_by'])) {
-      $form['exposed']['sort_by']['#field_prefix'] = $form['exposed']['sort_by']['#title'];
-      $form['exposed']['sort_by']['#title'] = '';
-    }
+    // Change the naming of the sort order option
     if (!empty($form['exposed']['sort_order'])) {
       $form['exposed']['sort_order']['#title'] = t('Sort order');
-      $form['exposed']['sort_order']['#field_prefix'] = $form['exposed']['sort_order']['#title'];
-      $form['exposed']['sort_order']['#title'] = '';
+    }
+
+    // Switch all exposed filters to use field_prefix display
+    foreach($form['exposed'] as $filter => $filter_array) {
+      if (!empty($form['exposed'][$filter]['#title']) && empty($form['exposed'][$filter]['#field_prefix'])) {
+        $form['exposed'][$filter]['#field_prefix'] = $form['exposed'][$filter]['#title'];
+        unset($form['exposed'][$filter]['#title']);
+      }
     }
 
     // Move items per page wiget to widget area
