@@ -3,22 +3,6 @@
 include_once('panopoly_magic.features.inc');
 
 /**
- * Implementation of hook_menu()
- */
-function panopoly_magic_menu() {
-  $items = array();
-
-  $items['autocomplete_panopoly'] = array(
-    'page callback' => 'panopoly_autocomplete_content',
-    'page arguments' => array(1, 2),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  return $items;
-}
-
-/**
  * Implementation of hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
@@ -187,16 +171,6 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     $form['#submit'][] = 'panopoly_magic_views_view_mode_pane_submit';
   }
 
-  // Add an autocomplete form for node title exposed filters in content pane editing forms
-  if ($form_id == 'views_content_views_panes_content_type_edit_form') {
-    if (isset($form['exposed']['filter-title']['title']) && isset($form_state['view']->display_handler->options['filters']['type']['value']) && count($form_state['view']->display_handler->options['filters']['type']['value']) == 1) {
-      $node_type = implode('', $form_state['view']->display_handler->options['filters']['type']['value']);
-      // $form['exposed']['filter-title']['title']['#autocomplete_path'] = 'autocomplete_panopoly/' . $node_type;
-      // $form['exposed']['filter-title']['title']['#size'] = 60;
-    }
-  }
-
-
   // Override default entity view mode behavior for fieldable panel panes.
   if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
     $view_mode = $form['view_mode'];
@@ -324,27 +298,6 @@ function _panopoly_magic_view_mode_options() {
     }
   }
   return $options;
-}
-
-/**
- * Callback to do autocomplete for basic content
- */
-function panopoly_autocomplete_content($node_type, $string) {
-  $matches = array();
-  if ($string) {
-    $result = db_select('node')
-      ->fields('node', array('title'))
-      ->condition('node.status','1')
-      ->condition('node.type', $node_type)
-      ->condition('title', '%' . db_like($string) . '%', 'LIKE')
-      ->range(0, 10)
-      ->execute();
-    foreach ($result as $node) {
-      $matches[$node->title] = check_plain($node->title);
-    }
-  }
-
-  drupal_json_output($matches);
 }
 
 /**
