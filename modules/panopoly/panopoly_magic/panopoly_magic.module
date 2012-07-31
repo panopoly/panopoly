@@ -77,11 +77,12 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
         '#type' => 'button',
         '#value' => t('Update Preview'),
         '#wizard type' => 'next',
-        '#attributes' => array('style' => 'display: none', 'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click')),
+        // '#attributes' => array('style' => 'display: none', 'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click')),
+        '#attributes' => array('class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click')),
       );
 
       // Autosubmit the form
-      ctools_add_js('auto-submit');
+      // ctools_add_js('auto-submit');
       $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
     }
   }
@@ -188,8 +189,8 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'views_content_views_panes_content_type_edit_form') {
     if (isset($form['exposed']['filter-title']['title']) && isset($form_state['view']->display_handler->options['filters']['type']['value']) && count($form_state['view']->display_handler->options['filters']['type']['value']) == 1) {
       $node_type = implode('', $form_state['view']->display_handler->options['filters']['type']['value']);
-      $form['exposed']['filter-title']['title']['#autocomplete_path'] = 'autocomplete_panopoly/' . $node_type;
-      $form['exposed']['filter-title']['title']['#size'] = 60;
+      // $form['exposed']['filter-title']['title']['#autocomplete_path'] = 'autocomplete_panopoly/' . $node_type;
+      // $form['exposed']['filter-title']['title']['#size'] = 60;
     }
   }
 
