@@ -163,6 +163,14 @@ projects[views_bulk_operations][version] = 3.0-rc1
 projects[views_bulk_operations][type] = module
 projects[views_bulk_operations][subdir] = contrib
 
+projects[views_autocomplete_filters][version] = 1.x-dev
+projects[views_autocomplete_filters][subdir] = contrib
+projects[views_autocomplete_filters][type] = module
+projects[views_autocomplete_filters][download][type] = git
+projects[views_autocomplete_filters][download][revision] = 7d85509
+projects[views_autocomplete_filters][download][branch] = 7.x-1.x
+projects[views_autocomplete_filters][patch][1151292] = http://drupal.org/files/views_autocomplete_filters-1151292-10_0.patch
+
 projects[simplified_menu_admin][version] = 1.0-beta2
 projects[simplified_menu_admin][type] = module
 projects[simplified_menu_admin][subdir] = contrib
