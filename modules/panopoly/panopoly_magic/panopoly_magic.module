@@ -119,7 +119,7 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       $form['exposed'] = array(
         '#type' => 'fieldset',
         '#title' => t('General Settings'),
-        '#weight' => -10,
+        '#weight' => -30,
       );
     }
 
@@ -217,8 +217,9 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     $form['widget_settings']['view_mode'] = $view_mode;
   }
 
-  // Customize the search box edit form.
-  if ($form_id == 'panopoly_search_search_box_content_type_edit_form') {
+  // Make sure that all options are inside a fieldset. Currently just supporting a known list
+  // of forms, but persumably this can be generalized.
+  if (in_array($form_id, array('panopoly_search_search_box_content_type_edit_form', 'menu_block_menu_tree_content_type_edit_form', 'ctools_node_content_content_type_edit_form'))) {
 
     // Grab child elements and create the fieldset.
     $children = element_children($form);
@@ -226,6 +227,7 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       $form['general_settings'] = array(
         '#type' => 'fieldset',
         '#title' => t('General Settings'),
+        '#weight' => -30,
       );
 
 
