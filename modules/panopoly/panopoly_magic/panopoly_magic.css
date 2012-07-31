@@ -84,3 +84,12 @@ div.ctools-ajaxing {
 #panels-layout-category-Panopoly-wrapper .current-layout {
   background-color: #DDD;
 }
+
+.form-item-exposed-sort-order, .form-item-exposed-sort-by {
+  float: left;
+}
+
+.form-item-exposed-sort-order {
+  padding-left: 20px;
+  clear: none;
+}
