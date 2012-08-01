@@ -6,3 +6,18 @@
 table.mceToolbar td {
  display: inline-block;
 }
+
+/**
+ * WYSIWYG styling
+ */
+table.mceLayout {
+  font-size: 1em;
+}
+
+.o2k7Skin table.mceLayout .mceListBox {
+  padding-left: 0;
+}
+
+.o2k7Skin table.mceLayout .mceOpen {
+  height: 24px;
+}
