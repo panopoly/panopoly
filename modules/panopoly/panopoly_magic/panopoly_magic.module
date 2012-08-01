@@ -78,8 +78,16 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     unset($form['style']['#options']['rounded_corners']);
     unset($form['style']['#options']['naked']);
 
-    // Set "no style" to be the default style
-    $form['style']['#options']['default'] = t('Default Style');
+    // Better explain that "No Style" means "Default Pane Style"
+    if (!empty($form['style']['#options']['default'])) {
+      $form['style']['#options']['default'] = t('Default Pane Style');
+    }
+
+    // Improve the UI around region style selections
+    if (!empty($form['style']['#options']['-1'])) {
+      $form['style']['#options']['-1'] = t('Default Region Style');
+      unset($form['style']['#options']['default']);
+    }
 
     // Adding a fieldset around styling
     $form['style'] = array('style' => $form['style']);
