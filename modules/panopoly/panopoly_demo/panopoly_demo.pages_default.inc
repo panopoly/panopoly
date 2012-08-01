@@ -83,18 +83,24 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
+      'fields_override' => array(
+        'field_featured_image' => 1,
+        'title' => 1,
+        'created' => 1,
+        'name' => 1,
+        'body' => 1,
+      ),
       'exposed' => array(
-        'title' => 'Vegetables are Great',
+        'title' => 'Great Vegetables',
         'widget_title' => '',
       ),
       'view_mode' => 'featured',
       'widget_title' => '',
       'items_per_page' => NULL,
+      'view_settings' => 'nodes',
     );
     $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
+    $pane->style = array();
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
@@ -105,24 +111,30 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->pid = 'new-2';
     $pane->panel = 'contentmain';
     $pane->type = 'views_panes';
-    $pane->subtype = 'panopoly_demo-all_demo';
+    $pane->subtype = 'panopoly_demo-demo_listing';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'items_per_page' => '5',
-      'view_mode' => 'teaser',
-      'widget_title' => '',
+      'fields_override' => array(
+        'field_featured_image' => 1,
+        'title' => 1,
+        'created' => 1,
+        'name' => 1,
+        'body' => 1,
+      ),
       'exposed' => array(
         'sort_by' => 'created',
         'sort_order' => 'DESC',
         'widget_title' => '',
-        'items_per_page' => '5',
+        'items_per_page' => '3',
       ),
+      'view_mode' => 'teaser',
+      'widget_title' => '',
+      'items_per_page' => '3',
+      'view_settings' => 'nodes',
     );
     $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
+    $pane->style = array();
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 1;
@@ -164,26 +176,26 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'items_per_page' => '2',
       'fields_override' => array(
         'field_featured_image' => 1,
         'title' => 1,
         'created' => 1,
-        'body' => 1,
+        'name' => 1,
+        'body' => 0,
       ),
-      'view_mode' => NULL,
-      'widget_title' => 'Recent Content',
       'exposed' => array(
         'sort_by' => 'created',
         'sort_order' => 'DESC',
-        'widget_title' => 'Recent Content',
-        'items_per_page' => '2',
+        'widget_title' => 'Demo Item List',
+        'items_per_page' => '0',
       ),
+      'view_mode' => 'teaser',
+      'widget_title' => 'Demo Item List',
+      'items_per_page' => '0',
+      'view_settings' => 'fields',
     );
     $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
+    $pane->style = array();
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 1;
@@ -198,20 +210,26 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'items_per_page' => '10',
-      'view_mode' => 'teaser',
-      'widget_title' => '',
+      'fields_override' => array(
+        'field_featured_image' => 1,
+        'title' => 1,
+        'created' => 0,
+        'name' => 0,
+        'body' => 1,
+      ),
       'exposed' => array(
         'sort_by' => 'created',
         'sort_order' => 'DESC',
-        'widget_title' => '',
-        'items_per_page' => '10',
+        'widget_title' => 'Demo Slideshow',
+        'items_per_page' => '0',
       ),
+      'view_mode' => 'teaser',
+      'widget_title' => 'Demo Slideshow',
+      'items_per_page' => '0',
+      'view_settings' => 'fields',
     );
     $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
+    $pane->style = array();
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 2;
