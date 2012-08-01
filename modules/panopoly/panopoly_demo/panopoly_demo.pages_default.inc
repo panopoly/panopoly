@@ -91,7 +91,7 @@ function panopoly_demo_default_page_manager_pages() {
         'body' => 1,
       ),
       'exposed' => array(
-        'title' => 'Great Vegetables',
+        'title' => 'Content Demo',
         'widget_title' => '',
       ),
       'view_mode' => 'featured',
@@ -123,7 +123,7 @@ function panopoly_demo_default_page_manager_pages() {
         'body' => 1,
       ),
       'exposed' => array(
-        'sort_by' => 'created',
+        'sort_by' => 'title',
         'sort_order' => 'DESC',
         'widget_title' => '',
         'items_per_page' => '3',
