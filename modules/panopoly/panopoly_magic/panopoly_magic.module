@@ -79,7 +79,7 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     unset($form['style']['#options']['naked']);
 
     // Set "no style" to be the default style
-    $form['style']['#options']['default'] = t('Default Pane Style');
+    $form['style']['#options']['default'] = t('Default Style');
 
     // Adding a fieldset around styling
     $form['style'] = array('style' => $form['style']);
