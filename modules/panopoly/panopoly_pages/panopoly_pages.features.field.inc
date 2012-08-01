@@ -10,7 +10,7 @@
 function panopoly_pages_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-panopoly_page-body'
+  // Exported field: 'node-panopoly_page-body'.
   $fields['node-panopoly_page-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function panopoly_pages_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -107,7 +108,7 @@ function panopoly_pages_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-panopoly_page-field_featured_image'
+  // Exported field: 'node-panopoly_page-field_featured_image'.
   $fields['node-panopoly_page-field_featured_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -128,6 +129,7 @@ function panopoly_pages_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
