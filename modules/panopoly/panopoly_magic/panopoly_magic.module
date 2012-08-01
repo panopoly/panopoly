@@ -6,7 +6,6 @@ include_once('panopoly_magic.features.inc');
  * Implementation of hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
-
   // Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
   // we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving the
   // entity first. 
@@ -151,21 +150,60 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       }
     }
 
-    // Only add style settings when we are on a node view
+    // Determine if this is a node view.
+    $node_view = FALSE;
     if ($form_state['view']->display_handler->options['row_plugin'] == 'node' && in_array($form_state['view']->display_handler->options['style_plugin'], array('default', 'slideshow'))) {
-      // Add the style setting fieldset
-      $form['style_settings'] = array(
+      $node_view = TRUE;
+    }
+
+    if ($node_view == FALSE) {
+      if (empty($conf['view_settings'])) {
+        $conf['view_settings'] = 'fields';
+      }
+
+      // Create the fieldset and the settings selection form.
+      $form['display_type'] = array(
         '#type' => 'fieldset',
-        '#title' => 'Style Settings',
+        '#title' => t('Display Type'),
+        // Make the weight of this fieldset dependent on the general settings fieldset.
+        '#weight' => $form['exposed']['#weight'] + 1,
       );
 
-      // Add specific style options
-      $form['style_settings']['view_mode'] = array(
+      $form['display_type']['view_settings'] = array(
+        '#type' => 'radios',
+        // '#title' => t('Display Type'),
+        '#default_value' => $conf['view_settings'],
+        '#options' => array(
+          'fields' => t('Fields'),
+          'nodes' => t('Content'),
+        ),
+      );
+
+      // Update the field overrides to be dependent on the view settings selection.
+      $form['fields_override']['#states'] = array(
+        'visible' => array(
+          ':input[name="view_settings"]' => array('value' => 'fields'),
+        ),
+      );
+
+      // Add the style setting fieldset.
+      $form['content_settings'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Content Settings',
+      );
+
+      // Add specific style options.
+      $form['content_settings']['view_mode'] = array(
         '#type' => 'radios',
         '#options' => _panopoly_magic_view_mode_options(),
         '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
+        '#states' => array(
+          'visible' => array(
+            ':input[name="view_settings"]' => array('value' => 'nodes'),
+          ),
+        ),
       );  
-    }
+    } 
 
     // Add a custom submit handler
     $form['#submit'][] = 'panopoly_magic_views_view_mode_pane_submit';
@@ -250,6 +288,11 @@ function panopoly_magic_views_view_mode_pane_submit(&$form, &$form_state) {
   else {
     $form_state['conf']['items_per_page'] = NULL;
   }
+
+  // Save the view settings field is present in the data.
+  if (isset($form_state['values']['view_settings'])) {
+    $form_state['conf']['view_settings'] = $form_state['values']['view_settings'];
+  }
 }
 
 /**
@@ -265,6 +308,31 @@ function panopoly_magic_views_pre_render(&$view) {
     if (isset($conf['widget_title']) || isset($conf['exposed']['widget_title'])) {
       $view->display_handler->options['title'] = (isset($conf['exposed']['widget_title'])) ? $conf['exposed']['widget_title'] : $conf['widget_title']; 
     }
+
+    // Determien that this was previously a field view, which has been overridden to a node view in the pane config.
+    if (!empty($conf['view_settings']) && $conf['view_settings'] == 'nodes' && empty($view->style_plugin->row_plugin->nodes)) {
+      
+      // Reconstruct the nodes array which a node row style expects.
+      if (!empty($view->result)) {
+        $nids = array();
+        foreach ($view->result as $result) {
+          $nids[] = $result->nid;
+        }
+
+        $nodes = node_load_multiple($nids);
+      }
+
+
+      // Change the row plugin.
+      if (!empty($nodes)) {
+        $view->style_plugin->row_plugin = views_get_plugin('row', 'node');
+        $view->style_plugin->row_plugin->view =& $view;
+        $view->style_plugin->row_plugin->display =& $view->display_handler->display;
+        $view->style_plugin->row_plugin->field_alias = 'nid';
+        $view->style_plugin->row_plugin->nodes = $nodes;
+      }
+    }
+
 
     // Set the view mode
     if (isset($conf['view_mode'])) {
