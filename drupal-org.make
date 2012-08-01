@@ -16,6 +16,7 @@ projects[panels][download][type] = git
 projects[panels][download][revision] = 3f50718
 projects[panels][download][branch] = 7.x-3.x
 projects[panels][patch][1706936] = http://drupal.org/files/panels-ipe-no-css-image.patch
+projects[panels][patch][1549660] = http://drupal.org/files/1549660-allow-region-style-settings.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
