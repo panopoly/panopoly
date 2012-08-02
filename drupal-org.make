@@ -10,7 +10,8 @@ projects[ctools][download][revision] = c7c1218
 projects[ctools][download][branch] = 7.x-1.x
 projects[ctools][patch][1294478] = http://drupal.org/files/1294478-modal-dynamic-mode.patch
 projects[ctools][patch][1708438] = http://drupal.org/files/1708438-autosubmit-autocomplete.patch
-projects[ctools][patch][1690188] = https://drupal.org/files/1690188-fix-items-per-page-stuff_0.patch
+projects[ctools][patch][1690188] = http://drupal.org/files/1690188-fix-items-per-page-stuff_0.patch
+projects[ctools][patch][1710816] = http://drupal.org/files/1710816-better-checking-override-title-value.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
