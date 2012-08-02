@@ -192,7 +192,7 @@ function panopoly_pages_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_featured_image',
-      'label' => 'Image',
+      'label' => 'Primary Image',
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
@@ -201,7 +201,7 @@ function panopoly_pages_field_default_fields() {
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
-        'min_resolution' => '',
+        'min_resolution' => '300x200',
         'title_field' => 0,
         'user_register_form' => FALSE,
       ),
@@ -252,7 +252,7 @@ function panopoly_pages_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'Indicates this content is featured which is used to promote the content in certain parts of Panopoly.',
+      'description' => 'Indicates this content is featured which is used to promote the content in certain parts of the site.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -303,8 +303,8 @@ function panopoly_pages_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Body');
   t('Featured');
-  t('Image');
-  t('Indicates this content is featured which is used to promote the content in certain parts of Panopoly.');
+  t('Indicates this content is featured which is used to promote the content in certain parts of the site.');
+  t('Primary Image');
 
   return $fields;
 }
