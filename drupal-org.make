@@ -2,20 +2,21 @@ api = 2
 core = 7.x
 
 ; Panopoly - Contrib - Foundation
-projects[ctools][version] = 1.0
+projects[ctools][version] = 1.x-dev
 projects[ctools][subdir] = contrib
 projects[ctools][type] = module
-projects[ctools][patch][1444732] = https://drupal.org/files/1444732-exposed-sort-as-pane-config.patch
-projects[ctools][patch][1198808] = http://drupal.org/files/1198808-work-around-jquery-bug-with-auto-submit-ctools-1.0.patch
+projects[ctools][download][type] = git
+projects[ctools][download][revision] = c7c1218
+projects[ctools][download][branch] = 7.x-1.x
 projects[ctools][patch][1294478] = http://drupal.org/files/1294478-modal-dynamic-mode.patch
+projects[ctools][patch][1708438] = http://drupal.org/files/1708438-autosubmit-autocomplete.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][type] = module
 projects[panels][download][type] = git
-projects[panels][download][revision] = 3f50718
+projects[panels][download][revision] = 33c439b
 projects[panels][download][branch] = 7.x-3.x
-projects[panels][patch][1706936] = http://drupal.org/files/panels-ipe-no-css-image.patch
 projects[panels][patch][1549660] = http://drupal.org/files/1549660-allow-region-style-settings.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
