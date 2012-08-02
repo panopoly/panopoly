@@ -10,6 +10,7 @@ projects[ctools][download][revision] = c7c1218
 projects[ctools][download][branch] = 7.x-1.x
 projects[ctools][patch][1294478] = http://drupal.org/files/1294478-modal-dynamic-mode.patch
 projects[ctools][patch][1708438] = http://drupal.org/files/1708438-autosubmit-autocomplete.patch
+projects[ctools][patch][1690188] = https://drupal.org/files/1690188-fix-items-per-page-stuff_0.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
@@ -17,7 +18,8 @@ projects[panels][type] = module
 projects[panels][download][type] = git
 projects[panels][download][revision] = 33c439b
 projects[panels][download][branch] = 7.x-3.x
-projects[panels][patch][1549660] = http://drupal.org/files/1549660-allow-region-style-settings.patch
+projects[panels][patch][1549660] = http://drupal.org/files/1549660-allow-region-style-settings_1.patch
+projects[panels][patch][1690124] = http://drupal.org/files/1690124-hide-ipe-toolbal-with-open-modal.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
