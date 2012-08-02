@@ -13,7 +13,6 @@ projects[ctools][patch][1708438] = http://drupal.org/files/1708438-blur-event.pa
 projects[ctools][patch][1690188] = http://drupal.org/files/1690188-fix-items-per-page-stuff_0.patch
 projects[ctools][patch][1710816] = http://drupal.org/files/1710816-better-checking-override-title-value.patch
 
-
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][type] = module
@@ -21,7 +20,7 @@ projects[panels][download][type] = git
 projects[panels][download][revision] = 33c439b
 projects[panels][download][branch] = 7.x-3.x
 projects[panels][patch][1549660] = http://drupal.org/files/1549660-allow-region-style-settings_1.patch
-projects[panels][patch][1690124] = http://drupal.org/files/1690124-hide-ipe-toolbal-with-open-modal.patch
+projects[panels][patch][1690124] = http://drupal.org/files/1690124-hide-ipe-toolbal-with-open-modal_1.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
