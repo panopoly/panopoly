@@ -247,8 +247,8 @@ function panopoly_demo_views_default_views() {
   $handler->display->display_options['allow']['exposed_form'] = 'exposed_form';
   $handler->display->display_options['allow']['fields_override'] = 'fields_override';
 
-  /* Display: Featured Demo Item */
-  $handler = $view->new_display('panel_pane', 'Featured Demo Item', 'featured_demo');
+  /* Display: Individual Demo Item */
+  $handler = $view->new_display('panel_pane', 'Individual Demo Item', 'featured_demo');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Demo Item';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -287,7 +287,7 @@ function panopoly_demo_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
-  $handler->display->display_options['pane_title'] = 'Featured Demo Item';
+  $handler->display->display_options['pane_title'] = 'Individual Demo Item';
   $handler->display->display_options['pane_category']['name'] = 'Demo';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['allow']['use_pager'] = 0;
@@ -378,6 +378,52 @@ function panopoly_demo_views_default_views() {
     'panopoly_page' => 'panopoly_page',
   );
   $handler->display->display_options['pane_title'] = 'Slideshow of Demo Items';
+  $handler->display->display_options['pane_category']['name'] = 'Demo';
+  $handler->display->display_options['pane_category']['weight'] = '0';
+  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['items_per_page'] = 'items_per_page';
+  $handler->display->display_options['allow']['offset'] = 0;
+  $handler->display->display_options['allow']['link_to_view'] = 0;
+  $handler->display->display_options['allow']['more_link'] = 0;
+  $handler->display->display_options['allow']['path_override'] = 0;
+  $handler->display->display_options['allow']['title_override'] = 0;
+  $handler->display->display_options['allow']['exposed_form'] = 'exposed_form';
+  $handler->display->display_options['allow']['fields_override'] = 'fields_override';
+
+  /* Display: List of Featured Demo Items */
+  $handler = $view->new_display('panel_pane', 'List of Featured Demo Items', 'panel_pane_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Featured Demo Items';
+  $handler->display->display_options['display_description'] = 'This is a customizable list of demo items which are marked as featured!';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'panopoly_page' => 'panopoly_page',
+  );
+  /* Filter criterion: Featured */
+  $handler->display->display_options['filters']['field_featured_status_value']['id'] = 'field_featured_status_value';
+  $handler->display->display_options['filters']['field_featured_status_value']['table'] = 'field_data_field_featured_status';
+  $handler->display->display_options['filters']['field_featured_status_value']['field'] = 'field_featured_status_value';
+  $handler->display->display_options['filters']['field_featured_status_value']['ui_name'] = 'Featured';
+  $handler->display->display_options['filters']['field_featured_status_value']['operator'] = 'not empty';
+  $handler->display->display_options['filters']['field_featured_status_value']['value'] = array(
+    0 => '0',
+  );
+  $handler->display->display_options['pane_title'] = 'List of Featured Demo Items';
   $handler->display->display_options['pane_category']['name'] = 'Demo';
   $handler->display->display_options['pane_category']['weight'] = '0';
   $handler->display->display_options['allow']['use_pager'] = 0;

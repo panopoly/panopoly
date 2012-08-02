@@ -65,7 +65,6 @@ function panopoly_demo_default_page_manager_pages() {
       'header' => NULL,
       'contentmain' => NULL,
       'footer' => NULL,
-      'sidebar' => NULL,
     ),
     'sidebar' => array(
       'style' => '-1',
