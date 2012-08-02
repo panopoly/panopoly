@@ -137,14 +137,16 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-5';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_publishing';
-    $pane->subtype = 'node_form_publishing';
+    $pane->type = 'entity_form_field';
+    $pane->subtype = 'node:field_featured_status';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
+      'label' => '',
+      'formatter' => '',
       'context' => 'argument_node_edit_1',
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => 'Featured Status',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -159,12 +161,12 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-6';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_author';
-    $pane->subtype = 'node_form_author';
+    $pane->type = 'node_form_publishing';
+    $pane->subtype = 'node_form_publishing';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => array(),
+      'context' => 'argument_node_edit_1',
       'override_title' => 0,
       'override_title_text' => '',
     );
@@ -181,12 +183,12 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-7';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_menu';
-    $pane->subtype = 'node_form_menu';
+    $pane->type = 'node_form_author';
+    $pane->subtype = 'node_form_author';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => 'argument_node_edit_1',
+      'context' => array(),
       'override_title' => 0,
       'override_title_text' => '',
     );
@@ -203,6 +205,28 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-8';
     $pane->panel = 'sidebar';
+    $pane->type = 'node_form_menu';
+    $pane->subtype = 'node_form_menu';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'argument_node_edit_1',
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 4;
+    $pane->locks = array();
+    $display->content['new-8'] = $pane;
+    $display->panels['sidebar'][4] = 'new-8';
+    $pane = new stdClass();
+    $pane->pid = 'new-9';
+    $pane->panel = 'sidebar';
     $pane->type = 'node_form_buttons';
     $pane->subtype = 'node_form_buttons';
     $pane->shown = TRUE;
@@ -218,10 +242,10 @@ function panopoly_admin_default_page_manager_handlers() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 4;
+    $pane->position = 5;
     $pane->locks = array();
-    $display->content['new-8'] = $pane;
-    $display->panels['sidebar'][4] = 'new-8';
+    $display->content['new-9'] = $pane;
+    $display->panels['sidebar'][5] = 'new-9';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-3';
   $handler->conf['display'] = $display;
