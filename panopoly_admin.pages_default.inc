@@ -120,9 +120,9 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane->configuration = array(
       'label' => '',
       'formatter' => '',
-      'context' => array(),
+      'context' => 'argument_node_edit_1',
       'override_title' => 1,
-      'override_title_text' => 'Featured Image',
+      'override_title_text' => 'Primary Image',
     );
     $pane->cache = array();
     $pane->style = array(
