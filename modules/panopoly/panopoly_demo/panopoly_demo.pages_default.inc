@@ -208,26 +208,26 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->pid = 'new-5';
     $pane->panel = 'sidebar';
     $pane->type = 'views_panes';
-    $pane->subtype = 'panopoly_demo-demo_slideshow';
+    $pane->subtype = 'panopoly_demo-panel_pane_1';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'fields_override' => array(
         'field_featured_image' => 1,
         'title' => 1,
-        'created' => 0,
+        'created' => 1,
         'name' => 0,
         'body' => 1,
       ),
       'exposed' => array(
         'sort_by' => 'created',
         'sort_order' => 'DESC',
-        'widget_title' => 'Demo Slideshow',
-        'items_per_page' => '4',
+        'widget_title' => 'Featured Demo Items',
+        'items_per_page' => '0',
       ),
       'view_mode' => 'teaser',
-      'widget_title' => 'Demo Slideshow',
-      'items_per_page' => '4',
+      'widget_title' => 'Featured Demo Items',
+      'items_per_page' => '0',
       'view_settings' => 'fields',
       'override_title' => '',
       'override_title_text' => '',
