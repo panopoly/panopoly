@@ -6,9 +6,18 @@ include_once('panopoly_magic.features.inc');
  * Implementation of hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
-  // Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
-  // we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving the
-  // entity first. 
+
+  /**
+   * Globally remove the "Cancel" button from Panel pane edit forms
+   */
+  if (strpos($form_id, 'content_type_edit_form')) { 
+    $form['buttons']['cancel']['#access'] = FALSE;
+  }
+
+  /**
+   * Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
+   * we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving.
+   */
   if ((strpos($form_id, '_content_type_edit_form') && $form_id != 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') || $form_id == 'panels_edit_style_type_form') {
 
     // Start the magic
@@ -37,7 +46,7 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     $content = ctools_content_render($pane->type, $pane->subtype, $configuration);
 
     // Remove the clearfix for preview floating
-    // TODO - is there a cleaner way to handle this?
+    // TODO - investigate why Panels is putting this here in the first place
     if (isset($form['aligner_start'])) {
       $form['aligner_start']['#markup'] = str_replace('clearfix', '', $form['aligner_start']['#markup']);
     }
@@ -69,7 +78,9 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     }
   }
 
-  // Add customization to panel pane style form
+  /**
+   * Add customization to panel pane style form
+   */
   if ($form_id == 'panels_edit_style_type_form') {
 
     // Unset options for which we have no need
@@ -94,7 +105,9 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     $form['style']['#title'] = t('Style Settings');
   }
 
-  // Add customization to panel pane settings form
+  /**
+   * Add customization to views panel pane settings form
+   */
   if ($form_id == 'views_content_views_panes_content_type_edit_form') {
 
     // Get the configuration
@@ -114,15 +127,31 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       );
     }
 
-    // Add a widget title setting
-    $form['exposed']['widget_title'] = array(
-      '#field_prefix' => t('Title'),
-      '#type' => 'textfield',
-      '#size' => 30,
-      '#weight' => -100,
-      '#attributes' => (empty($conf['widget_title']) || empty($form_state['view']->display_handler->options['title'])) ? array('placeholder' => '<No Title>') : array(),
-      '#default_value' => (isset($conf['widget_title'])) ? $conf['widget_title'] : $form_state['view']->display_handler->options['title'],
-    );
+    // Better position context settings
+    if (!empty($form['context'])) {
+      $form['context_settings'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Context Settings'),
+      );
+      $form['context_settings']['context'] = $form['context'];
+      unset($form['context']);
+    }
+
+
+    // Add a widget title setting if views allows this to be customized
+    if (!empty($form['override_title'])) {
+      $form['override_title_markup']['#access'] = FALSE;
+      $form['override_title']['#access'] = FALSE;
+      $form['override_title_text']['#access'] = FALSE;
+      $form['exposed']['widget_title'] = array(
+        '#field_prefix' => t('Title'),
+        '#type' => 'textfield',
+        '#size' => 30,
+        '#weight' => -100,
+        '#attributes' => (empty($conf['widget_title']) || empty($form_state['view']->display_handler->options['title'])) ? array('placeholder' => '<No Title>') : array(),
+        '#default_value' => (isset($conf['widget_title'])) ? $conf['widget_title'] : $form_state['view']->display_handler->options['title'],
+      );
+    }
 
     // Change the naming of the sort order option
     if (!empty($form['exposed']['sort_order'])) {
@@ -158,10 +187,8 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     }
 
     // Determine if this is a node view.
-    $node_view = FALSE;
-    if ($form_state['view']->display_handler->options['row_plugin'] == 'node' && in_array($form_state['view']->display_handler->options['style_plugin'], array('default', 'slideshow'))) {
-      $node_view = TRUE;
-    }
+    $view_handler = $form_state['view']->display_handler;
+    $node_view = ($view_handler->options['row_plugin'] == 'node' && in_array($view_handler->options['style_plugin'], array('default'))) ? TRUE : FALSE;
 
     if ($node_view == FALSE) {
       if (empty($conf['view_settings'])) {
@@ -192,32 +219,36 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
           ':input[name="view_settings"]' => array('value' => 'fields'),
         ),
       );
+    }
 
-      // Add the style setting fieldset.
-      $form['content_settings'] = array(
-        '#type' => 'fieldset',
-        '#title' => 'Content Settings',
-      );
+    // Add the style setting fieldset in any case
+    $form['content_settings'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Content Settings',
+    );
 
-      // Add specific style options.
-      $form['content_settings']['view_mode'] = array(
-        '#type' => 'radios',
-        '#options' => _panopoly_magic_view_mode_options(),
-        '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
-        '#states' => array(
-          'visible' => array(
-            ':input[name="view_settings"]' => array('value' => 'nodes'),
-          ),
+    // Add specific style options.
+    $form['content_settings']['view_mode'] = array(
+      '#type' => 'radios',
+      '#options' => _panopoly_magic_view_mode_options(),
+      '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
+      '#states' => array(
+        'visible' => array(
+          ':input[name="view_settings"]' => array('value' => 'nodes'),
         ),
-      );  
-    } 
+      ),
+    );  
 
     // Add a custom submit handler
     $form['#submit'][] = 'panopoly_magic_views_view_mode_pane_submit';
   }
 
-  // Override default entity view mode behavior for fieldable panel panes.
+  /**
+   * Override default entity view mode behavior for fieldable panel panes.
+   */
   if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
+
+    // Handle the view mode
     $view_mode = $form['view_mode'];
     unset($form['view_mode']);
 
@@ -239,8 +270,10 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     $form['widget_settings']['view_mode'] = $view_mode;
   }
 
-  // Make sure that all options are inside a fieldset. Currently just supporting a known list
-  // of forms, but persumably this can be generalized.
+  /**
+   * Globally make sure that all options are inside a fieldset. Currently just supporting a known list
+   * of forms, but persumably this can be applied to all items
+   */
   if (in_array($form_id, array('panopoly_search_search_box_content_type_edit_form', 'menu_block_menu_tree_content_type_edit_form', 'ctools_node_content_content_type_edit_form'))) {
 
     // Grab child elements and create the fieldset.
@@ -251,7 +284,6 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
         '#title' => t('General Settings'),
         '#weight' => -30,
       );
-
 
       // Move all elements which aren't fieldsets or the submit buttons into the general settings fieldset.
       foreach ($children as $child) {
@@ -314,21 +346,20 @@ function panopoly_magic_views_pre_render(&$view) {
     // sometimes it doesn't.
     if (isset($conf['widget_title']) || isset($conf['exposed']['widget_title'])) {
       $view->display_handler->options['title'] = (isset($conf['exposed']['widget_title'])) ? $conf['exposed']['widget_title'] : $conf['widget_title']; 
+      $view->build_info['title'] = (isset($conf['exposed']['widget_title'])) ? $conf['exposed']['widget_title'] : $conf['widget_title']; 
     }
 
-    // Determien that this was previously a field view, which has been overridden to a node view in the pane config.
+    // Determine that this was previously a field view, which has been overridden to a node view in the pane config.
     if (!empty($conf['view_settings']) && $conf['view_settings'] == 'nodes' && empty($view->style_plugin->row_plugin->nodes)) {
-      
+     
       // Reconstruct the nodes array which a node row style expects.
       if (!empty($view->result)) {
         $nids = array();
         foreach ($view->result as $result) {
           $nids[] = $result->nid;
         }
-
         $nodes = node_load_multiple($nids);
       }
-
 
       // Change the row plugin.
       if (!empty($nodes)) {
@@ -339,7 +370,6 @@ function panopoly_magic_views_pre_render(&$view) {
         $view->style_plugin->row_plugin->nodes = $nodes;
       }
     }
-
 
     // Set the view mode
     if (isset($conf['view_mode'])) {
