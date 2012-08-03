@@ -67,7 +67,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['path']['alias']['#title'] = '<strong>' . t('Permalink') . ':</strong> ';
     $form['path']['alias']['#title'] .= (isset($_SERVER['HTTPS'])) ? 'https://' . $_SERVER['HTTP_HOST'] . '/' : 'http://' . $_SERVER['HTTP_HOST'] . '/';
     if (isset($form['path']['pathauto'])) {
-      if (!empty($form['path']['alias']['#default_value'])) {
+      if (empty($form['nid']['#value']) || !empty($form['path']['alias']['#default_value'])) {
         $form['path']['pathauto']['#default_value'] = FALSE;
       }
       if (!$form['path']['alias']['#default_value']) {
