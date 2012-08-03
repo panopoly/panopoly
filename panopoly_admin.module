@@ -67,9 +67,8 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['path']['alias']['#title'] = '<strong>' . t('Permalink') . ':</strong> ';
     $form['path']['alias']['#title'] .= (isset($_SERVER['HTTPS'])) ? 'https://' . $_SERVER['HTTP_HOST'] . '/' : 'http://' . $_SERVER['HTTP_HOST'] . '/';
     if (isset($form['path']['pathauto'])) {
-      if (empty($form['nid']['#value']) || !empty($form['path']['alias']['#default_value'])) {
-        $form['path']['pathauto']['#default_value'] = FALSE;
-      }
+      // Remove the states property since we are hiding the field
+      $form['path']['alias']['#states'] = array();
       if (!$form['path']['alias']['#default_value']) {
         $form['path']['alias']['#attributes'] = array('placeholder' => '<' . t('magically generated') . '>');
       }
@@ -143,9 +142,9 @@ function panopoly_admin_module_implements_alter(&$implementations, $hook) {
  */
 function panopoly_admin_pathauto_submit($form, &$form_state) {
   // If the user hasn't specified a path, autogenerate
-  if (!isset($form_state['input']['path']['alias'])) {
-    $form_state['values']['path']['pathauto'] = 1;
-    $form_state['input']['path']['pathauto'] = 1;
+  if (empty($form_state['input']['path']['alias'])) {
+    $form_state['values']['path']['pathauto'] = TRUE;
+    $form_state['input']['path']['pathauto'] = TRUE;
   }
 }
 
