@@ -91,10 +91,9 @@ function panopoly_demo_default_page_manager_pages() {
       ),
       'exposed' => array(
         'title' => 'Content Demo',
-        'widget_title' => '',
       ),
       'view_mode' => 'featured',
-      'widget_title' => '',
+      'widget_title' => NULL,
       'items_per_page' => NULL,
       'view_settings' => 'nodes',
     );
@@ -122,8 +121,8 @@ function panopoly_demo_default_page_manager_pages() {
         'body' => 1,
       ),
       'exposed' => array(
-        'sort_by' => 'title',
-        'sort_order' => 'DESC',
+        'sort_by' => 'created',
+        'sort_order' => 'ASC',
         'widget_title' => '',
         'items_per_page' => '3',
       ),
@@ -131,6 +130,8 @@ function panopoly_demo_default_page_manager_pages() {
       'widget_title' => '',
       'items_per_page' => '3',
       'view_settings' => 'nodes',
+      'override_title' => '',
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array();
@@ -185,13 +186,15 @@ function panopoly_demo_default_page_manager_pages() {
       'exposed' => array(
         'sort_by' => 'created',
         'sort_order' => 'DESC',
-        'widget_title' => 'Demo Item List',
-        'items_per_page' => '0',
+        'widget_title' => 'Demo Items',
+        'items_per_page' => '3',
       ),
       'view_mode' => 'teaser',
-      'widget_title' => 'Demo Item List',
-      'items_per_page' => '0',
+      'widget_title' => 'Demo Items',
+      'items_per_page' => '3',
       'view_settings' => 'fields',
+      'override_title' => '',
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array();
@@ -220,12 +223,14 @@ function panopoly_demo_default_page_manager_pages() {
         'sort_by' => 'created',
         'sort_order' => 'DESC',
         'widget_title' => 'Demo Slideshow',
-        'items_per_page' => '0',
+        'items_per_page' => '4',
       ),
       'view_mode' => 'teaser',
       'widget_title' => 'Demo Slideshow',
-      'items_per_page' => '0',
+      'items_per_page' => '4',
       'view_settings' => 'fields',
+      'override_title' => '',
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array();
