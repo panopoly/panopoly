@@ -55,23 +55,6 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
  */
 function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
 
-  // General styling to the content type edit form
-  if (strpos($form_id, 'content_type_edit_form')) {
-    $form['override_title_markup']['#access'] = FALSE;
-    $form['buttons']['cancel']['#access'] = FALSE;
-  }
-
-  // Style the context information
-  // TODO - move to Panopoly Magic module
-  if (!empty($form['context'])) {
-    $form['context_settings'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Context Settings'),
-    );
-    $form['context_settings']['context'] = $form['context'];
-    unset($form['context']);
-  }
-
   // Improve the title field
   if (isset($form['title']['#title'])) {
     $form['title']['#attributes']['placeholder'] = $form['title']['#title'];
