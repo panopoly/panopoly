@@ -137,6 +137,14 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       unset($form['context']);
     }
 
+    // Better position page settings
+    if (!empty($form['use_pager'])) {
+      $form['exposed']['use_pager'] = $form['use_pager'];
+      $form['exposed']['pager_id'] = $form['pager_id'];
+      unset($form['use_pager']);
+      unset($form['pager_id']);
+    }
+
 
     // Add a widget title setting if views allows this to be customized
     if (!empty($form['override_title'])) {
@@ -153,9 +161,13 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       );
     }
 
-    // Change the naming of the sort order option
+    // Adjust the sort options
     if (!empty($form['exposed']['sort_order'])) {
       $form['exposed']['sort_order']['#title'] = t('Sort order');
+      $form['exposed']['sort_order']['#suffix'] = '<div class="clearfix"></div>';
+    }
+    if (!empty($form['exposed']['sort_by'])) {
+      $form['exposed']['sort_by']['#prefix'] = '<div class="clearfix"></div>';
     }
 
     // Switch all exposed filters to use field_prefix display
