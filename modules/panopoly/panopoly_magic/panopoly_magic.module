@@ -239,6 +239,25 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       ),
     );  
 
+    // Override context settings if there is only one option.
+    if (!empty($form['context_settings']['context'])) {
+      $show_fieldset = FALSE;
+      foreach (element_children($form['context_settings']['context']) as $child) {
+        // If the element has only one option, just hide the field.
+        if (empty($form['context_settings']['context'][$child]['#options']) || count($form['context_settings']['context'][$child]['#options']) < 2) {
+          $form['context_settings']['context'][$child]['#type'] = 'hidden';
+        }
+        else {
+          // We should show the fieldset if at least one sub element has multiple options.
+          $show_fieldset = TRUE;
+        }
+      }
+
+      if (empty($show_fieldset)) {
+        $form['context_settings']['#type'] = 'hidden';
+      }
+    }
+
     // Add a custom submit handler
     $form['#submit'][] = 'panopoly_magic_views_view_mode_pane_submit';
   }
