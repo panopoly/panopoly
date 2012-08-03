@@ -138,7 +138,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_link.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/quick-links',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -152,7 +152,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_file.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/basic-file',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -166,7 +166,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_image.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/image',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -180,7 +180,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_text.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/text',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -194,7 +194,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_map.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/map',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -208,7 +208,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_table.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/table',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -222,7 +222,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_video.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/video',
       'access arguments' => array('administer fieldable panels panes'),
     ),
@@ -236,7 +236,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png',
     'admin' => array(
       'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
-      'bundle argument' => 5,
+      'bundle argument' => 4,
       'real path' => 'admin/structure/fieldable-panels-panes/manage/spotlight',
       'access arguments' => array('administer fieldable panels panes'),
     ),
