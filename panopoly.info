@@ -80,7 +80,6 @@ dependencies[] = search_api_db
 dependencies[] = apps 
 dependencies[] = features
 dependencies[] = entity
-dependencies[] = uuid
 dependencies[] = defaultcontent
 dependencies[] = strongarm
 dependencies[] = libraries
