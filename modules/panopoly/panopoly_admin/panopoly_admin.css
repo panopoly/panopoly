@@ -272,9 +272,10 @@
  * Admin dashboard styling
  */
 .pane-theme .form-type-checkbox input, 
-.pane-apps .form-type-checkbox input {
+.pane-panopoly-apps-apps .form-type-checkbox input,
+.pane-panopoly-foundation-apps .form-type-checkbox input {
   float: left;
-  margin-top: 16px;
+  margin-top: 30px;
 }
 
 .pane-theme .admin-theme-image {
@@ -283,14 +284,16 @@
   width: 10%;
 }
 
-.pane-apps .admin-apps-image {
+.pane-panopoly-apps-apps .admin-apps-image,
+.pane-panopoly-foundation-apps .admin-apps-image {
   padding-left: 1em;
   float: left;
   width: 7%;
 }
 
 .pane-theme .admin-theme-configure, 
-.pane-apps .admin-apps-configure {
+.pane-panopoly-apps-apps .admin-apps-configure,
+.pane-panopoly-foundation-apps .admin-apps-configure {
   float: right;
   line-height: 40px;
 }
@@ -299,7 +302,8 @@
   width: 75px;
 }
 
-.pane-apps .admin-apps-image img {
+.pane-panopoly-apps-apps .admin-apps-image img,
+.pane-panopoly-foundation-apps .admin-apps-image img {
   width: 50px;
   border: 1px solid #000;
 }
@@ -311,16 +315,22 @@
   float: left;
 }
 
-.pane-apps .admin-apps-information {
+.pane-panopoly-apps-apps .admin-apps-information,
+.pane-panopoly-foundation-apps .admin-apps-information {
   padding-left: 1em;
   padding-right: 1em;
-  width: 57%;
   float: left;
 }
 
 .pane-theme .form-checkbox, 
-.pane-apps .form-checkbox {
+.pane-panopoly-apps-apps .form-checkbox,
+.pane-panopoly-foundation-apps .form-checkbox {
   font-size: 2em;
+}
+
+.pane-panopoly-apps-apps .form-checkbox .form-item,
+.pane-panopoly-foundation-apps .form-checkbox .form-item {
+  margin-top: 0;
 }
 
 /**
