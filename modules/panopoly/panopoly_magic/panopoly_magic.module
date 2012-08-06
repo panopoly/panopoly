@@ -5,7 +5,7 @@ include_once('panopoly_magic.features.inc');
 /**
  * Implementation of hook_form_alter()
  */
-function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
+function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
   /**
    * Globally remove the "Cancel" button from Panel pane edit forms
@@ -18,7 +18,7 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
    * Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
    * we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving.
    */
-  if ((strpos($form_id, '_content_type_edit_form') && $form_id != 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') || $form_id == 'panels_edit_style_type_form') {
+  if (strpos($form_id, '_content_type_edit_form') || $form_id == 'panels_edit_style_type_form') {
 
     // Start the magic
     $pane = $form_state['pane'];
@@ -37,12 +37,26 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
       $style = NULL;
     }
 
-    // Determine the configuration
-    // TODO - if a cleverer person can save the entity and get a vuuid, then we can pass that
-    // as a "uuid:asds-adsa-dsad-adsd-adda-adssd" subtype and it all works wonderfully.
-    $configuration = ($form_state['rebuild'] && strpos($form_id, 'content_type_edit_form')) ? $form_state['input'] : $pane->configuration;
+    // EXPERIEMENTAL: Handling Saving a Fieldable Panel Pane To Create a Live Preview. The trick 
+    // here is to make sure we properly save a version to get a vid, but don't make it the real one.
+    // NOTE - I doubt this will be very good for performance. Let's call it RC1. 
+    if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && $form_state['clicked_button']['#value'] == 'Update Preview') {
 
-    // Determine the content 
+      // Make sure this will not be set as reusable
+      $form_state['input']['reusable'] = 0;
+      $form_state['values']['reusable'] = 0;
+
+      // Run entity information through standard submission form
+      fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
+
+      // Properly adjust the VID to deal with all of this and tell Fieldable Panel Panes to Render It
+      db_query("UPDATE {fieldable_panels_panes} SET vid = :vid WHERE fpid = :fpid", array(':vid' => $form_state['entity']->old_vid, ':fpid' => $form_state['entity']->fpid));
+      $pane->subtype = 'vid:' . $form_state['entity']->vid;
+    }
+
+
+    // Set the configuration and determine the content for the pane
+    $configuration = ($form_state['rebuild'] && strpos($form_id, 'content_type_edit_form')) ? $form_state['input'] : $pane->configuration;
     $content = ctools_content_render($pane->type, $pane->subtype, $configuration);
 
     // Remove the clearfix for preview floating
