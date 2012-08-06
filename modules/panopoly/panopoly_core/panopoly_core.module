@@ -20,6 +20,21 @@ function panopoly_core_init() {
   }
 }
 
+/**
+ * Implements hook_apps_servers_info()
+ */
+function panopoly_core_apps_servers_info() {
+  $profile = variable_get('install_profile', 'panopoly');
+  $info =  drupal_parse_info_file(drupal_get_path('profile', $profile) . '/' . $profile . '.info');
+  return array(
+    'panopoly_apps' => array(
+      'title' => 'Panopoly Apps',
+      'description' => 'Apps for Panopoly',
+      'manifest' => (empty($info['version']) || $info['version'] == '7.x-1.x-dev') ? 'http://apps.getpantheon.com/panopoly-apps-dev' : 'http://apps.getpantheon.com/panopoly-apps',
+    ),
+  );
+}
+
 
 /**
  * Implements hook_date_format_types()
