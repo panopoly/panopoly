@@ -88,7 +88,7 @@ projects[file_entity][download][revision] = ba18f8b
 projects[file_entity][download][branch] = 7.x-2.x
 
 ; Panopoly - Contrib - Search
-projects[facetapi][version] = 1.0
+projects[facetapi][version] = 1.1
 projects[facetapi][type] = module
 projects[facetapi][subdir] = contrib
 
