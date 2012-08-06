@@ -242,7 +242,7 @@ function panopoly_magic_form_alter(&$form, $form_state, $form_id) {
     // Add specific style options.
     $form['content_settings']['view_mode'] = array(
       '#type' => 'radios',
-      '#options' => _panopoly_magic_view_mode_options(),
+      '#options' => panopoly_core_view_mode_options(),
       '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
       '#states' => array(
         'visible' => array(
@@ -420,21 +420,6 @@ function panopoly_magic_module_implements_alter(&$implementations, $hook) {
   }
 }
 
-/**
- * Helpfer function to get view modes
- */
-function _panopoly_magic_view_mode_options() {
-  $entity_info = entity_get_info('node');
-  $options = array();
-  if (!empty($entity_info['view modes'])) {
-    foreach ($entity_info['view modes'] as $mode => $settings) {
-      if (!in_array($mode, array('rss', 'search_index', 'search_result', 'token'))) {
-        $options[$mode] = $settings['label'];
-      }
-    }
-  }
-  return $options;
-}
 
 /**
  * Preprocess the panels_ipe_toolbar to change text for IPE buttons

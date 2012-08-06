@@ -10,6 +10,7 @@ dependencies[] = menu
 dependencies[] = node
 dependencies[] = page_manager
 dependencies[] = panels_ipe
+dependencies[] = panopoly_core
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
