@@ -42,6 +42,7 @@ projects[panelizer][patch][1555194] = http://drupal.org/files/panelizer_null-did
 projects[fieldable_panels_panes][version] = 1.1
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][type] = module
+projects[fieldable_panels_panes][patch][1715918] = http://drupal.org/files/fieldable-panel-panes-load-vid.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][type] = module
