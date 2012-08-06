@@ -43,17 +43,20 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && $form_state['clicked_button']['#value'] == 'Update Preview') {
 
       // Make sure this will not be set as reusable
-      $form_state['input']['reusable'] = 0;
-      $form_state['values']['reusable'] = 0;
+      // $form_state['input']['reusable'] = 0;
+      // $form_state['values']['reusable'] = 0;
 
       // Run entity information through standard submission form
       fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
 
-      // Properly adjust the VID to deal with all of this and tell Fieldable Panel Panes to Render It
-      db_query("UPDATE {fieldable_panels_panes} SET vid = :vid WHERE fpid = :fpid", array(':vid' => $form_state['entity']->old_vid, ':fpid' => $form_state['entity']->fpid));
+      // Properly adjust the VID if we are dealing with an existing object
+      if (!empty($form_state['entity']->old_vid)) {
+        db_query("UPDATE {fieldable_panels_panes} SET vid = :vid WHERE fpid = :fpid", array(':vid' => $form_state['entity']->old_vid, ':fpid' => $form_state['entity']->fpid));
+      }
+
+      // Then tell Fieldable Panel Panes to render the correct version
       $pane->subtype = 'vid:' . $form_state['entity']->vid;
     }
-
 
     // Set the configuration and determine the content for the pane
     $configuration = ($form_state['rebuild'] && strpos($form_id, 'content_type_edit_form')) ? $form_state['input'] : $pane->configuration;
@@ -66,7 +69,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Create the preview fieldset
-    if ($content) {
+    if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' || $content) {
       $form['widget_preview'] = array(
         '#type' => 'fieldset',
         '#title' => 'Preview',
