@@ -24,9 +24,13 @@ function panopoly_core_init() {
  * Implements hook_apps_servers_info()
  */
 function panopoly_core_apps_servers_info() {
-  $profile = variable_get('install_profile', 'panopoly');
-  $info =  drupal_parse_info_file(drupal_get_path('profile', $profile) . '/' . $profile . '.info');
+  $info =  drupal_parse_info_file(drupal_get_path('module', 'panopoly_core') . '/panopoly_core.info');
   return array(
+    'panopoly' => array(
+      'title' => 'Panopoly',
+      'description' => 'Apps for Panopoly',
+      'manifest' => (empty($info['version']) || $info['version'] == '7.x-1.x-dev') ? 'http://apps.getpantheon.com/panopoly-dev' : 'http://apps.getpantheon.com/panopoly',
+    ),
     'panopoly_apps' => array(
       'title' => 'Panopoly Apps',
       'description' => 'Apps for Panopoly',
