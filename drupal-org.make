@@ -87,6 +87,10 @@ projects[file_entity][download][type] = git
 projects[file_entity][download][revision] = ba18f8b
 projects[file_entity][download][branch] = 7.x-2.x
 
+projects[entityreference][version] = 1.0-rc3
+projects[entityreference][type] = module
+projects[entityreference][subdir] = contrib
+
 ; Panopoly - Contrib - Search
 projects[facetapi][version] = 1.1
 projects[facetapi][type] = module

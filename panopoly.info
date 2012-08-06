@@ -42,6 +42,7 @@ dependencies[] = date_views
 dependencies[] = simple_gmap
 dependencies[] = field_group
 dependencies[] = file_entity
+dependencies[] = entityreference
 
 ; Panopoly - Contrib - Media
 dependencies[] = media
