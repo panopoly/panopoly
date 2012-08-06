@@ -21,39 +21,6 @@ function panopoly_users_menu_alter(&$items) {
 }
 
 /**
- * Implementation of hook_pm_existing_pages_info()
- */
-function panopoly_users_pm_existing_pages_info() {
-  $pm_existing_pages = array();
-
-  $pm_existing_page = new stdClass();
-  $pm_existing_page->api_version = 1;
-  $pm_existing_page->name = 'user_login';
-  $pm_existing_page->label = 'User Login';
-  $pm_existing_page->context = 'entity|user|uid';
-  $pm_existing_page->paths = 'user';
-  $pm_existing_pages['user_login'] = $pm_existing_page;
-
-  $pm_existing_page = new stdClass();
-  $pm_existing_page->api_version = 1;
-  $pm_existing_page->name = 'user_register';
-  $pm_existing_page->label = 'User Register';
-  $pm_existing_page->context = 'entity|user|uid';
-  $pm_existing_page->paths = 'user/register';
-  $pm_existing_pages['user_register'] = $pm_existing_page;
-
-  $pm_existing_page = new stdClass();
-  $pm_existing_page->api_version = 1;
-  $pm_existing_page->name = 'user_password';
-  $pm_existing_page->label = 'User Password';
-  $pm_existing_page->context = 'entity|user|uid';
-  $pm_existing_page->paths = 'user/password';
-  $pm_existing_pages['user_password'] = $pm_existing_page;
-
-  return $pm_existing_pages;
-}
-
-/**
  * Implementation of hook_form_alter()
  */
 function panopoly_users_form_alter(&$form, $form_state, $form_id) {
