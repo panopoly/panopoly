@@ -73,3 +73,19 @@ function panopoly_core_date_formats() {
   return $formats;
 }
 
+/**
+ * Helpfer function to get view modes
+ */
+function panopoly_core_view_mode_options() {
+  $entity_info = entity_get_info('node');
+  $options = array();
+  if (!empty($entity_info['view modes'])) {
+    foreach ($entity_info['view modes'] as $mode => $settings) {
+      if (!in_array($mode, array('rss', 'search_index', 'search_result', 'token'))) {
+        $options[$mode] = $settings['label'];
+      }
+    }
+  }
+  return $options;
+}
+
