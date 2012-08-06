@@ -38,6 +38,7 @@ projects[panelizer][download][revision] = c4022c5
 projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1387634] = http://drupal.org/files/exporting_panelizer_defaults-1387634-9.patch
 projects[panelizer][patch][1555194] = http://drupal.org/files/panelizer_null-did-export.patch
+projects[panelizer][patch][1675136] = http://drupal.org/files/taxonomy-term-fix-1675136-3.patch
 
 projects[fieldable_panels_panes][version] = 1.1
 projects[fieldable_panels_panes][subdir] = contrib
