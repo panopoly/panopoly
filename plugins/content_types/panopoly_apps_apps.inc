@@ -52,13 +52,13 @@ function panopoly_admin_panopoly_apps_apps_selection_form($form, &$form_state) {
       if (function_exists($app['configure form'])) {
         $configure_links[] = array(
           'title' => t('Configure'),
-          'href' => 'admin/panopoly_apps/configure/nojs/' . $app_server . '/' . $name . '/configure',
+          'href' => 'admin/panopoly_apps/configure/nojs/panopoly_apps/' . $name . '/configure',
           'attributes' => array('class' => 'ctools-use-modal'),
           'query' => array(),
         );
         $configure_links[] = array(
           'title' => t('Details'),
-          'href' => 'admin/apps/' . $app_server . '/app/' . $name,
+          'href' => 'admin/apps/panopoly_apps/app/' . $name,
           'query' => array(),
         );
       }
