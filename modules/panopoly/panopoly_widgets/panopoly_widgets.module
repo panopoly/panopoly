@@ -66,6 +66,15 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
     $form['widget_settings']['link'] = $form['link'];
     unset($form['link']);
 
+    // Set proper display mode options for existing content bundles.  
+    if (!empty($form['#entity']) && $form['#entity']->bundle == 'existing_content') {
+      $form['field_view_mode'][LANGUAGE_NONE]['#options'] = panopoly_core_view_mode_options();
+      $form['field_view_mode'][LANGUAGE_NONE]['#required'] = TRUE;
+      $view_mode =  $form['#entity']->field_view_mode[LANGUAGE_NONE][0]['value'];
+      $form['field_view_mode'][LANGUAGE_NONE]['#default_value'] = !empty($view_mode) ? $view_mode : 'full';
+    }
+
+
     // Find file / image fields and ensure they are using a FID instead of a UUID.
     foreach($form as $key => $value) {
       if (substr($key, 0, 6) == 'field_') {
@@ -82,7 +91,6 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
         }
       }
     }
-    
 
     // Improve the reusable interface
     $form['reusable']['#title'] = t('Reusable Settings');
@@ -241,6 +249,20 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
       'access arguments' => array('administer fieldable panels panes'),
     ),
   );
+  
+  // Existing content.
+  $entity_info['fieldable_panels_pane']['bundles']['existing_content'] = array(
+    'label' => t('Add existing node'),
+    'pane category' => t('Custom'),
+    'pane top level' => TRUE,
+    'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png',
+    'admin' => array(
+      'path' => 'admin/structure/fieldable-panels-panes/manage/%fieldable_panels_panes_type',
+      'bundle argument' => 4,
+      'real path' => 'admin/structure/fieldable-panels-panes/manage/existing-content',
+      'access arguments' => array('administer fieldable panels panes'),
+    ),
+  );
 }
 
 /**
@@ -321,3 +343,17 @@ function _panopoly_widgets_preprocess_panopoly_widgets_pager_field_item(&$vars) 
   $vars['classes_array'][] = ($vars['count'] % 2) ? 'views-row-even' : 'views-row-odd';
 }
 
+/**
+ * Implementation of hook_field_display_ENTITY_TYPE_alter().
+ *
+ * Update the display settings with the option selected on the entity view mode field.
+ */
+function panopoly_widgets_field_display_fieldable_panels_pane_alter(&$display, $context) {
+  if ($context['field']['field_name'] == 'field_existing_content') {
+    $view_mode = $context['entity']->field_view_mode[LANGUAGE_NONE][0]['value'];
+
+    if (!empty($view_mode)) {
+      $display['settings']['view_mode'] = $view_mode;
+    }
+  }
+}
