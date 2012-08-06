@@ -279,9 +279,9 @@
 }
 
 .pane-theme .admin-theme-image {
-  padding-left: 1em;
+  margin-top: .3em;
+  width: 150px;
   float: left;
-  width: 10%;
 }
 
 .pane-panopoly-apps-apps .admin-apps-image,
@@ -299,7 +299,7 @@
 }
 
 .pane-theme .admin-theme-image img {
-  width: 75px;
+  width: 150px;
 }
 
 .pane-panopoly-apps-apps .admin-apps-image img,
