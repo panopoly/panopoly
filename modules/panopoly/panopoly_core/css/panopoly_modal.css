@@ -1,11 +1,16 @@
 /**
  * Modal stylings
  */
- 
-#modal-content .form-item-title input {
-  font-size: 2em;
+
+#modal-content input.form-text {
+  /* Because many input forms have a fixed width that might be wider than
+   * the IPE interface allows, we want to make sure we size them properly */
   width: 98%;
 }
+
+  #modal-content .form-item-title input {
+    font-size: 2em;
+  }
 
 #modalContent div.ctools-modal-content {
   -webkit-border-radius: 10px 10px 0 0;
@@ -174,8 +179,9 @@
   max-height: 200px;
   min-height: 200px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 1em;
+  margin-top: 1em;
 }
 
 #modal-content .widget-preview .fieldset-wrapper table tr.even td, 
@@ -194,6 +200,7 @@
 
 #modal-content .widget-preview .fieldset-wrapper h2 {
   font-size: 150%;
+  margin-top: .25em;
 }
 
 #modal-content .widget-preview {
@@ -303,12 +310,6 @@
 #modal-content .panels-categories-description {
   color: #FFF;
 }
-
-#modal-content .widget-preview .fieldset-wrapper .views-exposed-widget, 
-#modal-content .widget-preview .fieldset-wrapper table {
-  font-size: 50%;
-}
-
 
 /**
  * Misc Modal Stylings
