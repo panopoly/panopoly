@@ -78,7 +78,7 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->pid = 'new-1';
     $pane->panel = 'contentmain';
     $pane->type = 'views_panes';
-    $pane->subtype = 'panopoly_demo-featured_demo';
+    $pane->subtype = 'panopoly_demo-individual_demo_item';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -208,7 +208,7 @@ function panopoly_demo_default_page_manager_pages() {
     $pane->pid = 'new-5';
     $pane->panel = 'sidebar';
     $pane->type = 'views_panes';
-    $pane->subtype = 'panopoly_demo-panel_pane_1';
+    $pane->subtype = 'panopoly_demo-list_featured_demo_items';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

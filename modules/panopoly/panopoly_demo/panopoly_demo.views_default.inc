@@ -248,7 +248,7 @@ function panopoly_demo_views_default_views() {
   $handler->display->display_options['allow']['fields_override'] = 'fields_override';
 
   /* Display: Individual Demo Item */
-  $handler = $view->new_display('panel_pane', 'Individual Demo Item', 'featured_demo');
+  $handler = $view->new_display('panel_pane', 'Individual Demo Item', 'individual_demo_item');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
@@ -300,7 +300,7 @@ function panopoly_demo_views_default_views() {
   $handler->display->display_options['allow']['fields_override'] = 'fields_override';
 
   /* Display: List of Featured Demo Items */
-  $handler = $view->new_display('panel_pane', 'List of Featured Demo Items', 'panel_pane_1');
+  $handler = $view->new_display('panel_pane', 'List of Featured Demo Items', 'list_featured_demo_items');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Featured Demo Items';
   $handler->display->display_options['display_description'] = 'This is a customizable list of demo items which are marked as featured!';
