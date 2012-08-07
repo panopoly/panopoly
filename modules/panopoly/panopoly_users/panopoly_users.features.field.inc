@@ -150,7 +150,7 @@ function panopoly_users_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
-          'preview_image_style' => 'panopoly_image_thumbnail',
+          'preview_image_style' => 'panopoly_image_featured',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',

@@ -23,20 +23,22 @@ function panopoly_users_strongarm() {
   $strongarm->name = 'panelizer_defaults_user_user';
   $strongarm->value = array(
     'status' => 1,
-    'page_manager' => array(
-      'status' => 1,
-      'default' => 1,
-      'choice' => 0,
-    ),
-    'default' => array(
-      'status' => 1,
-      'default' => 1,
-      'choice' => 0,
-    ),
-    'featured' => array(
-      'status' => 1,
-      'default' => 1,
-      'choice' => 0,
+    'view modes' => array(
+      'page_manager' => array(
+        'status' => 1,
+        'default' => 1,
+        'choice' => 0,
+      ),
+      'default' => array(
+        'status' => 1,
+        'default' => 1,
+        'choice' => 0,
+      ),
+      'featured' => array(
+        'status' => 1,
+        'default' => 1,
+        'choice' => 0,
+      ),
     ),
   );
   $export['panelizer_defaults_user_user'] = $strongarm;

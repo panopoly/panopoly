@@ -34,4 +34,12 @@ function panopoly_users_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_login') {
     $form['pass']['#description'] .= '<br>' . t('If you forgot your password, !request.', array('!request' => l('request a new password', 'user/password')));
   }
+
+  if ($form_id == 'user_profile_form') {
+
+    // Remove the title from the User Picture
+    if (!empty($form['field_user_picture']['und'][0]['#title'])) {
+      unset($form['field_user_picture']['und'][0]['#title']);
+    }
+  }
 }
