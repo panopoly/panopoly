@@ -42,3 +42,7 @@ features[variable][] = panelizer_user:user_default
 features[variable][] = pm_existing_pages_disabled_user_login
 features[variable][] = pm_existing_pages_disabled_user_password
 features[variable][] = pm_existing_pages_disabled_user_register
+features[variable][] = user_picture_default
+features[variable][] = user_picture_path
+features[variable][] = user_picture_style
+features[variable][] = user_pictures
