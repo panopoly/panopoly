@@ -3,6 +3,36 @@
 include_once('panopoly_magic.features.inc');
 
 /**
+ * Implementation of hook_apps_app_info()
+ */
+function panopoly_magic_apps_app_info() {
+  return array(
+    'configure form' => 'panopoly_magic_configure_form',
+  );
+}
+
+/**
+ * Configuration Form for Panopoly Magic
+ */
+function panopoly_magic_configure_form($form, &$form_state) {
+  $form = array();
+
+  $form['panopoly_magic_live_preview'] = array(
+    '#title' => t('Live Preview'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => 'Enabled',
+      '0' => 'Disabled',
+    ),
+    '#default_value' => '1',
+    '#description' => t('Do you want Panopoly to provide a live preview for modal content through the in place editor?'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
  * Implementation of hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
@@ -18,7 +48,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
    * Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
    * we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving.
    */
-  if (strpos($form_id, '_content_type_edit_form') || $form_id == 'panels_edit_style_type_form') {
+  if (variable_get('panopoly_magic_live_preview', 1) && (strpos($form_id, '_content_type_edit_form') || $form_id == 'panels_edit_style_type_form')) {
 
     // Start the magic
     $pane = $form_state['pane'];
