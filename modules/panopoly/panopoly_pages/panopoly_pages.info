@@ -26,6 +26,7 @@ features[node][] = panopoly_page
 features[panelizer_defaults][] = node:panopoly_page:default
 features[panelizer_defaults][] = node:panopoly_page:default:default
 features[panelizer_defaults][] = node:panopoly_page:default:featured
+features[panelizer_defaults][] = node:panopoly_page:default:teaser
 features[variable][] = additional_settings__active_tab_panopoly_page
 features[variable][] = field_bundle_settings_node__panopoly_page
 features[variable][] = menu_options_panopoly_page

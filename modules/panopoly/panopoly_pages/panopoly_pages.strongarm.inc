@@ -107,8 +107,8 @@ function panopoly_pages_strongarm() {
     'status' => 1,
     'view modes' => array(
       'page_manager' => array(
-        'status' => 0,
-        'default' => 0,
+        'status' => 1,
+        'default' => 1,
         'choice' => 0,
       ),
       'default' => array(
@@ -117,8 +117,8 @@ function panopoly_pages_strongarm() {
         'choice' => 0,
       ),
       'teaser' => array(
-        'status' => 0,
-        'default' => 0,
+        'status' => 1,
+        'default' => 1,
         'choice' => 0,
       ),
       'featured' => array(
