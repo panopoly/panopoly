@@ -30,13 +30,14 @@ function panopoly_users_panelizer_defaults() {
   $panelizer->title_element = 'H2';
   $panelizer->link_to_entity = TRUE;
   $display = new panels_display();
-  $display->layout = 'boxton';
+  $display->layout = 'burr';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
       'contentmain' => NULL,
+      'sidebar' => NULL,
     ),
   );
   $display->cache = array();
@@ -46,12 +47,17 @@ function panopoly_users_panelizer_defaults() {
     $pane = new stdClass();
     $pane->pid = 'new-1';
     $pane->panel = 'contentmain';
-    $pane->type = 'user_profile';
-    $pane->subtype = 'user_profile';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'user:field_user_about';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'view_mode' => 'full',
+      'label' => 'hidden',
+      'formatter' => 'text_default',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(),
       'context' => 'panelizer',
       'override_title' => 1,
       'override_title_text' => '',
@@ -66,6 +72,28 @@ function panopoly_users_panelizer_defaults() {
     $pane->locks = array();
     $display->content['new-1'] = $pane;
     $display->panels['contentmain'][0] = 'new-1';
+    $pane = new stdClass();
+    $pane->pid = 'new-2';
+    $pane->panel = 'sidebar';
+    $pane->type = 'user_picture';
+    $pane->subtype = 'user_picture';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'context' => 'panelizer',
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['sidebar'][0] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
