@@ -20,5 +20,6 @@ features[variable][] = date_format_medium
 features[variable][] = date_format_panopoly_day
 features[variable][] = date_format_panopoly_time
 features[variable][] = date_format_short
+stylesheets[all][] = css/panopoly_fonts.css
 stylesheets[all][] = css/panopoly_modal.css
 stylesheets[all][] = css/panopoly_elements.css

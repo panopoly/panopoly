@@ -126,11 +126,10 @@
 }
 
 #modalContent .panels-section-column-categories .content-type-button div a {
-  font: bold 11px/21px "Open Sans", "Lucida Grande", 
- Tahoma, Verdana, sans-serif;
- text-decoration: none;
- color: #333;
- padding: 0 12px;
+  font: bold 11px/21px "Open Sans", "Lucida Grande", Tahoma, Verdana, sans-serif;
+  text-decoration: none;
+  color: #333;
+  padding: 0 12px;
 }
 
 #modalContent .panels-section-column-categories .content-type-button div:active {
@@ -298,6 +297,7 @@
   height: 100%;
   margin: 0;
   margin-top: 1px;
+  overflow-y: auto;
 }
 
 #modal-content .panels-categories-description {
