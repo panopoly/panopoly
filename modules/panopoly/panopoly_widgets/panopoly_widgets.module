@@ -25,6 +25,22 @@ function panopoly_widgets_ctools_content_subtype_alter(&$subtype, &$plugin) {
     $subtype['admin js'] = array(drupal_get_path('module', 'menu_block') . '/menu-block.js');
   }
 
+  // Modify the general content item to appear in the generic content sidebar area
+  if ($plugin['module'] == 'views_content' && $subtype['title'] == 'Piece of Content') {
+    $subtype['category'][0] = 'Custom';
+    $subtype['top level'] = TRUE;
+    $subtype['title'] = 'Add content item';
+    $subtype['icon'] = drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png';
+  }
+
+  // Modify the general content listing to appear in the generic content sidebar area
+  if ($plugin['module'] == 'views_content' && $subtype['title'] == 'List of Content') {
+    $subtype['category'][0] = 'Custom';
+    $subtype['top level'] = TRUE;
+    $subtype['title'] = 'Add content list';
+    $subtype['icon'] = drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png';
+  }
+
   // Modify the plugins so we do away with this "node" and "entity" thing
   if ($subtype['category'] == 'Node' || $subtype['category'] == 'Entity' || $subtype['category'] == 'User') {
     $subtype['category'] = 'Page Content';
@@ -252,7 +268,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
   
   // Existing content.
   $entity_info['fieldable_panels_pane']['bundles']['existing_content'] = array(
-    'label' => t('Add existing node'),
+    'label' => t('Add content item'),
     'pane category' => t('Custom'),
     'pane top level' => TRUE,
     'pane icon' => drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png',
