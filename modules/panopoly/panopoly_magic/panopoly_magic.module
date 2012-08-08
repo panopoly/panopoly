@@ -140,6 +140,11 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $form['style']['#options']['default'] = t('Default Pane Style');
     }
 
+    // Better title for the List Style region style plugin
+    if (!empty($form['style']['#options']['list'])) {
+      $form['style']['#options']['list'] = t('List Style');
+    }
+
     // Improve the UI around region style selections
     if (!empty($form['style']['#options']['-1'])) {
       $form['style']['#options']['-1'] = t('Default Region Style');
