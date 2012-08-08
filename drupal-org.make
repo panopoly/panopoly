@@ -35,11 +35,10 @@ projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][type] = module
 projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = c4022c5
+projects[panelizer][download][revision] = c1c00cb
 projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1387634] = http://drupal.org/files/exporting_panelizer_defaults-1387634-9.patch
-projects[panelizer][patch][1555194] = http://drupal.org/files/panelizer_null-did-export.patch
-projects[panelizer][patch][1675136] = http://drupal.org/files/taxonomy-term-fix-1675136-3.patch
+projects[panelizer][patch][1555194] = http://drupal.org/files/1555194-panelizer-did-should-not-export.patch
 
 projects[fieldable_panels_panes][version] = 1.1
 projects[fieldable_panels_panes][subdir] = contrib
@@ -87,7 +86,7 @@ projects[file_entity][version] = 2.x-dev
 projects[file_entity][type] = module
 projects[file_entity][subdir] = contrib
 projects[file_entity][download][type] = git
-projects[file_entity][download][revision] = ba18f8b
+projects[file_entity][download][revision] = a8986e5
 projects[file_entity][download][branch] = 7.x-2.x
 
 projects[entityreference][version] = 1.0-rc3
@@ -118,7 +117,7 @@ projects[media][version] = 2.x-dev
 projects[media][type] = module
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = cc55948
+projects[media][download][revision] = 1a0304d
 projects[media][download][branch] = 7.x-2.x
 
 projects[media_youtube][version] = 1.0-beta3
@@ -144,9 +143,9 @@ projects[wysiwyg][subdir] = contrib
 projects[wysiwyg][type] = module
 projects[wysiwyg][version] = 2.x-dev 
 projects[wysiwyg][patch][1489096] = http://drupal.org/files/wysiwyg-table-format.patch
-projects[wysiwyg][patch][356480] = http://drupal.org/files/356480-by-zhangtaihao-Shawn_Smiley-sun.-Lazy-load-ed-p0.patch
+projects[wysiwyg][patch][356480] = http://drupal.org/files/lazy_wysiwyg-356480-150.patch
 projects[wysiwyg][download][type] = git
-projects[wysiwyg][download][revision] = 7e6609e
+projects[wysiwyg][download][revision] = d17bf11
 projects[wysiwyg][download][branch] = 7.x-2.x
 
 projects[wysiwyg_filter][version] = 1.6-rc2
