@@ -195,6 +195,15 @@
   -moz-border-topright-radius: 0;
   border-top-right-radius: 0;
 }
+
+#modal-content fieldset.widget-preview-single {
+  margin-top: 0em;
+}
+
+#modal-content fieldset.widget-preview-single .fieldset-wrapper {
+  max-height: 275px;
+  max-height: 375px;
+}
   
 #modal-content fieldset legend {
   background: #dbdbdb;
