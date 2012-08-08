@@ -88,16 +88,30 @@ div.ctools-ajaxing {
 /**
  * Custom styling for exposed views filter options
  */
-.form-item-exposed-sort-order, 
-.form-item-exposed-sort-by {
+.form-item-sort-order, 
+.form-item-sort-by {
   float: left;
 }
 
-.form-item-exposed-sort-order {
+.form-item-sort-order {
   padding-left: 20px;
   clear: none;
 }
 
 #views-exposed-pane div.form-item {
   display: inline;
+}
+
+/* Handle the View Setting Element */
+#modal-content .form-item-view-settings {
+  display:inline;
+}
+
+#modal-content .view-settings-wrapper .field-prefix {
+  padding-right: 5px;
+}
+
+#modal-content .view-settings-wrapper .form-radios {
+  display: inline;
+  padding-right: 5px;
 }

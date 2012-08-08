@@ -198,9 +198,15 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['exposed']['sort_order'])) {
       $form['exposed']['sort_order']['#title'] = t('Sort order');
       $form['exposed']['sort_order']['#suffix'] = '<div class="clearfix"></div>';
+      $form['exposed']['sort_order']['#weight'] = 9;
+      $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
+      unset($form['exposed']['sort_order']);
     }
     if (!empty($form['exposed']['sort_by'])) {
       $form['exposed']['sort_by']['#prefix'] = '<div class="clearfix"></div>';
+      $form['exposed']['sort_by']['#weight'] = 8;
+      $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
+      unset($form['exposed']['sort_by']);
     }
 
     // Switch all exposed filters to use field_prefix display
@@ -211,12 +217,20 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
+    // Switch all display_settings filters to use field_prefix display
+    foreach($form['display_settings'] as $filter => $filter_array) {
+      if (!empty($form['display_settings'][$filter]['#title']) && empty($form['display_settings'][$filter]['#field_prefix'])) {
+        $form['display_settings'][$filter]['#field_prefix'] = $form['display_settings'][$filter]['#title'];
+        unset($form['display_settings'][$filter]['#title']);
+      }
+    }
+
     // Move items per page wiget to widget area
     if (isset($form['items_per_page'])) {
       $form['items_per_page']['#field_prefix'] = $form['items_per_page']['#title'];
       $form['items_per_page']['#title'] = '';
       $form['items_per_page']['#weight'] = -90;
-      $form['exposed']['items_per_page'] = $form['items_per_page'];
+      $form['display_settings']['items_per_page'] = $form['items_per_page'];
       unset($form['items_per_page']);
     }
 
@@ -238,6 +252,13 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $form['exposed']['#weight'] = -30;
     }
 
+    // Define a display settings fieldset if we have display options
+    if (!empty($form['display_settings']) && count($form['display_settings']) > 1) {
+      $form['display_settings']['#type'] = 'fieldset';
+      $form['display_settings']['#title'] = t('Display Settings');
+      $form['display_settings']['#weight'] = -29;
+    }
+
     // Determine if this is a node view.
     $view_handler = $form_state['view']->display_handler;
     $node_view = ($view_handler->options['row_plugin'] == 'node' && in_array($view_handler->options['style_plugin'], array('default'))) ? TRUE : FALSE;
@@ -247,18 +268,22 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         $conf['view_settings'] = 'fields';
       }
 
-      // Create the fieldset and the settings selection form.
-      $form['display_type'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Display Type'),
-        // Make the weight of this fieldset dependent on the general settings fieldset.
-        '#weight' => $form['exposed']['#weight'] + 1,
-      );
+      // Create the Display Settings fieldset if needed
+      if (empty($form['display_settings'])) {
+        $form['display_settings'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Display Settings'),
+          '#weight' => -29,
+        );
+      }
 
-      $form['display_type']['view_settings'] = array(
+      // Add information about the View Mode
+      $form['display_settings']['view_settings'] = array(
         '#type' => 'radios',
-        // '#title' => t('Display Type'),
+        '#prefix' => '<div class="view-settings-wrapper"><span class="field-prefix">' . t('Display Type') . '</span>',
+        '#suffix' => '</div>',
         '#default_value' => $conf['view_settings'],
+        '#weight' => 10,
         '#options' => array(
           'fields' => t('Fields'),
           'nodes' => t('Content'),
