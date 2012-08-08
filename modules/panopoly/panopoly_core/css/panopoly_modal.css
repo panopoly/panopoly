@@ -324,6 +324,7 @@
 #modal-content .field-type-text-long .form-type-select label {
   float: left;
   margin-right: .5em;
+  margin-top: .5em;
   font-weight: 400;
   display: block;
   width: auto;
