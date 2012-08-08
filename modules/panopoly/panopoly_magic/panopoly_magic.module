@@ -258,7 +258,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Define a display settings fieldset if we have display options
-    if (!empty($form['display_settings']) && count($form['display_settings']) > 1) {
+    if (!empty($form['display_settings']) && count($form['display_settings']) > 0) {
       $form['display_settings']['#type'] = 'fieldset';
       $form['display_settings']['#title'] = t('Display Settings');
       $form['display_settings']['#weight'] = -29;
