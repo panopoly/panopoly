@@ -160,20 +160,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     // Get the configuration
     $conf = $form_state['conf'];
 
-    // Add the content setting fieldset
-    if (isset($form['exposed']) && count($form['exposed']) > 1) {
-      $form['exposed']['#title'] = t('General Settings');
-      $form['exposed']['#type'] = 'fieldset';
-      $form['exposed']['#weight'] = -10;
-    } 
-    else {
-      $form['exposed'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('General Settings'),
-        '#weight' => -30,
-      );
-    }
-
     // Better position context settings
     if (!empty($form['context'])) {
       $form['context_settings'] = array(
@@ -243,6 +229,13 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
           $field['#title'] = t('Display') . ' ' . $field['#title'];
         }
       }
+    }
+
+    // Define a general settings fieldset if we have exposed values
+    if (!empty($form['exposed']) && count($form['exposed']) > 1) {
+      $form['exposed']['#type'] = 'fieldset';
+      $form['exposed']['#title'] = t('General Settings');
+      $form['exposed']['#weight'] = -30;
     }
 
     // Determine if this is a node view.
