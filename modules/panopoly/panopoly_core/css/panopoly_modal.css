@@ -8,9 +8,9 @@
   max-width: 98%;
 }
 
-  #modal-content .form-item-title input {
-    font-size: 2em;
-  }
+#modal-content .form-item-title input {
+  font-size: 2em;
+}
 
 #modalContent div.ctools-modal-content {
   -webkit-border-radius: 10px 10px 0 0;
@@ -30,11 +30,11 @@
   background-image: -webkit-linear-gradient(bottom, #333333 0%, #666666 100%);
   background-image: -ms-linear-gradient(bottom, #333333 0%, #666666 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #333333),
-    color-stop(1, #666666)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #333333),
+  color-stop(1, #666666)
   );
   color: #fff;
   font: bold 16px/50px 'Open Sans', 'Lucida Sans', 'Lucida Grande', verdana sans-serif;
@@ -79,11 +79,11 @@
   background-image: -webkit-linear-gradient(bottom, #DBDCDF 0%, #F6F6F7 100%);
   background-image: -ms-linear-gradient(bottom, #DBDCDF 0%, #F6F6F7 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #DBDCDF),
-    color-stop(1, #F6F6F7)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #DBDCDF),
+  color-stop(1, #F6F6F7)
   );
   font: bold 11px/30px 'Open Sans', 'Lucida Sans', 'Lucida Grande', verdana sans-serif;
   color: #333;
@@ -113,11 +113,11 @@
   background-image: -webkit-linear-gradient(bottom, #DBDCDF 0%, #F6F6F7 100%);
   background-image: -ms-linear-gradient(bottom, #DBDCDF 0%, #F6F6F7 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #DBDCDF),
-    color-stop(1, #F6F6F7)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #DBDCDF),
+  color-stop(1, #F6F6F7)
   );
   float: none;
   left: 0;
@@ -145,11 +145,11 @@
   background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #E9EAEC 100%);
   background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #E9EAEC 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #FFFFFF),
-    color-stop(1, #E9EAEC)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #FFFFFF),
+  color-stop(1, #E9EAEC)
   );
 }
 
@@ -166,30 +166,92 @@
   float: left;
 }
 
+/**
+ * Pane configuration preview styling
+ *
+ * Much of the fieldset-related css is ripped directly from Bartik to give
+ * IPE a more consistent look
+ * @see https://drupal.org/node/1717644
+ */
 #modal-content fieldset {
   clear: none;
   width: auto;
+  position: relative;
+  top: 12px; /* Offsets the negative margin of legends */
+  margin-top: 10px;
+  margin-bottom: 32px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 0 0 10px;
 }
 
-/**
- * Pane configuration preview styling
- */
+#modal-content fieldset.widget-preview {
+  margin-top: 3em;
+  margin-bottom: 4em;
+  -webkitborder-top-right-radius: 0;
+  -moz-border-topright-radius: 0;
+  border-top-right-radius: 0;
+}
+  
+#modal-content fieldset legend {
+  background: #dbdbdb;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  color: #3b3b3b;
+  display: block;
+  height: 2em;
+  left: -1px; /* LTR */
+  line-height: 2;
+  padding: 1px 0 0;
+  position: absolute;
+  text-indent: 10px;
+  text-shadow: 0 1px 0 #fff;
+  top: -12px;
+  width: 100%;
+  -moz-border-radius-topleft: 4px;
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+}
+  
+#modal-content fieldset.widget-preview legend {
+  -moz-border-radius-topright: 0;
+  -webkit-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+}
+  
+#modal-content .fieldset-legend {
+  font: bold 12px/1.5em 'Open Sans', 'Lucida Sans', 'Lucida Grande', verdana sans-serif;
+}
+  
+#modal-content fieldset.collapsed legend {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#modal-content fieldset legend a {
+  color: #3b3b3b;
+}
+
+#modal-content fieldset legend a:hover,
+#modal-content fieldset legend a:focus,
+#modal-content fieldset legend a:active {
+  color: #000;
+}
+  
+#modal-content .fieldset-wrapper {
+  padding: 0 10px;
+  margin-top: 2.25em;
+}
+
+#modal-content .widget-preview-single .fieldset-wrapper,
 #modal-content .widget-preview .fieldset-wrapper {
-  font-size: 75%;
-  max-height: 200px;
-  min-height: 200px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 1.25em;
-  margin-top: 1em;
-}
-
-#modal-content .widget-preview .fieldset-wrapper table tr.even td, 
-#modal-content .widget-preview .fieldset-wrapper table tr.odd td {
-  padding: 3px 5px;
-}
-
-#modal-content .widget-preview-single .fieldset-wrapper {
   font-size: 100%;
   max-width: 100%;
   max-height: 400px;
@@ -197,16 +259,21 @@
   overflow-y: auto;
 }
 
+#modal-content .widget-preview .fieldset-wrapper {
+  font-size: 75%;
+  max-height: 200px;
+  min-height: 200px;
+  overflow-x: hidden;
+}
+
+#modal-content .widget-preview .fieldset-wrapper table tr.even td, 
+#modal-content .widget-preview .fieldset-wrapper table tr.odd td {
+  padding: 3px 5px;
+}
+
 #modal-content .widget-preview .fieldset-wrapper h2 {
   font-size: 150%;
   margin-top: .25em;
-}
-
-#modal-content .widget-preview {
-  position: relative;
-  margin-top: 3em;
-  margin-bottom: 4em;
-  border: 1px solid silver;
 }
 
 #modal-content .widget-preview-single {
@@ -214,14 +281,6 @@
   margin-left: 1em;
   margin-top: 0;
   width: 48%;
-}
-
-#modal-content .widget-preview .fieldset-legend {
-  font: bold 12px/1.5em 'Open Sans', 'Lucida Sans', 'Lucida Grande', verdana sans-serif;
-}
-
-#modal-content .widget-preview-single .fieldset-legend {
-  font-weight: 400;
 }
 
 #modal-content .widget-preview-title {
@@ -251,11 +310,11 @@
   background-image: -webkit-linear-gradient(bottom, #4BA700 0%, #5DE000 100%);
   background-image: -ms-linear-gradient(bottom, #4BA700 0%, #5DE000 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #4BA700),
-    color-stop(1, #5DE000)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #4BA700),
+  color-stop(1, #5DE000)
   );
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -271,11 +330,11 @@
   background-image: -webkit-linear-gradient(bottom, #408E00 0%, #56CE00 100%);
   background-image: -ms-linear-gradient(bottom, #408E00 0%, #56CE00 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #408E00),
-    color-stop(1, #56CE00)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #408E00),
+  color-stop(1, #56CE00)
   );
 }
 
@@ -287,11 +346,11 @@
   background-image: -webkit-linear-gradient(bottom, #5DE000 0%, #4BA700 100%);
   background-image: -ms-linear-gradient(bottom, #5DE000 0%, #4BA700 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #5DE000),
-    color-stop(1, #4BA700)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #5DE000),
+  color-stop(1, #4BA700)
   );
 }
 
@@ -325,7 +384,7 @@
   float: left;
   margin-right: .5em;
   margin-top: .5em;
-  font-weight: 400;
+  font-weight: normal;
   display: block;
   width: auto;
 }
@@ -373,10 +432,10 @@
   background-image: -webkit-linear-gradient(bottom, #C5C5C5 0%, #FAFAFA 100%);
   background-image: -ms-linear-gradient(bottom, #C5C5C5 0%, #FAFAFA 100%);
   background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #C5C5C5),
-    color-stop(1, #FAFAFA)
+  linear,
+  left bottom,
+  left top,
+  color-stop(0, #C5C5C5),
+  color-stop(1, #FAFAFA)
   );
 }
