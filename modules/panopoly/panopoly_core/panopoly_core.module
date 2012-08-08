@@ -7,6 +7,29 @@ include_once('panopoly_core.features.inc');
  */
 function panopoly_core_init() {
 
+  // Override the Chaos Tools Modal Default Settings
+  $default_style = array(
+    'CToolsModal' => array(
+      'modalSize' => array(
+        'type' => 'scale',
+        'width' => '.9',
+        'height' => '.9',
+        'addWidth' => 0,
+        'addHeight' => 0,
+        'contentRight' => 25,
+        'contentBottom' => 75,
+      ),
+      'modalOptions' => array(
+        'opacity' => '.55',
+        'background-color' => '#FFF',
+      ),
+      'animationSpeed' => 'fast',
+      'modalTheme' => 'CToolsModalDialog',
+      'throbberTheme' => 'CToolsModalThrobber',
+    ),
+  );
+  drupal_add_js($default_style, 'setting');
+
   // Set the current page title in the breadcrumb
   $breadcrumb = drupal_get_breadcrumb();
   if (count($breadcrumb) && drupal_get_title()) {
