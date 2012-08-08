@@ -372,6 +372,15 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
   }
 
   /**
+   * Override the sizing on fields in the Fieldable Panel Panes modal for better UI
+   */
+  if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
+    if (!empty($form['widget_settings']['title'])) {
+      $form['widget_settings']['title']['#size'] = '';
+    }
+  }
+
+  /**
    * Globally make sure that all options are inside a fieldset. Currently just supporting a known list
    * of forms, but persumably this can be applied to all items
    */
