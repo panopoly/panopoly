@@ -201,7 +201,10 @@
 }
 
 #modal-content fieldset.widget-preview-single .fieldset-wrapper {
-  max-height: 275px;
+  font-size: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+  min-height: 75px;
   max-height: 375px;
 }
   
@@ -259,16 +262,9 @@
   margin-top: 2.25em;
 }
 
-#modal-content .widget-preview-single .fieldset-wrapper,
 #modal-content .widget-preview .fieldset-wrapper {
-  font-size: 100%;
   max-width: 100%;
-  max-height: 400px;
-  min-height: 225px;
   overflow-y: auto;
-}
-
-#modal-content .widget-preview .fieldset-wrapper {
   font-size: 75%;
   max-height: 200px;
   min-height: 200px;
