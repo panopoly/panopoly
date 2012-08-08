@@ -63,6 +63,11 @@ function panopoly_install_tasks($install_state) {
     'type' => 'form',
   );
 
+  // Set up a finishing task to do cache clearing and various cleanup
+  $tasks['panopoly_final_setup'] = array(
+    'run' => '2',
+  );
+
   return $tasks;
 }
 
@@ -97,7 +102,7 @@ function panopoly_install_tasks_alter(&$tasks, $install_state) {
   $tasks['install_select_locale']['function'] = 'panopoly_locale_selection';
 
   // Create a more fun finished page with our Panopoly square
-  $tasks['install_finished']['function'] = 'panopoly_finished_yah';
+  $tasks['install_finished']['function'] = 'panopoly_finished';
   $tasks['install_finished']['display_name'] = t('Finish up');
   $tasks['install_finished']['type'] = 'form';
  
@@ -293,17 +298,45 @@ function panopoly_theme_form_submit($form, &$form_state) {
 }
 
 /**
+ * Handler callback to do final cache clearing to prepare the site for greatness
+ */
+function panopoly_final_setup($install_state) {
+
+  // Flush all caches to ensure that any full bootstraps during the installer
+  // do not leave stale cached data, and that any content types or other items
+  // registered by the install profile are registered correctly.
+  drupal_flush_all_caches();
+
+  // Remember the profile which was used.
+  variable_set('install_profile', drupal_get_profile());
+
+  // Allow anonymous and authenticated users to see content
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  // Run cron to populate update status tables (if available) so that users
+  // will be warned if they've installed an out of date Drupal version.
+  // Will also trigger indexing of profile-supplied content or feeds.
+  drupal_cron_run();
+}
+
+/**
  * Form to finish it all out and send us on our way
  */
-function panopoly_finished_yah($form, &$form_state) {
+function panopoly_finished($form, &$form_state) {
 
   // Hide some messages from various modules that are just too chatty!
   drupal_get_messages('status');
 
+  // Set the title of the page
+  drupal_set_title(t('Finished!'));
+
+  // Create the finishing form
   $form = array();
 
-  // Setup the title for the install task
-  drupal_set_title(t('Finished!'));
   $form['openingtext'] = array(
     '#markup' => '<h2>' . t('Congratulations, you just installed Panopoly!') . '</h2>'
   );
@@ -317,43 +350,15 @@ function panopoly_finished_yah($form, &$form_state) {
 }
 
 /**
- * Submit form to finish it out and send us on our way!
+ * Submit form to finish it out and send us on our way! Redirect the 
+ * user to the front page if they are using the interactive mode installer.
+ * Also sets the install task to done so the installer knows we are ready
+ * to rock!
  */
-function panopoly_finished_yah_submit($form, &$form_state) {
-
-  // Flush all caches to ensure that any full bootstraps during the installer
-  // do not leave stale cached data, and that any content types or other items
-  // registered by the install profile are registered correctly.
-  drupal_flush_all_caches();
-
-  // Remember the profile which was used.
-  variable_set('install_profile', drupal_get_profile());
-
-  // Install profiles are always loaded last
-  db_update('system')
-    ->fields(array('weight' => 1000))
-    ->condition('type', 'module')
-    ->condition('name', drupal_get_profile())
-    ->execute();
-
-  // Allow anonymous and authenticated users to see content
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
-
-  // Cache a fully-built schema.
-  drupal_get_schema(NULL, TRUE);
-
-  // Run cron to populate update status tables (if available) so that users
-  // will be warned if they've installed an out of date Drupal version.
-  // Will also trigger indexing of profile-supplied content or feeds.
-  drupal_cron_run();
-
-  // And away we go! Redirect the user to the front page if they are using
-  // the interactive mode installer. Make sure to set the install task to 
-  // done so the installer knows Drupal is ready to rock.
+function panopoly_finished_submit($form, &$form_state) {
   $install_state = $form_state['build_info']['args'][0];
+  variable_set('install_task', 'done');
   if ($install_state['interactive']) {
-    variable_set('install_task', 'done');
     drupal_goto('<front>');
   }
 }

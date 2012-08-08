@@ -87,7 +87,6 @@ dependencies[] = libraries
 
 ; Panopoly - Contrib - Development
 ; dependencies[] = devel
-; dependencies[] = devel_generate
 
 ; Panopoly - Contrib - Theme
 dependencies[] = conditional_styles
