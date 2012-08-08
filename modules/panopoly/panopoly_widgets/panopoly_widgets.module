@@ -43,7 +43,12 @@ function panopoly_widgets_ctools_content_subtype_alter(&$subtype, &$plugin) {
 
   // Modify the plugins so we do away with this "node" and "entity" thing
   if ($subtype['category'] == 'Node' || $subtype['category'] == 'Entity' || $subtype['category'] == 'User') {
-    $subtype['category'] = 'Page Content';
+    $subtype['category'] = t('Page Content');
+  }
+
+  // Modify the plugins so we have consistent language around "form" content
+  if ($subtype['category'] == 'Form') {
+    $subtype['category'] = t('Form Content');
   }
 }
 
