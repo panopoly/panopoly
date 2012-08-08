@@ -5,7 +5,7 @@
 #modal-content input.form-text {
   /* Because many input forms have a fixed width that might be wider than
    * the IPE interface allows, we want to make sure we size them properly */
-  width: 98%;
+  max-width: 98%;
 }
 
   #modal-content .form-item-title input {
