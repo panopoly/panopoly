@@ -2,7 +2,7 @@
 
 // Plugin definition
 $plugin = array(
-  'title' => t('Accordion style'),
+  'title' => t('Accordion Style'),
   'description' => t('Display panes as accordion.'),
   'render region' => 'panopoly_theme_panopoly_accordion_style_render_region',
   'settings form' => 'panopoly_theme_panopoly_accordion_style_settings_form',
