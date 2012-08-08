@@ -6,35 +6,6 @@
 include_once('panopoly_admin.features.inc');
 
 /**
- * Implementation of hook_init().
- */
-function panopoly_admin_init() {
-
-  // Override the Chaos Tools Modal Default Settings
-  $default_style = array(
-    'CToolsModal' => array(
-      'modalSize' => array(
-        'type' => 'scale',
-        'width' => '.8',
-        'height' => '.8', 
-        'addWidth' => 0,
-        'addHeight' => 0,
-        'contentRight' => 25,
-        'contentBottom' => 75,
-      ),
-      'modalOptions' => array(
-        'opacity' => '.55',
-        'background-color' => '#FFF',
-      ),
-      'animationSpeed' => 'fast',
-      'modalTheme' => 'CToolsModalDialog',
-      'throbberTheme' => 'CToolsModalThrobber',
-    ),
-  );
-  drupal_add_js($default_style, 'setting');
-}
-
-/**
  * Implementation of hook_ctools_plugin_directory()
  */
 function panopoly_admin_ctools_plugin_directory($module, $plugin) {
