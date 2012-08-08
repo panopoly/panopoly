@@ -57,7 +57,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_basic_file_file',
       'label' => 'File',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'description_field' => 0,
         'file_directory' => 'general',
@@ -182,7 +182,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_callout_text',
       'label' => 'Text',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -263,7 +263,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_existing_content',
       'label' => 'Existing Content',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -450,7 +450,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_basic_image_image',
       'label' => 'Image',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'alt_field' => 1,
         'default_image' => 0,
@@ -530,7 +530,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_map_address',
       'label' => 'Address',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'text_processing' => '0',
         'user_register_form' => FALSE,
@@ -730,7 +730,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_quote_quote',
       'label' => 'Quote',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -1066,7 +1066,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_basic_text_text',
       'label' => 'Text',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,

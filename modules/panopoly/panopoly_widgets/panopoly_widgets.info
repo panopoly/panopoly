@@ -53,7 +53,6 @@ features[file_display][] = video__default__media_vimeo_video
 features[file_display][] = video__default__media_youtube_video
 features[views_view][] = panopoly_widgets_general_content
 files[] = panopoly_widgets.module
-required = 1
 scripts[] = js/panopoly_accordion.js
 scripts[] = js/panopoly_spotlight.js
 stylesheets[all][] = css/panopoly_spotlight.css
