@@ -1,4 +1,5 @@
 name = Panopoly
+distribution_name = Panopoly
 description = A magical framework for building Drupal products based on the Panels module
 core = 7.x
 
