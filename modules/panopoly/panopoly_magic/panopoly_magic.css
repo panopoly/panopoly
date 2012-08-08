@@ -105,6 +105,7 @@ div.ctools-ajaxing {
 /* Handle the View Setting Element */
 #modal-content .form-item-view-settings {
   display:inline;
+  margin-left: 5px;
 }
 
 #modal-content .view-settings-wrapper .field-prefix {
