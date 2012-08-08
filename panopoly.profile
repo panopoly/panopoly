@@ -5,9 +5,7 @@
  */
 function panopoly_install_tasks($install_state) {
 
-  // Kick off the tasks and attempt to increase the memory if
-  // provided with less than 196M
-  $tasks = array();
+  // Attempt to increase the memory limit to 196M
   if (ini_get('memory_limit') != '-1' && ini_get('memory_limit') <= '196M') {    
     ini_set('memory_limit', '196M');
   }
@@ -64,24 +62,51 @@ function panopoly_install_tasks($install_state) {
     'display_name' => t('Choose a theme'),
     'type' => 'form',
   );
-  $tasks['panopoly_theme_configure_form'] = array(
-    'display_name' => t('Theme settings'),
-    'type' => 'form',
-  );
 
   return $tasks;
+}
+
+/**
+ * Implements hook_install_tasks_alter()
+ */
+function panopoly_install_tasks_alter(&$tasks, $install_state) {
+
+  // Magically insert an install task to add the Panopoly icon to Seven!   
+  if (!array_key_exists('panopoly_add_icon', $tasks)) {
+    $panopoly_add_icon = array('panopoly_add_icon', array('run' => 2));
+    $tasks = array_reverse($tasks);
+    $install_select_profile = array_pop($tasks);
+    $install_select_locale = array_pop($tasks);
+    $install_load_profile = array_pop($tasks);
+    $install_verify_requirements = array_pop($tasks);
+    $install_settings_form = array_pop($tasks);
+    $install_system_module = array_pop($tasks);
+    $install_bootstrap_full = array_pop($tasks);
+    $tasks['panopoly_add_icon'] = array('run' => 2);
+    $tasks['install_bootstrap_full'] = $install_bootstrap_full;
+    $tasks['install_system_module'] = $install_system_module;
+    $tasks['install_settings_form'] = $install_settings_form;
+    $tasks['install_verify_requirements'] = $install_verify_requirements;
+    $tasks['install_load_profile'] = $install_load_profile;
+    $tasks['install_select_locale'] = $install_select_locale;
+    $tasks['install_select_profile'] = $install_select_profile;
+    $tasks = array_reverse($tasks);
+  }
+
+  // Since we only offer one language, define a callback to set this
+  $tasks['install_select_locale']['function'] = 'panopoly_locale_selection';
+
+  // Create a more fun finished page with our Panopoly square
+  $tasks['install_finished']['function'] = 'panopoly_finished_yah';
+  $tasks['install_finished']['display_name'] = t('Finish up');
+  $tasks['install_finished']['type'] = 'form';
+ 
 }
 
 /**
  * Implements hook_form_FORM_ID_alter()
  */
 function panopoly_form_install_configure_form_alter(&$form, $form_state) {
-
-  // Set the Seven logo to be Panopoly's logo
-  $theme_data = _system_rebuild_theme_data();
-  $seven_data = $theme_data['seven']->info['settings'];
-  $seven_data['default_logo'] = 0;
-  $seven_data['logo_path'] = 'profiles/panopoly/images/panopoly_icon_install.png';  variable_set('theme_seven_settings', $seven_data);
 
   // Hide some messages from various modules that are just too chatty!
   drupal_get_messages('status');
@@ -130,25 +155,23 @@ function panopoly_form_apps_profile_apps_select_form_alter(&$form, $form_state) 
 }
 
 /**
- * Implements hook_install_tasks_alter()
- */
-function panopoly_install_tasks_alter(&$tasks, $install_state) {
-
-  // Since we only offer one language, define a callback to set this
-  $tasks['install_select_locale']['function'] = 'panopoly_locale_selection';
-
-  // Create a more fun finished page with our Panopoly square
-  $tasks['install_finished']['function'] = 'panopoly_finished_yah';
-  $tasks['install_finished']['display_name'] = t('Finish up');
-  $tasks['install_finished']['type'] = 'form';
-}
-
-/**
  * Task handler to set the language to English since that is the only one
  * we have at the moment.
  */
 function panopoly_locale_selection(&$install_state) {
   $install_state['parameters']['locale'] = 'en';
+}
+
+/**
+ * Task handler to set the icon of the maintaince theme to the Panopoly icon since
+ * that icon is awesome and the Drupal alien (while also awesome) is scarey to new ppl
+ */
+function panopoly_add_icon(&$install_state) {
+  $theme_data = _system_rebuild_theme_data();
+  $seven_data = $theme_data['seven']->info['settings'];
+  $seven_data['default_logo'] = 0;
+  $seven_data['logo_path'] = 'profiles/panopoly/images/panopoly_icon_install.png';  
+  variable_set('theme_seven_settings', $seven_data);
 }
 
 /**
@@ -270,16 +293,6 @@ function panopoly_theme_form_submit($form, &$form_state) {
 }
 
 /**
- * Form to choose the starting theme
- */
-function panopoly_theme_configure_form($form, &$form_state) {
-  $theme = variable_get('theme_default');
-  ctools_include('system.admin', 'system', '');
-  $form = system_theme_settings($form, $form_state, $theme); 
-  return $form;
-}
-
-/**
  * Form to finish it all out and send us on our way
  */
 function panopoly_finished_yah($form, &$form_state) {
@@ -311,8 +324,6 @@ function panopoly_finished_yah_submit($form, &$form_state) {
   // Flush all caches to ensure that any full bootstraps during the installer
   // do not leave stale cached data, and that any content types or other items
   // registered by the install profile are registered correctly.
-  _field_info_collate_fields(TRUE);
-  _field_info_collate_fields();
   drupal_flush_all_caches();
 
   // Remember the profile which was used.
