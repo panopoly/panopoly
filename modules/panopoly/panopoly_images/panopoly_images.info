@@ -38,6 +38,5 @@ features[image][] = panopoly_image_half
 features[image][] = panopoly_image_quarter
 features[image][] = panopoly_image_spotlight
 features[image][] = panopoly_image_square
-features[image][] = panopoly_image_teaser
 features[image][] = panopoly_image_thumbnail
 stylesheets[all][] = panopoly_images.css
