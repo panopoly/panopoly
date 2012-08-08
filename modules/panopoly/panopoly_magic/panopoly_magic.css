@@ -64,6 +64,7 @@ div.ctools-ajaxing {
   margin: 3% 6%;
 }
 
+#panels-layout-category-Panopoly-wrapper .panels-layouts-category,
 #panels-layout-category-Panopoly-wrapper .layout-link div {
   display: none;
 }
