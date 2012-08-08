@@ -378,6 +378,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['widget_settings']['title'])) {
       $form['widget_settings']['title']['#size'] = '';
     }
+    if (!empty($form['widget_settings']['link']['path'])) {
+      $form['widget_settings']['link']['path']['#size'] = '40';
+    }
   }
 
   /**
