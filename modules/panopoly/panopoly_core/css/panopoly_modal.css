@@ -329,15 +329,6 @@
   width: auto;
 }
 
-/* Handle the View Setting Element */
-#modal-content .form-item-view-settings {
-  display:inline;
-}
-
-#modal-content .view-settings-wrapper .field-prefix {
-  padding-right: 5px;
-}
-
 #modal-content .view-settings-wrapper .form-radios {
   display: inline;
   padding-right: 5px;
