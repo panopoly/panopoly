@@ -2,16 +2,11 @@ api = 2
 core = 7.x
 
 ; Panopoly - Contrib - Foundation
-projects[ctools][version] = 1.x-dev
+projects[ctools][version] = 1.1
 projects[ctools][subdir] = contrib
 projects[ctools][type] = module
-projects[ctools][download][type] = git
-projects[ctools][download][revision] = c7c1218
-projects[ctools][download][branch] = 7.x-1.x
 projects[ctools][patch][1294478] = http://drupal.org/files/1294478-modal-dynamic-mode.patch
 projects[ctools][patch][1708438] = http://drupal.org/files/1708438-blur-event.patch
-projects[ctools][patch][1690188] = http://drupal.org/files/1690188-fix-items-per-page-stuff_0.patch
-projects[ctools][patch][1710816] = http://drupal.org/files/1710816-better-checking-override-title-value.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
@@ -100,7 +95,7 @@ projects[facetapi][version] = 1.1
 projects[facetapi][type] = module
 projects[facetapi][subdir] = contrib
 
-projects[search_api][version] = 1.1
+projects[search_api][version] = 1.2
 projects[search_api][type] = module
 projects[search_api][subdir] = contrib
 projects[search_api][patch][1698098] = http://drupal.org/files/search-api-disabled-index-configure-link.patch
