@@ -23,6 +23,8 @@ projects[panels][patch][1549660] = http://drupal.org/files/1549660-allow-region-
 projects[panels][patch][1690124] = http://drupal.org/files/1690124-hide-ipe-toolbal-with-open-modal_1.patch
 projects[panels][patch][1711302] = http://drupal.org/files/panels_ipe_shorten_add_language.patch
 projects[panels][patch][1711494] = http://drupal.org/files/1711494-double-ids.patch
+projects[panels][patch][1549660] = http://drupal.org/files/1549660-list-region-style-dont-render-empty-placeholder.patch
+
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
