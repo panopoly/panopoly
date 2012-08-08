@@ -299,6 +299,8 @@ function panopoly_theme_form_submit($form, &$form_state) {
 
 /**
  * Handler callback to do final cache clearing to prepare the site for greatness
+ *
+ * This is adapted from the logic in install_finished() which is later overridden 
  */
 function panopoly_final_setup($install_state) {
 
@@ -310,9 +312,12 @@ function panopoly_final_setup($install_state) {
   // Remember the profile which was used.
   variable_set('install_profile', drupal_get_profile());
 
-  // Allow anonymous and authenticated users to see content
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
+  // Install profiles are always loaded last
+  db_update('system')
+    ->fields(array('weight' => 1000))
+    ->condition('type', 'module')
+    ->condition('name', drupal_get_profile())
+    ->execute();
 
   // Cache a fully-built schema.
   drupal_get_schema(NULL, TRUE);
@@ -321,6 +326,10 @@ function panopoly_final_setup($install_state) {
   // will be warned if they've installed an out of date Drupal version.
   // Will also trigger indexing of profile-supplied content or feeds.
   drupal_cron_run();
+
+  // Allow anonymous and authenticated users to see content
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 }
 
 /**
