@@ -124,6 +124,10 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['menu']['link']['weight']['#access'] = FALSE;
     $form['#validate'][] = 'panopoly_admin_menu_validate';
   }
+
+  if ($form_id == 'panopoly_magic_configure_form' || $form_id == 'system_theme_settings') {
+    $form['#submit'][] = 'panopoly_admin_modal_close_submit';
+  }
 }
 
 /**
@@ -149,11 +153,25 @@ function panopoly_admin_pathauto_submit($form, &$form_state) {
 }
 
 /**
- * Submit function for adding menu validation
+ * Validate function for adding menu validation
  */
 function panopoly_admin_menu_validate($form, &$form_state) {
   if ($form_state['input']['menu']['enabled'] && !$form_state['input']['menu']['link_title']) {
     form_set_error('link_title', t('Menu link title is required.'));
+  }
+}
+
+/**
+ * Submit function for closing the custom modal
+ */
+function panopoly_admin_modal_close_submit($form, &$form_state) {
+  if (!empty($form_state['input']['js'])) {
+    ctools_include('ajax');
+    ctools_include('modal');
+    $commands = array();
+    $commands[] = ctools_ajax_command_reload();
+    print ajax_render($commands);
+    exit;
   }
 }
 
@@ -209,15 +227,14 @@ function panopoly_admin_theme_config_page($js = FALSE, $theme_key) {
   $theme_data = list_themes();
   $title = 'Configure ' . $theme_data[$theme_key]->info['name'];
   ctools_include('system.admin', 'system', '');
+  $output = drupal_get_form('system_theme_settings', $theme_key);
   if (empty($form_state['executed']) && $js) {
     ctools_include('ajax');
     ctools_include('modal');
-    $form_state = array('theme_key' => $theme_key, 'ajax' => TRUE, 'title' => $title);
-    $form = drupal_get_form('system_theme_settings', $theme_key); // This is required to 
-    print ajax_render(ctools_modal_form_wrapper('system_theme_settings', $form_state, $theme_key));
+    ctools_modal_render($title, $output);
   }
   else {
     drupal_set_title($title);
-    return drupal_get_form('system_theme_settings', $theme_key);
+    return $output;
   }
 }
