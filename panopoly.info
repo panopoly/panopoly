@@ -93,5 +93,5 @@ dependencies[] = libraries
 dependencies[] = conditional_styles
 dependencies[] = respondjs
 
-t; CSS Stylesheets
+; CSS Stylesheets
 stylesheets[all][] = panopoly.css

@@ -5,6 +5,9 @@
  */
 function panopoly_install_tasks(&$install_state) {
 
+  // Start it off
+  $tasks = array();
+
   // Attempt to increase the memory limit to 196M
   if (ini_get('memory_limit') != '-1' && ini_get('memory_limit') <= '196M') {    
     ini_set('memory_limit', '196M');
@@ -136,7 +139,8 @@ function panopoly_form_apps_profile_apps_select_form_alter(&$form, $form_state) 
   // Improve style of apps selection form
   if (isset($form['apps_fieldset'])) {
     $options = array();
-    foreach($_SESSION['apps_manifest'] as $name => $app) {
+    $manifest = apps_manifest(apps_servers('panopoly'));
+    foreach($manifest['apps'] as $name => $app) {
       if ($name != '#theme') {
         $options[$name] = '<strong>' . $app['name'] . '</strong><p><div class="admin-options"><div class="form-item">' . theme('image', array('path' => $app['logo']['path'], 'height' => '32', 'width' => '32')) . '</div>' . $app['description'] . '</div></p>';
       }
