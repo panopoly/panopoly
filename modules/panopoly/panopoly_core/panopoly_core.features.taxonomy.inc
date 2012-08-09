@@ -9,10 +9,10 @@
  */
 function panopoly_core_taxonomy_default_vocabularies() {
   return array(
-    'panopoly_topics' => array(
-      'name' => 'Topics',
-      'machine_name' => 'panopoly_topics',
-      'description' => 'This is a sitewide taxonomy of topics to organize the content on your site!',
+    'panopoly_categories' => array(
+      'name' => 'Categories',
+      'machine_name' => 'panopoly_categories',
+      'description' => 'This is a sitewide taxonomy of categories to organize the content on your site!',
       'hierarchy' => '0',
       'module' => 'taxonomy',
       'weight' => '0',

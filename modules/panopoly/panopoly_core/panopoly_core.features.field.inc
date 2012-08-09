@@ -10,8 +10,8 @@
 function panopoly_core_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'taxonomy_term-panopoly_topics-field_featured_image'.
-  $fields['taxonomy_term-panopoly_topics-field_featured_image'] = array(
+  // Exported field: 'taxonomy_term-panopoly_categories-field_featured_image'.
+  $fields['taxonomy_term-panopoly_categories-field_featured_image'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
@@ -41,7 +41,7 @@ function panopoly_core_field_default_fields() {
       'type' => 'image',
     ),
     'field_instance' => array(
-      'bundle' => 'panopoly_topics',
+      'bundle' => 'panopoly_categories',
       'deleted' => '0',
       'description' => 'This is the primary image to be associated with the taxonomy term',
       'display' => array(
@@ -63,7 +63,7 @@ function panopoly_core_field_default_fields() {
       'settings' => array(
         'alt_field' => 1,
         'default_image' => 0,
-        'file_directory' => 'topics',
+        'file_directory' => 'categories',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
