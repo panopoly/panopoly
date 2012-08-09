@@ -103,7 +103,90 @@ function panopoly_pages_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '3',
+        'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-panopoly_page-field_featured_category'.
+  $fields['node-panopoly_page-field_featured_category'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_featured_category',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'panopoly_categories',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'panopoly_page',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 3,
+        ),
+        'featured' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'search_result' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_featured_category',
+      'label' => 'Categories',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '2',
       ),
     ),
   );
@@ -252,7 +335,7 @@ function panopoly_pages_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'Indicates this content is featured which is used to promote the content in certain parts of the site.',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -282,7 +365,7 @@ function panopoly_pages_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_featured_status',
-      'label' => 'Featured',
+      'label' => 'Feature content',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -294,7 +377,7 @@ function panopoly_pages_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -302,8 +385,8 @@ function panopoly_pages_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
-  t('Featured');
-  t('Indicates this content is featured which is used to promote the content in certain parts of the site.');
+  t('Categories');
+  t('Feature content');
   t('Primary Image');
 
   return $fields;

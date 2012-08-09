@@ -51,7 +51,7 @@ function panopoly_pages_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '4',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -105,27 +105,25 @@ function panopoly_pages_strongarm() {
   $strongarm->name = 'panelizer_defaults_node_panopoly_page';
   $strongarm->value = array(
     'status' => 1,
-    'view modes' => array(
-      'page_manager' => array(
-        'status' => 1,
-        'default' => 1,
-        'choice' => 0,
-      ),
-      'default' => array(
-        'status' => 1,
-        'default' => 1,
-        'choice' => 0,
-      ),
-      'teaser' => array(
-        'status' => 1,
-        'default' => 1,
-        'choice' => 0,
-      ),
-      'featured' => array(
-        'status' => 1,
-        'default' => 1,
-        'choice' => 0,
-      ),
+    'page_manager' => array(
+      'status' => 1,
+      'default' => 1,
+      'choice' => 0,
+    ),
+    'default' => array(
+      'status' => 1,
+      'default' => 1,
+      'choice' => 0,
+    ),
+    'teaser' => array(
+      'status' => 1,
+      'default' => 1,
+      'choice' => 0,
+    ),
+    'featured' => array(
+      'status' => 1,
+      'default' => 1,
+      'choice' => 0,
     ),
   );
   $export['panelizer_defaults_node_panopoly_page'] = $strongarm;
