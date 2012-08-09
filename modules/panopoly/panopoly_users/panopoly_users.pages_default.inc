@@ -70,7 +70,7 @@ function panopoly_users_default_page_manager_handlers() {
     $pane->configuration = array(
       0 => 'task_id',
       'task_id' => 'user_login',
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
     );
     $pane->cache = array();
@@ -149,7 +149,7 @@ Request Password',
     $pane->configuration = array(
       0 => 'task_id',
       'task_id' => 'user_password',
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
     );
     $pane->cache = array();
