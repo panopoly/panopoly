@@ -179,7 +179,7 @@
 
 #node-edit .image-widget .form-submit, 
 #node-edit .file-widget .form-submit {
-  border: none;
+  border: 1px solid #CCCCCC;
   margin-bottom: 0;
   font: bold 12px/32px 'Open Sans', 'Lucida Sans', 'Lucida Grande', verdana sans-serif;
   text-decoration: none;
@@ -207,7 +207,7 @@
   -webkit-box-shadow: 0 3px 3px 0 #d2d2d2;
   -moz-box-shadow: 0 3px 3px 0 #d2d2d2;
   box-shadow: 0 3px 3px 0 #d2d2d2;
-  padding: 0;
+  padding: 0 13px 1px;
 }
 
 #edit-content-settings input.form-text {
@@ -233,9 +233,9 @@
 }
 
 #node-edit .form-item-field-featured-image-und-0-alt label {
-  font-weight: 400;
+  font-weight: normal;
   float: left;
-  width: 65px;
+  margin: 4px 10px 0 0;
 }
 
 #node-edit #edit-field-featured-image-und-0-alt {
@@ -250,8 +250,40 @@
 #node-edit .field-name-field-featured-image .image-preview img {
   max-width: 100%;
   height: auto;
+  margin-bottom: 0; /* Overrides Bartik's default margin, which is too much */
 }
 
+#node-edit .field-name-field-featured-image div.image-widget-data {
+  float: none;
+}
+
+  #node-edit .field-name-field-featured-image .image-widget-data img {
+    margin-bottom: 0;
+  }
+  
+  #node-edit .field-name-field-featured-image .image-widget-data span.file {
+    width: 65%;
+    margin-right: 5%;
+    float: left;
+  }
+  
+    #node-edit .field-name-field-featured-image .image-widget-data img {
+      margin-bottom: 0;
+    }
+    
+    #node-edit .field-name-field-featured-image .image-widget-data span.file-size {
+      display: none;
+    }
+  
+  #node-edit .field-name-field-featured-image .image-widget-data input#edit-field-featured-image-und-0-remove-button {
+    max-width: 28%
+  }
+  
+  #node-edit .field-name-field-featured-image .image-widget-data div.form-item {
+    clear: both;
+    margin-top: .75em;
+  }
+  
 #node-edit .field-name-field-featured-image .image-preview {
   width: 100%;
 }
