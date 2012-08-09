@@ -6,6 +6,49 @@
 include_once('panopoly_admin.features.inc');
 
 /**
+ * Implementation of hook_apps_app_info()
+ */
+function panopoly_admin_apps_app_info() {
+  return array(
+    'configure form' => 'panopoly_admin_configure_form',
+  );
+}
+
+/**
+ * Configuration Form for Panopoly Admin
+ */
+function panopoly_admin_configure_form($form, &$form_state) {
+  $form = array();
+
+  $form['panopoly_admin_machine_name'] = array(
+    '#title' => t('Machine Name'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => 'Enabled',
+      '0' => 'Disabled',
+    ),
+    '#default_value' => '0',
+    '#description' => t('Do you want to provide an option to specify a machine name (provided by the Default Content module) on the content editing form?'),
+  );
+
+  $form['panopoly_admin_revision_option'] = array(
+    '#title' => t('Create revision'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => 'Enabled',
+      '0' => 'Disabled',
+    ),
+    '#default_value' => '0',
+    '#description' => t('Do you want to provide an option to create a new revision for content on the content editing form?'),
+  );
+
+  return system_settings_form($form);
+}
+
+
+/**
  * Implementation of hook_ctools_plugin_directory()
  */
 function panopoly_admin_ctools_plugin_directory($module, $plugin) {
@@ -19,6 +62,12 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
   // Pass the title properly through to style plugins rendering regions
   // TODO - check with Earl on if this is best way to handle this data exchange
   $pane->title = (isset($content->title)) ? $content->title : NULL;
+
+  // Hide the title of the featured category pane if there isn't any content
+  // TODO - this could be extended generally to resolve other issues
+  if ($pane->subtype == 'node:field_featured_category' && $content->content['field_featured_category']['#access'] == FALSE) {
+    $content->title = '';
+  }
 }
 
 /**
@@ -56,9 +105,9 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   // Hide the machine name options
   if (isset($form['machine_name_fs'])) {
     $form['options']['machine_name_fs']['machine_name'] = $form['machine_name_fs']['machine_name'];
-    $form['options']['machine_name_fs']['machine_name']['#size'] = 27;
+    $form['options']['machine_name_fs']['machine_name']['#size'] = '';
     $form['options']['machine_name_fs']['#weight'] = 30;
-    $form['options']['machine_name_fs']['machine_name']['#title'] = 'UUID';
+    $form['options']['machine_name_fs']['#access'] = variable_get('panopoly_admin_machine_name', FALSE);
     unset($form['options']['machine_name_fs']['machine_name']['#description']);
     unset($form['machine_name_fs']);
   }
@@ -67,6 +116,26 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['options'])) {
     $form['options']['promote']['#access'] = FALSE;
     $form['options']['sticky']['#access'] = FALSE;
+  }
+
+  // Move the featured field into publishing options
+  if (!empty($form['field_featured_status'])) {
+    $form['options']['field_featured_status'] = $form['field_featured_status'];
+    unset($form['field_featured_status']);
+  }
+
+  // Remove the description from the featured image
+  if (!empty($form['field_featured_image'])) {
+    $form['field_featured_image']['und'][0]['#description'] = '';
+  }
+
+  // Consider the featured categoriy
+  if (!empty($form['field_featured_category'])) {
+
+    // Hide this field if there are no options
+    if (count($form['field_featured_category']['und']['#options']) == 1 && !empty($form['field_featured_category']['und']['#options']['_none'])) {
+      $form['field_featured_category']['#access'] = FALSE;
+    }
   }
 
   // Improve authoring options
@@ -86,6 +155,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     unset($form['revision_information']['#type']);
     $form['revision_information']['log']['#access'] = FALSE;
     $form['options']['revision'] = $form['revision_information']['revision'];
+    $form['options']['revision']['#access'] = variable_get('panopoly_admin_revision_option', FALSE);
     unset($form['revision_information']['revision']);
   }
 
