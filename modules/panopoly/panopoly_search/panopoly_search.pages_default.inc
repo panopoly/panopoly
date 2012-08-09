@@ -335,12 +335,23 @@ function panopoly_search_default_page_manager_pages() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'view_mode' => NULL,
+      'view_mode' => 'teaser',
       'widget_title' => '',
-      'items_per_page' => NULL,
+      'items_per_page' => '0',
       'context' => array(
         0 => 'argument_string_1',
       ),
+      'fields_override' => array(
+        'field_featured_image' => 1,
+        'title' => 1,
+        'body' => 1,
+      ),
+      'exposed' => array(
+        'widget_title' => '',
+      ),
+      'override_title' => '',
+      'override_title_text' => '',
+      'view_settings' => 'fields',
     );
     $pane->cache = array();
     $pane->style = array(
