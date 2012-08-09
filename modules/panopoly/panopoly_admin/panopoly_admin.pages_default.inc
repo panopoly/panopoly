@@ -161,8 +161,8 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-6';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_publishing';
-    $pane->subtype = 'node_form_publishing';
+    $pane->type = 'node_form_menu';
+    $pane->subtype = 'node_form_menu';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -183,8 +183,8 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-7';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_menu';
-    $pane->subtype = 'node_form_menu';
+    $pane->type = 'node_form_publishing';
+    $pane->subtype = 'node_form_publishing';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

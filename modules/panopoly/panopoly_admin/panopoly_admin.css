@@ -290,6 +290,7 @@
 #node-edit .field-name-field-featured-image .image-widget-data div.form-item {
   clear: both;
   margin-top: .75em;
+  margin-bottom: .25em;
 }
   
 #node-edit .field-name-field-featured-image .image-preview {
