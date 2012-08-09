@@ -122,7 +122,7 @@ function panopoly_admin_default_page_manager_handlers() {
       'formatter' => '',
       'context' => 'argument_node_edit_1',
       'override_title' => 1,
-      'override_title_text' => 'Primary Image',
+      'override_title_text' => 'Primary image',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -138,7 +138,7 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane->pid = 'new-5';
     $pane->panel = 'sidebar';
     $pane->type = 'entity_form_field';
-    $pane->subtype = 'node:field_featured_status';
+    $pane->subtype = 'node:field_featured_category';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -146,7 +146,7 @@ function panopoly_admin_default_page_manager_handlers() {
       'formatter' => '',
       'context' => 'argument_node_edit_1',
       'override_title' => 1,
-      'override_title_text' => 'Featured Status',
+      'override_title_text' => 'Content category',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -183,12 +183,12 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-7';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_author';
-    $pane->subtype = 'node_form_author';
+    $pane->type = 'node_form_menu';
+    $pane->subtype = 'node_form_menu';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => array(),
+      'context' => 'argument_node_edit_1',
       'override_title' => 0,
       'override_title_text' => '',
     );
@@ -205,12 +205,12 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane = new stdClass();
     $pane->pid = 'new-8';
     $pane->panel = 'sidebar';
-    $pane->type = 'node_form_menu';
-    $pane->subtype = 'node_form_menu';
+    $pane->type = 'node_form_author';
+    $pane->subtype = 'node_form_author';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => 'argument_node_edit_1',
+      'context' => array(),
       'override_title' => 0,
       'override_title_text' => '',
     );
