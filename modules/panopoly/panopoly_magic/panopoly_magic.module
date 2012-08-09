@@ -177,8 +177,8 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
     // Better position page settings
     if (!empty($form['use_pager'])) {
-      $form['exposed']['use_pager'] = $form['use_pager'];
-      $form['exposed']['pager_id'] = $form['pager_id'];
+      $form['display_settings']['use_pager'] = $form['use_pager'];
+      $form['display_settings']['pager_id'] = $form['pager_id'];
       unset($form['use_pager']);
       unset($form['pager_id']);
     }
