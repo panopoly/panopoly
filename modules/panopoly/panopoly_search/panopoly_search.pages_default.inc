@@ -391,7 +391,7 @@ function panopoly_search_default_page_manager_pages() {
     $pane->panel = 'sidebar';
     $pane->type = 'block';
     $pane->subtype = 'facetapi-fA1pg0Ubd1zgx1mvzHkFUGaNoMb4Gs0s';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,

@@ -200,6 +200,11 @@ function panopoly_search_default_search_api_server() {
       "database" : "default:default",
       "min_chars" : "3",
       "indexes" : { "database_node_index" : {
+          "nid" : {
+            "table" : "search_api_db_database_node_index_nid",
+            "type" : "integer",
+            "boost" : "1.0"
+          },
           "type" : {
             "table" : "search_api_db_database_node_index_type",
             "type" : "string",
@@ -218,6 +223,11 @@ function panopoly_search_default_search_api_server() {
           "status" : {
             "table" : "search_api_db_database_node_index_status",
             "type" : "boolean",
+            "boost" : "1.0"
+          },
+          "created" : {
+            "table" : "search_api_db_database_node_index_created",
+            "type" : "integer",
             "boost" : "1.0"
           },
           "author" : {
@@ -240,6 +250,11 @@ function panopoly_search_default_search_api_server() {
             "type" : "uri",
             "boost" : "1.0"
           },
+          "search_api_access_node" : {
+            "table" : "search_api_db_database_node_index_search_api_access_node",
+            "type" : "list\\u003Cstring\\u003E",
+            "boost" : "1.0"
+          },
           "body:value" : {
             "table" : "search_api_db_database_node_index_body_value",
             "type" : "text",
@@ -248,21 +263,6 @@ function panopoly_search_default_search_api_server() {
           "body:summary" : {
             "table" : "search_api_db_database_node_index_body_summary",
             "type" : "text",
-            "boost" : "1.0"
-          },
-          "nid" : {
-            "table" : "search_api_db_database_node_index_nid",
-            "type" : "integer",
-            "boost" : "1.0"
-          },
-          "search_api_access_node" : {
-            "table" : "search_api_db_database_node_index_search_api_access_node",
-            "type" : "list\\u003Cstring\\u003E",
-            "boost" : "1.0"
-          },
-          "created" : {
-            "table" : "search_api_db_database_node_index_created",
-            "type" : "integer",
             "boost" : "1.0"
           }
         }
