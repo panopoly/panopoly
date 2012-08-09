@@ -33,6 +33,7 @@ function panopoly_search_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['row_class'] = 'clearfix';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
@@ -71,8 +72,8 @@ function panopoly_search_views_default_views() {
   $handler->display->display_options['fields']['field_featured_image']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_featured_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_featured_image']['settings'] = array(
-    'image_style' => '',
-    'image_link' => '',
+    'image_style' => 'panopoly_image_quarter',
+    'image_link' => 'content',
   );
   $handler->display->display_options['fields']['field_featured_image']['field_api_classes'] = 0;
   /* Field: Title */
@@ -94,12 +95,13 @@ function panopoly_search_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_type'] = 'p';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['title']['link_to_entity'] = 0;
+  $handler->display->display_options['fields']['title']['link_to_entity'] = 1;
   /* Field: Teaser */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'search_api_index_database_node_index';
@@ -157,7 +159,7 @@ function panopoly_search_views_default_views() {
   $handler->display->display_options['pane_title'] = 'Database Search Results';
   $handler->display->display_options['pane_category']['name'] = 'Search';
   $handler->display->display_options['pane_category']['weight'] = '0';
-  $handler->display->display_options['allow']['use_pager'] = 0;
+  $handler->display->display_options['allow']['use_pager'] = 'use_pager';
   $handler->display->display_options['allow']['items_per_page'] = 'items_per_page';
   $handler->display->display_options['allow']['offset'] = 0;
   $handler->display->display_options['allow']['link_to_view'] = 0;
@@ -171,26 +173,11 @@ function panopoly_search_views_default_views() {
       'type' => 'context',
       'context' => 'string.html_safe',
       'context_optional' => 0,
-      'panel' => '0',
+      'panel' => '2',
       'fixed' => '',
       'label' => 'Search: Fulltext search',
     ),
   );
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Search: Fulltext search */
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['id'] = 'search_api_views_fulltext';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['table'] = 'search_api_index_database_node_index';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['field'] = 'search_api_views_fulltext';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['default_argument_options']['argument'] = 'vegetables';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['default_argument_skip_url'] = 0;
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['search_api_views_fulltext']['break_phrase'] = 0;
-  $handler->display->display_options['path'] = 'lol';
   $export['panopoly_database_search'] = $view;
 
   $view = new view;

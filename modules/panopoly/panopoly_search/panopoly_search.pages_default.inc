@@ -337,7 +337,7 @@ function panopoly_search_default_page_manager_pages() {
     $pane->configuration = array(
       'view_mode' => 'teaser',
       'widget_title' => '',
-      'items_per_page' => '0',
+      'items_per_page' => '15',
       'context' => array(
         0 => 'argument_string_1',
       ),
@@ -352,6 +352,8 @@ function panopoly_search_default_page_manager_pages() {
       'override_title' => '',
       'override_title_text' => '',
       'view_settings' => 'fields',
+      'use_pager' => 1,
+      'pager_id' => '0',
     );
     $pane->cache = array();
     $pane->style = array(
