@@ -256,6 +256,7 @@ libraries[SolrPhpClient][download][url] = http://solr-php-client.googlecode.com/
 
 libraries[markitup][download][type] = get
 libraries[markitup][download][url] = https://github.com/markitup/1.x/tarball/master
+libraries[markitup][patch][1715642] = http://drupal.org/files/1715642-adding-html-set-markitup-editor.patch
 
 libraries[jquery.cycle][download][type] = get
 libraries[jquery.cycle][download][url] = https://github.com/malsup/cycle/zipball/master
