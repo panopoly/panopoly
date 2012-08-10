@@ -43,7 +43,6 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
         'data' => array(
           $info['data']['title'],
           $info['data']['path'],
-          l('Edit Advanced', 'admin/structure/pages/edit/' . $id),
         ),
       );
     }
@@ -88,10 +87,34 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     );
   }
 
+  // Assemble General Page Operations
+  $general_pages_links = array();
+  $general_pages_links[] = array(
+    'title' => t('Add new'),
+    'href' => 'node/add/landing_page',
+  );
+  $general_pages_links[] = array(
+    'title' => t('Configure'),
+    'href' => 'admin/structure/pages',
+  );
+  $general_pages_options = (count($general_pages_links)) ? theme('links__ctools_dropbutton', array('links' => $general_pages_links, 'attributes' => array('class' => array('links', 'inline', 'operations'))))  : '';
+
+  // Assemble Template Options
+  $page_templates_links = array();
+  $page_templates_links[] = array(
+    'title' => t('Add new'),
+    'href' => 'admin/config/content/panelizer',
+  );
+  $page_templates_links[] = array(
+    'title' => t('Configure'),
+    'href' => 'admin/config/content/panelizer',
+  );
+  $page_templates_options = (count($page_templates_links)) ? theme('links__ctools_dropbutton', array('links' => $page_templates_links, 'attributes' => array('class' => array('links', 'inline', 'operations'))))  : '';
+
   // Create the Output
-  $pane->content .= '<h2 class="page-title">' . t('General Pages') . '</h2>';
+  $pane->content .= '<div>' . $general_pages_options . '<h2 class="page-title">' . t('General Pages') . '</h2></div>';
   $pane->content .= (count($general_pages)) ? theme('table', array('header' => array(), 'rows' => $general_pages, 'attributes' => array('class' => 'panels-manage'))) : t('No general pages have yet been created!');
-  $pane->content .= '<h2 class="page-title">' . t('Page Templates') . '</h2>';
+  $pane->content .= '<div>' . $page_templates_options . '<h2 class="page-title">' . t('Page Templates') . '</h2></div>';
   $pane->content .= (count($page_templates)) ? theme('table', array('header' => array(), 'rows' => $page_templates, 'attributes' => array('class' => 'panelizer-templates'))) : t('No page templates have yet been created!');
   $pane->content .= '<h2 class="page-title">' . t('Overriden Page Templates') . '</h2>';
   $pane->content .= (count($overridden_templates)) ? theme('table', array('header' => array(), 'rows' => $overridden_templates, 'attributes' => array('class' => 'panelizer-overrides'))) : t('No page templates have yet been overridden!');
