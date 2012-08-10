@@ -136,8 +136,15 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     unset($form['style']['#options']['naked']);
 
     // Better explain that "No Style" means "Default Pane Style"
+    // Move the default option to the top. Also I should have learned
+    // how to manage arrays in PHP.
     if (!empty($form['style']['#options']['default'])) {
       $form['style']['#options']['default'] = t('Default Pane Style');
+      $default = $form['style']['#options']['default'];
+      unset($form['style']['#options']['default']);
+      $form['style']['#options'] = array_reverse($form['style']['#options']);
+      $form['style']['#options']['default'] = $default;
+      $form['style']['#options'] = array_reverse($form['style']['#options']);
     }
 
     // Better title for the List Style region style plugin
@@ -146,8 +153,11 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Improve the UI around region style selections
-    if (!empty($form['style']['#options']['-1'])) {
-      $form['style']['#options']['-1'] = t('Default Region Style');
+    if (!empty($form['style']['#options'][0])) {
+      $form['style']['#options'][0] = t('Default Region Style');
+      if (empty($form['style']['#default_value'])) {
+        $form['style']['#default_value'] = '0';
+      }
       unset($form['style']['#options']['default']);
     }
 
