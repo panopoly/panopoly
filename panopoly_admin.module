@@ -189,7 +189,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
 
     // Improve the name of the page and remove its unnecessary description
     $form['admin_title']['#title'] = 'Title';
-    $form['admin_title']['#size'] = 40;
+    $form['admin_title']['#size'] = 30;
     $form['admin_title']['#attributes']['placeholder'] = 'Title of Page';
     $form['admin_title']['#description'] = '';
 
@@ -198,6 +198,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
 
     // Improve the path of the landing page
     $form['path']['#title'] = t('URL');
+    $form['path']['#size'] = 50;
     $form['path']['#attributes']['placeholder'] = '<URL of Page>';
 
     // Do not make them choose a weight
