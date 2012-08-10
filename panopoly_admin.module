@@ -65,7 +65,7 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
 
   // Hide the title of the featured category pane if there isn't any content
   // TODO - this could be extended generally to resolve other issues
-  if ($pane->subtype == 'node:field_featured_categories' && $content->content['field_featured_categories']['#access'] == FALSE) {
+  if ($pane->subtype == 'node:field_featured_categories' && !empty($content->content['field_featured_categories']) && $content->content['field_featured_categories']['#access'] == FALSE) {
     $content->title = '';
   }
 }
