@@ -3,7 +3,7 @@ $plugin = array(
   'title' => t('Light Blue Background'),
   'description' => t('Wraps panes in the Drupal light blue style.'),
   'render pane' => 'panopoly_demo_light_blue_background_render_pane',
-  'render region' => 'panopoly_demo_ligh_blue_background_render_region',
+  'render region' => 'panopoly_demo_light_blue_background_render_region',
   'weight' => -10,
 );
 
