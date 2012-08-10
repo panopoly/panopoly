@@ -58,7 +58,7 @@ function panopoly_core_field_default_fields() {
       ),
       'entity_type' => 'taxonomy_term',
       'field_name' => 'field_featured_image',
-      'label' => 'Primary Image',
+      'label' => 'Image',
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
@@ -75,7 +75,7 @@ function panopoly_core_field_default_fields() {
         'active' => 1,
         'module' => 'image',
         'settings' => array(
-          'preview_image_style' => 'panopoly_image_half',
+          'preview_image_style' => 'panopoly_image_thumbnail',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
@@ -86,7 +86,7 @@ function panopoly_core_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Primary Image');
+  t('Image');
   t('This is the primary image to be associated with the taxonomy term');
 
   return $fields;
