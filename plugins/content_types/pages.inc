@@ -78,9 +78,18 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     $entity = entity_load($overridden_page->entity_type, array($overridden_page->entity_id));
     $entity = $entity[$overridden_page->entity_id];
     $entity_uri = entity_uri($overridden_page->entity_type, $entity);
+    switch($entity_type) {
+      case 'node':
+        $entity_title = $entity->title;
+        break;
+      case 'user':
+      case 'taxonomy_term':
+        $entity_title = $entity->name;
+        break;
+    }
     $overridden_templates[] = array(
       'data' => array(
-        $entity->title,
+        $entity_title,
         '<em>' . $entity_info['bundles'][$entity->type]['label'] . ' template' . '</em>',
         l(url($entity_uri['path']), $entity_uri['path']),
       )
