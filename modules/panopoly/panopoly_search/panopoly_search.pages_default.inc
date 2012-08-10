@@ -13,7 +13,7 @@ function panopoly_search_default_page_manager_pages() {
   $page->api_version = 1;
   $page->name = 'panopoly_search';
   $page->task = 'page';
-  $page->admin_title = 'Search';
+  $page->admin_title = 'Search Page';
   $page->admin_description = '';
   $page->path = 'search/site/!keywords';
   $page->access = array(
