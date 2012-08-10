@@ -73,7 +73,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && $form_state['clicked_button']['#value'] == 'Update Preview') {
 
       // Make sure this will not be set as reusable
-      $form_state['input']['reusable'] = NULL;
+      $form_state['values']['reusable'] = NULL;
 
       // Run entity information through standard submission form
       fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
