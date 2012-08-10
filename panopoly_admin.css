@@ -553,3 +553,9 @@ ul#media-browser-library-list {
 #panopoly_admin_landing_page_wizard .panels-layouts-checkboxes {
   display: none;
 }
+
+#panopoly_admin_landing_page_wizard .form-item-menu-parent label {
+  float: left;
+  margin-right: 5px;
+  font-weight: normal;
+}
