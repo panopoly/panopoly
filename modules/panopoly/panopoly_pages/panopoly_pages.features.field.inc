@@ -108,14 +108,14 @@ function panopoly_pages_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-panopoly_page-field_featured_category'.
-  $fields['node-panopoly_page-field_featured_category'] = array(
+  // Exported field: 'node-panopoly_page-field_featured_categories'.
+  $fields['node-panopoly_page-field_featured_categories'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_featured_category',
+      'field_name' => 'field_featured_categories',
       'foreign keys' => array(
         'tid' => array(
           'columns' => array(
@@ -175,7 +175,7 @@ function panopoly_pages_field_default_fields() {
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_featured_category',
+      'field_name' => 'field_featured_categories',
       'label' => 'Categories',
       'required' => 0,
       'settings' => array(

@@ -136,7 +136,7 @@ function panopoly_pages_panelizer_defaults() {
     $pane->pid = 'new-4';
     $pane->panel = 'contentmain';
     $pane->type = 'entity_field';
-    $pane->subtype = 'node:field_featured_category';
+    $pane->subtype = 'node:field_featured_categories';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -317,7 +317,7 @@ function panopoly_pages_panelizer_defaults() {
     $pane->pid = 'new-9';
     $pane->panel = 'contentmain';
     $pane->type = 'entity_field';
-    $pane->subtype = 'node:field_featured_category';
+    $pane->subtype = 'node:field_featured_categories';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
