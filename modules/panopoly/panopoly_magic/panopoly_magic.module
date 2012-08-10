@@ -395,9 +395,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
   /**
    * Globally make sure that all options are inside a fieldset. Currently just supporting a known list
-   * of forms, but persumably this can be applied to all items
+   * of forms, but persumably this can be applied to all items. Ok going for it!!!
    */
-  if (in_array($form_id, array('panopoly_search_search_box_content_type_edit_form', 'menu_block_menu_tree_content_type_edit_form', 'ctools_node_content_content_type_edit_form'))) {
+  if (strpos($form_id, 'content_type_edit_form')) {
 
     // Grab child elements and create the fieldset.
     $children = element_children($form);
