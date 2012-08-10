@@ -138,7 +138,7 @@ function panopoly_admin_default_page_manager_handlers() {
     $pane->pid = 'new-5';
     $pane->panel = 'sidebar';
     $pane->type = 'entity_form_field';
-    $pane->subtype = 'node:field_featured_category';
+    $pane->subtype = 'node:field_featured_categories';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(

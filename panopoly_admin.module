@@ -65,7 +65,7 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
 
   // Hide the title of the featured category pane if there isn't any content
   // TODO - this could be extended generally to resolve other issues
-  if ($pane->subtype == 'node:field_featured_category' && $content->content['field_featured_category']['#access'] == FALSE) {
+  if ($pane->subtype == 'node:field_featured_categories' && $content->content['field_featured_categories']['#access'] == FALSE) {
     $content->title = '';
   }
 }
@@ -130,11 +130,11 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Consider the featured categoriy
-  if (!empty($form['field_featured_category'])) {
+  if (!empty($form['field_featured_categories'])) {
 
     // Hide this field if there are no options
-    if (count($form['field_featured_category']['und']['#options']) == 1 && !empty($form['field_featured_category']['und']['#options']['_none'])) {
-      $form['field_featured_category']['#access'] = FALSE;
+    if (count($form['field_featured_categories']['und']['#options']) == 1 && !empty($form['field_featured_categories']['und']['#options']['_none'])) {
+      $form['field_featured_categories']['#access'] = FALSE;
     }
   }
 
