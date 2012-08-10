@@ -21,7 +21,7 @@ function panopoly_admin_theme_content_type_render($subtype, $conf, $panel_args, 
   ctools_modal_add_js();
 
   // Get the current theme and define links
-  $theme_key = variable_get('theme_default');
+  global $theme_key;
   $theme_data = list_themes();
   $theme_links = array();
   $theme_links[] = array(
