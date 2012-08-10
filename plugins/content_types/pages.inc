@@ -31,6 +31,12 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     elseif($pages['disabled'][$id] == TRUE) {
       // Exclude any disabled pages
     }
+    elseif($info['data']['type']['data'] == 'Existing') {
+      // Exclude PM Existing Pages 
+    }
+    elseif($id == 'page-panopoly_search') {
+      // Exclude Panopoly Search's main page
+    }
     else {
       // Include anything else as a general page
       $general_pages[] = array(
