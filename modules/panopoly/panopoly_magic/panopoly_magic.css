@@ -51,10 +51,11 @@ div.ctools-ajaxing {
   background-image: url("images/status-active.gif");
   background-position: center center;
   background-repeat: no-repeat;
-  height: 16px;
+  min-height: 16px;
   opacity: .9;
   padding: 3px;
   width: 16px;
+  vertical-align: middle;
 }
 
 .ajax-progress-throbber .message {
