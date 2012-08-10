@@ -155,7 +155,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     // Improve the UI around region style selections
     if (!empty($form['style']['#options'][0])) {
       $form['style']['#options'][0] = t('Default Region Style');
-      if (empty($form['style']['#default_value'])) {
+      if (empty($form['style']['#default_value']) || $form['style']['#default_value'] == '-1') {
         $form['style']['#default_value'] = '0';
       }
       unset($form['style']['#options']['default']);
