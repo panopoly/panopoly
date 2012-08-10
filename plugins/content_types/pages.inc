@@ -73,7 +73,7 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
   $overridden_templates = array();
   $entity_types = array('node', 'taxonomy_term', 'user');
   // TODO - handle cases where there are more than 30 pages. This will involve a pager or something fancy like that.
-  foreach(db_query("SELECT * FROM {panelizer_entity} WHERE entity_type IN (:entity_types) AND view_mode = '' LIMIT 30", array(':entity_types' => $entity_types)) as $overridden_page) {
+  foreach(db_query("SELECT * FROM {panelizer_entity} WHERE entity_type IN (:entity_types) AND view_mode = 'page_manager' LIMIT 30", array(':entity_types' => $entity_types)) as $overridden_page) {
     $entity_info = entity_get_info($overridden_page->entity_type);
     $entity = entity_load($overridden_page->entity_type, array($overridden_page->entity_id));
     $entity = $entity[$overridden_page->entity_id];
