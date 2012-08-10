@@ -129,9 +129,8 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['field_featured_image']['und'][0]['#description'] = '';
   }
 
-  // Consider the featured categoriy
-  if (!empty($form['field_featured_categories'])) {
-
+  // Consider the featured category
+  if (!empty($form['field_featured_categories']) && $form['field_featured_categories']['und']['#type'] != 'textfield') {
     // Hide this field if there are no options
     if (count($form['field_featured_categories']['und']['#options']) == 0 || (!empty($form['field_featured_categories']['und']['#options']['_none']) && count($form['field_featured_categories']['und']['#options']) == 1)) {
       $form['field_featured_categories']['#access'] = FALSE;
