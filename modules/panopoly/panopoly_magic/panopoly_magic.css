@@ -121,3 +121,14 @@ div.ctools-ajaxing {
   display: inline;
   padding-right: 5px;
 }
+
+#ctools-stylizer-top-box #preview {
+  float: left;
+  width: 70%;
+  margin-left: 10px;
+}
+
+#ctools-stylizer-edit-style-form-choose .wizard-trail,
+#ctools-stylizer-edit-style-form-default .wizard-trail {
+  display: none;
+}

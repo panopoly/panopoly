@@ -425,6 +425,56 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+
+  /**
+   * Customize stylizer configuration forms.
+   */
+  
+  // Move custom style option to bottom of list.
+  if ($form_id == 'panels_edit_style_type_form') {
+    if (!empty($form['style']['style']['#options']['stylizer'])) {
+      unset($form['style']['style']['#options']['stylizer']);
+      $form['style']['style']['#options']['stylizer'] = t('Custom Style');
+    }
+  }
+
+  // Remove "rounded shadow" options.
+  if ($form_id == 'ctools_stylizer_edit_style_form_choose') {
+    if (!empty($form['style_base']['Basic-styles']['pane_rounded_shadow'])) {
+      unset($form['style_base']['Basic-styles']['pane_rounded_shadow']);
+    }
+
+    if (!empty($form['style_base']['Basic-styles']['region_rounded_shadow'])) {
+      unset($form['style_base']['Basic-styles']['region_rounded_shadow']);
+    }
+  }
+
+
+  // Customize the stylizer settings page.
+  if ($form_id == 'ctools_stylizer_edit_style_form_default') {
+
+    // Customize the settings preview button.
+    $form['top box']['preview']['submit']['#attributes'] = array(
+      'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click'),
+    );
+
+    $form['top box']['preview']['#weight'] = 5;
+
+    // Move reusable style options into their own fieldset.
+    if (!empty($form['panels'])) {
+      $form['general_settings'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('General Settings'),
+      );
+
+      $form['general_settings']['panels'] = $form['panels'];
+      unset($form['panels']);
+    }
+
+    // Autosubmit the form.
+    ctools_add_js('auto-submit');
+    $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
+  }
 }
 
 /**
