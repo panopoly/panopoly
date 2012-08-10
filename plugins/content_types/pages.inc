@@ -43,6 +43,7 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
         'data' => array(
           $info['data']['title'],
           $info['data']['path'],
+          l('Edit Advanced', 'admin/structure/pages/edit/' . $id),
         ),
       );
     }
@@ -69,7 +70,7 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     }
   }
 
-  // Assemble the Overriden Template Data
+  // Assemble the Overridden Template Data
   $overridden_templates = array();
   $entity_types = array('node', 'taxonomy_term', 'user');
   // TODO - handle cases where there are more than 30 pages. This will involve a pager or something fancy like that.
