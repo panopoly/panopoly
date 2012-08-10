@@ -57,6 +57,10 @@ div.ctools-ajaxing {
   width: 16px;
 }
 
+.ajax-progress-throbber .message {
+  display: none;
+}
+
 /**
  * Custom styling for the Panopoly Theme functionality
 */
