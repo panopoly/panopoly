@@ -24,7 +24,7 @@ function panopoly_pages_panelizer_defaults() {
   $panelizer->contexts = array();
   $panelizer->relationships = array();
   $panelizer->access = '';
-  $panelizer->view_mode = '';
+  $panelizer->view_mode = 'page_manager';
   $panelizer->css_class = '';
   $panelizer->title_element = 'H2';
   $panelizer->link_to_entity = TRUE;
