@@ -30,7 +30,7 @@ function panopoly_widgets_ctools_content_subtype_alter(&$subtype, &$plugin) {
     $subtype['category'][0] = 'Custom';
     $subtype['top level'] = TRUE;
     $subtype['title'] = 'Add content item';
-    $subtype['icon'] = drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png';
+    $subtype['icon'] = drupal_get_path('module', 'panopoly_widgets') . '/images/icon_content_item.png';
   }
 
   // Modify the general content listing to appear in the generic content sidebar area
@@ -38,7 +38,7 @@ function panopoly_widgets_ctools_content_subtype_alter(&$subtype, &$plugin) {
     $subtype['category'][0] = 'Custom';
     $subtype['top level'] = TRUE;
     $subtype['title'] = 'Add content list';
-    $subtype['icon'] = drupal_get_path('module', 'panopoly_widgets') . '/images/icon_spotlight.png';
+    $subtype['icon'] = drupal_get_path('module', 'panopoly_widgets') . '/images/icon_content_list.png';
   }
 
   // Modify the plugins so we do away with this "node" and "entity" thing
@@ -272,6 +272,7 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
   );
   
   // Existing content.
+  /* TODO - Which is better? FPP implementation of Views??
   $entity_info['fieldable_panels_pane']['bundles']['existing_content'] = array(
     'label' => t('Add content item'),
     'pane category' => t('Custom'),
@@ -283,7 +284,8 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
       'real path' => 'admin/structure/fieldable-panels-panes/manage/existing-content',
       'access arguments' => array('administer fieldable panels panes'),
     ),
-  );
+  ); 
+  */
 }
 
 /**
