@@ -166,7 +166,8 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = 'panopoly_admin_menu_validate';
   }
 
-  if ($form_id == 'panopoly_magic_configure_form' || $form_id == 'system_theme_settings') {
+  // Add our custom closing operation for the modal
+  if ((strpos($form['#action'], 'admin/panopoly_apps/configure') || strpos($form['#action'], 'admin/panopoly_theme/configure')) && TRUE) {
     $form['#submit'][] = 'panopoly_admin_modal_close_submit';
   }
 }

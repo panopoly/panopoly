@@ -361,6 +361,7 @@
   padding-left: 1em;
   padding-right: 1em;
   float: left;
+  width: 52%;
 }
 
 .pane-theme .form-checkbox, 
