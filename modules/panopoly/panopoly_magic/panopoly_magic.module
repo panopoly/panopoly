@@ -87,6 +87,13 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $pane->subtype = 'vid:' . $form_state['entity']->vid;
     }
 
+    // Make some adjustments based on the way the sort ordering is being pased in
+    // TODO - figure out why this is needed
+    if (!empty($form_state['input']['sort_by'])) {
+      $form_state['input']['exposed']['sort_by'] = $form_state['input']['sort_by'];
+      $form_state['input']['exposed']['sort_order'] = $form_state['input']['sort_order'];
+    }
+
     // Set the configuration and determine the content for the pane
     $configuration = ($form_state['rebuild'] && strpos($form_id, 'content_type_edit_form')) ? $form_state['input'] : $pane->configuration;
     $content = ctools_content_render($pane->type, $pane->subtype, $configuration);
@@ -350,8 +357,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    // Add a custom submit handler
-    $form['#submit'][] = 'panopoly_magic_views_view_mode_pane_submit';
+    // Add a custom submit handler to our preview and submit option
+    $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
+    $form['buttons']['preview']['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
   }
 
   /**
@@ -422,7 +430,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Custom submit handler to save panels pane configuration for styling
  */
-function panopoly_magic_views_view_mode_pane_submit(&$form, &$form_state) {
+function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
   $form_state['conf']['view_mode'] = (isset($form_state['values']['view_mode'])) ? $form_state['values']['view_mode'] : NULL;
 
   // Set the $conf['widget_title'] value. We need to do this a
@@ -450,6 +458,32 @@ function panopoly_magic_views_view_mode_pane_submit(&$form, &$form_state) {
   else {
     $form_state['conf']['items_per_page'] = NULL;
   }
+
+  // Set the $conf['sort_by'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't. 
+  if (isset($form_state['values']['display_settings']['sort_by'])) {
+    $form_state['conf']['exposed']['sort_by'] = $form_state['values']['display_settings']['sort_by'];
+  } 
+  elseif (isset($form_state['values']['sort_by'])) {
+    $form_state['conf']['exposed']['sort_by'] = $form_state['values']['sort_by'];
+  }   
+  else {
+    $form_state['conf']['exposed']['sort_by'] = NULL;
+  } 
+
+  // Set the $conf['sort_order'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't. 
+  if (isset($form_state['values']['display_settings']['sort_order'])) {
+    $form_state['conf']['exposed']['sort_order'] = $form_state['values']['display_settings']['sort_order'];
+  } 
+  elseif (isset($form_state['values']['sort_order'])) {
+    $form_state['conf']['exposed']['sort_order'] = $form_state['values']['sort_order'];
+  }   
+  else {
+    $form_state['conf']['exposed']['sort_order'] = NULL;
+  } 
 
   // Save the view settings field is present in the data.
   if (isset($form_state['values']['view_settings'])) {
