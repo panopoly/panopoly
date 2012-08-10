@@ -23,6 +23,7 @@ function panopoly_pages_panelizer_defaults() {
   $panelizer->pipeline = 'ipe';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
+  $panelizer->did = 0;
   $panelizer->access = '';
   $panelizer->view_mode = 'page_manager';
   $panelizer->css_class = '';
@@ -208,6 +209,7 @@ function panopoly_pages_panelizer_defaults() {
   $panelizer->pipeline = 'standard';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
+  $panelizer->did = 0;
   $panelizer->access = array();
   $panelizer->view_mode = 'default';
   $panelizer->css_class = 'page-default';
@@ -359,19 +361,21 @@ function panopoly_pages_panelizer_defaults() {
   $panelizer->pipeline = 'standard';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
+  $panelizer->did = 1;
   $panelizer->access = array();
   $panelizer->view_mode = 'featured';
   $panelizer->css_class = '';
   $panelizer->title_element = 'H2';
   $panelizer->link_to_entity = TRUE;
   $display = new panels_display();
-  $display->layout = 'phelan';
+  $display->layout = 'boxton';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'column1' => NULL,
       'column2' => NULL,
+      'contentmain' => NULL,
     ),
   );
   $display->cache = array();
@@ -380,7 +384,7 @@ function panopoly_pages_panelizer_defaults() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-10';
-    $pane->panel = 'column1';
+    $pane->panel = 'contentmain';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_featured_image';
     $pane->shown = TRUE;
@@ -393,7 +397,7 @@ function panopoly_pages_panelizer_defaults() {
       'delta_reversed' => FALSE,
       'formatter_settings' => array(
         'image_link' => 'content',
-        'image_style' => 'panopoly_image_featured',
+        'image_style' => 'panopoly_image_half',
       ),
       'context' => 'panelizer',
       'override_title' => 0,
@@ -408,10 +412,10 @@ function panopoly_pages_panelizer_defaults() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-10'] = $pane;
-    $display->panels['column1'][0] = 'new-10';
+    $display->panels['contentmain'][0] = 'new-10';
     $pane = new stdClass();
     $pane->pid = 'new-11';
-    $pane->panel = 'column2';
+    $pane->panel = 'contentmain';
     $pane->type = 'node_title';
     $pane->subtype = 'node_title';
     $pane->shown = TRUE;
@@ -428,13 +432,13 @@ function panopoly_pages_panelizer_defaults() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
     $display->content['new-11'] = $pane;
-    $display->panels['column2'][0] = 'new-11';
+    $display->panels['contentmain'][1] = 'new-11';
     $pane = new stdClass();
     $pane->pid = 'new-12';
-    $pane->panel = 'column2';
+    $pane->panel = 'contentmain';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
     $pane->shown = TRUE;
@@ -458,13 +462,13 @@ function panopoly_pages_panelizer_defaults() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
     $display->content['new-12'] = $pane;
-    $display->panels['column2'][1] = 'new-12';
+    $display->panels['contentmain'][2] = 'new-12';
     $pane = new stdClass();
     $pane->pid = 'new-13';
-    $pane->panel = 'column2';
+    $pane->panel = 'contentmain';
     $pane->type = 'node_links';
     $pane->subtype = 'node_links';
     $pane->shown = TRUE;
@@ -485,10 +489,10 @@ function panopoly_pages_panelizer_defaults() {
       'css_class' => 'link-wrapper',
     );
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
     $display->content['new-13'] = $pane;
-    $display->panels['column2'][2] = 'new-13';
+    $display->panels['contentmain'][3] = 'new-13';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $panelizer->display = $display;
@@ -507,6 +511,7 @@ function panopoly_pages_panelizer_defaults() {
   $panelizer->pipeline = 'standard';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
+  $panelizer->did = 0;
   $panelizer->access = array();
   $panelizer->view_mode = 'teaser';
   $panelizer->css_class = 'page-teaser';
