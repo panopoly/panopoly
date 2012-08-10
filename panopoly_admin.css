@@ -228,7 +228,7 @@
 /**
  * Featured Category Styling
  */
-#node-edit .field-name-field-featured-category>.form-item-field-featured-category-und>label {
+#node-edit .field-name-field-featured-categories>.form-item-field-featured-categories-und>label {
   display: none;
 }
 
