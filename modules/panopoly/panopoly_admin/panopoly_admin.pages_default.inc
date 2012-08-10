@@ -428,7 +428,7 @@ function panopoly_admin_default_page_manager_pages() {
   $handler->conf = array(
     'title' => 'Admin Content',
     'no_blocks' => 0,
-    'pipeline' => 'ipe',
+    'pipeline' => 'standard',
     'css_id' => 'admin-content',
     'css' => '',
     'contexts' => array(),
@@ -527,7 +527,7 @@ function panopoly_admin_default_page_manager_pages() {
   $handler->conf = array(
     'title' => 'Admin Dashboard',
     'no_blocks' => 0,
-    'pipeline' => 'ipe',
+    'pipeline' => 'standard',
     'css_id' => 'admin-dashboard',
     'css' => '',
     'contexts' => array(),
@@ -712,7 +712,7 @@ function panopoly_admin_default_page_manager_pages() {
   $handler->conf = array(
     'title' => 'Admin Media',
     'no_blocks' => 0,
-    'pipeline' => 'ipe',
+    'pipeline' => 'standard',
     'css_id' => 'admin-media',
     'css' => '',
     'contexts' => array(),
@@ -814,7 +814,7 @@ function panopoly_admin_default_page_manager_pages() {
   $handler->conf = array(
     'title' => 'Admin Content',
     'no_blocks' => 0,
-    'pipeline' => 'ipe',
+    'pipeline' => 'standard',
     'css_id' => 'admin-users',
     'css' => '',
     'contexts' => array(),

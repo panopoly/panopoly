@@ -133,7 +133,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   if (!empty($form['field_featured_categories'])) {
 
     // Hide this field if there are no options
-    if (count($form['field_featured_categories']['und']['#options']) == 1 && !empty($form['field_featured_categories']['und']['#options']['_none'])) {
+    if (count($form['field_featured_categories']['und']['#options']) == 0 || (!empty($form['field_featured_categories']['und']['#options']['_none']) && count($form['field_featured_categories']['und']['#options']) == 1)) {
       $form['field_featured_categories']['#access'] = FALSE;
     }
   }
