@@ -84,7 +84,7 @@ function panopoly_core_entity_info_alter(&$entity_info) {
  * problematic entity_entity_info_alter() implementation. 
  */
 function panopoly_core_module_implements_alter(&$implementations, $hook) {
-  if ($hook == 'entity_info_alter') {
+  if ($hook == 'entity_info_alter' || $hook == 'css_alter') {
     // Move our hook implementation to the bottom.
     $group = $implementations['panopoly_core'];
     unset($implementations['panopoly_core']);
