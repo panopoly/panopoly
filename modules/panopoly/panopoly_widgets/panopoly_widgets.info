@@ -58,3 +58,4 @@ scripts[] = js/panopoly_spotlight.js
 stylesheets[all][] = css/panopoly_spotlight.css
 stylesheets[all][] = css/panopoly_accordion.css
 stylesheets[all][] = css/panopoly_views_slideshow.css
+stylesheets[all][] = css/panopoly_media.css
