@@ -52,3 +52,4 @@ features[variable][] = search_active_modules
 features[variable][] = search_api_facets_search_ids
 features[views_view][] = panopoly_database_search
 features[views_view][] = panopoly_search
+stylesheets[all][] = panopoly_search.css
