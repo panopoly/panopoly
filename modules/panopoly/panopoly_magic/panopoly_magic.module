@@ -371,6 +371,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     $view_mode = $form['view_mode'];
     unset($form['view_mode']);
 
+    // Add custom validation function
+    $form['reusable']['admin_title']['#element_validate'][] = 'panopoly_magic_reusable_entity_validate';
+
     // Remove "tokens" from the list of available view modes.
     if (!empty($view_mode['#options']['token'])) {
       unset($view_mode['#options']['token']);
@@ -474,6 +477,19 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     // Autosubmit the form.
     ctools_add_js('auto-submit');
     $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
+  }
+}
+
+/**
+ *  Validator to ensure that reusable entites have titles.
+ */
+function panopoly_magic_reusable_entity_validate($element, &$form_state, $form) {
+  // If the reusable entity checkbox is selected.
+  if (!empty($form_state['values']['reusable'])) {
+    // Ensure a title is present.
+    if (empty($element['#value'])) {
+      form_error($element, t('If you would like this entity to be reusable, please add a title.'));
+    }
   }
 }
 
