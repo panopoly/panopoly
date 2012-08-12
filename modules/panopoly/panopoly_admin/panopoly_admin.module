@@ -343,6 +343,14 @@ function panopoly_admin_menu() {
     'file' => 'includes/page-wizard.inc',
     'file path' => drupal_get_path('module', 'ctools'),
   );
+
+  $items['admin/site/panelizer-delete/%/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('panopoly_admin_panelizer_delete_form', 3, 4),
+    'access arguments' => array('administer panelizer'),
+  );
+
   return $items;
 }
 
@@ -389,4 +397,81 @@ function panopoly_admin_theme_config_page($js = FALSE, $theme_key) {
     drupal_set_title($title);
     return $output;
   }
+}
+
+/**
+ * Utility function for parsing basic entity info.
+ */
+function panopoly_admin_entity_parse_info($entity, $type) {
+  $entity_info = array();
+
+  switch($type) {
+    case 'node':
+      $entity_info['title'] = $entity->title;
+      $entity_info['type'] = 'node';
+      $entity_info['bundle_type'] = $entity->type;
+      $entity_info['id'] = $entity->nid;
+      break;
+    case 'user':
+      $entity_info['title'] = $entity->name;
+      $entity_info['type'] = 'user';
+      $entity_info['bundle_type'] = 'user';
+      $entity_info['id'] = $entity->uid;
+      break;
+    case 'taxonomy_term':
+      $entity_info['title'] = $entity->name;
+      $entity_info['type'] = 'taxonomy_term';
+      $entity_info['bundle_type'] = $entity->vocabulary_machine_name;
+      $entity_info['id'] = $entity->tid;
+      break;
+  }
+
+  return $entity_info;
+}
+
+/**
+ * Confirmation form for deleting a panelizer revision.
+ */
+function panopoly_admin_panelizer_delete_form($form, &$form_state, $entity_type, $entity_id) {
+
+  $entities = entity_load($entity_type, array($entity_id));
+
+  if (!empty($entities)) {
+    $entity = reset($entities);
+  }
+
+  $entity_info = panopoly_admin_entity_parse_info($entity, $entity_type);
+
+  $form['#redirect'] = 'admin/site';
+
+  $form['entity_type'] = array(
+    '#type' => 'value',
+    '#value' => $entity_info['type'],
+  );
+
+  $form['entity_id'] = array(
+    '#type' => 'value',
+    '#value' => $entity_info['id'],
+  );
+
+  $form['entity_title'] = array(
+    '#type' => 'value',
+    '#value' => $entity_info['title'],
+  );
+
+  return confirm_form($form, t('Are you sure you want to delete the overriden page template for %title?', array('%title' => $entity_info['title'])), 'admin/site');
+}
+
+/**
+ * Submit function for deleting a panelizer revision.
+ */
+function panopoly_admin_panelizer_delete_form_submit($form, &$form_state) {
+  $form_state['redirect'] = 'admin/site';
+
+  db_delete('panelizer_entity')
+      ->condition('entity_type', $form_state['values']['entity_type'])
+      ->condition('entity_id', $form_state['values']['entity_id'])
+      ->execute();
+
+  drupal_set_message(t('The overridden page template for %title has been deleted.', array('%title' => $form_state['values']['entity_title'])));
 }

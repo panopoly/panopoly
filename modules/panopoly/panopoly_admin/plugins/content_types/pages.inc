@@ -78,25 +78,14 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     $entity = entity_load($overridden_page->entity_type, array($overridden_page->entity_id));
     $entity = $entity[$overridden_page->entity_id];
     $entity_uri = entity_uri($overridden_page->entity_type, $entity);
-    switch($overridden_page->entity_type) {
-      case 'node':
-        $entity_title = $entity->title;
-        $bundle_type = $entity->type;
-        break;
-      case 'user':
-        $entity_title = $entity->name;
-        $bundle_type = 'user';
-        break;
-      case 'taxonomy_term':
-        $entity_title = $entity->name;
-        $bundle_type = $entity->vocabulary_machine_name;
-        break;
-    }
+    $entity_data = panopoly_admin_entity_parse_info($entity, $overridden_page->entity_type);
+
     $overridden_templates[] = array(
       'data' => array(
-        $entity_title,
-        '<em>' . $entity_info['bundles'][$bundle_type]['label'] . ' template' . '</em>',
+        $entity_data['title'],
+        '<em>' . $entity_info['bundles'][$entity_data['bundle_type']]['label'] . ' template' . '</em>',
         l(url($entity_uri['path']), $entity_uri['path']),
+        l(t('Revert'), 'admin/site/panelizer-delete/' . $entity_data['type'] . '/' . $entity_data['id']),
       )
     );
   }
@@ -111,7 +100,7 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     'title' => t('Configure'),
     'href' => 'admin/structure/pages',
   );
-  $general_pages_options = (count($general_pages_links)) ? theme('links__ctools_dropbutton', array('links' => $general_pages_links, 'attributes' => array('class' => array('links', 'inline', 'operations'))))  : '';
+  $general_pages_options = (!empty($general_pages_links)) ? theme('links__ctools_dropbutton', array('links' => $general_pages_links, 'attributes' => array('class' => array('links', 'inline', 'operations'))))  : '';
 
   // Assemble Template Options
   $page_templates_links = array();
@@ -123,14 +112,14 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     'title' => t('Configure'),
     'href' => 'admin/config/content/panelizer',
   );
-  $page_templates_options = (count($page_templates_links)) ? theme('links__ctools_dropbutton', array('links' => $page_templates_links, 'attributes' => array('class' => array('links', 'inline', 'operations'))))  : '';
+  $page_templates_options = (!empty($page_templates_links)) ? theme('links__ctools_dropbutton', array('links' => $page_templates_links, 'attributes' => array('class' => array('links', 'inline', 'operations'))))  : '';
 
   // Create the Output
   $pane->content .= '<div>' . $general_pages_options . '<h2 class="page-title">' . t('General Pages') . '</h2></div>';
-  $pane->content .= (count($general_pages)) ? theme('table', array('header' => array(), 'rows' => $general_pages, 'attributes' => array('class' => 'panels-manage'))) : t('No general pages have yet been created!');
+  $pane->content .= (!empty($general_pages)) ? theme('table', array('header' => array(), 'rows' => $general_pages, 'attributes' => array('class' => 'panels-manage'))) : t('No general pages have yet been created!');
   $pane->content .= '<div>' . $page_templates_options . '<h2 class="page-title">' . t('Page Templates') . '</h2></div>';
-  $pane->content .= (count($page_templates)) ? theme('table', array('header' => array(), 'rows' => $page_templates, 'attributes' => array('class' => 'panelizer-templates'))) : t('No page templates have yet been created!');
+  $pane->content .= (!empty($page_templates)) ? theme('table', array('header' => array(), 'rows' => $page_templates, 'attributes' => array('class' => 'panelizer-templates'))) : t('No page templates have yet been created!');
   $pane->content .= '<h2 class="page-title">' . t('Overriden Page Templates') . '</h2>';
-  $pane->content .= (count($overridden_templates)) ? theme('table', array('header' => array(), 'rows' => $overridden_templates, 'attributes' => array('class' => 'panelizer-overrides'))) : t('No page templates have yet been overridden!');
+  $pane->content .= (!empty($overridden_templates)) ? theme('table', array('header' => array(), 'rows' => $overridden_templates, 'attributes' => array('class' => 'panelizer-overrides'))) : t('No page templates have yet been overridden!');
   return $pane;
 }
