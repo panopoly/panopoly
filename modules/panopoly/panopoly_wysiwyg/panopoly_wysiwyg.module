@@ -63,7 +63,6 @@ function panopoly_wysiwyg_filter_process_format($element) {
 
   // Set the element above the WYSIWYG textarea
   $element['format']['#weight'] = 1;
-  unset($element['format']['format']['#options']['plain_text']);
   unset($element['format']['#type']);
   $element['format']['format']['#title'] = 'Editor: ';
   
