@@ -402,6 +402,7 @@
   margin-top: 0;
 }
 
+.pane-taxonomy .ctools-dropbutton,
 .pane-pages .ctools-dropbutton {
   margin-top: 2px;
   float: right;
