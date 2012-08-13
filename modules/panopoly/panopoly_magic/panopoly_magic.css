@@ -63,7 +63,7 @@ div.ctools-ajaxing {
 }
 
 /**
- * Custom styling for the Panopoly Theme functionality
+ * Custom styling for Changing Layout Feature
 */
 #panels-layout-category-Panopoly {
   margin: 3% 6%;
@@ -93,13 +93,16 @@ div.ctools-ajaxing {
 /**
  * Custom styling for exposed views filter options
  */
-.form-item-sort-order, 
-.form-item-sort-by {
+#modal-content .form-item-offset,
+#modal-content .form-item-items-per-page,
+#modal-content .form-item-sort-order, 
+#modal-content .form-item-sort-by {
   float: left;
+  width: 50%;
 }
 
-.form-item-sort-order {
-  padding-left: 20px;
+#modal-content .form-item-offset,
+#modal-content .form-item-sort-order {
   clear: none;
 }
 
@@ -111,11 +114,10 @@ div.ctools-ajaxing {
   margin-right: 5px;
 }
 
-#views-exposed-pane div.form-item {
+#modal-content #views-exposed-pane div.form-item {
   display: inline;
 }
 
-/* Handle the View Setting Element */
 #modal-content .form-item-view-settings {
   display:inline;
   margin-left: 5px;
@@ -130,6 +132,9 @@ div.ctools-ajaxing {
   padding-right: 5px;
 }
 
+/**
+ * CSS Styles for the Landing Page Wizard
+ */
 #ctools-stylizer-edit-style-form-choose .wizard-trail,
 #ctools-stylizer-edit-style-form-default .wizard-trail {
   display: none;

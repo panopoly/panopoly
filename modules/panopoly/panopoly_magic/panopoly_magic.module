@@ -33,16 +33,20 @@ function panopoly_magic_configure_form($form, &$form_state) {
 }
 
 /**
+ * Implements hook_module_implements_alter()
+ */
+function panopoly_magic_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'form_alter') {
+    $group = $implementations['panopoly_magic'];
+    unset($implementations['panopoly_magic']);
+    $implementations['panopoly_magic'] = $group;
+  }
+}
+
+/**
  * Implements hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
-
-  /**
-   * Globally remove the "Cancel" button from Panel pane edit forms
-   */
-  if (strpos($form_id, 'content_type_edit_form')) {
-    $form['buttons']['cancel']['#access'] = FALSE;
-  }
 
   /**
    * Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
@@ -98,14 +102,10 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     $configuration = ($form_state['rebuild'] && strpos($form_id, 'content_type_edit_form')) ? $form_state['input'] : $pane->configuration;
     $content = ctools_content_render($pane->type, $pane->subtype, $configuration);
 
-    // Remove the clearfix for preview floating
-    // TODO - investigate why Panels is putting this here in the first place
-    if (isset($form['aligner_start'])) {
-      $form['aligner_start']['#markup'] = str_replace('clearfix', '', $form['aligner_start']['#markup']);
-    }
-
     // Create the preview fieldset
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' || $content) {
+    
+      // Create the fieldset with appropriate content
       $form['widget_preview'] = array(
         '#type' => 'fieldset',
         '#title' => 'Preview',
@@ -113,10 +113,14 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         '#collapsible' => FALSE,
         '#weight' => -100,
       );
-
       $form['widget_preview']['preview'] = array(
         '#markup' => (!empty($style['render pane'])) ? theme($style['render pane'], array('content' => $content, 'pane' => $pane, 'display' => $display, 'style' => $style, 'settings' => $pane->style['settings'])) : theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $display)),
       );
+      
+      // Remove the clearfix for preview floating
+      if (isset($form['aligner_start'])) {
+        $form['aligner_start']['#markup'] = str_replace('clearfix', '', $form['aligner_start']['#markup']);
+      }
 
       // Create the preview refresh button
       $form['buttons']['preview'] = array(
@@ -131,283 +135,29 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
     }
   }
-
-  /**
-   * Add customization to panel pane style form
+  
+   /**
+   * Globally improve the buttons for the Chaos Tools Content Type Settings Forms
    */
-  if ($form_id == 'panels_edit_style_type_form') {
-
-    // Unset options for which we have no need
-    unset($form['style']['#options']['block']);
-    unset($form['style']['#options']['rounded_corners']);
-    unset($form['style']['#options']['naked']);
-
-    // Better explain that "No Style" means "Default Pane Style"
-    // Move the default option to the top. Also I should have learned
-    // how to manage arrays in PHP.
-    if (!empty($form['style']['#options']['default'])) {
-      $form['style']['#options']['default'] = t('Default Pane Style');
-      $default = $form['style']['#options']['default'];
-      unset($form['style']['#options']['default']);
-      $form['style']['#options'] = array_reverse($form['style']['#options']);
-      $form['style']['#options']['default'] = $default;
-      $form['style']['#options'] = array_reverse($form['style']['#options']);
+  if (strpos($form_id, 'content_type_edit_form')) {
+    $form['buttons']['cancel']['#access'] = FALSE;
+    if (!empty($form['buttons']['return'])) {
+      $form['buttons']['return']['#value'] = t('Save');
     }
-
-    // Better title for the List Style region style plugin
-    if (!empty($form['style']['#options']['list'])) {
-      $form['style']['#options']['list'] = t('List Style');
-    }
-
-    // Improve the UI around region style selections
-    if (!empty($form['style']['#options'][0])) {
-      $form['style']['#options'][0] = t('Default Region Style');
-      if (empty($form['style']['#default_value']) || $form['style']['#default_value'] == '-1') {
-        $form['style']['#default_value'] = '0';
-      }
-      unset($form['style']['#options']['default']);
-    }
-
-    // Adding a fieldset around styling
-    $form['style'] = array('style' => $form['style']);
-    $form['style']['#type'] = 'fieldset';
-    $form['style']['#title'] = t('Style Settings');
-  }
-
-  /**
-   * Add customization to views panel pane settings form
-   */
-  if ($form_id == 'views_content_views_panes_content_type_edit_form') {
-
-    // Get the configuration
-    $conf = $form_state['conf'];
-
-    // Better position context settings
-    if (!empty($form['context'])) {
-      $form['context']['#type'] = 'fieldset';
-      $form['context']['#title'] = t('Context Settings');
-    }
-
-    // Better position page settings
-    if (!empty($form['use_pager'])) {
-      $form['display_settings']['use_pager'] = $form['use_pager'];
-      $form['display_settings']['pager_id'] = $form['pager_id'];
-      unset($form['use_pager']);
-      unset($form['pager_id']);
-    }
-
-
-    // Add a widget title setting if views allows this to be customized
-    if (!empty($form['override_title'])) {
-      $form['override_title_markup']['#access'] = FALSE;
-      $form['override_title']['#access'] = FALSE;
-      $form['override_title_text']['#access'] = FALSE;
-      $form['exposed']['widget_title'] = array(
-        '#field_prefix' => t('Title'),
-        '#type' => 'textfield',
-        '#size' => 30,
-        '#weight' => -100,
-        '#attributes' => (empty($conf['widget_title']) || empty($form_state['view']->display_handler->options['title'])) ? array('placeholder' => '<No Title>') : array(),
-        '#default_value' => (isset($conf['widget_title'])) ? $conf['widget_title'] : $form_state['view']->display_handler->options['title'],
-      );
-    }
-
-    // Adjust the sort options
-    if (!empty($form['exposed']['sort_order'])) {
-      $form['exposed']['sort_order']['#title'] = t('Sort order');
-      $form['exposed']['sort_order']['#suffix'] = '<div class="clearfix"></div>';
-      $form['exposed']['sort_order']['#weight'] = 9;
-      $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
-      unset($form['exposed']['sort_order']);
-    }
-    if (!empty($form['exposed']['sort_by'])) {
-      $form['exposed']['sort_by']['#prefix'] = '<div class="clearfix"></div>';
-      $form['exposed']['sort_by']['#weight'] = 8;
-      $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
-      unset($form['exposed']['sort_by']);
-    }
-
-    // Switch all exposed filters to use field_prefix display
-    foreach ($form['exposed'] as $filter => $filter_array) {
-      if (!empty($form['exposed'][$filter]['#title']) && empty($form['exposed'][$filter]['#field_prefix'])) {
-        $form['exposed'][$filter]['#field_prefix'] = $form['exposed'][$filter]['#title'];
-        unset($form['exposed'][$filter]['#title']);
-      }
-    }
-
-    // Switch all display_settings filters to use field_prefix display
-    foreach ($form['display_settings'] as $filter => $filter_array) {
-      if (!empty($form['display_settings'][$filter]['#title']) && empty($form['display_settings'][$filter]['#field_prefix'])) {
-        $form['display_settings'][$filter]['#field_prefix'] = $form['display_settings'][$filter]['#title'];
-        unset($form['display_settings'][$filter]['#title']);
-      }
-    }
-
-    // Move items per page wiget to widget area
-    if (isset($form['items_per_page'])) {
-      $form['items_per_page']['#field_prefix'] = $form['items_per_page']['#title'];
-      $form['items_per_page']['#title'] = '';
-      $form['items_per_page']['#weight'] = -90;
-      $form['display_settings']['items_per_page'] = $form['items_per_page'];
-      unset($form['items_per_page']);
-    }
-
-    // Update field setting options
-    if (isset($form['fields_override'])) {
-      $form['fields_override']['#title'] = t('Field Settings');
-      $form['fields_override']['#collapsible'] = FALSE;
-      foreach ($form['fields_override'] as &$field) {
-        if (is_array($field)) {
-          $field['#title'] = t('Display') . ' ' . $field['#title'];
-        }
-      }
-    }
-
-    // Define a general settings fieldset if we have exposed values
-    if (!empty($form['exposed']) && count($form['exposed']) > 1) {
-      $form['exposed']['#type'] = 'fieldset';
-      $form['exposed']['#title'] = t('General Settings');
-      $form['exposed']['#weight'] = -30;
-    }
-
-    // Define a display settings fieldset if we have display options
-    if (!empty($form['display_settings']) && count($form['display_settings']) > 0) {
-      $form['display_settings']['#type'] = 'fieldset';
-      $form['display_settings']['#title'] = t('Display Settings');
-      $form['display_settings']['#weight'] = -29;
-    }
-
-    // Determine if this is a node view.
-    $view_handler = $form_state['view']->display_handler;
-    $node_view = ($view_handler->options['row_plugin'] == 'node' && in_array($view_handler->options['style_plugin'], array('default'))) ? TRUE : FALSE;
-
-    if ($node_view == FALSE) {
-      if (empty($conf['view_settings'])) {
-        $conf['view_settings'] = 'fields';
-      }
-
-      // Create the Display Settings fieldset if needed
-      if (empty($form['display_settings'])) {
-        $form['display_settings'] = array(
-          '#type' => 'fieldset',
-          '#title' => t('Display Settings'),
-          '#weight' => -29,
-        );
-      }
-
-      // Add information about the View Mode
-      $form['display_settings']['view_settings'] = array(
-        '#type' => 'radios',
-        '#prefix' => '<div class="view-settings-wrapper"><span class="field-prefix">' . t('Display Type') . '</span>',
-        '#suffix' => '</div>',
-        '#default_value' => $conf['view_settings'],
-        '#weight' => 10,
-        '#options' => array(
-          'fields' => t('Fields'),
-          'nodes' => t('Content'),
-        ),
-      );
-
-      // Update the field overrides to be dependent on the view settings selection.
-      $form['fields_override']['#states'] = array(
-        'visible' => array(
-          ':input[name="view_settings"]' => array('value' => 'fields'),
-        ),
-      );
-    }
-
-    // Add the style setting fieldset in any case
-    $form['content_settings'] = array(
-      '#type' => 'fieldset',
-      '#title' => 'Content Settings',
-    );
-
-    // Add specific style options.
-    $form['content_settings']['view_mode'] = array(
-      '#type' => 'radios',
-      '#options' => panopoly_core_view_mode_options(),
-      '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
-      '#states' => array(
-        'visible' => array(
-          ':input[name="view_settings"]' => array('value' => 'nodes'),
-        ),
-      ),
-    );
-
-    // Override context settings if there is only one option.
-    /* TODO - something funky is happening here...
-    if (!empty($form['context_settings']['context'])) {
-      $show_fieldset = FALSE;
-      foreach (element_children($form['context_settings']['context']) as $child) {
-        // If the element has only one option, just hide the field.
-        if (empty($form['context_settings']['context'][$child]['#options']) || count($form['context_settings']['context'][$child]['#options']) < 2) {
-          $form['context_settings']['context'][$child]['#type'] = 'hidden';
-        }
-        else {
-          // We should show the fieldset if at least one sub element has multiple options.
-          $show_fieldset = TRUE;
-        }
-      }
-
-      if (empty($show_fieldset)) {
-        $form['context_settings']['#type'] = 'hidden';
-      }
-    }
-    */
-
-    // Add a custom submit handler to our preview and submit option
-    $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
-    $form['buttons']['preview']['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
-  }
-
-  /**
-   * Override default entity view mode behavior for fieldable panel panes.
-   */
-  if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
-
-    // Handle the view mode
-    $view_mode = $form['view_mode'];
-    unset($form['view_mode']);
-
-    // Add custom validation function
-    $form['reusable']['admin_title']['#element_validate'][] = 'panopoly_magic_reusable_entity_validate';
-
-    // Remove "tokens" from the list of available view modes.
-    if (!empty($view_mode['#options']['token'])) {
-      unset($view_mode['#options']['token']);
-    }
-
-    // If we're left with only one option, don't display the dropdown.
-    if (count($view_mode['#options']) < 2) {
-      $view_type = reset(array_keys($view_mode['#options']));
-      $view_mode = array(
-        '#type' => 'value',
-        '#value' => $view_type,
-      );
-    }
-
-    // Re-insert the view mode selection under the "General settings" fieldset.
-    $form['widget_settings']['view_mode'] = $view_mode;
-  }
-
-  /**
-   * Override the sizing on fields in the Fieldable Panel Panes modal for better UI
-   */
-  if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
-    if (!empty($form['widget_settings']['title'])) {
-      $form['widget_settings']['title']['#size'] = '';
-    }
-    if (!empty($form['widget_settings']['link']['path'])) {
-      $form['widget_settings']['link']['path']['#size'] = '40';
-    }
+    $form['buttons']['#weight'] = (!empty($form['widget_preview']['#weight'])) ? ($form['widget_preview']['#weight'] +1 ): -99;
   }
 
   /**
    * Globally make sure that all options are inside a fieldset. Currently just supporting a known list
-   * of forms, but persumably this can be applied to all items
+   * of forms, but persumably this can be applied to all items eventually.
    */
-  if (in_array($form_id, array('panopoly_search_search_box_content_type_edit_form', 'menu_block_menu_tree_content_type_edit_form', 'ctools_node_content_content_type_edit_form'))) {
-
+  $forms_to_improve = array(
+    'panopoly_search_search_box_content_type_edit_form',
+    'menu_block_menu_tree_content_type_edit_form',
+    'ctools_node_content_content_type_edit_form',
+  );
+  if (in_array($form_id, $forms_to_improve)) {
+  
     // Grab child elements and create the fieldset.
     $children = element_children($form);
     if (count($children) > 1) {
@@ -426,30 +176,279 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+}
 
-  /**
-   * Customize stylizer configuration forms.
-   */
+/** 
+ * Implementation of hook_form_FORM_ID_alter()
+ */
+function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form_alter(&$form, &$form_state, $form_id) {
+
+  // Handle the view mode
+  $view_mode = $form['view_mode'];
+  unset($form['view_mode']);
+
+  // Add custom validation function
+  $form['reusable']['admin_title']['#element_validate'][] = 'panopoly_magic_reusable_entity_validate';
+
+  // Remove "tokens" from the list of available view modes.
+  if (!empty($view_mode['#options']['token'])) {
+    unset($view_mode['#options']['token']);
+  }
+
+  // If we're left with only one option, don't display the dropdown.
+  if (count($view_mode['#options']) < 2) {
+    $view_type = reset(array_keys($view_mode['#options']));
+    $view_mode = array(
+      '#type' => 'value',
+      '#value' => $view_type,
+    );
+  }
+
+  // Re-insert the view mode selection under the "General settings" fieldset.
+  $form['widget_settings']['view_mode'] = $view_mode;
+    
+  // Override the sizing on fields in the Fieldable Panel Panes modal for better UI
+  if (!empty($form['widget_settings']['title'])) {
+    $form['widget_settings']['title']['#size'] = '';
+  }
+  if (!empty($form['widget_settings']['link']['path'])) {
+    $form['widget_settings']['link']['path']['#size'] = '40';
+  }
+}
+
+/** 
+ * Implementation of hook_form_FORM_ID_alter()
+ *
+ * Provides customizations to the views content type settings form
+ */
+function panopoly_magic_form_views_content_views_panes_content_type_edit_form_alter(&$form, &$form_state, $form_id) {
+  // Get the configuration
+  $conf = $form_state['conf'];
+  
+  dsm($form);
+
+  // Add a widget title setting if views allows this to be customized
+  if (!empty($form['override_title'])) {
+    $form['override_title_markup']['#access'] = FALSE;
+    $form['override_title']['#access'] = FALSE;
+    $form['override_title_text']['#access'] = FALSE;
+    $form['exposed']['widget_title'] = array(
+      '#field_prefix' => t('Title'),
+      '#type' => 'textfield',
+      '#size' => '',
+      '#weight' => -100,
+      '#default_value' => (isset($conf['widget_title'])) ? $conf['widget_title'] : $form_state['view']->display_handler->options['title'],
+    );
+  }
+  
+  // Add an option to make the widget title a link if views allows this to happen
+  if (!empty($form['link_to_view']) && !empty($form['path'])) {
+    $form['link_to_view']['#title'] = t('Make title a link');
+    $form['link_to_view']['#description'] =  '';
+    $form['link_to_view']['#id'] = 'edit-link';
+    $form['exposed']['link_to_view'] = $form['link_to_view'];
+    unset($form['link_to_view']);
+    $form['path']['#description'] = t('The path for this link. This can be an internal Drupal path such as %add-node or an external URL such as %drupal. Enter %front to link to the front page.', array('%front' => '<front>', '%add-node' => 'node/add', '%drupal' => 'http://drupal.org'));
+    $form['path']['#title'] = '';
+    $form['path']['#dependency'] = array('edit-link' => array(1));
+    $form['exposed']['path'] = $form['path'];
+    unset($form['path']);
+  } 
+  elseif (empty($form['link_to_view']) && !empty($form['path'])) {
+    $form['exposed']['path'] = $form['path'];
+    unset($form['path']);
+  }
+  elseif (!empty($form['link_to_view']) && empty($form['path'])) {
+    $form['exposed']['link_to_view'] = $form['link_to_view'];
+    unset($form['link_to_view']);
+  }
+  
+  // Adjust the items per page and offset settings
+  if (!empty($form['items_per_page']) && !empty($form['offset'])) {
+    $form['items_per_page']['#field_prefix'] = t('Items to Show');
+    $form['items_per_page']['#title'] = '';
+    $form['items_per_page']['#description'] = t('Enter 0 to display all.');
+    $form['display_settings']['items_per_page'] = $form['items_per_page'];
+    unset($form['items_per_page']);
+    $form['offset']['#field_prefix'] = t('Items to Skip');
+    $form['offset']['#title'] = '';
+    $form['offset']['#description'] = t('Enter 0 to skip none.');
+    $form['offset']['#suffix'] = '<div class="clearfix"></div>';
+    $form['display_settings']['offset'] = $form['offset'];
+    unset($form['offset']);
+  }
+  elseif (!empty($form['items_per_page']) && empty($form['offset'])) {
+    $form['items_per_page']['#field_prefix'] = t('Items to Show');
+    $form['items_per_page']['#title'] = '';
+    $form['items_per_page']['#description'] = t('Enter 0 to display all.');
+    $form['items_per_page']['#suffix'] = '<div class="clearfix"></div>';
+    $form['display_settings']['items_per_page'] = $form['items_per_page'];
+    unset($form['items_per_page']);
+  }
+  elseif (empty($form['items_per_page']) && !empty($form['offset'])) {
+    $form['offset']['#field_prefix'] = t('Items to Skip');
+    $form['offset']['#title'] = '';
+    $form['offset']['#description'] = t('Enter 0 to skip none.');
+    $form['offset']['#suffix'] = '<div class="clearfix"></div>';
+    $form['display_settings']['offset'] = $form['offset'];
+    unset($form['offset']);
+  }
+  
+  // Adjust the sort ordering and sort by options
+  if (!empty($form['exposed']['sort_order']) && !empty($form['exposed']['sort_by'])) {
+    $form['exposed']['sort_order']['#title'] = t('Sort order');
+    $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
+    unset($form['exposed']['sort_order']);
+    $form['exposed']['sort_by']['#suffix'] = '<div class="clearfix"></div>';
+    $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
+    unset($form['exposed']['sort_by']);
+  }
+  elseif (!empty($form['exposed']['sort_order']) && empty($form['exposed']['sort_by'])) {
+    $form['exposed']['sort_order']['#title'] = t('Sort order');
+    $form['exposed']['']['#suffix'] = '<div class="clearfix"></div>';
+    $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
+    unset($form['exposed']['sort_order']);
+  }
+  elseif (empty($form['exposed']['sort_order']) && !empty($form['exposed']['sort_by'])) {
+    $form['exposed']['sort_by']['#suffix'] = '<div class="clearfix"></div>';
+    $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
+    unset($form['exposed']['sort_by']);
+  }
+
+  // Adjust the field setting options
+  if (isset($form['fields_override'])) {
+    $form['fields_override']['#title'] = t('Field Settings');
+    $form['fields_override']['#collapsible'] = FALSE;
+    foreach ($form['fields_override'] as &$field) {
+      if (is_array($field)) {
+        $field['#title'] = t('Display') . ' ' . $field['#title'];
+      }
+    }
+  }
+
+  // Determine if this is a node view. If so, add magic display type changer
+  $view_handler = $form_state['view']->display_handler;
+  if ($view_handler->options['row_plugin'] == 'node' && in_array($view_handler->options['style_plugin'], array('default'))) {
+
+    // Default to a field view
+    if (empty($conf['view_settings'])) {
+      $conf['view_settings'] = 'fields';
+    }
+
+    // Add information about the View Mode
+    $form['display_settings']['view_settings'] = array(
+      '#type' => 'radios',
+      '#prefix' => '<div class="view-settings-wrapper"><span class="field-prefix">' . t('Display Type') . '</span>',
+      '#suffix' => '</div>',
+      '#default_value' => $conf['view_settings'],
+      '#weight' => 10,
+      '#options' => array(
+        'fields' => t('Fields'),
+        'nodes' => t('Content'),
+      ),
+    );
+
+    // Update the field overrides to be dependent on the view settings selection.
+    $form['fields_override']['#states'] = array(
+      'visible' => array(
+        ':input[name="view_settings"]' => array('value' => 'fields'),
+      ),
+    );
+  }
+
+  // Add specific style options.
+  $form['content_settings']['view_mode'] = array(
+    '#type' => 'radios',
+    '#options' => panopoly_core_view_mode_options(),
+    '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="view_settings"]' => array('value' => 'nodes'),
+      ),
+    ),
+  );
+   
+  // Define a general settings fieldset if we have exposed values
+  if (!empty($form['exposed']) && count(element_children($form['exposed'])) > 0) {
+    $form['exposed']['#type'] = 'fieldset';
+    $form['exposed']['#title'] = t('General Settings');
+    $form['exposed']['#weight'] = -30;
+  }
+
+  // Define a context settings fieldset if we have exposed values
+  if (!empty($form['context']) && count(element_children($form['context'])) > 0) {
+    $form['context']['#type'] = 'fieldset';
+    $form['context']['#title'] = t('Context Settings');
+    $form['context']['#weight'] = -29;
+  }
+
+  // Define a content settings fieldset if we have exposed values
+  if (!empty($form['content_settings']) && count(element_children($form['content_settings'])) > 0) {
+    $form['content_settings']['#type'] = 'fieldset';
+    $form['content_settings']['#title'] = t('Content Settings');
+    $form['content_settings']['#weight'] = -28;
+  }
+  
+  // Define a display settings fieldset if we have display options
+  if (!empty($form['display_settings']) && count(element_children($form['display_settings'])) > 0) {
+    $form['display_settings']['#type'] = 'fieldset';
+    $form['display_settings']['#title'] = t('Display Settings');
+    $form['display_settings']['#weight'] = -27;
+  }
+
+  // Add a custom submit handler to our preview and submit option
+  $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
+  $form['buttons']['preview']['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
+}
+
+/** 
+ * Implementation of hook_form_FORM_ID_alter().
+ *
+ * Provides customization to panel pane style form
+ */
+function panopoly_magic_form_panels_edit_style_type_form_alter(&$form, &$form_state, $form_id) {
+
+  // Adding a fieldset around styling
+  $form['style'] = array('style' => $form['style']);
+  $form['style']['#type'] = 'fieldset';
+  $form['style']['#title'] = t('Style Settings');
+
+  // Unset options for which we have no need
+  unset($form['style']['#options']['block']);
+  unset($form['style']['#options']['rounded_corners']);
+  unset($form['style']['#options']['naked']);
+
+  // Better explain that "No Style" means "Default Pane Style"
+  // Move the default option to the top. Also I should have learned
+  // how to manage arrays in PHP.
+  if (!empty($form['style']['#options']['default'])) {
+    $form['style']['#options']['default'] = t('Default Pane Style');
+    $default = $form['style']['#options']['default'];
+    unset($form['style']['#options']['default']);
+    $form['style']['#options'] = array_reverse($form['style']['#options']);
+    $form['style']['#options']['default'] = $default;
+    $form['style']['#options'] = array_reverse($form['style']['#options']);
+  }
+
+  // Better title for the List Style region style plugin
+  if (!empty($form['style']['#options']['list'])) {
+    $form['style']['#options']['list'] = t('List Style');
+  }
+
+  // Improve the UI around region style selections
+  if (!empty($form['style']['#options'][0])) {
+    $form['style']['#options'][0] = t('Default Region Style');
+    if (empty($form['style']['#default_value']) || $form['style']['#default_value'] == '-1') {
+      $form['style']['#default_value'] = '0';
+    }
+    unset($form['style']['#options']['default']);
+  }
 
   // Move custom style option to bottom of list.
-  if ($form_id == 'panels_edit_style_type_form') {
-    if (!empty($form['style']['style']['#options']['stylizer'])) {
-      unset($form['style']['style']['#options']['stylizer']);
-      $form['style']['style']['#options']['stylizer'] = t('Custom Style');
-    }
+  if (!empty($form['style']['style']['#options']['stylizer'])) {
+    unset($form['style']['style']['#options']['stylizer']);
+    $form['style']['style']['#options']['stylizer'] = t('Custom Style');
   }
-
-  // Remove "rounded shadow" options.
-  if ($form_id == 'ctools_stylizer_edit_style_form_choose') {
-    if (!empty($form['style_base']['Basic-styles']['pane_rounded_shadow'])) {
-      unset($form['style_base']['Basic-styles']['pane_rounded_shadow']);
-    }
-
-    if (!empty($form['style_base']['Basic-styles']['region_rounded_shadow'])) {
-      unset($form['style_base']['Basic-styles']['region_rounded_shadow']);
-    }
-  }
-
 }
 
 /**
@@ -459,66 +458,75 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
  */
 function panopoly_magic_form_ctools_stylizer_edit_style_form_default_alter(&$form, &$form_state, $form_id) {
 
-   // Customize the stylizer settings page.
-  if ($form_id == 'ctools_stylizer_edit_style_form_default') {
+  // Customize the settings preview button.
+  $form['top box']['preview']['submit']['#attributes'] = array(
+    'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click'),
+  );
 
-    // Customize the settings preview button.
-    $form['top box']['preview']['submit']['#attributes'] = array(
-      'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click'),
-    );
+  $form['top box']['preview']['#weight'] = 5;
 
-    $form['top box']['preview']['#weight'] = 5;
+  // Create a vertical tab element.
+  $form['style_tabs'] = array('#type' => 'vertical_tabs');
 
-    // Create a vertical tab element.
-    $form['style_tabs'] = array('#type' => 'vertical_tabs');
+  // Strip out prefixes and suffixes to allow vertical tabs to format properly.
+  unset($form['font']['#prefix']);
+  unset($form['font']['#suffix']);
+  unset($form['border']['#prefix']);
+  unset($form['border']['#suffix']);
+  unset($form['padding']['#prefix']);
+  unset($form['padding']['#suffix']);
+  unset($form['top box']['color']['#prefix']);
+  unset($form['top box']['color']['#suffix']);
 
+  // Add group info to fieldsets.
+  $form['font']['#group'] = 'style_tabs';
+  $form['border']['#group'] = 'style_tabs';
+  $form['padding']['#group'] = 'style_tabs';
+  $form['top box']['color']['#group'] = 'style_tabs';
 
-    // Strip out prefixes and suffixes to allow vertical tabs to format properly.
-    unset($form['font']['#prefix']);
-    unset($form['font']['#suffix']);
-    unset($form['border']['#prefix']);
-    unset($form['border']['#suffix']);
-    unset($form['padding']['#prefix']);
-    unset($form['padding']['#suffix']);
-    unset($form['top box']['color']['#prefix']);
-    unset($form['top box']['color']['#suffix']);
-
-    // Add group info to fieldsets.
-    $form['font']['#group'] = 'style_tabs';
-    $form['border']['#group'] = 'style_tabs';
-    $form['padding']['#group'] = 'style_tabs';
-    $form['top box']['color']['#group'] = 'style_tabs';
-
-    // Conditionally process header_font and header_border as they are only present on some pages.
-    if (!empty($form['header_font'])) {
-      unset($form['header_font']['#prefix']);
-      unset($form['header_font']['#suffix']);
-      $form['header_font']['#group'] = 'style_tabs';
-    }
-
-    if (!empty($form['header_border'])) {
-      unset($form['header_border']['#prefix']);
-      unset($form['header_border']['#suffix']);
-      $form['header_border']['#group'] = 'style_tabs';
-    }
-
-    // Move reusable style options into their own fieldset.
-    if (!empty($form['panels'])) {
-      $form['general_settings'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('General Settings'),
-        '#group' => 'style_tabs',
-      );
-
-      $form['general_settings']['panels'] = $form['panels'];
-      unset($form['panels']);
-    }
-
-    // Autosubmit the form.
-    ctools_add_js('auto-submit');
-    $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
+  // Conditionally process header_font and header_border as they are only present on some pages.
+  if (!empty($form['header_font'])) {
+    unset($form['header_font']['#prefix']);
+    unset($form['header_font']['#suffix']);
+    $form['header_font']['#group'] = 'style_tabs';
   }
 
+  if (!empty($form['header_border'])) {
+    unset($form['header_border']['#prefix']);
+    unset($form['header_border']['#suffix']);
+    $form['header_border']['#group'] = 'style_tabs';
+  }
+
+  // Move reusable style options into their own fieldset.
+  if (!empty($form['panels'])) {
+    $form['general_settings'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('General Settings'),
+      '#group' => 'style_tabs',
+    );
+    $form['general_settings']['panels'] = $form['panels'];
+    unset($form['panels']);
+  }
+
+  // Autosubmit the form.
+  ctools_add_js('auto-submit');
+  $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ *
+ * Provide customizations for the ctools stylizer edit choose form.
+ */
+function panopoly_magic_form_ctools_stylizer_edit_style_form_choose_alter(&$form, &$form_state, $form_id) {
+
+  // Remove the rounded corners options
+  if (!empty($form['style_base']['Basic-styles']['pane_rounded_shadow'])) {
+    unset($form['style_base']['Basic-styles']['pane_rounded_shadow']);
+  }
+  if (!empty($form['style_base']['Basic-styles']['region_rounded_shadow'])) {
+    unset($form['style_base']['Basic-styles']['region_rounded_shadow']);
+  }
 }
 
 /**
@@ -643,18 +651,6 @@ function panopoly_magic_views_pre_render(&$view) {
 }
 
 /**
- * Implements hook_module_implements_alter()
- */
-function panopoly_magic_module_implements_alter(&$implementations, $hook) {
-  if ($hook == 'form_alter') {
-    $group = $implementations['panopoly_magic'];
-    unset($implementations['panopoly_magic']);
-    $implementations['panopoly_magic'] = $group;
-  }
-}
-
-
-/**
  * Preprocess the panels_ipe_toolbar to change text for IPE buttons
  */
 function panopoly_magic_preprocess_panels_ipe_toolbar(&$vars) {
@@ -715,7 +711,7 @@ function panopoly_magic_process_panels_add_content_modal(&$vars) {
       $vars['columns'][$which] = '';
     }
 
-    // Readd the column data with our preview functionality
+    // Read the column data with our preview functionality
     $count = 0;
     foreach ($titles as $title) {
       $which = floor($count++ / $col_size) + 1;
