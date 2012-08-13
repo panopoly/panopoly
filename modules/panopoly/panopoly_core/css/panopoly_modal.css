@@ -8,8 +8,9 @@
   max-width: 98%;
 }
 
+#modal-content .form-item-exposed-widget-title input,
 #modal-content .form-item-title input {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 #modalContent div.ctools-modal-content {
