@@ -106,7 +106,12 @@ function panopoly_widgets_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'basic_file',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'value' => 'Salsify napa cabbage azuki bean mung bean kakadu plum onion garbanzo horseradish lettuce jícama water chestnut gumbo turnip courgette winter purslane cress squash. ',
+          'format' => 'plain_text',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -367,7 +372,13 @@ function panopoly_widgets_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'image',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'summary' => '',
+          'value' => 'Green bean beet greens water spinach bitterleaf dandelion summer purslane plantain. Brussels sprout dulse kohlrabi cabbage napa cabbage winter purslane garlic mustard water spinach tigernut pea asparagus jícama wakame ricebean.',
+          'format' => 'plain_text',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -392,7 +403,7 @@ function panopoly_widgets_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'rows' => '5',
+          'rows' => '3',
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
@@ -425,7 +436,7 @@ function panopoly_widgets_field_default_fields() {
       'locked' => '0',
       'module' => 'image',
       'settings' => array(
-        'default_image' => 0,
+        'default_image' => '45',
         'uri_scheme' => 'public',
       ),
       'translatable' => '0',
@@ -506,9 +517,13 @@ function panopoly_widgets_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'map',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'value' => '717 California Street, San Francisco, California 94108',
+        ),
+      ),
       'deleted' => '0',
-      'description' => '',
+      'description' => 'The street address of the location you wish to map. This widget will contact Google and try to do its best to create a map!',
       'display' => array(
         'default' => array(
           'label' => 'hidden',
@@ -547,6 +562,72 @@ function panopoly_widgets_field_default_fields() {
     ),
   );
 
+  // Exported field: 'fieldable_panels_pane-map-field_map_information'.
+  $fields['fieldable_panels_pane-map-field_map_information'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_map_information',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'map',
+      'default_value' => array(
+        0 => array(
+          'value' => 'Zucchini gumbo grape salad watercress sea lettuce rutabaga chard bell pepper beetroot chickweed peanut garlic.',
+          'format' => 'plain_text',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '1',
+        ),
+      ),
+      'entity_type' => 'fieldable_panels_pane',
+      'field_name' => 'field_map_information',
+      'label' => 'Information',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '3',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '-3',
+      ),
+    ),
+  );
+
   // Exported field: 'fieldable_panels_pane-quick_links-field_quick_links_links'.
   $fields['fieldable_panels_pane-quick_links-field_quick_links_links'] = array(
     'field_config' => array(
@@ -579,7 +660,12 @@ function panopoly_widgets_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'quick_links',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'title' => 'Kombu collard greens',
+          'url' => 'http://drupal.org',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -779,7 +865,14 @@ function panopoly_widgets_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'spotlight',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'title' => 'Veggies sunt bona vobis!',
+          'link' => 'http://drupal.org',
+          'fid' => '46',
+          'description' => 'Kakadu plum cucumber soko prairie turnip cress squash tatsoi nori aubergine asparagus endive dandelion beetroot lettuce broccoli water chestnut brussels sprout. ',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -896,21 +989,18 @@ function panopoly_widgets_field_default_fields() {
       'default_value' => array(
         0 => array(
           'tablefield' => array(
-            'cell_0_0' => '',
-            'cell_0_1' => '',
-            'cell_0_2' => '',
-            'cell_1_0' => '',
-            'cell_1_1' => '',
-            'cell_1_2' => '',
-            'cell_2_0' => '',
-            'cell_2_1' => '',
-            'cell_2_2' => '',
+            'cell_0_0' => 'Vegetable One',
+            'cell_0_1' => 'Vegeteable Two',
+            'cell_1_0' => 'brussels sprouts',
+            'cell_1_1' => 'cucumber',
+            'cell_2_0' => 'spinach',
+            'cell_2_1' => 'carrots',
             'import' => array(
               'rebuild_field_basic_table_table_0' => 'Upload CSV',
               'tablefield_csv_field_basic_table_table_0' => '',
             ),
             'rebuild' => array(
-              'count_cols' => '3',
+              'count_cols' => '2',
               'count_rows' => '3',
               'rebuild' => 'Rebuild Table',
             ),
@@ -974,7 +1064,12 @@ function panopoly_widgets_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'text',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'value' => 'Bok choy potato courgette beet greens squash scallion avocado fennel soko. Radish water chestnut tomato sweet pepper soybean quandong. Sweet pepper collard greens courgette black-eyed pea kohlrabi bunya nuts parsley kakadu plum tomatillo coriander dandelion caulie. Pea sprouts onion chickweed garbanzo plantain cress kakadu plum bamboo shoot celery dandelion. Carrot kohlrabi parsnip lotus root scallion chickpea welsh onion spring onion broccoli rabe broccoli horseradish fennel caulie desert raisin cucumber. ',
+          'format' => 'plain_text',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -1062,6 +1157,7 @@ function panopoly_widgets_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 0,
+            'vimeo' => 'vimeo',
             'youtube' => 'youtube',
           ),
           'allowed_types' => array(
@@ -1072,7 +1168,9 @@ function panopoly_widgets_field_default_fields() {
           ),
           'browser_plugins' => array(
             'library' => 0,
-            'media_default--media_browser_1' => 0,
+            'media_default--media_browser_1' => 'media_default--media_browser_1',
+            'media_default--media_browser_my_files' => 0,
+            'media_internet' => 'media_internet',
             'upload' => 0,
           ),
           'progress_indicator' => 'throbber',
@@ -1092,12 +1190,14 @@ function panopoly_widgets_field_default_fields() {
   t('File');
   t('How long (in seconds) before the spotlight rotates to the next image.');
   t('Image');
+  t('Information');
   t('Items');
   t('Links');
   t('Quote');
   t('Rotation Time');
   t('Table');
   t('Text');
+  t('The street address of the location you wish to map. This widget will contact Google and try to do its best to create a map!');
   t('Video');
   t('View Mode');
 

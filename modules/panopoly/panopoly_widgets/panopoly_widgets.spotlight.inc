@@ -285,8 +285,13 @@ function panopoly_widgets_field_prepare_view($entity_type, $entities, $field, $i
 function theme_panopoly_spotlight_view($variables) {
   $title = $variables['items']['title'];
   $description = $variables['items']['description'];
-  $image_entity = entity_uuid_load('file', array($variables['items']['uuid']));
-  $image = file_load(array_pop($image_entity)->fid);
+  if (module_exists('uuid')) {
+    $image_entity = entity_uuid_load('file', array($variables['items']['uuid']));
+    $image = file_load(array_pop($image_entity)->fid);
+  }
+  else {
+    $image = (object) $variables['items'];
+  }
   $link = $variables['items']['link'];
   $settings = $variables['settings'];
 
