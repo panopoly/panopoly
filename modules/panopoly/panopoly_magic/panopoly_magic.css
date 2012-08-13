@@ -123,6 +123,21 @@ div.ctools-ajaxing {
   margin-left: 5px;
 }
 
+/* Handle the Header Type Setting Element */
+#modal-content .form-item-header-type label {
+  display:inline;
+  clear: none;
+  font-weight: normal;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+#modal-content .form-item-header-type select {
+  display: inline;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
 #modal-content .view-settings-wrapper .field-prefix {
   padding-right: 5px;
 }
