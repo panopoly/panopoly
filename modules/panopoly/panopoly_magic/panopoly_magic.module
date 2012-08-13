@@ -452,8 +452,16 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
   }
 
+}
 
-  // Customize the stylizer settings page.
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ *
+ * Provide customizations for the ctools stylizer edit form.
+ */
+function panopoly_magic_form_ctools_stylizer_edit_style_form_default_alter(&$form, &$form_state, $form_id) {
+
+   // Customize the stylizer settings page.
   if ($form_id == 'ctools_stylizer_edit_style_form_default') {
 
     // Customize the settings preview button.
@@ -463,11 +471,45 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
     $form['top box']['preview']['#weight'] = 5;
 
+    // Create a vertical tab element.
+    $form['style_tabs'] = array('#type' => 'vertical_tabs');
+
+
+    // Strip out prefixes and suffixes to allow vertical tabs to format properly.
+    unset($form['font']['#prefix']);
+    unset($form['font']['#suffix']);
+    unset($form['border']['#prefix']);
+    unset($form['border']['#suffix']);
+    unset($form['padding']['#prefix']);
+    unset($form['padding']['#suffix']);
+    unset($form['top box']['color']['#prefix']);
+    unset($form['top box']['color']['#suffix']);
+
+    // Add group info to fieldsets.
+    $form['font']['#group'] = 'style_tabs';
+    $form['border']['#group'] = 'style_tabs';
+    $form['padding']['#group'] = 'style_tabs';
+    $form['top box']['color']['#group'] = 'style_tabs';
+
+    // Conditionally process header_font and header_border as they are only present on some pages.
+    if (!empty($form['header_font'])) {
+      unset($form['header_font']['#prefix']);
+      unset($form['header_font']['#suffix']);
+      $form['header_font']['#group'] = 'style_tabs';
+    }
+
+    if (!empty($form['header_border'])) {
+      unset($form['header_border']['#prefix']);
+      unset($form['header_border']['#suffix']);
+      $form['header_border']['#group'] = 'style_tabs';
+    }
+
     // Move reusable style options into their own fieldset.
     if (!empty($form['panels'])) {
       $form['general_settings'] = array(
         '#type' => 'fieldset',
         '#title' => t('General Settings'),
+        '#group' => 'style_tabs',
       );
 
       $form['general_settings']['panels'] = $form['panels'];
@@ -478,6 +520,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     ctools_add_js('auto-submit');
     $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
   }
+
 }
 
 /**
