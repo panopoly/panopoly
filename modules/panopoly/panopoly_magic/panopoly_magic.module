@@ -78,6 +78,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Make sure this will not be set as reusable
       $form_state['values']['reusable'] = NULL;
+      
+      // Do not run this through validation since it creates a wierd experience
+      $form['#validate'] = array();
 
       // Run entity information through standard submission form
       fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
@@ -200,7 +203,9 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
   unset($form['view_mode']);
 
   // Add custom validation function
-  $form['reusable']['admin_title']['#element_validate'][] = 'panopoly_magic_reusable_entity_validate';
+  if ($form_state['clicked_button']['#value'] != 'Update Preview') {
+    $form['widget_settings']['reusable']['admin_title']['#element_validate'][] = 'panopoly_magic_reusable_entity_validate';
+  }
 
   // Remove "tokens" from the list of available view modes.
   if (!empty($view_mode['#options']['token'])) {
@@ -219,12 +224,31 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
   // Re-insert the view mode selection under the "General settings" fieldset.
   $form['widget_settings']['view_mode'] = $view_mode;
     
-  // Override the sizing on fields in the Fieldable Panel Panes modal for better UI
+  // Improving the general title setting
   if (!empty($form['widget_settings']['title'])) {
     $form['widget_settings']['title']['#size'] = '';
   }
-  if (!empty($form['widget_settings']['link']['path'])) {
-    $form['widget_settings']['link']['path']['#size'] = '40';
+  
+  // Improving the link Options
+  if (!empty($form['widget_settings']['link'])) {
+    $form['widget_settings']['link']['path']['#size'] = '';
+    $form['widget_settings']['link']['path']['#field_prefix'] =  $form['widget_settings']['link']['path']['#title'];
+    $form['widget_settings']['link']['path']['#title'] = '';
+    $form['widget_settings']['link']['path']['#description'] = t('The URL or Drupal path from which to build the link.');
+    $form['widget_settings']['link']['link']['#description'] = '';
+  }
+  
+  // Move the reusable option to the general settings
+  if (!empty($form['reusable'])) {
+    $form['reusable']['#type'] = '';
+    $form['reusable']['#title'] = '';
+    $form['reusable']['reusable']['#title'] = t('Make this reusable');
+    $form['reusable']['admin_title']['#field_prefix'] = t('Admin Title');
+    $form['reusable']['admin_title']['#title'] = '';
+    $form['reusable']['admin_title']['#size'] = '';
+    $form['reusable']['admin_title']['#description'] = '';
+    $form['widget_settings']['reusable'] = $form['reusable'];
+    unset($form['reusable']);
   }
 }
 
@@ -541,7 +565,7 @@ function panopoly_magic_form_ctools_stylizer_edit_style_form_default_alter(&$for
     $form['header_border']['#group'] = 'style_tabs';
   }
 
-  // Move reusable style options into their own fieldset.
+  // Move panel setting options into their own fieldset.
   if (!empty($form['panels'])) {
     $form['general_settings'] = array(
       '#type' => 'fieldset',
