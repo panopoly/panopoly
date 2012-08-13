@@ -14,6 +14,10 @@ table.mceLayout {
   font-size: 1em;
 }
 
+.cirkuitSkin table.mceToolbar {
+  width: auto;
+}
+
 .o2k7Skin table.mceLayout .mceListBox {
   padding-left: 0;
 }
@@ -24,6 +28,10 @@ table.mceLayout {
 
 .cirkuitSkin td.mceIframeContainer {
   border-bottom: 0;
+}
+
+.cirkuitSkin table tbody {
+  width: auto;
 }
 
 .mceStatusbar > div {
