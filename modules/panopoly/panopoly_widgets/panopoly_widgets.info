@@ -46,7 +46,6 @@ features[field][] = fieldable_panels_pane-quote-field_quote_quote
 features[field][] = fieldable_panels_pane-spotlight-field_basic_spotlight_items
 features[field][] = fieldable_panels_pane-spotlight-field_spotlight_rotation_time
 features[field][] = fieldable_panels_pane-table-field_basic_table_table
-features[field][] = fieldable_panels_pane-text-field_basic_text_link
 features[field][] = fieldable_panels_pane-text-field_basic_text_text
 features[field][] = fieldable_panels_pane-video-field_video_video
 features[file_display][] = video__default__media_vimeo_video

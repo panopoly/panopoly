@@ -945,83 +945,6 @@ function panopoly_widgets_field_default_fields() {
     ),
   );
 
-  // Exported field: 'fieldable_panels_pane-text-field_basic_text_link'.
-  $fields['fieldable_panels_pane-text-field_basic_text_link'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_basic_text_link',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'locked' => '0',
-      'module' => 'link',
-      'settings' => array(
-        'attributes' => array(
-          'class' => '',
-          'rel' => '',
-          'target' => 'default',
-        ),
-        'display' => array(
-          'url_cutoff' => 80,
-        ),
-        'enable_tokens' => 1,
-        'title' => 'optional',
-        'title_maxlength' => 128,
-        'title_value' => '',
-        'url' => 0,
-      ),
-      'translatable' => '0',
-      'type' => 'link_field',
-    ),
-    'field_instance' => array(
-      'bundle' => 'text',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'link',
-          'settings' => array(),
-          'type' => 'link_default',
-          'weight' => 1,
-        ),
-      ),
-      'entity_type' => 'fieldable_panels_pane',
-      'field_name' => 'field_basic_text_link',
-      'label' => 'Read More Link',
-      'required' => 0,
-      'settings' => array(
-        'attributes' => array(
-          'class' => 'read-more',
-          'configurable_title' => 0,
-          'rel' => '',
-          'target' => 'default',
-          'title' => '',
-        ),
-        'display' => array(
-          'url_cutoff' => '80',
-        ),
-        'enable_tokens' => 1,
-        'title' => 'value',
-        'title_maxlength' => '128',
-        'title_value' => 'Read more',
-        'url' => 0,
-        'user_register_form' => FALSE,
-        'validate_url' => 1,
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_field',
-        'weight' => '-3',
-      ),
-    ),
-  );
-
   // Exported field: 'fieldable_panels_pane-text-field_basic_text_text'.
   $fields['fieldable_panels_pane-text-field_basic_text_text'] = array(
     'field_config' => array(
@@ -1091,7 +1014,14 @@ function panopoly_widgets_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_video_video',
-      'foreign keys' => array(),
+      'foreign keys' => array(
+        'file_managed' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
       'indexes' => array(
         'fid' => array(
           0 => 'fid',
@@ -1165,7 +1095,6 @@ function panopoly_widgets_field_default_fields() {
   t('Items');
   t('Links');
   t('Quote');
-  t('Read More Link');
   t('Rotation Time');
   t('Table');
   t('Text');
