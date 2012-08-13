@@ -23,7 +23,7 @@ function panopoly_core_panelizer_defaults() {
   $panelizer->pipeline = 'ipe';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
-  $panelizer->did = 0;
+  $panelizer->did = 4;
   $panelizer->access = array();
   $panelizer->view_mode = 'page_manager';
   $panelizer->css_class = '';
@@ -62,9 +62,11 @@ function panopoly_core_panelizer_defaults() {
       ),
       'exposed' => array(
         'widget_title' => '',
+        'sort_by' => 'created',
+        'sort_order' => 'DESC',
       ),
       'context' => array(
-        0 => '',
+        0 => 'panelizer',
       ),
       'override_title' => '',
       'override_title_text' => '',
