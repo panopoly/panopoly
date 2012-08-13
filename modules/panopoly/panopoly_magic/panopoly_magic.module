@@ -184,12 +184,8 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
     // Better position context settings
     if (!empty($form['context'])) {
-      $form['context_settings'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Context Settings'),
-      );
-      $form['context_settings']['context'] = $form['context'];
-      unset($form['context']);
+      $form['context']['#type'] = 'fieldset';
+      $form['context']['#title'] = t('Context Settings');
     }
 
     // Better position page settings
@@ -339,6 +335,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     );
 
     // Override context settings if there is only one option.
+    /* TODO - something funky is happening here...
     if (!empty($form['context_settings']['context'])) {
       $show_fieldset = FALSE;
       foreach (element_children($form['context_settings']['context']) as $child) {
@@ -356,6 +353,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         $form['context_settings']['#type'] = 'hidden';
       }
     }
+    */
 
     // Add a custom submit handler to our preview and submit option
     $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
