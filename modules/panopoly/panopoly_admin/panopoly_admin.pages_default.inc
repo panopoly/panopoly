@@ -604,8 +604,8 @@ function panopoly_admin_default_page_manager_pages() {
     $pane = new stdClass();
     $pane->pid = 'new-7';
     $pane->panel = 'sidebar';
-    $pane->type = 'categories';
-    $pane->subtype = 'categories';
+    $pane->type = 'taxonomy';
+    $pane->subtype = 'taxonomy';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
