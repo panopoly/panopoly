@@ -91,11 +91,23 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $pane->subtype = 'vid:' . $form_state['entity']->vid;
     }
 
-    // Make some adjustments based on the way the sort ordering is being pased in
-    // TODO - figure out why this is needed
+    // Make some adjustments based on the way the data is being expected
+    // TODO - this should not be necessary, so find out why!
     if (!empty($form_state['input']['sort_by'])) {
       $form_state['input']['exposed']['sort_by'] = $form_state['input']['sort_by'];
       $form_state['input']['exposed']['sort_order'] = $form_state['input']['sort_order'];
+    }
+    if (!empty($form_state['input']['exposed']['more_link'])) {
+      $form_state['input']['more_link'] = $form_state['input']['exposed']['more_link'];
+      $form_state['input']['path'] = $form_state['input']['exposed']['path'];
+    }
+    if (!empty($form_state['input']['exposed']['link_to_view'])) {
+      $form_state['input']['link_to_view'] = $form_state['input']['exposed']['link_to_view'];
+      $form_state['input']['path'] = $form_state['input']['exposed']['path'];
+    }
+    if (!empty($form_state['input']['exposed']['use_pager'])) {
+      $form_state['input']['use_pager'] = $form_state['input']['exposed']['use_pager'];
+      $form_state['input']['offset'] = $form_state['input']['exposed']['offset'];
     }
 
     // Set the configuration and determine the content for the pane
@@ -246,19 +258,33 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['link_to_view']['#id'] = 'edit-link';
     $form['exposed']['link_to_view'] = $form['link_to_view'];
     unset($form['link_to_view']);
-    $form['path']['#description'] = t('The path for this link. This can be an internal Drupal path such as %add-node or an external URL such as %drupal. Enter %front to link to the front page.', array('%front' => '<front>', '%add-node' => 'node/add', '%drupal' => 'http://drupal.org'));
-    $form['path']['#title'] = '';
-    $form['path']['#dependency'] = array('edit-link' => array(1));
-    $form['exposed']['path'] = $form['path'];
-    unset($form['path']);
   } 
-  elseif (empty($form['link_to_view']) && !empty($form['path'])) {
+  
+  // Add an option to make the more link available if views allows this to happen
+  if (!empty($form['more_link'])) {
+    $form['more_link']['#id'] = 'more-link';
+    $form['more_link']['#description'] = '';
+    $form['exposed']['more_link'] = $form['more_link'];
+    unset($form['more_link']);
+  }
+  
+    
+  // Update the field settings for pagers
+  if (!empty($form['use_pager']) && !empty($form['pager_id'])) {
+    $form['use_pager']['#prefix'] = '<div class="form-item container-inline">';
+    $form['exposed']['use_pager'] = $form['use_pager'];
+    $form['exposed']['pager_id'] = $form['pager_id'];
+    unset($form['use_pager']);
+    unset($form['pager_id']);
+  }
+  
+  // Handle the path value that views gives us
+  if (!empty($form['path'])) {
+    $form['path']['#description'] = t('The URL path used for linking and paging purposes. Leave blank to use the current page.');
+    $form['path']['#title'] = '';
+    $form['path']['#dependency'] = array('edit-link' => array(1), 'more-link' => array(1), 'use-pager-checkbox' => array(1));
     $form['exposed']['path'] = $form['path'];
     unset($form['path']);
-  }
-  elseif (!empty($form['link_to_view']) && empty($form['path'])) {
-    $form['exposed']['link_to_view'] = $form['link_to_view'];
-    unset($form['link_to_view']);
   }
   
   // Adjust the items per page and offset settings
@@ -565,7 +591,7 @@ function panopoly_magic_reusable_entity_validate($element, &$form_state, $form) 
  */
 function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
   $form_state['conf']['view_mode'] = (isset($form_state['values']['view_mode'])) ? $form_state['values']['view_mode'] : NULL;
- 
+
   // Set the $conf['widget_title'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
   // and sometimes it doesn't.
@@ -618,6 +644,84 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
     $form_state['conf']['exposed']['sort_order'] = NULL;
   } 
 
+  // Set the $conf['use_pager'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't.
+  if (isset($form_state['values']['display_settings']['use_pager'])) {
+    $form_state['conf']['use_pager'] = $form_state['values']['display_settings']['use_pager'];
+  } 
+  elseif (isset($form_state['values']['use_pager'])) {
+    $form_state['conf']['use_pager'] = $form_state['values']['use_pager'];
+  }   
+  else {
+    $form_state['conf']['use_pager'] = NULL;
+  } 
+  
+  // Set the $conf['pager_id'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't.
+  if (isset($form_state['values']['display_settings']['pager_id'])) {
+    $form_state['conf']['pager_id'] = $form_state['values']['display_settings']['pager_id'];
+  } 
+  elseif (isset($form_state['values']['pager_id'])) {
+    $form_state['conf']['pager_id'] = $form_state['values']['pager_id'];
+  }   
+  else {
+    $form_state['conf']['pager_id'] = NULL;
+  } 
+
+  // Set the $conf['offset'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't.
+  if (isset($form_state['values']['display_settings']['offset'])) {
+    $form_state['conf']['offset'] = $form_state['values']['display_settings']['offset'];
+  } 
+  elseif (isset($form_state['values']['offset'])) {
+    $form_state['conf']['offset'] = $form_state['values']['offset'];
+  }   
+  else {
+    $form_state['conf']['offset'] = NULL;
+  } 
+
+  // Set the $conf['link_to_view'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't.
+  if (isset($form_state['values']['exposed']['link_to_view'])) {
+    $form_state['conf']['link_to_view'] = $form_state['values']['exposed']['link_to_view'];
+  } 
+  elseif (isset($form_state['values']['link_to_view'])) {
+    $form_state['conf']['link_to_view'] = $form_state['values']['link_to_view'];
+  }   
+  else {
+    $form_state['conf']['link_to_view'] = NULL;
+  } 
+  
+  // Set the $conf['more_link'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't.
+  if (isset($form_state['values']['exposed']['more_link'])) {
+    $form_state['conf']['more_link'] = $form_state['values']['exposed']['more_link'];
+  } 
+  elseif (isset($form_state['values']['more_link'])) {
+    $form_state['conf']['more_link'] = $form_state['values']['more_link'];
+  }   
+  else {
+    $form_state['conf']['more_link'] = NULL;
+  } 
+
+  // Set the $conf['path'] value. We need to do this a
+  // little funky since sometimes it comes inside of $form_state['values']
+  // and sometimes it doesn't.
+  if (isset($form_state['values']['exposed']['path'])) {
+    $form_state['conf']['path'] = $form_state['values']['exposed']['path'];
+  } 
+  elseif (isset($form_state['values']['link_to_view'])) {
+    $form_state['conf']['path'] = $form_state['values']['path'];
+  }   
+  else {
+    $form_state['conf']['path'] = NULL;
+  } 
+  
   // Save the view settings field is present in the data.
   if (isset($form_state['values']['view_settings'])) {
     $form_state['conf']['view_settings'] = $form_state['values']['view_settings'];

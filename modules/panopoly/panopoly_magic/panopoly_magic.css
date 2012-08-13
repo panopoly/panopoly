@@ -98,12 +98,26 @@ div.ctools-ajaxing {
 #modal-content .form-item-sort-order, 
 #modal-content .form-item-sort-by {
   float: left;
-  width: 50%;
+  width: 175px;
 }
 
 #modal-content .form-item-offset,
 #modal-content .form-item-sort-order {
   clear: none;
+}
+
+#modal-content .form-item-sort-order label,
+#modal-content .form-item-sort-by label {
+  float: left;
+  font-weight: normal;
+  margin-right: 5px;
+  width: auto;
+  margin-top: 3px;
+  font-size: 100%;
+}
+
+#modal-content .form-item-exposed-pager-id label {
+  font-weight: normal;
 }
 
 #modal-content #edit-context label {
