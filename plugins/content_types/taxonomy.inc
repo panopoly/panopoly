@@ -14,7 +14,7 @@ $plugin = array(
   */
 function panopoly_admin_taxonomy_content_type_render($subtype, $conf, $panel_args, $context) {
   $pane = new stdClass();
-  $pane->title = t('Categories');
+  $pane->title = t('Taxonomy');
 
   // Build configuration
   $categories = array();
