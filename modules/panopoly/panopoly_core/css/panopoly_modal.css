@@ -295,6 +295,7 @@
   clear: right;
   width: 48%;
   margin-left: 1em;
+  text-align: right;
 }
 
 #modal-content .widget-preview-title {
