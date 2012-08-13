@@ -3,7 +3,7 @@
 include_once('panopoly_magic.features.inc');
 
 /**
- * Implementation of hook_apps_app_info()
+ * Implements hook_apps_app_info()
  */
 function panopoly_magic_apps_app_info() {
   return array(
@@ -33,14 +33,14 @@ function panopoly_magic_configure_form($form, &$form_state) {
 }
 
 /**
- * Implementation of hook_form_alter()
+ * Implements hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
   /**
    * Globally remove the "Cancel" button from Panel pane edit forms
    */
-  if (strpos($form_id, 'content_type_edit_form')) { 
+  if (strpos($form_id, 'content_type_edit_form')) {
     $form['buttons']['cancel']['#access'] = FALSE;
   }
 
@@ -67,9 +67,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $style = NULL;
     }
 
-    // EXPERIEMENTAL: Handling Saving a Fieldable Panel Pane To Create a Live Preview. The trick 
+    // EXPERIEMENTAL: Handling Saving a Fieldable Panel Pane To Create a Live Preview. The trick
     // here is to make sure we properly save a version to get a vid, but don't make it the real one.
-    // NOTE - I doubt this will be very good for performance. Let's call it RC1. 
+    // NOTE - I doubt this will be very good for performance. Let's call it RC1.
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && $form_state['clicked_button']['#value'] == 'Update Preview') {
 
       // Make sure this will not be set as reusable
@@ -232,7 +232,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Switch all exposed filters to use field_prefix display
-    foreach($form['exposed'] as $filter => $filter_array) {
+    foreach ($form['exposed'] as $filter => $filter_array) {
       if (!empty($form['exposed'][$filter]['#title']) && empty($form['exposed'][$filter]['#field_prefix'])) {
         $form['exposed'][$filter]['#field_prefix'] = $form['exposed'][$filter]['#title'];
         unset($form['exposed'][$filter]['#title']);
@@ -240,7 +240,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Switch all display_settings filters to use field_prefix display
-    foreach($form['display_settings'] as $filter => $filter_array) {
+    foreach ($form['display_settings'] as $filter => $filter_array) {
       if (!empty($form['display_settings'][$filter]['#title']) && empty($form['display_settings'][$filter]['#field_prefix'])) {
         $form['display_settings'][$filter]['#field_prefix'] = $form['display_settings'][$filter]['#title'];
         unset($form['display_settings'][$filter]['#title']);
@@ -260,7 +260,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if (isset($form['fields_override'])) {
       $form['fields_override']['#title'] = t('Field Settings');
       $form['fields_override']['#collapsible'] = FALSE;
-      foreach($form['fields_override'] as &$field) {
+      foreach ($form['fields_override'] as &$field) {
         if (is_array($field)) {
           $field['#title'] = t('Display') . ' ' . $field['#title'];
         }
@@ -336,7 +336,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
           ':input[name="view_settings"]' => array('value' => 'nodes'),
         ),
       ),
-    );  
+    );
 
     // Override context settings if there is only one option.
     if (!empty($form['context_settings']['context'])) {
@@ -432,7 +432,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
   /**
    * Customize stylizer configuration forms.
    */
-  
+
   // Move custom style option to bottom of list.
   if ($form_id == 'panels_edit_style_type_form') {
     if (!empty($form['style']['style']['#options']['stylizer'])) {
@@ -544,7 +544,7 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
 
   // Set the $conf['widget_title'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't. 
+  // and sometimes it doesn't.
   if (isset($form_state['values']['exposed']['widget_title'])) {
     $form_state['conf']['widget_title'] = $form_state['values']['exposed']['widget_title'];
   }
@@ -557,7 +557,7 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
 
   // Set the $conf['items_per_page'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't. 
+  // and sometimes it doesn't.
   if (isset($form_state['values']['exposed']['items_per_page'])) {
     $form_state['conf']['items_per_page'] = $form_state['values']['exposed']['items_per_page'];
   }
@@ -570,7 +570,7 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
 
   // Set the $conf['sort_by'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't. 
+  // and sometimes it doesn't.
   if (isset($form_state['values']['display_settings']['sort_by'])) {
     $form_state['conf']['exposed']['sort_by'] = $form_state['values']['display_settings']['sort_by'];
   } 
@@ -583,7 +583,7 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
 
   // Set the $conf['sort_order'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't. 
+  // and sometimes it doesn't.
   if (isset($form_state['values']['display_settings']['sort_order'])) {
     $form_state['conf']['exposed']['sort_order'] = $form_state['values']['display_settings']['sort_order'];
   } 
@@ -601,7 +601,7 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
 }
 
 /**
- * Implementation of hook_views_pre_render()
+ * Implements hook_views_pre_render()
  */
 function panopoly_magic_views_pre_render(&$view) {
   if (isset($view->display_handler->options['pane_conf'])) {
@@ -617,7 +617,7 @@ function panopoly_magic_views_pre_render(&$view) {
 
     // Determine that this was previously a field view, which has been overridden to a node view in the pane config.
     if (!empty($conf['view_settings']) && $conf['view_settings'] == 'nodes' && empty($view->style_plugin->row_plugin->nodes)) {
-     
+
       // Reconstruct the nodes array which a node row style expects.
       if (!empty($view->result)) {
         $nids = array();
@@ -645,7 +645,7 @@ function panopoly_magic_views_pre_render(&$view) {
 }
 
 /**
- * Implementation of hook_module_implements_alter()
+ * Implements hook_module_implements_alter()
  */
 function panopoly_magic_module_implements_alter(&$implementations, $hook) {
   if ($hook == 'form_alter') {
@@ -660,9 +660,9 @@ function panopoly_magic_module_implements_alter(&$implementations, $hook) {
  * Preprocess the panels_ipe_toolbar to change text for IPE buttons
  */
 function panopoly_magic_preprocess_panels_ipe_toolbar(&$vars) {
-  foreach($vars['buttons'] as $panel_context_id => $panel_context) {
-    foreach($panel_context as $button_name => $button) {
-      switch($button_name) {
+  foreach ($vars['buttons'] as $panel_context_id => $panel_context) {
+    foreach ($panel_context as $button_name => $button) {
+      switch ($button_name) {
         case 'panels-ipe-startedit':
           $vars['buttons'][$panel_context_id][$button_name]['#title'] = 'Customize this page';
           break;
@@ -680,7 +680,7 @@ function panopoly_magic_preprocess_panels_ipe_toolbar(&$vars) {
 function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
   // Generate the pane preview
   if (!empty($vars['categories'][$vars['category']]['content'])) {
-    foreach($vars['categories'][$vars['category']]['content'] as &$plugin) {
+    foreach ($vars['categories'][$vars['category']]['content'] as &$plugin) {
       $pane = panels_new_pane($plugin['type_name'], $plugin['subtype_name'], TRUE);
       $display = $vars['renderer']->display;
       $context = $vars['renderer']->display->context;
@@ -722,7 +722,7 @@ function panopoly_magic_process_panels_add_content_modal(&$vars) {
     foreach ($titles as $title) {
       $which = floor($count++ / $col_size) + 1;
       $content[$title]['title'] = 'Add';
-      $vars['columns'][$which] .= '<fieldset class="widget-preview"><legend><div class="widget-preview-title">' .  theme('panels_add_content_link', array('renderer' => $vars['renderer'], 'region' => $vars['region'], 'content_type' => $content[$title])) . '</div><span class="fieldset-legend">' . $title . '</span></legend><div class="fieldset-wrapper">' . $content[$title]['preview'] . '</div></fieldset>';
+      $vars['columns'][$which] .= '<fieldset class="widget-preview"><legend><div class="widget-preview-title">' . theme('panels_add_content_link', array('renderer' => $vars['renderer'], 'region' => $vars['region'], 'content_type' => $content[$title])) . '</div><span class="fieldset-legend">' . $title . '</span></legend><div class="fieldset-wrapper">' . $content[$title]['preview'] . '</div></fieldset>';
     }
   }
 }
