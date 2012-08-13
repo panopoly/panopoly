@@ -198,6 +198,7 @@
 
 #modal-content fieldset.widget-preview-single {
   margin-top: 0em;
+  margin-bottom: 1em;
 }
 
 #modal-content fieldset.widget-preview-single .fieldset-wrapper {
@@ -286,6 +287,13 @@
   margin-left: 1em;
   margin-top: 0;
   width: 48%;
+}
+
+#modal-content .form-actions {
+  float: right;
+  clear: right;
+  width: 48%;
+  margin-left: 1em;
 }
 
 #modal-content .widget-preview-title {
