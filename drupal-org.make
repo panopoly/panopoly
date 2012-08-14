@@ -251,6 +251,13 @@ projects[respondjs][version] = 1.1
 projects[respondjs][subdir] = contrib
 projects[respondjs][type] = module
 
+; Panopoly - Themes
+projects[bartik_respondz][version] = 1.x-dev
+projects[bartik_respondz][type] = theme
+projects[bartik_respondz][download][type] = git
+projects[bartik_respondz][download][revision] = 89c8e36
+projects[bartik_respondz][download][branch] = 7.x-1.x
+
 ; Libraries
 libraries[tinymce][download][type] = get
 libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.5.2.zip
