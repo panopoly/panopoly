@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * A panel plugin to provide administrative information about the site's pages and layouts
+ */
+
 $plugin = array(
   'title' => t('Pages'),
   'description' => t('This is a standard list of pages that are available'),
@@ -96,7 +101,7 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     $layout_options[] = array(
       'data' => array(
         $layout_option['title'],
-        l('Edit', 'admin/structure/panels/layouts/list/' . str_replace('responsive:', '', $layout_option['name']) . '/edit'),
+        l(t('Edit'), 'admin/structure/panels/layouts/list/' . str_replace('responsive:', '', $layout_option['name']) . '/edit'),
       ),
     );
   }
