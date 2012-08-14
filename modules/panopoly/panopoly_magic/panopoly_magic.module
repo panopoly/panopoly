@@ -475,11 +475,6 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
  */
 function panopoly_magic_form_panels_edit_style_type_form_alter(&$form, &$form_state, $form_id) {
 
-  // Adding a fieldset around styling
-  $form['style'] = array('style' => $form['style']);
-  $form['style']['#type'] = 'fieldset';
-  $form['style']['#title'] = t('Style Settings');
-
   // Unset options for which we have no need
   unset($form['style']['#options']['block']);
   unset($form['style']['#options']['rounded_corners']);
@@ -516,6 +511,11 @@ function panopoly_magic_form_panels_edit_style_type_form_alter(&$form, &$form_st
     unset($form['style']['style']['#options']['stylizer']);
     $form['style']['style']['#options']['stylizer'] = t('Custom Style');
   }
+
+  // Adding a fieldset around styling
+  $form['style'] = array('style' => $form['style']);
+  $form['style']['#type'] = 'fieldset';
+  $form['style']['#title'] = t('Style Settings');
 }
 
 /**
