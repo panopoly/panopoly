@@ -181,7 +181,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['#id'] = 'panopoly_admin_landing_page_wizard';
 
     // Set the title to be something consistent
-    drupal_set_title('Create Landing Page');
+    drupal_set_title(t('Create Landing Page'));
 
     // Remove the ctools train since we just have one step
     $form['ctools_trail']['#access'] = FALSE;
@@ -405,7 +405,7 @@ function panopoly_admin_theme_config_page($js = FALSE, $theme_key) {
 function panopoly_admin_entity_parse_info($entity, $type) {
   $entity_info = array();
 
-  switch($type) {
+  switch ($type) {
     case 'node':
       $entity_info['title'] = $entity->title;
       $entity_info['type'] = 'node';
