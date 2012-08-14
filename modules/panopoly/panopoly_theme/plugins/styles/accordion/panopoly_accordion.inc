@@ -102,7 +102,7 @@ function panopoly_theme_panopoly_accordion_style_settings_form($style_settings) 
     '#type' => 'checkbox',
     '#title' => t('If set, looks for the anchor that matches location.href and activates it. Great for href-based state-saving. Use navigationFilter to implement your own matcher..'),  
     '#return_value' => TRUE,
-    '#default_value' => (isset($style_settings['navigation'])) ? $style_settings['navigation'] : false,
+    '#default_value' => (isset($style_settings['navigation'])) ? $style_settings['navigation'] : FALSE,
   );
 
   return $form;
