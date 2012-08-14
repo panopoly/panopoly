@@ -24,7 +24,7 @@ function panopoly_search_install() {
     search_api_admin_index_view($solr_index, 'enable');
 
     // Push Pantheon's Search API Schema
-    $schema_uri = drupal_get_path('module', 'search_api_solr') . '/schema.xml');
+    $schema_uri = drupal_get_path('module', 'search_api_solr') . '/schema.xml';
     pantheon_apachesolr_update_schema($schema_uri);
 
     // Clear Solr Search Index and Rebuild
@@ -66,7 +66,7 @@ function panopoly_search_update_7002(&$sandbox) {
     search_api_admin_index_view($solr_index, 'enable');
 
     // Push Pantheon's Search API Schema
-    $schema_uri = drupal_get_path('module', 'search_api_solr') . '/schema.xml');
+    $schema_uri = drupal_get_path('module', 'search_api_solr') . '/schema.xml';
     pantheon_apachesolr_update_schema($schema_uri);
 
     // Clear Solr Search Index and Rebuild
