@@ -23,7 +23,6 @@ function panopoly_users_panelizer_defaults() {
   $panelizer->pipeline = 'ipe';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
-  $panelizer->did = 0;
   $panelizer->access = array();
   $panelizer->view_mode = 'page_manager';
   $panelizer->css_class = '';
@@ -116,7 +115,6 @@ function panopoly_users_panelizer_defaults() {
   $panelizer->pipeline = 'standard';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
-  $panelizer->did = 0;
   $panelizer->access = array();
   $panelizer->view_mode = 'default';
   $panelizer->css_class = 'user-default';
@@ -212,7 +210,6 @@ function panopoly_users_panelizer_defaults() {
   $panelizer->pipeline = 'standard';
   $panelizer->contexts = array();
   $panelizer->relationships = array();
-  $panelizer->did = 0;
   $panelizer->access = array();
   $panelizer->view_mode = 'featured';
   $panelizer->css_class = 'user-featured';
