@@ -27,33 +27,16 @@
   width: 100%;
 }
 
-#node-edit .form-item-body-und-0-format label, 
-#node-edit .form-item-body-und-1-format label, 
-#node-edit .form-item-body-und-2-format label, 
-#node-edit .form-item-body-und-3-format label, 
-#node-edit .form-item-body-und-4-format label, 
-#node-edit .form-item-body-und-5-format label, 
-#node-edit .form-item-body-und-6-format label, 
-#node-edit .form-item-body-und-7-format label, 
-#node-edit .form-item-body-und-8-format label, 
-#node-edit .form-item-body-und-9-format label {
+.format-toggle label {
   float: left;
   margin-right: .5em;
+  margin-top: 2px;
   font-weight: 400;
   display: block;
   width: auto;
 }
 
-#node-edit .form-item-body-und-0-format, 
-#node-edit .form-item-body-und-1-format, 
-#node-edit .form-item-body-und-2-format, 
-#node-edit .form-item-body-und-3-format, 
-#node-edit .form-item-body-und-4-format, 
-#node-edit .form-item-body-und-5-format, 
-#node-edit .form-item-body-und-6-format, 
-#node-edit .form-item-body-und-7-format, 
-#node-edit .form-item-body-und-8-format, 
-#node-edit .form-item-body-und-9-format {
+.format-toggle {
   float: right;
   margin-top: 5px;
   margin-bottom: 5px;
