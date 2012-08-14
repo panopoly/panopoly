@@ -17,6 +17,7 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[field][] = taxonomy_term-panopoly_categories-field_featured_image
 features[panelizer_defaults][] = taxonomy_term:panopoly_categories:default
+features[panelizer_defaults][] = taxonomy_term:panopoly_categories:default:default
 features[taxonomy][] = panopoly_categories
 features[variable][] = ctools_content_all_views
 features[variable][] = date_first_day
