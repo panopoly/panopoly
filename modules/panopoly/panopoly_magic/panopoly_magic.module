@@ -74,8 +74,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     // EXPERIEMENTAL: Handling Saving a Fieldable Panel Pane To Create a Live Preview. The trick
     // here is to make sure we properly save a version to get a vid, but don't make it the real one.
     // NOTE - I doubt this will be very good for performance. Let's call it RC1.
-    if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && $form_state['clicked_button']['#value'] == 'Update Preview') {
-
+    if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && ($form_state['clicked_button']['#value'] == 'Update Preview' || ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id'])))) {
       // Make sure this will not be set as reusable
       $form_state['values']['reusable'] = NULL;
       
