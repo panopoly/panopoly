@@ -87,6 +87,7 @@ dependencies[] = entity
 dependencies[] = defaultcontent
 dependencies[] = strongarm
 dependencies[] = libraries
+dependencies[] = json2
 
 ; Panopoly - Contrib - Development
 ; dependencies[] = devel

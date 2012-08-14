@@ -46,7 +46,7 @@ projects[views][version] = 3.3
 projects[views][type] = module
 projects[views][subdir] = contrib
 
-projects[token][version] = 1.1
+projects[token][version] = 1.2
 projects[token][type] = module
 projects[token][subdir] = contrib
 
@@ -67,7 +67,7 @@ projects[link][version] = 1.0
 projects[link][type] = module
 projects[link][subdir] = contrib
 
-projects[date][version] = 2.5
+projects[date][version] = 2.6
 projects[date][type] = module
 projects[date][subdir] = contrib
 
@@ -130,7 +130,7 @@ projects[media_vimeo][type] = module
 projects[media_vimeo][subdir] = contrib
 
 ; Panopoly - Contrib - Menus and URLs
-projects[pathauto][version] = 1.1
+projects[pathauto][version] = 1.2
 projects[pathauto][subdir] = contrib
 projects[pathauto][type] = module
 projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-persist.patch
@@ -224,10 +224,12 @@ projects[uuid][download][type] = git
 projects[uuid][download][revision] = 806c301 
 projects[uuid][download][branch] = 7.x-1.x
 
-projects[defaultcontent][version] = 1.0-alpha5
+projects[defaultcontent][version] = 1.x-dev
 projects[defaultcontent][type] = module
 projects[defaultcontent][subdir] = contrib
-projects[defaultcontent][patch][1263536] = http://drupal.org/files/base64_encode_files-1263536-1_0.patch
+projects[defaultcontent][download][type] = git
+projects[defaultcontent][download][revision] = d8806d8
+projects[defaultcontent][download][branch] = 7.x-1.x
 
 projects[strongarm][version] = 2.0
 projects[strongarm][type] = module
@@ -236,6 +238,10 @@ projects[strongarm][subdir] = contrib
 projects[libraries][version] = 2.0
 projects[libraries][type] = module
 projects[libraries][subdir] = contrib
+
+projects[json2][type] = module
+projects[json2][version] = 1.0
+projects[json2][subdir] = contrib
 
 ; Panopoly - Contrib - Development
 projects[devel][version] = 1.3
@@ -275,3 +281,7 @@ libraries[jquery.cycle][download][url] = https://github.com/malsup/cycle/zipball
 
 libraries[respondjs][download][type] = get
 libraries[respondjs][download][url] = https://github.com/scottjehl/Respond/tarball/master
+
+libraries[json2][download][type] = get
+libraries[json2][download][url] = https://github.com/douglascrockford/JSON-js/blob/master/json2.js
+libraries[json2][revision] = fc535e9cc8fa78bbf45a85835c830e7f799a5084
