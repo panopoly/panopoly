@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * A specification for the custom spotlight entity that is part of Panopoly Widgets
+ */
+
+/**
  * Implements hook_field_info().
  */
 function panopoly_widgets_field_info() {
@@ -153,13 +158,13 @@ function panopoly_widgets_field_formatter_view($entity_type, $entity, $field, $i
 
   // Assemble the tabs header
   $header = '<ul>';
-  foreach($items as $delta => $item_data) {
+  foreach ($items as $delta => $item_data) {
     $header .= '<li>' . '<a href="#panopoly-spotlight-' . $delta . '">' . ($delta+1) . '</a></li>'; 
   }
   $header .= '</ul>';
 
   // Assemble the tabs content
-  foreach($items as $delta => $item_data) {
+  foreach ($items as $delta => $item_data) {
     $element[$delta]['#markup'] = ($delta == 0) ? $header . theme('panopoly_spotlight_view', array('items' => $item_data, 'delta' => $delta, 'settings' => $settings)) : theme('panopoly_spotlight_view', array('items' => $item_data, 'delta' => $delta, 'settings' => $settings));
   }
   return $element;

@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * An installation file for Panopoly Widgets
+ */
+
+/**
  * Implements hook_install().
  */
 function panopoly_widgets_install() {
