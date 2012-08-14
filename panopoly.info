@@ -32,6 +32,8 @@ dependencies[] = views
 dependencies[] = views_content
 dependencies[] = views_ui
 dependencies[] = token
+dependencies[] = layout
+dependencies[] = gridbuilder
 
 ; Panopoly - Contrib - Field UI and Content Types
 dependencies[] = tablefield
