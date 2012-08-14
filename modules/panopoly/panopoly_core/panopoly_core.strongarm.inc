@@ -810,7 +810,7 @@ function panopoly_core_strongarm() {
     'token' => 0,
     'custom' => 0,
     'block' => 0,
-    'entity_view' => 0,
+    'entity_view' => 'entity_view',
   );
   $export['panels_page_default'] = $strongarm;
 
