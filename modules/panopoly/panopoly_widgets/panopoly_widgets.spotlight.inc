@@ -275,7 +275,7 @@ function panopoly_widgets_field_prepare_view($entity_type, $entities, $field, $i
   //Add appropriate JS variables for rotation time.
   //@TODO: Allow different rotation speeds to be set for different
   //spotlights in the page.
-  if(!empty($entities[1]->field_spotlight_rotation_time)) {
+  if (!empty($entities[1]->field_spotlight_rotation_time)) {
     $rotation_time = (int) $entities[1]->field_spotlight_rotation_time['und'][0]['value'];
   }
   empty($rotation_time) ? $rotation_time = 4 : '';
