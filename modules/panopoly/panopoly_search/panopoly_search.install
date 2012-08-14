@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Installation file for Panopoly Search
+ */
+
+/**
  * Implementation of hook_install()
  */
 function panopoly_search_install() {
