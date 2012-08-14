@@ -81,6 +81,11 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       // Do not run this through validation since it creates a wierd experience
       $form['#validate'] = array();
 
+      // Quick modification to get tablefield to render correctly
+      if ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id'])) {
+        $form_state['values']['field_basic_table_table']['und'] = $form_state['field']['field_basic_table_table']['und']['instance']['default_value'];
+      }
+
       // Run entity information through standard submission form
       fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
 
