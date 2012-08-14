@@ -38,6 +38,6 @@ function panopoly_admin_theme_content_type_render($subtype, $conf, $panel_args, 
   $configure = (count($theme_links)) ? theme('links__ctools_dropbutton', array('links' => $theme_links, 'attributes' => array('class' => array('links', 'inline'))))  : '';
 
   // Display the information about the theme
-  $pane->content = '<div class="clearfix"><div class="admin-theme-configure">' . $configure . '</div><div class="admin-theme-image">' . theme('image', array('path' => $theme_data[$theme_key]->info['screenshot'], 'title' => $theme_data[$theme_key]->info['name'])). '</div></div>';
+  $pane->content = '<div class="clearfix"><div class="admin-theme-configure">' . $configure . '</div><div class="admin-theme-image">' . theme('image', array('path' => $theme_data[$theme_key]->info['screenshot'], 'title' => $theme_data[$theme_key]->info['name'])) . '</div></div>';
   return $pane;
 }

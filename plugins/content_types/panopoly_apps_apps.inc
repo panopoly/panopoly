@@ -32,7 +32,7 @@ function panopoly_admin_panopoly_apps_apps_selection_form($form, &$form_state) {
   // Generate the apps information
   apps_include('manifest');
   $apps_manifests = array();
-  foreach(apps_servers() as $app_server_name => $app_server) {
+  foreach (apps_servers() as $app_server_name => $app_server) {
     $apps_manifests[$app_server_name] = apps_apps($app_server);
   }
 
@@ -44,7 +44,7 @@ function panopoly_admin_panopoly_apps_apps_selection_form($form, &$form_state) {
     // Build the options
     $app_defaults = array();
     $options = array();
-    foreach($apps_manifests['panopoly_apps'] as $name => $app) {
+    foreach ($apps_manifests['panopoly_apps'] as $name => $app) {
       $configure_links = array();
       if (module_exists($name)) {
         $app_defaults[] = $name;
@@ -63,13 +63,13 @@ function panopoly_admin_panopoly_apps_apps_selection_form($form, &$form_state) {
         );
       }
       $configure = (count($configure_links)) ? theme('links__ctools_dropbutton', array('links' => $configure_links, 'attributes' => array('class' => array('links', 'inline'))))  : '';
-      $options[$name] = '<div class="clearfix"><div class="admin-apps-configure">' . $configure . '</div><div class="admin-apps-image">' . theme('image', array('path' => $app['logo']['path'], 'height' => '64')). '</div><div class="admin-apps-information"><strong>' . $app['name'] . '</strong><br />' . $app['description'] . '</div></div>';
-    }                                 
+      $options[$name] = '<div class="clearfix"><div class="admin-apps-configure">' . $configure . '</div><div class="admin-apps-image">' . theme('image', array('path' => $app['logo']['path'], 'height' => '64')) . '</div><div class="admin-apps-information"><strong>' . $app['name'] . '</strong><br />' . $app['description'] . '</div></div>';
+    }
 
     // Setup the administration forms
     ksort($options);
     $form['apps'] = array(
-      '#type' =>'checkboxes',
+      '#type' => 'checkboxes',
       '#default_value' => $app_defaults,
       '#options' => $options,
       '#attributes' => array('disabled' => 'disabled'),

@@ -21,20 +21,20 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
   $tasks = page_manager_get_tasks_by_type('page');
   $pages = array('operations' => array());
   page_manager_get_pages($tasks, $pages);
-  foreach($pages['rows'] as $id => $info) {
+  foreach ($pages['rows'] as $id => $info) {
     if (strpos($id, 'panopoly_admin')) { 
       // Exclude any admin pages
     }
-    elseif($info['data']['type']['data'] == 'System') {
+    elseif ($info['data']['type']['data'] == 'System') {
       // Exclude any system pages
     }
-    elseif($pages['disabled'][$id] == TRUE) {
+    elseif ($pages['disabled'][$id] == TRUE) {
       // Exclude any disabled pages
     }
-    elseif($info['data']['type']['data'] == 'Existing') {
+    elseif ($info['data']['type']['data'] == 'Existing') {
       // Exclude PM Existing Pages 
     }
-    elseif($id == 'page-panopoly_search') {
+    elseif ($id == 'page-panopoly_search') {
       // Exclude Panopoly Search's main page
     }
     else {
@@ -55,14 +55,14 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
     if (in_array($entity_type, array('node', 'taxonomy_term', 'user'))) {
       $handler = panelizer_entity_plugin_get_handler($entity_type);
       $entity_info = entity_get_info($entity_type);
-      foreach($handler->plugin['bundles'] as $bundle_type => $bundle) {
+      foreach ($handler->plugin['bundles'] as $bundle_type => $bundle) {
         if (!empty($bundle['view modes']['page_manager']) && $bundle['view modes']['page_manager']['status'] == 1 && $bundle['view modes']['page_manager']['default'] == 1) {
           $page_templates[]  = array(
             'data' => array(
               $entity_info['bundles'][$bundle_type]['label'],
               '<em>' . $entity_info['label'] . ' template' . '</em>',
-              (pathauto_pattern_load_by_entity($entity_type, $bundle_type)) ? l('/' . pathauto_pattern_load_by_entity($entity_type, $bundle_type), 'admin/config/content/panelizer/' .$entity_type . '/' . $bundle_type . '.page_manager/content') : l('/' . $handler->plugin['entity path'], 'admin/config/content/panelizer/' .$entity_type . '/' . $bundle_type . '.page_manager/content'),
-            ),                             
+              (pathauto_pattern_load_by_entity($entity_type, $bundle_type)) ? l('/' . pathauto_pattern_load_by_entity($entity_type, $bundle_type), 'admin/config/content/panelizer/' . $entity_type . '/' . $bundle_type . '.page_manager/content') : l('/' . $handler->plugin['entity path'], 'admin/config/content/panelizer/' . $entity_type . '/' . $bundle_type . '.page_manager/content'),
+            ),
           );
         }
       }
@@ -73,7 +73,7 @@ function panopoly_admin_pages_content_type_render($subtype, $conf, $panel_args, 
   $overridden_templates = array();
   $entity_types = array('node', 'taxonomy_term', 'user');
   // TODO - handle cases where there are more than 30 pages. This will involve a pager or something fancy like that.
-  foreach(db_query("SELECT * FROM {panelizer_entity} WHERE entity_type IN (:entity_types) AND view_mode = 'page_manager' LIMIT 30", array(':entity_types' => $entity_types)) as $overridden_page) {
+  foreach (db_query_range("SELECT * FROM {panelizer_entity} WHERE entity_type IN (:entity_types) AND view_mode = 'page_manager'", 0, 30, array(':entity_types' => $entity_types)) as $overridden_page) {
     $entity_info = entity_get_info($overridden_page->entity_type);
     $entity = entity_load($overridden_page->entity_type, array($overridden_page->entity_id));
     $entity = $entity[$overridden_page->entity_id];
