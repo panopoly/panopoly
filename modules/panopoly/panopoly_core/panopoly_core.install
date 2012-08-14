@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * An installation file for Panopoly Core
+ */
+
+/**
  * Implementation of hook_install()
  */
 function panopoly_core_install() {
