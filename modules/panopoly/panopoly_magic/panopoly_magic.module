@@ -89,7 +89,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       // Quick modification to get the spotlight to render correctly
       if ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id']) && !empty($form_state['field']['field_basic_spotlight_items'])) {
         $form_state['values']['field_basic_spotlight_items']['und'] = $form_state['field']['field_basic_spotlight_items']['und']['instance']['default_value'];
-        $form_state['values']['field_basic_spotlight_items']['und'][0]['fid'] = variable_get('panopoly_widgets_default_image_fid', NULL);
+        $form_state['values']['field_basic_spotlight_items']['und'][0]['fid'] = variable_get('panopoly_widgets_default_spotlight_fid', NULL);
       }
 
       // Run entity information through standard submission form
