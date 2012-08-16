@@ -263,6 +263,9 @@ projects[bartik_respondz][download][type] = git
 projects[bartik_respondz][download][revision] = 89c8e36
 projects[bartik_respondz][download][branch] = 7.x-1.x
 
+projects[adaptivetheme][version] = 3.0
+projects[adaptivetheme][type] = theme
+
 ; Libraries
 libraries[tinymce][download][type] = get
 libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.5.2.zip
