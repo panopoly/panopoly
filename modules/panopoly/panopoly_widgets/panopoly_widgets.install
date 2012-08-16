@@ -77,13 +77,6 @@ function panopoly_widgets_update_7001(&$sandbox) {
 }
 
 /**
- * Implementation of hook_update_N().
- */
-function panopoly_widgets_update_7002(&$sandbox) {
-  panopoly_widgets_save_default_video_data();
-}
-
-/**
  * Helper function to save default file data.
  */
 function panopoly_widgets_save_default_file_data($filepath, $filename, $type) {
