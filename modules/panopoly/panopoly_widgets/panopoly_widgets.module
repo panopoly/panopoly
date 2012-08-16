@@ -422,6 +422,22 @@ function panopoly_widgets_field_attach_view_alter(&$output, $context) {
       }
     }
   }
+  else if ($context['entity_type'] == 'fieldable_panels_pane' && $context['entity']->bundle == 'video') {
+    if (empty($output['field_video_video'])) {
+      if ($fid = variable_get('panopoly_widgets_default_video_fid', NULL)) {
+        $file = file_load($fid);
+
+        $context['entity']->field_video_video[LANGUAGE_NONE][0] = array(
+          'fid' => $fid,
+          'title' => NULL,
+          'data' => NULL,
+          'file' => $file,
+        );
+
+        $output['field_video_video'] = field_view_field($context['entity_type'], $context['entity'], 'field_video_video', $context['display']);
+      }
+    }
+  }
 }
 
 /**
