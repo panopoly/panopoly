@@ -12,11 +12,9 @@ projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][type] = module
 projects[panels][download][type] = git
-projects[panels][download][revision] = 369c214
+projects[panels][download][revision] = ea0cd6c
 projects[panels][download][branch] = 7.x-3.x
-projects[panels][patch][1711302] = http://drupal.org/files/1711302-improve-ipe-icons-for-add-content.patch
 projects[panels][patch][1549660] = http://drupal.org/files/1549660-list-region-style-dont-render-empty-placeholder.patch
-projects[panels][patch][1690124] = http://drupal.org/files/1690124-hide-ipe-toolbar-with-open-modal_3_relies_1711302.patch
 projects[panels][patch][1690128] = http://drupal.org/files/1690128-add-panes-to-top-ipe.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
@@ -30,7 +28,7 @@ projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][type] = module
 projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = c1c00cb
+projects[panelizer][download][revision] = f276bfe
 projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1555194] = http://drupal.org/files/1387634-features-support-panelizer-unified.patch
 
