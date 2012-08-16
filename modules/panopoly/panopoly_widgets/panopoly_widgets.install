@@ -84,13 +84,6 @@ function panopoly_widgets_update_7002(&$sandbox) {
 }
 
 /**
- * Implementation of hook_update_N().
- */
-function panopoly_widgets_update_7002(&$sandbox) {
-  panopoly_widgets_save_default_video_data();
-}
-
-/**
  * Helper function to save default file data.
  */
 function panopoly_widgets_save_default_file_data($filepath, $filename, $type) {
@@ -104,30 +97,6 @@ function panopoly_widgets_save_default_file_data($filepath, $filename, $type) {
       variable_set('panopoly_widgets_default_' . $type . '_fid', $file_entity->fid);
 
       return $file_entity->fid;
-    }
-  }
-}
-
-/**
- * Helper function to save default video data.
- */
-function panopoly_widgets_save_default_video_data() {
-  $fid = variable_get('panopoly_widgets_default_video_fid', NULL);
-
-  if (empty($fid)) {
-    $file = (object) array(
-      'uid' => 1,
-      'filename' => 'The Drupal Song Music Video',
-      'uri' => 'youtube://v/lZ-s3DRZJKY',
-      'filemime' => 'video/youtube',
-      'status' => 1,
-      'type' => 'video',
-    );
-
-    $file = file_save($file);
-
-    if (!empty($file->fid)) {
-      variable_set('panopoly_widgets_default_video_fid', $file->fid);
     }
   }
 }
