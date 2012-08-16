@@ -25,7 +25,7 @@ function panopoly_magic_configure_form($form, &$form_state) {
       '1' => 'Enabled',
       '0' => 'Disabled',
     ),
-    '#default_value' => '1',
+    '#default_value' => variable_get('panopoly_magic_live_preview', FALSE) ? '1' : '0',
     '#description' => t('Do you want Panopoly to provide a live preview for modal content through the in place editor?'),
   );
 
@@ -82,6 +82,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Quick modification to get tablefield to render correctly
       if ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id']) && !empty($form_state['field']['field_basic_table_table'])) {
+        dpm($form_state);
         $form_state['values']['field_basic_table_table']['und'] = $form_state['field']['field_basic_table_table']['und']['instance']['default_value'];
       }
 
@@ -553,10 +554,18 @@ function panopoly_magic_form_panels_edit_style_type_form_alter(&$form, &$form_st
  */
 function panopoly_magic_form_ctools_stylizer_edit_style_form_default_alter(&$form, &$form_state, $form_id) {
 
-  // Customize the settings preview button.
-  $form['top box']['preview']['submit']['#attributes'] = array(
-    'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click'),
-  );
+  // If Auto-submit is enabled.
+  if (variable_get('panopoly_magic_live_preview', FALSE)) {
+
+    // Customize the settings preview button.
+    $form['top box']['preview']['submit']['#attributes'] = array(
+      'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click'),
+    );
+
+    // Autosubmit the form.
+    ctools_add_js('auto-submit');
+    $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
+  }
 
   $form['top box']['preview']['#weight'] = 5;
 
@@ -602,10 +611,6 @@ function panopoly_magic_form_ctools_stylizer_edit_style_form_default_alter(&$for
     $form['general_settings']['panels'] = $form['panels'];
     unset($form['panels']);
   }
-
-  // Autosubmit the form.
-  ctools_add_js('auto-submit');
-  $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
 }
 
 /**
