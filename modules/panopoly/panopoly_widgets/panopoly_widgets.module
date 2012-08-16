@@ -4,6 +4,43 @@ include_once('panopoly_widgets.features.inc');
 include_once('panopoly_widgets.spotlight.inc');
 
 /**
+ * Implements hook_apps_app_info()
+ */
+function panopoly_widgets_apps_app_info() {
+  return array(
+    'configure form' => 'panopoly_widgets_configure_form',
+  );
+}
+
+/**
+ * Configuration Form for Panopoly Magic
+ */
+function panopoly_widgets_configure_form($form, &$form_state) {
+  $form = array();
+
+  $form['panopoly_widgets_spotlight_rotation_time'] = array(
+    '#title' => t('Spotlight Rotation Time'),
+    '#type' => 'textfield',   
+    '#required' => TRUE,
+    '#default_value' => variable_get('panopoly_widgets_spotlight_rotation_time', 4),
+    '#description' => t('How many seconds do you want between rotations of the spotlight widget?'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_init()
+ */
+function panopoly_widgets_init() {
+
+  // Set the rotation time
+  $rotation_time = 1000 * variable_get('panopoly_widgets_spotlight_rotation_time', 4);
+  $js_variables = array('spotlight_settings' => array('rotation_time' => $rotation_time));
+  drupal_add_js($js_variables, 'setting');
+}
+    
+/**
  * Implementation of hook_ctools_plugin_directory()
  */
 function panopoly_widgets_ctools_plugin_directory($module, $plugin) {

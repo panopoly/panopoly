@@ -869,7 +869,7 @@ function panopoly_widgets_field_default_fields() {
         0 => array(
           'title' => 'Veggies sunt bona vobis!',
           'link' => 'http://drupal.org',
-          'fid' => '46',
+          'fid' => '',
           'description' => 'Kakadu plum cucumber soko prairie turnip cress squash tatsoi nori aubergine asparagus endive dandelion beetroot lettuce broccoli water chestnut brussels sprout. ',
         ),
       ),
@@ -907,60 +907,6 @@ function panopoly_widgets_field_default_fields() {
         'settings' => array(),
         'type' => 'panopoly_spotlight_form',
         'weight' => '-4',
-      ),
-    ),
-  );
-
-  // Exported field: 'fieldable_panels_pane-spotlight-field_spotlight_rotation_time'.
-  $fields['fieldable_panels_pane-spotlight-field_spotlight_rotation_time'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_spotlight_rotation_time',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'locked' => '0',
-      'module' => 'number',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'number_integer',
-    ),
-    'field_instance' => array(
-      'bundle' => 'spotlight',
-      'default_value' => array(
-        0 => array(
-          'value' => '4',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => 'How long (in seconds) before the spotlight rotates to the next image.',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '1',
-        ),
-      ),
-      'entity_type' => 'fieldable_panels_pane',
-      'field_name' => 'field_spotlight_rotation_time',
-      'label' => 'Rotation Time',
-      'required' => 0,
-      'settings' => array(
-        'max' => '',
-        'min' => '',
-        'prefix' => '',
-        'suffix' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'number',
-        'settings' => array(),
-        'type' => 'number',
-        'weight' => '-3',
       ),
     ),
   );
@@ -1194,7 +1140,6 @@ function panopoly_widgets_field_default_fields() {
   t('Items');
   t('Links');
   t('Quote');
-  t('Rotation Time');
   t('Table');
   t('Text');
   t('The street address of the location you wish to map. This widget will contact Google and try to do its best to create a map!');
