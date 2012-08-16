@@ -73,6 +73,14 @@ function panopoly_widgets_update_7001(&$sandbox) {
   panopoly_widgets_save_default_file_data(drupal_get_path('module', 'panopoly_widgets') . '/default_content/vegetables-demo-image.png', 'vegetables-demo-image.png', 'image');
   panopoly_widgets_save_default_file_data(drupal_get_path('module', 'panopoly_widgets') . '/default_content/vegetables_demo_spotlight.jpeg', 'vegetables_demo_spotlight.jpeg', 'spotlight');
   panopoly_widgets_save_default_file_data(drupal_get_path('module', 'panopoly_widgets') . '/default_content/preview-file.txt', 'preview-file.txt', 'basic_file');
+  panopoly_widgets_save_default_video_data();
+}
+
+/**
+ * Implementation of hook_update_N().
+ */
+function panopoly_widgets_update_7002(&$sandbox) {
+  panopoly_widgets_save_default_video_data();
 }
 
 /**
@@ -96,6 +104,30 @@ function panopoly_widgets_save_default_file_data($filepath, $filename, $type) {
       variable_set('panopoly_widgets_default_' . $type . '_fid', $file_entity->fid);
 
       return $file_entity->fid;
+    }
+  }
+}
+
+/**
+ * Helper function to save default video data.
+ */
+function panopoly_widgets_save_default_video_data() {
+  $fid = variable_get('panopoly_widgets_default_video_fid', NULL);
+
+  if (empty($fid)) {
+    $file = (object) array(
+      'uid' => 1,
+      'filename' => 'The Drupal Song Music Video',
+      'uri' => 'youtube://v/lZ-s3DRZJKY',
+      'filemime' => 'video/youtube',
+      'status' => 1,
+      'type' => 'video',
+    );
+
+    $file = file_save($file);
+
+    if (!empty($file->fid)) {
+      variable_set('panopoly_widgets_default_video_fid', $file->fid);
     }
   }
 }
