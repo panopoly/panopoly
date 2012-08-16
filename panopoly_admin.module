@@ -294,6 +294,11 @@ function panopoly_admin_pathauto_submit($form, &$form_state) {
     $form_state['values']['path']['pathauto'] = TRUE;
     $form_state['input']['path']['pathauto'] = TRUE;
   }
+  // If the user has specified a path, dont autogenerate
+  else {
+    $form_state['values']['path']['pathauto'] = FALSE;
+    $form_state['input']['path']['pathauto'] = FALSE;
+  }
 }
 
 /**
