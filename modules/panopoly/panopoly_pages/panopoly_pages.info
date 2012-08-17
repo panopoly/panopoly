@@ -41,4 +41,4 @@ features[variable][] = panelizer_node:panopoly_page_allowed_layouts
 features[variable][] = panelizer_node:panopoly_page_allowed_types
 features[variable][] = panelizer_node:panopoly_page_default
 features[variable][] = save_continue_panopoly_page
-files[] = panopoly_pages.module
+stylesheets[all][] = panopoly_pages.css
