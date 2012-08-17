@@ -83,23 +83,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       // TODO - extend this to other elements that might have validation hooks on them (i.e. link fields)
       $form['#validate'] = array();
 
-      // Quick modification to get tablefield to render correctly
-      if ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id']) && !empty($form_state['field']['field_basic_table_table'])) {
-        $form_state['values']['field_basic_table_table']['und'] = $form_state['field']['field_basic_table_table']['und']['instance']['default_value'];
-      }
-
-      // Quick exclusion of column and row counts from being autosubmited
-      if (!empty($form['field_basic_table_table'])) {
-        $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_cols']['#attributes']['class'][] = 'ctools-auto-submit-exclude';
-        $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_rows']['#attributes']['class'][] = 'ctools-auto-submit-exclude';
-      }
-
-      // Quick modification to get the spotlight to render correctly
-      if ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id']) && !empty($form_state['field']['field_basic_spotlight_items'])) {
-        $form_state['values']['field_basic_spotlight_items']['und'] = $form_state['field']['field_basic_spotlight_items']['und']['instance']['default_value'];
-        $form_state['values']['field_basic_spotlight_items']['und'][0]['fid'] = variable_get('panopoly_widgets_default_spotlight_fid', NULL);
-      }
-
       // Determine the current VID for the element
       if (!empty($form_state['entity']->fpid)) {
         $current_vid = db_query("SELECT vid FROM {fieldable_panels_panes} WHERE fpid = :fpid", array(':fpid' => $form_state['entity']->fpid))->fetchField();
