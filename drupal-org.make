@@ -17,6 +17,7 @@ projects[panels][download][revision] = 0b237c0
 projects[panels][download][branch] = 7.x-3.x
 projects[panels][patch][1549660] = http://drupal.org/files/1549660-list-region-style-dont-render-empty-placeholder.patch
 projects[panels][patch][1690128] = http://drupal.org/files/1690128-add-panes-to-top-ipe.patch
+projects[panels][patch][1735336] = http://drupal.org/files/1735336-repaint-draghandle-ipe-initial.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
