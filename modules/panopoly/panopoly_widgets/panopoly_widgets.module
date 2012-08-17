@@ -175,6 +175,7 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
     $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['#collapsible'] = FALSE;
     $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['#collapsed'] = FALSE;
     $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_cols']['#field_prefix'] = $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_cols']['#title'] . '? ';
+    $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_cols']['#title'] = '';
     $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_rows']['#field_prefix'] = $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_rows']['#title'] . '? ';
     $form['field_basic_table_table'][LANGUAGE_NONE][0]['tablefield']['rebuild']['count_rows']['#title'] = '';
   }
