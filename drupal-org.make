@@ -200,12 +200,9 @@ projects[backports][type] = module
 projects[backports][subdir] = contrib
 
 ; Panopoly - Contrib - Products
-projects[apps][version] = 1.x-dev
+projects[apps][version] = 1.0-beta7
 projects[apps][subdir] = contrib
 projects[apps][type] = module
-projects[apps][download][type] = git
-projects[apps][download][revision] = d74715e
-projects[apps][download][branch] = 7.x-1.x
 
 projects[features][version] = 1.0
 projects[features][subdir] = contrib
