@@ -202,9 +202,8 @@ projects[apps][version] = 1.x-dev
 projects[apps][subdir] = contrib
 projects[apps][type] = module
 projects[apps][download][type] = git
-projects[apps][download][revision] = ee1e7a7
+projects[apps][download][revision] = d74715e
 projects[apps][download][branch] = 7.x-1.x
-projects[apps][patch][1561652] = http://drupal.org/files/apps-drush-install-1561652-19.patch
 
 projects[features][version] = 1.0
 projects[features][subdir] = contrib
