@@ -202,12 +202,9 @@ projects[apps][version] = 1.x-dev
 projects[apps][subdir] = contrib
 projects[apps][type] = module
 projects[apps][download][type] = git
-projects[apps][download][revision] = c435c95
+projects[apps][download][revision] = ee1e7a7
 projects[apps][download][branch] = 7.x-1.x
-projects[apps][patch][1479164] = http://drupal.org/files/1479164-apps-has-write-access-check.patch
-projects[apps][patch][1561652] = http://drupal.org/files/1561652-apps-allow-drush-site-install-patch-reroll-1479164.patch
-projects[apps][patch][1721538] = http://drupal.org/files/1721538-rename-app-images-not-replace.patch
-projects[apps][patch][1721548] = http://drupal.org/files/1721548-silent-success-condition-profile.patch
+projects[apps][patch][1561652] = http://drupal.org/files/apps-drush-install-1561652-19.patch
 
 projects[features][version] = 1.0
 projects[features][subdir] = contrib
