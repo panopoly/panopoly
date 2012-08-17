@@ -52,7 +52,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
    * Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
    * we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving.
    */
-  if (variable_get('panopoly_magic_live_preview', 1) && (strpos($form_id, '_content_type_edit_form') || $form_id == 'panels_edit_style_type_form')) {
+  if (variable_get('panopoly_magic_live_preview', 1) && (strpos($form_id, '_content_type_edit_form') || $form_id == 'panels_edit_style_type_form') || $form_id == 'panels_edit_style_settings_form') {
 
     // Start the magic
     $pane = $form_state['pane'];
@@ -66,6 +66,9 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
     elseif ($form_id == 'panels_edit_style_type_form') {
       $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_type_form') ? panels_get_style($form_state['values']['style']) : panels_get_style($form_state['style']);
+    }
+    elseif ($form_id == 'panels_edit_style_settings_form') {
+      $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_settings_form') ? panels_get_style($form_state['values']['style']) : panels_get_style($form_state['style']);
     }
     else {
       $style = NULL;
