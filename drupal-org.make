@@ -256,11 +256,11 @@ projects[respondjs][subdir] = contrib
 projects[respondjs][type] = module
 
 ; Panopoly - Themes
-projects[bartik_respondz][version] = 1.x-dev
-projects[bartik_respondz][type] = theme
-projects[bartik_respondz][download][type] = git
-projects[bartik_respondz][download][revision] = 89c8e36
-projects[bartik_respondz][download][branch] = 7.x-1.x
+projects[responsive_bartik][version] = 1.x-dev
+projects[responsive_bartik][type] = theme
+projects[responsive_bartik][download][type] = git
+projects[responsive_bartik][download][revision] = 27cbb75
+projects[responsive_bartik][download][branch] = 7.x-1.x
 
 projects[adaptivetheme][version] = 3.0
 projects[adaptivetheme][type] = theme

@@ -232,7 +232,7 @@ function panopoly_theme_form_submit($form, &$form_state) {
   variable_set('theme_default', $theme);
 
   // Set the Bartik or Garland logo to be Panopoly's logo
-  if ($theme == 'bartik' || $theme == 'garland' || $theme == 'bartik_respondz') {
+  if ($theme == 'bartik' || $theme == 'garland' || $theme == 'responsive_bartik') {
     $theme_data = _system_rebuild_theme_data();
     $theme_data[$theme]->info['settings']['default_logo'] = 0;
     $theme_data[$theme]->info['settings']['logo_path'] = 'profiles/panopoly/images/panopoly_icon_theme.png';
