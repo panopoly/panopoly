@@ -90,7 +90,7 @@ dependencies[] = libraries
 dependencies[] = json2
 
 ; Panopoly - Contrib - Development
-; dependencies[] = devel
+dependencies[] = devel
 
 ; Panopoly - Contrib - Theme
 dependencies[] = conditional_styles
