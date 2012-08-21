@@ -9,16 +9,10 @@ projects[ctools][patch][1294478] = http://drupal.org/files/1294478-modal-dynamic
 projects[ctools][patch][1708438] = http://drupal.org/files/1708438-blur-event.patch
 projects[ctools][patch][1735254] = http://drupal.org/files/1735254-exclude-form-element-autosubmit_with_docs.patch
 
-projects[panels][version] = 3.x-dev
+projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
 projects[panels][type] = module
-projects[panels][download][type] = git
-projects[panels][download][revision] = 0b237c0
-projects[panels][download][branch] = 7.x-3.x
-projects[panels][patch][1549660] = http://drupal.org/files/1549660-list-region-style-dont-render-empty-placeholder.patch
-projects[panels][patch][1690128] = http://drupal.org/files/1690128-add-panes-to-top-ipe.patch
 projects[panels][patch][1735336] = http://drupal.org/files/1735336-repaint-draghandle-ipe-initial.patch
-projects[panels][patch][1735350] = http://drupal.org/files/1735350-prevent-double-form-id-change-layout.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
@@ -27,18 +21,13 @@ projects[panels_breadcrumbs][download][type] = git
 projects[panels_breadcrumbs][download][revision] = 531f589
 projects[panels_breadcrumbs][download][branch] = 7.x-2.x
 
-projects[panelizer][version] = 3.x-dev
+projects[panelizer][version] = 3.0-rc1
 projects[panelizer][subdir] = contrib
 projects[panelizer][type] = module
-projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = f276bfe
-projects[panelizer][download][branch] = 7.x-3.x
-projects[panelizer][patch][1555194] = http://drupal.org/files/1387634-features-support-panelizer-unified.patch
 
-projects[fieldable_panels_panes][version] = 1.1
+projects[fieldable_panels_panes][version] = 1.2
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][type] = module
-projects[fieldable_panels_panes][patch][1715918] = http://drupal.org/files/fieldable-panel-panes-load-vid.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][type] = module
@@ -52,7 +41,7 @@ projects[token][version] = 1.2
 projects[token][type] = module
 projects[token][subdir] = contrib
 
-projects[layout][version] = 1.0-alpha2
+projects[layout][version] = 1.0-alpha3
 projects[layout][type] = module
 projects[layout][subdir] = contrib
 
