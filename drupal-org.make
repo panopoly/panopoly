@@ -188,6 +188,10 @@ projects[backports][version] = 1.0-alpha1
 projects[backports][type] = module
 projects[backports][subdir] = contrib
 
+projects[jquery_update][version] = 2.2
+projects[jquery_update][type] = module
+projects[jquery_update][subdir] = contrib
+
 ; Panopoly - Contrib - Products
 projects[apps][version] = 1.0-beta7
 projects[apps][subdir] = contrib

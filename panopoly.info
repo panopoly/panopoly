@@ -32,8 +32,8 @@ dependencies[] = views
 dependencies[] = views_content
 dependencies[] = views_ui
 dependencies[] = token
-dependencies[] = layout
-dependencies[] = gridbuilder
+; dependencies[] = layout
+; dependencies[] = gridbuilder
 
 ; Panopoly - Contrib - Field UI and Content Types
 dependencies[] = tablefield
@@ -71,6 +71,7 @@ dependencies[] = views_autocomplete_filters
 dependencies[] = simplified_menu_admin
 dependencies[] = references_dialog 
 dependencies[] = backports
+; dependencies[] = jquery_update
 
 ; Panopoly - Contrib - Search 
 dependencies[] = facetapi
