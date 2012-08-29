@@ -4,6 +4,7 @@ core = 7.x
 package = Panopoly
 php = 5.2.4
 project = panopoly_admin
+dependencies[] = apps
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = page_manager
