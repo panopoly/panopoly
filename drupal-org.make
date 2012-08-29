@@ -2,12 +2,11 @@ api = 2
 core = 7.x
 
 ; Panopoly - Contrib - Foundation
-projects[ctools][version] = 1.1
+projects[ctools][version] = 1.2
 projects[ctools][subdir] = contrib
 projects[ctools][type] = module
-projects[ctools][patch][1294478] = http://drupal.org/files/1294478-modal-dynamic-mode.patch
-projects[ctools][patch][1708438] = http://drupal.org/files/1708438-blur-event.patch
-projects[ctools][patch][1735254] = http://drupal.org/files/1735254-exclude-form-element-autosubmit_with_docs.patch
+projects[ctools][patch][1294478] = http://drupal.org/files/dynamic-modal-1294478-34.patch
+projects[ctools][patch][1708438] = http://drupal.org/files/1708438-blur-event_0.patch
 
 projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
