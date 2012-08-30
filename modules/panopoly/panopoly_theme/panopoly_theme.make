@@ -8,9 +8,6 @@ core = 7.x
 projects[browscap][version] = 1.3
 projects[browscap][subdir] = contrib
 
-projects[browscap_ctools][version] = 1.0
-projects[browscap_ctools][subdir] = contrib
-
 ; Sparkle up the Responsive Layout Builder
 
 projects[layout][version] = 1.0-alpha3
