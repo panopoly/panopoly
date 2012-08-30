@@ -127,7 +127,7 @@ projects[libraries][version] = 2.0
 projects[libraries][subdir] = contrib
 
 projects[devel][version] = 1.3
-projects[devel][type] = module
+projects[devel][subdir] = contrib
 
 ; Harness the Power of Features and Apps
 
