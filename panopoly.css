@@ -19,3 +19,11 @@
   margin-left: 1em;
   margin-bottom: 1em;
 }
+
+#logo {
+  background:transparent url(panopoly.png) no-repeat top left;
+  height:0;
+  overflow:hidden;
+  padding-top: 180px; /* height of logo  */
+  width: 180px; /* width of logo  */
+}
