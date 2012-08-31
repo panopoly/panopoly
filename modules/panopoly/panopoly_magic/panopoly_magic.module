@@ -133,7 +133,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
     // Create the preview fieldset
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' || $content) {
-    
+
       // Create the fieldset with appropriate content
       $form['widget_preview'] = array(
         '#type' => 'fieldset',
@@ -212,6 +212,38 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
+/**
+ * Recursively parse form elements to add special autosubmit handling on a per field-type basis.
+ */
+function panopoly_magic_autosubmit_configure(&$element) {
+  if (!empty($element['#type'])) {
+    switch ($element['#type']) {
+      case 'textfield':
+        // Special handling for autosubmit.
+        if (!empty($element['#autocomplete_path'])) {
+          $element['#attributes']['class'][] = 'ctools-auto-submit-exclude panopoly-autocomplete-autosubmit';
+        }
+        else {
+          $element['#attributes']['class'][] = 'ctools-auto-submit-exclude panopoly-textfield-autosubmit';
+        }
+        break;
+      case 'text_format':
+        $element['#attributes']['class'][] = 'ctools-auto-submit-exclude panopoly-textarea-autosubmit';
+        break;
+      default:
+        break;
+    }
+  }
+
+  $children = element_children($element);
+  
+  if (!empty($children) && is_array($children)) {
+    foreach ($children as $child) {
+      panopoly_magic_autosubmit_configure($element[$child]);
+    }
+  }
+}
+
 /** 
  * Implementation of hook_form_FORM_ID_alter()
  */
@@ -220,6 +252,11 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
   // Handle the view mode
   $view_mode = $form['view_mode'];
   unset($form['view_mode']);
+
+
+  if (variable_get('panopoly_magic_live_preview', 1)) {
+    panopoly_magic_autosubmit_configure($form);
+  }
 
   // Add custom validation function
   if ($form_state['clicked_button']['#value'] != 'Update Preview') {
@@ -482,6 +519,10 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['display_settings']['#type'] = 'fieldset';
     $form['display_settings']['#title'] = t('Display Settings');
     $form['display_settings']['#weight'] = -28;
+  }
+
+  if (variable_get('panopoly_magic_live_preview', 1)) {
+    panopoly_magic_autosubmit_configure($form);
   }
 
   // Add a custom submit handler to our preview and submit option
