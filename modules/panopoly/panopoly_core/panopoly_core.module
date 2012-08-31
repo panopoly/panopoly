@@ -54,11 +54,6 @@ function panopoly_core_apps_servers_info() {
       'description' => 'Apps for Panopoly',
       'manifest' => (empty($info['version']) || $info['version'] == '7.x-1.x-dev') ? 'http://apps.getpantheon.com/panopoly-dev' : 'http://apps.getpantheon.com/panopoly',
     ),
-    'panopoly_apps' => array(
-      'title' => 'Panopoly Apps',
-      'description' => 'Apps for Panopoly',
-      'manifest' => (empty($info['version']) || $info['version'] == '7.x-1.x-dev') ? 'http://apps.getpantheon.com/panopoly-apps-dev' : 'http://apps.getpantheon.com/panopoly-apps',
-    ),
   );
 }
 
