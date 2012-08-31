@@ -75,7 +75,6 @@ projects[panopoly_search][download][branch] = 7.x-1.x
 projects[ctools][version] = 1.2
 projects[ctools][subdir] = contrib
 projects[ctools][patch][1294478] = http://drupal.org/files/dynamic-modal-1294478-34.patch
-projects[ctools][patch][1708438] = http://drupal.org/files/1708438-blur-event_0.patch
 
 projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
