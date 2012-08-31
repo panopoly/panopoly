@@ -41,7 +41,7 @@
 
       function triggerDisable (e) {
         var $this = $(this);
-        $this.find(':submit:not(.ctools-auto-submit-click)').val(Drupal.t('Updating Preview...')).addClass('form-disabled').attr('disabled', 'disabled');
+        $this.find(':submit:not(.ctools-auto-submit-click)').val(Drupal.t('Updating...')).addClass('form-disabled').attr('disabled', 'disabled');
       }
 
 
