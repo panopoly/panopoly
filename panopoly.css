@@ -2,13 +2,13 @@
  * Stylesheet for Panopoly Profile
  */
 
-#panopoly-theme-form .form-item-theme {
+#panopoly-theme-selection-form .form-item-theme {
   clear: both;
   margin-top: .5em;
   margin-bottom: .5em;
 }
 
-#panopoly-theme-form .form-item-theme label img {
+#panopoly-theme-selection-form .form-item-theme label img {
   float: left;
   width: 100px;
   margin-right: 1em;
@@ -20,7 +20,7 @@
   margin-bottom: 1em;
 }
 
-#logo {
+body.maintenance-page #logo {
   background:transparent url(panopoly.png) no-repeat top left;
   height:0;
   overflow:hidden;
