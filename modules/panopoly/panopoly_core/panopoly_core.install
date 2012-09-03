@@ -24,6 +24,7 @@ function panopoly_core_requirements($phase) {
   $requirements['php_memory_limit'] = array(
     'title' => $t('PHP memory limit'),
     'value' => $memory_limit == -1 ? t('-1 (Unlimited)') : $memory_limit,
+    'weight' => 0,
   );
 
   if ($memory_limit && $memory_limit != -1 && parse_size($memory_limit) < parse_size($panopoly_memory_limit)) {
