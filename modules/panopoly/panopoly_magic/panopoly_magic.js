@@ -69,11 +69,14 @@
         triggerDisable.call(e.target.form);
       });
 
+      // Special handling for link field widgets. This ensures content which is ahah'd in still properly autosubmits.
+      $('.field-widget-link-field input:text', context).addClass('panopoly-textfield-autosubmit').addClass('ctools-auto-submit-exclude');
+
+
       // Handle title fields.
       var timer;
       $('.panopoly-textfield-autosubmit', context).bind('keyup keydown blur', function (e) {
         var $element;
-
         $element = $('.widget-preview .pane-title', context);
 
         // Special handling for title elements.
