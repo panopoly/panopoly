@@ -21,3 +21,6 @@ projects[simplified_menu_admin][subdir] = contrib
 
 projects[date_popup_authored][version] = 1.1
 projects[date_popup_authored][subdir] = contrib
+
+projects[ctools_automodal][version] = 1.1
+projects[ctools_automodal][sudir] = contrib
