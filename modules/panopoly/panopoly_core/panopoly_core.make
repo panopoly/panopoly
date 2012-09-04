@@ -59,6 +59,9 @@ projects[fieldable_panels_panes][subdir] = contrib
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
 
+projects[fape][version] = 1.1
+projects[fape][subdir] = contrib
+
 ; Views Magic
 
 projects[views][version] = 3.5
