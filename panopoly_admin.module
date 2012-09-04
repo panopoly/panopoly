@@ -259,14 +259,15 @@ function panopoly_admin_menu() {
 
   // Add settings pages for Panopoly and Panopoly Apps
   foreach(module_list() as $module) {
-    if ($app_info = module_invoke($module, 'apps_app_info')) {
+    $app_info = module_invoke($module, 'apps_app_info');
+    if (!empty($app_info) && !empty($app_info['configure form'])) {
       $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
       if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly') {
         $items['admin/config/panopoly/' . $module] = array(
           'title' => $module_info['name'],
           'description' => 'This is the configuration screen for ' . $module_info['name'],
           'page callback' => 'drupal_get_form',
-          'page arguments' => array('panopoly_admin_configure_form'),
+          'page arguments' => array($app_info['configure form']),
           'access arguments' => array('administer site configuration'),
         );
       } else if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly Apps') {
@@ -274,7 +275,7 @@ function panopoly_admin_menu() {
           'title' => $module_info['name'],
           'description' => 'This is the configuration screen for ' . $module_info['name'],
           'page callback' => 'drupal_get_form',
-          'page arguments' => array('panopoly_admin_configure_form'),
+          'page arguments' => array($app_info['configure form']),
           'access arguments' => array('administer site configuration'),
         );
       }
