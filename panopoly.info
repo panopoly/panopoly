@@ -15,7 +15,6 @@ dependencies[] = search
 dependencies[] = field
 dependencies[] = field_ui
 dependencies[] = file
-dependencies[] = block
 dependencies[] = dblog
 dependencies[] = update
 
