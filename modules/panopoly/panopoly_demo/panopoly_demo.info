@@ -1,7 +1,7 @@
 name = Panopoly Demo
 description = Demo content and functionality to help show the power of Panopoly
 core = 7.x
-package = Panopoly
+package = Panopoly Apps
 php = 5.2.4
 project = panopoly_demo
 dependencies[] = features
