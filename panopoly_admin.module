@@ -232,6 +232,54 @@ function panopoly_admin_menu() {
     'page arguments' => array('panopoly_admin_panelizer_delete_form', 3, 4),
     'access arguments' => array('administer panelizer'),
   );
+
+  // Add an administration section for Panopoly settings
+  $items['admin/config/panopoly'] = array(
+    'title' => 'Panopoly Settings',
+    'description' => 'Configuration related to Panopoly',
+    'position' => 'right',
+    'weight' => -50,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  // Add an administration section for Panopoly app settings
+  $items['admin/config/panopoly_apps'] = array(
+    'title' => 'Panopoly Apps Settings',
+    'description' => 'Configuration related to Panopoly Apps',
+    'position' => 'right',
+    'weight' => -45,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  // Add settings pages for Panopoly and Panopoly Apps
+  foreach(module_list() as $module) {
+    if ($app_info = module_invoke($module, 'apps_app_info')) {
+      $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
+      if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly') {
+        $items['admin/config/panopoly/' . $module] = array(
+          'title' => $module_info['name'],
+          'description' => 'This is the configuration screen for ' . $module_info['name'],
+          'page callback' => 'drupal_get_form',
+          'page arguments' => array('panopoly_admin_configure_form'),
+          'access arguments' => array('administer site configuration'),
+        );
+      } else if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly Apps') {
+        $items['admin/config/panopoly_apps/' . $module] = array(
+          'title' => $module_info['name'],
+          'description' => 'This is the configuration screen for ' . $module_info['name'],
+          'page callback' => 'drupal_get_form',
+          'page arguments' => array('panopoly_admin_configure_form'),
+          'access arguments' => array('administer site configuration'),
+        );
+      }
+    }
+  }
   return $items;
 }
 
