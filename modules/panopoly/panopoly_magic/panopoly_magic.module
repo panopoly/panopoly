@@ -197,6 +197,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     'menu_block_menu_tree_content_type_edit_form',
     'ctools_node_content_content_type_edit_form',
     'ctools_entity_field_content_type_formatter_options',
+    'panopoly_search_facet_content_type_edit_form',
   );
   if (in_array($form_id, $forms_to_improve)) {
   
@@ -215,6 +216,17 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
           $form['general_settings'][$child] = $form[$child];
           unset($form[$child]);
         }
+      }
+
+      // Don't show the context when it is the only one
+      if (!empty($form['general_settings']['context']) && count($form['general_settings']['context']['#options']) == 1) { 
+        $form['general_settings']['context']['#type'] = 'value';
+        $form['general_settings']['context']['#value'] = $form['general_settings']['context']['#default_value'];
+      }
+
+      // Don't show the override title text field unless we are overriding
+      if (!empty($form['general_settings']['override_title_text'])) {
+        $form['general_settings']['override_title_text']['#dependency_type'] = 'hide';
       }
 
       // Deal with cases where there is override title markup
@@ -573,17 +585,6 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
       $form['general_settings'][$field]['#field_prefix'] = $form['general_settings'][$field]['#title'];
       $form['general_settings'][$field]['#title'] = '';
     }
-  }
- 
-  // Don't show the override title text field unless we are overriding
-  if (!empty($form['general_settings']['override_title_text'])) {
-    $form['general_settings']['override_title_text']['#dependency_type'] = 'hide';
-  }
-
-  // Don't show the node context when it is the only one
-  if (!empty($form['general_settings']['context']) && count($form['general_settings']['context']['#options']) == 1) {
-    $form['general_settings']['context']['#type'] = 'value';
-    $form['general_settings']['context']['#value'] = $form['general_settings']['context']['#default_value'];
   }
 
   // Enable auto submit functionality
