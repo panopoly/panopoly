@@ -20,13 +20,13 @@ projects[panopoly_widgets][subdir] = panopoly
 projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
 
-projects[panopoly_pages][version] = 1.x-dev
-projects[panopoly_pages][subdir] = panopoly
-
 projects[panopoly_users][version] = 1.x-dev
 projects[panopoly_users][subdir] = panopoly
 
 ; The Panopoly Toolset
+
+projects[panopoly_pages][version] = 1.x-dev
+projects[panopoly_pages][subdir] = panopoly
 
 projects[panopoly_wysiwyg][version] = 1.x-dev
 projects[panopoly_wysiwyg][subdir] = panopoly
