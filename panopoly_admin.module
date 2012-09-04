@@ -233,8 +233,32 @@ function panopoly_admin_menu() {
     'access arguments' => array('administer panelizer'),
   );
 
+  // Add an administration page for Panopoly
+  $items['admin/panopoly'] = array(
+    'title' => 'Panopoly',
+    'description' => 'Administer all things Panopoly.',
+    'position' => 'right',
+    'weight' => -8,
+    'page callback' => 'panopoly_admin_config_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  // Add an administration section for the Panopoly dashboard
+  $items['admin/panopoly/dashboards'] = array(
+    'title' => 'Panopoly Dashboards',
+    'description' => 'Dashboards that power Panopoly.',
+    'position' => 'left',
+    'weight' => -50,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
   // Add an administration section for Panopoly settings
-  $items['admin/config/panopoly'] = array(
+  $items['admin/panopoly/settings'] = array(
     'title' => 'Panopoly Settings',
     'description' => 'Configuration related to Panopoly',
     'position' => 'right',
@@ -246,8 +270,8 @@ function panopoly_admin_menu() {
   );
 
   // Add an administration section for Panopoly app settings
-  $items['admin/config/panopoly_apps'] = array(
-    'title' => 'Panopoly Apps Settings',
+  $items['admin/panopoly/apps_settings'] = array(
+    'title' => 'Apps Settings',
     'description' => 'Configuration related to Panopoly Apps',
     'position' => 'right',
     'weight' => -45,
@@ -263,7 +287,7 @@ function panopoly_admin_menu() {
     if (!empty($app_info) && !empty($app_info['configure form'])) {
       $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
       if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly') {
-        $items['admin/config/panopoly/' . $module] = array(
+        $items['admin/panopoly/settings/' . $module] = array(
           'title' => $module_info['name'],
           'description' => 'This is the configuration screen for ' . $module_info['name'],
           'page callback' => 'drupal_get_form',
@@ -271,7 +295,7 @@ function panopoly_admin_menu() {
           'access arguments' => array('administer site configuration'),
         );
       } else if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly Apps') {
-        $items['admin/config/panopoly_apps/' . $module] = array(
+        $items['admin/panopoly/app_settings/' . $module] = array(
           'title' => $module_info['name'],
           'description' => 'This is the configuration screen for ' . $module_info['name'],
           'page callback' => 'drupal_get_form',
@@ -289,8 +313,8 @@ function panopoly_admin_menu() {
  */
 function panopoly_admin_menu_alter(&$items) {
 
-  // Set weight of dashboard to be good
-  $items['admin/site']['weight'] = -100;
+  // Set the description of the dashboard
+  $items['admin/panopoly/dashboards/site']['description'] = 'This is the primary site dashboard to manage Panopoly';
 
   // Set configuration elements of Apps to use modals
   /*
@@ -378,4 +402,53 @@ function panopoly_admin_panelizer_delete_form_submit($form, &$form_state) {
       ->execute();
 
   drupal_set_message(t('The overridden page template for %title has been deleted.', array('%title' => $form_state['values']['entity_title'])));
+}
+
+/**
+ * Menu callback: Provide the administration overview page.
+ * 
+ * Adapted from system_admin_config_page()
+ */
+function panopoly_admin_config_page() {
+  // Check for status report errors.
+  if (system_status(TRUE) && user_access('administer site configuration')) {
+    drupal_set_message(t('One or more problems were detected with your Drupal installation. Check the <a href="@status">status report</a> for more information.', array('@status' => url('admin/reports/status'))), 'error');
+  }
+  $blocks = array();
+  if ($admin = db_query("SELECT menu_name, mlid FROM {menu_links} WHERE link_path = 'admin/panopoly' AND module = 'system'")->fetchAssoc()) {
+    $result = db_query("
+      SELECT m.*, ml.*
+      FROM {menu_links} ml
+      INNER JOIN {menu_router} m ON ml.router_path = m.path
+      WHERE ml.link_path <> 'admin/help' AND menu_name = :menu_name AND ml.plid = :mlid AND hidden = 0", $admin, array('fetch' => PDO::FETCH_ASSOC));
+    foreach ($result as $item) {
+      _menu_link_translate($item);
+      if (!$item['access']) {
+        continue;
+      }
+      // The link description, either derived from 'description' in hook_menu()
+      // or customized via menu module is used as title attribute.
+      if (!empty($item['localized_options']['attributes']['title'])) {
+        $item['description'] = $item['localized_options']['attributes']['title'];
+        unset($item['localized_options']['attributes']['title']);
+      }
+      $block = $item;
+      $block['content'] = '';
+      $block['content'] .= theme('admin_block_content', array('content' => system_admin_menu_block($item)));
+      if (!empty($block['content'])) {
+        $block['show'] = TRUE;
+      }
+
+      // Prepare for sorting as in function _menu_tree_check_access().
+      // The weight is offset so it is always positive, with a uniform 5-digits.
+      $blocks[(50000 + $item['weight']) . ' ' . $item['title'] . ' ' . $item['mlid']] = $block;
+    }
+  }
+  if ($blocks) {
+    ksort($blocks);
+    return theme('admin_page', array('blocks' => $blocks));
+  }
+  else {
+    return t('You do not have any administrative items.');
+  }
 }
