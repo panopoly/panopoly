@@ -25,6 +25,7 @@ features[features_api][] = api:1
 features[page_manager_handlers][] = node_edit_panel_context
 features[page_manager_pages][] = panopoly_admin_layout_library
 features[page_manager_pages][] = panopoly_admin_page_library
+features[page_manager_pages][] = panopoly_admin_pane_library
 features[page_manager_pages][] = panopoly_site_dashboard
 features[user_role][] = administrative user
 features[user_role][] = editorial user
