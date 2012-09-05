@@ -63,6 +63,7 @@ features[views_view][] = panopoly_widgets_general_content
 files[] = panopoly_widgets.module
 scripts[] = js/panopoly_accordion.js
 scripts[] = js/panopoly_spotlight.js
+scripts[] = js/panopoly_tables.js
 stylesheets[all][] = css/panopoly_spotlight.css
 stylesheets[all][] = css/panopoly_accordion.css
 stylesheets[all][] = css/panopoly_views_slideshow.css
