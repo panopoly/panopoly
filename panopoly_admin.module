@@ -246,9 +246,9 @@ function panopoly_admin_menu() {
   );
 
   // Add an administration section for the Panopoly dashboard
-  $items['admin/panopoly/dashboards'] = array(
-    'title' => 'Panopoly Dashboards',
-    'description' => 'Dashboards that power Panopoly.',
+  $items['admin/panopoly/libraries'] = array(
+    'title' => 'Panopoly Libraries',
+    'description' => 'Libraries of Panopoly related items.',
     'position' => 'left',
     'weight' => -50,
     'page callback' => 'system_admin_menu_block_page',
@@ -315,6 +315,9 @@ function panopoly_admin_menu_alter(&$items) {
 
   // Set the description of the dashboard
   $items['admin/panopoly/dashboards/site']['description'] = 'This is the primary site dashboard to manage Panopoly';
+
+  // Set the description of the page library
+  $items['admin/panopoly/libraries/pages']['description'] = 'This is the page library for the site. See your landing pages, page templates, and overriden page templates.';
 
   // Set configuration elements of Apps to use modals
   /*
