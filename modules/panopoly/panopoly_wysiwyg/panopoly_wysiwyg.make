@@ -16,6 +16,11 @@ projects[wysiwyg][download][branch] = 7.x-2.x
 projects[wysiwyg_filter][version] = 1.6-rc2
 projects[wysiwyg_filter][subdir] = contrib
 
+; Panopoly - Contrib - LinkIt
+
+projects[linkit][version] = 2.5
+projects[linkit][subdir] = contrib
+
 ; Include our WYSIWYG editors
 
 libraries[tinymce][download][type] = get

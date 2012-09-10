@@ -71,7 +71,6 @@ function panopoly_wysiwyg_wysiwyg_default_profiles() {
           'indent' => 1,
           'undo' => 1,
           'redo' => 1,
-          'link' => 1,
           'unlink' => 1,
           'formatselect' => 1,
           'forecolor' => 1,
@@ -86,14 +85,14 @@ function panopoly_wysiwyg_wysiwyg_default_profiles() {
           'pastetext' => 1,
           'pasteword' => 1,
         ),
+        'linkit' => array(
+          'linkit' => 1,
+        ),
         'pdw' => array(
           'pdw_toggle' => 1,
         ),
         'spellchecker' => array(
           'spellchecker' => 1,
-        ),
-        'captionfilter' => array(
-          'captionfilter' => 1,
         ),
         'drupal' => array(
           'media' => 1,
