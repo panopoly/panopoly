@@ -12,3 +12,4 @@ Key Features
 * Custom styling for the CTools dropbutton and jQuery UI modals
 * Provides defaults about the Panopoly App Server for use by Apps.module
 * Special handling of site breadcrumb to append current page title
+* Installation profile specific code for cleaner profiles based on Panopoly
