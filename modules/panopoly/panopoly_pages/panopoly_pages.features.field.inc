@@ -153,7 +153,7 @@ function panopoly_pages_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 3,
+          'weight' => '3',
         ),
         'featured' => array(
           'label' => 'above',
@@ -342,7 +342,7 @@ function panopoly_pages_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 2,
+          'weight' => '2',
         ),
         'featured' => array(
           'label' => 'above',
