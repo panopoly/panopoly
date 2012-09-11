@@ -1,6 +1,7 @@
 (function ($) {
+
  /**
-   * Form behavior for Panopoly Admin
+   * UI Improvements for the Content Editing Form
    */
  Drupal.behaviors.panopolyAdmin = {
    attach: function (context, settings) {
@@ -16,7 +17,10 @@
      }
    }
  }
- 
+
+ /**
+   * Automatically Upload Files/Images Attached
+   */
  Drupal.behaviors.panopolyAutoUpload = {
     attach: function (context, settings) {
       $('input#edit-field-featured-image-und-0-upload').next('input[type="submit"]').hide();
