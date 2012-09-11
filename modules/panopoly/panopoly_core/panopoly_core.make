@@ -40,6 +40,7 @@ projects[ctools][version] = 1.2
 projects[ctools][subdir] = contrib
 projects[ctools][patch][1294478] = http://drupal.org/files/dynamic-modal-1294478-34.patch
 projects[ctools][patch][1774434] = http://drupal.org/files/1774434-ctools-allow-string-context-ui.patch
+projects[ctools][patch][1754770] = http://drupal.org/files/blocks_dependency_issue-1754770-1.patch
 
 projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
