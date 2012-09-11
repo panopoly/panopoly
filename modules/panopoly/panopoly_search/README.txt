@@ -5,4 +5,5 @@ Indexes and searches site content making it available to both Solr and DB search
 Key Features
 * Integration with Search API Solr for Solr searching
 * Integration with Search API for database searching
-* Panelized search page
+* Integration with and Panelization of Facet API module
+* Panelizer search pages for DB and Solr results

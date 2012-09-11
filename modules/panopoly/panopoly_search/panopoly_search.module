@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Code for the Panopoly Search feature.
- */
 
 include_once 'panopoly_search.features.inc';
 
