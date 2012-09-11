@@ -7,3 +7,4 @@ project = panopoly_theme
 dependencies[] = image
 features[features_api][] = api:1
 stylesheets[all][] = css/panopoly-featured.css
+stylesheets[all][] = css/panopoly-accordian.css
