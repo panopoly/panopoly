@@ -9,6 +9,7 @@ function panopoly_install_tasks(&$install_state) {
   // Require specific code required for the install profile process
   require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
   require_once(drupal_get_path('module', 'panopoly_theme') . '/panopoly_theme.profile.inc');
+  require_once(drupal_get_path('module', 'panopoly_core') . '/panopoly_core.profile.inc');
 
   // Assemble and return the install tasks
   $tasks = array();
@@ -23,10 +24,10 @@ function panopoly_install_tasks(&$install_state) {
 function panopoly_install_tasks_alter(&$tasks, $install_state) {
 
   // Magically go one level deeper in solving years of dependency problems with install profiles
-  $tasks['install_load_profile']['function'] = 'panopoly_install_load_profile';
+  $tasks['install_load_profile']['function'] = 'panopoly_core_install_load_profile';
 
   // Since we only offer one language, define a callback to set this
-  $tasks['install_select_locale']['function'] = 'panopoly_install_locale_selection';
+  $tasks['install_select_locale']['function'] = 'panopoly_core_install_locale_selection';
 }
 
 /**
@@ -72,29 +73,4 @@ function panopoly_form_apps_profile_apps_select_form_alter(&$form, $form_state) 
 
   // Remove the demo content selection option since this is handled through the Panopoly demo module.
   $form['default_content_fieldset']['#access'] = FALSE;
-}
-
-/**
- * Task handler to set the language to English since that is the only one
- * we have at the moment.
- */
-function panopoly_install_locale_selection(&$install_state) {
-  $install_state['parameters']['locale'] = 'en';
-}
-
-/**
- * Task handler to load our install profile and enhance the dependency information
- */
-function panopoly_install_load_profile(&$install_state) {
-
-  // Loading the install profile normally
-  install_load_profile($install_state);
-
-  // Include any dependencies that we might have missed...
-  foreach($install_state['profile_info']['dependencies'] as $module) {
-    $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
-    if (!empty($module_info['dependencies'])) {
-      $install_state['profile_info']['dependencies'] = array_unique(array_merge($install_state['profile_info']['dependencies'], $module_info['dependencies']));
-    }
-  }
 }
