@@ -20,7 +20,7 @@ function panopoly_images_ctools_plugin_api() {
 function panopoly_images_image_default_styles() {
   $styles = array();
 
-  // Exported image style: panopoly_image_featured
+  // Exported image style: panopoly_image_featured.
   $styles['panopoly_image_featured'] = array(
     'name' => 'panopoly_image_featured',
     'effects' => array(
@@ -59,7 +59,7 @@ function panopoly_images_image_default_styles() {
     ),
   );
 
-  // Exported image style: panopoly_image_full
+  // Exported image style: panopoly_image_full.
   $styles['panopoly_image_full'] = array(
     'name' => 'panopoly_image_full',
     'effects' => array(
@@ -82,7 +82,7 @@ function panopoly_images_image_default_styles() {
     ),
   );
 
-  // Exported image style: panopoly_image_half
+  // Exported image style: panopoly_image_half.
   $styles['panopoly_image_half'] = array(
     'name' => 'panopoly_image_half',
     'effects' => array(
@@ -105,7 +105,7 @@ function panopoly_images_image_default_styles() {
     ),
   );
 
-  // Exported image style: panopoly_image_quarter
+  // Exported image style: panopoly_image_quarter.
   $styles['panopoly_image_quarter'] = array(
     'name' => 'panopoly_image_quarter',
     'effects' => array(
@@ -128,7 +128,7 @@ function panopoly_images_image_default_styles() {
     ),
   );
 
-  // Exported image style: panopoly_image_spotlight
+  // Exported image style: panopoly_image_spotlight.
   $styles['panopoly_image_spotlight'] = array(
     'name' => 'panopoly_image_spotlight',
     'effects' => array(
@@ -150,7 +150,7 @@ function panopoly_images_image_default_styles() {
     ),
   );
 
-  // Exported image style: panopoly_image_square
+  // Exported image style: panopoly_image_square.
   $styles['panopoly_image_square'] = array(
     'name' => 'panopoly_image_square',
     'effects' => array(
@@ -172,7 +172,7 @@ function panopoly_images_image_default_styles() {
     ),
   );
 
-  // Exported image style: panopoly_image_thumbnail
+  // Exported image style: panopoly_image_thumbnail.
   $styles['panopoly_image_thumbnail'] = array(
     'name' => 'panopoly_image_thumbnail',
     'effects' => array(
