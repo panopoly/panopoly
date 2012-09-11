@@ -8,11 +8,11 @@ function panopoly_install_tasks(&$install_state) {
 
   $tasks = array();
 
-  // Add the Panopoly App Server to the Installation Process
+  // Add the Panopoly app selection to the installation process
   require_once(drupal_get_path('module', 'apps') . '/apps.profile.inc');
   $tasks = $tasks + apps_profile_install_tasks($install_state, array('machine name' => 'panopoly', 'default apps' => array('panopoly_demo')));
 
-  // Add the Panopoly theme selection to the Installation process
+  // Add the Panopoly theme selection to the installation process
   require_once(drupal_get_path('module', 'panopoly_theme') . '/panopoly_theme.profile.inc');
   $tasks = $tasks + panopoly_theme_profile_theme_selection_install_task($install_state);
 
