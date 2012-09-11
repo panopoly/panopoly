@@ -22,4 +22,4 @@ features[linkit_profiles][] = content_editors
 features[variable][] = media__wysiwyg_browser_plugins
 features[wysiwyg][] = panopoly_html_text
 features[wysiwyg][] = panopoly_wysiwyg_text
-stylesheets[all][] = panopoly_wysiwyg.css
+stylesheets[all][] = panopoly-wysiwyg.css
