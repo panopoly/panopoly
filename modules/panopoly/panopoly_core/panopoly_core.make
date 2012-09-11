@@ -79,9 +79,6 @@ projects[views_bulk_operations][subdir] = contrib
 
 ; The Usual Suspects
 
-projects[jquery_update][version] = 2.2
-projects[jquery_update][subdir] = contrib
-
 projects[pathauto][version] = 1.2
 projects[pathauto][subdir] = contrib
 projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-persist.patch
@@ -98,7 +95,7 @@ projects[libraries][subdir] = contrib
 projects[devel][version] = 1.3
 projects[devel][subdir] = contrib
 
-; Harness the Power of Features and Apps
+; Harness the Power of Features and Apps with Default Content
 
 projects[apps][version] = 1.0-beta7
 projects[apps][subdir] = contrib
@@ -108,8 +105,6 @@ projects[features][subdir] = contrib
 
 projects[strongarm][version] = 2.0
 projects[strongarm][subdir] = contrib
-
-; Allow for Default Content
 
 projects[defaultcontent][version] = 1.x-dev
 projects[defaultcontent][subdir] = contrib
