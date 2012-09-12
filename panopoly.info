@@ -31,6 +31,3 @@ dependencies[] = panopoly_users
 dependencies[] = panopoly_pages
 dependencies[] = panopoly_search
 dependencies[] = panopoly_wysiwyg
-
-; CSS Stylesheets
-stylesheets[all][] = panopoly.css
