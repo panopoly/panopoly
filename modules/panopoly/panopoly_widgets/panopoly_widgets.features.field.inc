@@ -733,7 +733,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_video_video',
       'foreign keys' => array(
-        'file_managed' => array(
+        'fid' => array(
           'columns' => array(
             'fid' => 'fid',
           ),
@@ -746,10 +746,14 @@ function panopoly_widgets_field_default_fields() {
         ),
       ),
       'locked' => '0',
-      'module' => 'mediafield',
-      'settings' => array(),
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
       'translatable' => '0',
-      'type' => 'media',
+      'type' => 'file',
     ),
     'field_instance' => array(
       'bundle' => 'video',
@@ -757,21 +761,22 @@ function panopoly_widgets_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
-          'module' => 'mediafield',
-          'settings' => array(
-            'file_view_mode' => 'default',
-          ),
-          'type' => 'media',
-          'weight' => '1',
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'fieldable_panels_pane',
       'field_name' => 'field_video_video',
       'label' => 'Video',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
-        'file_extensions' => 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp mp3 mov m4v mp4 mpeg avi ogg oga ogv wmv ico',
+        'description_field' => 0,
+        'file_directory' => 'videos',
+        'file_extensions' => 'mov m4v mp4 mpeg avi',
+        'max_filesize' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -799,7 +804,7 @@ function panopoly_widgets_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
-        'weight' => '-3',
+        'weight' => '-4',
       ),
     ),
   );
