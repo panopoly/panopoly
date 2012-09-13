@@ -733,7 +733,7 @@ function panopoly_widgets_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_video_video',
       'foreign keys' => array(
-        'fid' => array(
+        'file_managed' => array(
           'columns' => array(
             'fid' => 'fid',
           ),
@@ -746,14 +746,10 @@ function panopoly_widgets_field_default_fields() {
         ),
       ),
       'locked' => '0',
-      'module' => 'file',
-      'settings' => array(
-        'display_default' => 0,
-        'display_field' => 0,
-        'uri_scheme' => 'public',
-      ),
+      'module' => 'mediafield',
+      'settings' => array(),
       'translatable' => '0',
-      'type' => 'file',
+      'type' => 'media',
     ),
     'field_instance' => array(
       'bundle' => 'video',
@@ -762,12 +758,12 @@ function panopoly_widgets_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'hidden',
-          'module' => 'file_entity',
+          'module' => 'mediafield',
           'settings' => array(
             'file_view_mode' => 'default',
           ),
-          'type' => 'file_rendered',
-          'weight' => '0',
+          'type' => 'media',
+          'weight' => '1',
         ),
       ),
       'entity_type' => 'fieldable_panels_pane',
@@ -775,10 +771,7 @@ function panopoly_widgets_field_default_fields() {
       'label' => 'Video',
       'required' => 0,
       'settings' => array(
-        'description_field' => 0,
-        'file_directory' => 'videos',
-        'file_extensions' => 'mov m4v mp4 mpeg avi',
-        'max_filesize' => '',
+        'file_extensions' => 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp mp3 mov m4v mp4 mpeg avi ogg oga ogv wmv ico',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -806,7 +799,7 @@ function panopoly_widgets_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
-        'weight' => '-4',
+        'weight' => '-3',
       ),
     ),
   );
