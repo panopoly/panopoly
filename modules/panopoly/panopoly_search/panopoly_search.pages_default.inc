@@ -185,7 +185,7 @@ function panopoly_search_default_page_manager_pages() {
       'context' => array(),
       'override_title' => 1,
       'override_title_text' => 'Filter by Type',
-      'delta' => '0',
+      'delta' => 'Shb0Q1vWgCArrHrjHszTyhl2jaEhIjzW',
     );
     $pane->cache = array();
     $pane->style = array(
