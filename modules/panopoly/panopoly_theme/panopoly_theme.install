@@ -24,22 +24,23 @@ function panopoly_theme_uninstall() {
  */
 function panopoly_theme_update_7001(&$sandbox) {
 
-  // Get the theme data
-  $theme_data = _system_rebuild_theme_data();
-
-  // Update the Bartik or Garland logo to Panopoly's New Logo Location
-  foreach(array('bartik', 'garland', 'responsive_bartik') as $theme) {
-    $theme_data = _system_rebuild_theme_data();
-    if (strpos($theme_data[$theme]->info['settings']['logo_path'], 'panopoly_icon_theme.png')) {
-      $theme_data[$theme]->info['settings']['logo_path'] = drupal_get_path('module', 'panopoly_theme') . '/images/panopoly_icon_theme.png';
-      variable_set('theme_' . $theme . '_settings', $theme_data[$theme]->info['settings']);
+  // Update Bartik, Garland, or Responsive Bartik's Current Logo to New Panopoly Location
+  foreach(array('bartik', 'garland', 'responsive_bartik') as $theme_key) {
+    $theme_settings = variable_get('theme_' . $theme_key . '_settings');
+    if ($theme_settings['logo_path'] == 'profiles/panopoly/images/panopoly_icon_theme.png') {
+      $theme_settings['logo_path'] = drupal_get_path('module', 'panopoly_theme') . '/images/panopoly_icon_theme.png';
+      variable_set('theme_' . $theme_key . '_settings', $theme_settings);
     }
   }
 
   // Update Seven's Logo to Go Back to Normal
-  if ($theme_data['seven']->info['settings']['logo_path'] = 'profiles/panopoly/images/panopoly_icon_install.png') {
-    $theme_data['seven']->info['settings']['logo_path'] = '';
-    $theme_data['seven']->info['settings']['default_logo'] = 1;
-    variable_set('theme_seven_settings', $theme_data['seven']->info['settings']);
+  $theme_settings = variable_get('theme_seven_settings');
+  if ($theme_settings['logo_path'] == 'profiles/panopoly/images/panopoly_icon_install.png') {
+    $theme_settings['logo_path'] = '';
+    $theme_settings['default_logo'] = 1;
+    variable_set('theme_seven_settings', $theme_settings);
   }
+
+  // Flush the Theme Data
+  system_rebuild_theme_data();
 }
