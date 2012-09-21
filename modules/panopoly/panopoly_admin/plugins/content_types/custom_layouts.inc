@@ -41,7 +41,7 @@ function panopoly_admin_custom_layouts_content_type_render($subtype, $conf, $pan
     $pane->content = theme('table', array('header' => $header, 'rows' => $layout_options, 'attributes' => array('class' => array('custom-layouts'))));
   }
   else {
-    $pane->content = t('There are no additional custom layouts defined in your modules and themes');
+    $pane->content = t('There are no additional custom layouts defined in your modules and themes. !create one now!', array('!create' => l('Create', 'http://drupal.org/node/495654')));
   }
   return $pane;
 }
