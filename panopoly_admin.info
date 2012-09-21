@@ -29,5 +29,5 @@ features[user_role][] = administrator
 features[user_role][] = editor
 features[variable][] = admin_toolbar
 features[variable][] = user_admin_role
-scripts[] = panopoly_admin.js
-stylesheets[all][] = panopoly_admin.css
+scripts[] = panopoly-admin.js
+stylesheets[all][] = panopoly-admin.css
