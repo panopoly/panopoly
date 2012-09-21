@@ -387,7 +387,7 @@ function panopoly_admin_panelizer_delete_form($form, &$form_state, $entity_type,
  */
 function panopoly_admin_panelizer_delete_form_submit($form, &$form_state) {
 
-  $form_state['redirect'] = 'admin/site';
+  $form_state['redirect'] = 'admin/panopoly/libraries/pages';
 
   db_delete('panelizer_entity')
       ->condition('entity_type', $form_state['values']['entity_type'])
