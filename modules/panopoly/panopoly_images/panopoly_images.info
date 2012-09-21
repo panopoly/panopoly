@@ -40,4 +40,4 @@ features[image][] = panopoly_image_quarter
 features[image][] = panopoly_image_spotlight
 features[image][] = panopoly_image_square
 features[image][] = panopoly_image_thumbnail
-stylesheets[all][] = panopoly_images.css
+stylesheets[all][] = panopoly-images.css
