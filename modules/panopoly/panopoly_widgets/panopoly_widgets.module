@@ -168,7 +168,8 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Make some form modifications in cases where the item is being shown for the first time
-  if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && ($form_state['clicked_button']['#value'] == 'Update Preview' || ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id'])))) {
+  $clicked_button = empty($form_state['clicked_button']['#value']) ? '' : $form_state['clicked_button']['#value'];
+  if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && ($clicked_button == 'Update Preview' || ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id'])))) {
 
     // Quick modification to get tablefield to render correctly with default values
     if ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id']) && !empty($form_state['field']['field_basic_table_table'])) {
