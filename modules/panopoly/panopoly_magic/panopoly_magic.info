@@ -5,6 +5,7 @@ package = Panopoly
 php = 5.2.4
 project = panopoly_magic
 dependencies[] = ctools
+dependencies[] = fape
 dependencies[] = features
 dependencies[] = menu
 dependencies[] = node
