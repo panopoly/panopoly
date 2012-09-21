@@ -114,7 +114,7 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
 
     // Add fields to the FPP object if we are adding a reusable object for the first time
-    if ($form_state['entity']->reusable && $form_state['op'] == 'add') {
+    if ($form_state['entity']->reusable && $form_state['op'] == 'add' && $form_state['rebuild'] == FALSE) {
       $form = fieldable_panels_panes_entity_edit_form($form, $form_state);
     }
 
@@ -153,7 +153,7 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
     $form['reusable']['warning']['#type'] = 'item';
 
     // Update the text for the reusable markup
-    $form['reusable']['warning']['#markup'] = '<div class="description">' . t('Note: This item is reusable! Any changes made will change the values everywhere this item is used.') . '</div>';
+    $form['reusable']['warning']['#markup'] = '<div class="description">' . t('Note: This item is reusable! Any changes made will be applied globally.') . '</div>';
   }
 
   // Improve the usability and functionality of the table field widget
