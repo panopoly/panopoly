@@ -226,7 +226,7 @@ function panopoly_widgets_fieldable_panel_pane_pre_render($element) {
 
   // Add any remaining fields to the content settings fieldset.
   foreach ($element as $key => $value) {
-    if (substr($key, 0, 6) == 'field_') {
+    if (substr($key, 0, 6) == 'field_' || $key == 'body') {
       $element['content_settings'][$key] = $value;
       unset($element[$key]);
     }
