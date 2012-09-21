@@ -19,8 +19,8 @@ projects[responsive_bartik][download][type] = git
 projects[responsive_bartik][download][revision] = 7853fee
 projects[responsive_bartik][download][branch] = 7.x-1.x
 
-projects[radix][version] = 1.x-dev
-projects[radix][type] = theme
-projects[radix][download][type] = git
-projects[radix][download][revision] = b873330
-projects[radix][download][branch] = 7.x-1.x
+; projects[radix][version] = 1.x-dev
+; projects[radix][type] = theme
+; projects[radix][download][type] = git
+; projects[radix][download][revision] = b873330
+; projects[radix][download][branch] = 7.x-1.x
