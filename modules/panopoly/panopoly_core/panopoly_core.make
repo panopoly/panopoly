@@ -33,6 +33,7 @@ projects[pm_existing_pages][subdir] = contrib
 
 projects[fape][version] = 1.1
 projects[fape][subdir] = contrib
+projects[fape][patch][1785056] = http://drupal.org/files/remove-contextual-dep.patch
 
 ; Views Magic
 
