@@ -23,8 +23,8 @@
    */
  Drupal.behaviors.panopolyAutoUpload = {
     attach: function (context, settings) {
-      $('input#edit-field-featured-image-und-0-upload').next('input[type="submit"]').hide();
-      $('form', context).delegate('input#edit-field-featured-image-und-0-upload', 'change', function() {  
+      $('#node-edit input#edit-field-featured-image-und-0-upload').next('input[type="submit"]').hide();
+      $('form', context).delegate('#node-edit input#edit-field-featured-image-und-0-upload', 'change', function() {  
         $(this).next('input[type="submit"]').mousedown();
       }); 
     }
