@@ -116,7 +116,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Run entity information through standard submission form if this is a new or updated object
       // Update the pane settngs with the VID afterwards
-      if (!$form_state['entity']->reusable || $form_state['op'] != 'add') {
+      if (!$form_state['entity']->reusable || $form_state['op'] != 'add' || $form_state['rebuild'] == TRUE) {
 
         // Process the entity to create a preview. Set the FPID to be the correct version. 
         $form_state['values'] = (!empty($form_state['values'])) ? $form_state['values'] : array();
