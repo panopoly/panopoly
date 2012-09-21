@@ -15,6 +15,7 @@ projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
 projects[panels][patch][1735336] = http://drupal.org/files/1735336-repaint-draghandle-ipe-initial.patch
 projects[panels][patch][1788170] = http://drupal.org/files/panels-edit-context-overwrite.patch
+projects[panels][patch][1772834] = http://drupal.org/files/1772834-fix-lost-context.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
