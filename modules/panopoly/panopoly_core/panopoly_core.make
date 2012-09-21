@@ -44,7 +44,7 @@ projects[views][subdir] = contrib
 projects[views_autocomplete_filters][version] = 1.0-beta1
 projects[views_autocomplete_filters][subdir] = contrib
 
-projects[views_bulk_operations][version] = 3.0-rc1
+projects[views_bulk_operations][version] = 3.0
 projects[views_bulk_operations][subdir] = contrib
 
 
