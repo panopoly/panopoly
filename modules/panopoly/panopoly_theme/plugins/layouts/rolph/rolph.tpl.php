@@ -36,7 +36,7 @@
     </div>
     <div class="rolph-column-content-region rolph-quarter4 rolph-quarter panel-panel">
       <div class="rolph-column-content-region-inner rolph-quarter4-inner rolph-quarter-inner panel-panel-inner">
-        <?php print $content['quarter2']; ?>
+        <?php print $content['quarter4']; ?>
       </div>
     </div>
   </div>
