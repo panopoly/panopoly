@@ -8,9 +8,10 @@ core = 7.x
 projects[wysiwyg][subdir] = contrib
 projects[wysiwyg][version] = 2.x-dev
 projects[wysiwyg][patch][1489096] = http://drupal.org/files/wysiwyg-table-format.patch
-projects[wysiwyg][patch][356480] = http://drupal.org/files/wysiwyg-lazy-init-scripts.356480.202.patch
+projects[wysiwyg][patch][356480] = http://drupal.org/files/lazy_wysiwyg-356480-150.patch
 projects[wysiwyg][download][type] = git
-projects[wysiwyg][download][revision] = 6e6431e
+projects[wysiwyg][download][revision] = d17bf11
+projects[wysiwyg][download][type] = git
 projects[wysiwyg][download][branch] = 7.x-2.x
 
 projects[wysiwyg_filter][version] = 1.6-rc2
