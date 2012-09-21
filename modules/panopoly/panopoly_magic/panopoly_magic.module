@@ -186,7 +186,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
 
     // Create the preview fieldset
-    if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' || $content) {
+    if (($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && $content) || $content) {
 
       // Create the fieldset with appropriate content
       $form['widget_preview'] = array(
