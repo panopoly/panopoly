@@ -5,7 +5,7 @@ core = 7.x
 
 ; Search API and Facet API Modules
 
-projects[facetapi][version] = 1.1
+projects[facetapi][version] = 1.2
 projects[facetapi][subdir] = contrib
 
 projects[search_api][version] = 1.2
