@@ -619,43 +619,40 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
     }
   }
 
-  // Only add in the field edit fields if FAPE is enabled.
-  if (module_exists('fape')) {
-    if (empty($form_state['entity'])) {
-      // Determine what entity type and field name we are editing based on the form subtype and URL args.
-      $arg_parts = explode(':', arg(4));
-      list($entity_type, $field_name) = explode(':', $form_state['subtype_name']);
-      $entity = reset(entity_load($entity_type, array($arg_parts[2])));
+  // Add in the field edit fields with FAPE
+  if (empty($form_state['entity'])) {
+    // Determine what entity type and field name we are editing based on the form subtype and URL args.
+    $arg_parts = explode(':', arg(4));
+    list($entity_type, $field_name) = explode(':', $form_state['subtype_name']);
+    $entity = reset(entity_load($entity_type, array($arg_parts[2])));
 
-      $form_state['entity'] = $entity;
-      $form_state['entity_type'] = $entity_type;
-      $form_state['field_name'] = $field_name;
-      $form_state['bundle'] = empty($entity->bundle) ? $entity->type : $entity->bundle;
-      $form_state['field_instance'] = field_info_instance($entity_type, $field_name, $form_state['bundle']);
-      $form_state['langcode'] = LANGUAGE_NONE;
-      $form_state['subform_id'] = 'fape_field_edit_field_form';
-    }
-
-    // Ensure form id, form token, and form build id are on the root of the form.
-    // Image fields in particular have issues with this.
-    $form['form_id'] = $form['general_settings']['form_id'];
-    $form['form_token'] = $form['general_settings']['form_token'];
-    $form['form_build_id'] = $form['general_settings']['form_build_id'];
-    unset($form['general_settings']['form_id']);
-    unset($form['general_settings']['form_token']);
-    unset($form['general_settings']['form_build_id']);
-
-    // Add the field edit form.
-    fape_field_edit_field_form($form, $form_state);
-
-    // Remove the default submitter in favor of our own custom submit callback.
-    array_pop($form['#submit']);
-    $form['#submit'][] = 'panopoly_magic_fape_submit';
-
-    // Pre-rende fields into a fieldset.
-    $form['#pre_render'][] = 'panopoly_magic_panelizer_pre_render';
-    
+    $form_state['entity'] = $entity;
+    $form_state['entity_type'] = $entity_type;
+    $form_state['field_name'] = $field_name;
+    $form_state['bundle'] = empty($entity->bundle) ? $entity->type : $entity->bundle;
+    $form_state['field_instance'] = field_info_instance($entity_type, $field_name, $form_state['bundle']);
+    $form_state['langcode'] = LANGUAGE_NONE;
+    $form_state['subform_id'] = 'fape_field_edit_field_form';
   }
+
+  // Ensure form id, form token, and form build id are on the root of the form.
+  // Image fields in particular have issues with this.
+  $form['form_id'] = $form['general_settings']['form_id'];
+  $form['form_token'] = $form['general_settings']['form_token'];
+  $form['form_build_id'] = $form['general_settings']['form_build_id'];
+  unset($form['general_settings']['form_id']);
+  unset($form['general_settings']['form_token']);
+  unset($form['general_settings']['form_build_id']);
+
+  // Add the field edit form.
+  fape_field_edit_field_form($form, $form_state);
+
+  // Remove the default submitter in favor of our own custom submit callback.
+  array_pop($form['#submit']);
+  $form['#submit'][] = 'panopoly_magic_fape_submit';
+
+  // Pre-rende fields into a fieldset.
+  $form['#pre_render'][] = 'panopoly_magic_panelizer_pre_render';
 
   // Enable auto submit functionality
   if (variable_get('panopoly_magic_live_preview', 1)) {
@@ -704,12 +701,10 @@ function panopoly_magic_panelizer_pre_render($element) {
 }
 
 function panopoly_magic_form_ctools_entity_field_content_type_formatter_styles_alter(&$form, &$form_state, $form_id) {
-  if (module_exists('fape')) {
-    // Push the panopoly magic submitter onto the front of the submit array.
-    // We need it at the beginning so the entity is saved before the IPE 
-    // reloads pane content.
-    $form['#submit'][] = 'panopoly_magic_fape_submit';
-  }
+  // Push the panopoly magic submitter onto the front of the submit array.
+  // We need it at the beginning so the entity is saved before the IPE 
+  // reloads pane content.
+  $form['#submit'][] = 'panopoly_magic_fape_submit';
 }
 
 /**
