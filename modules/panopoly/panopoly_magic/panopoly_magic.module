@@ -121,7 +121,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
         // Process the entity to create a preview. Set the FPID to be the correct version. We need to 
         // generate a fake set of values to avoid notices from FPP as per http://drupal.org/node/1791734.
-        $form_state['values'] = (!empty($form_state['values'])) ? $form_state['values'] : array('title' => '', 'link' => '', 'path' => '', 'reusable' => '', 'category' => '', 'admin_title' => '', 'admin_description' => '', 'revision' => '');
+        $form_state['values'] = (!empty($form_state['values'])) ? $form_state['values'] : array('language' => '', 'title' => '', 'link' => '', 'path' => '', 'reusable' => '', 'category' => '', 'admin_title' => '', 'admin_description' => '', 'revision' => '');
         fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
         $preview_subtype = 'vid:' . $form_state['entity']->vid;
         $pane->subtype = 'fpid:' . $form_state['entity']->fpid;
