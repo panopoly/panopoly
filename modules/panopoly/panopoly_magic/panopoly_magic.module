@@ -23,6 +23,16 @@ function panopoly_magic_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function panopoly_magic_menu_alter(&$items) {
+  // Include entity_field.inc from ctools to ensure that files can be properly removed 
+  // from within the panelizer edit forms.
+  $items['file/ajax']['file'] = 'entity_field.inc';
+  $items['file/ajax']['file path'] = drupal_get_path('module', 'ctools') .'/plugins/content_types/entity_context';
+}
+
+/**
  * Configuration Form for Panopoly Magic
  */
 function panopoly_magic_configure_form($form, &$form_state) {
@@ -58,12 +68,17 @@ function panopoly_magic_module_implements_alter(&$implementations, $hook) {
  * Implements hook_form_alter()
  */
 function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
-
   /**
    * Add a custom preview to the content type edit form and style edit form. This is applied in all cases, except for cases where
    * we are customizing an entity (i.e. fieldable panels panes) because we cannot reliable regenerate a preview without saving.
    */
-  if (variable_get('panopoly_magic_live_preview', 1) && (strpos($form_id, '_content_type_edit_form') || $form_id == 'panels_edit_style_type_form') || $form_id == 'panels_edit_style_settings_form' || $form_id == 'ctools_entity_field_content_type_formatter_options') {
+  $ids_to_alter = array(
+    'panels_edit_style_settings_form',
+    'panels_edit_style_type_form',
+    'ctools_entity_field_content_type_formatter_options',
+    'ctools_entity_field_content_type_formatter_styles',
+  );
+  if (variable_get('panopoly_magic_live_preview', 1) && (strpos($form_id, '_content_type_edit_form') || in_array($form_id, $ids_to_alter))) {
 
     // Start the magic
     $pane = $form_id == 'panels_edit_style_settings_form' ? $form_state['display']->content[$form_state['pid']] : $form_state['pane'];
@@ -136,7 +151,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Set the configuration and determine the content for the pane
-    $configuration = ($form_state['rebuild'] && (strpos($form_id, 'content_type_edit_form') || $form_id == 'ctools_entity_field_content_type_formatter_options')) ? $form_state['input'] : $pane->configuration;
+    $configuration = ($form_state['rebuild'] && (strpos($form_id, 'content_type_edit_form') || $form_id == 'ctools_entity_field_content_type_formatter_options' || $form_id == 'ctools_entity_field_content_type_formatter_styles')) ? array_merge($pane->configuration, $form_state['input']) : $pane->configuration;
     $keywords = array();
     $args = array();
     if (!empty($form_state['contexts'])) {
@@ -147,6 +162,24 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
     else {
       $context = array();
+    }
+   
+    // Special case for panelizer fields being edited through the IPE. For some reason images are not being fully loaded
+    if (!empty($pane->configuration['formatter']) && $pane->configuration['formatter'] == 'image') {
+      list($entity_type, $field_name) = explode(':', $pane->subtype);
+      if (!empty($form_state['entity']) && !empty($form_state['entity']->$field_name)) {
+        $form_state['entity']->{$field_name}[LANGUAGE_NONE][0] = array_merge((array) file_load($form_state['entity']->{$field_name}[LANGUAGE_NONE][0]['fid']), $form_state['entity']->{$field_name}[LANGUAGE_NONE][0]);
+      }
+
+      if (!empty($configuration['image_style']) ) {
+        $configuration['formatter_settings']['image_style'] = $configuration['image_style'];
+        unset($configuration['image_style']);
+      }
+
+      if (!empty($configuration['image_link'])) {
+        $configuration['formatter_settings']['image_link'] = $configuration['image_link'];
+        unset($configuration['image_link']);
+      }
     }
     $content = (empty($preview_subtype)) ? ctools_content_render($pane->type, $pane->subtype, $configuration, $keywords, $args, $context) : ctools_content_render($pane->type, $preview_subtype, $configuration, $keywords, $args, $context);
 
@@ -206,6 +239,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     'ctools_node_content_content_type_edit_form',
     'ctools_entity_field_content_type_formatter_options',
     'panopoly_search_facet_content_type_edit_form',
+    'ctools_entity_field_content_type_formatter_styles'
   );
 
   if (in_array($form_id, $forms_to_improve)) {
@@ -585,14 +619,112 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
     }
   }
 
+  // Only add in the field edit fields if FAPE is enabled.
+  if (module_exists('fape')) {
+    if (empty($form_state['entity'])) {
+      // Determine what entity type and field name we are editing based on the form subtype and URL args.
+      $arg_parts = explode(':', arg(4));
+      list($entity_type, $field_name) = explode(':', $form_state['subtype_name']);
+      $entity = reset(entity_load($entity_type, array($arg_parts[2])));
+
+      $form_state['entity'] = $entity;
+      $form_state['entity_type'] = $entity_type;
+      $form_state['field_name'] = $field_name;
+      $form_state['bundle'] = empty($entity->bundle) ? $entity->type : $entity->bundle;
+      $form_state['field_instance'] = field_info_instance($entity_type, $field_name, $form_state['bundle']);
+      $form_state['langcode'] = LANGUAGE_NONE;
+      $form_state['subform_id'] = 'fape_field_edit_field_form';
+    }
+
+    // Ensure form id, form token, and form build id are on the root of the form.
+    // Image fields in particular have issues with this.
+    $form['form_id'] = $form['general_settings']['form_id'];
+    $form['form_token'] = $form['general_settings']['form_token'];
+    $form['form_build_id'] = $form['general_settings']['form_build_id'];
+    unset($form['general_settings']['form_id']);
+    unset($form['general_settings']['form_token']);
+    unset($form['general_settings']['form_build_id']);
+
+    // Add the field edit form.
+    fape_field_edit_field_form($form, $form_state);
+
+    // Remove the default submitter in favor of our own custom submit callback.
+    array_pop($form['#submit']);
+    $form['#submit'][] = 'panopoly_magic_fape_submit';
+
+    // Pre-rende fields into a fieldset.
+    $form['#pre_render'][] = 'panopoly_magic_panelizer_pre_render';
+    
+  }
+
   // Enable auto submit functionality
   if (variable_get('panopoly_magic_live_preview', 1)) {
     panopoly_magic_autosubmit_configure($form);
   }
 
+
   // Add a custom submit handler to our preview and submit option
   $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
   $form['buttons']['preview']['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
+}
+
+/**
+ * Implement the "Content Settings" fieldset in a pre-render. This fixes issues with image caused by initially
+ * doing this in a form_alter.
+ *
+ * @see http://drupal.org/node/1567704
+ */
+function panopoly_magic_panelizer_pre_render($element) {
+  $exclude_list = array(
+    'form_id',
+    'form_token',
+    'form_build_id',
+    'buttons',
+  );
+
+  // Add any remaining fields to the content settings fieldset.
+  foreach (element_children($element) as $key) {
+    $value = $element[$key];
+    if (!in_array($key, $exclude_list) && !empty($value['#type']) && $value['#type'] != 'fieldset') {
+      if (empty($element['content_settings'])) {
+        // Add a content settings fieldset.
+        $element['content_settings'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Content Settings'),
+          '#weight' => 1,
+        );
+      }
+
+      $element['content_settings'][$key] = $value;
+      unset($element[$key]);
+    }
+  }
+
+  return $element;
+}
+
+function panopoly_magic_form_ctools_entity_field_content_type_formatter_styles_alter(&$form, &$form_state, $form_id) {
+  if (module_exists('fape')) {
+    // Push the panopoly magic submitter onto the front of the submit array.
+    // We need it at the beginning so the entity is saved before the IPE 
+    // reloads pane content.
+    $form['#submit'][] = 'panopoly_magic_fape_submit';
+  }
+}
+
+/**
+ * Custom submit callback for FAPE enabled stylizer forms.
+ */
+function panopoly_magic_fape_submit(&$form, &$form_state) {
+  // If there isn't a next step save the entity.
+  if ((empty($form_state['clicked_button']['#next'])  || !empty($form_state['field']['body'])) && !empty($form_state['entity'])) {
+    entity_save($form_state['entity_type'], $form_state['entity']);
+    $form_state['display_cache']->display->context['panelizer']->data = $form_state['entity'];
+  }
+  // Otherwise we're on step 1, so just run the FAPE submitter.
+  else {
+    fape_field_edit_field_form_submit($form, $form_state);
+  }
 }
 
 /** 
