@@ -8,6 +8,7 @@
 }
 
 .pond-column {
+  min-height: 1px;
   width: 34.043%;
   float: left;
 }
@@ -18,6 +19,7 @@
 
   .pond-column3,
   .pond-secondary-column3 {
+    min-height: 1px;
     width: 31.915%;
     margin-right: 0;
   }

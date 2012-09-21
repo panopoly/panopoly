@@ -13,6 +13,7 @@
 }
 
 .taylor-quarter1 {
+  min-height: 1px;
   width: 25.532%;
   float: left;
 }
@@ -23,6 +24,7 @@
 }
 
 .taylor-quarter2 {
+  min-height: 1px;
   width: 23.404%;
   float: left;
 }

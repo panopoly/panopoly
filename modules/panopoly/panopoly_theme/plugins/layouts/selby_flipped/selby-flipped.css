@@ -10,6 +10,7 @@
 }
 
 .selby-flipped-column {
+  min-height: 1px;
   width: 34.043%;
   float: left;
 }
@@ -24,6 +25,7 @@
     
 .selby-flipped-content-container { /* This is floated to the left of the sidebar,
   which is styled by the generic "selby-flipped-column" class */
+  min-height: 1px;
   float: left;
   width: 68.085%;
 }

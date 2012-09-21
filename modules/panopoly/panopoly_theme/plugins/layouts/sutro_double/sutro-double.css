@@ -8,6 +8,7 @@
 }
 
 .sutro-double-column {
+  min-height: 1px;
   width: 51.064%;
   float: left;
 }

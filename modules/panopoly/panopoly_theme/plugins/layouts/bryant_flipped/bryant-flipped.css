@@ -8,6 +8,7 @@
 }
 
 .bryant-flipped-sidebar {
+  min-height: 1px;
   width: 21.277%;
   float: left;
 }

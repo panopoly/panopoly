@@ -8,6 +8,7 @@
 }
 
 .hewston-slider {
+  min-height: 1px;
   float: left;
   width: 68.085%;
 }
@@ -17,11 +18,13 @@
   }
 
 .hewston-slider-gutter {
+  min-height: 1px;
   float: left;
   width: 31.915%;
 }
 
 .hewston-middle-region {
+  min-height: 1px;
   width: 34.043%;
   float: left;
 }

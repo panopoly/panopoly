@@ -8,6 +8,7 @@
 }
 
 .whelan-column-content-region {
+  min-height: 1px;
   width: 25.532%;
   float: left;
 }

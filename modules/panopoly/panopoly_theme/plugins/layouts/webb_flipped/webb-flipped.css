@@ -9,6 +9,7 @@
 }
 
 .webb-flipped-column {
+  min-height: 1px;
   width: 31.915%;
   float: left;
 }
@@ -24,6 +25,7 @@
   
 .webb-flipped-content-container { /* This is floated to the left of the sidebar,
   which is styled by the generic "webb-flipped-column" class */
+  min-height: 1px;
   float: left;
   width: 68.085%;
 }

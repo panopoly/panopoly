@@ -8,12 +8,14 @@
 }
 
 .taylor-flipped-half {
+  min-height: 1px;
   width: 48.936%; /* 460 / 940 = 48.936% */
   float: left;
 }
 
 .taylor-flipped-quarter1,
 .taylor-flipped-quarter2 {
+  min-height: 1px;
   width: 25.532%; /* 240 / 940 = 25.532% */
   float: left;
 }

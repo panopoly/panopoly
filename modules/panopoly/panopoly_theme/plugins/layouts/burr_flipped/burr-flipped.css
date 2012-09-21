@@ -8,6 +8,7 @@
 }
 
 .burr-flipped-sidebar {
+  min-height: 1px;
   width: 31.915%;
   float: left;
 }

@@ -8,6 +8,7 @@
 }
 
 .rolph-quarter {
+  min-height: 1px;
   width: 25.532%; /* 240 / 940 = 25.532% */
   float: left;
 }

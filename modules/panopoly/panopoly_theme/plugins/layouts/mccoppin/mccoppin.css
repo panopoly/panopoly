@@ -8,6 +8,7 @@
 }
 
 .mccoppin-column-content-region {
+  min-height: 1px;
   width: 34.043%;
   float: left;
 }

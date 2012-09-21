@@ -8,6 +8,7 @@
 }
 
 .bryant-sidebar {
+  min-height: 1px;
   width: 23.404%;
   float: left;
 }

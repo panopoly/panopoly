@@ -8,6 +8,7 @@
 }
 
 .moscone-flipped-content {
+  min-height: 1px;
   width: 68.085%;
   float: left;
 }
@@ -17,6 +18,7 @@
   }
 
 .moscone-flipped-sidebar {
+  min-height: 1px;
   width: 31.915%;
   float: left;
 }

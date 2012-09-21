@@ -9,6 +9,7 @@
 }
 
 .webb-column {
+  min-height: 1px;
   width: 34.043%; /* 320 / 940 */
   float: left;
 }
@@ -23,6 +24,7 @@
   
 .webb-content-container { /* This is floated to the left of the sidebar,
   which is styled by the generic "webb-column" class */
+  min-height: 1px;
   float: left;
   width: 65.957%; /* 620 / 940 */
 }

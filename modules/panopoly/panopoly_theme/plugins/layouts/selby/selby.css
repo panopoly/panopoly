@@ -10,6 +10,7 @@
 }
 
 .selby-column {
+  min-height: 1px;
   width: 34.043%;
   float: left;
 }
@@ -24,6 +25,7 @@
   
 .selby-content-container { /* This is floated to the left of the sidebar,
   which is styled by the generic "selby-column" class */
+  min-height: 1px;
   float: left;
   width: 65.957%;
 }
