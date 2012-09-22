@@ -29,7 +29,7 @@ function panopoly_users_panelizer_defaults() {
   $panelizer->title_element = 'H2';
   $panelizer->link_to_entity = TRUE;
   $display = new panels_display();
-  $display->layout = 'burr';
+  $display->layout = 'phelan';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -37,6 +37,8 @@ function panopoly_users_panelizer_defaults() {
       'center' => NULL,
       'contentmain' => NULL,
       'sidebar' => NULL,
+      'column1' => NULL,
+      'column2' => NULL,
     ),
   );
   $display->cache = array();
@@ -45,7 +47,7 @@ function panopoly_users_panelizer_defaults() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'contentmain';
+    $pane->panel = 'column1';
     $pane->type = 'user_profile';
     $pane->subtype = 'user_profile';
     $pane->shown = TRUE;
@@ -65,10 +67,10 @@ function panopoly_users_panelizer_defaults() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['contentmain'][0] = 'new-1';
+    $display->panels['column1'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'sidebar';
+    $pane->panel = 'column2';
     $pane->type = 'entity_field';
     $pane->subtype = 'user:field_user_picture';
     $pane->shown = TRUE;
@@ -80,12 +82,25 @@ function panopoly_users_panelizer_defaults() {
       'delta_offset' => '0',
       'delta_reversed' => FALSE,
       'formatter_settings' => array(
-        'image_style' => 'panopoly_image_featured',
+        'image_style' => 'panopoly_image_full',
         'image_link' => '',
       ),
       'context' => 'panelizer',
       'override_title' => 1,
       'override_title_text' => '',
+      'view_mode' => NULL,
+      'widget_title' => NULL,
+      'items_per_page' => NULL,
+      'exposed' => array(
+        'sort_by' => NULL,
+        'sort_order' => NULL,
+      ),
+      'use_pager' => NULL,
+      'pager_id' => NULL,
+      'offset' => NULL,
+      'link_to_view' => NULL,
+      'more_link' => NULL,
+      'path' => NULL,
     );
     $pane->cache = array();
     $pane->style = array(
@@ -96,7 +111,7 @@ function panopoly_users_panelizer_defaults() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['sidebar'][0] = 'new-2';
+    $display->panels['column2'][0] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $panelizer->display = $display;
