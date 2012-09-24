@@ -35,5 +35,5 @@ projects[panopoly_pages][subdir] = panopoly
 projects[panopoly_wysiwyg][version] = 1.0-beta6
 projects[panopoly_wysiwyg][subdir] = panopoly
 
-projects[panopoly_search][version] = 1.0-beat6
+projects[panopoly_search][version] = 1.0-beta6
 projects[panopoly_search][subdir] = panopoly
