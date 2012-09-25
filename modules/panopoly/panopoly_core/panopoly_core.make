@@ -44,10 +44,11 @@ projects[fieldable_panels_panes][patch][1536944] = http://drupal.org/files/Field
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
 
-projects[fape][version] = 1.1
+projects[fape][version] = 1.x-dev
 projects[fape][subdir] = contrib
-projects[fape][patch][1607652] = http://drupalcode.org/project/fape.git/commitdiff_plain/c8c7c4d
-projects[fape][patch][1785056] = http://drupalcode.org/project/fape.git/commitdiff_plain/1143ee2
+projects[fape][download][type] = git
+projects[fape][download][revision] = 1143ee2
+projects[fape][download][branch] = 7.x-1.x
 
 ; Views Magic
 
@@ -91,11 +92,11 @@ projects[features][subdir] = contrib
 projects[strongarm][version] = 2.0
 projects[strongarm][subdir] = contrib
 
-projects[defaultcontent][version] = 1.0-alpha6
+projects[defaultcontent][version] = 1.x-dev
 projects[defaultcontent][subdir] = contrib
-projects[defaultcontent][patch][1446714] = http://drupalcode.org/project/defaultcontent.git/commitdiff_plain/051bae5
-projects[defaultcontent][patch][1446714] = http://drupalcode.org/project/defaultcontent.git/commitdiff_plain/5ca9ecd
-projects[defaultcontent][patch][1515024] = http://drupalcode.org/project/defaultcontent.git/commitdiff_plain/d8806d8
+projects[defaultcontent][download][type] = git
+projects[defaultcontent][download][revision] = d8806d8
+projects[defaultcontent][download][branch] = 7.x-1.x
 
 projects[uuid][version] = 1.x-dev
 projects[uuid][subdir] = contrib
