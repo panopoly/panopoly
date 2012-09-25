@@ -20,7 +20,7 @@ projects[simple_gmap][subdir] = contrib
 projects[field_group][version] = 1.1
 projects[field_group][subdir] = contrib
 
-projects[entityreference][version] = 1.0-rc3
+projects[entityreference][version] = 1.0-rc5
 projects[entityreference][subdir] = contrib
 
 ; Panopoly - Contrib - Widgets
