@@ -24,8 +24,11 @@ projects[panopoly_widgets][download][type] = git
 projects[panopoly_widgets][download][revision] = ec86618
 projects[panopoly_widgets][download][branch] = 7.x-1.x
 
-projects[panopoly_admin][version] = 1.0-beta6
+projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
+projects[panopoly_admin][download][type] = git
+projects[panopoly_admin][download][revision] = b5c3e49
+projects[panopoly_admin][download][branch] = 7.x-1.x
 
 projects[panopoly_users][version] = 1.0-beta6
 projects[panopoly_users][subdir] = panopoly
