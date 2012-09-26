@@ -103,3 +103,4 @@ projects[uuid][subdir] = contrib
 projects[uuid][download][type] = git
 projects[uuid][download][revision] = 4730c67
 projects[uuid][download][branch] = 7.x-1.x
+projects[uuid][patch][1605284] = http://drupal.org/files/1605284-define-types-for-tokens.patch
