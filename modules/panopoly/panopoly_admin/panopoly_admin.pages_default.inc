@@ -122,7 +122,7 @@ function panopoly_admin_default_page_manager_handlers() {
       'formatter' => '',
       'context' => 'argument_node_edit_1',
       'override_title' => 1,
-      'override_title_text' => 'Primary image',
+      'override_title_text' => 'Featured image',
     );
     $pane->cache = array();
     $pane->style = array(
