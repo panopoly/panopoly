@@ -86,6 +86,25 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     ctools_include('plugins', 'panels');
     ctools_include('content');
 
+    // Do some special processing for stylizer settings forms to ensure previews work correctly.
+    if ($form_id == 'panels_edit_style_settings_form') {
+
+      if (!empty($form_state['style']) && is_array($form_state['style'])) {
+        $form_state['style'] = $form_state['style']['name'];
+      }
+
+      if (!empty($form_state['values']['settings'])) {
+        $form_state['conf'] = $form_state['values']['settings'];
+      }
+
+      if (!empty($form_state['values']['settings'])) {
+        $pane->style = array(
+          'settings' => $form_state['values']['settings'],
+          'style' => $form_state['style'],
+        );
+      }
+    }
+
     // Determine the style
     if (strpos($form_id, '_content_type_edit_form') || $form_id == 'ctools_entity_field_content_type_formatter_options') {
       $style = (isset($pane->style['style'])) ? panels_get_style($pane->style['style']) : NULL;
@@ -94,7 +113,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_type_form') ? panels_get_style($form_state['values']['style']) : panels_get_style($form_state['style']);
     }
     elseif ($form_id == 'panels_edit_style_settings_form') {
-      $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_settings_form') ? panels_get_style($form_state['values']['style']) : panels_get_style($form_state['style']);
+      $style = panels_get_style($form_state['style']);
     }
     else {
       $style = NULL;
@@ -122,6 +141,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         // Process the entity to create a preview. Set the FPID to be the correct version. We need to 
         // generate a fake set of values to avoid notices from FPP as per http://drupal.org/node/1791734.
         $form_state['values'] = (!empty($form_state['values'])) ? $form_state['values'] : array('language' => '', 'title' => '', 'link' => '', 'path' => '', 'reusable' => '', 'category' => '', 'admin_title' => '', 'admin_description' => '', 'revision' => '');
+
         fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
         $preview_subtype = 'vid:' . $form_state['entity']->vid;
         $pane->subtype = 'fpid:' . $form_state['entity']->fpid;
@@ -153,7 +173,13 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // Set the configuration and determine the content for the pane
-    $configuration = ($form_state['rebuild'] && (strpos($form_id, 'content_type_edit_form') || $form_id == 'ctools_entity_field_content_type_formatter_options' || $form_id == 'ctools_entity_field_content_type_formatter_styles')) ? array_merge($pane->configuration, $form_state['input']) : $pane->configuration;
+    $configuration_ids = array(
+      'ctools_entity_field_content_type_formatter_options',
+      'ctools_entity_field_content_type_formatter_styles',
+      'panels_edit_style_settings_form',
+    );
+    $configuration = ($form_state['rebuild'] && (strpos($form_id, 'content_type_edit_form') || in_array($form_id, $configuration_ids))) ? array_merge($pane->configuration, $form_state['input']) : $pane->configuration;
+   
     $keywords = array();
     $args = array();
     if (!empty($form_state['contexts'])) {
@@ -184,7 +210,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
     $content = (empty($preview_subtype)) ? ctools_content_render($pane->type, $pane->subtype, $configuration, $keywords, $args, $context) : ctools_content_render($pane->type, $preview_subtype, $configuration, $keywords, $args, $context);
-
 
     // Create the preview fieldset
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' || is_object($content)) {
@@ -241,7 +266,8 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     'ctools_node_content_content_type_edit_form',
     'ctools_entity_field_content_type_formatter_options',
     'panopoly_search_facet_content_type_edit_form',
-    'ctools_entity_field_content_type_formatter_styles'
+    'ctools_entity_field_content_type_formatter_styles',
+    'panels_edit_style_settings_form'
   );
 
   if (in_array($form_id, $forms_to_improve)) {
@@ -257,7 +283,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Move all elements which aren't fieldsets or the submit buttons into the general settings fieldset.
       foreach ($children as $child) {
-        if (!empty($form[$child]['#type']) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons') {
+        if ((!empty($form[$child]['#type']) || $form[$child]['#tree'] == TRUE) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons' && $child != 'submit') {
           $form['general_settings'][$child] = $form[$child];
           unset($form[$child]);
         }
@@ -714,7 +740,7 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_styles_a
  */
 function panopoly_magic_fape_submit(&$form, &$form_state) {
   // If there isn't a next step save the entity.
-  if ((empty($form_state['clicked_button']['#next'])  || !empty($form_state['field']['body'])) && !empty($form_state['entity'])) {
+  if ((empty($form_state['clicked_button']['#next']) || !empty($form_state['field']['body'])) && !empty($form_state['entity'])) {
     entity_save($form_state['entity_type'], $form_state['entity']);
     $form_state['display_cache']->display->context['panelizer']->data = $form_state['entity'];
   }
