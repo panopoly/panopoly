@@ -647,8 +647,8 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
     }
   }
 
-  // Add in the field edit fields with FAPE
-  if (empty($form_state['entity'])) {
+  // Add in the field edit fields with FAPE if we are not editing a default
+  if (empty($form_state['entity']) && !empty($form_state['display']->context['panelizer']->data)) {
     // Determine what entity type and field name we are editing based on the form subtype and URL args.
     $arg_parts = explode(':', arg(4));
     list($entity_type, $field_name) = explode(':', $form_state['subtype_name']);
