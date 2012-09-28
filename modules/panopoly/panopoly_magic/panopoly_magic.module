@@ -283,7 +283,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Move all elements which aren't fieldsets or the submit buttons into the general settings fieldset.
       foreach ($children as $child) {
-        if ((!empty($form[$child]['#type']) || $form[$child]['#tree'] == TRUE) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons' && $child != 'submit') {
+        if ((!empty($form[$child]['#type']) || !empty($form[$child]['#tree'])) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons' && $child != 'submit') {
           $form['general_settings'][$child] = $form[$child];
           unset($form[$child]);
         }
@@ -682,11 +682,25 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
   // Pre-rende fields into a fieldset.
   $form['#pre_render'][] = 'panopoly_magic_panelizer_pre_render';
 
+  // When moving backwards through form steps, ensure image widgets properly retain their value.
+  if (!empty($form_state['field_instance']) && $form_state['clicked_button']['#value'] == 'Back') {
+    $field_name = $form_state['field_instance']['field_name'];
+    $field_type = $form_state['field_instance']['widget']['module'];
+    $entity = $form_state['entity'];
+ 
+    // Reset the #default_value to the (currently) unsaved entity value.
+    if ($field_type == 'image' && !empty($form[$field_name])) {
+      $field = $entity->$field_name;
+      foreach ($field[LANGUAGE_NONE] as $delta => $value) {
+        $form[$field_name][LANGUAGE_NONE][$delta]['#default_value'] = $value;
+      } 
+    }
+  }
+
   // Enable auto submit functionality
   if (variable_get('panopoly_magic_live_preview', 1)) {
     panopoly_magic_autosubmit_configure($form);
   }
-
 
   // Add a custom submit handler to our preview and submit option
   $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
