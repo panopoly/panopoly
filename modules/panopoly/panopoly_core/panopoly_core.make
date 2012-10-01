@@ -95,6 +95,7 @@ projects[strongarm][subdir] = contrib
 
 projects[defaultconfig][version] = 1.0-alpha8
 projects[defaultconfig][subdir] = contrib
+projects[defaultconfig][patch][1800560] = http://drupal.org/files/1800560-load-features-map-export.patch
 
 projects[defaultcontent][version] = 1.x-dev
 projects[defaultcontent][subdir] = contrib
