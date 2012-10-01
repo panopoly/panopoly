@@ -22,6 +22,7 @@ projects[panels][patch][1772834] = http://drupalcode.org/project/panels.git/comm
 projects[panels][patch][1788170] = http://drupalcode.org/project/panels.git/commitdiff_plain/465ba82
 projects[panels][patch][1735336] = http://drupal.org/files/1735336-fix-draghandle-width-css.patch
 projects[panels][patch][1744824] = http://drupal.org/files/1744724-confirmation-on-leave-page-with-changes.patch
+projects[panels][patch][1797298] = http://drupal.org/files/stylizer-form-caching.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
