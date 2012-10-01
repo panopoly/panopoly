@@ -22,6 +22,7 @@ projects[field_group][subdir] = contrib
 
 projects[entityreference][version] = 1.0-rc5
 projects[entityreference][subdir] = contrib
+projects[entityreference][patch][1608358] = http://drupal.org/files/1608358-selectionhandler-views-broken.patch
 
 ; Panopoly - Contrib - Widgets
 
