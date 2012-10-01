@@ -93,6 +93,9 @@ projects[features][subdir] = contrib
 projects[strongarm][version] = 2.0
 projects[strongarm][subdir] = contrib
 
+projects[defaultconfig][version] = 1.0-alpha8
+projects[defaultconfig][subdir] = contrib
+
 projects[defaultcontent][version] = 1.x-dev
 projects[defaultcontent][subdir] = contrib
 projects[defaultcontent][download][type] = git
