@@ -49,9 +49,23 @@ function panopoly_admin_configure_form($form, &$form_state) {
     '#type' => 'select',
     '#required' => TRUE,
     '#options' => array(
+      '1' => 'Enabled',
+      '0' => 'Disabled',
     ),
     '#default_value' => variable_get('panopoly_admin_link_description', FALSE),
     '#description' => t('Do you want to provide a description field for a menu item link on the node edit page?'),
+  );
+
+  $form['panopoly_admin_advanced_plugins'] = array(
+    '#title' => t('Use Advanced Panel Plugins'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => 'Enabled',
+      '0' => 'Disabled',
+    ),
+    '#default_value' => variable_get('panopoly_admin_advanced_plugins', FALSE),
+    '#description' => t('Do you want to enable the advanced Panel plugins in the Panopoly pane library? This includes rarely used Panel plugins for such things as view context, token support, and page elements?'),
   );
 
   return system_settings_form($form);
@@ -76,6 +90,17 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
   // Hide the title of the featured category pane if there isn't any content
   if ($pane->subtype == 'node:field_featured_categories' && !empty($content->content['field_featured_categories']) && $content->content['field_featured_categories']['#access'] == FALSE) {
     $content->title = '';
+  }
+}
+
+/**
+ * Implementation of hook_ctools_content_subtype_alter()
+ */
+function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
+
+  // Filter out the panes we consider advanced
+  if (!variable_get('panopoly_admin_advanced_panes', FALSE) && panopoly_admin_is_advanced_plugin($subtype)) {
+    $subtype['required context'] = new ctools_context_required(t('Panopoly Null'), 'string');;
   }
 }
 
@@ -445,4 +470,39 @@ function panopoly_admin_config_page() {
   else {
     return t('You do not have any administrative items.');
   }
+}
+
+/**
+ * Helper function to identify advanced plugins
+ */
+function panopoly_admin_is_advanced_plugin($plugin) {
+
+  // Specifically excluded categories
+  $fixed_advanced_plugins = array(
+    'View context',
+    'Page elements',
+    'Admin',
+    'Form Content',
+    'File',
+    'Facet API',
+    'Fielded panes',
+    'Fieldable_panels_pane',
+    'Search',
+    'Existing pages',
+    'Widgets',
+  );
+
+  // Specifically excluded panes
+  $fixed_advanced_panes = array(
+    'New custom content',
+    'Execute PHP',  
+    'Devel',
+    'Switch user', 
+    'Theme switcher',
+  );
+
+  // Define this as an advanced plugin if it is in the advance category or pane list or has tokens
+  $pane_label = !empty($plugin['title']) ? $plugin['title'] : '';
+  $category_label = (is_string($plugin['category'])) ? $plugin['category'] : $plugin['category'][0];
+  return (in_array($category_label, $fixed_advanced_plugins) || in_array($pane_label, $fixed_advanced_panes) || strpos($category_label, '(tokens)'));
 }

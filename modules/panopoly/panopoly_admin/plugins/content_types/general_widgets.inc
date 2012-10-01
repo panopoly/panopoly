@@ -22,6 +22,7 @@ function panopoly_admin_general_widgets_content_type_render($subtype, $conf, $pa
   // Create the Table Data
   ctools_include('common', 'panels');
   ctools_include('plugins', 'panels');
+  require_once(drupal_get_path('module', 'fieldable_panels_panes') . '/plugins/content_types/fieldable_panels_pane.inc');
   $header = array(array('data' => '', 'style' => 'width: 20px'), t('Name'), '');
   $rows = array();
   foreach(_fieldable_panels_panes_default_content_type() as $widget) {
