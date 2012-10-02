@@ -51,7 +51,6 @@ function panopoly_search_default_search_api_index() {
         "status" : { "type" : "boolean" },
         "created" : { "type" : "integer" },
         "author" : { "type" : "integer", "entity_type" : "user" },
-        "field_featured_categories" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "search_api_language" : { "type" : "string" },
         "search_api_viewed" : { "type" : "text" },
         "search_api_url" : { "type" : "uri" },
@@ -127,7 +126,6 @@ function panopoly_search_default_search_api_index() {
         "status" : { "type" : "boolean" },
         "created" : { "type" : "date" },
         "author" : { "type" : "integer", "entity_type" : "user" },
-        "field_featured_categories" : { "type" : "list\\u003Cinteger\\u003E", "entity_type" : "taxonomy_term" },
         "search_api_language" : { "type" : "string" },
         "search_api_viewed" : { "type" : "text" },
         "search_api_url" : { "type" : "uri" },
@@ -265,11 +263,6 @@ function panopoly_search_default_search_api_server() {
           "body:summary" : {
             "table" : "search_api_db_database_node_index_body_summary",
             "type" : "text",
-            "boost" : "1.0"
-          },
-          "field_featured_categories" : {
-            "table" : "search_api_db_database_node_index_field_featured_categories",
-            "type" : "list\\u003Cinteger\\u003E",
             "boost" : "1.0"
           }
         }
