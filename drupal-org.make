@@ -11,6 +11,9 @@ projects[panopoly_core][download][branch] = 7.x-1.x
 
 projects[panopoly_images][version] = 1.0-beta6
 projects[panopoly_images][subdir] = panopoly
+projects[panopoly_images][download][type] = git
+projects[panopoly_images][download][revision] = 8efa35b
+projects[panopoly_images][download][branch] = 7.x-1.x
 
 projects[panopoly_theme][version] = 1.0-beta6
 projects[panopoly_theme][subdir] = panopoly
@@ -44,7 +47,7 @@ projects[panopoly_pages][subdir] = panopoly
 projects[panopoly_wysiwyg][version] = 1.x-dev
 projects[panopoly_wysiwyg][subdir] = panopoly
 projects[panopoly_wysiwyg][download][type] = git
-projects[panopoly_wysiwyg][download][revision] = 23221a9
+projects[panopoly_wysiwyg][download][revision] = c955e04
 projects[panopoly_wysiwyg][download][branch] = 7.x-1.x
 
 projects[panopoly_search][version] = 1.x-dev
