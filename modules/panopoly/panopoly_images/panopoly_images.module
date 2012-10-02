@@ -3,6 +3,16 @@
 include_once('panopoly_images.features.inc');
 
 /**
+ * Implementation of hook_init()
+ */
+function panopoly_images_init() {
+
+  // Adding the panopoly images file to the theme so it will show up in the WYSIWYG
+  drupal_add_css(drupal_get_path('module', 'panopoly_images') . '/panopoly-images.css', array('group' => CSS_THEME));
+}
+
+
+/**
  * Implementation of drupal_alter() for media_wysiwyg_allowed_view_modes
  */
 function panopoly_images_media_wysiwyg_allowed_view_modes_alter(&$options, $context) {
