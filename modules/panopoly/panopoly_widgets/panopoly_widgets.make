@@ -14,7 +14,7 @@ projects[tablefield][subdir] = contrib
 projects[link][version] = 1.0
 projects[link][subdir] = contrib
 
-projects[simple_gmap][version] = 1.0-rc1
+projects[simple_gmap][version] = 1.0
 projects[simple_gmap][subdir] = contrib
 
 projects[field_group][version] = 1.1
