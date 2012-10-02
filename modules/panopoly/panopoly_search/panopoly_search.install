@@ -13,6 +13,7 @@ function panopoly_search_install() {
   // Allow anonymous and authenticated users to search content
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('search content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('search content'));
+
 }
 
 /**

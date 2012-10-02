@@ -57,7 +57,25 @@ function panopoly_search_default_search_api_index() {
         "search_api_url" : { "type" : "uri" },
         "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "body:value" : { "type" : "text" },
-        "body:summary" : { "type" : "text" }
+        "body:summary" : { "type" : "text" },
+        "field_featured_categories:tid" : { "type" : "list\\u003Cinteger\\u003E" },
+        "field_featured_categories:name" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_featured_categories:description" : { "type" : "list\\u003Ctext\\u003E" },
+        "field_featured_categories:weight" : { "type" : "list\\u003Cinteger\\u003E" },
+        "field_featured_categories:node_count" : { "type" : "list\\u003Cinteger\\u003E" },
+        "field_featured_categories:url" : { "type" : "list\\u003Curi\\u003E" },
+        "field_featured_categories:vocabulary" : {
+          "type" : "list\\u003Cinteger\\u003E",
+          "entity_type" : "taxonomy_vocabulary"
+        },
+        "field_featured_categories:parent" : {
+          "type" : "list\\u003Clist\\u003Cinteger\\u003E\\u003E",
+          "entity_type" : "taxonomy_term"
+        },
+        "field_featured_categories:parents_all" : {
+          "type" : "list\\u003Clist\\u003Cinteger\\u003E\\u003E",
+          "entity_type" : "taxonomy_term"
+        }
       },
       "data_alter_callbacks" : {
         "search_api_alter_bundle_filter" : {
@@ -265,6 +283,51 @@ function panopoly_search_default_search_api_server() {
           "body:summary" : {
             "table" : "search_api_db_database_node_index_body_summary",
             "type" : "text",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:tid" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_tid",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:name" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_nam",
+            "type" : "list\\u003Ctext\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:description" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_des",
+            "type" : "list\\u003Ctext\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:weight" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_wei",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:node_count" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_nod",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:url" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_url",
+            "type" : "list\\u003Curi\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:vocabulary" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_voc",
+            "type" : "list\\u003Cinteger\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:parent" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_par",
+            "type" : "list\\u003Clist\\u003Cinteger\\u003E\\u003E",
+            "boost" : "1.0"
+          },
+          "field_featured_categories:parents_all" : {
+            "table" : "search_api_db_database_node_index_field_featured_categories_p_1",
+            "type" : "list\\u003Clist\\u003Cinteger\\u003E\\u003E",
             "boost" : "1.0"
           },
           "field_featured_categories" : {
