@@ -100,7 +100,8 @@ function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
 
   // Filter out the panes we consider advanced
   if (!variable_get('panopoly_admin_advanced_panes', FALSE) && panopoly_admin_is_advanced_plugin($subtype)) {
-    $subtype['required context'] = new ctools_context_required(t('Panopoly Null'), 'string');;
+    $subtype['category'][0] = t('Advanced');
+    // $subtype['required context'] = new ctools_context_required(t('Panopoly Null'), 'string');;
   }
 }
 
