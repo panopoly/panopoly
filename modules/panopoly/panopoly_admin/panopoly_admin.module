@@ -100,7 +100,7 @@ function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
 
   // Filter out the panes we consider advanced
   if (!variable_get('panopoly_admin_advanced_panes', FALSE) && panopoly_admin_is_advanced_plugin($subtype)) {
-    $subtype['category'][0] = t('Advanced');
+    // $subtype['category'][0] = t('Advanced');
     // $subtype['required context'] = new ctools_context_required(t('Panopoly Null'), 'string');;
   }
 }
@@ -249,6 +249,14 @@ function panopoly_admin_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('panopoly_admin_panelizer_delete_form', 3, 4),
     'access arguments' => array('administer panelizer'),
+  );
+
+  // Panels pane enable/disable page callback
+  $items['admin/panopoly/libraries/panes/%/%/%/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'panopoly_admin_switch_pane_action',
+    'page arguments' => array(4, 5, 6, 7),
+    'access arguments' => array('administer page manager'),
   );
 
   // Add an administration page for Panopoly
@@ -506,4 +514,59 @@ function panopoly_admin_is_advanced_plugin($plugin) {
   $pane_label = !empty($plugin['title']) ? $plugin['title'] : '';
   $category_label = (is_string($plugin['category'])) ? $plugin['category'] : $plugin['category'][0];
   return (in_array($category_label, $fixed_advanced_plugins) || in_array($pane_label, $fixed_advanced_panes) || strpos($category_label, '(tokens)'));
+}
+
+/**
+ * Helper function to enable or disable general panel panes
+ */
+function panopoly_admin_switch_pane_action($status, $category_name, $plugin_name, $token) {
+
+  $commands = array();
+  $panels_page_allowed_types = variable_get('panels_page_allowed_types');
+
+  if ($token == drupal_get_token($plugin_name) && $status == 'enable') {
+    $panels_page_allowed_types[$category_name . '-' . $plugin_name] = $category_name . '-' . $plugin_name;
+    $commands[] = ajax_command_replace('#panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
+  } elseif ($token == drupal_get_token($plugin_name) && $status == 'disable') {
+    $panels_page_allowed_types[$category_name . '-' . $plugin_name] = 0;
+    $commands[] = ajax_command_replace('#panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
+  } else {
+    $commands[] = ajax_command_replace('#panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), 'Trouble!');
+  }
+
+  variable_set('panels_page_allowed_types', $panels_page_allowed_types);
+  print ajax_render($commands);
+  drupal_exit();
+}
+
+/**
+ * Helper function to get the plugin status
+ */
+function _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status) {
+  if ($status == 'enable') {
+    $link = array(
+      '#type' => 'link',
+      '#title' => t('Disable?'),
+      '#href' => 'admin/panopoly/libraries/panes/disable/' . $category_name . '/' . $plugin_name . '/' . drupal_get_token($plugin_name),
+      '#ajax' => array(
+        'wrapper' => 'panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name),
+        'method' => 'replace',
+        'effect' => 'fade',     
+      ),                          
+    );
+    return '<div id="panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name) . '">Enabled (' . drupal_render($link) . ')</div>';
+  }
+  else {
+    $link = array(
+      '#type' => 'link',
+      '#title' => t('Enable?'),
+      '#href' => 'admin/panopoly/libraries/panes/enable/' . $category_name . '/' . $plugin_name . '/' . drupal_get_token($plugin_name),
+      '#ajax' => array(
+        'wrapper' => 'panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name),
+        'method' => 'replace',
+        'effect' => 'fade',
+      ),
+    );
+    return '<div id="panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name) . '">Disabled (' . drupal_render($link) . ')</div>';
+  }
 }

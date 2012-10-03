@@ -687,8 +687,8 @@ function panopoly_admin_default_page_manager_pages() {
     $pane = new stdClass();
     $pane->pid = 'new-10';
     $pane->panel = 'sidebar';
-    $pane->type = 'general_widgets';
-    $pane->subtype = 'general_widgets';
+    $pane->type = 'default_pane_status';
+    $pane->subtype = 'default_pane_status';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
@@ -705,8 +705,8 @@ function panopoly_admin_default_page_manager_pages() {
     $pane = new stdClass();
     $pane->pid = 'new-11';
     $pane->panel = 'sidebar';
-    $pane->type = 'reusable_widgets';
-    $pane->subtype = 'reusable_widgets';
+    $pane->type = 'general_widgets';
+    $pane->subtype = 'general_widgets';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array();
@@ -720,6 +720,24 @@ function panopoly_admin_default_page_manager_pages() {
     $pane->locks = array();
     $display->content['new-11'] = $pane;
     $display->panels['sidebar'][1] = 'new-11';
+    $pane = new stdClass();
+    $pane->pid = 'new-12';
+    $pane->panel = 'sidebar';
+    $pane->type = 'reusable_widgets';
+    $pane->subtype = 'reusable_widgets';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $display->content['new-12'] = $pane;
+    $display->panels['sidebar'][2] = 'new-12';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
