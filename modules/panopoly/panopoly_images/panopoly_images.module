@@ -60,6 +60,11 @@ function panopoly_images_form_alter(&$form, &$form_state, $form_id) {
       );
     }
   }
+
+  // Set the default media style to be default
+  if ($form_id == 'media_format_form' && !empty($form['options']['format'])) {
+    $form['options']['format']['#default_value'] = 'default';
+  }
 }
 
 /**
