@@ -11,8 +11,8 @@ projects[ctools][patch][1739718] = http://drupalcode.org/project/ctools.git/comm
 projects[ctools][patch][1494860] = http://drupalcode.org/project/ctools.git/commitdiff_plain/7cd8d95d65edecf82f73b6df2a073c44d05074b8
 projects[ctools][patch][1788088] = http://drupalcode.org/project/ctools.git/commitdiff_plain/909290dc9482374a30943db49ca9dac998fc3a5e
 projects[ctools][patch][1774434] = http://drupalcode.org/project/ctools.git/commitdiff_plain/e7b85db971cf33ade21252d1f55aa88de3301ce7
-projects[ctools][patch][1294478] = http://drupal.org/files/dynamic-modal-1294478-34.patch
 projects[ctools][patch][1754770] = http://drupal.org/files/1754770-do-not-query-block-table-if-no-block-module.patch
+projects[ctools][patch][1197582] = http://drupal.org/files/undefined_index-1197582-29.patch
 
 projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
