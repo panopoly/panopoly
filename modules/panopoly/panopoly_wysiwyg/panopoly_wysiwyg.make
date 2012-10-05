@@ -6,12 +6,8 @@ core = 7.x
 ; The WYSIWYG Module Family
 
 projects[wysiwyg][subdir] = contrib
-projects[wysiwyg][version] = 2.x-dev
+projects[wysiwyg][version] = 2.2
 projects[wysiwyg][patch][1489096] = http://drupal.org/files/wysiwyg-table-format.patch
-projects[wysiwyg][download][type] = git
-projects[wysiwyg][download][revision] = 41693f1
-projects[wysiwyg][download][type] = git
-projects[wysiwyg][download][branch] = 7.x-2.x
 
 projects[wysiwyg_filter][version] = 1.6-rc2
 projects[wysiwyg_filter][subdir] = contrib
