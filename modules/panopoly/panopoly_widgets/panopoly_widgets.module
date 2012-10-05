@@ -109,6 +109,11 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
     $form['display_options']['#access'] = FALSE;
     $form['title_link']['#access'] = FALSE;
     $form['buttons']['#prefix'] = '<div class="menu-block-ctools-buttons">';
+
+    // Disable some options since they appear busted or confusing in Menu Block
+    // TODO - http://drupal.org/node/1649112
+    $form['parent_mlid']['#access'] = FALSE;
+    $form['sort']['#access'] = FALSE;
   }
 
   if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
