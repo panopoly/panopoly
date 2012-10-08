@@ -252,10 +252,18 @@ function panopoly_admin_menu() {
   );
 
   // Panels pane enable/disable page callback
-  $items['admin/panopoly/libraries/panes/%/%/%/%'] = array(
+  $items['admin/panopoly/libraries/panes/pane/%/%/%/%'] = array(
     'type' => MENU_CALLBACK,
     'page callback' => 'panopoly_admin_switch_pane_action',
-    'page arguments' => array(4, 5, 6, 7),
+    'page arguments' => array(5, 6, 7, 8),
+    'access arguments' => array('administer page manager'),
+  );
+
+  // Panels pane type enable/disable page callback
+  $items['admin/panopoly/libraries/panes/type/%/%/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'panopoly_admin_switch_pane_type_action',
+    'page arguments' => array(5, 6, 7),
     'access arguments' => array('administer page manager'),
   );
 
@@ -526,15 +534,38 @@ function panopoly_admin_switch_pane_action($status, $category_name, $plugin_name
 
   if ($token == drupal_get_token($plugin_name) && $status == 'enable') {
     $panels_page_allowed_types[$category_name . '-' . $plugin_name] = $category_name . '-' . $plugin_name;
-    $commands[] = ajax_command_replace('#panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
+    $commands[] = ajax_command_replace('#panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
   } elseif ($token == drupal_get_token($plugin_name) && $status == 'disable') {
     $panels_page_allowed_types[$category_name . '-' . $plugin_name] = 0;
-    $commands[] = ajax_command_replace('#panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
+    $commands[] = ajax_command_replace('#panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
   } else {
-    $commands[] = ajax_command_replace('#panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), 'Trouble!');
+    $commands[] = ajax_command_replace('#panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), 'Trouble!');
   }
 
   variable_set('panels_page_allowed_types', $panels_page_allowed_types);
+  print ajax_render($commands);
+  drupal_exit();
+}
+
+/**
+ * Helper function to enable or disable general pane types
+ */
+function panopoly_admin_switch_pane_type_action($status, $plugin_type, $token) {
+
+  $commands = array();
+  $panels_page_default = variable_get('panels_page_default');
+
+  if ($token == drupal_get_token($plugin_type) && $status == 'enable') {
+    $panels_page_default[$plugin_type] = $plugin_type;
+    $commands[] = ajax_command_replace('#panopoly-admin-type-response-' . $plugin_type, _panopoly_admin_plugin_type_get_status($plugin_type, $status));
+  } elseif ($token == drupal_get_token($plugin_type) && $status == 'disable') {
+    $panels_page_default[$plugin_type] = 0;
+    $commands[] = ajax_command_replace('#panopoly-admin-type-response-' . $plugin_type, _panopoly_admin_plugin_type_get_status($plugin_type, $status));
+  } else {
+    $commands[] = ajax_command_replace('#panopoly-admin-type-response-' . $plugin_type, 'Trouble!');
+  }
+
+  variable_set('panels_page_default', $panels_page_default);
   print ajax_render($commands);
   drupal_exit();
 }
@@ -547,26 +578,58 @@ function _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 
     $link = array(
       '#type' => 'link',
       '#title' => t('Disable?'),
-      '#href' => 'admin/panopoly/libraries/panes/disable/' . $category_name . '/' . $plugin_name . '/' . drupal_get_token($plugin_name),
+      '#href' => 'admin/panopoly/libraries/panes/pane/disable/' . $category_name . '/' . $plugin_name . '/' . drupal_get_token($plugin_name),
       '#ajax' => array(
-        'wrapper' => 'panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name),
+        'wrapper' => 'panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name),
         'method' => 'replace',
         'effect' => 'fade',     
       ),                          
     );
-    return '<div id="panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name) . '">Enabled (' . drupal_render($link) . ')</div>';
+    return '<div id="panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name) . '">Enabled (' . drupal_render($link) . ')</div>';
   }
   else {
     $link = array(
       '#type' => 'link',
       '#title' => t('Enable?'),
-      '#href' => 'admin/panopoly/libraries/panes/enable/' . $category_name . '/' . $plugin_name . '/' . drupal_get_token($plugin_name),
+      '#href' => 'admin/panopoly/libraries/panes/pane/enable/' . $category_name . '/' . $plugin_name . '/' . drupal_get_token($plugin_name),
       '#ajax' => array(
-        'wrapper' => 'panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name),
+        'wrapper' => 'panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name),
         'method' => 'replace',
         'effect' => 'fade',
       ),
     );
-    return '<div id="panopoly-admin-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name) . '">Disabled (' . drupal_render($link) . ')</div>';
+    return '<div id="panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name) . '">Disabled (' . drupal_render($link) . ')</div>';
+  }
+}
+
+/**
+ * Helper function to get the plugin type status
+ */
+function _panopoly_admin_plugin_type_get_status($plugin_type, $status) {
+  if ($status == 'enable') {
+    $link = array(
+      '#type' => 'link',
+      '#title' => t('Disable?'),
+      '#href' => 'admin/panopoly/libraries/panes/type/disable/' . $plugin_type . '/' . drupal_get_token($plugin_type),
+      '#ajax' => array(
+        'wrapper' => 'panopoly-admin-type-response-' . $plugin_type,
+        'method' => 'replace',
+        'effect' => 'fade',
+      ),
+    );
+    return '<div id="panopoly-admin-type-response-' . $plugin_type . '">Enabled (' . drupal_render($link) . ')</div>';
+  }
+  else {
+    $link = array(
+      '#type' => 'link',
+      '#title' => t('Enable?'),
+      '#href' => 'admin/panopoly/libraries/panes/type/enable/' . $plugin_type . '/' . drupal_get_token($plugin_type),
+      '#ajax' => array(
+        'wrapper' => 'panopoly-admin-type-response-' . $plugin_type,
+        'method' => 'replace',
+        'effect' => 'fade',
+      ),
+    );
+    return '<div id="panopoly-admin-type-response-' . $plugin_type . '">Disabled (' . drupal_render($link) . ')</div>';
   }
 }
