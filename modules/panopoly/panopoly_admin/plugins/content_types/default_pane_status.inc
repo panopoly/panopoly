@@ -21,17 +21,18 @@ function panopoly_admin_default_pane_status_content_type_render($subtype, $conf,
 
   // Get the default pane status
   $panels_page_default = variable_get('panels_page_default');
+  $content_types = ctools_get_content_types();
+  $content_types['other']['title'] = t('Content of other types');
   $header = array(
-    //array('data' => '', 'style' => 'width: 16px'), 
     array('data' => t('Title')), 
-    array('data' => t('Status'), 'style' => 'width: 20%'),
+    array('data' => t('Status'), 'style' => 'width: 40%'),
   );
   $rows = array();
 
-  foreach($panels_page_default as $category => $category_status) {
+  foreach($panels_page_default as $plugin_type => $plugin_type_status) {
     $rows[] = array(
-      $category,
-      $category_status,
+      $content_types[$plugin_type]['title'],
+      (!empty($plugin_type_status)) ? _panopoly_admin_plugin_type_get_status($plugin_type, 'enable') : _panopoly_admin_plugin_type_get_status($plugin_type, 'disable'),
     );
   }
 
