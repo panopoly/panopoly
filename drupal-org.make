@@ -15,13 +15,16 @@ projects[panopoly_images][download][type] = git
 projects[panopoly_images][download][revision] = 4791604
 projects[panopoly_images][download][branch] = 7.x-1.x
 
-projects[panopoly_theme][version] = 1.0-beta6
+projects[panopoly_theme][version] = 1.x-dev
 projects[panopoly_theme][subdir] = panopoly
+projects[panopoly_theme][download][type] = git
+projects[panopoly_theme][download][revision] = 383ff1a
+projects[panopoly_theme][download][branch] = 7.x-1.x
 
-projects[panopoly_magic][version] = 1.0-beta6
+projects[panopoly_magic][version] = 1.x-dev
 projects[panopoly_magic][subdir] = panopoly
 projects[panopoly_magic][download][type] = git
-projects[panopoly_magic][download][revision] = 0df7c57
+projects[panopoly_magic][download][revision] = 8d49616
 projects[panopoly_magic][download][branch] = 7.x-1.x
 
 projects[panopoly_widgets][version] = 1.x-dev
