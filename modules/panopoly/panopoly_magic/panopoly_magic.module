@@ -137,10 +137,27 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       // Run entity information through standard submission form if this is a new or updated object
       // Update the pane settngs with the VID afterwards
       if (!$form_state['entity']->reusable || $form_state['op'] != 'add' || $form_state['rebuild'] == TRUE) {
-
         // Process the entity to create a preview. Set the FPID to be the correct version. We need to 
         // generate a fake set of values to avoid notices from FPP as per http://drupal.org/node/1791734.
-        $form_state['values'] = (!empty($form_state['values'])) ? $form_state['values'] : array('language' => '', 'title' => '', 'link' => '', 'path' => '', 'reusable' => '', 'category' => '', 'admin_title' => '', 'admin_description' => '', 'revision' => '');
+        $default_values = array(
+          'language' => '',
+          'title' => '',
+          'link' => '',
+          'path' => '',
+          'reusable' => '',
+          'category' => '',
+          'admin_title' => '',
+          'admin_description' => '',
+          'revision' => '',
+        );
+
+        if (!empty($form_state['values'])) {
+          $form_state['values'] = array_merge($default_values, $form_state['values']);
+        }
+        else {
+          $form_state['values'] = $default_values;
+        }
+
 
         fieldable_panels_panes_entity_edit_form_submit($form, $form_state);
         $preview_subtype = 'vid:' . $form_state['entity']->vid;
