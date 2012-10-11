@@ -4,10 +4,11 @@
  * panopoly_admin.strongarm.inc
  */
 
+
 /**
- * Implements hook_strongarm().
+ * Implements hook_defaultconfig_strongarm().
  */
-function panopoly_admin_strongarm() {
+function panopoly_admin_defaultconfig_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
@@ -18,12 +19,18 @@ function panopoly_admin_strongarm() {
     'layout' => 'vertical',
     'position' => 'nw',
     'behavior' => 'ah',
-    'blocks' => array(
-      'admin-create' => -1,
-      'admin-menu' => 1,
-    ),
+    'blocks' => array(),
   );
   $export['admin_toolbar'] = $strongarm;
+
+  return $export;
+}
+
+/**
+ * Implements hook_strongarm().
+ */
+function panopoly_admin_strongarm() {
+  $export = array();
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
