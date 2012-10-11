@@ -34,3 +34,4 @@ dependencies[] = panopoly_wysiwyg
 
 ; Panopoly Recommended
 dependencies[] = admin
+dependencies[] = devel
