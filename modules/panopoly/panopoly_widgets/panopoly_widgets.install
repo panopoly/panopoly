@@ -77,6 +77,43 @@ function panopoly_widgets_update_7001(&$sandbox) {
 }
 
 /**
+ * Implemenets hook_update_N().
+ *
+ * Revert panopoly_widget fields to avoid data loss in update 7003.
+ */
+function panopoly_widgets_update_7002(&$sandbox) {
+  module_load_include('inc', 'features', 'features.export');
+  features_include();
+  features_revert(array('panopoly_widgets' => array('field')));
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Move video mediafield data into a file field.
+ */
+function panopoly_widgets_update_7003(&$sandbox) {
+
+  $results = entity_load('fieldable_panels_pane');
+  foreach($results as $entity) {
+
+    foreach ($entity->field_video_video[LANGUAGE_NONE] as $f) {
+      $entity->field_video_file[LANGUAGE_NONE][] = array(
+        'fid' => $f['fid'],
+        'display' => 1,
+      );
+    }
+
+    $form_state['entity'] = $entity;
+    $form_state['values'] = (array) $entity;
+    $form_state['values']['link'] = ($form_state['values']['link'] == 0) ? NULL : $form_state['values']['link'];
+    $form_state['values']['reusable'] = ($$form_state['values']['reusable'] == 0) ? NULL : $form_state['values']['reusable'];
+    drupal_form_submit('fieldable_panels_panes_entity_edit_form', $form_state);
+  }
+  field_delete_field('field_video_video');
+}
+
+/**
  * Helper function to save default file data.
  */
 function panopoly_widgets_save_default_file_data($filepath, $filename, $type) {
