@@ -82,9 +82,6 @@ projects[entity][subdir] = contrib
 projects[libraries][version] = 2.0
 projects[libraries][subdir] = contrib
 
-projects[devel][version] = 1.3
-projects[devel][subdir] = contrib
-
 ; Harness the Power of Features and Apps with Default Content
 
 projects[apps][version] = 1.0-beta7
