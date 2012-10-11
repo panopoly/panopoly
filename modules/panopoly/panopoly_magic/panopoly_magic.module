@@ -43,10 +43,11 @@ function panopoly_magic_configure_form($form, &$form_state) {
     '#type' => 'select',
     '#required' => TRUE,
     '#options' => array(
-      '1' => 'Enabled',
+      '1' => 'Automatic',
+      '2' => 'Manual',
       '0' => 'Disabled',
     ),
-    '#default_value' => variable_get('panopoly_magic_live_preview', TRUE),
+    '#default_value' => variable_get('panopoly_magic_live_preview', 1),
     '#description' => t('Do you want Panopoly to provide a live preview for modal content through the in place editor?'),
   );
 
@@ -248,12 +249,25 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         $form['aligner_start']['#markup'] = str_replace('clearfix', '', $form['aligner_start']['#markup']);
       }
 
+      $preview_attributes = array(
+        'class' => array(
+          'widget-preview-button',
+          'ctools-use-ajax',
+        ),
+      );
+
+      // If manual, show button, and don't autoupdate.
+      if(variable_get('panopoly_magic_live_preview') == 1) {
+        $preview_attributes['style'] = 'display: none';
+        $preview_attributes['class'][] = 'ctools-auto-submit-click';
+      }
+
       // Create the preview refresh button
       $form['buttons']['preview'] = array(
         '#type' => 'button',
         '#value' => t('Update Preview'),
         '#wizard type' => 'next',
-        '#attributes' => array('style' => 'display: none', 'class' => array('widget-preview-button', 'ctools-use-ajax', 'ctools-auto-submit-click')),
+        '#attributes' => $preview_attributes,
       );
 
       // Autosubmit the form
