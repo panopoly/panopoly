@@ -22,7 +22,7 @@ function panopoly_admin_panels_layouts_content_type_render($subtype, $conf, $pan
   // Find all the Panopoly layouts
   $layout_options = array();
   $panels_page_allowed_layouts = unserialize(variable_get('panels_page_allowed_layouts'));
-  foreach(panels_get_layouts() as $layout_option) {
+  foreach (panels_get_layouts() as $layout_option) {
     if ($layout_option['category'] !== 'Panopoly' && $layout_option['module'] == 'panels' && (empty($layout_option['builder']) || $layout_option['builder'] == FALSE) && !in_array($layout_option['theme'], array('panels_flexible', 'layout_responsive'))) {
       $layout_name = $layout_option['name'];
       $layout_status = ($panels_page_allowed_layouts->allowed_layout_settings[$layout_name]) ? _panopoly_admin_general_layout_get_status($layout_name, 'enable') : _panopoly_admin_general_layout_get_status($layout_name, 'disable');

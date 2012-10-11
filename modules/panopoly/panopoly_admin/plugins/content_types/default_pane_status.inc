@@ -29,7 +29,7 @@ function panopoly_admin_default_pane_status_content_type_render($subtype, $conf,
   );
   $rows = array();
 
-  foreach($panels_page_default as $plugin_type => $plugin_type_status) {
+  foreach ($panels_page_default as $plugin_type => $plugin_type_status) {
     $rows[] = array(
       $content_types[$plugin_type]['title'],
       (!empty($plugin_type_status)) ? _panopoly_admin_plugin_type_get_status($plugin_type, 'enable') : _panopoly_admin_plugin_type_get_status($plugin_type, 'disable'),

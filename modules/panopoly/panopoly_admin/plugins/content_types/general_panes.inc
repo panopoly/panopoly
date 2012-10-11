@@ -34,8 +34,8 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
   // Build the data for the different panes
   $plugin_data = array();
   $panels_page_allowed_types = variable_get('panels_page_allowed_types');
-  foreach(ctools_content_get_all_types() as $category_name => $category) {
-    foreach($category as $plugin_name => $plugin) {
+  foreach (ctools_content_get_all_types() as $category_name => $category) {
+    foreach ($category as $plugin_name => $plugin) {
       $category_label = (is_string($plugin['category'])) ? $plugin['category'] : $plugin['category'][0];
       $plugin_status = (!empty($panels_page_allowed_types[$category_name . '-' . $plugin_name])) ? _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'enable') : _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'disable');
       if (variable_get('panopoly_admin_advanced_panes', FALSE) || !panopoly_admin_is_advanced_plugin($plugin)) {
@@ -52,7 +52,7 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
   // Create the Output
   $pane = new stdClass();
   ksort($plugin_data);
-  foreach($plugin_data as $category_label => $rows) {
+  foreach ($plugin_data as $category_label => $rows) {
     $pane->content .= '<h2 class="pane-title">' . check_plain($category_label . ' ' . t('Panes')) . '</h2>';
     $pane->content .= theme('table', array('header' => $header, 'rows' => $rows));
   }
