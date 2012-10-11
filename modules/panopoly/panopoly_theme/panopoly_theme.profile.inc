@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * panopoly_theme.profile.inc
+ */
 
 /** 
  * Add an install task to allow selection of the theme
