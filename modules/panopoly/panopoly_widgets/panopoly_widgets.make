@@ -33,17 +33,15 @@ projects[menu_block][subdir] = contrib
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][subdir] = contrib
 projects[file_entity][download][type] = git
-projects[file_entity][download][revision] = a8986e5
+projects[file_entity][download][revision] = 38bfc8f
 projects[file_entity][download][branch] = 7.x-2.x
-projects[file_entity][patch][1553094] = http://drupal.org/files/Alt-and-Title-support-for-Images-1553094-68.patch
 
 projects[media][version] = 2.x-dev
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = 1a0304d
+projects[media][download][revision] = 283d06b
 projects[media][download][branch] = 7.x-2.x
-projects[media][patch][1307054] = http://drupal.org/files/1307054-d7-2.patch
-projects[media][patch][1311828] = http://drupal.org/files/media-n1311828.patch
+projects[media][patch][1311828] = http://drupal.org/files/media-install-error-1311828-28.patch
 
 projects[media_youtube][version] = 1.0-beta3
 projects[media_youtube][subdir] = contrib
