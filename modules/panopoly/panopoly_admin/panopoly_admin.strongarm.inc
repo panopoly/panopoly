@@ -19,7 +19,10 @@ function panopoly_admin_defaultconfig_strongarm() {
     'layout' => 'vertical',
     'position' => 'nw',
     'behavior' => 'ah',
-    'blocks' => array(),
+    'blocks' => array(
+      'admin-create' => -1,
+      'admin-menu' => 1,
+    ),
   );
   $export['admin_toolbar'] = $strongarm;
 
