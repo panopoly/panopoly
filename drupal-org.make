@@ -36,7 +36,7 @@ projects[panopoly_widgets][download][branch] = 7.x-1.x
 projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
 projects[panopoly_admin][download][type] = git
-projects[panopoly_admin][download][revision] = 2c1468e
+projects[panopoly_admin][download][revision] = 899195c
 projects[panopoly_admin][download][branch] = 7.x-1.x
 
 projects[panopoly_users][version] = 1.0-beta6
@@ -58,3 +58,8 @@ projects[panopoly_search][subdir] = panopoly
 projects[panopoly_search][download][type] = git
 projects[panopoly_search][download][revision] = e600402
 projects[panopoly_search][download][branch] = 7.x-1.x
+
+; Panopoly Recommended
+
+projects[admin][version] = 2.0-beta3
+projects[admin][subdir] = contrib

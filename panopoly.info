@@ -31,3 +31,6 @@ dependencies[] = panopoly_users
 dependencies[] = panopoly_pages
 dependencies[] = panopoly_search
 dependencies[] = panopoly_wysiwyg
+
+; Panopoly Recommended
+dependencies[] = admin
