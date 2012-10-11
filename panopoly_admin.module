@@ -324,7 +324,7 @@ function panopoly_admin_menu() {
   );
 
   // Add settings pages for Panopoly and Panopoly Apps
-  foreach(module_list() as $module) {
+  foreach (module_list() as $module) {
     $app_info = module_invoke($module, 'apps_app_info');
     if (!empty($app_info) && !empty($app_info['configure form'])) {
       $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
@@ -336,7 +336,8 @@ function panopoly_admin_menu() {
           'page arguments' => array($app_info['configure form']),
           'access arguments' => array('administer site configuration'),
         );
-      } else if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly Apps') {
+      } 
+      elseif (!empty($module_info['package']) && $module_info['package'] == 'Panopoly Apps') {
         $items['admin/panopoly/app_settings/' . $module] = array(
           'title' => $module_info['name'],
           'description' => 'This is the configuration screen for ' . $module_info['name'],
@@ -543,10 +544,12 @@ function panopoly_admin_switch_layout_action($status, $layout_name, $token) {
   if ($token == drupal_get_token($layout_name) && $status == 'enable') {
     $panels_page_allowed_layouts->allowed_layout_settings[$layout_name] = TRUE;
     $commands[] = ajax_command_replace('#panopoly-admin-layout-response-' . $layout_name, _panopoly_admin_general_layout_get_status($layout_name, $status));
-  } elseif ($token == drupal_get_token($layout_name) && $status == 'disable') {
+  } 
+  elseif ($token == drupal_get_token($layout_name) && $status == 'disable') {
     $panels_page_allowed_layouts->allowed_layout_settings[$layout_name] = FALSE;
     $commands[] = ajax_command_replace('#panopoly-admin-layout-response-' . $layout_name, _panopoly_admin_general_layout_get_status($layout_name, $status));
-  } else {
+  } 
+  else {
     $commands[] = ajax_command_replace('#panopoly-admin-layout-response-' . $layout_name, 'Trouble!');
   }
 
@@ -566,10 +569,12 @@ function panopoly_admin_switch_pane_action($status, $category_name, $plugin_name
   if ($token == drupal_get_token($plugin_name) && $status == 'enable') {
     $panels_page_allowed_types[$category_name . '-' . $plugin_name] = $category_name . '-' . $plugin_name;
     $commands[] = ajax_command_replace('#panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
-  } elseif ($token == drupal_get_token($plugin_name) && $status == 'disable') {
+  } 
+  elseif ($token == drupal_get_token($plugin_name) && $status == 'disable') {
     $panels_page_allowed_types[$category_name . '-' . $plugin_name] = 0;
     $commands[] = ajax_command_replace('#panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), _panopoly_admin_general_panes_get_status($plugin_name, $category_name, $status));
-  } else {
+  } 
+  else {
     $commands[] = ajax_command_replace('#panopoly-admin-pane-response-' . $category_name . '-' . str_replace(':', '_', $plugin_name), 'Trouble!');
   }
 
@@ -589,10 +594,12 @@ function panopoly_admin_switch_pane_type_action($status, $plugin_type, $token) {
   if ($token == drupal_get_token($plugin_type) && $status == 'enable') {
     $panels_page_default[$plugin_type] = $plugin_type;
     $commands[] = ajax_command_replace('#panopoly-admin-type-response-' . $plugin_type, _panopoly_admin_plugin_type_get_status($plugin_type, $status));
-  } elseif ($token == drupal_get_token($plugin_type) && $status == 'disable') {
+  } 
+  elseif ($token == drupal_get_token($plugin_type) && $status == 'disable') {
     $panels_page_default[$plugin_type] = 0;
     $commands[] = ajax_command_replace('#panopoly-admin-type-response-' . $plugin_type, _panopoly_admin_plugin_type_get_status($plugin_type, $status));
-  } else {
+  } 
+  else {
     $commands[] = ajax_command_replace('#panopoly-admin-type-response-' . $plugin_type, 'Trouble!');
   }
 
