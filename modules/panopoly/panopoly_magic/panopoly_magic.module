@@ -29,7 +29,7 @@ function panopoly_magic_menu_alter(&$items) {
   // Include entity_field.inc from ctools to ensure that files can be properly removed 
   // from within the panelizer edit forms.
   $items['file/ajax']['file'] = 'entity_field.inc';
-  $items['file/ajax']['file path'] = drupal_get_path('module', 'ctools') .'/plugins/content_types/entity_context';
+  $items['file/ajax']['file path'] = drupal_get_path('module', 'ctools') . '/plugins/content_types/entity_context';
 }
 
 /**
@@ -203,7 +203,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form_state['contexts'])) {
       $context = $form_state['contexts'];
     }
-    else if (!empty($form_state['display']->context)) {
+    elseif (!empty($form_state['display']->context)) {
       $context = $form_state['display']->context;
     }
     else {
@@ -257,7 +257,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       );
 
       // If manual, show button, and don't autoupdate.
-      if(variable_get('panopoly_magic_live_preview') == 1) {
+      if (variable_get('panopoly_magic_live_preview') == 1) {
         $preview_attributes['style'] = 'display: none';
         $preview_attributes['class'][] = 'ctools-auto-submit-click';
       }
@@ -671,7 +671,7 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
   $conf = $form_state['conf'];
 
   // Move the title for the label and formatter to be the field prefix
-  foreach(array('label', 'formatter') as $field) {
+  foreach (array('label', 'formatter') as $field) {
     if (!empty($form['general_settings'][$field])) {
       $form['general_settings'][$field]['#field_prefix'] = $form['general_settings'][$field]['#title'];
       $form['general_settings'][$field]['#title'] = '';
