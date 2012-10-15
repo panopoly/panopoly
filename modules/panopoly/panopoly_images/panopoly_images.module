@@ -17,22 +17,10 @@ function panopoly_images_init() {
  */
 function panopoly_images_media_wysiwyg_allowed_view_modes_alter(&$options, $context) {
 
-  // Unset confusing options
-  if (!empty($options['token'])) {
-    unset($options['token']); 
-  }
-  if (!empty($options['media_link'])) {
-    unset($options['media_link']);
-  }
-  if (!empty($options['full'])) {
-    unset($options['full']); 
-  }
-
   // Relabel some options
-  $options['media_original']['label'] = t('Full Size');
-  $options['media_large']['label'] = t('Half Size');
-  $options['media_small']['label'] = t('Quarter Size');
-  $options['media_preview']['label'] = t('Thumbnail');
+  $options['default']['label'] = t('Full Size');
+  $options['teaser']['label'] = t('Half Size');
+  $options['preview']['label'] = t('Thumbnail');
 }
 
 /**
