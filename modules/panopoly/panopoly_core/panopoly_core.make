@@ -25,6 +25,7 @@ projects[panels][patch][1801422] = http://drupalcode.org/project/panels.git/comm
 projects[panels][patch][1735336] = http://drupalcode.org/project/panels.git/commitdiff_plain/f533a26
 projects[panels][patch][1797298] = http://drupalcode.org/project/panels.git/commitdiff_plain/42978af
 projects[panels][patch][1744824] = http://drupalcode.org/project/panels.git/commitdiff_plain/f6f7049
+projects[panels][patch][1772846] = http://drupalcode.org/project/panels.git/commitdiff_plain/4e636d7
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
