@@ -38,7 +38,7 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
     foreach ($category as $plugin_name => $plugin) {
       $category_label = (is_string($plugin['category'])) ? $plugin['category'] : $plugin['category'][0];
       $plugin_status = (!empty($panels_page_allowed_types[$category_name . '-' . $plugin_name])) ? _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'enable') : _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'disable');
-      if (variable_get('panopoly_admin_advanced_panes', FALSE) || !panopoly_admin_is_advanced_plugin($plugin)) {
+      if (variable_get('panopoly_admin_advanced_plugins', FALSE) || !panopoly_admin_is_advanced_plugin($plugin)) {
         $plugin_data[$category_label][] = array(
           theme('image', array('path' => ctools_content_admin_icon($plugin))),
           $plugin['title'],
