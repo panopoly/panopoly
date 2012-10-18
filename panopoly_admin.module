@@ -193,7 +193,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Improve the menu adding experience
-  if (isset($form['menu']) && isset($form['menu']['enabled'])) {
+  if (isset($form['menu']) && isset($form['menu']['enabled']) && $form['menu']['#access']) {
     $form['menu']['link']['link_title']['#size'] = '';
     $form['menu']['link']['weight']['#access'] = FALSE;
     $form['menu']['link']['link_title']['#title'] = 'Title';
