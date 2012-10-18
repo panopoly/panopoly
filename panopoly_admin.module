@@ -99,11 +99,6 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
  */
 function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
 
-  // Filter out the panes we consider advanced
-  if (!variable_get('panopoly_admin_advanced_panes', FALSE) && panopoly_admin_is_advanced_plugin($subtype)) {
-    // $subtype['category'][0] = t('Advanced');
-    // $subtype['required context'] = new ctools_context_required(t('Panopoly Null'), 'string');;
-  }
 }
 
 /**
@@ -506,26 +501,21 @@ function panopoly_admin_is_advanced_plugin($plugin) {
 
   // Specifically excluded categories
   $fixed_advanced_plugins = array(
-    'View context',
-    'Page elements',
-    'Admin',
-    'Form Content',
-    'File',
-    'Facet API',
-    'Fielded panes',
-    'Fieldable_panels_pane',
-    'Search',
-    'Existing pages',
-    'Widgets',
+    'View context', // support for views context
+    'Page elements', // sitewide panes that don't work so well in $content region
+    'Facet API', // default facet api options subsumed into "Search Facets" option
+    'File', // support for file items that is just confusing
+    'Fielded panes', // unnecessary default FPP content type
+    'Fieldable_panels_pane', // duplicated fields for custom panes
+    'Existing pages', // pages from pm existing pages module that will break the site
   );
 
   // Specifically excluded panes
   $fixed_advanced_panes = array(
-    'New custom content',
-    'Execute PHP',  
-    'Devel',
-    'Switch user', 
-    'Theme switcher',
+    'Execute PHP',  // sigh
+    'Devel', // devel option for advanced users
+    'Switch user',  // devel option for advanced users
+    'Theme switcher', // devel option for advanced users
   );
 
   // Define this as an advanced plugin if it is in the advance category or pane list or has tokens
