@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * panopoly_pages.strongarm.inc
+ * panopoly_pages.defaultconfig.inc
  */
 
 /**
- * Implements hook_strongarm().
+ * Implements hook_defaultconfig_strongarm().
  */
-function panopoly_pages_strongarm() {
+function panopoly_pages_defaultconfig_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
