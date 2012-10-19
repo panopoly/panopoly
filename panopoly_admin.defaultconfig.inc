@@ -17,7 +17,7 @@ function panopoly_admin_defaultconfig_strongarm() {
   $strongarm->value = array(
     'layout' => 'vertical',
     'position' => 'nw',
-    'behavior' => 'df',
+    'behavior' => 'ah',
     'blocks' => array(
       'admin-create' => -1,
       'admin-menu' => 1,
