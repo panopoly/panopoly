@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_install().
+ * Implementation of hook_install().
  */
 function panopoly_widgets_install() {
   panopoly_widgets_save_default_file_data(drupal_get_path('module', 'panopoly_widgets') . '/default_content/vegetables-demo-image.png', 'vegetables-demo-image.png', 'image');
@@ -16,14 +16,14 @@ function panopoly_widgets_install() {
 }
 
 /**
- * Implements hook_uninstall().
+ * Implementation of hook_uninstall().
  */
 function panopoly_widgets_uninstall() {
 
 }
 
 /**
- * Implements hook_field_schema().
+ * Implementation of hook_field_schema().
  */
 function panopoly_widgets_field_schema($field) {
   if ($field['type'] == 'panopoly_spotlight') {
@@ -77,7 +77,7 @@ function panopoly_widgets_update_7001(&$sandbox) {
 }
 
 /**
- * Implemenets hook_update_N().
+ * Implementation of hook_update_N().
  *
  * Revert panopoly_widget fields to avoid data loss in update 7003.
  */
@@ -88,7 +88,7 @@ function panopoly_widgets_update_7002(&$sandbox) {
 }
 
 /**
- * Implements hook_update_N().
+ * Implementation of hook_update_N().
  *
  * Move video mediafield data into a file field.
  */
