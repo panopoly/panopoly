@@ -257,7 +257,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       );
 
       // If live previewing, don't show button, and autoupdate.
-      if (variable_get('panopoly_magic_live_preview') == 1) {
+      if (variable_get('panopoly_magic_live_preview', 1) == 1) {
         $preview_attributes['style'] = 'display: none';
         $preview_attributes['class'][] = 'ctools-auto-submit-click';
       }
