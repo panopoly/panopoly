@@ -114,6 +114,40 @@ function panopoly_widgets_update_7003(&$sandbox) {
 }
 
 /**
+ * Implements hook_update_N().
+ *
+ * Convert panel panes with "uuid" style subtypes into "fpid" style subtypes.
+ */
+function panopoly_widgets_update_7004(&$sandbox) {
+
+  $results = db_select('panels_pane', 'p')
+    ->fields('p', array('pid', 'subtype'))
+    ->execute()
+    ->fetchAll();
+
+  foreach ($results as $result) {
+    if (substr($result->subtype, 0, 5) == 'uuid:') {
+      $uuid = substr($result->subtype, 5);
+
+      $fpid = db_select('fieldable_panels_panes', 'fpp')
+        ->fields('fpp', array('fpid'))
+        ->condition('uuid', $uuid)
+        ->execute()
+        ->fetchField();
+
+      if (!empty($fpid)) {
+        $subtype = "fpid:" . $fpid;
+
+        db_update('panels_pane')
+        ->fields(array('subtype' => $subtype))
+        ->condition('pid', $result->pid)
+        ->execute();
+      }
+    }
+  }
+}
+
+/**
  * Helper function to save default file data.
  */
 function panopoly_widgets_save_default_file_data($filepath, $filename, $type) {
