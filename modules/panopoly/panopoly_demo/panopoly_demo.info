@@ -4,6 +4,7 @@ core = 7.x
 package = Panopoly Apps
 php = 5.2.4
 project = panopoly_demo
+dependencies[] = defaultcontent
 dependencies[] = features
 dependencies[] = page_manager
 dependencies[] = panopoly_pages
