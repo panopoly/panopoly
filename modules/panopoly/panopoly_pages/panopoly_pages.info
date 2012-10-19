@@ -26,7 +26,4 @@ features[variable][] = node_options_panopoly_page
 features[variable][] = node_preview_panopoly_page
 features[variable][] = node_submitted_panopoly_page
 features[variable][] = panelizer_defaults_node_panopoly_page
-features[variable][] = panelizer_node:panopoly_page_allowed_layouts
-features[variable][] = panelizer_node:panopoly_page_allowed_types
-features[variable][] = panelizer_node:panopoly_page_default
 features[variable][] = save_continue_panopoly_page
