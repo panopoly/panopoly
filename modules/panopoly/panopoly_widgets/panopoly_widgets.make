@@ -41,7 +41,6 @@ projects[media][subdir] = contrib
 projects[media][download][type] = git
 projects[media][download][revision] = 0085612
 projects[media][download][branch] = 7.x-2.x
-projects[media][patch][1311828] = http://drupal.org/files/media-n1311828.patch
 
 projects[media_youtube][version] = 1.0-beta3
 projects[media_youtube][subdir] = contrib
