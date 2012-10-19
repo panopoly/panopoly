@@ -405,3 +405,14 @@ function panopoly_widgets_field_display_fieldable_panels_pane_alter(&$display, $
     }
   }
 }
+
+/**
+ * Implementation of hook_file_type_alter()
+ *
+ * Alters list of file types that can be assigned to a file.
+ */
+function panopoly_widgets_file_type_alter(&$types, $file) {
+  if ($file->filemime == 'video/youtube' || $file->filemime == 'video/vimeo') {
+    $types[] = 'video';
+  }
+}
