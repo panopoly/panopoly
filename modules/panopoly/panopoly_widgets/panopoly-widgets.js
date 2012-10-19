@@ -21,18 +21,29 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
  Drupal.behaviors.panopolyWidgetVideo = {
    attach: function (context, settings) {
 
-     $('.media-vimeo-outer-wrapper').each(function() {
+     $('.pane-bundle-video .media-vimeo-outer-wrapper').each(function() {
        var width = $(this).width();
        var height = width / 16 * 9;
        $(this).css('height', height);
        $(this).find('iframe.vimeo-player').css('height', height);
      }); 
+
+     $('#media-browser-library-list .media-vimeo-preview-wrapper').each(function() {
+       $(this).css('width', 'auto');
+       $(this).find('iframe.vimeo-player').css('width', 'auto');
+     });
  
-     $('.media-youtube-outer-wrapper').each(function() {
+     $('.pane-bundle-video .media-youtube-outer-wrapper').each(function() {
        var width = $(this).width();
        var height = width / 16 * 9;
        $(this).css('height', height);
+       $(this).find('iframe.youtube-player').css('height', height);
      });
+
+     $('#media-browser-library-list .media-youtube-preview-wrapper').each(function() {
+       $(this).css('width', 'auto');
+       $(this).find('iframe.youtube-player').css('width', 'auto');
+     })
 
    }
  }
