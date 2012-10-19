@@ -5,27 +5,17 @@ core = 7.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 1.2
+projects[ctools][version] = 1.x-dev
 projects[ctools][subdir] = contrib
-projects[ctools][patch][1739718] = http://drupalcode.org/project/ctools.git/commitdiff_plain/03f10455c9ca38c152b33282f66c9bedad577b21
-projects[ctools][patch][1494860] = http://drupalcode.org/project/ctools.git/commitdiff_plain/7cd8d95d65edecf82f73b6df2a073c44d05074b8
-projects[ctools][patch][1788088] = http://drupalcode.org/project/ctools.git/commitdiff_plain/909290dc9482374a30943db49ca9dac998fc3a5e
-projects[ctools][patch][1774434] = http://drupalcode.org/project/ctools.git/commitdiff_plain/e7b85db971cf33ade21252d1f55aa88de3301ce7
-projects[ctools][patch][1197582] = http://drupalcode.org/project/ctools.git/commitdiff_plain/b2c7635abf502e66b108bb64ecbfb4166596b613
-projects[ctools][patch][1754770] = http://drupalcode.org/project/ctools.git/commitdiff_plain/d6157d1a4cdc787b6c88c8802ce3026a17de62cf
+projects[ctools][download][type] = git
+projects[ctools][download][revision] = d6157d1
+projects[ctools][download][branch] = 7.x-1.x
 
-projects[panels][version] = 3.3
+projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
-projects[panels][patch][7a8bd4e] = http://drupalcode.org/project/panels.git/commitdiff_plain/7a8bd4e
-projects[panels][patch][1572202] = http://drupalcode.org/project/panels.git/commitdiff_plain/d4e2e93
-projects[panels][patch][1772834] = http://drupalcode.org/project/panels.git/commitdiff_plain/451f8d4
-projects[panels][patch][1788170] = http://drupalcode.org/project/panels.git/commitdiff_plain/465ba82
-projects[panels][patch][86c216e] = http://drupalcode.org/project/panels.git/commitdiff_plain/86c216e
-projects[panels][patch][1801422] = http://drupalcode.org/project/panels.git/commitdiff_plain/fcca8e3
-projects[panels][patch][1735336] = http://drupalcode.org/project/panels.git/commitdiff_plain/f533a26
-projects[panels][patch][1797298] = http://drupalcode.org/project/panels.git/commitdiff_plain/42978af
-projects[panels][patch][1744824] = http://drupalcode.org/project/panels.git/commitdiff_plain/f6f7049
-projects[panels][patch][1772846] = http://drupalcode.org/project/panels.git/commitdiff_plain/4e636d7
+projects[panels][download][type] = git
+projects[panels][download][revision] = 4e636d7
+projects[panels][download][branch] = 7.x-3.x
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
@@ -33,14 +23,11 @@ projects[panels_breadcrumbs][download][type] = git
 projects[panels_breadcrumbs][download][revision] = 531f589
 projects[panels_breadcrumbs][download][branch] = 7.x-2.x
 
-projects[panelizer][version] = 3.0-rc1
+projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
-projects[panelizer][patch][1238e8c] = http://drupalcode.org/project/panelizer.git/commitdiff_plain/1238e8c
-projects[panelizer][patch][1572202] = http://drupalcode.org/project/panelizer.git/commitdiff_plain/665c089
-projects[panelizer][patch][6ba90d3] = http://drupalcode.org/project/panelizer.git/commitdiff_plain/6ba90d3
-projects[panelizer][patch][1719372] = http://drupalcode.org/project/panelizer.git/commitdiff_plain/55c4582
-projects[panelizer][patch][2fb80ae] = http://drupalcode.org/project/panelizer.git/commitdiff_plain/2fb80ae
-projects[panelizer][patch][3fdacfd] = http://drupalcode.org/project/panelizer.git/commitdiff_plain/3fdacfd
+projects[panelizer][download][type] = git
+projects[panelizer][download][revision] = 3fdacfd 
+projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-allow-additional-panelizer-tab-pages_1.patch
 
 projects[fieldable_panels_panes][version] = 1.2
