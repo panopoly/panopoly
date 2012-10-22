@@ -141,6 +141,11 @@ function panopoly_core_strongarm() {
         'default' => 1,
         'choice' => 0,
       ),
+      'featured' => array(
+        'status' => 1,
+        'default' => 1,
+        'choice' => 0,
+      ),
     ),
   );
   $export['panelizer_defaults_taxonomy_term_panopoly_categories'] = $strongarm;
