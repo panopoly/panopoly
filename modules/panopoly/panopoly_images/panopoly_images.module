@@ -56,6 +56,21 @@ function panopoly_images_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Implementation of hook_file_displays_alter()
+ *
+ * This function is designed to readjust the width and height properties in the WYSIWYG.
+ * See this issue for more background - http://drupal.org/node/1801308.
+ */
+function panopoly_images_file_displays_alter(&$displays, &$file, &$view_mode) {
+  if (!empty($file->override['attributes']['width'])) {
+    $file->image_dimensions['width'] = $file->override['attributes']['width'];
+  }
+  if (!empty($file->override['attributes']['height'])) {
+    $file->image_dimensions['height'] = $file->override['attributes']['height'];
+  }
+}
+
+/**
  * Implementation of hook_preprocess_image_style()
  */
 function panopoly_images_preprocess_image_style(&$variables) {
