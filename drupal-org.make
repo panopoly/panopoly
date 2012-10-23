@@ -27,8 +27,11 @@ projects[panopoly_magic][subdir] = panopoly
 projects[panopoly_widgets][version] = 1.0-rc1
 projects[panopoly_widgets][subdir] = panopoly
 
-projects[panopoly_admin][version] = 1.0-rc1
+projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
+projects[panopoly_admin][download][type] = git
+projects[panopoly_admin][download][revision] = 5ff7d19
+projects[panopoly_admin][download][branch] = 7.x-1.x
 
 projects[panopoly_users][version] = 1.0-rc1
 projects[panopoly_users][subdir] = panopoly
@@ -48,9 +51,6 @@ projects[panopoly_search][version] = 1.0-rc1
 projects[panopoly_search][subdir] = panopoly
 
 ; Panopoly Recommended
-
-projects[admin][version] = 2.0-beta3
-projects[admin][subdir] = contrib
 
 projects[devel][version] = 1.3
 projects[devel][subdir] = contrib
