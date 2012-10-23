@@ -18,8 +18,8 @@ function panopoly_images_init() {
 function panopoly_images_media_wysiwyg_allowed_view_modes_alter(&$options, $context) {
 
   // Relabel some options
-  $options['default']['label'] = t('Full Size');
-  $options['teaser']['label'] = t('Half Size');
+  $options['default']['label'] = t('Original Size');
+  $options['teaser']['label'] = t('Quarter Size');
   $options['preview']['label'] = t('Thumbnail');
 }
 
