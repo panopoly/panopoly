@@ -67,6 +67,7 @@ projects[token][subdir] = contrib
 
 projects[entity][version] = 1.0-rc3
 projects[entity][subdir] = contrib
+projects[entity][patch][1514764] = http://drupal.org/files/1514764-fix_entity_conditions-20.patch
 
 projects[libraries][version] = 2.0
 projects[libraries][subdir] = contrib
