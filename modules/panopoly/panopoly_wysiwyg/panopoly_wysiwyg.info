@@ -4,6 +4,7 @@ core = 7.x
 package = Panopoly
 php = 5.2.4
 project = panopoly_wysiwyg
+dependencies[] = caption_filter
 dependencies[] = features
 dependencies[] = image_resize_filter
 dependencies[] = linkit
