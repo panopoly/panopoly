@@ -397,7 +397,6 @@ function panopoly_admin_menu() {
   // Add settings pages for Panopoly and Panopoly Apps
   foreach (module_list() as $module) {
     $app_info = module_invoke($module, 'apps_app_info');
-    drush_print_r($app_info);
     if (!empty($app_info) && !empty($app_info['configure form'])) {
       $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
       if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly') {
