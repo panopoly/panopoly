@@ -14,6 +14,7 @@ dependencies[] = jquery_update
 dependencies[] = module_filter
 dependencies[] = page_manager
 dependencies[] = panopoly_core
+dependencies[] = shortcut
 dependencies[] = simplified_menu_admin
 dependencies[] = strongarm
 dependencies[] = views_bulk_operations
