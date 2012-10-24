@@ -10,6 +10,7 @@ dependencies[] = ctools
 dependencies[] = date_popup_authored
 dependencies[] = defaultconfig
 dependencies[] = features
+dependencies[] = jquery_update
 dependencies[] = module_filter
 dependencies[] = page_manager
 dependencies[] = panopoly_core
