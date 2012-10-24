@@ -10,6 +10,7 @@ projects[ctools][subdir] = contrib
 projects[ctools][download][type] = git
 projects[ctools][download][revision] = d6157d1
 projects[ctools][download][branch] = 7.x-1.x
+projects[ctools][patch][1822472] = http://drupal.org/files/1822472-exclude-all.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
