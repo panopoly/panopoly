@@ -384,7 +384,7 @@ function panopoly_admin_menu() {
 
   // Add an administration section for Panopoly app settings
   $items['admin/panopoly/apps_settings'] = array(
-    'title' => 'Apps Settings',
+    'title' => 'Panopoly Apps Settings',
     'description' => 'Configuration related to Panopoly Apps',
     'position' => 'right',
     'weight' => -45,
@@ -397,6 +397,7 @@ function panopoly_admin_menu() {
   // Add settings pages for Panopoly and Panopoly Apps
   foreach (module_list() as $module) {
     $app_info = module_invoke($module, 'apps_app_info');
+    drush_print_r($app_info);
     if (!empty($app_info) && !empty($app_info['configure form'])) {
       $module_info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
       if (!empty($module_info['package']) && $module_info['package'] == 'Panopoly') {
@@ -409,7 +410,7 @@ function panopoly_admin_menu() {
         );
       } 
       elseif (!empty($module_info['package']) && $module_info['package'] == 'Panopoly Apps') {
-        $items['admin/panopoly/app_settings/' . $module] = array(
+        $items['admin/panopoly/apps_settings/' . $module] = array(
           'title' => $module_info['name'],
           'description' => 'This is the configuration screen for ' . $module_info['name'],
           'page callback' => 'drupal_get_form',
