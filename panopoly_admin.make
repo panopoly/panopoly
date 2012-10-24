@@ -29,6 +29,9 @@ projects[admin][patch][1334804] = http://drupal.org/files/1334804-admin-jquery-u
 projects[navbar][version] = 1.0-alpha3
 projects[navbar][subdir] = contrib
 
+projects[admin_menu][version] = 3.0-rc3
+projects[admin_menu][subdir] = contrib
+
 projects[jquery_update][version] = 2.x
 projects[jquery_update][subdir] = contrib
 projects[jquery_update][download][type] = git
