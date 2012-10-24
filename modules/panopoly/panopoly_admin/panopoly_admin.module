@@ -70,13 +70,14 @@ function panopoly_admin_configure_form($form, &$form_state) {
   );
 
   $form['panopoly_admin_toolbar'] = array(
-    '#title' => t('Administrative toolbar'),
+    '#title' => t('Administrative Toolbar'),
     '#type' => 'select',
     '#options' => array(
       'none' => t('None'),
       'admin' => t('Admin Module'),
       'navbar' => t('Navbar Module'),
-      'admin_menu' => t('Admin Menu')
+      'admin_menu' => t('Admin Menu Module'),
+      'toolbar' => t('Toolbar Module')
     ),
     '#default_value' => variable_get('panopoly_admin_toolbar', 'admin'),
     '#description' => t('Would you like to provide an administrative toolbar for admins and editors?'),
@@ -99,23 +100,29 @@ function panopoly_admin_configure_form_submit($form, &$form_state) {
   if ($toolbar != $old_toolbar) {
 
     if ($toolbar == 'none') {
-      module_disable(array('admin', 'navbar', 'admin_menu', 'admin_menu_toolbar'));
+      module_disable(array('admin', 'navbar', 'admin_menu', 'admin_menu_toolbar', 'toolbar'));
     }
     else if ($toolbar == 'admin') {
-      module_disable(array('navbar', 'admin_menu', 'admin_menu_toolbar'));
+      module_disable(array('navbar', 'admin_menu', 'admin_menu_toolbar', 'toolbar'));
       module_enable(array('admin'));
     }
     else if ($toolbar == 'navbar') {
-      module_disable(array('admin', 'admin_menu', 'admin_menu_toolbar'));
+      module_disable(array('admin', 'admin_menu', 'admin_menu_toolbar', 'toolbar'));
       module_enable(array('navbar'));
 
       // Navbar requires a menu rebuild.
       menu_rebuild();
     }
     else if ($toolbar == 'admin_menu') {
-      module_disable(array('admin', 'navbar'));
+      module_disable(array('admin', 'navbar', 'toolbar'));
       module_enable(array('admin_menu', 'admin_menu_toolbar'));
 
+      // Admin menu requires a menu rebuild
+      menu_rebuild();
+    }
+    else if ($toolbar == 'toolbar') {
+      module_disable(array('admin', 'navbar', 'admin_menu'));
+      module_enable(array('toolbar'));
     }
 
     cache_clear_all();
