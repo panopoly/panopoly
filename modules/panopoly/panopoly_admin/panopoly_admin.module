@@ -416,6 +416,18 @@ function panopoly_admin_menu() {
           'page arguments' => array($app_info['configure form']),
           'access arguments' => array('administer site configuration'),
         );
+        if (!empty($app_info['demo content module']) && !empty($app_info['demo content link path'])) {
+          if (module_exists($app_info['demo content module'])) {
+            $items[$app_info['demo content link path'] . '/disable_demo_content'] = array(
+              'title' => 'Disable Demo Content',
+              'description' => 'This will disable the demo content that is provided by this app.',
+              'page callback' => 'drupal_get_form',
+              'type' => MENU_LOCAL_ACTION,
+              'page arguments' => array('panopoly_admin_disable_demo_content_form', $app_info['demo content module'], $app_info['demo content link path']),
+              'access arguments' => array('administer apps'),
+            );
+          }
+        }
       }
     }
   }
@@ -439,6 +451,40 @@ function panopoly_admin_menu_alter(&$items) {
   // Set the description of the pane library
   $items['admin/panopoly/libraries/panes']['description'] = 'This is the pane library for the site. See all of the panes you can add to your pages.';
 
+}
+
+/**
+ * Callback form to disable demo content for an app
+ */
+function panopoly_admin_disable_demo_content_form($form, &$form_state, $demomodule, $redirect) {
+  $form = array();
+
+  drupal_set_title('Disable Demo Content?');
+
+  $form['redirect'] = array(
+    '#type' => 'value',
+    '#value' => $redirect,
+  );
+
+  $form['demomodule'] = array(
+    '#type' => 'value',
+    '#value' => $demomodule,
+  );
+
+  $form['submit'] = array(
+    '#value' => t('Disable Demo Content'),
+    '#type' => 'submit',
+  );
+  return $form;
+}
+
+/**
+ * Submit handler for disabling demo content
+ */
+function panopoly_admin_disable_demo_content_form_submit($form, &$form_state) {
+  module_disable(array($form_state['values']['demomodule']));
+  menu_rebuild();
+  drupal_goto($form_state['values']['redirect']);
 }
 
 /**
