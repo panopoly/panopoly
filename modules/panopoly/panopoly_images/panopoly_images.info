@@ -38,3 +38,4 @@ features[image][] = panopoly_image_quarter
 features[image][] = panopoly_image_spotlight
 features[image][] = panopoly_image_square
 features[image][] = panopoly_image_thumbnail
+features[image][] = panopoly_image_video
