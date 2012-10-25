@@ -69,7 +69,7 @@ function panopoly_widgets_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'image_style' => 'panopoly_image_thumbnail',
+    'image_style' => 'panopoly_image_video',
   );
   $export['video__preview__media_vimeo_image'] = $file_display;
 
@@ -79,7 +79,7 @@ function panopoly_widgets_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'image_style' => 'panopoly_image_thumbnail',
+    'image_style' => 'panopoly_image_video',
   );
   $export['video__preview__media_youtube_image'] = $file_display;
 
