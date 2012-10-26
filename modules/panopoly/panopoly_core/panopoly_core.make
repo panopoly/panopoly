@@ -95,10 +95,3 @@ projects[defaultcontent][subdir] = contrib
 projects[defaultcontent][download][type] = git
 projects[defaultcontent][download][revision] = d8806d8
 projects[defaultcontent][download][branch] = 7.x-1.x
-
-projects[uuid][version] = 1.x-dev
-projects[uuid][subdir] = contrib
-projects[uuid][download][type] = git
-projects[uuid][download][revision] = 4730c67
-projects[uuid][download][branch] = 7.x-1.x
-projects[uuid][patch][1605284] = http://drupal.org/files/1605284-define-types-for-tokens-6.patch

@@ -28,7 +28,6 @@ dependencies[] = pm_existing_pages
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = token
-dependencies[] = uuid
 dependencies[] = views
 dependencies[] = views_autocomplete_filters
 dependencies[] = views_content
