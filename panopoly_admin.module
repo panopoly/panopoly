@@ -253,6 +253,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['revision_information']['revision']['#weight'] = 9;
     $form['options']['revision'] = $form['revision_information']['revision'];
     $form['options']['log'] = $form['revision_information']['log'];
+    unset($form['revision_information']['#type']);
     unset($form['revision_information']['log']);
     unset($form['revision_information']['revision']);
   }
