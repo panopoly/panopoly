@@ -33,18 +33,6 @@ function panopoly_admin_configure_form($form, &$form_state) {
     '#description' => t('Do you want to provide an option to specify a machine name (provided by the Default Content module) on the content editing form?'),
   );
 
-  $form['panopoly_admin_revision_option'] = array(
-    '#title' => t('Create revision'),
-    '#type' => 'select',
-    '#required' => TRUE,
-    '#options' => array(
-      '1' => 'Enabled',
-      '0' => 'Disabled',
-    ),
-    '#default_value' => variable_get('panopoly_admin_revision_option', 0),
-    '#description' => t('Do you want to provide an option to create a new revision for content on the content editing form?'),
-  );
-
   $form['panopoly_admin_link_description'] = array(
     '#title' => t('Menu Link Description'),
     '#type' => 'select',
@@ -253,12 +241,19 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['author']['date']['#size'] = 20;
   }
 
-  // Make revisioning happen by default
+  // Improve the revision interface
   if (isset($form['revision_information']['revision'])) {
-    unset($form['revision_information']['#type']);
-    $form['revision_information']['log']['#access'] = FALSE;
+    $form['revision_information']['log']['#states'] = array(
+      'visible' => array(
+        'input[name="revision"]' => array('checked' => TRUE)
+      )
+    );
+    $form['revision_information']['log']['#weight'] = 10;
+    unset($form['revision_information']['log']['#title']);
+    $form['revision_information']['revision']['#weight'] = 9;
     $form['options']['revision'] = $form['revision_information']['revision'];
-    $form['options']['revision']['#access'] = variable_get('panopoly_admin_revision_option', FALSE);
+    $form['options']['log'] = $form['revision_information']['log'];
+    unset($form['revision_information']['log']);
     unset($form['revision_information']['revision']);
   }
 
