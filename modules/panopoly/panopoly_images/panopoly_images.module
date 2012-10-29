@@ -24,9 +24,21 @@ function panopoly_images_media_wysiwyg_allowed_view_modes_alter(&$options, $cont
 }
 
 /**
- * Implementation of hook_form_alter()
+ * Implementation of hook_jorm_alter()
  */
 function panopoly_images_form_alter(&$form, &$form_state, $form_id) {
+
+  // Remove some necessary image styles
+  if ($form_id == 'ctools_entity_field_content_type_formatter_styles') {
+    if (!empty($form['image_style']['#options'])) {
+      $styles_to_remove = array('apps_logo', 'apps_logo_small', 'apps_screenshot', 'apps_featured_screenshot', 'linkit_thumb');
+      foreach($styles_to_remove as $style_name) {
+        if (!empty($form['image_style']['#options'][$style_name])) {
+          unset($form['image_style']['#options'][$style_name]);
+        }
+      }
+    }
+  }
 
   // Improve the media upload form
   if (!empty($form['upload'])) {
