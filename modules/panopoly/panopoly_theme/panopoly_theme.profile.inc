@@ -39,7 +39,7 @@ function panopoly_theme_selection_form($form, &$form_state) {
   $form['theme_wrapper']['theme'] = array(
     '#type' => 'radios',
     '#options' => $themes,
-    '#default_value' => 'bartik',
+    '#default_value' => 'responsive_bartik',
   );
 
   $form['submit'] = array(
