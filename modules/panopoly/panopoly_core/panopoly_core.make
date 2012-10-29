@@ -30,6 +30,7 @@ projects[panelizer][download][type] = git
 projects[panelizer][download][revision] = 3fdacfd 
 projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-allow-additional-panelizer-tab-pages_1.patch
+projects[panelizer][patch][1824566] = http://drupal.org/files/1824566-allow-panelizer-bundles-to-use-default-4.patch
 
 projects[fieldable_panels_panes][version] = 1.2
 projects[fieldable_panels_panes][subdir] = contrib
