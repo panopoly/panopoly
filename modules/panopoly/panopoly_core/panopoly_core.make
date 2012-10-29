@@ -95,3 +95,4 @@ projects[defaultcontent][subdir] = contrib
 projects[defaultcontent][download][type] = git
 projects[defaultcontent][download][revision] = d8806d8
 projects[defaultcontent][download][branch] = 7.x-1.x
+projects[defaultcontent][patch][1754428] = http://drupal.org/files/1754428-allow-node-export-alter.patch
