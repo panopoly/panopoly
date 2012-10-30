@@ -5,12 +5,16 @@ core = 7.x
 
 ; Search API and Facet API Modules
 
-projects[facetapi][version] = 1.2
+projects[facetapi][version] = 1.x-dev
 projects[facetapi][subdir] = contrib
+projects[facetapi][download][type] = git
+projects[facetapi][download][revision] = 7c8adea
+projects[facetapi][download][branch] = 7.x-1.x
 
 projects[search_api][version] = 1.3
 projects[search_api][subdir] = contrib
 projects[search_api][patch][1698098] = http://drupal.org/files/search-api-disabled-index-configure-link.patch
+projects[search_api][patch][1827272] = http://drupal.org/files/1827272-request-path.patch
 
 projects[search_api_solr][version] = 1.0-rc2
 projects[search_api_solr][subdir] = contrib
