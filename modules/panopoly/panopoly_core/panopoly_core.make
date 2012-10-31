@@ -17,6 +17,7 @@ projects[panels][subdir] = contrib
 projects[panels][download][type] = git
 projects[panels][download][revision] = 4e636d7
 projects[panels][download][branch] = 7.x-3.x
+projects[panels][patch][1069744] = http://drupal.org/files/1069744-ipe-inaccessible-pane-placeholders.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
