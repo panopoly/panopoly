@@ -214,7 +214,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   // Move the featured field into publishing options
   if (!empty($form['field_featured_status'])) {
     $form['options']['field_featured_status'] = $form['field_featured_status'];
-    unset($form['field_featured_status']);
+    $form['field_featured_status'] = array('#language' => $form['options']['field_featured_status']['#language']);
   }
 
   // Remove the description from the featured image
