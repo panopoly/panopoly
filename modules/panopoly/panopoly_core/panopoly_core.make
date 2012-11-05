@@ -23,8 +23,9 @@ projects[panels][patch][1828684] = http://drupal.org/files/1828684-layout-fix-6.
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
 projects[panels_breadcrumbs][download][type] = git
-projects[panels_breadcrumbs][download][revision] = 531f589
+projects[panels_breadcrumbs][download][revision] = b79f3a8
 projects[panels_breadcrumbs][download][branch] = 7.x-2.x
+projects[panels_breadcrumbs][patch][1655296] = http://drupal.org/files/1655296-panelizer-allow-breadcrumb-tabs-33.patch
 
 projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
@@ -33,7 +34,7 @@ projects[panelizer][download][revision] = b783c23
 projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1824566] = http://drupal.org/files/1824566-allow-panelizer-bundles-to-use-default-5.patch
 projects[panelizer][patch][1772844] = http://drupal.org/files/1772844-reject-ipe-without-edit-permission.patch
-; projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-allow-additional-panelizer-tab-pages_1.patch
+projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-panelizer-allow-breadcrumb-tabs_0.patch
 
 projects[fieldable_panels_panes][version] = 1.2
 projects[fieldable_panels_panes][subdir] = contrib
