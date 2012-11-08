@@ -51,6 +51,18 @@ function panopoly_magic_configure_form($form, &$form_state) {
     '#description' => t('Do you want Panopoly to provide a live preview for modal content through the in place editor?'),
   );
 
+  $form['panopoly_magic_pane_add_preview'] = array(
+    '#title' => t('Enable previews when adding panes'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => t('Enabled'),
+      '0' => t('Disabled'),
+    ),
+    '#default_value' => variable_get('panopoly_magic_pane_add_preview', 1),
+    '#description' => t('Do you want to automatically generate previews when adding existing panels panes through the IPE?'),
+  );
+
   return system_settings_form($form);
 }
 
@@ -1165,14 +1177,31 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
   // Generate the pane preview
   if (!empty($vars['categories'][$vars['category']]['content'])) {
     foreach ($vars['categories'][$vars['category']]['content'] as &$plugin) {
-      $pane = panels_new_pane($plugin['type_name'], $plugin['subtype_name'], TRUE);
-      $display = $vars['renderer']->display;
-      $context = $vars['renderer']->display->context;
-      $args = $vars['renderer']->display->args;
-      $incoming_content = $vars['renderer']->display->incoming_content;
-      $keywords = (!empty($vars['renderer']->display->keywords)) ? $vars['renderer']->display->keywords : array();
-      if ($content = ctools_content_render($pane->type, $pane->subtype, $pane->configuration, $keywords, $args, $context, $incoming_content)) {
-        $plugin['preview'] = theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $display));
+      $use_preview = variable_get('panopoly_magic_pane_add_preview', 1);
+      $query = drupal_get_query_parameters();
+      $preview_panes = (!empty($query['preview_panes'])) ? explode(',', $query['preview_panes']) : array();
+
+      // Determine if we should show a preview for this pane.
+      if (!empty($use_preview) || in_array($plugin['subtype_name'], $preview_panes)) {
+        $pane = panels_new_pane($plugin['type_name'], $plugin['subtype_name'], TRUE);
+        $display = $vars['renderer']->display;
+        $context = $vars['renderer']->display->context;
+        $args = $vars['renderer']->display->args;
+        $incoming_content = $vars['renderer']->display->incoming_content;
+        $keywords = (!empty($vars['renderer']->display->keywords)) ? $vars['renderer']->display->keywords : array();
+        if ($content = ctools_content_render($pane->type, $pane->subtype, $pane->configuration, $keywords, $args, $context, $incoming_content)) {
+          $plugin['preview'] = theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $display));
+        }
+      }
+      else {
+
+        // If we can't preview then generate a preview link.
+        $preview = empty($query['preview_panes']) ? $plugin['subtype_name'] : $query['preview_panes'] . ',' . $plugin['subtype_name'];
+        $options = array(
+          'query' => array('preview_panes' => $preview),
+          'attributes' => array('class' => array('use-ajax button'))
+        );
+        $plugin['preview'] = '<div class="modal-content-preview-button">' . l(t('Preview'), request_path(), $options) . '</div>';
       }
     }
   }
