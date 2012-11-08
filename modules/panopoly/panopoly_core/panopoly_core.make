@@ -78,6 +78,20 @@ projects[entity][patch][1514764] = http://drupal.org/files/1514764-fix_entity_co
 projects[libraries][version] = 2.0
 projects[libraries][subdir] = contrib
 
+; Field modules
+
+projects[date][version] = 2.6
+projects[date][subdir] = contrib
+
+projects[entityreference][version] = 1.0-rc5
+projects[entityreference][subdir] = contrib
+
+projects[field_group][version] = 1.1
+projects[field_group][subdir] = contrib
+
+projects[link][version] = 1.0
+projects[link][subdir] = contrib
+
 ; Harness the Power of Features and Apps with Default Content
 
 projects[apps][version] = 1.0-beta7
