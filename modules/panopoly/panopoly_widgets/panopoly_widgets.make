@@ -21,13 +21,13 @@ projects[menu_block][subdir] = contrib
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][subdir] = contrib
 projects[file_entity][download][type] = git
-projects[file_entity][download][revision] = 2df7f24
+projects[file_entity][download][revision] = 945bf90
 projects[file_entity][download][branch] = 7.x-2.x
 
 projects[media][version] = 2.x-dev
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = 0085612
+projects[media][download][revision] = 83c903d
 projects[media][download][branch] = 7.x-2.x
 
 projects[media_youtube][version] = 1.0-beta3
