@@ -25,7 +25,7 @@ projects[panels_breadcrumbs][subdir] = contrib
 projects[panels_breadcrumbs][download][type] = git
 projects[panels_breadcrumbs][download][revision] = b79f3a8
 projects[panels_breadcrumbs][download][branch] = 7.x-2.x
-projects[panels_breadcrumbs][patch][1655296] = http://drupal.org/files/1655296-panelizer-allow-breadcrumb-tabs-33.patch
+projects[panels_breadcrumbs][patch][1655296] = http://drupal.org/files/1655296-panels_breadcrumbs-panelizer-36.patch
 
 projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
