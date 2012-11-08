@@ -1110,7 +1110,9 @@ function panopoly_magic_views_pre_render(&$view) {
       if (!empty($view->result)) {
         $nids = array();
         foreach ($view->result as $result) {
-          $nids[] = $result->nid;
+          if (!empty($result->nid)) {
+            $nids[] = $result->nid;
+          }
         }
         $nodes = node_load_multiple($nids);
       }
