@@ -29,6 +29,7 @@ projects[media][subdir] = contrib
 projects[media][download][type] = git
 projects[media][download][revision] = 83c903d
 projects[media][download][branch] = 7.x-2.x
+projects[media][patch][1836020] = http://drupal.org/files/1836020-check-before-drop-media-update.patch
 
 projects[media_youtube][version] = 1.0-beta3
 projects[media_youtube][subdir] = contrib
