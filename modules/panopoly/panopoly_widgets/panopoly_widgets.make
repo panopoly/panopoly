@@ -5,23 +5,11 @@ core = 7.x
 
 ; Panopoly - Contrib - Fields
 
-projects[date][version] = 2.6
-projects[date][subdir] = contrib
-
 projects[tablefield][version] = 2.0
 projects[tablefield][subdir] = contrib
 
-projects[link][version] = 1.0
-projects[link][subdir] = contrib
-
 projects[simple_gmap][version] = 1.0
 projects[simple_gmap][subdir] = contrib
-
-projects[field_group][version] = 1.1
-projects[field_group][subdir] = contrib
-
-projects[entityreference][version] = 1.0-rc5
-projects[entityreference][subdir] = contrib
 
 ; Panopoly - Contrib - Widgets
 
