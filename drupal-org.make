@@ -12,8 +12,11 @@ projects[panopoly_core][download][branch] = 7.x-1.x
 projects[panopoly_images][version] = 1.0-rc2
 projects[panopoly_images][subdir] = panopoly
 
-projects[panopoly_theme][version] = 1.0-rc2
+projects[panopoly_theme][version] = 1.x-dev
 projects[panopoly_theme][subdir] = panopoly
+projects[panopoly_theme][download][type] = git
+projects[panopoly_theme][download][revision] = 3a12958
+projects[panopoly_theme][download][branch] = 7.x-1.x
 
 projects[panopoly_magic][version] = 1.x-dev
 projects[panopoly_magic][subdir] = panopoly
