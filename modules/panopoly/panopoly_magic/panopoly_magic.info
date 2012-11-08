@@ -6,6 +6,6 @@ php = 5.2.4
 project = panopoly_magic
 dependencies[] = fape
 dependencies[] = panopoly_core
-features[features_api][] = api:1
 scripts[] = panopoly-magic.js
 stylesheets[all][] = panopoly-magic.css
+features[features_api][] = api:1
