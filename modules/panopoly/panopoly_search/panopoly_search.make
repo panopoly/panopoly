@@ -17,7 +17,7 @@ projects[search_api_solr][version] = 1.0-rc2
 projects[search_api_solr][subdir] = contrib
 projects[search_api_solr][patch][1407282] = http://drupal.org/files/1407282-variable_solr_connection_class-33.patch
 
-projects[search_api_db][version] = 1.0-beta3
+projects[search_api_db][version] = 1.0-beta4
 projects[search_api_db][subdir] = contrib
 
 ; Solr PHP Client Library
