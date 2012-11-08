@@ -45,5 +45,4 @@ features[file_display][] = video__teaser__media_vimeo_image
 features[file_display][] = video__teaser__media_youtube_image
 features[views_view][] = panopoly_widgets_general_content
 files[] = panopoly_widgets.module
-scripts[] = panopoly-widgets.js
 stylesheets[all][] = panopoly-widgets.css
