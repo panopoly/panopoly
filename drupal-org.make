@@ -6,7 +6,7 @@ core = 7.x
 projects[panopoly_core][version] = 1.x-dev
 projects[panopoly_core][subdir] = panopoly
 projects[panopoly_core][download][type] = git
-projects[panopoly_core][download][revision] = 42af0af
+projects[panopoly_core][download][revision] = 6b3ad8c
 projects[panopoly_core][download][branch] = 7.x-1.x
 
 projects[panopoly_images][version] = 1.0-rc2
@@ -33,7 +33,7 @@ projects[panopoly_widgets][download][branch] = 7.x-1.x
 projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
 projects[panopoly_admin][download][type] = git
-projects[panopoly_admin][download][revision] = 0e3a27a
+projects[panopoly_admin][download][revision] = 9e9ac9f
 projects[panopoly_admin][download][branch] = 7.x-1.x
 
 projects[panopoly_users][version] = 1.x-dev
