@@ -163,6 +163,16 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: save draft.
+  $permissions['save draft'] = array(
+    'name' => 'save draft',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'save_draft',
+  );
+
   // Exported permission: use admin toolbar.
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
