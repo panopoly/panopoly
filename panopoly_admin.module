@@ -434,9 +434,6 @@ function panopoly_admin_menu() {
  */
 function panopoly_admin_menu_alter(&$items) {
 
-  // Set the description of the dashboard
-  $items['admin/panopoly/dashboards/site']['description'] = 'This is the primary site dashboard to manage Panopoly';
-
   // Set the description of the page library
   $items['admin/panopoly/libraries/pages']['description'] = 'This is the page library for the site. See your landing pages, page templates, and overriden page templates.';
 
