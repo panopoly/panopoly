@@ -38,6 +38,7 @@ features[defaultconfig][] = user_default_permissions:delete revisions
 features[defaultconfig][] = user_default_permissions:edit any files
 features[defaultconfig][] = user_default_permissions:edit own files
 features[defaultconfig][] = user_default_permissions:revert revisions
+features[defaultconfig][] = user_default_permissions:save draft
 features[defaultconfig][] = user_default_permissions:use admin toolbar
 features[defaultconfig][] = user_default_permissions:view files
 features[defaultconfig][] = user_default_permissions:view own files
