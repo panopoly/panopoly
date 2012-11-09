@@ -554,5 +554,25 @@ function panopoly_core_defaultconfig_user_default_permissions() {
     'module' => 'panelizer',
   );
 
+  // Exported permission: change layouts in place editing.
+  $permissions['change layouts in place editing'] = array(
+    'name' => 'change layouts in place editing',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'panels',
+  );
+
+  // Exported permission: use panels in place editing.
+  $permissions['use panels in place editing'] = array(
+    'name' => 'use panels in place editing',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'panels',
+  );
+
   return $permissions;
 }
