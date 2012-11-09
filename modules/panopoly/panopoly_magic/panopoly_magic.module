@@ -1203,7 +1203,7 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
           'query' => array('preview_panes' => $preview),
           'attributes' => array('class' => array('use-ajax button'))
         );
-        $plugin['preview'] = '<div class="modal-content-preview-button">' . l(t('Preview'), request_path(), $options) . '</div>';
+        $plugin['preview'] = '<div class="modal-content-preview-button">' . l(t('Preview'), current_path(), $options) . '</div>';
       }
     }
   }
