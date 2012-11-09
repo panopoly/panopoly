@@ -53,6 +53,46 @@ function panopoly_admin_defaultconfig_strongarm() {
 function panopoly_admin_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access administration menu.
+  $permissions['access administration menu'] = array(
+    'name' => 'access administration menu',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'admin_menu',
+  );
+
+  // Exported permission: access content.
+  $permissions['access content'] = array(
+    'name' => 'access content',
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: access content overview.
+  $permissions['access content overview'] = array(
+    'name' => 'access content overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: access navbar.
+  $permissions['access navbar'] = array(
+    'name' => 'access navbar',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'navbar',
+  );
+
   // Exported permission: create files.
   $permissions['create files'] = array(
     'name' => 'create files',
@@ -83,6 +123,16 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: delete revisions.
+  $permissions['delete revisions'] = array(
+    'name' => 'delete revisions',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: edit any files.
   $permissions['edit any files'] = array(
     'name' => 'edit any files',
@@ -101,6 +151,26 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
       'editor' => 'editor',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: revert revisions.
+  $permissions['revert revisions'] = array(
+    'name' => 'revert revisions',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: use admin toolbar.
+  $permissions['use admin toolbar'] = array(
+    'name' => 'use admin toolbar',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'admin',
   );
 
   // Exported permission: view files.
@@ -131,6 +201,26 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
       'editor' => 'editor',
     ),
     'module' => 'file_entity',
+  );
+
+  // Exported permission: view own unpublished content.
+  $permissions['view own unpublished content'] = array(
+    'name' => 'view own unpublished content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: view revisions.
+  $permissions['view revisions'] = array(
+    'name' => 'view revisions',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'node',
   );
 
   return $permissions;
