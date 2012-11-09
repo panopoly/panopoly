@@ -697,13 +697,18 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
     list($entity_type, $field_name) = explode(':', $form_state['subtype_name']);
     $entity = reset(entity_load($entity_type, array($arg_parts[2])));
 
-    $form_state['entity'] = $entity;
-    $form_state['entity_type'] = $entity_type;
-    $form_state['field_name'] = $field_name;
-    $form_state['bundle'] = empty($entity->bundle) ? $entity->type : $entity->bundle;
-    $form_state['field_instance'] = field_info_instance($entity_type, $field_name, $form_state['bundle']);
-    $form_state['langcode'] = LANGUAGE_NONE;
-    $form_state['subform_id'] = 'fape_field_edit_field_form';
+    // Unfortunately the above code is not as reliable as we'd like. There are cases where the field we're editing
+    // doesn't have an corrosponding entity (say, comments). Let's make sure we have an entity before adding FAPE specific
+    // data into the form.
+    if (!empty($entity)) {
+      $form_state['entity'] = $entity;
+      $form_state['entity_type'] = $entity_type;
+      $form_state['field_name'] = $field_name;
+      $form_state['bundle'] = empty($entity->bundle) ? $entity->type : $entity->bundle;
+      $form_state['field_instance'] = field_info_instance($entity_type, $field_name, $form_state['bundle']);
+      $form_state['langcode'] = LANGUAGE_NONE;
+      $form_state['subform_id'] = 'fape_field_edit_field_form';
+    }
   }
 
   // Ensure form id, form token, and form build id are on the root of the form.
@@ -715,13 +720,14 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
   unset($form['general_settings']['form_token']);
   unset($form['general_settings']['form_build_id']);
 
-  // Add the field edit form.
-  fape_field_edit_field_form($form, $form_state);
+  if (!empty($form_state['entity'])) {
+    // Add the field edit form.
+    fape_field_edit_field_form($form, $form_state);
 
-  // Remove the default submitter in favor of our own custom submit callback.
-  array_pop($form['#submit']);
-  $form['#submit'][] = 'panopoly_magic_fape_submit';
-
+    // Remove the default submitter in favor of our own custom submit callback.
+    array_pop($form['#submit']);
+    $form['#submit'][] = 'panopoly_magic_fape_submit';
+  }
   // Pre-rende fields into a fieldset.
   $form['#pre_render'][] = 'panopoly_magic_panelizer_pre_render';
 
