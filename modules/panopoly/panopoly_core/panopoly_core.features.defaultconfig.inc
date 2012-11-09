@@ -11,6 +11,7 @@ function panopoly_core_defaultconfig_features() {
   return array(
     'panopoly_core' => array(
       'strongarm' => 'strongarm',
+      'user_default_permissions' => 'user_default_permissions',
     ),
   );
 }
@@ -480,4 +481,78 @@ function panopoly_core_defaultconfig_strongarm() {
   $export['pathauto_taxonomy_term_panopoly_categories_pattern'] = $strongarm;
 
   return $export;
+}
+
+/**
+ * Implements hook_defaultconfig_user_default_permissions().
+ */
+function panopoly_core_defaultconfig_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories breadcrumbs.
+  $permissions['administer panelizer taxonomy_term panopoly_categories breadcrumbs'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories breadcrumbs',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories content.
+  $permissions['administer panelizer taxonomy_term panopoly_categories content'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories content',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories context.
+  $permissions['administer panelizer taxonomy_term panopoly_categories context'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories context',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories defaults.
+  $permissions['administer panelizer taxonomy_term panopoly_categories defaults'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories defaults',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories layout.
+  $permissions['administer panelizer taxonomy_term panopoly_categories layout'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories layout',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories overview.
+  $permissions['administer panelizer taxonomy_term panopoly_categories overview'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories overview',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panelizer',
+  );
+
+  // Exported permission: administer panelizer taxonomy_term panopoly_categories settings.
+  $permissions['administer panelizer taxonomy_term panopoly_categories settings'] = array(
+    'name' => 'administer panelizer taxonomy_term panopoly_categories settings',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'panelizer',
+  );
+
+  return $permissions;
 }
