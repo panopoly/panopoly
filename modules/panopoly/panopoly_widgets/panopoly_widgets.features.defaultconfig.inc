@@ -21,6 +21,16 @@ function panopoly_widgets_defaultconfig_features() {
 function panopoly_widgets_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: add media from remote sources.
+  $permissions['add media from remote sources'] = array(
+    'name' => 'add media from remote sources',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'media_internet',
+  );
+
   // Exported permission: create fieldable basic_file.
   $permissions['create fieldable basic_file'] = array(
     'name' => 'create fieldable basic_file',
