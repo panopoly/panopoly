@@ -150,9 +150,13 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
   // Pass the title properly through to style plugins rendering regions
   $pane->title = (isset($content->title)) ? $content->title : NULL;
 
-  // Hide the title of the featured category pane if there isn't any content
-  if ($pane->subtype == 'node:field_featured_categories' && !empty($content->content['field_featured_categories']) && $content->content['field_featured_categories']['#access'] == FALSE) {
-    $content->title = '';
+  // Hide the title of administrative panes when there isn't any content
+  if (!empty($context['argument_node_edit_1'])) {
+    foreach($content->content as $content_item) {
+      if (isset($content_item['#access']) && $content_item['#access'] === FALSE) {
+        $content->title = '';
+      }
+    }
   }
 }
 
@@ -160,7 +164,6 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
  * Implementation of hook_ctools_content_subtype_alter()
  */
 function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
-
 }
 
 /**
@@ -204,10 +207,13 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     unset($form['machine_name_fs']);
   }
 
-  // Improve the publishing options
+  // Improve the publishing options by remove promote to front page and stick.
+  // Allow the option list to be shown globally since permissions are handled on 
+  // a per field level and we are injecting things in there
   if (isset($form['options'])) {
     $form['options']['promote']['#access'] = FALSE;
     $form['options']['sticky']['#access'] = FALSE;
+    $form['options']['#access'] = TRUE;
   }
 
   // Move the featured field into publishing options
@@ -215,6 +221,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['options']['field_featured_status'] = $form['field_featured_status'];
     $form['field_featured_status'] = array('#language' => $form['options']['field_featured_status']['#language']);
   }
+
 
   // Remove the description from the featured image
   if (!empty($form['field_featured_image'])) {
@@ -241,7 +248,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Improve the revision interface
-  if (isset($form['revision_information']['revision'])) {
+  if (isset($form['revision_information']['revision']) && $form['revision_information']['revision']['#access']) {
     $form['revision_information']['log']['#states'] = array(
       'visible' => array(
         'input[name="revision"]' => array('checked' => TRUE)
