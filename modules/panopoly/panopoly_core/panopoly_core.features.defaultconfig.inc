@@ -12,6 +12,7 @@ function panopoly_core_defaultconfig_features() {
     'panopoly_core' => array(
       'strongarm' => 'strongarm',
       'user_default_permissions' => 'user_default_permissions',
+      'user_default_roles' => 'user_default_roles',
     ),
   );
 }
@@ -497,6 +498,16 @@ function panopoly_core_defaultconfig_user_default_permissions() {
       'editor' => 'editor',
     ),
     'module' => 'panels',
+  );
+
+  // Exported permission: use page manager.
+  $permissions['use page manager'] = array(
+    'name' => 'use page manager',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'page_manager',
   );
 
   // Exported permission: use panels in place editing.
