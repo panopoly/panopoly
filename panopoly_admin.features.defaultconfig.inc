@@ -56,11 +56,17 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
   // Exported permission: access administration menu.
   $permissions['access administration menu'] = array(
     'name' => 'access administration menu',
+    'roles' => array(),
+  );
+
+  // Exported permission: access administration pages.
+  $permissions['access administration pages'] = array(
+    'name' => 'access administration pages',
     'roles' => array(
       'administrator' => 'administrator',
       'editor' => 'editor',
     ),
-    'module' => 'admin_menu',
+    'module' => 'system',
   );
 
   // Exported permission: access content.
@@ -91,6 +97,16 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
       'editor' => 'editor',
     ),
     'module' => 'navbar',
+  );
+
+  // Exported permission: administer menu.
+  $permissions['administer menu'] = array(
+    'name' => 'administer menu',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'menu',
   );
 
   // Exported permission: create files.
@@ -176,11 +192,7 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
   // Exported permission: use admin toolbar.
   $permissions['use admin toolbar'] = array(
     'name' => 'use admin toolbar',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'editor' => 'editor',
-    ),
-    'module' => 'admin',
+    'roles' => array(),
   );
 
   // Exported permission: view files.
