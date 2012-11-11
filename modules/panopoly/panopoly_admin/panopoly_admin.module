@@ -321,7 +321,8 @@ function panopoly_admin_menu() {
     'type' => MENU_CALLBACK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('panopoly_admin_panelizer_delete_form', 3, 4),
-    'access arguments' => array('administer panelizer'),
+    'access callback' => 'panopoly_admin_panelizer_revert_access',
+    'access arguments' => array(3, 4),
   );
 
   // Panels pane layout enable/disable page callback
@@ -434,6 +435,27 @@ function panopoly_admin_menu() {
     }
   }
   return $items;
+}
+
+/**
+ * Access handler for Panelizer revert functionality
+ */
+function panopoly_admin_panelizer_revert_access($entity_type, $entity_id) {
+
+  // Allow if the user can administer panelizer
+  if (user_access('administer panelizer')) {
+    return TRUE;
+  }
+
+  // Allow if the user can administer the specific panelizer item
+  // TODO - do we also want to check ability to modify panelizer setting?
+  $entities = entity_load($entity_type, array($entity_id));
+  if (entity_access('update', $entity_type, $entities[$entity_id])) {
+    return TRUE;
+  }
+
+  // Otherwise not allowed
+  return FALSE;
 }
 
 /**
