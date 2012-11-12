@@ -18,8 +18,11 @@ projects[panopoly_magic][subdir] = panopoly
 projects[panopoly_widgets][version] = 1.0-rc3
 projects[panopoly_widgets][subdir] = panopoly
 
-projects[panopoly_admin][version] = 1.0-rc3
+projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
+projects[panopoly_admin][download][type] = git
+projects[panopoly_admin][download][revision] = adeb3b2
+projects[panopoly_admin][download][branch] = 7.x-1.x
 
 projects[panopoly_users][version] = 1.0-rc3
 projects[panopoly_users][subdir] = panopoly
