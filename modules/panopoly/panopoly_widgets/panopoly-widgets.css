@@ -11,12 +11,12 @@ div.file-widget img {
 
 /* Video Widget */
 div.pane-bundle-video .media-youtube-outer-wrapper,
-div.pane-bundle-video .media-video-outer-wrapper {
+div.pane-bundle-video .media-vimeo-outer-wrapper {
   max-width: 100%;
 }
 
 div.pane-bundle-video .media-youtube-preview-wrapper,
-div.pane-bundle-video .media-video-preview-wrapper {
+div.pane-bundle-video .media-vimeo-preview-wrapper {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
@@ -28,9 +28,9 @@ div.pane-bundle-video .media-video-preview-wrapper {
 div.pane-bundle-video .media-youtube-preview-wrapper iframe,
 div.pane-bundle-video .media-youtube-preview-wrapper object,
 div.pane-bundle-video .media-youtube-preview-wrapper embed,
-div.pane-bundle-video .media-video-preview-wrapper iframe,
-div.pane-bundle-video .media-video-preview-wrapper object,
-div.pane-bundle-video .media-video-preview-wrapper embed {
+div.pane-bundle-video .media-vimeo-preview-wrapper iframe,
+div.pane-bundle-video .media-vimeo-preview-wrapper object,
+div.pane-bundle-video .media-vimeo-preview-wrapper embed {
   position: absolute;
   top: 0;
   left: 0;
