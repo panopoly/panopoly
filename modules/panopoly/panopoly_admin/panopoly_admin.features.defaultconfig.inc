@@ -109,6 +109,16 @@ function panopoly_admin_defaultconfig_user_default_permissions() {
     'module' => 'menu',
   );
 
+  // Exported permission: administer taxonomy.
+  $permissions['administer taxonomy'] = array(
+    'name' => 'administer taxonomy',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'editor' => 'editor',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: create files.
   $permissions['create files'] = array(
     'name' => 'create files',
