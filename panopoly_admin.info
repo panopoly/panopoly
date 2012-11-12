@@ -33,6 +33,7 @@ features[defaultconfig][] = user_default_permissions:access content
 features[defaultconfig][] = user_default_permissions:access content overview
 features[defaultconfig][] = user_default_permissions:access navbar
 features[defaultconfig][] = user_default_permissions:administer menu
+features[defaultconfig][] = user_default_permissions:administer taxonomy
 features[defaultconfig][] = user_default_permissions:create files
 features[defaultconfig][] = user_default_permissions:delete any files
 features[defaultconfig][] = user_default_permissions:delete own files
