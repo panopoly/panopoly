@@ -6,7 +6,6 @@ php = 5.2.4
 project = panopoly_search
 dependencies[] = facetapi
 dependencies[] = page_manager
-dependencies[] = panopoly_core
 dependencies[] = search
 dependencies[] = search_api
 dependencies[] = search_api_db
