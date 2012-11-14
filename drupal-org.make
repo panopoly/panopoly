@@ -38,8 +38,11 @@ projects[panopoly_users][subdir] = panopoly
 
 ; The Panopoly Toolset
 
-projects[panopoly_pages][version] = 1.0-rc3
+projects[panopoly_pages][version] = 1.x-dev
 projects[panopoly_pages][subdir] = panopoly
+projects[panopoly_pages][download][type] = git
+projects[panopoly_pages][download][revision] = 37cddce
+projects[panopoly_pages][download][branch] = 7.x-1.x
 
 projects[panopoly_wysiwyg][version] = 1.x-dev
 projects[panopoly_wysiwyg][subdir] = panopoly
