@@ -22,6 +22,7 @@ dependencies[] = page_manager
 dependencies[] = simple_gmap
 dependencies[] = tablefield
 dependencies[] = text
+dependencies[] = views_autocomplete_filters
 dependencies[] = views_content
 stylesheets[all][] = panopoly-widgets.css
 features[ctools][] = file_entity:file_default_displays:1
