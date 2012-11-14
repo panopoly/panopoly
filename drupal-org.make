@@ -9,8 +9,11 @@ projects[panopoly_core][download][type] = git
 projects[panopoly_core][download][revision] = ca5439e
 projects[panopoly_core][download][branch] = 7.x-1.x
 
-projects[panopoly_images][version] = 1.0-rc3
+projects[panopoly_images][version] = 1.x-dev
 projects[panopoly_images][subdir] = panopoly
+projects[panopoly_images][download][type] = git
+projects[panopoly_images][download][revision] = 36e5034
+projects[panopoly_images][download][branch] = 7.x-1.x
 
 projects[panopoly_theme][version] = 1.x-dev
 projects[panopoly_theme][subdir] = panopoly
