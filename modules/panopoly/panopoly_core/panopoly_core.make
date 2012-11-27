@@ -8,17 +8,14 @@ core = 7.x
 projects[ctools][version] = 1.x-dev
 projects[ctools][subdir] = contrib
 projects[ctools][download][type] = git
-projects[ctools][download][revision] = d6157d1
+projects[ctools][download][revision] = be26071
 projects[ctools][download][branch] = 7.x-1.x
-projects[ctools][patch][1822472] = http://drupal.org/files/1822472-exclude-all.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][download][type] = git
-projects[panels][download][revision] = 4e636d7
+projects[panels][download][revision] = cd02caf
 projects[panels][download][branch] = 7.x-3.x
-projects[panels][patch][1069744] = http://drupal.org/files/1069744-ipe-inaccessible-pane-placeholders.patch
-projects[panels][patch][1828684] = http://drupal.org/files/1828684-layout-fix-6.patch
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
@@ -30,9 +27,8 @@ projects[panels_breadcrumbs][patch][1655296] = http://drupal.org/files/1655296-p
 projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = b783c23
+projects[panelizer][download][revision] = a3ae923
 projects[panelizer][download][branch] = 7.x-3.x
-projects[panelizer][patch][1824566] = http://drupal.org/files/1824566-allow-panelizer-bundles-to-use-default-5.patch
 projects[panelizer][patch][1772844] = http://drupal.org/files/1772844-reject-ipe-without-edit-permission.patch
 projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-panelizer-allow-breadcrumb-tabs-40.patch
 
