@@ -26,8 +26,8 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
   $content_types =  ctools_content_get_all_types();
   $header = array(
     array('data' => '', 'style' => 'width: 16px'), 
+    array('data' => t('Category'), 'style' => 'width: 15%'),
     array('data' => t('Title')), 
-    array('data' => t('Category'), 'style' => 'width: 25%'),
     array('data' => t('Status'), 'style' => 'width: 20%'),
   );
 
@@ -37,12 +37,15 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
   foreach (ctools_content_get_all_types() as $category_name => $category) {
     foreach ($category as $plugin_name => $plugin) {
       $category_label = (is_string($plugin['category'])) ? $plugin['category'] : $plugin['category'][0];
+      $category_label = ($category_label == 'Custom') ? 'Global' : $category_label; // Call all custom plugins "Global"
       $plugin_status = (!empty($panels_page_allowed_types[$category_name . '-' . $plugin_name])) ? _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'enable') : _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'disable');
-      if (variable_get('panopoly_admin_advanced_plugins', FALSE) || !panopoly_admin_is_advanced_plugin($plugin)) {
-        $plugin_data[$category_label][] = array(
+
+      // Only show plugins that are general (no context)
+      if (empty($plugin['required context'])) {
+        $plugin_data[$category_label . '::' . $plugin_name] = array(
           theme('image', array('path' => ctools_content_admin_icon($plugin))),
-          $plugin['title'],
           $category_label,
+          $plugin['title'],
           $plugin_status,
         );
       }
@@ -50,11 +53,7 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
   }
 
   // Create the Output
-  $pane = new stdClass();
   ksort($plugin_data);
-  foreach ($plugin_data as $category_label => $rows) {
-    $pane->content .= '<h2 class="pane-title">' . check_plain($category_label . ' ' . t('Panes')) . '</h2>';
-    $pane->content .= theme('table', array('header' => $header, 'rows' => $rows));
-  }
+  $pane->content .= theme('table', array('header' => $header, 'rows' => $plugin_data));
   return $pane;
 }
