@@ -23,7 +23,7 @@ projects[image_resize_filter][subdir] = contrib
 
 projects[caption_filter][version] = 1.2
 projects[caption_filter][subdir] = contrib
-projects[caption_filter][patch][1432092] = http://drupal.org/files/caption-button-and-image-1432092-8_0.patch
+projects[caption_filter][patch][1432092] = http://drupal.org/files/1432092-button-and-image.patch
 
 ; Include our Editors
 
