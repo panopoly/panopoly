@@ -67,9 +67,8 @@ projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-pers
 projects[token][version] = 1.4
 projects[token][subdir] = contrib
 
-projects[entity][version] = 1.0-rc3
+projects[entity][version] = 1.0
 projects[entity][subdir] = contrib
-projects[entity][patch][1514764] = http://drupal.org/files/1514764-fix_entity_conditions-20.patch
 
 projects[libraries][version] = 2.0
 projects[libraries][subdir] = contrib
@@ -79,7 +78,7 @@ projects[libraries][subdir] = contrib
 projects[date][version] = 2.6
 projects[date][subdir] = contrib
 
-projects[entityreference][version] = 1.0-rc5
+projects[entityreference][version] = 1.0
 projects[entityreference][subdir] = contrib
 
 projects[field_group][version] = 1.1
