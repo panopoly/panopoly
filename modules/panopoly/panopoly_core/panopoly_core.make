@@ -32,10 +32,9 @@ projects[panelizer][download][branch] = 7.x-3.x
 projects[panelizer][patch][1772844] = http://drupal.org/files/1772844-reject-ipe-without-edit-permission.patch
 projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-panelizer-allow-breadcrumb-tabs-40.patch
 
-projects[fieldable_panels_panes][version] = 1.2
+projects[fieldable_panels_panes][version] = 1.3
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][patch][1536944] = http://drupal.org/files/Fieldable_Panels_Pane-translatable_panes-1536944-11.patch
-projects[fieldable_panels_panes][patch][1818132] = http://drupal.org/files/1818132-prevent-uuids.patch
+projects[fieldable_panels_panes][patch][1536944] = http://drupal.org/files/1536944-fieldable_panels_pane-tranlsation-followup.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
