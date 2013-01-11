@@ -50,12 +50,11 @@ projects[fape][download][branch] = 7.x-1.x
 projects[views][version] = 3.5
 projects[views][subdir] = contrib
 
-projects[views_autocomplete_filters][version] = 1.0-beta1
+projects[views_autocomplete_filters][version] = 1.0-beta2
 projects[views_autocomplete_filters][subdir] = contrib
 
-projects[views_bulk_operations][version] = 3.0
+projects[views_bulk_operations][version] = 3.1
 projects[views_bulk_operations][subdir] = contrib
-
 
 ; The Usual Suspects
 
