@@ -541,7 +541,6 @@ function panopoly_admin_is_advanced_plugin($pane_label, $category_label) {
     'File', // support for file items that is just confusing
     'Fieldable_panels_pane', // duplicated fields for custom panes
     'Existing pages', // pages from pm existing pages module that will break the site
-    'Widgets', // general widgets (i.e. search form, syndicate, powered by drupal)
   );
 
   // Specifically excluded panes
@@ -561,6 +560,11 @@ function panopoly_admin_is_advanced_plugin($pane_label, $category_label) {
     '<em class="placeholder">Navigation</em> menu tree', // navigation menu tree
     'Manage Apps for Panopoly', // manage apps for panopoly block
     'Shortcuts', // shortcuts block
+    'User login', // user login widget
+    'Powered by Drupal', // powere by drupal widget
+    'Search form', // search form widget
+    'Syndicate', // syndicate widget
+    'Recent content', // recent content widget
   );
 
   // Define this as an advanced plugin if it is in the advance category or pane list or has tokens
