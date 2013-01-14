@@ -180,10 +180,14 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['author']['name']['#title'] = t('Author');
     $form['author']['name']['#size'] = '40';
     $form['author']['name']['#weight'] = 4;
-    unset($form['author']['date']['#description']);
     $form['author']['date']['#weight'] = 5;
-    unset($form['author']['date']['#title']);
-    $form['author']['date']['#size'] = 20;
+
+    // Adjust options for Date Popup Module
+    if (module_exists('date_popup_authored')) {
+      unset($form['author']['date']['#description']);
+      unset($form['author']['date']['#title']);
+      $form['author']['date']['#size'] = 20;
+    }
   }
 
   // Improve the revision interface
