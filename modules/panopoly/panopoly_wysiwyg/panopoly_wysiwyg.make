@@ -28,8 +28,8 @@ projects[caption_filter][patch][1432092] = http://drupal.org/files/1432092-butto
 ; Include our Editors
 
 libraries[tinymce][download][type] = get
-libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.5.7.zip
-libraries[tinymce][patch][1561882] = http://drupal.org/files/1561882-cirkuit-theme-tinymce-3.5.7.patch
+libraries[tinymce][download][url] = https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8.zip
+libraries[tinymce][patch][1561882] = http://drupal.org/files/1561882-cirkuit-theme-tinymce-3.5.8.patch
 
 libraries[markitup][download][type] = get
 libraries[markitup][download][url] = https://github.com/markitup/1.x/tarball/master
