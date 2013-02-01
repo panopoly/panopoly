@@ -8,42 +8,38 @@ core = 7.x
 projects[ctools][version] = 1.x-dev
 projects[ctools][subdir] = contrib
 projects[ctools][download][type] = git
-projects[ctools][download][revision] = be26071
+projects[ctools][download][revision] = b8671ef
 projects[ctools][download][branch] = 7.x-1.x
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][download][type] = git
-projects[panels][download][revision] = cd02caf
+projects[panels][download][revision] = 9846b92
 projects[panels][download][branch] = 7.x-3.x
 
 projects[panels_breadcrumbs][version] = 2.x-dev
 projects[panels_breadcrumbs][subdir] = contrib
 projects[panels_breadcrumbs][download][type] = git
-projects[panels_breadcrumbs][download][revision] = b79f3a8
+projects[panels_breadcrumbs][download][revision] = a8f265a
 projects[panels_breadcrumbs][download][branch] = 7.x-2.x
-projects[panels_breadcrumbs][patch][1655296] = http://drupal.org/files/1655296-panels_breadcrumbs-panelizer-42.patch
 
 projects[panelizer][version] = 3.x-dev
 projects[panelizer][subdir] = contrib
 projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = a3ae923
+projects[panelizer][download][revision] = fb796a2 
 projects[panelizer][download][branch] = 7.x-3.x
-projects[panelizer][patch][1772844] = http://drupal.org/files/1772844-reject-ipe-without-edit-permission.patch
-projects[panelizer][patch][1655296] = http://drupal.org/files/1655296-panelizer-allow-breadcrumb-tabs-40.patch
 
-projects[fieldable_panels_panes][version] = 1.3
+projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][patch][1536944] = http://drupal.org/files/1536944-fieldable_panels_pane-tranlsation-followup.patch
+projects[fieldable_panels_panes][download][type] = git
+projects[fieldable_panels_panes][download][revision] = 7fe67bc
+projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
 
-projects[fape][version] = 1.x-dev
+projects[fape][version] = 1.1
 projects[fape][subdir] = contrib
-projects[fape][download][type] = git
-projects[fape][download][revision] = 1143ee2
-projects[fape][download][branch] = 7.x-1.x
 
 ; Views Magic
 
@@ -65,8 +61,11 @@ projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-pers
 projects[token][version] = 1.4
 projects[token][subdir] = contrib
 
-projects[entity][version] = 1.0
+projects[entity][version] = 1.x-dev
 projects[entity][subdir] = contrib
+projects[entity][download][type] = git
+projects[entity][download][revision] = 681a20d1c8a8cb209b2ae7afa6121276f8fb9a2f
+projects[entity][download][branch] = 7.x-1.x
 
 projects[libraries][version] = 2.0
 projects[libraries][subdir] = contrib
