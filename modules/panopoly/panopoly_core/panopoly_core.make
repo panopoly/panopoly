@@ -39,8 +39,11 @@ projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
 
-projects[fape][version] = 1.1
+projects[fape][version] = 1.x-dev
 projects[fape][subdir] = contrib
+projects[fape][download][type] = git
+projects[fape][download][revision] = 1143ee2
+projects[fape][download][branch] = 7.x-1.x
 
 ; Views Magic
 
