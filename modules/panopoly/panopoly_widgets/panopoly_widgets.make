@@ -29,7 +29,6 @@ projects[media][subdir] = contrib
 projects[media][download][type] = git
 projects[media][download][revision] = 4a18a67 
 projects[media][download][branch] = 7.x-2.x
-projects[media][patch][1307054] = http://drupal.org/files/1307054-d7-2-alt-text-89.patch
 
 projects[media_youtube][version] = 1.0-beta3
 projects[media_youtube][subdir] = contrib
