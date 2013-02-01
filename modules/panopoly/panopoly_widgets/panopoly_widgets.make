@@ -18,11 +18,18 @@ projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
 
-projects[file_entity][version] = 2.0-unstable7
+projects[file_entity][version] = 2.x-dev
 projects[file_entity][subdir] = contrib
+projects[file_entity][download][type] = git
+projects[file_entity][download][revision] = 22b86e8
+projects[file_entity][download][branch] = 7.x-2.x
 
-projects[media][version] = 2.0-unstable7
+projects[media][version] = 2.x-dev
 projects[media][subdir] = contrib
+projects[media][download][type] = git
+projects[media][download][revision] = fa663c3
+projects[media][download][branch] = 7.x-2.x
+projects[media][patch][1307054] = http://drupal.org/files/1307054-d7-2-alt-text-89.patch
 
 projects[media_youtube][version] = 1.0-beta3
 projects[media_youtube][subdir] = contrib
