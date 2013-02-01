@@ -3,6 +3,10 @@ div.pane-bundle-map {
   overflow: hidden;
 }
 
+div.field-name-field-map-address img {
+  max-width: auto;
+}
+
 /* File Widget */
 img.file-icon,
 div.file-widget img {
