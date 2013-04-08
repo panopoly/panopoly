@@ -1,4 +1,4 @@
-api = 2
+epi = 2
 core = 7.x
 
 ; The Panopoly Foundation
@@ -6,7 +6,7 @@ core = 7.x
 projects[panopoly_core][version] = 1.x-dev
 projects[panopoly_core][subdir] = panopoly
 projects[panopoly_core][download][type] = git
-projects[panopoly_core][download][revision] = 4623851
+projects[panopoly_core][download][revision] = ae0d64f
 projects[panopoly_core][download][branch] = 7.x-1.x
 
 projects[panopoly_images][version] = 1.x-dev
