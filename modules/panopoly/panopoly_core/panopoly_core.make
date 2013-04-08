@@ -47,7 +47,7 @@ projects[fape][download][branch] = 7.x-1.x
 
 ; Views Magic
 
-projects[views][version] = 3.5
+projects[views][version] = 3.6
 projects[views][subdir] = contrib
 
 projects[views_autocomplete_filters][version] = 1.0-beta2
