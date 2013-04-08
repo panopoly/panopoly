@@ -15,7 +15,7 @@ projects[wysiwyg_filter][subdir] = contrib
 
 ; The WYSIWYG Helpers
 
-projects[linkit][version] = 2.5
+projects[linkit][version] = 2.6
 projects[linkit][subdir] = contrib
 
 projects[image_resize_filter][version] = 1.13
