@@ -21,13 +21,13 @@ projects[menu_block][subdir] = contrib
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][subdir] = contrib
 projects[file_entity][download][type] = git
-projects[file_entity][download][revision] = 6d46953
+projects[file_entity][download][revision] = c2d5c3d
 projects[file_entity][download][branch] = 7.x-2.x
 
 projects[media][version] = 2.x-dev
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = 4a18a67 
+projects[media][download][revision] = ecb9392
 projects[media][download][branch] = 7.x-2.x
 projects[media][patch][1319528] = http://drupal.org/files/media-browser-enter-submit-frontpage-1319528-11.patch
 
