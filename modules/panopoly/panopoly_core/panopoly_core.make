@@ -5,36 +5,23 @@ core = 7.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 1.x-dev
+projects[ctools][version] = 1.3
 projects[ctools][subdir] = contrib
-projects[ctools][download][type] = git
-projects[ctools][download][revision] = b8671ef
-projects[ctools][download][branch] = 7.x-1.x
-projects[ctools][patch][1630820] = http://drupal.org/files/1630820-ctools-access-30.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
 projects[panels][download][type] = git
-projects[panels][download][revision] = 9846b92
+projects[panels][download][revision] = a915408
 projects[panels][download][branch] = 7.x-3.x
 
-projects[panels_breadcrumbs][version] = 2.x-dev
+projects[panels_breadcrumbs][version] = 2.0
 projects[panels_breadcrumbs][subdir] = contrib
-projects[panels_breadcrumbs][download][type] = git
-projects[panels_breadcrumbs][download][revision] = a8f265a
-projects[panels_breadcrumbs][download][branch] = 7.x-2.x
 
-projects[panelizer][version] = 3.x-dev
+projects[panelizer][version] = 3.1
 projects[panelizer][subdir] = contrib
-projects[panelizer][download][type] = git
-projects[panelizer][download][revision] = fb796a2 
-projects[panelizer][download][branch] = 7.x-3.x
 
-projects[fieldable_panels_panes][version] = 1.x-dev
+projects[fieldable_panels_panes][version] = 1.4
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][download][type] = git
-projects[fieldable_panels_panes][download][revision] = 7fe67bc
-projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
