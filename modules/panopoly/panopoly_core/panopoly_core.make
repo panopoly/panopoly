@@ -52,11 +52,8 @@ projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-pers
 projects[token][version] = 1.5
 projects[token][subdir] = contrib
 
-projects[entity][version] = 1.x-dev
+projects[entity][version] = 1.0
 projects[entity][subdir] = contrib
-projects[entity][download][type] = git
-projects[entity][download][revision] = 681a20d1c8a8cb209b2ae7afa6121276f8fb9a2f
-projects[entity][download][branch] = 7.x-1.x
 
 projects[libraries][version] = 2.1
 projects[libraries][subdir] = contrib
