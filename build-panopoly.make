@@ -2,7 +2,7 @@ api = 2
 core = 7.x
 
 ; Drupal
-projects[drupal][version] = 7.21
+projects[drupal][version] = 7.22
 
 ; Panopoly
 projects[panopoly][type] = profile 
