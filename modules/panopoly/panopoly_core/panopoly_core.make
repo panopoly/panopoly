@@ -20,8 +20,11 @@ projects[panels_breadcrumbs][subdir] = contrib
 projects[panelizer][version] = 3.1
 projects[panelizer][subdir] = contrib
 
-projects[fieldable_panels_panes][version] = 1.4
+projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
+projects[fieldable_panels_panes][download][type] = git
+projects[fieldable_panels_panes][download][revision] = 1bda8c9
+projects[fieldable_panels_panes][download][branch] = 7.x-3.x
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
