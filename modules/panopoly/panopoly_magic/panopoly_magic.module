@@ -1182,10 +1182,10 @@ function panopoly_magic_preprocess_panels_ipe_toolbar(&$vars) {
     foreach ($panel_context as $button_name => $button) {
       switch ($button_name) {
         case 'panels-ipe-startedit':
-          $vars['buttons'][$panel_context_id][$button_name]['#title'] = 'Customize this page';
+          $vars['buttons'][$panel_context_id][$button_name]['#title'] = t('Customize this page');
           break;
         case 'panels-ipe-change-layout':
-          $vars['buttons'][$panel_context_id][$button_name]['#title'] = 'Change this layout';
+          $vars['buttons'][$panel_context_id][$button_name]['#title'] = t('Change this layout');
           break;
       }
     }
