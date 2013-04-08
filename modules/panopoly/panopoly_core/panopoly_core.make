@@ -85,7 +85,7 @@ projects[entityreference][subdir] = contrib
 projects[field_group][version] = 1.1
 projects[field_group][subdir] = contrib
 
-projects[link][version] = 1.0
+projects[link][version] = 1.1
 projects[link][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
