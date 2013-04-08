@@ -24,7 +24,6 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
      $('.pane-bundle-video .media-vimeo-outer-wrapper').each(function() {
        var width = $(this).width();
        var height = width / 16 * 9;
-       console.log(width);
        $(this).css('height', height);
        $(this).css('width', width);
        $(this).find('.media-vimeo-preview-wrapper').css('height', height);
@@ -37,7 +36,6 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
      $('.pane-bundle-video .media-youtube-outer-wrapper').each(function() {
        var width = $(this).width();
        var height = width / 16 * 9;
-       console.log(width);
        $(this).css('height', height);
        $(this).css('width', width);
        $(this).find('.media-youtube-preview-wrapper').css('width', width);
