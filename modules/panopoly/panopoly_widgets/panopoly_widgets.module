@@ -30,9 +30,9 @@ function panopoly_widgets_configure_form($form, &$form_state) {
 }
 
 /**
- * Implements hook_init()
+ * Implements hook_page_build()
  */
-function panopoly_widgets_init() {
+function panopoly_widgets_page_build(&$page) {
 
   // Include the Spotlight Rotation time setting
   $rotation_time = 1000 * variable_get('panopoly_widgets_spotlight_rotation_time', 4);
