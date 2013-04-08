@@ -71,7 +71,7 @@ projects[entity][download][type] = git
 projects[entity][download][revision] = 681a20d1c8a8cb209b2ae7afa6121276f8fb9a2f
 projects[entity][download][branch] = 7.x-1.x
 
-projects[libraries][version] = 2.0
+projects[libraries][version] = 2.1
 projects[libraries][subdir] = contrib
 
 ; Field modules
