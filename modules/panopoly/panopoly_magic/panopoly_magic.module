@@ -338,7 +338,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Move all elements which aren't fieldsets or the submit buttons into the general settings fieldset.
       foreach ($children as $child) {
-        if ((!empty($form[$child]['#type']) || !empty($form[$child]['#tree'])) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons' && $child != 'submit') {
+        if ((empty($form[$child]['#type']) || !empty($form[$child]['#tree'])) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons' && $child != 'submit') {
           $form['general_settings'][$child] = $form[$child];
           unset($form[$child]);
         }
