@@ -24,7 +24,7 @@ projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][download][type] = git
 projects[fieldable_panels_panes][download][revision] = 1bda8c9
-projects[fieldable_panels_panes][download][branch] = 7.x-3.x
+projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
@@ -37,7 +37,7 @@ projects[fape][download][branch] = 7.x-1.x
 
 ; Views Magic
 
-projects[views][version] = 3.6
+projects[views][version] = 3.7
 projects[views][subdir] = contrib
 
 projects[views_autocomplete_filters][version] = 1.0-beta2
