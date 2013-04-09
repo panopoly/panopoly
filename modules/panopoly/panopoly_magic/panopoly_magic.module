@@ -3,6 +3,34 @@
 include_once('panopoly_magic.features.inc');
 
 /**
+ * Implements hook_init()
+ */
+function panopoly_magic_init() {
+  // Override the Chaos Tools Modal Default Settings
+  $default_style = array(
+    'CToolsModal' => array(
+      'modalSize' => array(
+        'type' => 'scale',
+        'width' => '.9',
+        'height' => '.9',
+        'addWidth' => 0,
+        'addHeight' => 0,
+        'contentRight' => 25,
+        'contentBottom' => 75,
+      ),
+      'modalOptions' => array(
+        'opacity' => '.55',
+        'background-color' => '#FFF',
+      ),
+      'animationSpeed' => 'fast',
+      'modalTheme' => 'CToolsModalDialog',
+      'throbberTheme' => 'CToolsModalThrobber',
+    ),
+  );
+  drupal_add_js($default_style, 'setting');
+}
+
+/**
  * Implements hook_apps_app_info()
  */
 function panopoly_magic_apps_app_info() {
