@@ -27,7 +27,8 @@ function panopoly_magic_init() {
       'throbberTheme' => 'CToolsModalThrobber',
     ),
   );
-  drupal_add_js($default_style, 'setting');
+  $modal_style = variable_get('panopoly_magic_modal_style', $default_style);
+  drupal_add_js($modal_style, 'setting');
 }
 
 /**

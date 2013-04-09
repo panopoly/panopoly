@@ -24,13 +24,13 @@ input.ctools-ajaxing,
 button.ctools-ajaxing,
 select.ctools-ajaxing {
   padding-right: 18px !important;
-  background: url(images/status-active.gif) right center no-repeat !important;
+  background: url(../images/status-active.gif) right center no-repeat !important;
 }
 
 div.ctools-ajaxing {
   float: left;
   width: 18px;
-  background: url(images/status-active.gif) center center no-repeat !important;
+  background: url(../images/status-active.gif) center center no-repeat !important;
 }
 
 .ajax-progress .throbber {
@@ -38,7 +38,7 @@ div.ctools-ajaxing {
 }
 
 .ajax-progress-throbber {
-  background-image: url("images/status-active.gif");
+  background-image: url("../images/status-active.gif");
   background-position: center center;
   background-repeat: no-repeat;
   min-height: 16px;
