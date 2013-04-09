@@ -36,8 +36,5 @@ projects[navbar][patch][1875254] = http://drupal.org/files/navbar_has_mismatchin
 projects[admin_menu][version] = 3.0-rc3
 projects[admin_menu][subdir] = contrib
 
-projects[jquery_update][version] = 2.x
+projects[jquery_update][version] = 2.3
 projects[jquery_update][subdir] = contrib
-projects[jquery_update][download][type] = git
-projects[jquery_update][download][revision] = baff5d1
-projects[jquery_update][download][branch] = 7.x-2.x
