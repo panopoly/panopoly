@@ -104,6 +104,18 @@ function panopoly_magic_configure_form($form, &$form_state) {
     '#description' => t('Do you want to show seldom used pane styles such as "no markup at all"?'),
   );
 
+  $form['panopoly_magic_strip_js_from_preview'] = array(
+    '#title' => t('Strip embedded .js from previews'),
+    '#type' => 'select',
+    '#required' => TRUE,
+    '#options' => array(
+      '1' => t('Enabled'),
+      '0' => t('Disabled'),
+    ),
+    '#default_value' => variable_get('panopoly_magic_strip_js_from_preview', 0),
+    '#description' => t('Some embedded javascript may cause issues with panopoly and the IPE, stripping the .js from your previews will fix this issue, but may alter the look of the preview.'),
+  );
+
   return system_settings_form($form);
 }
 
@@ -1229,6 +1241,7 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
   if (!empty($vars['categories'][$vars['category']]['content'])) {
     foreach ($vars['categories'][$vars['category']]['content'] as &$plugin) {
       $use_preview = variable_get('panopoly_magic_pane_add_preview', 1);
+      $strip_js = variable_get('panopoly_magic_strip_js_from_preview', 0);
       $query = drupal_get_query_parameters();
       $preview_panes = (!empty($query['preview_panes'])) ? explode(',', $query['preview_panes']) : array();
 
@@ -1253,6 +1266,9 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
           'attributes' => array('class' => array('use-ajax button'))
         );
         $plugin['preview'] = '<div class="modal-content-preview-button">' . l(t('Preview'), current_path(), $options) . '</div>';
+      }
+      if (!empty($strip_js) && !empty($plugin['preview'])) {
+        $plugin['preview'] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $plugin['preview']);
       }
     }
   }
