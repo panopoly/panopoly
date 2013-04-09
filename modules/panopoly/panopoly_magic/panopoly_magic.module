@@ -636,7 +636,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   // Add specific style options.
   $form['content_settings']['view_mode'] = array(
     '#type' => 'radios',
-    '#options' => panopoly_core_view_mode_options(),
+    '#options' => panopoly_magic_view_mode_options(),
     '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : 'teaser',
     '#states' => array(
       'visible' => array(
@@ -1261,3 +1261,20 @@ function panopoly_magic_process_panels_add_content_modal(&$vars) {
     }
   }
 }
+
+/**
+ * Helper function to get view modes
+ */
+function panopoly_magic_view_mode_options() {
+  $entity_info = entity_get_info('node');
+  $options = array();
+  if (!empty($entity_info['view modes'])) {
+    foreach ($entity_info['view modes'] as $mode => $settings) {
+      if (!in_array($mode, array('rss', 'search_index', 'search_result', 'token'))) {
+        $options[$mode] = $settings['label'];
+      }
+    }
+  }
+  return $options;
+}
+

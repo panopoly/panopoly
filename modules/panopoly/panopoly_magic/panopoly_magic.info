@@ -11,5 +11,6 @@ dependencies[] = page_manager
 dependencies[] = panels_ipe
 dependencies[] = views
 scripts[] = panopoly-magic.js
-stylesheets[all][] = panopoly-magic.css
+stylesheets[all][] = css/panopoly-magic.css
+stylesheets[all][] = css/panopoly-modal.css
 features[features_api][] = api:1
