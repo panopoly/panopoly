@@ -41,7 +41,7 @@ function panopoly_admin_general_panes_content_type_render($subtype, $conf, $pane
       $category_label = ($category_label == 'Custom') ? 'Global' : $category_label; // Call all custom plugins "Global"
       $plugin_enabled = (!empty($panels_page_allowed_types[$category_name . '-' . $plugin_name])) ? TRUE : FALSE;
       $plugin_setting = (isset($panels_page_allowed_types[$category_name . '-' . $plugin_name])) ? TRUE : FALSE;
-      $category_enabled = (!empty($panels_page_default_types[$category_name])) ? TRUE : FALSE;
+      $category_enabled = (!empty($panels_page_default_types[$category_name]) || !array_key_exists($category_name, $panels_page_default_types)) ? TRUE : FALSE;
       $plugin_status = ($plugin_enabled || (!$plugin_setting && $category_enabled)) ? _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'enable') : _panopoly_admin_general_panes_get_status($plugin_name, $category_name, 'disable');
 
       // Only show plugins that are general (no context)
