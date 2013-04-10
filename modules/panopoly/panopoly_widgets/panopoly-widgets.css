@@ -1,3 +1,8 @@
+/* Media Browser */
+body.page-media-browser {
+  height: auto;
+}
+
 /* Map Widget */
 div.pane-bundle-map {
   overflow: hidden;
