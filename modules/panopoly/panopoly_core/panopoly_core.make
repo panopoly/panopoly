@@ -57,6 +57,7 @@ projects[token][subdir] = contrib
 
 projects[entity][version] = 1.0
 projects[entity][subdir] = contrib
+projects[entity][patch][1831578] = http://drupal.org/files/entity-file_entity_access-1831578-9.patch
 
 projects[libraries][version] = 2.1
 projects[libraries][subdir] = contrib
