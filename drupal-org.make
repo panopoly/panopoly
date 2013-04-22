@@ -34,3 +34,4 @@ projects[panopoly_wysiwyg][subdir] = panopoly
 
 projects[panopoly_search][version] = 1.0-rc4
 projects[panopoly_search][subdir] = panopoly
+projects[panopoly_search][patch][1976178] = http://drupal.org/files/1976178-disable-solr-on-pantheon-1.patch
