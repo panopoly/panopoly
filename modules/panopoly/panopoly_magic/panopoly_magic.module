@@ -848,7 +848,9 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_styles_a
   // Push the panopoly magic submitter onto the front of the submit array.
   // We need it at the beginning so the entity is saved before the IPE 
   // reloads pane content.
-  $form['#submit'][] = 'panopoly_magic_fape_submit';
+  if (!empty($form_state['entity'])) {
+    $form['#submit'][] = 'panopoly_magic_fape_submit';
+  }
 }
 
 /**
