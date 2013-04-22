@@ -78,28 +78,10 @@ function panopoly_core_apps_servers_info() {
 }
 
 /**
- * Implements hook_entity_info_alter().
- *
- * This hook is implemented to address an issue with core that can be
- * seen here - http://drupal.org/node/1400256. There is a patch that helps
- * to resolve this issue, but it (a) has performance issues and (b) why
- * patch/hack core when you can do crazy workarounds in contrib.
- */
-function panopoly_core_entity_info_alter(&$entity_info) {
-  if (variable_get('install_task', 'done') != 'done') {
-    _field_info_collate_fields();
-  }
-}
-
-/**
  * Implements hook_module_implements_alter().
- *
- * This hook is implemented to move our panopoly_core_entity_info_alter()
- * hook implementation to the bottom of the ordering so as to run after the
- * problematic entity_entity_info_alter() implementation.
  */
 function panopoly_core_module_implements_alter(&$implementations, $hook) {
-  if ($hook == 'entity_info_alter' || $hook == 'css_alter' || $hook == 'modules_enabled') {
+  if ($hook == 'css_alter' || $hook == 'modules_enabled') {
     $group = $implementations['panopoly_core'];
     unset($implementations['panopoly_core']);
     $implementations['panopoly_core'] = $group;
