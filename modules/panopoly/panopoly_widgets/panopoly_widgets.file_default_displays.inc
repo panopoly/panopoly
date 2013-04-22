@@ -132,8 +132,8 @@ function panopoly_widgets_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = FALSE;
   $file_display->settings = array(
-    'width' => '560',
-    'height' => '340',
+    'width' => '640',
+    'height' => '360',
     'autoplay' => 0,
   );
   $export['video__link__media_vimeo_video'] = $file_display;
@@ -156,8 +156,8 @@ function panopoly_widgets_file_default_displays() {
   $file_display->settings = array(
     'version' => '3',
     'theme' => 'dark',
-    'width' => '560',
-    'height' => '340',
+    'width' => '640',
+    'height' => '360',
     'fullscreen' => 1,
     'autoplay' => 0,
     'related' => 1,

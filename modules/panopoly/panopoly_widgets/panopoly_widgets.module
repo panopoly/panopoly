@@ -364,6 +364,38 @@ function panopoly_widgets_field_display_fieldable_panels_pane_alter(&$display, $
 }
 
 /**
+ * Implementation of hook_file_default_displays_alter()
+ */
+function panopoly_widgets_file_default_displays_alter(&$default_displays) {
+
+  // Set the default image style for videos to be our custom video image style
+  if (!empty($default_displays['video__media_large__media_youtube_image'])) {
+    $default_displays['video__media_large__media_youtube_image']->settings['image_style'] = 'panopoly_image_video';
+  }
+  if (!empty($default_displays['video__media_large__media_vimeo_image'])) {
+    $default_displays['video__media_large__media_vimeo_image']->settings['image_style'] = 'panopoly_image_video';
+  }
+
+  // Set the teasuer image style for videos to be our custom video image style
+  if (!empty($default_displays['video__teaser__media_vimeo_image'])) {
+    $default_displays['video__teaser__media_vimeo_image']->settings['image_style'] = 'panopoly_image_video';
+  }
+  if (!empty($default_displays['video__teaser__media_youtube_image'])) {
+    $default_displays['video__teaser__media_youtube_image']->settings['image_style'] = 'panopoly_image_video';
+  }
+
+  // Set the preview image style for videos to be our custom thumbnail image style
+  if (!empty($default_displays['video__preview__media_youtube_image'])) {
+    $default_displays['video__preview__media_youtube_image']->settings['image_style'] = 'panopoly_image_thumbnail';
+  }
+  if (!empty($default_displays['video__preview__media_vimeo_image'])) {
+    $default_displays['video__preview__media_vimeo_image']->settings['image_style'] = 'panopoly_image_thumbnail';
+  }
+
+  // dsm($default_displays);
+}
+
+/**
  * Implementation of hook_file_type_alter()
  *
  * Alters list of file types that can be assigned to a file.

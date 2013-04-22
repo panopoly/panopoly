@@ -18,7 +18,6 @@ dependencies[] = media_youtube
 dependencies[] = menu_block
 dependencies[] = number
 dependencies[] = page_manager
-dependencies[] = panopoly_widgets
 dependencies[] = simple_gmap
 dependencies[] = tablefield
 dependencies[] = text
