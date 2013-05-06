@@ -3,7 +3,7 @@ core = 7.x
 
 ; The Panopoly Foundation
 
-projects[panopoly_core][version] = 1.0-rc4
+projects[panopoly_core][version] = 1.x-dev
 projects[panopoly_core][subdir] = panopoly
 projects[panopoly_core][download][type] = git
 projects[panopoly_core][download][revision] = 6a257ac
@@ -21,8 +21,11 @@ projects[panopoly_magic][subdir] = panopoly
 projects[panopoly_widgets][version] = 1.0-rc4
 projects[panopoly_widgets][subdir] = panopoly
 
-projects[panopoly_admin][version] = 1.0-rc4
+projects[panopoly_admin][version] = 1.x-dev
 projects[panopoly_admin][subdir] = panopoly
+projects[panopoly_admin][download][type] = git
+projects[panopoly_admin][download][revision] = ddf4ccc
+projects[panopoly_admin][download][branch] = 7.x-1.x
 
 projects[panopoly_users][version] = 1.0-rc4
 projects[panopoly_users][subdir] = panopoly
