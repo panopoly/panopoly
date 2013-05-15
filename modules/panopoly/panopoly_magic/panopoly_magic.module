@@ -1211,7 +1211,7 @@ function panopoly_magic_views_pre_render(&$view) {
   }
 
     // Set the view mode
-    if (isset($conf['view_mode'])) {
+    if (!empty($conf['view_mode'])) {
       $view->style_plugin->row_plugin->options['view_mode'] = $conf['view_mode'];
     }
   }
