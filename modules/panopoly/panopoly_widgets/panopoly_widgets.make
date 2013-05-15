@@ -21,7 +21,7 @@ projects[menu_block][subdir] = contrib
 projects[file_entity][version] = 2.x-dev
 projects[file_entity][subdir] = contrib
 projects[file_entity][download][type] = git
-projects[file_entity][download][revision] = c2d5c3d
+projects[file_entity][download][revision] = e6f091e
 projects[file_entity][download][branch] = 7.x-2.x
 
 projects[media][version] = 2.x-dev
