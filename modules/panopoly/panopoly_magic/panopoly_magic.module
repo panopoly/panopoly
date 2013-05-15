@@ -1257,6 +1257,9 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
         $keywords = (!empty($vars['renderer']->display->keywords)) ? $vars['renderer']->display->keywords : array();
         if ($content = ctools_content_render($pane->type, $pane->subtype, $pane->configuration, $keywords, $args, $context, $incoming_content)) {
           $plugin['preview'] = theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $display));
+          if (!empty($strip_js) && !empty($plugin['preview'])) {
+            $plugin['preview'] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $plugin['preview']);
+          }
         }
       }
       else {
@@ -1268,9 +1271,6 @@ function panopoly_magic_preprocess_panels_add_content_modal(&$vars) {
           'attributes' => array('class' => array('use-ajax button'))
         );
         $plugin['preview'] = '<div class="modal-content-preview-button">' . l(t('Preview'), current_path(), $options) . '</div>';
-      }
-      if (!empty($strip_js) && !empty($plugin['preview'])) {
-        $plugin['preview'] = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $plugin['preview']);
       }
     }
   }
