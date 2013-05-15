@@ -31,11 +31,8 @@ projects[media][download][revision] = ecb9392
 projects[media][download][branch] = 7.x-2.x
 projects[media][patch][1319528] = http://drupal.org/files/media-browser-enter-submit-frontpage-1319528-11.patch
 
-projects[media_youtube][version] = 2.x-dev
+projects[media_youtube][version] = 2.0-rc3
 projects[media_youtube][subdir] = contrib
-projects[media_youtube][download][type] = git
-projects[media_youtube][download][revision] = 5418cbe
-projects[media_youtube][download][branch] = 7.x-2.x
 
 projects[media_vimeo][version] = 2.x-dev
 projects[media_vimeo][subdir] = contrib
