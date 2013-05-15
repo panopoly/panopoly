@@ -55,9 +55,8 @@ projects[pathauto][patch][936222] = http://drupal.org/files/936222-pathauto-pers
 projects[token][version] = 1.5
 projects[token][subdir] = contrib
 
-projects[entity][version] = 1.0
+projects[entity][version] = 1.1
 projects[entity][subdir] = contrib
-projects[entity][patch][1831578] = http://drupal.org/files/entity-file_entity_access-1831578-9.patch
 
 projects[libraries][version] = 2.1
 projects[libraries][subdir] = contrib
