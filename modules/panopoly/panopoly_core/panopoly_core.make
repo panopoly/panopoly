@@ -23,7 +23,7 @@ projects[panelizer][subdir] = contrib
 projects[fieldable_panels_panes][version] = 1.x-dev
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][download][type] = git
-projects[fieldable_panels_panes][download][revision] = 1bda8c9
+projects[fieldable_panels_panes][download][revision] = 3b9c8b6
 projects[fieldable_panels_panes][download][branch] = 7.x-1.x
 
 projects[pm_existing_pages][version] = 1.4
