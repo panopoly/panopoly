@@ -50,5 +50,5 @@ projects[panopoly_wysiwyg][subdir] = panopoly
 projects[panopoly_search][version] = 1.x-dev
 projects[panopoly_search][subdir] = panopoly
 projects[panopoly_search][download][type] = git
-projects[panopoly_search][download][revision] = eb73bcf
+projects[panopoly_search][download][revision] = 3900b8a
 projects[panopoly_search][download][branch] = 7.x-1.x
