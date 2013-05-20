@@ -1200,7 +1200,9 @@ function panopoly_magic_views_pre_render(&$view) {
       // Set or remove header labels depending on user selection.
       if (!empty($conf['header_type']) && $conf['header_type'] == 'titles') {
         foreach ($view->field as &$field) {
-          $field->options['label'] = $field->options['ui_name'];
+          if (!empty($field->options['ui_name']) && empty($field->options['label'])) {
+            $field->options['label'] = $field->options['ui_name'];
+          }
         }
       }
       else {
