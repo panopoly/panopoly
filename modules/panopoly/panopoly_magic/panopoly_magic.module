@@ -624,9 +624,9 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     }
   }
 
-  // Determine if this is a node view. If so, add magic display type changer
+  // Determine if this is a fielded view. If so, add magic display type changer
   $view_handler = $form_state['view']->display_handler;
-  if (!($view_handler->options['row_plugin'] == 'node' && in_array($view_handler->options['style_plugin'], array('default')))) {
+  if ($view_handler->options['row_plugin'] == 'fields') {
 
     // Default to a field view
     if (empty($conf['view_settings'])) {
