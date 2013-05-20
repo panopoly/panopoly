@@ -11,13 +11,10 @@ projects[facetapi][subdir] = contrib
 projects[search_api][version] = 1.5
 projects[search_api][subdir] = contrib
 
-projects[search_api_solr][version] = 1.x-dev
+projects[search_api_solr][version] = 1.0-rc5
 projects[search_api_solr][subdir] = contrib
-projects[search_api_solr][download][type] = git
-projects[search_api_solr][download][revision] = 61155ad
-projects[search_api_solr][download][branch] = 7.x-1.x
 
-projects[search_api_db][version] = 1.0-beta4
+projects[search_api_db][version] = 1.0-rc1
 projects[search_api_db][subdir] = contrib
 
 ; Solr PHP Client Library
