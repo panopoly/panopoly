@@ -1198,19 +1198,20 @@ function panopoly_magic_views_pre_render(&$view) {
       $view->style_plugin->display =& $view->display_handler->display;
       
       // Set or remove header labels depending on user selection.
-      if (!empty($conf['header_type']) && $conf['header_type'] == 'titles') {
-        foreach ($view->field as &$field) {
-          if (!empty($field->options['ui_name']) && empty($field->options['label'])) {
-            $field->options['label'] = $field->options['ui_name'];
-          }
+      $use_header_titles = !empty($conf['header_type']) && $conf['header_type'] == 'titles';
+      foreach ($view->field as &$field) {
+        if ($use_header_titles && !empty($field->options['ui_name']) && empty($field->options['label'])) {
+          $field->options['label'] = $field->options['ui_name'];
         }
-      }
-      else {
-        foreach ($view->field as &$field) {
+        elseif (!$use_header_titles) {
           $field->options['label'] = NULL;
         }
+        // Hide empty columns.
+        if (!empty($view->style_plugin->row_plugin->options['hide_empty'])) {
+          $view->style_plugin->options['info'][$field->field]['empty_column'] = TRUE;
+        }
       }
-  }
+    }
 
     // Set the view mode
     if (!empty($conf['view_mode'])) {
