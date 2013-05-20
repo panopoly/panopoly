@@ -7,6 +7,7 @@ core = 7.x
 
 projects[ctools][version] = 1.3
 projects[ctools][subdir] = contrib
+projects[ctools][patch][1925018] = http://drupal.org/files/ctools-1925018-61.patch
 
 projects[panels][version] = 3.x-dev
 projects[panels][subdir] = contrib
