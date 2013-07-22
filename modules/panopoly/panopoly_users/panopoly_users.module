@@ -69,12 +69,12 @@ function panopoly_users_form_alter(&$form, $form_state, $form_id) {
 
     // Add a create account link below the username
     if ($form_id == 'user_login' && variable_get('user_register')) {
-      $form['name']['#description'] .= '<br>' . t('If you don\'t have an username, !create.', array('!create' => l('create an account', 'user/register')));
+      $form['name']['#description'] .= '<br>' . t('If you don\'t have an username, !create.', array('!create' => l(t('create an account'), 'user/register')));
     }
 
     // Add the request password link below the password
     if ($form_id == 'user_login') {
-      $form['pass']['#description'] .= '<br>' . t('If you forgot your password, !request.', array('!request' => l('request a new password', 'user/password')));
+      $form['pass']['#description'] .= '<br>' . t('If you forgot your password, !request.', array('!request' => l(t('request a new password'), 'user/password')));
     }
   }
 }
