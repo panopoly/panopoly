@@ -82,7 +82,7 @@ projects[apps][version] = 1.0-beta7
 projects[apps][subdir] = contrib
 projects[apps][patch][1790902] = http://drupal.org/files/1790902-check-last-modified-existing.patch
 
-projects[features][version] = 2.0-rc1rc1
+projects[features][version] = 2.0-rc1
 projects[features][subdir] = contrib
 
 projects[strongarm][version] = 2.0
