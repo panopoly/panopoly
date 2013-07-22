@@ -17,7 +17,7 @@ projects[simplified_menu_admin][subdir] = contrib
 projects[date_popup_authored][version] = 1.1
 projects[date_popup_authored][subdir] = contrib
 
-projects[admin_views][version] = 1.1
+projects[admin_views][version] = 1.2
 projects[admin_views][subdir] = contrib
 
 projects[save_draft][version] = 1.4
@@ -33,7 +33,7 @@ projects[navbar][version] = 1.0-alpha3
 projects[navbar][subdir] = contrib
 projects[navbar][patch][1875254] = http://drupal.org/files/navbar_has_mismatching_closing_tag_1875254_1.patch
 
-projects[admin_menu][version] = 3.0-rc3
+projects[admin_menu][version] = 3.0-rc4
 projects[admin_menu][subdir] = contrib
 
 projects[jquery_update][version] = 2.3
