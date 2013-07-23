@@ -48,3 +48,4 @@ dependencies[] = views_ui
 dependencies[] = devel
 dependencies[] = uuid
 dependencies[] = defaultcontent
+dependencies[] = apps
