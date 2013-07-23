@@ -35,7 +35,6 @@ dependencies[] = token
 dependencies[] = views
 dependencies[] = views_autocomplete_filters
 dependencies[] = views_content
-dependencies[] = views_ui
 stylesheets[all][] = css/panopoly-fonts.css
 stylesheets[all][] = css/panopoly-dropbutton.css
 features[ctools][] = panelizer:panelizer:1
