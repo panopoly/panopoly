@@ -4,7 +4,6 @@ core = 7.x
 package = Panopoly
 php = 5.2.4
 project = panopoly_core
-dependencies[] = apps
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = date_api
