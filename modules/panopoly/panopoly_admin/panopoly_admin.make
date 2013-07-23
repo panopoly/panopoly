@@ -29,12 +29,18 @@ projects[admin][version] = 2.0-beta3
 projects[admin][subdir] = contrib
 projects[admin][patch][1334804] = http://drupal.org/files/1334804-admin-jquery-updated-6.patch
 
-projects[navbar][version] = 1.0-alpha3
+projects[navbar][version] = 1.0-alpha10
 projects[navbar][subdir] = contrib
-projects[navbar][patch][1875254] = http://drupal.org/files/navbar_has_mismatching_closing_tag_1875254_1.patch
+
+projects[breakpoints][version] = 1.1
+projects[breakpoints][subdir] = contrib
 
 projects[admin_menu][version] = 3.0-rc4
 projects[admin_menu][subdir] = contrib
 
 projects[jquery_update][version] = 2.3
 projects[jquery_update][subdir] = contrib
+
+; Libraries
+libraries[backbone][download][type] = get
+libraries[backbone][download][url] = https://github.com/documentcloud/backbone/archive/1.0.0.zip
