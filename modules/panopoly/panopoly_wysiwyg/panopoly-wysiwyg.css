@@ -2,6 +2,11 @@
  * TinyMCE WYSIWYG styling
  */
 
+body.mceContentBody {
+  height: 88% !important;
+  background: none #FFF;
+}
+
 table.mceToolbar td {
    display: inline-block;
 }
