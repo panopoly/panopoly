@@ -11,7 +11,6 @@ dependencies[] = date_api
 dependencies[] = date_popup
 dependencies[] = date_views
 dependencies[] = defaultconfig
-dependencies[] = defaultcontent
 dependencies[] = entity
 dependencies[] = entityreference
 dependencies[] = features
