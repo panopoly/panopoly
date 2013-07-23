@@ -44,3 +44,6 @@ projects[jquery_update][subdir] = contrib
 ; Libraries
 libraries[backbone][download][type] = get
 libraries[backbone][download][url] = https://github.com/documentcloud/backbone/archive/1.0.0.zip
+
+libraries[underscore][download][type] = get
+libraries[underscore][download][url] = https://github.com/documentcloud/underscore/archive/1.4.4.zip
