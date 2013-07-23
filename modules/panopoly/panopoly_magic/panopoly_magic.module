@@ -300,7 +300,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       // Create the fieldset with appropriate content
       $form['widget_preview'] = array(
         '#type' => 'fieldset',
-        '#title' => 'Preview',
+        '#title' => t('Preview'),
         '#attributes' => array('class' => array('widget-preview', 'widget-preview-single')),
         '#collapsible' => FALSE,
         '#weight' => -100,
