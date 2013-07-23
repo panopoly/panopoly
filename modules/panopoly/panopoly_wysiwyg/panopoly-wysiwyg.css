@@ -3,8 +3,13 @@
  */
 
 body.mceContentBody {
-  height: 88% !important;
+  height: auto !important;
   background: none #FFF;
+}
+
+body.mceContentBody ol li,
+body.mceContentBody ul li {
+  list-style-position: inside;
 }
 
 table.mceToolbar td {
