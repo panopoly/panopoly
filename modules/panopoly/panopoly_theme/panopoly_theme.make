@@ -5,7 +5,7 @@ core = 7.x
 
 ; Summon the Power of Respond.js
 
-projects[respondjs][version] = 1.1
+projects[respondjs][version] = 1.2
 projects[respondjs][subdir] = contrib
 
 libraries[respondjs][download][type] = get
