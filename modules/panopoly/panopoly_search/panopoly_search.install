@@ -106,10 +106,6 @@ function panopoly_search_update_7005(&$sandbox) {
   // If we are running on Pantheon...
   if (variable_get('pantheon_tier')) {
 
-    // Load the Solr PHP Client Library
-    _search_api_solr_autoload('Apache_Solr_Service');
-    _search_api_solr_autoload('Apache_Solr_HttpTransport_Abstract');
-
     // Disable Panopoly's Solr Server and Solr Index
     require_once(drupal_get_path('module', 'search_api') . '/search_api.admin.inc');
     $solr_server = search_api_server_load('solr_server');
