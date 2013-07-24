@@ -97,22 +97,3 @@ function panopoly_search_update_7004(&$sandbox) {
     return t('Panopoly\'s Search API Solr index has been temporarily disabled. Search API DB will now be used for faceted search results.');
   }
 }
-
-/**
- * Panopoly RC5 Update: Enabling the Search API Solr System
- */
-function panopoly_search_update_7005(&$sandbox) {
-
-  // If we are running on Pantheon...
-  if (variable_get('pantheon_tier')) {
-
-    // Disable Panopoly's Solr Server and Solr Index
-    require_once(drupal_get_path('module', 'search_api') . '/search_api.admin.inc');
-    $solr_server = search_api_server_load('solr_server');
-    $solr_server->update(array('enabled' => 1));
-    $solr_index = search_api_index_load('node_index');
-    $solr_index->update(array('enabled' => 1));
-
-    return t('Panopoly\'s Search API Solr index has been re-enabled.');
-  }
-}
