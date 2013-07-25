@@ -29,8 +29,12 @@ projects[admin][version] = 2.0-beta3
 projects[admin][subdir] = contrib
 projects[admin][patch][1334804] = http://drupal.org/files/1334804-admin-jquery-updated-6.patch
 
-projects[navbar][version] = 1.0-alpha10
+projects[navbar][version] = 1.x-dev
 projects[navbar][subdir] = contrib
+projects[navbar][download][type] = git
+projects[navbar][download][revision] = 455f81d
+projects[navbar][download][branch] = 7.x-1.x
+projects[navbar][patch][1334804] = https://drupal.org/files/navbar-conflict-1757466-14.patch
 
 projects[breakpoints][version] = 1.1
 projects[breakpoints][subdir] = contrib
