@@ -22,7 +22,7 @@ projects[linkit][subdir] = contrib
 projects[image_resize_filter][version] = 1.13
 projects[image_resize_filter][subdir] = contrib
 
-projects[caption_filter][version] = 1.3
+projects[caption_filter][version] = 1.2
 projects[caption_filter][subdir] = contrib
 
 ; Include our Editors
