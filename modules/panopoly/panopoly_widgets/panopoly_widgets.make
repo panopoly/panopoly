@@ -7,6 +7,7 @@ core = 7.x
 
 projects[tablefield][version] = 2.1
 projects[tablefield][subdir] = contrib
+projects[tablefield][patch][2050657] = https://drupal.org/files/tablefield_event_click_conflict.patch
 
 projects[simple_gmap][version] = 1.0
 projects[simple_gmap][subdir] = contrib
