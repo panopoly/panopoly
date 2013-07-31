@@ -41,7 +41,7 @@ projects[fape][download][branch] = 7.x-1.x
 projects[views][version] = 3.7
 projects[views][subdir] = contrib
 
-projects[views_autocomplete_filters][version] = 1.0-rc1
+projects[views_autocomplete_filters][version] = 1.0
 projects[views_autocomplete_filters][subdir] = contrib
 
 projects[views_bulk_operations][version] = 3.1
