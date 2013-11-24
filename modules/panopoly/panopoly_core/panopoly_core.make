@@ -98,6 +98,14 @@ projects[defaultcontent][subdir] = contrib
 projects[defaultcontent][patch][1754428] = http://drupal.org/files/1754428-allow-node-export-alter.patch
 projects[defaultcontent][patch][1757782] = http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch
 
+projects[migrate][version] = "2.5"
+projects[migrate][type] = "module"
+projects[migrate][subdir] = "contrib"
+
+projects[migrate_extras][version] = "2.5"
+projects[migrate_extras][type] = "module"
+projects[migrate_extras][subdir] = "contrib"
+
 ; Recommended Modules
 projects[devel][version] = 1.3
 projects[devel][subdir] = contrib
