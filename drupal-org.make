@@ -47,7 +47,7 @@ projects[panopoly_users][download][branch] = 7.x-1.x
 
 ; The Panopoly Toolset
 
-projects[panopoly_pages][version] = 1.0-rc4
+projects[panopoly_pages][version] = 1.x-dev
 projects[panopoly_pages][subdir] = panopoly
 projects[panopoly_pages][download][type] = git
 projects[panopoly_pages][download][revision] = f69e570
