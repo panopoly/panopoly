@@ -78,9 +78,11 @@ projects[link][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[apps][version] = 1.0-beta7
 projects[apps][subdir] = contrib
-projects[apps][patch][1790902] = http://drupal.org/files/1790902-check-last-modified-existing.patch
+projects[apps][download][type] = git
+projects[apps][download][branch] = 7.x-1.x
+projects[apps][download][revision] = b9d82b7
+projects[apps][patch][1790902] = http://drupal.org/files/1790902.4-check-last-modified-existing.patch
 
 projects[features][version] = 2.0
 projects[features][subdir] = contrib
