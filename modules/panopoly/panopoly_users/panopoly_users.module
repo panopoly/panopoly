@@ -97,7 +97,7 @@ function panopoly_users_preprocess_user_picture(&$variables) {
   $account = $variables['account'];
 
   // Sometimes we get a partially loaded user object that doesn't have fields.
-  if (!isset($account->field_user_picture)) {
+  if (empty($account->field_user_picture)) {
     $account = user_load($account->uid);
   }
 
@@ -105,7 +105,7 @@ function panopoly_users_preprocess_user_picture(&$variables) {
     $account->field_user_picture[LANGUAGE_NONE][0]['uri'] : '';
 
   // Copied graciously from user.module...
-  if (isset($filepath)) {
+  if (!empty($filepath)) {
     $alt = t("@user's picture", array('@user' => format_username($account)));
     // If the image does not have a valid Drupal scheme (for eg. HTTP),
     // don't load image styles.
