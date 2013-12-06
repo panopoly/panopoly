@@ -165,7 +165,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Move the featured field into publishing options
-  if (!empty($form['field_featured_status'])) {
+  if (!empty($form['field_featured_status']) && $form['options']['#access']) {
     $form['options']['field_featured_status'] = $form['field_featured_status'];
     $form['field_featured_status'] = array('#language' => $form['options']['field_featured_status']['#language']);
   }
