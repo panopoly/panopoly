@@ -1067,8 +1067,8 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
   // Set the $conf['use_pager'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
   // and sometimes it doesn't.
-  if (isset($form_state['values']['display_settings']['use_pager'])) {
-    $form_state['conf']['use_pager'] = $form_state['values']['display_settings']['use_pager'];
+  if (isset($form_state['values']['exposed']['use_pager'])) {
+    $form_state['conf']['use_pager'] = $form_state['values']['exposed']['use_pager'];
   } 
   elseif (isset($form_state['values']['use_pager'])) {
     $form_state['conf']['use_pager'] = $form_state['values']['use_pager'];
@@ -1080,8 +1080,8 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
   // Set the $conf['pager_id'] value. We need to do this a
   // little funky since sometimes it comes inside of $form_state['values']
   // and sometimes it doesn't.
-  if (isset($form_state['values']['display_settings']['pager_id'])) {
-    $form_state['conf']['pager_id'] = $form_state['values']['display_settings']['pager_id'];
+  if (isset($form_state['values']['exposed']['pager_id'])) {
+    $form_state['conf']['pager_id'] = $form_state['values']['exposed']['pager_id'];
   } 
   elseif (isset($form_state['values']['pager_id'])) {
     $form_state['conf']['pager_id'] = $form_state['values']['pager_id'];
