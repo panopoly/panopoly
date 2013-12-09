@@ -8,7 +8,7 @@ core = 7.x
 projects[tablefield][version] = 2.2
 projects[tablefield][subdir] = contrib
 
-projects[simple_gmap][version] = 1.0
+projects[simple_gmap][version] = 1.1
 projects[simple_gmap][subdir] = contrib
 
 ; Panopoly - Contrib - Widgets
