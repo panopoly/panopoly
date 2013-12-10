@@ -236,25 +236,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    // Make some adjustments based on the way the data is being expected
-    // TODO - this should not be necessary, so find out why!
-    if (!empty($form_state['input']['sort_by'])) {
-      $form_state['input']['exposed']['sort_by'] = $form_state['input']['sort_by'];
-      $form_state['input']['exposed']['sort_order'] = $form_state['input']['sort_order'];
-    }
-    if (!empty($form_state['input']['exposed']['more_link'])) {
-      $form_state['input']['more_link'] = $form_state['input']['exposed']['more_link'];
-      $form_state['input']['path'] = $form_state['input']['exposed']['path'];
-    }
-    if (!empty($form_state['input']['exposed']['link_to_view'])) {
-      $form_state['input']['link_to_view'] = $form_state['input']['exposed']['link_to_view'];
-      $form_state['input']['path'] = $form_state['input']['exposed']['path'];
-    }
-    if (!empty($form_state['input']['exposed']['use_pager'])) {
-      $form_state['input']['use_pager'] = $form_state['input']['exposed']['use_pager'];
-      $form_state['input']['offset'] = $form_state['input']['exposed']['offset'];
-    }
-
     // Set the configuration and determine the content for the pane
     $configuration_ids = array(
       'ctools_entity_field_content_type_formatter_options',
@@ -522,6 +503,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
         ),
       ),
       '#default_value' => (isset($conf['widget_title'])) ? $conf['widget_title'] : $form_state['view']->display_handler->options['title'],
+      '#parents' => array('widget_title'),
     );
   }
 
@@ -531,6 +513,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['link_to_view']['#description'] =  '';
     $form['link_to_view']['#id'] = 'edit-link';
     $form['exposed']['link_to_view'] = $form['link_to_view'];
+    $form['exposed']['link_to_view']['#parents'] = array('link_to_view');
     unset($form['link_to_view']);
   } 
   
@@ -539,6 +522,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['more_link']['#id'] = 'more-link';
     $form['more_link']['#description'] = '';
     $form['exposed']['more_link'] = $form['more_link'];
+    $form['exposed']['more_link']['#parents'] = array('more_link');
     unset($form['more_link']);
   }
   
@@ -547,7 +531,9 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   if (!empty($form['use_pager']) && !empty($form['pager_id'])) {
     $form['use_pager']['#prefix'] = '<div class="form-item container-inline">';
     $form['exposed']['use_pager'] = $form['use_pager'];
+    $form['exposed']['use_pager']['#parents'] = array('use_pager');
     $form['exposed']['pager_id'] = $form['pager_id'];
+    $form['exposed']['pager_id']['#parents'] = array('pager_id');
     unset($form['use_pager']);
     unset($form['pager_id']);
   }
@@ -558,6 +544,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['path']['#title'] = '';
     $form['path']['#dependency'] = array('edit-link' => array(1), 'more-link' => array(1), 'use-pager-checkbox' => array(1));
     $form['exposed']['path'] = $form['path'];
+    $form['exposed']['path']['#parents'] = array('path');
     unset($form['path']);
   }
   
@@ -596,20 +583,24 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   if (!empty($form['exposed']['sort_order']) && !empty($form['exposed']['sort_by'])) {
     $form['exposed']['sort_order']['#title'] = t('Sort order');
     $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
+    $form['display_settings']['sort_order']['#parents'] = array('exposed', 'sort_order');
     unset($form['exposed']['sort_order']);
     $form['exposed']['sort_by']['#suffix'] = '<div class="clearfix"></div>';
     $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
+    $form['display_settings']['sort_by']['#parents'] = array('exposed', 'sort_by');
     unset($form['exposed']['sort_by']);
   }
   elseif (!empty($form['exposed']['sort_order']) && empty($form['exposed']['sort_by'])) {
     $form['exposed']['sort_order']['#title'] = t('Sort order');
     $form['exposed']['']['#suffix'] = '<div class="clearfix"></div>';
     $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
+    $form['display_settings']['sort_order']['#parents'] = array('exposed', 'sort_order');
     unset($form['exposed']['sort_order']);
   }
   elseif (empty($form['exposed']['sort_order']) && !empty($form['exposed']['sort_by'])) {
     $form['exposed']['sort_by']['#suffix'] = '<div class="clearfix"></div>';
     $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
+    $form['display_settings']['sort_by']['#parents'] = array('exposed', 'sort_by');
     unset($form['exposed']['sort_by']);
   }
 
@@ -1010,144 +1001,11 @@ function panopoly_magic_reusable_entity_validate($element, &$form_state, $form) 
  * Custom submit handler to save panels pane configuration for styling
  */
 function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
-  $form_state['conf']['view_mode'] = (isset($form_state['values']['view_mode'])) ? $form_state['values']['view_mode'] : NULL;
-
-  // Set the $conf['widget_title'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['widget_title'])) {
-    $form_state['conf']['widget_title'] = $form_state['values']['exposed']['widget_title'];
-  }
-  elseif (isset($form_state['values']['widget_title'])) {
-    $form_state['conf']['widget_title'] = $form_state['values']['widget_title'];
-  }
-  else {
-    $form_state['conf']['widget_title'] = NULL;
-  }
-
-  // Set the $conf['items_per_page'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['items_per_page'])) {
-    $form_state['conf']['items_per_page'] = $form_state['values']['exposed']['items_per_page'];
-  }
-  elseif (isset($form_state['values']['items_per_page'])) {
-    $form_state['conf']['items_per_page'] = $form_state['values']['items_per_page'];
-  }
-  else {
-    $form_state['conf']['items_per_page'] = NULL;
-  }
-
-  // Set the $conf['sort_by'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['display_settings']['sort_by'])) {
-    $form_state['conf']['exposed']['sort_by'] = $form_state['values']['display_settings']['sort_by'];
-  } 
-  elseif (isset($form_state['values']['sort_by'])) {
-    $form_state['conf']['exposed']['sort_by'] = $form_state['values']['sort_by'];
-  }   
-  else {
-    $form_state['conf']['exposed']['sort_by'] = NULL;
-  } 
-
-  // Set the $conf['sort_order'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['display_settings']['sort_order'])) {
-    $form_state['conf']['exposed']['sort_order'] = $form_state['values']['display_settings']['sort_order'];
-  } 
-  elseif (isset($form_state['values']['sort_order'])) {
-    $form_state['conf']['exposed']['sort_order'] = $form_state['values']['sort_order'];
-  }   
-  else {
-    $form_state['conf']['exposed']['sort_order'] = NULL;
-  } 
-
-  // Set the $conf['use_pager'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['use_pager'])) {
-    $form_state['conf']['use_pager'] = $form_state['values']['exposed']['use_pager'];
-  } 
-  elseif (isset($form_state['values']['use_pager'])) {
-    $form_state['conf']['use_pager'] = $form_state['values']['use_pager'];
-  }   
-  else {
-    $form_state['conf']['use_pager'] = NULL;
-  } 
-  
-  // Set the $conf['pager_id'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['pager_id'])) {
-    $form_state['conf']['pager_id'] = $form_state['values']['exposed']['pager_id'];
-  } 
-  elseif (isset($form_state['values']['pager_id'])) {
-    $form_state['conf']['pager_id'] = $form_state['values']['pager_id'];
-  }   
-  else {
-    $form_state['conf']['pager_id'] = NULL;
-  } 
-
-  // Set the $conf['offset'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['display_settings']['offset'])) {
-    $form_state['conf']['offset'] = $form_state['values']['display_settings']['offset'];
-  } 
-  elseif (isset($form_state['values']['offset'])) {
-    $form_state['conf']['offset'] = $form_state['values']['offset'];
-  }   
-  else {
-    $form_state['conf']['offset'] = NULL;
-  } 
-
-  // Set the $conf['link_to_view'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['link_to_view'])) {
-    $form_state['conf']['link_to_view'] = $form_state['values']['exposed']['link_to_view'];
-  } 
-  elseif (isset($form_state['values']['link_to_view'])) {
-    $form_state['conf']['link_to_view'] = $form_state['values']['link_to_view'];
-  }   
-  else {
-    $form_state['conf']['link_to_view'] = NULL;
-  } 
-  
-  // Set the $conf['more_link'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['more_link'])) {
-    $form_state['conf']['more_link'] = $form_state['values']['exposed']['more_link'];
-  } 
-  elseif (isset($form_state['values']['more_link'])) {
-    $form_state['conf']['more_link'] = $form_state['values']['more_link'];
-  }   
-  else {
-    $form_state['conf']['more_link'] = NULL;
-  } 
-
-  // Set the $conf['path'] value. We need to do this a
-  // little funky since sometimes it comes inside of $form_state['values']
-  // and sometimes it doesn't.
-  if (isset($form_state['values']['exposed']['path'])) {
-    $form_state['conf']['path'] = $form_state['values']['exposed']['path'];
-  } 
-  elseif (isset($form_state['values']['link_to_view'])) {
-    $form_state['conf']['path'] = $form_state['values']['path'];
-  }   
-  else {
-    $form_state['conf']['path'] = NULL;
-  } 
-  
-  // Save the view settings field is present in the data.
-  if (isset($form_state['values']['view_settings'])) {
-    $form_state['conf']['view_settings'] = $form_state['values']['view_settings'];
-  }
-  if (!empty($form_state['values']['header_type'])) {
-    $form_state['conf']['header_type'] = $form_state['values']['header_type'];
+  $move = array('view_settings', 'header_type', 'view_mode', 'widget_title');
+  foreach ($move as $key) {
+    if (isset($form_state['values'][$key])) {
+      $form_state['conf'][$key] = $form_state['values'][$key];
+    }
   }
 }
 
