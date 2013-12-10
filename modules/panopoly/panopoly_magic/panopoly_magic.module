@@ -1151,71 +1151,65 @@ function panopoly_magic_views_content_type_modal_submit(&$form, &$form_state) {
   }
 }
 
+
 /**
- * Implements hook_views_pre_render()
+ * Implements hook_views_pre_view()
  */
-function panopoly_magic_views_pre_render(&$view) {
+function panopoly_magic_views_pre_view(&$view) {
   if (isset($view->display_handler->options['pane_conf'])) {
     $conf = $view->display_handler->options['pane_conf'];
   
-    // Set the view title depending on where it comes. We do this a little
-    // funky since sometimes it comes inside of $form_state['values'] and 
-    // sometimes it doesn't.
-    if (isset($conf['widget_title']) || isset($conf['exposed']['widget_title'])) {
-      $view->display_handler->options['title'] = (isset($conf['exposed']['widget_title'])) ? $conf['exposed']['widget_title'] : $conf['widget_title']; 
-      $view->build_info['title'] = (isset($conf['exposed']['widget_title'])) ? $conf['exposed']['widget_title'] : $conf['widget_title']; 
+    if (isset($conf['widget_title'])) {
+      $view->display_handler->options['defaults']['title'] = FALSE;
+      $view->display_handler->options['title'] = $conf['widget_title']; 
+      $view->build_info['title'] = $conf['widget_title']; 
     }
 
-    // Determine that this was previously a field view, which has been overridden to a node view in the pane config.
-    if (!empty($conf['view_settings']) && $conf['view_settings'] == 'nodes' && empty($view->style_plugin->row_plugin->nodes)) {
-
-      // Reconstruct the nodes array which a node row style expects.
-      if (!empty($view->result)) {
-        $nids = array();
-        foreach ($view->result as $result) {
-          if (!empty($result->nid)) {
-            $nids[] = $result->nid;
-          }
-        }
-        $nodes = node_load_multiple($nids);
-      }
-
-      // Change the row plugin.
-      if (!empty($nodes)) {
-        $view->style_plugin->row_plugin = views_get_plugin('row', 'node');
-        $view->style_plugin->row_plugin->view =& $view;
-        $view->style_plugin->row_plugin->display =& $view->display_handler->display;
-        $view->style_plugin->row_plugin->field_alias = 'nid';
-        $view->style_plugin->row_plugin->nodes = $nodes;
-      }
-    }
     // Set the style plugin to a table style.
+    // Determine that this was previously a field view, which has been overridden to a node view in the pane config.
+    if (!empty($conf['view_settings']) && $conf['view_settings'] == 'nodes' ) {
+      $view->display_handler->options['defaults']['row_plugin'] = FALSE;
+      $view->display_handler->options['row_plugin'] = 'node';
+    }
     elseif (!empty($conf['view_settings']) && $conf['view_settings'] == 'table') {
-      $row_plugin = $view->style_plugin->row_plugin;
-      $view->style_plugin = views_get_plugin('style', 'table');
-      $view->style_plugin->row_plugin = $row_plugin;
-      $view->style_plugin->view =& $view;
-      $view->style_plugin->display =& $view->display_handler->display;
-      
+      // Find the currently active field defination, else break out as table
+      // needs fields.
+      if (empty($view->display_handler->options['defaults']['fields']) && isset($view->display_handler->options['fields'])) {
+        $fields = &$view->display_handler->options['fields'];
+      }
+      elseif (!empty($view->display_handler->default_display->options['fields'])) {
+        $fields = &$view->display_handler->default_display->options['fields'];
+      }
+      else {
+        // If no fields, don't try to display as table.
+        return;
+      }
+
+      $view->display_handler->options['defaults']['style_plugin'] = FALSE;
+      $view->display_handler->options['style_plugin'] = 'table';
+
       // Set or remove header labels depending on user selection.
       $use_header_titles = !empty($conf['header_type']) && $conf['header_type'] == 'titles';
-      foreach ($view->field as &$field) {
-        if ($use_header_titles && !empty($field->options['ui_name']) && empty($field->options['label'])) {
-          $field->options['label'] = $field->options['ui_name'];
+      foreach ($fields as $field_key => &$field) {
+        if ($use_header_titles && !empty($field['ui_name']) && empty($field['label'])) {
+          $field['label'] = $field['ui_name'];
         }
         elseif (!$use_header_titles) {
-          $field->options['label'] = NULL;
+          $field['label'] = '';
         }
         // Hide empty columns.
-        if (!empty($view->style_plugin->row_plugin->options['hide_empty'])) {
-          $view->style_plugin->options['info'][$field->field]['empty_column'] = TRUE;
+        if (!empty($view->display_handler->options['row_plugin']['hide_empty'])) {
+          $view->display_handler->options['style_options'][$field_key]['empty_column'] = TRUE;
         }
       }
     }
-
-    // Set the view mode
-    if (!empty($conf['view_mode'])) {
-      $view->style_plugin->row_plugin->options['view_mode'] = $conf['view_mode'];
+    if ((empty($conf['view_settings']) || $conf['view_settings'] == 'nodes') && !empty($conf['view_mode'])) {
+      // Transfer over the row options from default if set to use.
+      if (!empty($view->display_handler->options['defaults']['row_options'])) {
+        $view->display_handler->options['defaults']['row_options'] = FALSE;
+        $view->display_handler->options['row_options'] = $view->display_handler->default_display->options['row_options'];
+      }
+      $view->display_handler->options['row_options']['view_mode'] = $conf['view_mode'];
     }
   }
 }
