@@ -191,10 +191,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     $clicked_button = empty($form_state['clicked_button']['#value']) ? '' : $form_state['clicked_button']['#value'];
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' && ($clicked_button == 'Update Preview' || ($form_state['op'] == 'add' && empty($form_state['input']['form_build_id'])))) {
 
-      // Do not run this through validation since it creates a wierd experience
-      // TODO - extend this to other elements that might have validation hooks on them (i.e. link fields)
-      $form['#validate'] = array();
-
       // Determine the current VID for the element
       if (!empty($form_state['entity']->fpid)) {
         $current_vid = db_query("SELECT vid FROM {fieldable_panels_panes} WHERE fpid = :fpid", array(':fpid' => $form_state['entity']->fpid))->fetchField();
