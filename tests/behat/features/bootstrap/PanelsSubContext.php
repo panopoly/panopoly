@@ -54,4 +54,14 @@ class PanelsSubContext extends BehatContext implements DrupalSubContextInterface
     $this->getSession()->getPage()->clickLink('Customize this page');
     $this->waitForIPEtoActivate();
   }
+
+ /**
+   * @When /^(?:|I )wait for live preview to finish$/
+   *
+   * Wait until the live preview to finish.
+   */
+  public function waitForLivePreview() {
+    $this->getSession()->wait(5000, 'jQuery(".form-submit").value == "Save"');
+  }
+
 }

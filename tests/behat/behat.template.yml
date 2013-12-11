@@ -17,6 +17,9 @@ default:
         Bryant Sidebar: ".bryant-sidebar"
         Bryant Flipped Content: ".bryant-flipped-content"
         Bryant Flipped Sidebar: ".bryant-flipped-sidebar"
+        # For Panels / Panopoly specific regions.
+        CTools modal: "#modalContent"
+        Live preview: "fieldset.widget-preview"
         # These are the regions for responsive_bartik.
         Header: ".region-header"
         Featured: ".region-featured"

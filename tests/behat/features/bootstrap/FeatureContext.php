@@ -67,6 +67,24 @@ class FeatureContext extends DrupalContext
   }
 
   /**
+   * @Given /^Panopoly magic live previews are automatic$/
+   *
+   * Enable live previews via Panopoly Magic.
+   */
+  public function enableAutomaticPanopolyMagicLivePreview() {
+    $this->getDriver('drush')->vset('panopoly_magic_live_preview 1 --yes');
+  }
+
+  /**
+   * @Given /^Panopoly magic live previews are manual$/
+   *
+   * Enable live previews via Panopoly Magic.
+   */
+  public function enableManualPanopolyMagicLivePreview() {
+    $this->getDriver('drush')->vset('panopoly_magic_live_preview 2 --yes');
+  }
+
+  /**
    * @Given /^(?:|I )wait(?:| for) (\d+) seconds?$/
    *
    * Wait for the given number of seconds. ONLY USE FOR DEBUGGING!
