@@ -151,7 +151,7 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
     $form['widget_settings']['#type'] = 'fieldset';
     $form['widget_settings']['#title'] = t('General Settings');
     $form['title']['#attributes']['placeholder'] = $form['title']['#title'];
-    unset($form['title']['#title']);
+    $form['title']['#title_display'] = 'invisible';
     $form['widget_settings']['title'] = $form['title'];
     unset($form['title']);
 
