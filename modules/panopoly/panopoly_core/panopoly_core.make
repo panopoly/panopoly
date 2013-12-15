@@ -36,6 +36,7 @@ projects[fape][subdir] = contrib
 projects[fape][download][type] = git
 projects[fape][download][revision] = 1143ee2
 projects[fape][download][branch] = 7.x-1.x
+projects[fape][patch][1846156] = http://drupal.org/files/fape-1846156-5.patch
 
 ; Views Magic
 
