@@ -71,7 +71,7 @@ projects[date][subdir] = contrib
 projects[entityreference][version] = 1.1
 projects[entityreference][subdir] = contrib
 
-projects[field_group][version] = 1.1
+projects[field_group][version] = 1.3
 projects[field_group][subdir] = contrib
 
 projects[link][version] = 1.2
