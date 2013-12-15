@@ -554,7 +554,8 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['offset']['#field_prefix'] = t('Items to Skip');
     $form['offset']['#title'] = '';
     $form['offset']['#description'] = t('Enter 0 to skip none.');
-    $form['offset']['#suffix'] = '<div class="clearfix"></div>';
+    $form['offset']['#prefix'] = '<div class="clearfix">';
+    $form['offset']['#suffix'] = '</div>';
     $form['display_settings']['offset'] = $form['offset'];
     unset($form['offset']);
   }
@@ -562,7 +563,8 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['items_per_page']['#field_prefix'] = t('Items to Show');
     $form['items_per_page']['#title'] = '';
     $form['items_per_page']['#description'] = t('Enter 0 to display all.');
-    $form['items_per_page']['#suffix'] = '<div class="clearfix"></div>';
+    $form['items_per_page']['#prefix'] = '<div class="clearfix">';
+    $form['items_per_page']['#suffix'] = '</div>';
     $form['display_settings']['items_per_page'] = $form['items_per_page'];
     unset($form['items_per_page']);
   }
@@ -570,7 +572,8 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['offset']['#field_prefix'] = t('Items to Skip');
     $form['offset']['#title'] = '';
     $form['offset']['#description'] = t('Enter 0 to skip none.');
-    $form['offset']['#suffix'] = '<div class="clearfix"></div>';
+    $form['offset']['#prefix'] = '<div class="clearfix">';
+    $form['offset']['#suffix'] = '</div>';
     $form['display_settings']['offset'] = $form['offset'];
     unset($form['offset']);
   }
@@ -581,20 +584,23 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
     $form['display_settings']['sort_order']['#parents'] = array('exposed', 'sort_order');
     unset($form['exposed']['sort_order']);
-    $form['exposed']['sort_by']['#suffix'] = '<div class="clearfix"></div>';
+    $form['exposed']['sort_by']['#prefix'] = '<div class="clearfix">';
+    $form['exposed']['sort_by']['#suffix'] = '</div>';
     $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
     $form['display_settings']['sort_by']['#parents'] = array('exposed', 'sort_by');
     unset($form['exposed']['sort_by']);
   }
   elseif (!empty($form['exposed']['sort_order']) && empty($form['exposed']['sort_by'])) {
     $form['exposed']['sort_order']['#title'] = t('Sort order');
-    $form['exposed']['']['#suffix'] = '<div class="clearfix"></div>';
+    $form['exposed']['#prefix'] = '<div class="clearfix">';
+    $form['exposed']['#suffix'] = '</div>';
     $form['display_settings']['sort_order'] = $form['exposed']['sort_order'];
     $form['display_settings']['sort_order']['#parents'] = array('exposed', 'sort_order');
     unset($form['exposed']['sort_order']);
   }
   elseif (empty($form['exposed']['sort_order']) && !empty($form['exposed']['sort_by'])) {
-    $form['exposed']['sort_by']['#suffix'] = '<div class="clearfix"></div>';
+    $form['exposed']['sort_by']['#prefix'] = '<div class="clearfix">';
+    $form['exposed']['sort_by']['#suffix'] = '</div>';
     $form['display_settings']['sort_by'] = $form['exposed']['sort_by'];
     $form['display_settings']['sort_by']['#parents'] = array('exposed', 'sort_by');
     unset($form['exposed']['sort_by']);
