@@ -192,8 +192,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
 
     // Adjust options for Date Popup Module
     if (module_exists('date_popup_authored')) {
-      unset($form['author']['date']['#description']);
-      unset($form['author']['date']['#title']);
+      $form['author']['date']['#title_display'] = 'invisible';
       $form['author']['date']['#size'] = 20;
     }
   }
