@@ -206,7 +206,7 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
       )
     );
     $form['revision_information']['log']['#weight'] = 10;
-    unset($form['revision_information']['log']['#title']);
+    $form['revision_information']['log']['#title_display'] = 'invisible';
     $form['revision_information']['revision']['#weight'] = 9;
     $form['options']['revision'] = $form['revision_information']['revision'];
     $form['options']['log'] = $form['revision_information']['log'];
