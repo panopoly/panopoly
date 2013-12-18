@@ -1,5 +1,4 @@
 <?php
-
 include_once('panopoly_magic.features.inc');
 
 /**
@@ -29,6 +28,56 @@ function panopoly_magic_init() {
   );
   $modal_style = variable_get('panopoly_magic_modal_style', $default_style);
   drupal_add_js($modal_style, 'setting');
+}
+
+/**
+ * Implements hook_menu()
+ */
+function panopoly_magic_menu() {
+  $items = array();
+  $items['system/panopoly-magic'] = array(
+    'title' => 'AHAH callback',
+    'page callback' => 'panopoly_magic_ajax_form_callback',
+    'delivery callback' => 'ajax_deliver',
+    'access callback' => TRUE,
+    'theme callback' => 'ajax_base_page_theme',
+    'type' => MENU_CALLBACK,
+    'file path' => 'includes',
+    'file' => 'form.inc',
+  );
+  return $items;
+}
+
+/**
+ * Replaces system/ajax for pane configuration preview callback to work with
+ * ctools multi step form.
+ */
+function panopoly_magic_ajax_form_callback() {
+  list($form, $form_state) = ajax_get_form();
+  ctools_include('content');
+  ctools_include('modal');
+
+  if (isset($form_state['no_redirect']) && !isset($form_state['form_info'])) {
+    $form_state += array(
+      're_render' => FALSE,
+      'no_redirect' => !empty($form_state['ajax']),
+     );
+     $form = drupal_build_form($form_state['build_info']['form_id'], $form_state);
+  }
+  else {
+    // These ensure the class files/form definations are included.
+    $content_type = ctools_get_content_type($form_state['pane']->type);
+    $subtype = ctools_content_get_subtype($content_type, $form_state['subtype_name']);
+
+    $form = ctools_content_form($form_state['op'], $form_state['form_info'], $form_state, $form_state['plugin'], $form_state['subtype_name'], $form_state['conf'], $form_state['step']);
+  }
+
+  if (!empty($form_state['triggering_element'])) {
+    $callback = $form_state['triggering_element']['#ajax']['callback'];
+  }
+  if (!empty($callback) && function_exists($callback)) {
+    return $callback($form, $form_state);
+  }
 }
 
 /**
@@ -176,7 +225,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $style = (isset($pane->style['style'])) ? panels_get_style($pane->style['style']) : NULL;
     }
     elseif ($form_id == 'panels_edit_style_type_form') {
-      $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_type_form') ? panels_get_style($form_state['values']['style']) : panels_get_style($form_state['style']);
+      $style = ($form_state['rebuild'] && $form_id == 'panels_edit_style_type_form') ? panels_get_style($form_state['input']['style']) : panels_get_style($form_state['style']);
     }
     elseif ($form_id == 'panels_edit_style_settings_form') {
       $style = panels_get_style($form_state['style']);
@@ -269,21 +318,21 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         unset($configuration['image_link']);
       }
     }
-    $content = (empty($preview_subtype)) ? ctools_content_render($pane->type, $pane->subtype, $configuration, $keywords, $args, $context) : ctools_content_render($pane->type, $preview_subtype, $configuration, $keywords, $args, $context);
 
-    // Create the preview fieldset
-    if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form' || is_object($content)) {
-
-      // Create the fieldset with appropriate content
-      $form['widget_preview'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Preview'),
-        '#attributes' => array('class' => array('widget-preview', 'widget-preview-single')),
-        '#collapsible' => FALSE,
-        '#weight' => -100,
-      );
-      $form['widget_preview']['preview'] = array(
-        '#markup' => (!empty($style['render pane'])) ? theme($style['render pane'], array('content' => $content, 'pane' => $pane, 'display' => $display, 'style' => $style, 'settings' => $pane->style['settings'])) : theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $display)),
+    // only render preview for Panes and not Regions
+    if (isset($pane)) {
+      // Creates preview outside of form itself to fix various bugs, like form
+      // inside form and double rendering.
+      $form['#post_render'][] = 'panopoly_magic_form_post_render_preview';
+      $form['#panopoly_magic_preview_info'] = array(
+        'preview_subtype' => isset($preview_subtype) ? $preview_subtype : NULL,
+        'pane' => $pane,
+        'configuration' =>  $configuration,
+        'keywords' => $keywords,
+        'args' => $args,
+        'context' => $context,
+        'style' => $style,
+        'display' => $display,
       );
 
       // Remove the clearfix for preview floating
@@ -294,7 +343,6 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $preview_attributes = array(
         'class' => array(
           'widget-preview-button',
-          'ctools-use-ajax',
         ),
       );
 
@@ -308,17 +356,23 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       $form['buttons']['preview'] = array(
         '#type' => 'button',
         '#value' => t('Update Preview'),
-        '#wizard type' => 'next',
         '#attributes' => $preview_attributes,
+        '#ajax' => array(
+          'callback' => 'panopoly_magic_ajax_update_preview',
+          'wrapper' => 'panopoly-form-widget-preview',
+          'path' => 'system/panopoly-magic',
+        ),
       );
 
       // Autosubmit the form
       ctools_add_js('auto-submit');
       $form['#attributes']['class'][] = 'ctools-auto-submit-full-form';
     }
+    // Convert any other #ajax enabled buttons to use system/panopoly-magic.
+    _panopoly_magic_add_path_to_ajax($form);
   }
   
-   /**
+  /**
    * Globally improve the buttons for the Chaos Tools Content Type Settings Forms
    */
   if (strpos($form_id, 'content_type_edit_form') || $form_id == 'ctools_entity_field_content_type_formatter_options') {
@@ -326,7 +380,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($form['buttons']['return'])) {
       $form['buttons']['return']['#value'] = t('Save');
     }
-    $form['buttons']['#weight'] = (!empty($form['widget_preview']['#weight'])) ? ($form['widget_preview']['#weight'] +1 ): -99;
+    $form['buttons']['#weight'] = -99;
   }
 
   /**
@@ -379,6 +433,57 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+}
+
+/**
+ * Content panes should not use default system/ajax. Use our own for now.
+ */
+function _panopoly_magic_add_path_to_ajax($element) {
+  if (!empty($element['#ajax']) && !isset($element['#ajax']['path'])) {
+    $element['#ajax']['path'] = 'system/panopoly-magic';
+  }
+  foreach (element_children($element) as $key) {
+    _panopoly_magic_add_path_to_ajax($element[$key]);
+  }
+}
+
+/**
+ * Ajax callback that just returns the rendered preview.
+ */
+function panopoly_magic_ajax_update_preview($form, $form_state) {
+  if (isset($form_state['values']) && isset($form['#panopoly_magic_preview_info']['configuration'])) {
+    $form['#panopoly_magic_preview_info']['configuration'] = $form_state['values'] + $form['#panopoly_magic_preview_info']['configuration'];
+  }
+  return panopoly_magic_form_post_render_preview('', $form);
+}
+
+/**
+ * Add the preview to the form output.
+ *
+ * It is done here so the form is fully processed.
+ */
+function panopoly_magic_form_post_render_preview($output, $form) {
+  extract($form['#panopoly_magic_preview_info']);
+  $content = (empty($preview_subtype)) ? ctools_content_render($pane->type, $pane->subtype, $configuration, $keywords, $args, $context) : ctools_content_render($pane->type, $preview_subtype, $configuration, $keywords, $args, $context);
+
+  // Create the fieldset with appropriate content
+  $preview = array(
+    '#type' => 'fieldset',
+    '#title' => 'Preview',
+    '#attributes' => array(
+      'id' => 'panopoly-form-widget-preview',
+      'class' => array('widget-preview', 'widget-preview-single'),
+    ),
+    '#collapsible' => FALSE,
+    '#weight' => -100,
+  );
+  if (!empty($content)) {
+    $preview['preview']['#markup'] = (!empty($style['render pane'])) ? theme($style['render pane'], array('content' => $content, 'pane' => $pane, 'display' => $display, 'style' => $style, 'settings' => $pane->style['settings'])) : theme('panels_pane', array('content' => $content, 'pane' => $pane, 'display' => $display));
+  }
+  else {
+    $preview['preview']['#markup'] = t('[no preview]');
+  }
+  return drupal_render($preview) . $output;
 }
 
 /**
@@ -715,7 +820,6 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
 
   // Add a custom submit handler to our preview and submit option
   $form['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
-  $form['buttons']['preview']['#submit'][] = 'panopoly_magic_views_content_type_modal_submit';
 }
 
 /**
