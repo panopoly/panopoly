@@ -24,7 +24,6 @@ features[defaultconfig][] = user_default_permissions:edit own panopoly_page cont
 features[features_api][] = api:2
 features[field_base][] = body
 features[field_base][] = field_featured_categories
-features[field_base][] = field_featured_image
 features[field_base][] = field_featured_status
 features[field_instance][] = node-panopoly_page-body
 features[field_instance][] = node-panopoly_page-field_featured_categories
