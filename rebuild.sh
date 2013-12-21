@@ -31,7 +31,7 @@ if [ -f drupal-org.make ]; then
   elif [ $SELECTION = "2" ]; then
 
     echo "Building Panopoly install profile..."
-    drush make --working-copy --no-core --no-gitinfofile --contrib-destination=. drupal-org.make
+    drush make --working-copy --no-core --no-gitinfofile --contrib-destination=. drupal-org-dev.make
 
   else
    echo "Invalid selection."
