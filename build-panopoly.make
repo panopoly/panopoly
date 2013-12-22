@@ -5,5 +5,6 @@ core = 7.x
 includes[] = drupal-org-core.make
 
 ; Panopoly
-projects[panopoly][type] = profile
-projects[panopoly][version] = 1.0
+projects[panopoly][type] = profile 
+projects[panopoly][download][type] = git
+projects[panopoly][download][branch] = 7.x-1.x
