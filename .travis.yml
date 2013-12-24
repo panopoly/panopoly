@@ -32,6 +32,7 @@ install:
   # Test the current branch
   - cd drupal
   - drush make --prepare-install profiles/panopoly/build-panopoly-dev.make --yes
+  - drush dl panopoly_demo
   # - cp profiles/panopoly/settings.php.example sites/default/settings.php
   # - cp profiles/panopoly/settings.local.php.example sites/default/settings.local.php
   - cd ../
