@@ -8,6 +8,13 @@ mysql:
   username: root
   encoding: utf8
 
+env:
+  - UPGRADE=none
+  - UPGRADE=7.x-1.0-rc5
+  - UPGRADE=7.x-1.0-rc4
+  - UPGRADE=7.x-1.0-rc3
+  - UPGRADE=7.x-1.0-rc2
+
 install:
   - sudo apt-get update > /dev/null
   - "mysql -e 'create database drupal;'"
@@ -37,6 +44,9 @@ install:
   # - cp profiles/panopoly/settings.local.php.example sites/default/settings.local.php
   - cd ../
 
+  # Download an old version to test upgrading from.
+  - if [[ "$UPGRADE" != none ]]; then drush dl panopoly-$UPGRADE; fi
+
   # Setup files
   - sudo chmod -R 777 drupal/sites/all
 
@@ -49,12 +59,20 @@ install:
   - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.37.0.jar
   - java -jar selenium-server-standalone-2.37.0.jar > /dev/null 2>&1 &
   - sleep 5
+ 
+  # Disable sendmail
+  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
 
-  - cd drupal
-  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  # Do the site install (either the current revision or old for the upgrade).
+  - if [[ "$UPGRADE" == none ]]; then cd drupal; else cd panopoly-$UPGRADE; fi
   - php `pear config-get php_dir`/drush/drush.php si panopoly --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Panopoly" --yes
+  - cd ../drupal
+
+  # If we're an upgrade test, run the upgrade process.
+  - if [[ "$UPGRADE" != none ]]; then cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/ && drush updb --yes; fi
+
   - drush runserver --server=builtin 8888 > /dev/null 2>&1 &
   - sleep 3
   - cd profiles/panopoly/tests/behat
