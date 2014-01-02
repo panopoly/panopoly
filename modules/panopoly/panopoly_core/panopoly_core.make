@@ -80,6 +80,7 @@ projects[link][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
+projects[apps][version] = 1.x-dev
 projects[apps][subdir] = contrib
 projects[apps][download][type] = git
 projects[apps][download][branch] = 7.x-1.x
