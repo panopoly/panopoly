@@ -6,6 +6,17 @@
  */
 
 /**
+ * Implements hook_update_dependencies().
+ */
+function panopoly_users_update_dependencies() {
+  $deps = array();
+  $deps['panopoly_users'][7001] = array(
+    'panopoly_core' => 7002,
+  );
+  return $deps;
+}
+
+/**
  * Enable user_picture_field and copy from field_user_picture to users.picture.
  */
 function panopoly_users_update_7001() {
