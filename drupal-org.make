@@ -42,7 +42,7 @@ projects[panopoly_admin][download][branch] = 7.x-1.x
 projects[panopoly_users][version] = 1.x-dev
 projects[panopoly_users][subdir] = panopoly
 projects[panopoly_users][download][type] = git
-projects[panopoly_users][download][revision] = a5c956c
+projects[panopoly_users][download][revision] = c7bc02b
 projects[panopoly_users][download][branch] = 7.x-1.x
 
 ; The Panopoly Toolset
