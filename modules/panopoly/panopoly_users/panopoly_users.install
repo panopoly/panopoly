@@ -12,6 +12,9 @@ function panopoly_users_update_dependencies() {
   $deps = array();
   $deps['panopoly_users'][7001] = array(
     'panopoly_core' => 7002,
+    // This is necessary because we clear all caches at the end of that update
+    // function and this add the  'cache_entity_fieldable_panels_pane' table.
+    'fieldable_panel_panes' => 7107,
   );
   return $deps;
 }
