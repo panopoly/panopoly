@@ -24,7 +24,7 @@ install:
 
   # Build Behat dependencies
   - cd ./tests/behat
-  - composer install
+  - composer install --no-interaction
   # - cp behat.template.yml behat.local.yml
   - cd ../../../
 
