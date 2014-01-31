@@ -50,5 +50,4 @@ dependencies[] = views_ui
 
 ; Panopoly Recommended - Other
 dependencies[] = devel
-dependencies[] = defaultcontent
 dependencies[] = apps
