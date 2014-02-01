@@ -8,7 +8,7 @@ core = 7.x
 projects[ctools][version] = 1.x-dev
 projects[ctools][subdir] = contrib
 projects[ctools][download][type] = git
-projects[ctools][download][revision] = 720483f
+projects[ctools][download][revision] = a333dfc
 projects[ctools][download][branch] = 7.x-1.x
 projects[ctools][patch][2153811] = http://drupal.org/files/issues/ctools-views-pane-sort-by-2153811-2.patch
 
