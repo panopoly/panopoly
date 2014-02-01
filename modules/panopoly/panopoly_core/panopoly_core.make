@@ -48,7 +48,7 @@ projects[views][subdir] = contrib
 projects[views_autocomplete_filters][version] = 1.0
 projects[views_autocomplete_filters][subdir] = contrib
 
-projects[views_bulk_operations][version] = 3.1
+projects[views_bulk_operations][version] = 3.2
 projects[views_bulk_operations][subdir] = contrib
 
 ; The Usual Suspects
