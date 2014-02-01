@@ -20,10 +20,6 @@ dependencies[] = file
 dependencies[] = dblog
 dependencies[] = update
 
-; The UUID module has to be installed before the CTools module or installation
-; will fail. See issue #2186405: https://drupal.org/node/2186405
-dependencies[] = uuid
-
 ; Panopoly Foundation
 dependencies[] = panopoly_core
 dependencies[] = panopoly_images
@@ -50,4 +46,5 @@ dependencies[] = views_ui
 
 ; Panopoly Recommended - Other
 dependencies[] = devel
+dependencies[] = uuid
 dependencies[] = apps
