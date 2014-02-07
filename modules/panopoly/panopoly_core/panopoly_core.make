@@ -116,7 +116,7 @@ projects[migrate_extras][type] = "module"
 projects[migrate_extras][subdir] = "contrib"
 
 ; Recommended Modules
-projects[devel][version] = 1.3
+projects[devel][version] = 1.4
 projects[devel][subdir] = contrib
 
 projects[uuid][version] = 1.0-alpha5
