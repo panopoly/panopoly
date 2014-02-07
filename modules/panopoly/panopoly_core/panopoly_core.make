@@ -68,7 +68,7 @@ projects[libraries][subdir] = contrib
 
 ; Field modules
 
-projects[date][version] = 2.6
+projects[date][version] = 2.7
 projects[date][subdir] = contrib
 
 projects[entityreference][version] = 1.1
