@@ -5,18 +5,12 @@ core = 7.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 1.x-dev
+projects[ctools][version] = 1.4
 projects[ctools][subdir] = contrib
-projects[ctools][download][type] = git
-projects[ctools][download][revision] = a333dfc
-projects[ctools][download][branch] = 7.x-1.x
 projects[ctools][patch][2153811] = http://drupal.org/files/issues/ctools-views-pane-sort-by-2153811-2.patch
 
-projects[panels][version] = 3.x-dev
+projects[panels][version] = 3.4
 projects[panels][subdir] = contrib
-projects[panels][download][type] = git
-projects[panels][download][revision] = a879ecc
-projects[panels][download][branch] = 7.x-3.x
 
 projects[panels_breadcrumbs][version] = 2.1
 projects[panels_breadcrumbs][subdir] = contrib
