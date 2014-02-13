@@ -20,7 +20,7 @@ install:
   - "mysql -e 'create database drupal;'"
 
   - pear channel-discover pear.drush.org
-  - pear install drush/drush-6.1.0.0
+  - pear install drush/drush-6.2.0.0
   - phpenv rehash
 
   # Build Behat dependencies
@@ -83,3 +83,15 @@ before_script:
 script:
 
   - ./bin/behat --config behat.travis.yml
+
+notifications:
+  email:
+    recipients:
+      - panopoly-ci@googlegroups.com
+    on_success: always
+    on_failure: always
+  irc:
+    channels:
+      - "chat.freenode.net#panopoly"
+    on_success: always
+    on_failure: always
