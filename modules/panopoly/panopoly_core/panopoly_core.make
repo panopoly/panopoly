@@ -7,7 +7,6 @@ core = 7.x
 
 projects[ctools][version] = 1.4
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2153811] = http://drupal.org/files/issues/ctools-views-pane-sort-by-2153811-2.patch
 
 projects[panels][version] = 3.4
 projects[panels][subdir] = contrib
@@ -38,6 +37,7 @@ projects[fape][patch][1846156] = http://drupal.org/files/fape-1846156-5.patch
 
 projects[views][version] = 3.7
 projects[views][subdir] = contrib
+projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-2037469-1.patch
 
 projects[views_autocomplete_filters][version] = 1.0
 projects[views_autocomplete_filters][subdir] = contrib
