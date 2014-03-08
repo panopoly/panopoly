@@ -64,21 +64,20 @@ table.mobile-table {
   }
 
   table {
-    margin: 50px; 
-    td, th {
-      padding: 10px;
-      text-align: left;
-    }
+    margin: 50px;
   }
 
-  .mobile-table {
-    tbody tr:nth-child(odd) {
-      background: #eee;
-    }
+  td, th {
+    padding: 10px;
+    text-align: left;
+  }
+
+  .mobile-table tbody tr:nth-child(odd) {
+    background: #eee;
   }
 
   .mobile-table tr {
-    width 50%;
+    width: 50%;
   }
 
   .mobile-table tr.even th,
