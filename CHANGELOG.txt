@@ -1,5 +1,8 @@
 Panopoly 7.x-1.2, 2014-03-08
 ----------------------
+- Add UPGRADE.txt
+- Add shell script to help with creating release notes for Drupal release nodes
+- Create a complete README.txt file for the Panopoly distribution.
 - Add CHANGELOG.txt
 - Update Panopoly Magic for #2213593 by mrfelton: Notice: Undefined index: view_mode line 779 of panopoly_magic when adding existing content  through IPE.
 - Write Behat tests for Panopoly "file" widget.
@@ -33,7 +36,6 @@ Panopoly 7.x-1.2, 2014-03-08
 
 Panopoly 7.x-1.1, 2014-01-13
 ----------------------
-- Getting ready for the 1.1 Release.
 - Update Panopoly Users for #2175729: panopoly_users_update_7001 will be skipped due to missing dependency on fieldable_panel_panes_update_7107.
 - Update Panopoly Admin for #2155847: Panopoly panes error.
 - Travis-CI should use drupal-org-core.make / drupal-org.make directly.
