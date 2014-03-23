@@ -31,7 +31,6 @@ install:
   - cd ../../../
 
   # Build Codebase
-  - mkdir private_files
   - mkdir profiles
   - mv panopoly profiles/
   - mkdir drupal
@@ -42,6 +41,9 @@ install:
   - drush make --yes profiles/panopoly/drupal-org-core.make --prepare-install
   - drush make --yes profiles/panopoly/drupal-org.make --no-core --contrib-destination=profiles/panopoly
   - drush dl panopoly_demo-1.x-dev
+  - mkdir sites/default/private
+  - mkdir sites/default/private/files
+  - mkdir sites/default/private/temp
   - cd ../
 
   # Download an old version to test upgrading from.
@@ -73,6 +75,8 @@ before_script:
   - if [[ "$UPGRADE" == none ]]; then cd drupal; else cd panopoly-$UPGRADE; drush dl panopoly_demo-$UPGRADE_DEMO_VERSION; fi
   - drush si panopoly --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Panopoly" --yes
   - cd ../drupal
+  - drush vset -y file_private_path "sites/default/private/files"
+  - drush vset -y file_temporary_path "sites/default/private/temp"
 
   # If we're an upgrade test, run the upgrade process.
   - if [[ "$UPGRADE" != none ]]; then cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/ && drush updb --yes; fi
