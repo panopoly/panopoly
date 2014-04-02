@@ -22,12 +22,11 @@ install:
 
   # Install the latest Drush 6.
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer global require drush/drush:6.*
+  - composer global require --prefer-source --no-interaction drush/drush:6.*
 
   # Build Behat dependencies
   - cd ./tests/behat
-  - composer install --no-interaction
-  # - cp behat.template.yml behat.local.yml
+  - composer install --prefer-source --no-interaction
   - cd ../../../
 
   # Build Codebase
