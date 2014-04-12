@@ -43,7 +43,9 @@ Feature: Use rich text editor
       | Align Full      | p       | text-align      | justify   |
       | Increase Indent | p       | padding-left    | 30px      |
 
-  @api @javascript
+  # TODO: About 10% of the time this test will hang with Firefox, so for now,
+  # we will run in Chrome only on Travis-CI to get consistent builds.
+  @api @javascript @chrome
   Scenario: Add an image with format and alt text
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
@@ -75,7 +77,9 @@ Feature: Use rich text editor
     Then I should see the "img" element in the "Bryant Content" region
       And I should see the image alt "Sample alt text" in the "Bryant Content" region
 
-  @api @javascript
+  # TODO: About 10% of the time this test will hang with Firefox, so for now,
+  # we will run in Chrome only on Travis-CI to get consistent builds.
+  @api @javascript @chrome
   Scenario: Add a YouTube video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
@@ -95,7 +99,9 @@ Feature: Use rich text editor
     # See the image on the view page.
     Then I should see the "iframe.media-youtube-player" element in the "Bryant Content" region
 
-  @api @javascript
+  # TODO: About 10% of the time this test will hang with Firefox, so for now,
+  # we will run in Chrome only on Travis-CI to get consistent builds.
+  @api @javascript @chrome
   Scenario: Add a Vimeo video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.

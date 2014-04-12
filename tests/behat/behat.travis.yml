@@ -1,6 +1,8 @@
 default:
   paths:
     features: 'features'
+  filters:
+    tags: "~@chrome"
   extensions:
     Behat\MinkExtension\Extension:
       goutte: ~
@@ -41,3 +43,13 @@ default:
         Footer fourth column: ".region-footer-fourthcolumn"
         Footer: ".region-footer"
         Tabs: ".tabs.primary"
+
+# Setup for Google Chrome only tests.
+chrome:
+  filters:
+    tags: "@chrome"
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: chrome
+        capabilities: {"browser": "chrome", "browserName": "chrome", "browserVersion": "ANY", "version": "ANY"}
