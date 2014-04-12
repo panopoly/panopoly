@@ -43,7 +43,7 @@ projects[breakpoints][subdir] = contrib
 projects[admin_menu][version] = 3.0-rc4
 projects[admin_menu][subdir] = contrib
 
-projects[jquery_update][version] = 2.3
+projects[jquery_update][version] = 2.4
 projects[jquery_update][subdir] = contrib
 
 ; Libraries
