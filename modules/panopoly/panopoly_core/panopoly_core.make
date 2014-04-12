@@ -54,7 +54,7 @@ projects[token][subdir] = contrib
 projects[entity][version] = 1.5
 projects[entity][subdir] = contrib
 
-projects[libraries][version] = 2.1
+projects[libraries][version] = 2.2
 projects[libraries][subdir] = contrib
 
 ; Field modules
