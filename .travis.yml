@@ -101,6 +101,7 @@ before_script:
   - if [[ "$UPGRADE" != none ]]; then cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/ && drush updb --yes; fi
 
   - drush runserver --server=builtin 8888 > /dev/null 2>&1 &
+  - SERVER_PID=$!
   - sleep 3
   - cd profiles/panopoly/tests/behat
 
@@ -115,6 +116,11 @@ script:
  
   # Then run some Chrome-only tests.
   - ./bin/behat --config behat.travis.yml -p chrome
+
+after_script:
+
+  # Stop the webserver so that it's not still running when MySQL is stopped.
+  - kill $SERVER_PID
 
 notifications:
   email:
