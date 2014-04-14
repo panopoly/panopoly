@@ -12,7 +12,7 @@ projects[panopoly_core][download][branch] = 7.x-1.x
 projects[panopoly_images][version] = 1.x-dev
 projects[panopoly_images][subdir] = panopoly
 projects[panopoly_images][download][type] = git
-projects[panopoly_images][download][revision] = d5f5faf
+projects[panopoly_images][download][revision] = 834d131
 projects[panopoly_images][download][branch] = 7.x-1.x
 
 projects[panopoly_theme][version] = 1.x-dev
@@ -30,7 +30,7 @@ projects[panopoly_magic][download][branch] = 7.x-1.x
 projects[panopoly_widgets][version] = 1.x-dev
 projects[panopoly_widgets][subdir] = panopoly
 projects[panopoly_widgets][download][type] = git
-projects[panopoly_widgets][download][revision] = c0e64a8
+projects[panopoly_widgets][download][revision] = 7f1c3a5
 projects[panopoly_widgets][download][branch] = 7.x-1.x
 
 projects[panopoly_admin][version] = 1.x-dev
@@ -42,7 +42,7 @@ projects[panopoly_admin][download][branch] = 7.x-1.x
 projects[panopoly_users][version] = 1.x-dev
 projects[panopoly_users][subdir] = panopoly
 projects[panopoly_users][download][type] = git
-projects[panopoly_users][download][revision] = 3d8c137
+projects[panopoly_users][download][revision] = f21f1c8
 projects[panopoly_users][download][branch] = 7.x-1.x
 
 ; The Panopoly Toolset
@@ -50,7 +50,7 @@ projects[panopoly_users][download][branch] = 7.x-1.x
 projects[panopoly_pages][version] = 1.x-dev
 projects[panopoly_pages][subdir] = panopoly
 projects[panopoly_pages][download][type] = git
-projects[panopoly_pages][download][revision] = d453614
+projects[panopoly_pages][download][revision] = 56b1d30
 projects[panopoly_pages][download][branch] = 7.x-1.x
 
 projects[panopoly_wysiwyg][version] = 1.x-dev

@@ -58,6 +58,7 @@ Feature: Use rich text editor
     When I select the radio button "Public local files served by the webserver."
       And I press "Next"
     Then I should see a "#edit-submit" element
+      And I should see the "Crop" button
     # Fields for the image.
     When I fill in the following:
         | Alt Text   | Sample alt text   |

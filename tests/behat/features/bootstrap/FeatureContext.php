@@ -62,6 +62,44 @@ class FeatureContext extends DrupalContext
   }
 
   /**
+   * @Then /^I should see the "([^"]*)" button$/
+   */
+  public function assertButton($label) {
+    $page = $this->getSession()->getPage();
+    $results = $page->findAll('css', "input[type=submit],input[type=button],button");
+    if (!empty($results)) {
+      foreach ($results as $result) {
+        if ($result->getTagName() == 'input' && $result->getAttribute('value') == $label) {
+          return;
+        }
+        elseif ($result->getText() == $label) {
+          return;
+        }
+      }
+    }
+    throw new \Exception(sprintf('The "%s" button was not found on the page %s', $label, $region, $this->getSession()->getCurrentUrl()));
+  }
+
+  /**
+   * @Then /^I should see the "([^"]*)" button in the "([^"]*)" region$/
+   */
+  public function assertRegionButton($label, $region) {
+    $regionObj = $this->getRegion($region);
+    $results = $regionObj->findAll('css', "input[type=submit],input[type=button],button");
+    if (!empty($results)) {
+      foreach ($results as $result) {
+        if ($result->getTagName() == 'input' && $result->getAttribute('value') == $label) {
+          return;
+        }
+        elseif ($result->getText() == $label) {
+          return;
+        }
+      }
+    }
+    throw new \Exception(sprintf('The "%s" button was not found in the "%s" region on the page %s', $label, $region, $this->getSession()->getCurrentUrl()));
+  }
+
+  /**
    * @Then /^I should see the "([^"]*)" element in the "([^"]*)" region$/
    */
   public function assertRegionElement($tag, $region) {
