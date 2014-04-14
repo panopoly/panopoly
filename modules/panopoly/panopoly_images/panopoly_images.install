@@ -30,3 +30,10 @@ function panopoly_images_install() {
 
   file_info_cache_clear();
 }
+
+/**
+ * Enable the 'manualcrop' module.
+ */
+function panopoly_images_update_7101() {
+  module_enable(array('manualcrop'));
+}
