@@ -1,14 +1,35 @@
 <?php
 /**
  * @file
- * panopoly_images.strongarm.inc
+ * panopoly_images.features.defaultconfig.inc
  */
 
 /**
- * Implements hook_strongarm().
+ * Implements hook_defaultconfig_features().
  */
-function panopoly_images_strongarm() {
+function panopoly_images_defaultconfig_features() {
+  return array(
+    'panopoly_images' => array(
+      'strongarm' => 'strongarm',
+    ),
+  );
+}
+
+/**
+ * Implements hook_defaultconfig_strongarm().
+ */
+function panopoly_images_defaultconfig_strongarm() {
   $export = array();
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'focal_point_enabled_for';
+  $strongarm->value = array(
+    'image' => 'image',
+    'media' => 0,
+  );
+  $export['focal_point_enabled_for'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
