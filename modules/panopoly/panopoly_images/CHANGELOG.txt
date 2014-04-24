@@ -1,3 +1,7 @@
+Panopoly Images 7.x-1.4, 2014-04-24
+-----------------------------
+- Update manualcrop.make to match Drupal.org Whitelist.
+
 Panopoly Images 7.x-1.3, 2014-04-23
 -----------------------------
 - Improve compatibility with focal_point.
