@@ -1,3 +1,17 @@
+Panopoly 7.x-1.5, 2014-04-30
+----------------------
+- Update Panopoly Widgets for #2251989: Crop on spotlight widget does nothing when Spotlight is new.
+- Update Panopoly Core for #2254999: Update FAPE to version 1.2 for SA-CONTRIB-2014-048.
+- Add test for one time login.
+- Revert "Issue #2252095: Add test for one time login.".
+- Run 'drush make-verify' on Travis-CI to make sure ALL .make files will work on Drupal.org.
+- Update Panopoly Magic for #2246859: Font-family on submit buttons (CSS Error).
+- Update Panopoly Admin for #2244811: Update Date Popup Authored to latest -dev from Git.
+- Update build-*.make files for the 1.4 release.
+- Starting testing upgrades from the 1.4 release.
+- Updated CHANGELOG.txt (the 1.3 changes got lost).
+- Restored drupal-org.make after the 1.4 release.
+
 Panopoly 7.x-1.4, 2014-04-24
 ----------------------
 - Update Panopoly Images for #2248591: Update manualcrop.make to match Drupal.org Whitelist.
