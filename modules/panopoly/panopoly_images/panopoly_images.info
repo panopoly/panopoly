@@ -44,6 +44,7 @@ features[file_display][] = image__teaser__file_image
 features[image][] = panopoly_image_featured
 features[image][] = panopoly_image_full
 features[image][] = panopoly_image_half
+features[image][] = panopoly_image_original
 features[image][] = panopoly_image_quarter
 features[image][] = panopoly_image_spotlight
 features[image][] = panopoly_image_square
