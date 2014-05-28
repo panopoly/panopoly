@@ -58,7 +58,7 @@ function panopoly_images_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'image_style' => '',
+    'image_style' => 'panopoly_image_original',
   );
   $export['image__default__file_image'] = $file_display;
 
@@ -68,7 +68,7 @@ function panopoly_images_file_default_displays() {
   $file_display->weight = 5;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'image_style' => 'large',
+    'image_style' => 'panopoly_image_original',
   );
   $export['image__full__file_image'] = $file_display;
 
