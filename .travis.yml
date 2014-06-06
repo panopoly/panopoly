@@ -19,6 +19,9 @@ env:
   - UPGRADE=7.x-1.0-rc4
   - UPGRADE=7.x-1.0-rc3
 
+matrix:
+  fast_finish: true
+
 install:
   # Add the Google Chrome packages.
   - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
