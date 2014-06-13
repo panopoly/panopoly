@@ -7,9 +7,11 @@ core = 7.x
 
 projects[ctools][version] = 1.4
 projects[ctools][subdir] = contrib
+projects[ctools][patch][2280875] = http://drupal.org/files/issues/ctools-icon-text-renderer-2280875-5.patch
 
 projects[panels][version] = 3.4
 projects[panels][subdir] = contrib
+projects[panels][patch][2283719] = http://drupal.org/files/issues/panels-icon-text-renderer-2283719-1.patch
 
 projects[panels_breadcrumbs][version] = 2.1
 projects[panels_breadcrumbs][subdir] = contrib
@@ -19,6 +21,7 @@ projects[panelizer][subdir] = contrib
 
 projects[fieldable_panels_panes][version] = 1.5
 projects[fieldable_panels_panes][subdir] = contrib
+projects[fieldable_panels_panes][patch][2283263] = http://drupal.org/files/issues/fieldable_panels_panes-n2283263-5.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
