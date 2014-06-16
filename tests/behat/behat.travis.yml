@@ -31,6 +31,7 @@ default:
         Featured: ".region-featured"
         Highlighted: ".region-highlighted"
         Help: ".region-help"
+        Tabs: ".tabs"
         Content: ".region-content"
         Sidebar first: ".region-sidebar-first"
         Sidebar second: ".region-sidebar-second"
