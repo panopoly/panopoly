@@ -61,7 +61,8 @@
   padding: 0;
 }
 
-#modalContent div.ctools-modal-content a.close:hover {
+#modalContent div.ctools-modal-content a.close:hover,
+#modalContent div.ctools-modal-content a.close:focus {
   background-position: left -15px;
 }
 
@@ -104,7 +105,8 @@
   padding: 0 0 .5em 10px;
 }
 
-#modalContent .panels-section-column-categories .content-type-button div {
+#modalContent .panels-section-column-categories .content-type-button a {
+  display: inline-block;
   background: #EAEAEC;
   background-image: linear-gradient(bottom, #DBDCDF 0%, #F6F6F7 100%);
   background-image: -o-linear-gradient(bottom, #DBDCDF 0%, #F6F6F7 100%);
@@ -121,22 +123,37 @@
   float: none;
   left: 0;
   top: 0;
-  width: auto;
+  width: 85%;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  margin: 0 8px 0 25px;
+  margin: 0 8px 0 0px;
   padding: 0;
 }
 
-#modalContent .panels-section-column-categories .content-type-button div a {
+#modalContent .panels-section-column-categories .content-type-button a {
   font: bold 11px/21px "Open Sans", "Lucida Grande", Tahoma, Verdana, sans-serif;
   text-decoration: none;
   color: #333;
-  padding: 0 12px;
+  padding: 0 8px;
 }
 
-#modalContent .panels-section-column-categories .content-type-button div:active {
+#modalContent .panels-section-column-categories .content-type-button span {
+  display: inline-block;
+  margin-top: -2px;
+}
+
+#modalContent .panels-section-column-categories .content-type-button img {
+  margin: 0px 2px 0px -9px;
+  padding: 3px 2px;
+  background-color: #FFFFFF;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #EEEEEE !important;
+  border-radius: 5px;
+}
+
+#modalContent .panels-section-column-categories .content-type-button a:active {
   outline: none;
   background-image: linear-gradient(bottom, #FFFFFF 0%, #E9EAEC 100%);
   background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #E9EAEC 100%);
@@ -150,11 +167,6 @@
   color-stop(0, #FFFFFF),
   color-stop(1, #E9EAEC)
   );
-}
-
-#modalContent .panels-section-column-categories .content-type-button img {
-  border: none;
-  padding-top: 2px;
 }
 
 #modalContent div.ctools-modal-content .modal-content {
@@ -340,7 +352,8 @@
   padding: 0 10px;
 }
 
-#modal-content .widget-preview-title .content-type-button div a:hover {
+#modal-content .widget-preview-title .content-type-button a:hover,
+#modal-content .widget-preview-title .content-type-button a:focus {
   background: #56CE00;
   background-image: linear-gradient(bottom, #408E00 0%, #56CE00 100%);
   background-image: -o-linear-gradient(bottom, #408E00 0%, #56CE00 100%);
@@ -356,7 +369,7 @@
   );
 }
 
-#modal-content .widget-preview-title .content-type-button div a:active {
+#modal-content .widget-preview-title .content-type-button a:active {
   background: #5DE000;
   background-image: linear-gradient(bottom, #5DE000 0%, #4BA700 100%);
   background-image: -o-linear-gradient(bottom, #5DE000 0%, #4BA700 100%);
@@ -442,7 +455,9 @@
 }
 
 #modalContent .panels-add-content-modal a.panels-modal-add-category:hover, 
-#modalContent .panels-section-column-categories .content-type-button div:hover {
+#modalContent .panels-section-column-categories .content-type-button a:hover,
+#modalContent .panels-add-content-modal a.panels-modal-add-category:focus,
+#modalContent .panels-section-column-categories .content-type-button a:focus {
   background: #E6E6E6;
   background-image: linear-gradient(bottom, #C5C5C5 0%, #FAFAFA 100%);
   background-image: -o-linear-gradient(bottom, #C5C5C5 0%, #FAFAFA 100%);
@@ -494,7 +509,8 @@
   padding: 0 13px 1px;
 }
 
-#modal-content .form-submit:hover {
+#modal-content .form-submit:hover,
+#modal-content .form-submit:focus {
   background: #E6E6E6;
   background-image: linear-gradient(bottom, #C5C5C5 0%, #FAFAFA 100%);
   background-image: -o-linear-gradient(bottom, #C5C5C5 0%, #FAFAFA 100%);
