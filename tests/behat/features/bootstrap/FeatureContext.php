@@ -168,6 +168,38 @@ class FeatureContext extends DrupalContext
   }
 
   /**
+   * @Then /^I should see "([^"]*)" in the "([^"]*)" element with the "([^"]*)" attribute set to "([^"]*)" in the "([^"]*)" region$/
+   */
+  public function assertRegionElementTextAttribute($text, $tag, $attribute, $value, $region) {
+    $regionObj = $this->getRegion($region);
+    $elements = $regionObj->findAll('css', $tag);
+    if (empty($elements)) {
+      throw new \Exception(sprintf('The element "%s" was not found in the "%s" region on the page %s', $tag, $region, $this->getSession()->getCurrentUrl()));
+    }
+
+    $found = FALSE;
+    foreach ($elements as $element) {
+      if ($element->getText() == $text) {
+        $found = TRUE;
+        break;
+      }
+    }
+    if (!$found) {
+      throw new \Exception(sprintf('The text "%s" was not found in the "%s" element in the "%s" region on the page %s', $text, $tag, $region, $this->getSession()->getCurrentUrl()));
+    }
+
+    if (!empty($attribute)) {
+      $attr = $element->getAttribute($attribute);
+      if (empty($attr)) {
+        throw new \Exception(sprintf('The "%s" attribute is not present on the element "%s" in the "%s" region on the page %s', $attribute, $tag, $region, $this->getSession()->getCurrentUrl()));
+      }
+      if (strpos($attr, "$value") === FALSE) {
+        throw new \Exception(sprintf('The "%s" attribute does not equal "%s" on the element "%s" in the "%s" region on the page %s', $attribute, $value, $tag, $region, $this->getSession()->getCurrentUrl()));
+      }
+    }
+  }
+
+  /**
    * @Then /^I should not see "([^"]*)" in the "([^"]*)" element in the "([^"]*)" region$/
    */
   public function assertNotRegionElementText($text, $tag, $region) {
