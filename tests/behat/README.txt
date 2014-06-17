@@ -1,8 +1,8 @@
 Behat tests
 ===========
 
-Setup
------
+Quick setup
+-----------
 
  1. Install Composer
 
@@ -12,11 +12,18 @@ Setup
 
     php composer.phar install
 
- 3. Copy behat.yml.example to behat.yml and modify
+ 3. Copy behat.template.yml to behat.yml and modify
 
     mv behat.template.yml behat.yml
  
  4. Run Behat and examine test results!
  
     bin/behat
+
+More information
+----------------
+
+For detailed instructions, see:
+
+  https://drupal.org/node/2271009
 
