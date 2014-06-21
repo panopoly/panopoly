@@ -23,15 +23,16 @@ Feature: Add video widget
   @api @javascript @chrome
   Scenario: Add a YouTube video
     When I fill in "Testing video" for "edit-title"
-    When I click "Select"
+    When I click "Browse"
       And I switch to the frame "mediaBrowser"
-    Then I should see "Supported providers"
+    Then I should see "Supported internet media providers"
       And I should see "YouTube"
     When I fill in "File URL or media resource" with "https://www.youtube.com/watch?v=1TV0q4Sdxlc"
-      And I press "Submit"
+      And I press "Next"
       And I wait 2 seconds
-    Then I should see "Edit"
-      And I should see "Remove"
+    Then I should see the "Remove" button in the "CTools modal" region
+     # TODO: Disabled until #2264187 is fixed!
+     #And I should see "Edit"
     When I press "edit-return"
       And I press "Save as custom"
       And I wait for the Panels IPE to deactivate
@@ -43,15 +44,16 @@ Feature: Add video widget
   @api @javascript @chrome
   Scenario: Add a Vimeo video
     When I fill in "Testing video" for "edit-title"
-    When I click "Select"
+    When I click "Browse"
       And I switch to the frame "mediaBrowser"
-    Then I should see "Supported providers"
+    Then I should see "Supported internet media providers"
       And I should see "YouTube"
     When I fill in "File URL or media resource" with "http://vimeo.com/59482983"
-      And I press "Submit"
+      And I press "Next"
       And I wait 2 seconds
-    Then I should see "Edit"
-      And I should see "Remove"
+    Then I should see "Remove"
+     # TODO: Disabled until #2264187 is fixed!
+     #And I should see "Edit"
     When I press "edit-return"
       And I press "Save as custom"
       And I wait for the Panels IPE to deactivate

@@ -88,7 +88,7 @@ Feature: Use rich text editor
       And I switch to the frame "mediaBrowser"
       And I click "Web"
       And I fill in "File URL or media resource" with "https://www.youtube.com/watch?v=1TV0q4Sdxlc"
-      And I press "Submit"
+      And I press "Next" in the "Media web tab" region
       And I wait 2 seconds
     When I switch to the frame "mediaStyleSelector"
     Then I should see "DrupalCon Portland 2013"
@@ -110,7 +110,7 @@ Feature: Use rich text editor
       And I switch to the frame "mediaBrowser"
       And I click "Web"
       And I fill in "File URL or media resource" with "http://vimeo.com/59482983"
-      And I press "Submit"
+      And I press "Next" in the "Media web tab" region
       And I wait 2 seconds
     When I switch to the frame "mediaStyleSelector"
     Then I should see "Panopoly by Troels Lenda"
