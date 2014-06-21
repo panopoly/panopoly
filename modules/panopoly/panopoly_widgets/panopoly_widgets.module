@@ -388,6 +388,10 @@ function panopoly_widgets_field_display_fieldable_panels_pane_alter(&$display, $
  * Implementation of hook_file_default_displays_alter()
  */
 function panopoly_widgets_file_default_displays_alter(&$default_displays) {
+  // Display the 'Generic file' display on video preview.
+  if (!empty($default_displays['video__preview__file_field_file_default'])) {
+    $default_displays['video__preview__file_field_file_default']->status = FALSE;
+  }
 
   // Set the default video configuration for videos
   if (!empty($default_displays['video__default__media_vimeo_video'])) {
