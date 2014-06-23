@@ -20,6 +20,7 @@ default:
       api_driver: 'drupal'
       region_map:
         # Regions for Panopoly Layouts
+        Boxton Content: ".boxton-content"
         Bryant Content: ".bryant-content"
         Bryant Sidebar: ".bryant-sidebar"
         Bryant Flipped Content: ".bryant-flipped-content"
