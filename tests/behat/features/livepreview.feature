@@ -29,7 +29,7 @@ Feature: Live preview
       And I wait for live preview to finish
     Then I should see the link "Widget title" in the "Live preview" region
     When I press "Save" in the "CTools modal" region
-      And I press "Save as custom"
+      And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Widget title"
       And I should see the link "Widget title"
