@@ -6,13 +6,7 @@ Feature: Add table widget
   Background:
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing text title |
-        | Editor              | plain_text         |
-        | body[und][0][value] | Testing text body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing text title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add table"
@@ -28,8 +22,8 @@ Feature: Add table widget
       | tablefield_0_cell_1_1 | c-2-r-2      |
       | tablefield_0_cell_2_0 | c-1-r-3      |
       | tablefield_0_cell_2_1 | c-2-r-3      |
-      And I press "edit-return"
-      And I press "Save as custom"
+      And I press "Save" in the "CTools modal" region
+      And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Widget title"
       And I should see "c-2-r-3"
@@ -49,8 +43,8 @@ Feature: Add table widget
       | tablefield_0_cell_1_0 | c-1-r-2 |
       | tablefield_0_cell_1_1 | c-2-r-2 |
       | tablefield_0_cell_1_2 | c-3-r-2 |
-      And I press "edit-return"
-      And I press "Save as custom"
+      And I press "Save" in the "CTools modal" region
+      And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Widget title"
       And I should see "c-3-r-2"

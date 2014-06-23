@@ -7,13 +7,7 @@ Feature: Add links widget
   Scenario: Add links
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing title |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add links"
@@ -22,8 +16,8 @@ Feature: Add links widget
       | title                                  | Testing link title  |      
       | field_quick_links_links[und][0][title] | Testing url title   |
       | field_quick_links_links[und][0][url]   | http://drupal.org   |
-      And I press "edit-return"
-      And I press "Save as custom"
+      And I press "Save" in the "CTools modal" region
+      And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing link title"
       And I should see "Testing url title"

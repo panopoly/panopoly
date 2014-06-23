@@ -4,6 +4,7 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
     Behat\Behat\Context\BehatContext,
     Behat\Behat\Event\StepEvent,
+    Behat\Behat\Event\ScenarioEvent,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
@@ -22,6 +23,9 @@ use Drupal\Component\Utility\Random;
  */
 class FeatureContext extends DrupalContext
 {
+  protected $bootstrapped = FALSE;
+  protected $landing_pages = array();
+
   /**
    * Initializes context.
    * Every scenario gets it's own context object.
@@ -230,6 +234,32 @@ class FeatureContext extends DrupalContext
   }
 
   /**
+   * @BeforeScenario @api
+   *
+   * Bootstrap Drupal so that all Drupal API functions work.
+   */
+  public function bootstrapDrupal($event) {
+    if (!$this->bootstrapped) {
+      $drupal = $this->getDriver('drupal');
+
+      // We are experiencing a weird issue where the CTools plugin cache gets
+      // corrupted and none of our Panels pages work because their layout
+      // plugins can't be found. It appears that clearing the cache, and then
+      // bootstrapping Drupal again will fix it! I suspect the CTools plugin
+      // cache is being built too early, ie. before we change to the Drupal
+      // directory - but I haven't been able to confirm that.
+      $drupal->clearCache();
+      $drupal->bootstrap();
+
+      // We occasionally get errors about not finding the ctools_get_export_ui()
+      // function, so we force it to be loaded. No idea what's causing this.
+      ctools_include('export-ui');
+
+      $this->bootstrapped = TRUE;
+    }
+  }
+
+  /**
    * @AfterStep @javascript
    *
    * After every step in a @javascript scenario, we want to wait for AJAX
@@ -247,7 +277,8 @@ class FeatureContext extends DrupalContext
    * Disable live previews via Panopoly Magic.
    */
   public function disablePanopolyMagicLivePreview() {
-    $this->getDriver('drush')->vset('panopoly_magic_live_preview 0 --yes');
+    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 0 --yes');
+    variable_set('panopoly_magic_live_preview', 0);
   }
 
   /**
@@ -256,7 +287,8 @@ class FeatureContext extends DrupalContext
    * Enable live previews via Panopoly Magic.
    */
   public function enableAutomaticPanopolyMagicLivePreview() {
-    $this->getDriver('drush')->vset('panopoly_magic_live_preview 1 --yes');
+    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 1 --yes');
+    variable_set('panopoly_magic_live_preview', 1);
   }
 
   /**
@@ -265,7 +297,8 @@ class FeatureContext extends DrupalContext
    * Enable live previews via Panopoly Magic.
    */
   public function enableManualPanopolyMagicLivePreview() {
-    $this->getDriver('drush')->vset('panopoly_magic_live_preview 2 --yes');
+    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 2 --yes');
+    variable_set('panopoly_magic_live_preview', 2);
   }
 
   /**
@@ -363,5 +396,77 @@ class FeatureContext extends DrupalContext
     $login_link = str_replace("/login", '', $login_link);
     $this->getSession()->visit($this->locatePath($login_link));
     return TRUE;
+  }
+
+  /**
+   * Create a new Landing Page.
+   *
+   * @param string $name
+   *   The internal machine name for the new Page.
+   * @param string $path
+   *   The path for the new Page.
+   * @param string $title
+   *   The title for the new Page.
+   */
+  protected function createPage($name, $path, $title) {
+    $page_task = page_manager_get_task('page');
+
+    $subtask = page_manager_page_new();
+    $subtask->name = $name;
+    $subtask->path = $path;
+    $subtask->admin_title = $title;
+    $subtask->admin_description = '';
+    $subtask->menu = array(
+      'type' => 'none',
+    );
+
+    $display = new stdClass();
+    $display->layout = 'boxton';
+    $display->title = $title;
+    $display->panels = array();
+    $display->content = array();
+
+    $plugin = page_manager_get_task_handler('panel_context');
+    $handler = page_manager_new_task_handler($plugin);
+    $handler->conf['title'] = t('Landing page');
+    $handler->conf['display'] = $display;
+    $handler->conf['pipeline'] = 'ipe';
+
+    // Assemble a new $page cache and assign it to our page subtask and task
+    // handler.
+    $page = new stdClass();
+    page_manager_page_new_page_cache($subtask, $page);
+    page_manager_handler_add_to_page($page, $handler);
+    page_manager_save_page_cache($page);
+
+    // Mark this page for deletion at the end of the scenario.
+    $this->landing_pages[] = $name;
+  }
+
+  /**
+   * @AfterScenario @api
+   *
+   * Delete landing pages after a Scenario has finished.
+   */
+  public function cleanupPages() {
+    foreach ($this->landing_pages as $name) {
+      if ($page = page_manager_page_load($name)) {
+        page_manager_page_delete($page);
+      }
+    }
+    $this->landing_pages = array();
+  }
+
+  /**
+   * @Given /^I am viewing a landing page$/
+   */
+  public function iAmViewingALandingPage() {
+    $random = new Random();
+    $name = $random->name(8);
+    $path = $random->name(8);
+
+    $this->createPage($name, $path, 'Testing Landing Page');
+
+    $this->getSession()->visit($this->locatePath($path));
   }
 }

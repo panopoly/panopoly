@@ -6,13 +6,7 @@ Feature: Add spotlight widget
   Background:
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing title |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add spotlight"
@@ -27,8 +21,8 @@ Feature: Add spotlight widget
       And I attach the file "panopoly.png" to "files[field_basic_spotlight_items_und_0_fid]"
       And I press the "Upload" button
     #Then I should see the "Crop" button in the "CTools modal" region
-    When I press "edit-return"
-      And I press "Save as custom"
+    When I press "Save" in the "CTools modal" region
+      And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing description"
       And I should see "Testing item title"

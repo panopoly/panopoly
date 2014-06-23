@@ -7,13 +7,7 @@ Feature: Live preview
   Scenario: Automatic live preview should show changes immediately
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are automatic
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing text title |
-        | Editor              | plain_text         |
-        | body[und][0][value] | Testing text body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing text title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add table"
@@ -46,13 +40,7 @@ Feature: Live preview
   Scenario: Live preview should work with views
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are automatic
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing title |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add content list"
@@ -122,13 +110,7 @@ Feature: Live preview
   Scenario: Manual live preview should show changes when requested
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are manual
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing text title |
-        | Editor              | plain_text         |
-        | body[und][0][value] | Testing text body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing text title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add text"
@@ -143,13 +125,7 @@ Feature: Live preview
   Scenario: Automatic live preview should validation errors immediately
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are automatic
-    When I visit "/node/add/panopoly-page"
-      And I fill in the following:
-        | Title               | Testing title |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
-      And I press "Publish"
-    Then the "h1" element should contain "Testing title"
+      And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
       And I click "Add spotlight"
