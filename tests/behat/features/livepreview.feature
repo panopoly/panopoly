@@ -53,18 +53,18 @@ Feature: Live preview
     # Test changing the "Items to Show".
     When I select "Content Page" from "exposed[type]"
       And I wait for live preview to finish
-    Then I should see the link "Testing title" in the "Live preview" region
-      And I should see the link "Content Demo" in the "Live preview" region
+    Then I should see the link "Content Demo" in the "Live preview" region
       And I should see the link "Lovely Vegetables" in the "Live preview" region
+      And I should see the link "Great Vegetables" in the "Live preview" region
     When I fill in "items_per_page" with "1"
       And I wait for live preview to finish
-    Then I should see the link "Testing title" in the "Live preview" region
-      And I should not see the link "Content Demo" in the "Live preview" region
+    Then I should see the link "Content Demo" in the "Live preview" region
       And I should not see the link "Lovely Vegetables" in the "Live preview" region
+      And I should not see the link "Great Vegetables" in the "Live preview" region
     # Test changing the sort order.
     When I fill in "exposed[sort_order]" with "ASC"
       And I wait for live preview to finish
-    Then I should not see the link "Testing title" in the "Live preview" region
+    Then I should not see the link "Content demo" in the "Live preview" region
       And I should see the link "Vegetables are Great" in the "Live preview" region
     # Test changing the sort by.
     When I fill in "exposed[sort_by]" with "title"

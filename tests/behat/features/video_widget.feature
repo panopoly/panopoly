@@ -24,7 +24,7 @@ Feature: Add video widget
     When I fill in "File URL or media resource" with "https://www.youtube.com/watch?v=1TV0q4Sdxlc"
       And I press "Next"
       And I wait 2 seconds
-    Then I should see "Remove"
+    Then I should see the "Remove" button in the "CTools modal" region
       # TODO: Disabled until #2264187 is fixed!
       #And I should see "Edit"
     When I press "Save" in the "CTools modal" region
@@ -45,7 +45,7 @@ Feature: Add video widget
     When I fill in "File URL or media resource" with "http://vimeo.com/59482983"
       And I press "Next"
       And I wait 2 seconds
-    Then I should see "Remove"
+    Then I should see the "Remove" button in the "CTools modal" region
       # TODO: Disabled until #2264187 is fixed!
       #And I should see "Edit"
     When I press "Save" in the "CTools modal" region
