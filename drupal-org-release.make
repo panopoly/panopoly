@@ -34,3 +34,8 @@ projects[panopoly_wysiwyg][subdir] = panopoly
 
 projects[panopoly_search][version] = 1.6
 projects[panopoly_search][subdir] = panopoly
+
+; For running the automated tests.
+
+projects[panopoly_test][version] = 1.6
+projects[panopoly_test][subdir] = panopoly
