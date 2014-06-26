@@ -4,7 +4,7 @@ Feature: Add landing page
   I need to be able to create a landing page
 
   # @javascript is needed for the machine name
-  @api @javascript
+  @api @javascript @panopoly_pages
   Scenario: Add a landing page
     Given I am logged in as a user with the "administrator" role
     When I visit "/node/add/landing_page"

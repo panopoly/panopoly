@@ -28,7 +28,7 @@ class FeatureContext extends DrupalContext
 
   /**
    * Initializes context.
-   * Every scenario gets it's own context object.
+   * Every scenario gets its own context object.
    *
    * @param array $parameters context parameters (set them up through behat.yml)
    */
@@ -215,6 +215,22 @@ class FeatureContext extends DrupalContext
           throw new \Exception(sprintf('The text "%s" was found in the "%s" element in the "%s" region on the page %s', $text, $tag, $region, $this->getSession()->getCurrentUrl()));
         }
       }
+    }
+  }
+
+  /**
+   * Checks, that the region contains text matching specified pattern.
+   *
+   * @Then /^(?:|I )should see text matching "(?P<pattern>(?:[^"]|\\")*)" in the "(?P<region>[^"]*)"(?:| region)$/
+   */
+  public function assertRegionMatchesText($pattern, $region)
+  {
+    $regionObj = $this->getRegion($region);
+
+    // Find the text within the region
+    $regionText = $regionObj->getText();
+    if (!preg_match($pattern, $regionText)) {
+      throw new \Exception(sprintf("No text matching '%s' was found in the region '%s' on the page %s", $pattern, $region, $this->getSession()->getCurrentUrl()));
     }
   }
 

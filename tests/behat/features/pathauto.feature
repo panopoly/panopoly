@@ -6,19 +6,22 @@
   Background:
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-    When I visit "/node/add/panopoly-page"
+    When I visit "/node/add/panopoly-test-page"
       And I fill in the following:
-        | Title               | Testing title |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
-      And I press "Publish"
+        | Title  | Testing title |
+        | Editor | plain_text    |
+        | Body   | Testing body  |
+    # Normally, here we'd press "Publish", however some child distribtions
+    # don't use 'save_draft', and this makes this test compatible with them.
+    #When I press "Publish"
+    When I press "edit-submit"
     Then the "h1" element should contain "Testing title"
 
-  @api
+  @api @panopoly_admin
   Scenario: Pathauto should automatically assign an url
     Then the url should match "testing-title"
   
-  @api
+  @api @panopoly_admin
   Scenario: Pathauto should keep old url when changing the title
     When I click "Edit" in the "Tabs" region
       And I fill in the following:
@@ -28,7 +31,7 @@
     Given I go to "completely-other-title"
     Then the response status code should be 404
   
-  @api
+  @api @panopoly_admin
   Scenario: My own permalink should be kept even if changing title
     When I click "Edit" in the "Tabs" region
       And I fill in the following:

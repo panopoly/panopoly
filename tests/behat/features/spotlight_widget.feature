@@ -9,10 +9,10 @@ Feature: Add spotlight widget
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
-      And I click "Add spotlight"
+      And I click "Add spotlight" in the "CTools modal" region
     Then I should see "Configure new Add spotlight"
 
-  @api @javascript
+  @api @javascript @panopoly_widgets
   Scenario: Add a spotlight
     When I fill in the following:
       | field_basic_spotlight_items[und][0][title] | Testing item title  |
@@ -29,7 +29,7 @@ Feature: Add spotlight widget
       # Per an old bug described in issue #2075903
       And I should not see "Spotlight"
 
-  @api @javascript
+  @api @javascript @panopoly_widgets
   Scenario: Image is required per issue #2075903
     When I fill in the following:
       | field_basic_spotlight_items[und][0][title] | Testing item title  |

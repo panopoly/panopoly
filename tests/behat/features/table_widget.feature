@@ -9,7 +9,7 @@ Feature: Add table widget
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
-      And I click "Add table"
+      And I click "Add table" in the "CTools modal" region
     Then I should see "Configure new Add table"
 
   @api @javascript

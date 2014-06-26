@@ -3,6 +3,7 @@ Feature: Demo content
   As a site owner
   I need to view demo content
 
+  @panopoly_demo
   Scenario: Homepage
     Given I am an anonymous user
     When I visit "/"

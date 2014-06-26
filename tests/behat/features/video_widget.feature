@@ -9,12 +9,12 @@ Feature: Add video widget
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane" in the "Boxton Content" region
-      And I click "Add video"
+      And I click "Add video" in the "CTools modal" region
     Then I should see "Configure new Add video"
 
   # TODO: About 10% of the time this test will hang with Firefox, so for now,
   # we will run in Chrome only on Travis-CI to get consistent builds.
-  @api @javascript @chrome
+  @api @javascript @chrome @panopoly_widgets
   Scenario: Add a YouTube video
     When I fill in "Testing video" for "edit-title"
     When I click "Browse"
@@ -35,7 +35,7 @@ Feature: Add video widget
 
   # TODO: About 10% of the time this test will hang with Firefox, so for now,
   # we will run in Chrome only on Travis-CI to get consistent builds.
-  @api @javascript @chrome
+  @api @javascript @chrome @panopoly_widgets
   Scenario: Add a Vimeo video
     When I fill in "Testing video" for "edit-title"
     When I click "Browse"

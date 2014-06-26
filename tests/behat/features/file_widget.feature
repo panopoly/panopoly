@@ -9,10 +9,10 @@ Feature: Add a file to a page
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
-      And I click "Add file"
+      And I click "Add file" in the "CTools modal" region
     Then I should see "Configure new Add file"
 
-  @api @javascript
+  @api @javascript @panopoly_widgets
   Scenario: Add a spotlight
     Then I should see "Allowed file types: pdf txt."
     When I fill in the following:

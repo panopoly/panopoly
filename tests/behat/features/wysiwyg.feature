@@ -5,22 +5,26 @@ Feature: Use rich text editor
 
   Background:
     Given I am logged in as a user with the "administrator" role
-    When I visit "/node/add/panopoly-page"
+    When I visit "/node/add/panopoly-test-page"
       And I fill in the following:
-        | Title                | Testing WYSIWYG       |
-        | body[und][0][format] | panopoly_wysiwyg_text |
+        | Title  | Testing WYSIWYG       |
+        | Editor | panopoly_wysiwyg_text |
 
   # For some inexplicable reason this is necessary on Travis-CI. Without it,
   # the first test always fails: it can't find the "Bryant Content" region.
-  @api
+  @api @panopoly_wysiwyg
   Scenario: Fix issues on Travis-CI (not Chrome)
-    When I press "Publish"
+    # Normally, here we'd press "Publish", however some child distribtions
+    # don't use 'save_draft', and this makes this test compatible with them.
+    #When I press "Publish"
+    When I press "edit-submit"
 
-  @api @javascript
+  @api @javascript @panopoly_wysiwyg
   Scenario Outline: Format text in the editor (first toolbar)
     When I click the "<Action>" button in the "edit-body-und-0-value" WYSIWYG editor
       And I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
-      And I press "Publish"
+      #And I press "Publish"
+      And I press "edit-submit"
     Then I should see "Testing body" in the "<Element>" element with the "<Property>" CSS property set to "<Value>" in the "Bryant Content" region
 
     Examples:
@@ -35,12 +39,13 @@ Feature: Use rich text editor
       | Align Center                  | p          | text-align      | center       |
       | Align Right                   | p          | text-align      | right        |
 
-  @api @javascript
+  @api @javascript @panopoly_wysiwyg
   Scenario Outline: Format text in the editor (advanced toolbar)
     When I expand the toolbar in the "edit-body-und-0-value" WYSIWYG editor
       And I click the "<Action>" button in the "edit-body-und-0-value" WYSIWYG editor
       And I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
-      And I press "Publish"
+      #And I press "Publish"
+      And I press "edit-submit"
     Then I should see "Testing body" in the "<Element>" element with the "<Property>" CSS property set to "<Value>" in the "Bryant Content" region
 
     Examples:
@@ -51,13 +56,14 @@ Feature: Use rich text editor
 
   # Because we start over with the Chrome tests, we need to do this again, but
   # for Chrome. Again, this issue only occurs on Travis-CI.
-  @api @chrome
+  @api @chrome @panopoly_wysiwyg
   Scenario: Fix issues on Travis-CI (on Chrome)
-    When I press "Publish"
+    #When I press "Publish"
+    When I press "edit-submit"
 
   # TODO: About 10% of the time this test will hang with Firefox, so for now,
   # we will run in Chrome only on Travis-CI to get consistent builds.
-  @api @javascript @chrome
+  @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_image @panopoly_images
   Scenario: Add an image with format and alt text
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
@@ -85,14 +91,15 @@ Feature: Use rich text editor
       And I click the fake "Submit" button
       And I switch out of all frames
     # Save the whole node.
-    When I press "Publish"
+    #When I press "Publish"
+    When I press "edit-submit"
     # See the image on the view page.
     Then I should see the "img" element in the "Bryant Content" region
       And I should see the image alt "Sample alt text" in the "Bryant Content" region
 
   # TODO: About 10% of the time this test will hang with Firefox, so for now,
   # we will run in Chrome only on Travis-CI to get consistent builds.
-  @api @javascript @chrome
+  @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_video @panopoly_widgets
   Scenario: Add a YouTube video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
@@ -108,13 +115,14 @@ Feature: Use rich text editor
       And I click the fake "Submit" button
       And I switch out of all frames
     # Save the whole node.
-    When I press "Publish"
+    #When I press "Publish"
+    When I press "edit-submit"
     # See the image on the view page.
     Then I should see the "iframe.media-youtube-player" element in the "Bryant Content" region
 
   # TODO: About 10% of the time this test will hang with Firefox, so for now,
   # we will run in Chrome only on Travis-CI to get consistent builds.
-  @api @javascript @chrome
+  @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_video @panopoly_widgets
   Scenario: Add a Vimeo video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
@@ -130,6 +138,7 @@ Feature: Use rich text editor
       And I click the fake "Submit" button
       And I switch out of all frames
     # Save the whole node.
-    When I press "Publish"
+    #When I press "Publish"
+    When I press "edit-submit"
     # See the image on the view page.
     Then I should see the "iframe.media-vimeo-player" element in the "Bryant Content" region

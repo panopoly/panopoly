@@ -3,14 +3,14 @@ Feature: Add image widget
   As a site administrator
   I need to be able to use the image widget
  
-  @api @javascript
+  @api @javascript @panopoly_widgets
   Scenario: Add a image
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
-      And I click "Add image"
+      And I click "Add image" in the "CTools modal" region
     Then I should see "Configure new Add image"
     When I fill in the following:
       | Title   | Testing image widget title |
