@@ -105,6 +105,9 @@ class WysiwygSubContext extends BehatContext implements DrupalSubContextInterfac
 
     // Click the action button.
     $button = $toolbarElement->find("xpath", "//a[starts-with(@title, '$action')]");
+    if (!$button) {
+      throw new \Exception(sprintf('Button "%s" was not found on the page %s', $action, $this->getSession()->getCurrentUrl()));
+    }
     $button->click();
     $driver->wait(1000, TRUE);
   }
@@ -125,6 +128,9 @@ class WysiwygSubContext extends BehatContext implements DrupalSubContextInterfac
 
     // Expand wysiwyg toolbar.
     $button = $toolbarElement->find("xpath", "//a[starts-with(@title, '$action')]");
+    if (!$button) {
+      throw new \Exception(sprintf('Button "%s" was not found on the page %s', $action, $this->getSession()->getCurrentUrl()));
+    }
     if (strpos($button->getAttribute('class'), 'mceButtonActive') !== FALSE) {
       $button->click();
     }
