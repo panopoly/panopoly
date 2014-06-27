@@ -424,3 +424,17 @@ function panopoly_widgets_file_type_alter(&$types, $file) {
     $types[] = 'video';
   }
 }
+
+/**
+ * Implements hook_menu_block_tree_alter().
+ *
+ * Updates menu block settings in case of IPE callback magic. This will only
+ * work in limited cases but will be fixed when the page refreshes.
+ */
+function panopoly_widgets_menu_block_tree_alter($tree, $config) {
+  if (arg(0) == 'panels' && arg(1) == 'ajax') {
+    foreach ($tree as $key => $value) {
+      $tree[$key]['link']['in_active_trail'] = TRUE;
+    }
+  }
+}
