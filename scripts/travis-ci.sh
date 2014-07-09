@@ -32,12 +32,6 @@ system_install() {
   drush dl -y drupalorg_drush-7.x-1.x-dev --destination=$HOME/.drush
   drush cc drush
 
-  # Build Behat dependencies
-  header Installing Behat
-  cd panopoly/tests/behat
-  composer install --prefer-source --no-interaction
-  cd ../../..
-
   # Build Codebase
   mkdir profiles
   mv panopoly profiles/
@@ -54,7 +48,12 @@ system_install() {
   mkdir sites/default/private
   mkdir sites/default/private/files
   mkdir sites/default/private/temp
-  cd ../
+
+  # Build Behat dependencies
+  header Installing Behat
+  cd profiles/panopoly/modules/panopoly/panopoly_test/tests
+  composer install --prefer-source --no-interaction
+  cd ../../../../../../../
 
   # Verify that all the .make files will work on Drupal.org.
   header Verifying .make file
@@ -159,11 +158,11 @@ run_tests() {
   # Make the Travis tests repos agnostic by injecting drupal_root with BEHAT_PARAMS
   export BEHAT_PARAMS="extensions[Drupal\\DrupalExtension\\Extension][drupal][drupal_root]=$BUILD_TOP/drupal"
 
-  cd drupal/profiles/panopoly/tests/behat
+  cd drupal/profiles/panopoly/modules/panopoly/panopoly_test/tests
 
   # If this isn't an upgrade, we test if any features are overridden.
   if [[ "$UPGRADE" == none ]]; then
-    run_test ../../scripts/check-overridden.sh
+    run_test ../../../../scripts/check-overridden.sh
   fi
 
   # First, run all the tests in Firefox.
