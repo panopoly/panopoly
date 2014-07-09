@@ -121,9 +121,10 @@ before_tests() {
   fi
   drush si panopoly --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Panopoly" --yes
   drush dis -y dblog
-  drush en -y panopoly_test
   drush vset -y file_private_path "sites/default/private/files"
   drush vset -y file_temporary_path "sites/default/private/temp"
+
+  # Switch to the Panopoly platform built from Git (if we aren't there already).
   cd ../drupal
 
   # If we're an upgrade test, run the upgrade process.
@@ -132,6 +133,9 @@ before_tests() {
     cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/ && drush updb --yes
     drush cc all
   fi
+
+  # Our tests depend on panopoly_test.
+  drush en -y panopoly_test
 
   # Run the webserver
   header Starting webserver
