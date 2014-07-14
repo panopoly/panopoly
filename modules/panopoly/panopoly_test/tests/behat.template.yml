@@ -1,6 +1,8 @@
 default:
   paths:
     features: 'features'
+  filters:
+    tags: "~@chrome"
   extensions:
     Behat\MinkExtension\Extension:
       goutte: ~
@@ -55,3 +57,13 @@ default:
       subcontexts:
         paths:
           - "../../../"
+
+# Setup for Google Chrome only tests.
+chrome:
+  filters:
+    tags: "@chrome"
+  extensions:
+    Behat\MinkExtension\Extension:
+      selenium2:
+        browser: chrome
+        capabilities: {"browser": "chrome", "browserName": "chrome", "browserVersion": "ANY", "version": "ANY"}

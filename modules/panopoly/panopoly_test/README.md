@@ -25,6 +25,15 @@ Quick setup
  
     bin/behat
 
+Profiles
+-----------
+
+Some of the tests need to run on Chrome due to issues in the Selenium Firefox 
+driver. To run the tests tagged with @chrome, you need to run Behat using the 
+Chrome profile:
+
+    bin/behat --profile chrome
+
 More information
 ----------------
 
