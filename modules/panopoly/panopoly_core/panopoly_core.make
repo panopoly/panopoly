@@ -8,6 +8,7 @@ core = 7.x
 projects[ctools][version] = 1.4
 projects[ctools][subdir] = contrib
 projects[ctools][patch][2280875] = http://drupal.org/files/issues/ctools-icon-text-renderer-2280875-5.patch
+projects[ctools][patch][581670] = http://drupal.org/files/fix-autocomplete-581670.patch
 
 projects[panels][version] = 3.4
 projects[panels][subdir] = contrib
