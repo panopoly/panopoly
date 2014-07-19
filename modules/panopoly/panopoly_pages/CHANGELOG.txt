@@ -1,3 +1,7 @@
+Panopoly Pages 7.x-1.8, 2014-07-19
+----------------------------
+- No changes since last release.
+
 Panopoly Pages 7.x-1.7, 2014-07-16
 ----------------------------
 - Move panopoly_page's hook_menu_block_tree_alter() to panopoly_widgets.
