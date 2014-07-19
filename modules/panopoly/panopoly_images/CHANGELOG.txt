@@ -1,7 +1,3 @@
-Panopoly Images 7.x-1.8, 2014-07-19
------------------------------
-- No changes since last release.
-
 Panopoly Images 7.x-1.7, 2014-07-16
 -----------------------------
 - Fixed 'file_display' components are always overridden (update Media / File Entity).
