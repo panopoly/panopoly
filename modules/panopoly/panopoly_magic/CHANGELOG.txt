@@ -1,3 +1,7 @@
+Panopoly Magic 7.x-1.8, 2014-07-19
+----------------------------
+- No changes since last release.
+
 Panopoly Magic 7.x-1.7, 2014-07-16
 ----------------------------
 - Fixed Panopoly Magic only provides node view modes for view mode selection.
