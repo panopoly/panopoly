@@ -59,6 +59,9 @@ projects[entity][subdir] = contrib
 projects[libraries][version] = 2.2
 projects[libraries][subdir] = contrib
 
+projects[transliteration][version] = 3.2
+projects[transliteration][subdir] = contrib
+
 ; Field modules
 
 projects[date][version] = 2.7

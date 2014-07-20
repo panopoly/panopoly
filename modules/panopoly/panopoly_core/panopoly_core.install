@@ -120,3 +120,12 @@ function panopoly_core_update_7003() {
     variable_set('panels_page_allowed_types', $allowed);
   }
 }
+
+/**
+ * Enable the transliteration module.
+ */
+function panopoly_core_update_7100() {
+  if (!module_exists('transliteration')) {
+    module_enable(array('transliteration'));
+  }
+}
