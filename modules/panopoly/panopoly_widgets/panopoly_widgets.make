@@ -31,6 +31,7 @@ projects[media][download][type] = git
 projects[media][download][revision] = 6382429
 projects[media][download][branch] = 7.x-2.x
 projects[media][patch][2192981] = http://drupal.org/files/issues/media-restore-edit-button-2192981-13.patch
+projects[media][patch][2126697] = http://drupal.org/files/issues/media-wysiwyg-alt-title-handling-2126697-27.patch
 
 projects[media_youtube][version] = 2.x-dev
 projects[media_youtube][subdir] = contrib
