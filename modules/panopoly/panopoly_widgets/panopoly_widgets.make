@@ -28,10 +28,9 @@ projects[file_entity][download][branch] = 7.x-2.x
 projects[media][version] = 2.x-dev
 projects[media][subdir] = contrib
 projects[media][download][type] = git
-projects[media][download][revision] = fe09f09
+projects[media][download][revision] = 6382429
 projects[media][download][branch] = 7.x-2.x
 projects[media][patch][2192981] = http://drupal.org/files/issues/media-restore-edit-button-2192981-13.patch
-projects[media][patch][2126755] = http://drupal.org/files/issues/media-wysiwyg-improve-our-macro-handling-2126755-100.patch
 
 projects[media_youtube][version] = 2.x-dev
 projects[media_youtube][subdir] = contrib
