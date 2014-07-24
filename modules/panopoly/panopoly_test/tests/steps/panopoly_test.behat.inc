@@ -312,7 +312,7 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
    * Wait for the jQuery AJAX loading to finish. ONLY USE FOR DEBUGGING!
    */
   public function iWaitForAJAX() {
-    $this->getSession()->wait(5000, 'jQuery != undefined && jQuery.active === 0');
+    $this->getSession()->wait(5000, 'typeof jQuery !== "undefined" && jQuery.active === 0');
   }
 
   /**

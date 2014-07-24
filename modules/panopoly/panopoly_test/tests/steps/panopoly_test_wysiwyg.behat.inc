@@ -30,7 +30,7 @@ class WysiwygSubContext extends BehatContext implements DrupalSubContextInterfac
   /**
    * Get the instance variable to use in Javascript.
    *
-   * @param string
+   * @param string $instanceId
    *   The instanceId used by the WYSIWYG module to identify the instance.
    *
    * @throws Exeception
@@ -52,9 +52,9 @@ class WysiwygSubContext extends BehatContext implements DrupalSubContextInterfac
   /**
    * Get a Mink Element representing the WYSIWYG toolbar.
    *
-   * @param string
+   * @param string $instanceId
    *   The instanceId used by the WYSIWYG module to identify the instance.
-   * @param string
+   * @param string $editorType
    *   Identifies the underlying editor (for example, "tinymce").
    *
    * @throws Exeception
@@ -110,6 +110,25 @@ class WysiwygSubContext extends BehatContext implements DrupalSubContextInterfac
     }
     $button->click();
     $driver->wait(1000, TRUE);
+  }
+
+  /**
+   * @When /^I click the "([^"]*)" element in the "([^"]*)" WYSIWYG editor$/
+   */
+  public function iClickTheElementInTheWysiwygEditor($cssSelector, $instanceId) {
+    $instance = $this->getWysiwygInstance($instanceId);
+    $editorType = $this->getSession()->evaluateScript("return $instance.editor");
+
+    // TODO: This is tinyMCE specific. We should probably do a switch statement
+    // based on $editorType.
+    $editor_iframe_id = $instanceId . '_ifr';
+
+    // This Javascript only works on Chrome - not Firefox.
+    $javascript  = "jQuery('#{$editor_iframe_id}').each(function() {";
+    $javascript .= "  jQuery('{$cssSelector}', this.contentWindow.document || this.contentDocument).click();";
+    $javascript .= "});";
+
+    $this->getSession()->executeScript($javascript);
   }
 
   /**

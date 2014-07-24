@@ -99,6 +99,87 @@ Feature: Use rich text editor
 
   # TODO: About 10% of the time this test will hang with Firefox, so for now,
   # we will run in Chrome only on Travis-CI to get consistent builds.
+  @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_image @panopoly_images
+  Scenario: The second alt/title text sticks
+    When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I switch to the frame "mediaBrowser"
+      And I attach the file "test-sm.png" to "files[upload]"
+      And I press "Next"
+    Then I should see "Destination"
+    When I select the radio button "Public local files served by the webserver."
+      And I press "Next"
+    Then I should see a "#edit-submit" element
+    # We need to set the alt/title text differently in the two steps that ask
+    # for it - so, that we can test that the 2nd overrides.
+    When I fill in the following:
+        | Alt Text   | First alt text   |
+        | Title Text | First title text |
+      And I press "Save"
+    When I wait 2 seconds
+      And I switch to the frame "mediaStyleSelector"
+    Then the "Alt Text" field should contain "First Alt text"
+      And the "Title Text" field should contain "First Title text"
+    When I fill in the following:
+        | Alt Text   | Second alt text   |
+        | Title Text | Second title text |
+    When I click the fake "Submit" button
+      And I switch out of all frames
+    # Save the whole node.
+    When I press "edit-submit"
+    # See the image with the 2nd alt text.
+    Then I should see the "img" element in the "Bryant Content" region
+      And I should see the image alt "Second alt text" in the "Bryant Content" region
+    # Next, we edit the node again, so we can verify that the second
+    # alt text will load when editing the image again.
+    When I click "Edit" in the "Tabs" region
+      And I click the "img" element in the "edit-body-und-0-value" WYSIWYG editor
+      And I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I switch to the frame "mediaStyleSelector"
+    Then the "Alt Text" field should contain "Second Alt text"
+      And the "Title Text" field should contain "Second Title text"
+      And I switch out of all frames
+
+  # TODO: About 10% of the time this test will hang with Firefox, so for now,
+  # we will run in Chrome only on Travis-CI to get consistent builds.
+  @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_image @panopoly_images
+  Scenario: HTML entities in alt/title text get decoded/encoded correctly
+    When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I switch to the frame "mediaBrowser"
+      And I attach the file "test-sm.png" to "files[upload]"
+      And I press "Next"
+    Then I should see "Destination"
+    When I select the radio button "Public local files served by the webserver."
+      And I press "Next"
+    Then I should see a "#edit-submit" element
+    # We need to set the alt/title text differently in the two steps that ask
+    # for it - so, that we can test that the 2nd overrides.
+    When I fill in the following:
+        | Alt Text   | Alt & some > characters <   |
+        | Title Text | Title & some > characters < |
+      And I press "Save"
+    When I wait 2 seconds
+      And I switch to the frame "mediaStyleSelector"
+    When I click the fake "Submit" button
+      And I switch out of all frames
+    # Save the whole node.
+    When I press "edit-submit"
+    # See the image with the 2nd alt text.
+    Then I should see the "img" element in the "Bryant Content" region
+      And I should see the image alt "Alt & some > characters <" in the "Bryant Content" region
+    # Next, we edit the node again, so we can verify that the second
+    # alt text will load when editing the image again.
+    When I click "Edit" in the "Tabs" region
+      And I click the "img" element in the "edit-body-und-0-value" WYSIWYG editor
+      And I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I switch to the frame "mediaStyleSelector"
+    Then the "Alt Text" field should contain "Alt & some > characters <"
+      And the "Title Text" field should contain "Title & some > characters <"
+      And I switch out of all frames
+
+  # TODO: About 10% of the time this test will hang with Firefox, so for now,
+  # we will run in Chrome only on Travis-CI to get consistent builds.
   @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_video @panopoly_widgets
   Scenario: Add a YouTube video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
