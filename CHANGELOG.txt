@@ -1,3 +1,20 @@
+Panopoly 7.x-1.8, 2014-07-25
+----------------------
+- Minor fix to drupal-org-dev.make file for panopoly_test.
+- Update Panopoly WYSIWYG for #2306225 by dsnopek: Packaging error with Panopoly 1.7 release: Unable to download tinymce. (take two).
+- Update to Drupal 7.30 (fixes regression in 7.29).
+- Update Panopoly Test for #2308325: Write Behat test for alt/title text on images in the WYSIWYG.
+- Update Panopoly Widgets for #2308487 by dsnopek: Fixed Alt and Title double encoded in WYSIWYG.
+- Update Panopoly Widgets for #2307007 by dsnopek: Fixed When inserting Image in WYSIWYG, the second set of alt/title fields is ignored. (take two).
+- Update Panopoly Widgets for #2307007 by dsnopek: Fixed When inserting Image in WYSIWYG, the second set of alt/title fields is ignored.
+- Move README.txt to README.md and add link to Travis-CI build status image.
+- Update Panopoly Magic for #2303755 by dsnopek | cboyden: Fixed Live preview does not respond to keyboard events.
+- Update Panopoly Core for #2213769 by caschbre | lsolesen: Added transliteration.
+- Got .make file in sync with other projects after failed 1.8 release.
+- Update Panopoly WYSIWYG for #2306225: Revert Packaging error with Panopoly 1.7 release: Unable to download tinymce.
+- Update Panopoly WYSIWYG for issue #2306225: Packaging error with Panopoly 1.7 release: Unable to download tinymce.
+- Restored drupal-org.make after the 1.7 release.
+
 Panopoly 7.x-1.7, 2014-07-16
 ----------------------
 - Update to Drupal 7.29 for SA-CORE-2014-003.
