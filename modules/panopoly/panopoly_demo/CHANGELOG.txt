@@ -1,3 +1,7 @@
+Panopoly Demo 7.x-1.8, 2014-07-25
+---------------------------
+- No changes since last release.
+
 Panopoly Demo 7.x-1.7, 2014-07-16
 ---------------------------
 - Test if Features are Overridden after install on Travis-CI.
