@@ -23,6 +23,7 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
 
   protected $bootstrapped = FALSE;
   protected $landing_pages = array();
+  protected $private_path_overridden = FALSE;
 
   /**
    * Get the session from the parent context.
@@ -269,6 +270,39 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
       ctools_include('export-ui');
 
       $this->bootstrapped = TRUE;
+    }
+  }
+
+  /**
+   * @BeforeScenario @api&&@drupal_private_files
+   *
+   * Configure a private files path if one isn't already configured.
+   */
+  public function configurePrivateFiles($event) {
+    $file_private_path = variable_get('file_private_path', '');
+    if (empty($file_private_path)) {
+      $file_public_path = variable_get('file_public_path', conf_path() . '/files');
+      if (empty($file_public_path)) {
+        throw new \Exception('Files must be configured for @drupal_private_files tests to work!');
+      }
+
+      // Set flag for later cleanup.
+      $this->private_path_overridden = TRUE;
+      
+      // Create and setup the private path.
+      $file_private_path = $file_public_path . '/' . 'private';
+      variable_set('file_private_path', $file_private_path);
+    }
+  }
+
+  /**
+   * @AfterScenario @api&&@drupal_private_files
+   *
+   * Clean up our temporary private files path.
+   */
+  public function cleanupPrivateFiles($event) {
+    if ($this->private_path_overridden) {
+      variable_del('file_private_path');
     }
   }
 
