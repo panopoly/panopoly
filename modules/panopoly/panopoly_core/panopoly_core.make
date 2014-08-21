@@ -86,7 +86,7 @@ projects[apps][download][branch] = 7.x-1.x
 projects[apps][download][revision] = b9d82b7
 projects[apps][patch][1790902] = http://drupal.org/files/1790902.4-check-last-modified-existing.patch
 
-projects[features][version] = 2.0
+projects[features][version] = 2.2
 projects[features][subdir] = contrib
 
 projects[strongarm][version] = 2.0
