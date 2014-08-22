@@ -224,6 +224,10 @@ function panopoly_widgets_update_7007(&$sandbox) {
   $data_table_name = 'field_data_field_basic_spotlight_items';
   $revision_table_name = 'field_revision_field_basic_spotlight_items';
   $field_name = 'field_basic_spotlight_items_alt';
-  db_add_field($data_table_name, $field_name, $spec);
-  db_add_field($revision_table_name, $field_name, $spec);
+  if (!db_field_exists($data_table_name, $field_name)) {
+    db_add_field($data_table_name, $field_name, $spec);
+  }
+  if (!db_field_exists($revision_table_name, $field_name)) {
+    db_add_field($revision_table_name, $field_name, $spec);
+  }
 }
