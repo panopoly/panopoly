@@ -116,5 +116,8 @@ projects[migrate_extras][subdir] = "contrib"
 projects[devel][version] = 1.5
 projects[devel][subdir] = contrib
 
+projects[distro_update][version] = 1.0-beta2
+projects[distro_update][subdir] = contrib
+
 projects[uuid][version] = 1.0-alpha5
 projects[uuid][subdir] = contrib
