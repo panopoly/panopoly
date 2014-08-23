@@ -10,6 +10,7 @@ projects[ctools][subdir] = contrib
 projects[ctools][patch][2280875] = http://drupal.org/files/issues/ctools-icon-text-renderer-2280875-5.patch
 projects[ctools][patch][581670] = http://drupal.org/files/fix-autocomplete-581670.patch
 projects[ctools][patch][2312505] = http://drupal.org/files/issues/ctools-views-pane-more-link-2312505-1.patch
+projects[ctools][patch][1978378] = http://www.drupal.org/files/ctools-page-title-check-plained-twice-1978378-1.patch
 
 projects[panels][version] = 3.4
 projects[panels][subdir] = contrib
