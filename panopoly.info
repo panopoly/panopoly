@@ -46,5 +46,6 @@ dependencies[] = views_ui
 
 ; Panopoly Recommended - Other
 dependencies[] = devel
+dependencies[] = distro_update
 dependencies[] = uuid
 dependencies[] = apps

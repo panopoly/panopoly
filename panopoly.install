@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall hooks.
+ */
+
+/**
+ * Enable the Distribution Update Status Manager (distro_update) module.
+ */
+function panopoly_update_7101() {
+  module_enable(array('distro_update'));
+}
