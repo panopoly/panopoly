@@ -26,6 +26,7 @@ dependencies[] = views_content
 stylesheets[all][] = panopoly-widgets.css
 features[ctools][] = file_entity:file_default_displays:1
 features[ctools][] = views:views_default:3.0
+features[defaultconfig][] = user_default_permissions:access media browser
 features[defaultconfig][] = user_default_permissions:add media from remote sources
 features[defaultconfig][] = user_default_permissions:create fieldable basic_file
 features[defaultconfig][] = user_default_permissions:create fieldable image
