@@ -21,7 +21,7 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
     return 'test';
   }
 
-  protected $bootstrapped = FALSE;
+  protected $menu_rebuilt = FALSE;
   protected $landing_pages = array();
   protected $private_path_overridden = FALSE;
 
@@ -252,24 +252,23 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
    *
    * Bootstrap Drupal so that all Drupal API functions work.
    */
-  public function bootstrapDrupal($event) {
-    if (!$this->bootstrapped) {
+  public function drupalMenuRebuild($event) {
+    if (!$this->menu_rebuilt) {
       $drupal = $this->getMainContext()->getDriver('drupal');
 
-      // We are experiencing a weird issue where the CTools plugin cache gets
-      // corrupted and none of our Panels pages work because their layout
-      // plugins can't be found. It appears that clearing the cache, and then
-      // bootstrapping Drupal again will fix it! I suspect the CTools plugin
-      // cache is being built too early, ie. before we change to the Drupal
-      // directory - but I haven't been able to confirm that.
-      $drupal->clearCache();
-      $drupal->bootstrap();
+      // Drupal is having a cache or registry issue that is causing tests to
+      // fail (certain CTools plugin functions won't exist.) Menu rebuild does
+      // the trick and fixes any fatal errors due to missing functions!
+      $current_path = getcwd();
+      chdir(DRUPAL_ROOT);
+      menu_rebuild();
+      chdir($current_path);
 
       // We occasionally get errors about not finding the ctools_get_export_ui()
       // function, so we force it to be loaded. No idea what's causing this.
       ctools_include('export-ui');
 
-      $this->bootstrapped = TRUE;
+      $this->menu_rebuilt = TRUE;
     }
   }
 
@@ -288,7 +287,7 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
 
       // Set flag for later cleanup.
       $this->private_path_overridden = TRUE;
-      
+
       // Create and setup the private path.
       $file_private_path = $file_public_path . '/' . 'private';
       variable_set('file_private_path', $file_private_path);
