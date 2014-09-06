@@ -133,11 +133,12 @@ function panopoly_admin_form_alter(&$form, &$form_state, $form_id) {
     unset($form['path']['alias']['#description']); 
     $form['path']['alias']['#title'] = '<strong>' . t('Permalink') . ':</strong> ';
     $form['path']['alias']['#title'] .= (isset($_SERVER['HTTPS'])) ? 'https://' . $_SERVER['HTTP_HOST'] . '/' : 'http://' . $_SERVER['HTTP_HOST'] . '/';
+
     if (isset($form['path']['pathauto'])) {
+      $form['path']['pathauto']['#access'] = FALSE;
+      // Alter the place holder text based on the pathauto default value.
+      $form['path']['alias']['#attributes'] = array('placeholder' => '<' . t('magically generated') . '>');
       $form['path']['alias']['#states'] = array();
-      if (!$form['path']['alias']['#default_value']) {
-        $form['path']['alias']['#attributes'] = array('placeholder' => '<' . t('magically generated') . '>');
-      }
       $form['#submit'][] = 'panopoly_admin_pathauto_submit';
     }
   }
@@ -240,16 +241,25 @@ function panopoly_admin_module_implements_alter(&$implementations, $hook) {
  * Submit function for adding pathauto settings
  */
 function panopoly_admin_pathauto_submit($form, &$form_state) {
-  // If the user hasn't specified a path, autogenerate
-  if (empty($form_state['input']['path']['alias'])) {
-    $form_state['values']['path']['pathauto'] = TRUE;
-    $form_state['input']['path']['pathauto'] = TRUE;
+  $values = $form_state['values'];
+  $autogenerate = TRUE;
+
+  // If the submitted 'alias' is NOT empty then we potentially may not want to
+  // auto-generate.
+  if (!empty($values['path']['alias'])) {
+    // If the submitted alias differs than the previous form default value then
+    // the user is attempting to manually set it.
+    if ($values['path']['alias'] != $form['path']['alias']['#default_value']) {
+      $autogenerate = FALSE;
+    }
+    // If the submitted value is equal to the previous value AND the autogenerate (pathauto) setting is FALSE then an alias was previously manually set so leave it.
+    elseif (!empty($form['path']['pathauto']) && !$form['path']['pathauto']['#default_value']) {
+      $autogenerate = FALSE;
+    }
   }
-  // If the user has specified a path, dont autogenerate
-  else {
-    $form_state['values']['path']['pathauto'] = FALSE;
-    $form_state['input']['path']['pathauto'] = FALSE;
-  }
+
+  $form_state['values']['path']['pathauto'] = $autogenerate;
+  $form_state['input']['path']['pathauto'] = $autogenerate;
 }
 
 /**
