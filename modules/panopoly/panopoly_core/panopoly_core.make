@@ -22,6 +22,7 @@ projects[panels_breadcrumbs][subdir] = contrib
 
 projects[panelizer][version] = 3.1
 projects[panelizer][subdir] = contrib
+projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
 
 projects[fieldable_panels_panes][version] = 1.5
 projects[fieldable_panels_panes][subdir] = contrib
