@@ -39,9 +39,12 @@
 /**
  * Pathauto styling
  */
+#node-edit .form-item-path-alias * {
+  float:left;
+}
 #node-edit .form-item-path-alias label {
-  float: left;
   font-weight: 400;
+  padding-right: 5px;
 }
 
 #node-edit .form-item-path-alias {
