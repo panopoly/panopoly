@@ -472,4 +472,29 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
 
     $this->getSession()->visit($this->getMainContext()->locatePath($path));
   }
+
+  /**
+   * @Then /^the "([^"]*)" radio button should be set to "([^"]*)"$/
+   *
+   * @link: https://www.drupal.org/node/1891584 @endlink
+   */
+  public function theRadioButtonShouldBeSetTo($identifier, $option) {
+    $page = $this->getSession()->getPage();
+    $div = $page->find('xpath', "//div[contains(., '$identifier') and @class[contains(.,'form-type-radio')]]");
+    if ($div) {
+      $radios = $div->find('xpath', "//input[@type='radio']");
+      if ($radios) {
+        $checkedRadio = $div->find('xpath', "//input[@type='radio' and @checked='checked']/following-sibling::label[contains(text(), '$option')] ");
+        if (!$checkedRadio) {
+          throw new \Exception(sprintf('We found the radio buttons for "%s", but "%s" was not selected.', $identifier, $option));
+        }
+      } elseif (!$radios) {
+        throw new \Exception(sprintf('We found "%s", but it did not contain any radio buttons".', $identifier));
+      }
+    } elseif (!$div) {
+      throw new \Exception(sprintf('We couldn\'nt find "%s" on the page', $identifier));
+    } else {
+      throw new \Exception('General exception from '.__FUNCTION__);
+    }
+  }
 }
