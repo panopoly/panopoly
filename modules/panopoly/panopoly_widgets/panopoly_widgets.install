@@ -260,3 +260,10 @@ function panopoly_widgets_update_7007(&$sandbox) {
 function panopoly_widgets_update_7008() {
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access media browser'));
 }
+
+/**
+ * Make sure the new 'field_basic_spotlight_duration' gets created.
+ */
+function panopoly_widgets_update_7009() {
+  features_revert(array('panopoly_widgets' => array('field_base', 'field_instance')));
+}

@@ -151,16 +151,27 @@ function panopoly_widgets_field_formatter_settings_summary($field, $instance, $v
  * Implements hook_field_formatter_view().
  */
 function panopoly_widgets_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+
+  // Include the Spotlight Rotation time setting
+  $duration_field = field_get_items('fieldable_panels_pane', $entity, 'field_basic_spotlight_duration');
+  if ($duration_field) {
+    $duration_field = reset($duration_field);
+    $duration = $duration_field['value'];
+  }
+  if (empty($duration)) {
+    $duration = variable_get('panopoly_widgets_spotlight_rotation_time', 4);
+  }
+
   $element = array();
   $settings = $display['settings'];
   $formatter = $display['type'];
   drupal_add_library('system', 'ui.tabs');
 
   // Assemble the tabs header
-  $header = '<div class="panopoly-spotlight-buttons-wrapper">';
+  $header = '<div class="panopoly-spotlight-buttons-wrapper" data-rotation-time="' . $duration * 1000 . '">';
   $header .= '<ul>';
   foreach ($items as $delta => $item_data) {
-    $header .= '<li>' . '<a href="#panopoly-spotlight-' . $delta . '">' . ($delta+1) . '</a></li>'; 
+    $header .= '<li>' . '<a href="#panopoly-spotlight-' . $delta . '">' . ($delta+1) . '</a></li>';
   }
   $header .= '</ul>';
 
