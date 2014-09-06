@@ -192,10 +192,12 @@ function panopoly_wysiwyg_alter_wysiwyg_editor_settings(&$settings, $context) {
         // that we're merging, and not overwriting.
         $settings_array = array();
         foreach($settings['extended_valid_elements'] as $tag) {
-          list($tag, $allowed_attributes) = explode('[', $tag);
-          $allowed_attributes = explode('|', trim($allowed_attributes, ']'));
-          foreach($allowed_attributes as $key => $attribute) {
-            $settings_array[$tag][$attribute] = $attribute;
+          if (strpos("[", $tag) !== FALSE) {
+            list($tag, $allowed_attributes) = explode('[', $tag);
+            $allowed_attributes = explode('|', trim($allowed_attributes, ']'));
+            foreach($allowed_attributes as $key => $attribute) {
+                $settings_array[$tag][$attribute] = $attribute;
+            }
           }
         }
         $valid_elements = array();
