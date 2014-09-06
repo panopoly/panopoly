@@ -358,8 +358,17 @@ function theme_panopoly_spotlight_view($variables) {
     $image = (object) $variables['items'];
   }
 
+  $image_markup = theme('image_style', array('style_name' => $settings['image_style'], 'path' => $image->uri, 'alt' => $alt));
+
   $output = '<div id="' . 'panopoly-spotlight-' . $variables['delta'] . '" class="' . 'panopoly-spotlight' . '">';
-  $output .= theme('image_style', array('style_name' => $settings['image_style'], 'path' => $image->uri, 'alt' => $alt));
+
+  if ($link) {
+    $output .= l($image_markup, $link, array('html' => TRUE));
+  }
+  else {
+    $output .= $image_markup;
+  }
+
   $output .= '<div class="panopoly-spotlight-wrapper">';
   if (!empty($title) || !empty($link)) {
     if (empty($title)) {
