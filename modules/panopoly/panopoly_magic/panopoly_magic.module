@@ -727,7 +727,12 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   if ($view_handler->options['row_plugin'] == 'fields') {
     // Set to default view settings if there isn't one.
     if (empty($conf['view_settings'])) {
-      $conf['view_settings'] = 'fields';
+      if ($form_state['view']->style_plugin->plugin_name == 'table') {
+        $conf['view_settings'] = 'table';
+      }
+      else {
+        $conf['view_settings'] = 'fields';
+      }
     }
 
     // Deal with legacy 'nodes' and others (such as 'files') view settings so
@@ -778,8 +783,12 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   // Get view modes for entity
   $view_modes = panopoly_magic_view_mode_options(panopoly_magic_get_entity_type($form_state['view']));
 
-  $options_default_view_mode = 'teaser';
-  if(!array_key_exists($options_default_view_mode, $view_modes)){
+  // Get the default view mode.
+  $options_default_view_mode = 'full';
+  if (isset($form_state['view']->style_plugin->display->display_options['row_options']['view_mode'])) {
+    $options_default_view_mode = $form_state['view']->style_plugin->display->display_options['row_options']['view_mode'];
+  }
+  if (!array_key_exists($options_default_view_mode, $view_modes)){
     $options_default_view_mode = current(array_keys($view_modes));
   }
 
@@ -787,7 +796,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   $form['content_settings']['view_mode'] = array(
     '#type' => 'radios',
     '#options' => $view_modes,
-    '#default_value' => $conf['view_mode'] ? $conf['view_mode'] : $options_default_view_mode,
+    '#default_value' => !empty($conf['view_mode']) ? $conf['view_mode'] : $options_default_view_mode,
     '#states' => array(
       'visible' => array(
         ':input[name="view_settings"]' => array('value' => 'rendered_entity'),
@@ -1140,14 +1149,11 @@ function panopoly_magic_views_pre_view(&$view) {
       $view->build_info['title'] = $conf['widget_title']; 
     }
 
-    // Set to default view settings if there isn't one.
-    if (empty($conf['view_settings'])) {
-      $conf['view_settings'] = 'fields';
-    }
-
     // Deal with legacy 'nodes' and others (such as 'files') view settings so
     // that other entity types can be included.
-    $conf['view_settings'] = panopoly_magic_convert_view_settings($conf['view_settings']);
+    if (!empty($conf['view_settings'])) {
+      $conf['view_settings'] = panopoly_magic_convert_view_settings($conf['view_settings']);
+    }
 
     // Set the style plugin to a table style.
     // Determine that this was previously a field view, which has been overridden to a node view in the pane config.
