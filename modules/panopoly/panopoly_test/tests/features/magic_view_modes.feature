@@ -39,4 +39,7 @@ Feature: Panopoly Magic respects entity view configuration
       And I click "View panes" in the "CTools modal" region
       And I click "View: Magic View Modes: Fields" in the "CTools modal" region
     Then I should see "Display Settings"
-
+      And I should not see "Content Settings"
+    When I select the radio button "Content"
+    Then I should see "Content Settings"
+      And the "Teaser " radio button should be set to "Teaser "
