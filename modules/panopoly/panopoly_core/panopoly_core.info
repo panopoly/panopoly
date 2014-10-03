@@ -50,6 +50,7 @@ features[defaultconfig][] = strongarm:panels_page_allowed_layouts
 features[defaultconfig][] = strongarm:panels_page_allowed_types
 features[defaultconfig][] = strongarm:panels_page_default
 features[defaultconfig][] = strongarm:pathauto_taxonomy_term_panopoly_categories_pattern
+features[defaultconfig][] = strongarm:pathauto_update_action
 features[defaultconfig][] = user_default_permissions:administer panels styles
 features[defaultconfig][] = user_default_permissions:change layouts in place editing
 features[defaultconfig][] = user_default_permissions:use page manager
