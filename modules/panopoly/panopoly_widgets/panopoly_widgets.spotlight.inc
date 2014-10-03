@@ -169,16 +169,18 @@ function panopoly_widgets_field_formatter_view($entity_type, $entity, $field, $i
 
   // Assemble the tabs header
   $header = '<div class="panopoly-spotlight-buttons-wrapper" data-rotation-time="' . $duration * 1000 . '">';
-  $header .= '<ul>';
-  foreach ($items as $delta => $item_data) {
-    $header .= '<li>' . '<a href="#panopoly-spotlight-' . $delta . '">' . ($delta+1) . '</a></li>';
-  }
-  $header .= '</ul>';
+  if (count($items) > 1) {
+    $header .= '<ul>';
+    foreach ($items as $delta => $item_data) {
+      $header .= '<li>' . '<a href="#panopoly-spotlight-' . $delta . '">' . ($delta+1) . '</a></li>';
+    }
+    $header .= '</ul>';
 
-  if (variable_get('panopoly_widgets_spotlight_pause_play_buttons', 1)) {
-    $header .= '<div class="panopoly-spotlight-function-buttons">';
-    $header .= '<a href="#" class="panopoly-spotlight-pause-play">' . t('Pause') . '</a>';
-    $header .= '</div>';
+    if (variable_get('panopoly_widgets_spotlight_pause_play_buttons', 1)) {
+      $header .= '<div class="panopoly-spotlight-function-buttons">';
+      $header .= '<a href="#" class="panopoly-spotlight-pause-play">' . t('Pause') . '</a>';
+      $header .= '</div>';
+    }
   }
   $header .= '</div>';  // class="panopoly-spotlight-buttons-wrapper"
 
