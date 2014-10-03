@@ -1,4 +1,4 @@
-  Feature: Test pathauto
+Feature: Test pathauto
   In order to get nice urls
   As a site administrator
   I need to be able to trust that pathauto works consistently
@@ -28,6 +28,9 @@
         | Title               | Completely other title |
       And I press "Save"
     Then the url should match "completely-other-title"
+    # But visiting the old URL should continue to work
+    When I visit "/content/testing-title"
+    Then the "h1" element should contain "Completely other title"
 
   @api @panopoly_admin
   Scenario: My own permalink should be kept even if changing title
