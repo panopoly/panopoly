@@ -82,7 +82,7 @@ projects[link][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[apps][version] = 1.0-beta16
+projects[apps][version] = 1.0-beta17
 projects[apps][subdir] = contrib
 
 projects[features][version] = 2.2
