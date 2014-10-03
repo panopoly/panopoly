@@ -11,6 +11,14 @@ use Drupal\Component\Utility\Random;
 use Behat\Behat\Event\StepEvent;
 
 class TestSubContext extends BehatContext implements DrupalSubContextInterface {
+
+  /**
+   * Holds a list of temporary users created by our steps.
+   *
+   * @var array
+   */
+  protected $users = array();
+
   /**
    * Initializes context.
    */
@@ -302,6 +310,21 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
   public function cleanupPrivateFiles($event) {
     if ($this->private_path_overridden) {
       variable_del('file_private_path');
+    }
+  }
+
+  /**
+   * @AfterScenario
+   *
+   * Clean up users that were created during testing
+   */
+  public function removeUsers() {
+    if(!empty($this->users)){
+      foreach ($this->users as $user) {
+        $account = user_load_by_name($user->name);
+        user_delete($account->uid);
+      }
+      $this->users = array();
     }
   }
 
