@@ -33,7 +33,6 @@ dependencies[] = transliteration
 dependencies[] = views
 dependencies[] = views_autocomplete_filters
 dependencies[] = views_content
-stylesheets[all][] = css/panopoly-fonts.css
 stylesheets[all][] = css/panopoly-dropbutton.css
 features[ctools][] = panelizer:panelizer:1
 features[ctools][] = strongarm:strongarm:1
