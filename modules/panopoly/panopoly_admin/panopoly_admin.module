@@ -97,19 +97,43 @@ function panopoly_admin_panels_pane_content_alter($content, $pane, $args, $conte
 }
 
 /**
+ * Implements hook_theme_registry_alter().
+ */
+function panopoly_admin_theme_registry_alter(&$registry) {
+  if (isset($registry['panels_add_content_modal'])) {
+    // Put our preprocess function before the default one from Panels.
+    $index = array_search('template_preprocess_panels_add_content_modal', $registry['panels_add_content_modal']['preprocess functions']);
+    if ($index !== FALSE) {
+      array_splice($registry['panels_add_content_modal']['preprocess functions'], $index, 0, 'panopoly_admin_prepreprocess_panels_add_content_modal');
+    }
+  }
+}
+
+/**
+ * Preprocess the panels_add_content_modal() theme function.
+ */
+function panopoly_admin_prepreprocess_panels_add_content_modal(&$vars) {
+  if (!variable_get('panopoly_admin_advanced_plugins', FALSE)) {
+    // Remove advanced Panes from the 'Add content' modal.
+    foreach ($vars['categories'] as $category_name => $category) {
+      foreach ($category['content'] as $pane_name => $pane) {
+        if (panopoly_admin_is_advanced_plugin($pane['title'], $category['title'])) {
+          unset($vars['categories'][$category_name]['content'][$pane_name]);
+        }
+      }
+      // If an entire category has been emptied, remove it as well.
+      if (empty($vars['categories'][$category_name]['content'])) {
+        unset($vars['categories'][$category_name]);
+      }
+    }
+  }
+}
+
+/**
  * Implementation of hook_ctools_content_subtype_alter()
  */
 function panopoly_admin_ctools_content_subtype_alter(&$subtype, &$plugin) {
-
-  // Figure out some things about each of the substypes
-  $pane_label = $subtype['title'];
   $category_label  = (is_string($subtype['category'])) ? $subtype['category'] : $subtype['category'][0];
-
-  // If we are not using advanced plugins and this is an advanced plugin then disable the pane
-  if (!variable_get('panopoly_admin_advanced_plugins', FALSE) && panopoly_admin_is_advanced_plugin($pane_label, $category_label)) {
-    $subtype['required context'] = new ctools_context_required(t('Panopoly Null'), 'string');
-    $plugin['all contexts'] = FALSE;
-  }
 
   // Switch the labeling of "Miscellaneous" to "Blocks"
   if ($category_label == 'Miscellaneous') {
@@ -562,6 +586,9 @@ function panopoly_admin_is_advanced_plugin($pane_label, $category_label) {
     'File', // support for file items that is just confusing
     'Fieldable_panels_pane', // duplicated fields for custom panes
     'Existing pages', // pages from pm existing pages module that will break the site
+
+    // TODO: this should be added via an alter hook or something!
+    'Panopoly Test Advanced',
   );
 
   // Specifically excluded panes
