@@ -371,6 +371,24 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
   }
 
   /**
+   * @Given /^Panopoly admin "Use Advanced Panel Plugins" is disabled$/
+   *
+   * Disable the "Use Advanced Panel Panes" option.
+   */
+  public function disablePanopolyAdminAdvanacedPanelPlugins() {
+    variable_set('panopoly_admin_advanced_plugins', FALSE);
+  }
+
+  /**
+   * @Given /^Panopoly admin "Use Advanced Panel Plugins" is enabled$/
+   *
+   * Enable the "Use Advanced Panel Panes" option.
+   */
+  public function enablePanopolyAdminAdvanacedPanelPlugins() {
+    variable_set('panopoly_admin_advanced_plugins', TRUE);
+  }
+
+  /**
    * @Given /^(?:|I )wait(?:| for) (\d+) seconds?$/
    *
    * Wait for the given number of seconds. ONLY USE FOR DEBUGGING!
