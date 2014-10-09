@@ -18,7 +18,7 @@ projects[panels][subdir] = contrib
 projects[panels][patch][2283719] = http://drupal.org/files/issues/panels-icon-text-renderer-2283719-1.patch
 projects[panels][patch][2280797] = http://drupal.org/files/issues/panels-ipe-keyboard-focus-2280797-2.patch
 
-projects[panels_breadcrumbs][version] = 2.1
+projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
 
 projects[panelizer][version] = 3.1
