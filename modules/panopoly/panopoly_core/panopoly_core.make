@@ -117,7 +117,7 @@ projects[migrate_extras][subdir] = "contrib"
 projects[devel][version] = 1.5
 projects[devel][subdir] = contrib
 
-projects[distro_update][version] = 1.0-beta3
+projects[distro_update][version] = 1.0-beta4
 projects[distro_update][subdir] = contrib
 
 projects[features_override][version] = 2.0-rc2
