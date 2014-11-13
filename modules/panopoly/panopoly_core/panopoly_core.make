@@ -49,6 +49,7 @@ projects[views_autocomplete_filters][patch][2277453] = http://drupal.org/files/i
 
 projects[views_bulk_operations][version] = 3.2
 projects[views_bulk_operations][subdir] = contrib
+projects[views_bulk_operations][patch][2192775] = http://drupal.org/files/issues/views-bulk-operations-2192775-1_0.patch
 
 ; The Usual Suspects
 
