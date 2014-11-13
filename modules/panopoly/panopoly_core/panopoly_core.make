@@ -46,6 +46,8 @@ projects[views][patch][2037469] = http://drupal.org/files/views-exposed-sorts-20
 projects[views_autocomplete_filters][version] = 1.1
 projects[views_autocomplete_filters][subdir] = contrib
 projects[views_autocomplete_filters][patch][2277453] = http://drupal.org/files/issues/ViewsAutocompleteFilters-no_results_on_some_environments-2277453-1.patch
+projects[views_autocomplete_filters][patch][2374709] = http://www.drupal.org/files/issues/views_autocomplete_filters-cache-2374709-2.patch
+projects[views_autocomplete_filters][patch][2317351] = http://www.drupal.org/files/issues/views_autocomplete_filters-content-pane-2317351-4.patch
 
 projects[views_bulk_operations][version] = 3.2
 projects[views_bulk_operations][subdir] = contrib
