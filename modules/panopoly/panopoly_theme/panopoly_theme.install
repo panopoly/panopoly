@@ -44,3 +44,15 @@ function panopoly_theme_update_7001(&$sandbox) {
   // Flush the Theme Data
   system_rebuild_theme_data();
 }
+
+/**
+ * Enable radix_layouts and clear layout/theme caches.
+ */
+function panopoly_theme_update_7002() {
+  module_enable(array('radix_layouts'));
+
+  // Clear caches so that we can find the Radix layouts and make the Panopoly
+  // layouts stubs.
+  cache_clear_all('ctools_plugin_files:panels:layouts', 'cache');
+  system_rebuild_theme_data();
+}
