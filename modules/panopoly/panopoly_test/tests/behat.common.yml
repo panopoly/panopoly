@@ -20,12 +20,12 @@ default:
         # The region on panopoly_page where the body appears (frequently
         # customized on child distributions).
         Panopoly Page Content: '.bryant-content'
-        # Regions for Panopoly Layouts
-        Boxton Content: ".boxton-content"
-        Bryant Content: ".bryant-content"
-        Bryant Sidebar: ".bryant-sidebar"
-        Bryant Flipped Content: ".bryant-flipped-content"
-        Bryant Flipped Sidebar: ".bryant-flipped-sidebar"
+        # Regions for Radix Layouts
+        Boxton Content: ".boxton .radix-layouts-content"
+        Bryant Content: ".bryant .radix-layouts-content"
+        Bryant Sidebar: ".bryant .radix-layouts-sidebar"
+        Bryant Flipped Content: ".bryant-flipped .radix-layouts-content"
+        Bryant Flipped Sidebar: ".bryant-flipped .radix-layouts-sidebar"
         # For Panels / Panopoly specific regions.
         CTools modal: "#modalContent"
         Live preview: "fieldset.widget-preview"
