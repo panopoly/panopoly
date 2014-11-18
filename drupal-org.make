@@ -71,5 +71,5 @@ projects[panopoly_test][version] = 1.x-dev
 projects[panopoly_test][subdir] = panopoly
 projects[panopoly_test][type] = module
 projects[panopoly_test][download][type] = git
-projects[panopoly_test][download][revision] = 7772a1c
+projects[panopoly_test][download][revision] = 3d1e027
 projects[panopoly_test][download][branch] = 7.x-1.x
