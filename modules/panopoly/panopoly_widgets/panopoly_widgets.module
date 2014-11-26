@@ -425,31 +425,3 @@ function panopoly_widgets_menu_block_tree_alter($tree, $config) {
     }
   }
 }
-
-/**
- * Implements hook_field_default_field_instances_alter().
- */
-function panopoly_widgets_field_default_field_instances_alter(&$instances) {
-  // If the linkit module isn't present, then we alter the field settings for
-  // the 'Add image' widget to disable linkit on the 'Link' field.
-  if (isset($instances['fieldable_panels_pane-image-field_basic_image_link'])) {
-    if (!module_exists('linkit')) {
-      $instances['fieldable_panels_pane-image-field_basic_image_link']['settings']['linkit']['enable'] = 0;
-      $instances['fieldable_panels_pane-image-field_basic_image_link']['settings']['linkit']['profile'] = NULL;
-    }
-  }
-}
-
-/**
- * Implements hook_fieldable_panels_pane_view().
- */
-function panopoly_widgets_fieldable_panels_pane_view($entity, $view_mode, $langcode) {
-  if ($entity->bundle == 'image') {
-    // Render the image in a link if one is given.
-    if (!empty($entity->field_basic_image_link[LANGUAGE_NONE][0]['url'])) {
-      $entity->content['field_basic_image_image'][0]['#path'] = array(
-        'path' => $entity->field_basic_image_link[LANGUAGE_NONE][0]['display_url'],
-      );
-    }
-  }
-}
