@@ -372,10 +372,7 @@ function theme_panopoly_spotlight_view($variables) {
   }
 
   $output .= '<div class="panopoly-spotlight-wrapper">';
-  if (!empty($title) || !empty($link)) {
-    if (empty($title)) {
-      $title = t('Link');
-    }
+  if (!empty($title)) {
     $output .= '<h3 class="panopoly-spotlight-label">' . (empty($link) ? check_plain($title) : l($title, $link)) . '</h3>';
   }
   if (!empty($description)) {
