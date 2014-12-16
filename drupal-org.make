@@ -30,7 +30,7 @@ projects[panopoly_magic][download][branch] = 7.x-1.x
 projects[panopoly_widgets][version] = 1.x-dev
 projects[panopoly_widgets][subdir] = panopoly
 projects[panopoly_widgets][download][type] = git
-projects[panopoly_widgets][download][revision] = ef8b460
+projects[panopoly_widgets][download][revision] = c02abd2
 projects[panopoly_widgets][download][branch] = 7.x-1.x
 
 projects[panopoly_admin][version] = 1.x-dev
