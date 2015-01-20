@@ -88,7 +88,7 @@ projects[link][subdir] = contrib
 projects[apps][version] = 1.0-beta20
 projects[apps][subdir] = contrib
 
-projects[features][version] = 2.2
+projects[features][version] = 2.3
 projects[features][subdir] = contrib
 
 projects[strongarm][version] = 2.0
