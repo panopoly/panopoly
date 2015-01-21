@@ -274,3 +274,16 @@ function panopoly_widgets_update_7009() {
 function panopoly_widgets_update_7010() {
   features_revert(array('panopoly_widgets' => array('field_base', 'field_instance')));
 }
+
+/**
+ * Update the allowed file extensions in File widgets.
+ */
+function panopoly_widgets_update_7011() {
+  if ($file_instance = field_info_instance('fieldable_panels_pane', 'field_basic_file_file', 'basic_file')) {
+    // If the file extensions match the old default, then we set them to the new default.
+    if ($file_instance['settings']['file_extensions'] == 'pdf txt') {
+      $file_instance['settings']['file_extensions'] = PANOPOLY_WIDGETS_FILE_EXTENSIONS_DEFAULT;
+      field_update_instance($file_instance);
+    }
+  }
+}
