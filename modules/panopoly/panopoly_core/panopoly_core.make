@@ -7,6 +7,7 @@ core = 7.x
 
 projects[ctools][version] = 1.6
 projects[ctools][subdir] = contrib
+projects[ctools][patch][2416589] = http://www.drupal.org/files/issues/ctools-illegal-offset-views-add-contextual-links-2416589-1.patch
 
 projects[panels][version] = 3.5
 projects[panels][subdir] = contrib
