@@ -60,3 +60,46 @@ Feature: Add content item
       And I wait for the Panels IPE to deactivate
     Then I should see "Test Widget Title"
      And I should not see "Test Page 1"
+
+  @api @javascript @panopoly_widgets
+  Scenario: Content item widget continues to work after renaming content
+    Given I am logged in as a user with the "administrator" role
+      And Panopoly magic live previews are disabled
+      And "panopoly_test_page" nodes:
+      | title       | body      | created            | status |
+      | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
+      And I am viewing a landing page
+    When I customize this page with the Panels IPE
+      And I click "Add new pane"
+      And I click "Add content item" in the "CTools modal" region
+    Then I should see "Configure new Add content item"
+    When I select "Test Page" from "exposed[type]"
+      And I fill in the following:
+      | exposed[title] | Test Page 1       |
+      | widget_title   | Test Widget Title |
+      And I press "Save" in the "CTools modal" region
+      And I press "Save"
+      And I wait for the Panels IPE to deactivate
+    Then I should see "Test Widget Title"
+      And I should see "Test Page 1"
+    When follow "Test Page 1"
+      And I click "Edit" in the "Tabs" region
+      And I fill in "Test Page 2" for "Title"
+      And I press "edit-submit"
+    # @todo: Find a better way to get back to the original page.
+    When I move backward one page
+      And I move backward one page
+      And I move backward one page
+      And I reload the page
+    Then I should see "Test Widget Title"
+      And I should see "Test Page 2"
+    # Check that the edit form shows the new title now too.
+    When I customize this page with the Panels IPE
+      And I click "Settings" in the "Boxton Content" region
+    Then the "exposed[title]" field should contain "Test Page 2"
+    # Make sure that saving without changes works OK.
+    When I press "Save" in the "CTools modal" region
+      And I press "Save"
+      And I wait for the Panels IPE to deactivate
+    Then I should see "Test Widget Title"
+      And I should see "Test Page 2"
