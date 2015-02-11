@@ -488,3 +488,63 @@ function panopoly_widgets_views_pre_render(&$view) {
     }
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_widgets_form_views_content_views_panes_content_type_edit_form_alter(&$form, &$form_state) {
+  $view = $form_state['view'];
+  if ($view->name == 'panopoly_widgets_general_content' && $view->current_display == 'piece_of_content') {
+    $exposed =& $form['exposed'];
+
+    // If the user updated panopoly_widgets, but hasn't run the update function
+    // panopoly_wigets_update_7012() yet, then bail out because this code can
+    // actually break this widget entirely.
+    if (empty($exposed['filter-nid'])) {
+      return;
+    }
+
+    // If we have a value for NID, then we use that to set the title and then
+    // clear out and hide the NID. This allows the user to chose the node using
+    // the title autocomplete.
+    if (!empty($exposed['filter-nid']['nid']['#default_value'])) {
+      if ($node = node_load($exposed['filter-nid']['nid']['#default_value'])) {
+        $form_state['original_nid'] = $node->nid;
+        $form_state['original_title'] = $node->title;
+        $exposed['filter-title']['title']['#default_value'] = $node->title;
+      }
+    }
+    $exposed['filter-nid']['nid']['#default_value'] = '';
+    $exposed['filter-nid']['#access'] = FALSE;
+
+    // Add a submit callback that will convert back from the title to the NID.
+    array_unshift($form['#submit'], '_panopoly_widgets_content_item_form_submit');
+  }
+}
+
+/**
+ * Submission callback for 'Content Item' widget's exposed form.
+ */
+function _panopoly_widgets_content_item_form_submit($form, &$form_state) {
+  $exposed =& $form_state['values']['exposed'];
+  if ($exposed['title'] != $form_state['original_title']) {
+    // If the title has changed, we need to load the node with that title, set
+    // the NID, and then clear out the title. We use the View itself to query
+    // so that the result is consistent with autocomplete.
+    $view = views_get_view('panopoly_widgets_general_content');
+    $view->set_display('piece_of_content');
+    $view->set_exposed_input($exposed);
+    $view->pre_execute();
+    $view->execute($view->current_display);
+    $view->post_execute();
+    if (count($view->result) > 0) {
+      $exposed['nid'] = $view->result[0]->nid;
+      $exposed['title'] = '';
+    }
+  }
+  else {
+    // If the title hasn't change, we just revert back to the original NID.
+    $exposed['nid'] = $form_state['original_nid'];
+    $exposed['title'] = '';
+  }
+}
