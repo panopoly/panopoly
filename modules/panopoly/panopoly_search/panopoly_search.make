@@ -16,6 +16,7 @@ projects[search_api_solr][subdir] = contrib
 
 projects[search_api_db][version] = 1.4
 projects[search_api_db][subdir] = contrib
+projects[search_api_db][patch][2428693] = https://www.drupal.org/files/issues/entity-type-indhold-doest-specify-a-type-for-the-nid-property-2428693-2.patch
 
 ; Solr PHP Client Library
 
