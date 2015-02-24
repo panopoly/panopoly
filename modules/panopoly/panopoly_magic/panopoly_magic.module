@@ -566,7 +566,7 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
 
   // Customize the view mode setting
   if (!empty($form['view_mode'])) {
-    unset($form['view_mode']['#options']['token']);
+    $form['view_mode']['#options'] = panopoly_magic_view_mode_options('fieldable_panels_pane');
     if (count($form['view_mode']['#options']) < 2) {
       $form['view_mode']['#type'] = 'value';
       $form['view_mode']['#value'] = reset($form['view_mode']['#options']);
