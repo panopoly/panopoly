@@ -134,7 +134,8 @@ before_tests() {
   # If we're an upgrade test, run the upgrade process.
   if [[ "$UPGRADE" != none ]]; then
     header Upgrading to latest version
-    cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/ && drush updb --yes
+    cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/
+    run_test drush updb --yes
     drush cc all
   fi
 
