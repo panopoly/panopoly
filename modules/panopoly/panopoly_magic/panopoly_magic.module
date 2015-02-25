@@ -569,7 +569,7 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
     $form['view_mode']['#options'] = panopoly_magic_view_mode_options('fieldable_panels_pane');
     if (count($form['view_mode']['#options']) < 2) {
       $form['view_mode']['#type'] = 'value';
-      $form['view_mode']['#value'] = reset($form['view_mode']['#options']);
+      $form['view_mode']['#value'] = key($form['view_mode']['#options']);
     }
     $form['widget_settings']['view_mode'] = $form['view_mode'];
     unset($form['view_mode']);
