@@ -57,7 +57,7 @@ projects[pathauto][patch][936222] = http://drupal.org/files/issues/pathauto-pers
 projects[token][version] = 1.5
 projects[token][subdir] = contrib
 
-projects[entity][version] = 1.5
+projects[entity][version] = 1.6
 projects[entity][subdir] = contrib
 
 projects[libraries][version] = 2.2
