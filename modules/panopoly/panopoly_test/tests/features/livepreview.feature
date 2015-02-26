@@ -140,3 +140,40 @@ Feature: Live preview
     When I fill in "Description" with "Testing description"
       And I wait for live preview to finish
     Then I should see "Image field is required"
+
+  # @todo: We need to test that clicking the WYSIWYG buttons (without typing!)
+  #        causes the live preview to update.
+  @api @javascript @panopoly_magic @panopoly_widgets @panopoly_wysiwyg
+  Scenario: Automatic live preview should update when making changes in the WYSIWYG
+    Given I am logged in as a user with the "administrator" role
+      And Panopoly magic live previews are automatic
+      And I am viewing a landing page
+    When I customize this page with the Panels IPE
+      And I click "Add new pane"
+      And I click "Add text" in the "CTools modal" region
+    Then I should see "Configure new Add text"
+    # Try with TinyMCE
+    When I type "Testing WYSIWYG preview" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
+      And I wait for live preview to finish
+    Then I should see "Testing WYSIWYG preview" in the "Live preview" region
+    # Try with MarkItUp
+    When I select "HTML" from "Editor"
+      And I type "Using HTML editor" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
+      And I wait for live preview to finish
+    Then I should see "Using HTML editor" in the "Live preview" region
+    # @todo: This isn't really testing what we want because it's typing after
+    #        clicking the "Bold" button.
+    When I click the "Bold" button in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
+      And I type "This is strong" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
+      And I wait for live preview to finish
+    Then I should see "This is strong" in the "strong" element in the "Live preview" region
+    # Try switching to plain text and make sure this doesn't break anything.
+    When I select "Plain text" from "Editor"
+      And I fill in "edit-field-basic-text-text-und-0-value" with "Testing plain text"
+      And I wait for live preview to finish
+    Then I should see "Testing plain text" in the "Live preview" region
+    # And verify that switching back to TinyMCE will still work.
+    When I select "WYSIWYG" from "Editor"
+      And I type "Testing WYSIWYG again" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
+      And I wait for live preview to finish
+    Then I should see "Testing WYSIWYG again" in the "Live preview" region
