@@ -1,3 +1,7 @@
+Panopoly Demo 7.x-1.18, 2015-02-26
+---------------------------
+- Update Panopoly Demo content import to Migrate 2.7 format.
+
 Panopoly Demo 7.x-1.17, 2015-02-18
 ---------------------------
 - No changes since last release.
