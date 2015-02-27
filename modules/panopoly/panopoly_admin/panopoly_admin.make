@@ -43,7 +43,7 @@ projects[navbar][patch][2050559] = http://drupal.org/files/z-index-heart-cools-2
 projects[breakpoints][version] = 1.3
 projects[breakpoints][subdir] = contrib
 
-projects[admin_menu][version] = 3.0-rc4
+projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir] = contrib
 
 projects[jquery_update][version] = 2.3
