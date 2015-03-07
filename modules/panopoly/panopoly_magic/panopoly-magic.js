@@ -27,13 +27,34 @@
   // Used to make sure we don't wrap Drupal.wysiwygAttach() more than once.
   var wrappedWysiwygAttach = false;
 
-  function triggerSubmit() {
-    // 'this' references the form element.
-    var $this = $(this), preview_widget = $('#panopoly-form-widget-preview');
+  // Triggers the CTools autosubmit on the given form. If timeout is passed,
+  // it'll set a timeout to do the actual submit rather than calling it directly
+  // and return the timer handle.
+  function triggerSubmit(form, timeout) {
+    var $form = $(form),
+        preview_widget = $('#panopoly-form-widget-preview'),
+        submit;
     if (!preview_widget.hasClass('panopoly-magic-loading')) {
       preview_widget.addClass('panopoly-magic-loading');
-      $this.find('.ctools-auto-submit-click').click();
+      submit = function () {
+        $form.find('.ctools-auto-submit-click').click();
+      };
+      if (typeof timeout === 'number') {
+        return setTimeout(submit, timeout);
+      }
+      else {
+        submit();
+      }
     }
+  }
+
+  // Used to cancel a submit. It'll clear the timer and the class marking the
+  // loading operation.
+  function cancelSubmit(form, timer) {
+    var $form = $(form),
+        preview_widget = $('#panopoly-form-widget-preview');
+    preview_widget.removeClass('panopoly-magic-loading');
+    clearTimeout(timer);
   }
 
   function onWysiwygChangeFactory(editorId) {
@@ -43,8 +64,8 @@
 
       if (textarea.hasClass('panopoly-textarea-autosubmit')) {
         // Wait a second and then submit.
-        clearTimeout(timer); 
-        timer = setTimeout(function () { triggerSubmit.call(form); }, 1000);
+        cancelSubmit(form, timer); 
+        timer = triggerSubmit(form, 1000);
       }
     };
   }
@@ -142,23 +163,15 @@
         var $element;
         $element = $('.widget-preview .pane-title', context);
 
-        clearTimeout(timer);
+        cancelSubmit(e.target.form, timer);
 
         // Filter out discarded keys.
         if (e.type !== 'blur' && $.inArray(e.keyCode, discardKeyCode) > 0) {
           return;
         }
 
-        // Automatically submit the field on blur. This won't happen if title
-        // markup is already present.
-        if (e.type == 'blur') {
-          triggerSubmit.call(e.target.form)
-        }
-        // Otherwise, just trigger a timer to submit the form a second after
-        // the last activity.
-        else {
-          timer = setTimeout(function () { triggerSubmit.call(e.target.form); }, 1000);
-        }
+        // Set a timer to submit the form a second after the last activity.
+        timer = triggerSubmit(e.target.form, 1000);
       });
 
       // Handle WYSIWYG fields.
@@ -196,9 +209,7 @@
         if (e.type === 'blur' || e.keyCode === 13) {
           // We defer the submit call so that it happens after autocomplete has
           // had a chance to fill the input with the selected value.
-          setTimeout(function () {
-            triggerSubmit.call(e.target.form);
-          }, 0);
+          triggerSubmit(e.target.form, 0);
         }
       });
 
