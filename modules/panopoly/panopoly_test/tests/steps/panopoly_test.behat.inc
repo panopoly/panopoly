@@ -239,6 +239,52 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
   }
 
   /**
+   * @Then /^I should see an image in the "([^"]*)" region$/
+   *
+   * Attempts to determine if the image is broken or not.
+   */
+  public function assertValidImageRegion($region) {
+    $regionObj = $this->getMainContext()->getRegion($region);
+    $elements = $regionObj->findAll('css', 'img');
+    if (empty($elements)) {
+      throw new \Exception(sprintf('No image was not found in the "%s" region on the page %s', $region, $this->getSession()->getCurrentUrl()));
+    }
+
+    if ($src = $elements[0]->getAttribute('src')) {
+      $params = array('http' => array('method' => 'HEAD'));
+      $context = stream_context_create($params);
+      $fp = @fopen($src, 'rb', FALSE, $context);
+      if (!$fp) {
+        throw new \Exception(sprintf('Unable to download <img src="%s"> in the "%s" region on the page %s', $src, $region, $this->getSession()->getCurrentUrl()));
+      }
+
+      $meta = stream_get_meta_data($fp);
+      fclose($fp);
+      if ($meta === FALSE) {
+        throw new \Exception(sprintf('Error reading from <img src="%s"> in the "%s" region on the page %s', $src, $region, $this->getSession()->getCurrentUrl()));
+      }
+
+      $wrapper_data = $meta['wrapper_data'];
+      $found = FALSE;
+      if (is_array($wrapper_data)) {
+        foreach ($wrapper_data as $header) {
+          if (substr(strtolower($header), 0, 19) == 'content-type: image') {
+            $found = TRUE;
+          }
+        }
+      }
+
+      if (!$found) {
+        throw new \Exception(sprintf('Not a valid image <img src="%s"> in the "%s" region on the page %s', $src, $region, $this->getSession()->getCurrentUrl()));
+      }
+    }
+    else {
+      throw new \Exception(sprintf('No image had no src="..." attribute in the "%s" region on the page %s', $region, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+
+  /**
    * @Then /^I should see the image alt "(?P<alt>(?:[^"]|\\")*)" in the "(?P<region>[^"]*)"(?:| region)$/
    */
   public function assertAltRegion($alt, $region) {
