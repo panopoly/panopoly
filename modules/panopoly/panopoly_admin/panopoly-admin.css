@@ -276,7 +276,7 @@
   width: 100%;
 }
 
-#node-edit .form-item-field-featured-image-und-0 > label {
+#node-edit .form-item-field-featured-image-und-0 .description {
   display: none;
 }
 
