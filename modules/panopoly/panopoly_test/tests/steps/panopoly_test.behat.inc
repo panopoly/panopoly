@@ -538,4 +538,11 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
     }
   }
 
+  /**
+   * @Given /^the dblog is empty$/
+   */
+  public function clearDblog() {
+    db_delete('watchdog')->execute();
+  }
+
 }
