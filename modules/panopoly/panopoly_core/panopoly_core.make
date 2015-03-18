@@ -5,10 +5,8 @@ core = 7.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 1.6
+projects[ctools][version] = 1.7
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2416589] = http://www.drupal.org/files/issues/ctools-illegal-offset-views-add-contextual-links-2416589-1.patch
-projects[ctools][patch][2119357] = http://www.drupal.org/files/issues/2119357-6_0.patch
 
 projects[panels][version] = 3.5
 projects[panels][subdir] = contrib
