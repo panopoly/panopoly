@@ -539,6 +539,31 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
   }
 
   /**
+   * @Then /^the "([^"]*)" select should be set to "([^"]*)"$/
+   */
+  public function theSelectShouldBeSetTo($identifier, $value) {
+    $select = $this->getSession()->getPage()->findField($identifier);
+    if (empty($select)) {
+      throw new \Exception(sprintf('We couldn\'nt find "%s" on the page', $identifier));
+    }
+    $options = $select->findAll('xpath', '//option[@selected="selected"]');
+    if (empty($select)) {
+      throw new \Exception(sprintf('The select "%s" doesn\'t have any options selected', $identifier));
+    }
+
+    $found = FALSE;
+    foreach ($options as $option) {
+      if ($option->getText() === $value) {
+        $found = TRUE;
+        break;
+      }
+    }
+    if (!$found) {
+      throw new \Exception(sprintf('The select "%s" doesn\'t have the option "%s" selected', $identifier, $value));
+    }
+  }
+
+  /**
    * @Given /^the dblog is empty$/
    */
   public function clearDblog() {
