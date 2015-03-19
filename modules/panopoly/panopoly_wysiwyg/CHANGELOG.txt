@@ -1,5 +1,9 @@
-Panopoly WYSIWYG 7.x-1.19, 2015-03-18 ------------------------------ -
-  Livepreview.feature is super slow.Panopoly WYSIWYG 7.x-1.18, 2015-02-26
+Panopoly WYSIWYG 7.x-1.19, 2015-03-19
+-------------------------------
+- Updated CHANGELOG.txt for 7.x-1.19 release.
+- Livepreview.feature is super slow.
+
+Panopoly WYSIWYG 7.x-1.18, 2015-02-26
 ------------------------------
 - No changes since last release.
 
