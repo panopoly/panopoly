@@ -1,3 +1,15 @@
+Panopoly 7.x-1.20, 2015-03-25
+----------------------
+- Update Panopoly Pages for Issue #2456635 by candelas, dsnopek:
+  SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'rid' cannot be
+  null.
+- Intermittent test failures due to Chrome errors.
+- Update Panopoly Admin for Issue #2429327 by B-Prod: The alteration of node
+  options may conflict with other forms.
+- CHANGELOG.txt updates for 1.19 went wrong.
+- Start testing upgrades from the 1.19 release.
+- Restored drupal-org.make after the 1.19 release.
+
 Panopoly 7.x-1.19, 2015-03-19
 -----------------------
 - Getting ready for the 1.19 release.
