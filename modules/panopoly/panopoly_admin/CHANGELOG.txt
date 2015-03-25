@@ -1,3 +1,8 @@
+Panopoly Admin 7.x-1.20, 2015-03-25
+----------------------------
+- The alteration of node options may conflict with other forms.
+- CHANGELOG.txt updates for 1.19 went wrong.
+
 Panopoly Admin 7.x-1.19, 2015-03-19
 -----------------------------
 - Updated CHANGELOG.txt for 7.x-1.19 release.
