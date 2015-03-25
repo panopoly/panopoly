@@ -1,3 +1,9 @@
+Panopoly Pages 7.x-1.20, 2015-03-25
+----------------------------
+- SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'rid' cannot be
+  null.
+- CHANGELOG.txt updates for 1.19 went wrong.
+
 Panopoly Pages 7.x-1.19, 2015-03-19
 -----------------------------
 - Updated CHANGELOG.txt for 7.x-1.19 release.
