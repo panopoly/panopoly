@@ -29,6 +29,7 @@ projects[caption_filter][subdir] = contrib
 projects[caption_filter][download][type] = git
 projects[caption_filter][download][revision] = b8097ee
 projects[caption_filter][download][branch] = 7.x-1.x
+projects[caption_filter][patch][2455253] = https://www.drupal.org/files/issues/caption_filter-single-quotes-to-entities.patch
 
 ; Include our Editors
 
