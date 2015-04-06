@@ -479,6 +479,11 @@ img[!src|title|alt|width|height|hspace|vspace],',
           'filter_url_length' => 72,
         ),
       ),
+      'panopoly_images_fix_captions' => array(
+        'weight' => 0,
+        'status' => 1,
+        'settings' => array(),
+      ),
     ),
   );
 
