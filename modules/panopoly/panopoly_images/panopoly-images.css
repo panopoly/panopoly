@@ -1,7 +1,15 @@
 /**
  * Default image styling
  */
-img {
+img.panopoly-image-full,
+img.panopoly-image-half,
+img.panopoly-image-quarter,
+img.panopoly-image-featured,
+img.panopoly-image-thumbnail
+img.panopoly-image-square,
+img.panopoly-image-original,
+img.panopoly-image-spotlight,
+img.panopoly-image-video {
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
