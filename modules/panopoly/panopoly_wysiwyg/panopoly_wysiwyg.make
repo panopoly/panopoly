@@ -20,6 +20,7 @@ projects[wysiwyg_filter][subdir] = contrib
 
 projects[linkit][version] = 3.3
 projects[linkit][subdir] = contrib
+projects[linkit][patch][2115763] = http://drupal.org/files/issues/linkit-2115763-18-text-format-switching.patch
 
 projects[image_resize_filter][version] = 1.14
 projects[image_resize_filter][subdir] = contrib
