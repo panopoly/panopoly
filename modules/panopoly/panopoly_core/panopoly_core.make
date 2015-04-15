@@ -88,7 +88,7 @@ projects[apps][version] = 1.0-beta20
 projects[apps][subdir] = contrib
 projects[apps][patch][2430915] = https://www.drupal.org/files/issues/apps-drush-default-apps-2430915-1.patch
 
-projects[features][version] = 2.3
+projects[features][version] = 2.5
 projects[features][subdir] = contrib
 
 projects[strongarm][version] = 2.0
