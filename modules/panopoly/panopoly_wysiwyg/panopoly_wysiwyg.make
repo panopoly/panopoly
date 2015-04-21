@@ -35,7 +35,7 @@ projects[caption_filter][patch][2455253] = https://www.drupal.org/files/issues/c
 ; Include our Editors
 
 libraries[tinymce][download][type] = get
-libraries[tinymce][download][url] = http://download.moxiecode.com/tinymce/tinymce_3.5.8.zip
+libraries[tinymce][download][url] = http://download.moxiecode.com/tinymce/tinymce_3.5.11.zip
 libraries[tinymce][patch][1561882] = http://drupal.org/files/1561882-cirkuit-theme-tinymce-3.5.8.patch
 
 libraries[markitup][download][type] = git
