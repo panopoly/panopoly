@@ -24,7 +24,7 @@ PANOPOLY_COMPONENT_MAP = {
     'Theme': 'panopoly_theme',
     'Users': 'panopoly_users',
     'Widgets': 'panopoly_widgets',
-    'WYSIWYG': 'panopoly_wyiswyg',
+    'WYSIWYG': 'panopoly_wysiwyg',
 }
 
 PANOPOLY_GITHUB_REPO = 'git@github.com:panopoly/panopoly.git'
