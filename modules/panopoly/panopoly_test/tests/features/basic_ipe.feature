@@ -11,7 +11,7 @@ Feature: Make basic changes with the IPE
   @api @javascript
   Scenario: Change layout
     When I change layout with the Panels IPE
-      And I click "Radix Phelan"
+      And I click "Phelan"
       And I press "Save" in the "CTools modal" region
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing title"
