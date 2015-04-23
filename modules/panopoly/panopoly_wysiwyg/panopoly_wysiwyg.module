@@ -421,6 +421,11 @@ function _panopoly_wysiwyg_process_caption_filter($text, $filter, $format, $lang
     }
     $caption->setAttribute('class', $caption_classes);
   }
+
+  // Generate the HTML and remove everything except the body of the document.
   $text = $doc->saveHTML();
+  $text = preg_replace('/^.*?<body>/s', '', $text);
+  $text = preg_replace('/<\/body>.*$/s', '', $text);
+
   return $text;
 }
