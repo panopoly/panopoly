@@ -166,12 +166,13 @@ function panopoly_core_panelizer_defaults() {
   $panelizer->link_to_entity = TRUE;
   $panelizer->extra = '';
   $display = new panels_display();
-  $display->layout = 'flexible';
+  $display->layout = 'radix_boxton';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
+      'contentmain' => NULL,
     ),
   );
   $display->cache = array();
@@ -181,7 +182,7 @@ function panopoly_core_panelizer_defaults() {
   $display->panels = array();
   $pane = new stdClass();
   $pane->pid = 'new-0c8d8fde-7a93-4242-bd92-f5810efb1b2a';
-  $pane->panel = 'center';
+  $pane->panel = 'contentmain';
   $pane->type = 'entity_field';
   $pane->subtype = 'taxonomy_term:field_featured_image';
   $pane->shown = TRUE;
@@ -210,10 +211,10 @@ function panopoly_core_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = '0c8d8fde-7a93-4242-bd92-f5810efb1b2a';
   $display->content['new-0c8d8fde-7a93-4242-bd92-f5810efb1b2a'] = $pane;
-  $display->panels['center'][0] = 'new-0c8d8fde-7a93-4242-bd92-f5810efb1b2a';
+  $display->panels['contentmain'][0] = 'new-0c8d8fde-7a93-4242-bd92-f5810efb1b2a';
   $pane = new stdClass();
   $pane->pid = 'new-2263de4c-477a-4889-b074-16ca4286ee86';
-  $pane->panel = 'center';
+  $pane->panel = 'contentmain';
   $pane->type = 'term_description';
   $pane->subtype = 'term_description';
   $pane->shown = TRUE;
@@ -233,7 +234,7 @@ function panopoly_core_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = '2263de4c-477a-4889-b074-16ca4286ee86';
   $display->content['new-2263de4c-477a-4889-b074-16ca4286ee86'] = $pane;
-  $display->panels['center'][1] = 'new-2263de4c-477a-4889-b074-16ca4286ee86';
+  $display->panels['contentmain'][1] = 'new-2263de4c-477a-4889-b074-16ca4286ee86';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-0c8d8fde-7a93-4242-bd92-f5810efb1b2a';
   $panelizer->display = $display;
