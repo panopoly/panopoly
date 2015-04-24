@@ -68,7 +68,7 @@ function panopoly_test_panelizer_defaults() {
   $panelizer->link_to_entity = TRUE;
   $panelizer->extra = '';
   $display = new panels_display();
-  $display->layout = 'bryant';
+  $display->layout = 'radix_bryant';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -544,12 +544,13 @@ function panopoly_test_panelizer_defaults() {
   $panelizer->link_to_entity = TRUE;
   $panelizer->extra = array();
   $display = new panels_display();
-  $display->layout = 'flexible';
+  $display->layout = 'radix_boxton';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'center' => NULL,
+      'contentmain' => NULL,
     ),
   );
   $display->cache = array();
@@ -559,7 +560,7 @@ function panopoly_test_panelizer_defaults() {
   $display->panels = array();
   $pane = new stdClass();
   $pane->pid = 'new-1a29748d-961a-4c68-ac8a-fd0487599ea7';
-  $pane->panel = 'center';
+  $pane->panel = 'contentmain';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:field_featured_image';
   $pane->shown = TRUE;
@@ -586,10 +587,10 @@ function panopoly_test_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = '1a29748d-961a-4c68-ac8a-fd0487599ea7';
   $display->content['new-1a29748d-961a-4c68-ac8a-fd0487599ea7'] = $pane;
-  $display->panels['center'][0] = 'new-1a29748d-961a-4c68-ac8a-fd0487599ea7';
+  $display->panels['contentmain'][0] = 'new-1a29748d-961a-4c68-ac8a-fd0487599ea7';
   $pane = new stdClass();
   $pane->pid = 'new-5a11a330-5d60-48a7-8990-70cdf1c5e76d';
-  $pane->panel = 'center';
+  $pane->panel = 'contentmain';
   $pane->type = 'entity_field';
   $pane->subtype = 'node:body';
   $pane->shown = TRUE;
@@ -618,10 +619,10 @@ function panopoly_test_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = '5a11a330-5d60-48a7-8990-70cdf1c5e76d';
   $display->content['new-5a11a330-5d60-48a7-8990-70cdf1c5e76d'] = $pane;
-  $display->panels['center'][1] = 'new-5a11a330-5d60-48a7-8990-70cdf1c5e76d';
+  $display->panels['contentmain'][1] = 'new-5a11a330-5d60-48a7-8990-70cdf1c5e76d';
   $pane = new stdClass();
   $pane->pid = 'new-81940446-a77c-4133-b348-71a49da13a8f';
-  $pane->panel = 'center';
+  $pane->panel = 'contentmain';
   $pane->type = 'node_links';
   $pane->subtype = 'node_links';
   $pane->shown = TRUE;
@@ -646,7 +647,7 @@ function panopoly_test_panelizer_defaults() {
   $pane->locks = array();
   $pane->uuid = '81940446-a77c-4133-b348-71a49da13a8f';
   $display->content['new-81940446-a77c-4133-b348-71a49da13a8f'] = $pane;
-  $display->panels['center'][2] = 'new-81940446-a77c-4133-b348-71a49da13a8f';
+  $display->panels['contentmain'][2] = 'new-81940446-a77c-4133-b348-71a49da13a8f';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = 'new-1a29748d-961a-4c68-ac8a-fd0487599ea7';
   $panelizer->display = $display;
