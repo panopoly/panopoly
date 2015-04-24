@@ -28,7 +28,7 @@ function panopoly_admin_default_page_manager_handlers() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'burr_flipped';
+  $display->layout = 'radix_burr_flipped';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -355,7 +355,7 @@ function panopoly_admin_default_page_manager_pages() {
     'body_classes_to_add' => '',
   );
   $display = new panels_display();
-  $display->layout = 'boxton';
+  $display->layout = 'radix_boxton';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -466,7 +466,7 @@ function panopoly_admin_default_page_manager_pages() {
     'body_classes_to_add' => '',
   );
   $display = new panels_display();
-  $display->layout = 'boxton';
+  $display->layout = 'radix_boxton';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -596,7 +596,7 @@ function panopoly_admin_default_page_manager_pages() {
     'body_classes_to_add' => '',
   );
   $display = new panels_display();
-  $display->layout = 'boxton';
+  $display->layout = 'radix_boxton';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
