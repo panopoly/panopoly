@@ -24,7 +24,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_featured.
   $styles['panopoly_image_featured'] = array(
-    'label' => 'panopoly_image_featured',
+    'label' => 'Featured',
     'effects' => array(
       7 => array(
         'name' => 'manualcrop_crop',
@@ -60,7 +60,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_full.
   $styles['panopoly_image_full'] = array(
-    'label' => 'panopoly_image_full',
+    'label' => 'Full width (of the containing region - could upscale small images)',
     'effects' => array(
       2 => array(
         'name' => 'manualcrop_crop',
@@ -87,7 +87,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_half.
   $styles['panopoly_image_half'] = array(
-    'label' => 'panopoly_image_half',
+    'label' => 'Half width (of the containing region - could upscale small images)',
     'effects' => array(
       17 => array(
         'name' => 'manualcrop_reuse',
@@ -110,7 +110,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_original.
   $styles['panopoly_image_original'] = array(
-    'label' => 'panopoly_image_original',
+    'label' => 'Original size (after manual crop)',
     'effects' => array(
       1 => array(
         'name' => 'manualcrop_reuse',
@@ -124,7 +124,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_quarter.
   $styles['panopoly_image_quarter'] = array(
-    'label' => 'panopoly_image_quarter',
+    'label' => 'Quarter width (of the containing region - could upscale small images)',
     'effects' => array(
       18 => array(
         'name' => 'manualcrop_reuse',
@@ -147,7 +147,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_spotlight.
   $styles['panopoly_image_spotlight'] = array(
-    'label' => 'panopoly_image_spotlight',
+    'label' => 'Spotlight widget',
     'effects' => array(
       11 => array(
         'name' => 'manualcrop_crop',
@@ -173,7 +173,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_square.
   $styles['panopoly_image_square'] = array(
-    'label' => 'panopoly_image_square',
+    'label' => 'Square',
     'effects' => array(
       13 => array(
         'name' => 'manualcrop_crop',
@@ -199,7 +199,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_thumbnail.
   $styles['panopoly_image_thumbnail'] = array(
-    'label' => 'panopoly_image_thumbnail',
+    'label' => 'Thumbnail',
     'effects' => array(
       15 => array(
         'name' => 'manualcrop_crop',
@@ -226,7 +226,7 @@ function panopoly_images_image_default_styles() {
 
   // Exported image style: panopoly_image_video.
   $styles['panopoly_image_video'] = array(
-    'label' => 'panopoly_image_video',
+    'label' => 'Video widget',
     'effects' => array(
       16 => array(
         'name' => 'image_scale_and_crop',
