@@ -5,7 +5,7 @@ core = 7.x
 
 ; Panopoly - Contrib - Fields
 
-projects[tablefield][version] = 2.3
+projects[tablefield][version] = 2.4
 projects[tablefield][subdir] = contrib
 
 projects[simple_gmap][version] = 1.2
