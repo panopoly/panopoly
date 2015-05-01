@@ -689,6 +689,25 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
   }
 }
 
+/**
+ * Find visible element children.
+ *
+ * @param array $element
+ *   Form API element.
+ *
+ * @return array
+ *   Array of the element children that are visible.
+ */
+function _panopoly_magic_visible_element_children($element) {
+  $children = array();
+  foreach (element_children($element) as $name) {
+    if ($element[$name]['#type'] != 'hidden' && (!isset($element[$name]['#access']) || $element[$name]['#access'])) {
+      $children[] = $name;
+    }
+  }
+  return $children;
+}
+
 /** 
  * Implementation of hook_form_FORM_ID_alter()
  *
@@ -854,8 +873,9 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     // Add information about the View Mode
     $form['display_settings']['view_settings'] = array(
       '#type' => 'radios',
-      '#prefix' => '<div class="view-settings-wrapper"><span class="field-prefix">' . t('Display Type') . '</span>',
+      '#prefix' => '<div class="view-settings-wrapper">',
       '#suffix' => '</div>',
+      '#title' => t('Display Type'),
       '#default_value' => $conf['view_settings'],
       '#weight' => 10,
       '#options' => array(
@@ -890,6 +910,18 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
         ':input[name="view_settings"]' => array('value' => 'rendered_entity'),
       ),
     );
+
+    // If the View has opted out of 'Display type' then we hide it from the form,
+    // but still allow our JavaScript #states to work. We do the is_a() check to
+    // not break things in the case the user has upgraded panopoly_magic, but
+    // hasn't yet rebuilt the Views cache.
+    $view_allow = $view_handler->get_option('allow');
+    if (is_a($view_handler, 'panopoly_magic_plugin_display_panel_pane') && empty($view_allow['panopoly_magic_display_type'])) {
+      $form['display_settings']['view_settings']['#type'] = 'hidden';
+      $form['display_settings']['header_type']['#type'] = 'hidden';
+      // Since we're not giving the user the choice, default to keeping the titles.
+      $form['display_settings']['header_type']['#default_value'] = 'titles';
+    }
   }
 
   // Get view modes for entity
@@ -917,7 +949,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   );
    
   // Define a general settings fieldset if we have exposed values
-  if (!empty($form['exposed']) && count(element_children($form['exposed'])) > 0) {
+  if (!empty($form['exposed']) && count(_panopoly_magic_visible_element_children($form['exposed'])) > 0) {
     $form['exposed']['#type'] = 'fieldset';
     $form['exposed']['#title'] = t('General Settings');
     $form['exposed']['#weight'] = -30;
@@ -925,21 +957,21 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   }
 
   // Define a context settings fieldset if we have exposed values
-  if (!empty($form['context']) && count(element_children($form['context'])) > 0) {
+  if (!empty($form['context']) && count(_panopoly_magic_visible_element_children($form['context'])) > 0) {
     $form['context']['#type'] = 'fieldset';
     $form['context']['#title'] = t('Context Settings');
     $form['context']['#weight'] = -29;
   }
 
   // Define a content settings fieldset if we have exposed values
-  if (!empty($form['content_settings']) && count(element_children($form['content_settings'])) > 0) {
+  if (!empty($form['content_settings']) && count(_panopoly_magic_visible_element_children($form['content_settings'])) > 0) {
     $form['content_settings']['#type'] = 'fieldset';
     $form['content_settings']['#title'] = t('Content Settings');
     $form['content_settings']['#weight'] = -27;
   }
   
   // Define a display settings fieldset if we have display options
-  if (!empty($form['display_settings']) && count(element_children($form['display_settings'])) > 0) {
+  if (!empty($form['display_settings']) && count(_panopoly_magic_visible_element_children($form['display_settings'])) > 0) {
     $form['display_settings']['#type'] = 'fieldset';
     $form['display_settings']['#title'] = t('Display Settings');
     $form['display_settings']['#weight'] = -28;
@@ -1455,3 +1487,12 @@ function panopoly_magic_view_mode_options($entity_type = 'node') {
   return $options;
 }
 
+/**
+ * Implements hook_views_api().
+ */
+function panopoly_magic_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'panopoly_magic') . '/plugins/views',
+  );
+}
