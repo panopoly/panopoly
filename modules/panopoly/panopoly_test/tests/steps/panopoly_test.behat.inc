@@ -354,7 +354,13 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
    * loading to finish.
    */
   public function afterStep(StepEvent $event) {
-    $type = $event->getDefinition()->getType();
+    if ($definition = $event->getDefinition()) {
+      $type = $definition->getType();
+    }
+    // Step has not been defined yet.
+    else {
+      return;
+    }
     $text = $event->getStep()->getText();
     if (($type === 'When' || preg_match('/viewing|visit|reload/', $text)) && $event->getResult() === 0) {
       $this->iWaitForAJAX();
