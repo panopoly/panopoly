@@ -68,7 +68,7 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
         }
       }
     }
-    throw new \Exception(sprintf('The "%s" button was not found on the page %s', $label, $region, $this->getSession()->getCurrentUrl()));
+    throw new \Exception(sprintf('The "%s" button was not found on the page %s', $label, $this->getSession()->getCurrentUrl()));
   }
 
   /**
