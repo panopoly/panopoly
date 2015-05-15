@@ -13,9 +13,9 @@ projects[simple_gmap][subdir] = contrib
 
 ; Panopoly - Contrib - Widgets
 
-projects[menu_block][version] = 2.4
+projects[menu_block][version] = 2.5
 projects[menu_block][subdir] = contrib
-projects[menu_block][patch][2418803] = https://www.drupal.org/files/issues/menu_block-ctools-1.6-2418803-2.patch
+projects[menu_block][patch][2421645] = https://www.drupal.org/files/issues/2421645-menu-tree-prune-tree-parent-item-false_0.patch
 
 ; Panopoly - Contrib - Files & Media
 
