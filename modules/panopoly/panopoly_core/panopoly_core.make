@@ -85,9 +85,8 @@ projects[link][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[apps][version] = 1.0-beta20
+projects[apps][version] = 1.0-rc1
 projects[apps][subdir] = contrib
-projects[apps][patch][2430915] = https://www.drupal.org/files/issues/apps-drush-default-apps-2430915-1.patch
 
 projects[features][version] = 2.5
 projects[features][subdir] = contrib
