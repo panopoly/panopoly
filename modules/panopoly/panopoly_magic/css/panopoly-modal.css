@@ -156,6 +156,7 @@
   -webkit-border-radius: 5px;
   border: 1px solid #EEEEEE !important;
   border-radius: 5px;
+  vertical-align: bottom;
 }
 
 #modalContent .panels-section-column-categories .content-type-button a:active {
