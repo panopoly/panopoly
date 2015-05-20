@@ -87,7 +87,6 @@ function panopoly_test_views_default_views() {
   $handler->display->display_options['allow']['panopoly_magic_display_type'] = 0;
   $export['panopoly_test_magic_display_type'] = $view;
 
-
   $view = new view();
   $view->name = 'panopoly_test_magic_view_modes';
   $view->description = '';

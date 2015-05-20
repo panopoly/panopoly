@@ -30,6 +30,7 @@ features[node][] = panopoly_test_landing_page
 features[node][] = panopoly_test_page
 features[node][] = panopoly_test_page_simple
 features[panelizer_defaults][] = node:panopoly_test_landing_page:default
+features[panelizer_defaults][] = node:panopoly_test_page:body_only
 features[panelizer_defaults][] = node:panopoly_test_page:default
 features[panelizer_defaults][] = node:panopoly_test_page:default:default
 features[panelizer_defaults][] = node:panopoly_test_page:default:featured
