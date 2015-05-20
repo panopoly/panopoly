@@ -24,7 +24,7 @@ projects[panopoly_theme][download][branch] = 7.x-1.x
 projects[panopoly_magic][version] = 1.x-dev
 projects[panopoly_magic][subdir] = panopoly
 projects[panopoly_magic][download][type] = git
-projects[panopoly_magic][download][revision] = dd8b63c
+projects[panopoly_magic][download][revision] = e0dcff1
 projects[panopoly_magic][download][branch] = 7.x-1.x
 
 projects[panopoly_widgets][version] = 1.x-dev
@@ -70,5 +70,5 @@ projects[panopoly_search][download][branch] = 7.x-1.x
 projects[panopoly_test][version] = 1.x-dev
 projects[panopoly_test][subdir] = panopoly
 projects[panopoly_test][download][type] = git
-projects[panopoly_test][download][revision] = 74e38ca
+projects[panopoly_test][download][revision] = 7d366a1
 projects[panopoly_test][download][branch] = 7.x-1.x
