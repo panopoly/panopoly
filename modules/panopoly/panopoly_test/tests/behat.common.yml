@@ -53,6 +53,7 @@ default:
         Footer fourth column: ".region-footer-fourthcolumn"
         Footer: ".region-footer"
         Search: "#search-form"
+        Panopoly Magic Style Settings: "#panels-edit-style-settings-form #edit-general-settings"
       # Look in the profile modules directory and pull in module subcontexts.
       subcontexts:
         paths:
