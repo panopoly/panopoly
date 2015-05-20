@@ -219,12 +219,23 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
     'ctools_entity_field_content_type_formatter_styles',
   );
   if (variable_get('panopoly_magic_live_preview', 1) && (strpos($form_id, '_content_type_edit_form') || in_array($form_id, $extra_form_ids_with_preview))) {
-
-    // Start the magic
-    $pane = $form_id == 'panels_edit_style_settings_form' ? $form_state['display']->content[$form_state['pid']] : $form_state['pane'];
-    $display = $form_state['display'];
     ctools_include('plugins', 'panels');
     ctools_include('content');
+
+    // Get the Panels display and the current Pane (if there is one).
+    $display = $form_state['display'];
+    if ($form_id == 'panels_edit_style_settings_form') {
+      if ($form_state['type'] == 'pane') {
+        $pane = $display->content[$form_state['pid']];
+      }
+      else {
+        // For region styles, we don't have a pane.
+        $pane = NULL;
+      }
+    }
+    else {
+      $pane = $form_state['pane'];
+    }
 
     // Do some special processing for stylizer settings forms to ensure previews work correctly.
     if ($form_id == 'panels_edit_style_settings_form') {
@@ -342,7 +353,12 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       'ctools_entity_field_content_type_formatter_styles',
       'panels_edit_style_settings_form',
     );
-    $configuration = ($form_state['rebuild'] && (strpos($form_id, 'content_type_edit_form') || in_array($form_id, $configuration_ids))) ? array_merge($pane->configuration, $form_state['input']) : $pane->configuration;
+    if (!empty($pane->configuration)) {
+      $configuration = ($form_state['rebuild'] && (strpos($form_id, 'content_type_edit_form') || in_array($form_id, $configuration_ids))) ? array_merge($pane->configuration, $form_state['input']) : $pane->configuration;
+    }
+    else {
+      $configuration = $form_state['input'];
+    }
    
     $keywords = array();
     $args = array();
@@ -467,7 +483,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
       // Move all elements which aren't fieldsets or the submit buttons into the general settings fieldset.
       foreach ($children as $child) {
-        if ((!empty($form[$child]['#type']) || !empty($form[$child]['#tree'])) && $form[$child]['#type'] != 'fieldset' && $child != 'buttons' && $child != 'submit') {
+        if ((!empty($form[$child]['#tree']) || (!empty($form[$child]['#type']) && $form[$child]['#type'] != 'fieldset')) && !in_array($child, array('buttons', 'submit', 'cancel_style', 'form_build_id', 'form_token', 'form_id'))) {
           // If the form has #tree => TRUE set, then we need to make sure the
           // submitted data has the same keys.
           if (empty($form[$child]['#parents'])) {
@@ -1024,15 +1040,6 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
       $form_state['subform_id'] = 'fape_field_edit_field_form';
     }
   }
-
-  // Ensure form id, form token, and form build id are on the root of the form.
-  // Image fields in particular have issues with this.
-  $form['form_id'] = $form['general_settings']['form_id'];
-  $form['form_token'] = $form['general_settings']['form_token'];
-  $form['form_build_id'] = $form['general_settings']['form_build_id'];
-  unset($form['general_settings']['form_id']);
-  unset($form['general_settings']['form_token']);
-  unset($form['general_settings']['form_build_id']);
 
   if (!empty($form_state['entity'])) {
     // Add the field edit form.
