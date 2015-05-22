@@ -574,5 +574,52 @@ class TestSubContext extends BehatContext implements DrupalSubContextInterface {
   public function clearDblog() {
     db_delete('watchdog')->execute();
   }
+  
+  /**
+   * @When /^I select the first autocomplete option for "([^"]*)" on the "([^"]*)" field$/
+   */
+  public function iSelectFirstAutocomplete($prefix, $identifier) {
+    $session = $this->getSession();
+    $page = $session->getPage();
+    $element = $page->findField($identifier);
+    if (empty($element)) {
+      throw new \Exception(sprintf('We couldn\'t find "%s" on the page', $identifier));
+    }
+    $page->fillField($identifier, $prefix);
 
+    $xpath = $element->getXpath();
+    $driver = $session->getDriver();
+
+    // autocomplete.js uses key down/up events directly.
+
+    // Press the backspace key.
+    $driver->keyDown($xpath, 8);
+    $driver->keyUp($xpath, 8);
+
+    // Retype the last character.
+    $chars = str_split($prefix);
+    $last_char = array_pop($chars);
+    $driver->keyDown($xpath, $last_char);
+    $driver->keyUp($xpath, $last_char);
+
+    // Wait for AJAX to finish.
+    $this->iWaitForAJAX();
+
+    // And make sure the autocomplete is showing.
+    $this->getSession()->wait(5000, 'jQuery("#autocomplete").show().length > 0');
+
+    // And wait for 1 second just to be sure.
+    sleep(1);
+
+    // Press the down arrow to select the first option.
+    $driver->keyDown($xpath, 40);
+    $driver->keyUp($xpath, 40);
+
+    // Press the Enter key to confirm selection, copying the value into the field.
+    $driver->keyDown($xpath, 13);
+    $driver->keyUp($xpath, 13);
+
+    // Wait for AJAX to finish.
+    $this->iWaitForAJAX();
+  }
 }
