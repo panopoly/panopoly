@@ -20,14 +20,8 @@ projects[panelizer][subdir] = contrib
 projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
 projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
 
-projects[fieldable_panels_panes][version] = 1.5
+projects[fieldable_panels_panes][version] = 1.6
 projects[fieldable_panels_panes][subdir] = contrib
-projects[fieldable_panels_panes][patch][2283263] = http://drupal.org/files/issues/fieldable_panels_panes-n2283263-5.patch
-projects[fieldable_panels_panes][patch][2256503] = http://www.drupal.org/files/issues/fieldable_panels_panes-n2256503-12-backport-fpp15.patch
-projects[fieldable_panels_panes][patch][2415427] = http://www.drupal.org/files/issues/fieldable_panels_pane-avoid-reload-2415427-4.patch
-projects[fieldable_panels_panes][patch][2146479] = http://www.drupal.org/files/issues/2146479-admin-menu-map-conflict.patch
-projects[fieldable_panels_panes][patch][2463965] = http://www.drupal.org/files/issues/fieldable_panels_panes-title-visibility-rules-2463965-1.patch
-projects[fieldable_panels_panes][patch][2304921] = http://www.drupal.org/files/issues/fpp_rendering-2304921-1.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
