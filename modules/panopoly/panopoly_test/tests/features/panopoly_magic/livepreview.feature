@@ -255,9 +255,9 @@ Feature: Live preview
       And I click "Add new pane"
       And I click "Add text" in the "CTools modal" region
     Then I should see "Configure new Add text"
-    When I check the box "Make title a link"
+    When I fill in "Title" with "Widget title 1"
+      And I check the box "Make title a link"
       And I fill in "path" with "http://google.com"
-      And I fill in "Title" with "Widget title 1"
       And I type "Widget content 1" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
       And I press "Update Preview"
     Then I should see "Widget title 1" in the "Live preview" region
