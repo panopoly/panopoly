@@ -7,7 +7,7 @@ Feature: Add content item
   Scenario: Content item autocomplete should only offer nodes of the selected type
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-      And "panopoly_test_page" nodes:
+      And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
       And I am viewing a landing page
@@ -29,7 +29,7 @@ Feature: Add content item
   Scenario: Add content item (as "Fields")
     Given I am logged in as a user with the "administrator" role
     And Panopoly magic live previews are disabled
-    And "panopoly_test_page" nodes:
+    And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
       And I am viewing a landing page
@@ -53,7 +53,7 @@ Feature: Add content item
   Scenario: Add content item (as "Content")
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-      And "panopoly_test_page" nodes:
+      And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
       And I am viewing a landing page
@@ -87,7 +87,7 @@ Feature: Add content item
   Scenario: Title override should work for all view modes
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-      And "panopoly_test_page" nodes:
+      And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
       And I am viewing a landing page
@@ -124,7 +124,7 @@ Feature: Add content item
   Scenario: Title override should work with non-Panelizer content types
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-      And "panopoly_test_page_simple" nodes:
+      And "panopoly_test_page_simple" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
       And I am viewing a landing page
@@ -161,7 +161,7 @@ Feature: Add content item
   Scenario: Content item widget continues to work after renaming content
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-      And "panopoly_test_page" nodes:
+      And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
       And I am viewing a landing page

@@ -9,10 +9,10 @@ Feature: Edit field content in the IPE via FAPE
       And Panopoly magic live previews are disabled
     When I visit "/node/add/panopoly-test-page"
       And I fill in the following:
-        | Title               | Testing title |
-        | Full page override  | Body only     |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
+        | Title               | Testing title                     |
+        | Full page override  | node:panopoly_test_page:body_only |
+        | Editor              | plain_text                        |
+        | body[und][0][value] | Testing body                      |
       And I press "edit-submit"
     Then I should see "Testing body"
     When I customize this page with the Panels IPE

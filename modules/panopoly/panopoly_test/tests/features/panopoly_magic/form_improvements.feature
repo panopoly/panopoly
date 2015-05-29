@@ -7,7 +7,7 @@ Feature: Panopoly Magic improves the usability of forms (even without previews)
   Scenario: Change the settings on an image field formatter
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-      And I am viewing a "panopoly_test_page" node with the title "Testing title"
+      And I am viewing a "panopoly_test_page" with the title "Testing title"
     When I customize this page with the Panels IPE
       # This only works because the image field pane is the first widget,
       # however, we should really target it directly somehow. The IPE needs to
@@ -38,7 +38,7 @@ Feature: Panopoly Magic improves the usability of forms (even without previews)
   Scenario: Ability to configure region styles that have settings.
     Given I am logged in as a user with the "administrator" role
     And Panopoly magic live previews are disabled
-    And I am viewing a "panopoly_test_page" node with the title "Testing region style"
+    And I am viewing a "panopoly_test_page" with the title "Testing region style"
     When I customize this page with the Panels IPE
       And I click "Region style" in the "Bryant Content" region
     Then I should see "Style Settings"
@@ -53,7 +53,7 @@ Feature: Panopoly Magic improves the usability of forms (even without previews)
   Scenario: Ability to configure pane styles that have settings.
     Given I am logged in as a user with the "administrator" role
     And Panopoly magic live previews are disabled
-    And I am viewing a "panopoly_test_page" node with the title "Testing pane style"
+    And I am viewing a "panopoly_test_page" with the title "Testing pane style"
     When I customize this page with the Panels IPE
     And I click "Style" in the "Bryant Content" region
     Then I should see "Style Settings"
