@@ -341,9 +341,12 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
       }
     }
 
-    // Add our own submit handler ALWAYS, not just when we are generating
-    // a preview.
     if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
+      // Hide the revision fieldset.
+      $form['revision']['#access'] = FALSE;
+
+      // Add our own submit handler ALWAYS, not just when we are generating
+      // a preview.
       $form['#submit'][] = '_panopoly_magic_fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form_submit';
     }
 
