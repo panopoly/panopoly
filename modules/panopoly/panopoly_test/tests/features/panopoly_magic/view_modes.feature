@@ -7,6 +7,7 @@ Feature: Panopoly Magic respects entity view configuration
   Scenario: Add view pane that has an entity view mode of Featured
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
+      And Panopoly magic add content previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
@@ -20,6 +21,7 @@ Feature: Panopoly Magic respects entity view configuration
   Scenario: Add view pane that has default view mode
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
+      And Panopoly magic add content previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"
@@ -33,6 +35,7 @@ Feature: Panopoly Magic respects entity view configuration
   Scenario: Add view pane that supports fields
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
+      And Panopoly magic add content previews are disabled
       And I am viewing a landing page
     When I customize this page with the Panels IPE
       And I click "Add new pane"

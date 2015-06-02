@@ -318,6 +318,42 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * @Given Panopoly magic add content previews are disabled
+   *
+   * Disable add content previews via Panopoly Magic.
+   */
+  public function disablePanopolyMagicAddContentPreview() {
+    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_DISABLED);
+  }
+
+  /**
+   * @Given Panopoly magic add content previews are automatic
+   *
+   * Enable automatic add content previews via Panopoly Magic.
+   */
+  public function enableAutomaticPanopolyMagicAddContentPreview() {
+    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_AUTOMATIC);
+  }
+
+  /**
+   * @Given Panopoly magic add content previews are manual
+   *
+   * Enable manual add content previews via Panopoly Magic.
+   */
+  public function enableManualPanopolyMagicAddContentPreview() {
+    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_MANUAL);
+  }
+
+  /**
+   * @Given Panopoly magic add content previews are single
+   *
+   * Enable single add content previews via Panopoly Magic.
+   */
+  public function enableSinglePanopolyMagicAddContentPreview() {
+    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_SINGLE);
+  }
+
+  /**
    * Disable the "Use Advanced Panel Panes" option.
    *
    * @Given Panopoly admin "Use Advanced Panel Plugins" is disabled
@@ -456,6 +492,24 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     }
     if (!$found) {
       throw new \Exception(sprintf('The text "%s" was not found in the "%s" element in the "%s" region on the page %s', $text, $tag, $region, $this->getSession()->getCurrentUrl()));
+    }
+  }
+
+  /**
+   * @Then I should not see :text in the :tag element with the :attribute attribute set to :value in the :region region
+   */
+  public function assertNotRegionElementTextAttribute($text, $tag, $attribute, $value, $region) {
+    $regionObj = $this->getRegion($region);
+    $elements = $regionObj->findAll('css', $tag);
+    if (!empty($elements)) {
+      foreach ($elements as $element) {
+        if ($element->getText() == $text) {
+          $attr = $element->getAttribute($attribute);
+          if (!empty($attr) && strpos($attr, "$value") !== FALSE) {
+            throw new \Exception(sprintf('The text "%s" was found in the "%s" element with the "%s" attribute set to "%s" in the "%s" region on the page %s', $text, $tag, $attribute, $value, $region, $this->getSession()->getCurrentUrl()));
+          }
+        }
+      }
     }
   }
 
