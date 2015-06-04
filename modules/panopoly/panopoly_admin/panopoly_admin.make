@@ -42,6 +42,7 @@ projects[navbar][patch][2050559] = http://drupal.org/files/z-index-heart-cools-2
 
 projects[breakpoints][version] = 1.3
 projects[breakpoints][subdir] = contrib
+projects[breakpoints][patch][2415363] = https://www.drupal.org/files/issues/2415363-breakpoints-menu_rebuild-13.patch
 
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir] = contrib
