@@ -81,12 +81,12 @@ div.pane-bundle-video .media-youtube-video embed {
 
 /* Spotlight Widget - Specific Overrides and Styles */
 .pane-bundle-spotlight .ui-tabs-nav { /*position: absolute; right: .7em; top: .7em;*/ }
-.pane-bundle-spotlight .panopoly-spotlight-wrapper { position: absolute; left: 0px; bottom: 0px; }
+.pane-bundle-spotlight .panopoly-spotlight-wrapper { position: absolute; left: 0px; bottom: 0px; display: inline-block; max-width: 85%; }
 .pane-bundle-spotlight .panopoly-spotlight-wrapper h2 { margin: 0; }
 .pane-bundle-spotlight .panopoly-spotlight-wrapper h2 a { text-decoration: none; color: #FFFFFF; }
 .pane-bundle-spotlight .panopoly-spotlight-wrapper p { font-size: .8em; margin: 0; line-height: 1.2em; margin-top: 5px; }
-.pane-bundle-spotlight .panopoly-spotlight-label { background-color: #FFF; width: 75%; max-width: 85%; opacity: .75; }
-.pane-bundle-spotlight .panopoly-spotlight-label { padding: .3em .7em; margin: 0px; }
+.pane-bundle-spotlight .panopoly-spotlight-label { display: inline-block; background-color: #FFF; opacity: .75; }
+.pane-bundle-spotlight .panopoly-spotlight-label { padding: .3em .7em; margin: 0 50px 0 0; }
 .pane-bundle-spotlight .panopoly-spotlight-info { padding: .7em; background-color: #000000; color: #FFFFFF; opacity: .75; }
 .pane-bundle-spotlight .ui-tabs .ui-tabs-nav li.ui-state-default { background: none; background-color: #000; opacity: .75; border: 1px solid #000000 !important; border-top-left-radius: 0px; border-top-right-radius: 0px; }
 .pane-bundle-spotlight .ui-state-default a { color: #FFFFFF; }
