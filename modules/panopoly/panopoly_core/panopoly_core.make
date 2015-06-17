@@ -115,7 +115,7 @@ projects[migrate_extras][subdir] = "contrib"
 ; jQuery Update was moved to Panopoly Core, but is left in Panopoly Admin's
 ; .make file to retain a stable 1.x branch of Panopoly. See the following URL
 ; for more information: http://drupal.org/node/2492811
-projects[jquery_update][version] = 2.5
+projects[jquery_update][version] = 2.6
 projects[jquery_update][subdir] = contrib
 
 ; Recommended Modules
