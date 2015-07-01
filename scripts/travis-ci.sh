@@ -94,7 +94,7 @@ system_install() {
 
   # Get Selenium
   header Downloading Selenium
-  wget http://selenium-release.storage.googleapis.com/2.46/selenium-server-standalone-2.46.0.jar
+  wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar
  
   # Disable sendmail
   echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
