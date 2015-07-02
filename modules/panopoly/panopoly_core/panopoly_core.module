@@ -159,6 +159,26 @@ function panopoly_core_library_alter(&$libraries, $module) {
       if (isset($libraries['ui']['css']['misc/ui/jquery.ui.theme.css'])) {
         $libraries['ui']['css']['misc/ui/jquery.ui.theme.css']['data'] = drupal_get_path('module', 'panopoly_core') . '/css/panopoly-jquery-ui-theme.css';
       }
+      if (isset($libraries['ui']['css']['misc/ui/jquery.ui.core.css'])) {
+        unset($libraries['ui']['css']['misc/ui/jquery.ui.core.css']);
+      }
+    }
+
+    // If our jQuery UI theme is in use, then we need to remove unnecessary CSS,
+    // because it's all merged into our theme.
+    $jquery_ui_unnecessary_css = array(
+      'ui.button',
+      'ui.resizable',
+      'ui.selectable',
+      'ui.dialog',
+      'ui.tabs',
+    );
+    foreach ($jquery_ui_unnecessary_css as $name) {
+      if (isset($libraries[$name])) {
+        if (isset($libraries[$name]['css'])) {
+          unset($libraries[$name]['css']);
+        }
+      }
     }
   }
 }
@@ -171,7 +191,7 @@ function panopoly_core_pre_render_styles($elements) {
 
   // We only need to mess with the CSS if a jQuery UI theme is loaded.
   if (!isset($css['misc/ui/jquery.ui.theme.css'])) {
-    return;
+    return $elements;
   }
 
   $panopoly_core_theme = drupal_get_path('module', 'panopoly_core') . '/css/panopoly-jquery-ui-theme.css';
@@ -181,24 +201,6 @@ function panopoly_core_pre_render_styles($elements) {
   // earlier version of jQuery UI and doesn't quite work right).
   if ($css['misc/ui/jquery.ui.theme.css']['data'] === $seven_theme) {
     $css['misc/ui/jquery.ui.theme.css']['data'] = $panopoly_core_theme;
-  }
-
-  // If our jQuery UI theme is in use, then we need to remove unnecessary CSS,
-  // because it's all merged into our theme.
-  if ($css['misc/ui/jquery.ui.theme.css']['data'] === $panopoly_core_theme) {
-    $jquery_ui_unnecessary_css = array(
-      'core',
-      'button',
-      'resizable',
-      'selectable',
-      'dialog',
-      'tabs',
-    );
-    foreach($jquery_ui_unnecessary_css as $name) {
-      if (isset($css["misc/ui/jquery.ui.$name.css"])) {
-        unset($css["misc/ui/jquery.ui.$name.css"]);
-      }
-    }
   }
 
   return $elements;
