@@ -388,12 +388,11 @@ function panopoly_widgets_entity_info_alter(&$entity_info) {
  */
 function panopoly_widgets_theme($existing, $type, $theme, $path) {
   return array(
+    'panopoly_spotlight_wrapper' => array(
+      'render element' => 'element',
+    ),
     'panopoly_spotlight_view' => array(
-      'variables' => array(
-        'items' => NULL,
-        'delta' => NULL,
-        'settings' => NULL,
-      ),
+      'render element' => 'element',
     ),
   );
 }
