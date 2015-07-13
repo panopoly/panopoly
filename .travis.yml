@@ -3,6 +3,10 @@ language: php
 php:
   - 5.4
 
+# Forces our builds to run on Travis-CI's old infrastructure.
+# See Issue #2532134 about migrating to the new infrastructure!
+sudo: required
+
 mysql:
   database: drupal
   username: root
