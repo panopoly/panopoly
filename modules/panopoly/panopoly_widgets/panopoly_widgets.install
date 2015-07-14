@@ -339,3 +339,10 @@ function panopoly_widgets_update_7013() {
     }
   }
 }
+
+/**
+ * Rebuild theme registry so that spotlight theme functions are available.
+ */
+function panopoly_widgets_update_7014() {
+  drupal_theme_rebuild();
+}

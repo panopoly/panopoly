@@ -26,6 +26,7 @@ dependencies[] = views
 dependencies[] = views_autocomplete_filters
 dependencies[] = views_content
 stylesheets[all][] = panopoly-widgets.css
+stylesheets[all][] = panopoly-widgets-spotlight.css
 features[ctools][] = file_entity:file_default_displays:1
 features[ctools][] = views:views_default:3.0
 features[defaultconfig][] = user_default_permissions:access media browser

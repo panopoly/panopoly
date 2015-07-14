@@ -372,16 +372,16 @@ function panopoly_widgets_field_prepare_view($entity_type, $entities, $field, $i
  * Theme function for the spotlight wrapper
  */
 function theme_panopoly_spotlight_wrapper($variables){
-  drupal_add_library('system', 'ui.tabs');
-
   $output = '';
   $items = $variables['element']['#items'];
   $duration = $variables['element']['#duration'];
   $pager_style = $variables['element']['#pager_style'];
   $element = array();
 
+  $output .= '<div class="panopoly-spotlight-widget-wrapper">';
+
   // Assemble the tabs header
-  $output = '<div class="panopoly-spotlight-buttons-wrapper" data-rotation-time="' . $duration * 1000 . '">';
+  $output .= '<div class="panopoly-spotlight-buttons-wrapper" data-rotation-time="' . $duration * 1000 . '">';
   if (count($items) > 1) {
     if ($pager_style == 'full') {
       $output .= '<ul>';
@@ -417,6 +417,8 @@ function theme_panopoly_spotlight_wrapper($variables){
   $output .= '</div>';  // class="panopoly-spotlight-buttons-wrapper"
 
   $output .= render($variables['element']['slides']);
+
+  $output .= '</div>';  // class="panopoly-spotlight-widget-wrapper"
 
   return $output;
 }
