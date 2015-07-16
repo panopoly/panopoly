@@ -40,7 +40,7 @@ function panopoly_search_enable_solr() {
   $solr_server = search_api_server_load('solr_server');
   $solr_server->update(array('enabled' => 1));
   $solr_index = search_api_index_load('node_index');
-  $solr_index->update(array('enabled' => 1));
+  $solr_index->update(array('server' => 'solr_server', 'enabled' => 1));
 
   // Clear index and rebuild.
   $solr_index->clear();
@@ -69,6 +69,7 @@ function panopoly_search_default_search_api_index_alter(&$items) {
     // Hack to allow 'enabled' to be changed without the Feature becoming
     // overridden (will still be overridden in the Search API admin).
     if ($solr_index = search_api_index_load('node_index')) {
+      $items['node_index']->server = $solr_index->server;
       $items['node_index']->enabled = $solr_index->enabled;
     }
   }

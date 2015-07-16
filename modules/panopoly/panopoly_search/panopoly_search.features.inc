@@ -131,7 +131,7 @@ function panopoly_search_default_search_api_index() {
     "name" : "Solr Node Index",
     "machine_name" : "node_index",
     "description" : null,
-    "server" : "solr_server",
+    "server" : null,
     "item_type" : "node",
     "options" : {
       "index_directly" : 1,
