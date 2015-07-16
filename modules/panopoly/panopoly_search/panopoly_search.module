@@ -13,7 +13,7 @@ function panopoly_search_ctools_plugin_directory($module, $plugin) {
  * Implementation of hook_form_alter()
  */
 function panopoly_search_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'search_form' || $form_id == 'search_theme_form') {
+  if ($form_id == 'search_form' || $form_id == 'search_block_form' || $form_id == 'search_theme_form') {
     $form['#submit'][] = 'panopoly_search_all_form_submit';
     if (!empty($form['basic']['keys'])) {
       $form['basic']['keys']['#size'] = '';
@@ -25,7 +25,15 @@ function panopoly_search_form_alter(&$form, &$form_state, $form_id) {
  * Custom form submit handler to change redirect state of the form
  */
 function panopoly_search_all_form_submit($form, &$form_state) {
-  $keys = trim($form_state['values']['keys']);
+  // The block provided by core's Search module uses the form ID as the value
+  // key, not keys.
+  if (!isset($form_state['values']['keys'])) {
+    $keys = trim($form_state['values'][$form['#form_id']]);
+  }
+  else {
+    $keys = trim($form_state['values']['keys']);
+  }
+
   $module = !empty($form_state['values']['module']) ? $form_state['values']['module'] : 'site';
   $module = ($module === 'node') ? 'site' : $module;
   $form_state['redirect'] = array('search/' . $module . '/' . $keys);
