@@ -41,7 +41,7 @@ function panopoly_search_update_dependencies() {
   return $deps;
 }
 
-/** 
+/**
  * Panopoly Beta 4 Update: Enabling Search API DB Module
  */
 function panopoly_search_update_7001(&$sandbox) {
@@ -126,4 +126,29 @@ function panopoly_search_update_7005() {
       }
     }
   }
+}
+
+/**
+ * Reindex all nodes after applying patch to fix issue 2530866. Also, update the
+ * configuration in the DB so that it matches the Feature.
+ */
+function panopoly_search_update_7006() {
+  $fields = array('body:summary', 'body:value', 'search_api_panelizer_content', 'search_api_panelizer_title', 'search_api_viewed');
+  foreach (search_api_index_load_multiple(array('database_node_index', 'node_index')) as $index) {
+    // If the index configuration is stored in the database, also update it there.
+    if ($index->status & EXPORT_IN_DATABASE) {
+      $options = $index->options;
+      foreach (array('search_api_case_ignore', 'search_api_html_filter', 'search_api_tokenizer') as $processor_name) {
+        foreach ($fields as $field_name) {
+          $options['processors'][$processor_name]['settings']['fields'][$field_name] = TRUE;
+        }
+      }
+      $index->update(array('options' => $options));
+    }
+    // If the index is enabled, queue it for re-indexing.
+    if ($index->enabled) {
+      $index->reindex();
+    }
+  }
+  return t('All items in the search indexes have been queued for reindexing.');
 }
