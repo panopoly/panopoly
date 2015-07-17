@@ -152,3 +152,22 @@ function panopoly_search_update_7006() {
   }
   return t('All items in the search indexes have been queued for reindexing.');
 }
+
+/**
+ * Configure Solr index to use node access by default.
+ */
+function panopoly_search_update_7007() {
+  $index = search_api_index_load('node_index');
+  // If the index configuration is stored in the database, update it there.
+  if ($index->status & EXPORT_IN_DATABASE) {
+    $options = $index->options;
+    // Add the node_access field to be indexed.
+    $options['fields']['search_api_access_node']['type'] = 'list<string>';
+    $index->update(array('options' => $options));
+    // If the index is enabled, queue it for re-indexing.
+    if ($index->enabled) {
+      $index->reindex();
+    }
+    return t('All items in the search indexes have been queued for reindexing.');
+  }
+}
