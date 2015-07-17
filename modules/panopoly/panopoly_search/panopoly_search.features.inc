@@ -79,13 +79,28 @@ function panopoly_search_default_search_api_index() {
         "search_api_case_ignore" : {
           "status" : 1,
           "weight" : "0",
-          "settings" : { "fields" : { "title" : true } }
+          "settings" : { "fields" : {
+              "title" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "search_api_viewed" : true,
+              "body:value" : true,
+              "body:summary" : true
+            }
+          }
         },
         "search_api_html_filter" : {
           "status" : 1,
           "weight" : "10",
           "settings" : {
-            "fields" : { "title" : true },
+            "fields" : {
+              "title" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "search_api_viewed" : true,
+              "body:value" : true,
+              "body:summary" : true
+            },
             "title" : 0,
             "alt" : 1,
             "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
@@ -96,7 +111,14 @@ function panopoly_search_default_search_api_index() {
           "status" : 1,
           "weight" : "20",
           "settings" : {
-            "fields" : { "title" : true },
+            "fields" : {
+              "title" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "search_api_viewed" : true,
+              "body:value" : true,
+              "body:summary" : true
+            },
             "spaces" : "[^[:alnum:]]",
             "ignorable" : "[-]"
           }
@@ -174,13 +196,28 @@ function panopoly_search_default_search_api_index() {
         "search_api_case_ignore" : {
           "status" : 1,
           "weight" : "0",
-          "settings" : { "fields" : { "title" : true, "body:value" : true } }
+          "settings" : { "fields" : {
+              "title" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "search_api_viewed" : true,
+              "body:value" : true,
+              "body:summary" : true
+            }
+          }
         },
         "search_api_html_filter" : {
           "status" : 1,
           "weight" : "10",
           "settings" : {
-            "fields" : { "title" : true, "body:value" : true },
+            "fields" : {
+              "title" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "search_api_viewed" : true,
+              "body:value" : true,
+              "body:summary" : true
+            },
             "title" : 0,
             "alt" : 1,
             "tags" : "h1 = 5\\r\\nh2 = 3\\r\\nh3 = 2\\r\\nstrong = 2\\r\\nb = 2\\r\\nem = 1.5\\r\\nu = 1.5"
@@ -201,7 +238,14 @@ function panopoly_search_default_search_api_index() {
           "status" : 1,
           "weight" : "20",
           "settings" : {
-            "fields" : { "title" : true, "body:value" : true },
+            "fields" : {
+              "title" : true,
+              "search_api_panelizer_content" : true,
+              "search_api_panelizer_title" : true,
+              "search_api_viewed" : true,
+              "body:value" : true,
+              "body:summary" : true
+            },
             "spaces" : "[^\\\\p{L}\\\\p{N}^\\u0027]",
             "ignorable" : "[-]"
           }
