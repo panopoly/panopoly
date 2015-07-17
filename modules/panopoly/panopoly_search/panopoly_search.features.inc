@@ -168,6 +168,7 @@ function panopoly_search_default_search_api_index() {
         "search_api_panelizer_content" : { "type" : "text" },
         "search_api_panelizer_title" : { "type" : "text", "boost" : "8.0" },
         "search_api_url" : { "type" : "uri" },
+        "search_api_access_node" : { "type" : "list\\u003Cstring\\u003E" },
         "search_api_viewed" : { "type" : "text" },
         "status" : { "type" : "boolean" },
         "title" : { "type" : "text", "boost" : "8.0" },
