@@ -31,13 +31,14 @@ env:
     - PATH="$PATH:$HOME/.composer/vendor/bin"
 
     # Configuration variables.
+    - DRUPAL_TI_DISTRIBUTION_NAME="panopoly"
     #- DRUPAL_TI_MODULE_NAME="[[[FILL THIS OUT]]]"
     #- DRUPAL_TI_SIMPLETEST_GROUP="[[[FILL THIS OUT]]]"
 
     # Define runners and environment vars to include before and after the
     # main runners / environment vars.
-    - DRUPAL_TI_SCRIPT_DIR_BEFORE="./.drupal_ti/before"
-    #- DRUPAL_TI_SCRIPT_DIR_AFTER="./.drupal_ti/after"
+    #- DRUPAL_TI_SCRIPT_DIR_BEFORE="./.drupal_ti/before"
+    - DRUPAL_TI_SCRIPT_DIR_AFTER="./.drupal_ti"
 
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-7"
@@ -54,7 +55,7 @@ env:
 
     # === Behat specific variables.
     # This is relative to $TRAVIS_BUILD_DIR
-    - DRUPAL_TI_BEHAT_DIR="./tests/behat"
+    - DRUPAL_TI_BEHAT_DIR="./profiles/panopoly/modules/panopoly/panopoly_test/tests"
     # These arguments are passed to the bin/behat command.
     - DRUPAL_TI_BEHAT_ARGS=""
     # Specify the filename of the behat.yml with the $DRUPAL_TI_DRUPAL_DIR variables.
