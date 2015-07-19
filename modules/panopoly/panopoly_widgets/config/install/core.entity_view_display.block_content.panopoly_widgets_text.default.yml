@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_widgets_text
+    - field.field.block_content.panopoly_widgets_text.body
+  module:
+    - text
+id: block_content.panopoly_widgets_text.default
+targetEntityType: block_content
+bundle: panopoly_widgets_text
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
