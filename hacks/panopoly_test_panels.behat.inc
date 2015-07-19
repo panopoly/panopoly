@@ -63,6 +63,7 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    * @When I change layout with the Panels IPE
    */
   public function changeLayoutIPE() {
+    $this->getSession()->wait(5000, 'jQuery(".panels-choose-layout").length > 0');
     $this->getSession()->getPage()->clickLink('Change layout');
     $this->getSession()->wait(5000, 'jQuery(".panels-choose-layout").length === 0');
   }
