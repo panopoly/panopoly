@@ -82,7 +82,8 @@ env:
     # etc. to only output those channels.
     #- DRUPAL_TI_DEBUG_FILE_OUTPUT="selenium xvfb webserver"
 
-    - DRUPAL_TI_RUNNERS="behat"
+    # Use a custom runner for now.
+    - DRUPAL_TI_RUNNERS="panopoly-behat"
     # [[[ SELECT ANY OR MORE OPTIONS ]]]
     #- DRUPAL_TI_RUNNERS="phpunit"
     #- DRUPAL_TI_RUNNERS="simpletest"
