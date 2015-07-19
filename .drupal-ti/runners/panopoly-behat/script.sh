@@ -26,7 +26,7 @@ export BEHAT_PARAMS
 # If this isn't an upgrade, we test if any features are overridden.
 if [[ "$UPGRADE" == none ]]
 then
-#	@todo remove commented out part.
+	echo @todo remove commented out part.
 #	"$TRAVIS_BUILD_DIR"/scripts/check-overridden.sh
 fi
 
