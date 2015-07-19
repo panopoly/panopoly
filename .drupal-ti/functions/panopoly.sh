@@ -65,24 +65,23 @@ function panopoly_build_distribution() {
 		drush dl panopoly_demo-1.x-dev
 	fi
 	drush dl diff
-	mkdir sites/default/private
-	mkdir sites/default/private/files
-	mkdir sites/default/private/temp
+	mkdir -p sites/default/private/files
+	mkdir -p sites/default/private/temp
 
 	# Verify that all the .make files will work on Drupal.org.
 	panopoly_header Verifying .make file
-	drush verify-makefile drupal/profiles/panopoly/drupal-org.make
-	find drupal/profiles/panopoly/modules -name \*.make -print0 | xargs -0 -n1 drush verify-makefile
+	drush verify-makefile profiles/panopoly/drupal-org.make
+	find profiles/panopoly/modules -name \*.make -print0 | xargs -0 -n1 drush verify-makefile
 
 	# Download an old version to test upgrading from.
 	if [[ "$UPGRADE" != none ]]
 	then
-		panopoly_header Downloading Panopoly $UPGRADE
-		drush dl panopoly-$UPGRADE
+		(
+			cd "$DRUPAL_TI_DRUPAL_BASE"
+			panopoly_header Downloading Panopoly $UPGRADE
+			drush dl panopoly-$UPGRADE
+		)
 	fi
-
-	# Setup files
-	chmod -R 777 drupal/sites/all
 }
 
 
