@@ -179,11 +179,9 @@ function panopoly_optimize() {
 # Prints a message about the section of the script.
 #
 function panopoly_header() {
-	set +xv
 	echo
 	echo "** $@"
 	echo
-	set -xv
 }
 
 
