@@ -83,6 +83,7 @@ env:
     #- DRUPAL_TI_DEBUG_FILE_OUTPUT="selenium xvfb webserver"
 
     # Use a custom runner for now.
+    # @todo Move functionality back upstream.
     - DRUPAL_TI_RUNNERS="panopoly-behat"
     # [[[ SELECT ANY OR MORE OPTIONS ]]]
     #- DRUPAL_TI_RUNNERS="phpunit"
