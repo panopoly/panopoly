@@ -5,6 +5,7 @@ core: 8.x
 package: Panopoly
 dependencies:
   - block_content
+  - file
   - image
   - link
   - text

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_widgets_file
+label: File
+revision: 1
+description: 'A file widget with an optional bit of text.'

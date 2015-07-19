@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_widgets_file
+    - field.field.block_content.panopoly_widgets_file.body
+    - field.field.block_content.panopoly_widgets_file.field_panopoly_widgets_file
+  module:
+    - file
+    - text
+id: block_content.panopoly_widgets_file.default
+targetEntityType: block_content
+bundle: panopoly_widgets_file
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_panopoly_widgets_file:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+hidden: {  }

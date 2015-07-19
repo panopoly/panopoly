@@ -2,17 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.panopoly_widgets_text
+    - block_content.type.panopoly_widgets_file
     - field.storage.block_content.body
   module:
     - text
-id: block_content.panopoly_widgets_text.body
+id: block_content.panopoly_widgets_file.body
 field_name: body
 entity_type: block_content
-bundle: panopoly_widgets_text
+bundle: panopoly_widgets_file
 label: Text
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

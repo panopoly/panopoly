@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_widgets_links
+    - field.field.block_content.panopoly_widgets_links.field_panopoly_widgets_links
+  module:
+    - link
+id: block_content.panopoly_widgets_links.default
+targetEntityType: block_content
+bundle: panopoly_widgets_links
+mode: default
+content:
+  field_panopoly_widgets_links:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+hidden: {  }
