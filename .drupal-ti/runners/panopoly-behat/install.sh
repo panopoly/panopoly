@@ -20,7 +20,7 @@ panopoly_build_distribution
 
 # Install the behat extension.
 panopoly_header Installing Behat
-cd "$TRAVIS_BUILD_DIR/$DRUPAL_TI_BEHAT_DIR"
+cd "$DRUPAL_TI_DRUPAL_DIR/$DRUPAL_TI_BEHAT_DIR"
 composer install --no-interaction --prefer-source --dev
 
 # Disable sendmail

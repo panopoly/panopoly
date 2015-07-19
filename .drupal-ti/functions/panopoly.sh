@@ -27,7 +27,8 @@ function panopoly_ensure_drush() {
 #
 function panopoly_ensure_distribution() {
         # Ensure we are in the right directory.
-        cd "$DRUPAL_TI_DRUPAL_DIR"
+        mkdir -p "$DRUPAL_TI_DRUPAL_BASE"
+        cd "$DRUPAL_TI_DRUPAL_BASE"
 
         # This function is re-entrant.
         if [ -L "$DRUPAL_TI_DISTRIBUTION_NAME" ]
@@ -47,7 +48,7 @@ function panopoly_ensure_distribution() {
 #
 function panopoly_build_distribution() {
         # Ensure we are in the right directory.
-        cd "$DRUPAL_TI_DRUPAL_DIR"
+        cd "$DRUPAL_TI_DRUPAL_BASE"
 
 	# Build Codebase
 	mkdir profiles

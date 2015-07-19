@@ -5,7 +5,7 @@
 set -e $DRUPAL_TI_DEBUG
 
 # Ensure we are in the right directory.
-cd "$DRUPAL_TI_DRUPAL_DIR/drupal"
+cd "$DRUPAL_TI_DRUPAL_DIR"
 
 # Now go to the local behat tests, being within the module installation is
 # needed for example for the drush runner.
@@ -16,7 +16,7 @@ panopoly_header Running tests
 # Make the Travis tests repos agnostic by injecting drupal_root with BEHAT_PARAMS
 # @todo Consider using drupal_ti_replace_behat_vars instead to use $ in
 #       behat.yml.travis directly.
-BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"DRUPAL_TI_DRUPAL_DIR/drupal"}}}}'
+BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"DRUPAL_TI_DRUPAL_DIR"}}}}'
 BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#DRUPAL_TI_DRUPAL_DIR#$DRUPAL_TI_DRUPAL_DIR#`
 export BEHAT_PARAMS
 
