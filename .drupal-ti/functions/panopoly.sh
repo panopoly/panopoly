@@ -84,6 +84,38 @@ function panopoly_build_distribution() {
 	fi
 }
 
+#
+# Overwrite functions/drupal.sh install function.
+# @todo Upstream tries to check for drupal dir existing, which fails
+#       this. Use a file instead.
+#
+function drupal_ti_ensure_drupal() {
+	# This function is re-entrant.
+	if [ -r "$TRAVIS_BUILD_DIR/../drupal_ti-drupal-installed" ]
+	then
+		return
+	fi
+
+        # HHVM env is broken: https://github.com/travis-ci/travis-ci/issues/2523.
+        PHP_VERSION=`phpenv version-name`
+        if [ "$PHP_VERSION" = "hhvm" ]
+        then
+                # Create sendmail command, which links to /bin/true for HHVM.
+                BIN_DIR="$TRAVIS_BUILD_DIR/../drupal_travis/bin"
+                mkdir -p "$BIN_DIR"
+                ln -s $(which true) "$BIN_DIR/sendmail"
+                export PATH="$BIN_DIR:$PATH"
+        fi
+
+        # Create database and install Drupal.
+        mysql -e "create database $DRUPAL_TI_DB"
+
+        mkdir -p "$DRUPAL_TI_DRUPAL_BASE"
+        cd "$DRUPAL_TI_DRUPAL_BASE"
+
+        drupal_ti_install_drupal
+	touch "$TRAVIS_BUILD_DIR/../drupal_ti-drupal-installed"
+}
 
 #
 # Overwrite environments/drupal-7.sh install function
