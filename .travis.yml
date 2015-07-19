@@ -8,7 +8,8 @@
 
 language: php
 
-sudo: false
+# Test legacy infrastructure.
+sudo: required
 
 php:
   - 5.4
