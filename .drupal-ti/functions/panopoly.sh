@@ -6,11 +6,11 @@
 # Ensures that the right drush version is installed.
 #
 function panopoly_ensure_drush() {
-        # This function is re-entrant.
-        if [ -r "$TRAVIS_BUILD_DIR/../drupal_ti-panopoly-drush-installed" ]
-        then
-                return
-        fi
+	# This function is re-entrant.
+	if [ -r "$TRAVIS_BUILD_DIR/../drupal_ti-panopoly-drush-installed" ]
+	then
+		return
+	fi
 
 	drupal_ti_ensure_drush
 
@@ -18,7 +18,7 @@ function panopoly_ensure_drush() {
 	drush dl -y drupalorg_drush-7.x-1.x-dev --destination=$HOME/.drush
 	drush cc drush
 
-        touch "$TRAVIS_BUILD_DIR/../drupal_ti-panopoly-drush-installed"
+	touch "$TRAVIS_BUILD_DIR/../drupal_ti-panopoly-drush-installed"
 }
 
 #
