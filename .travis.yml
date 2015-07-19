@@ -8,8 +8,7 @@
 
 language: php
 
-# Test legacy infrastructure.
-sudo: required
+sudo: false
 
 php:
   - 5.4
@@ -61,7 +60,8 @@ env:
     # These arguments are passed to the bin/behat command.
     - DRUPAL_TI_BEHAT_ARGS="--stop-on-failure"
     # Specify the filename of the behat.yml with the $DRUPAL_TI_DRUPAL_DIR variables.
-    - DRUPAL_TI_BEHAT_YML="behat.yml.dist"
+    # @todo This is ignored right now.
+    - DRUPAL_TI_BEHAT_YML="behat.travis.yml"
     # This is used to setup Xvfb.
     - DRUPAL_TI_BEHAT_SCREENSIZE_COLOR="1024x768x24"
     # The version of selenium that should be used.
