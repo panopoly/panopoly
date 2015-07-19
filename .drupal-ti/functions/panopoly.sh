@@ -131,13 +131,16 @@ function drupal_ti_install_drupal() {
 
 	# Do the site install (either the current revision or old for the upgrade).
 	panopoly_header Installing Drupal
-	if [[ "$UPGRADE" == none ]]; then
+	if [[ "$UPGRADE" == none ]]
+	then
 		cd drupal
 	else
 		cd panopoly-$UPGRADE
 		if [[ "$INSTALL_PANOPOLY_DEMO_FROM_APPS" != 1 ]]; then
 			drush dl panopoly_demo-$UPGRADE_DEMO_VERSION
 		fi
+		# Relax checks as drush site-install has errors for update 1.13.
+		set +e
 	fi
 	php -d sendmail_path=$(which true) ~/.composer/vendor/bin/drush.php --yes site-install panopoly --db-url="$DRUPAL_TI_DB_URL" --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Panopoly"
 	drush vset -y file_private_path "sites/default/private/files"
@@ -149,6 +152,9 @@ function drupal_ti_install_drupal() {
 	# If we're an upgrade test, run the upgrade process.
 	if [[ "$UPGRADE" != none ]]
 	then
+		# Use strict checking again.
+		set -e
+
 	        panopoly_header Upgrading to latest version
         	cp -a ../panopoly-$UPGRADE/sites/default/* sites/default/
 	        drush updb --yes
