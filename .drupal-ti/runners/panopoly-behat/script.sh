@@ -14,7 +14,8 @@ cd "$DRUPAL_TI_BEHAT_DIR"
 panopoly_header Running tests
 
 panopoly_header Hacking panopoly_test_panels.behat.inc ...
-cp -a $TRAVIS_BUILD_DIR/hacks/panopoly_test_panels.behat.inc steps/
+rm -f steps/panopoly_test_panels.behat.inc
+mv -f $TRAVIS_BUILD_DIR/hacks/panopoly_test_panels.behat.inc steps/
 
 # Make the Travis tests repos agnostic by injecting drupal_root with BEHAT_PARAMS
 # @todo Consider using drupal_ti_replace_behat_vars instead to use $ in
