@@ -61,7 +61,7 @@ env:
     - DRUPAL_TI_BEHAT_ARGS="--stop-on-failure"
     # Specify the filename of the behat.yml with the $DRUPAL_TI_DRUPAL_DIR variables.
     # @todo This is ignored right now.
-    - DRUPAL_TI_BEHAT_YML="behat.travis.yml"
+    - DRUPAL_TI_BEHAT_YML="behat.travis.yml.dist"
     # This is used to setup Xvfb.
     - DRUPAL_TI_BEHAT_SCREENSIZE_COLOR="1024x768x24"
     # The version of selenium that should be used.

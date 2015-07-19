@@ -16,13 +16,7 @@ panopoly_header Running tests
 panopoly_header Hacking panopoly_test_panels.behat.inc ...
 rm -f steps/panopoly_test_panels.behat.inc
 mv -f $TRAVIS_BUILD_DIR/hacks/panopoly_test_panels.behat.inc steps/
-
-# Make the Travis tests repos agnostic by injecting drupal_root with BEHAT_PARAMS
-# @todo Consider using drupal_ti_replace_behat_vars instead to use $ in
-#       behat.yml.travis directly.
-BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"DRUPAL_TI_DRUPAL_DIR"}}}}'
-BEHAT_PARAMS=`echo $BEHAT_PARAMS | sed -e s#DRUPAL_TI_DRUPAL_DIR#$DRUPAL_TI_DRUPAL_DIR#`
-export BEHAT_PARAMS
+mv -f $TRAVIS_BUILD_DIR/hacks/behat.travis.yml.dist .
 
 # If this isn't an upgrade, we test if any features are overridden.
 if [[ "$UPGRADE" == none ]]
@@ -31,9 +25,13 @@ then
 #	"$TRAVIS_BUILD_DIR"/scripts/check-overridden.sh
 fi
 
+# This replaces environment vars from $DRUPAL_TI_BEHAT_YML into 'behat.yml'.
+drupal_ti_replace_behat_vars
+
 ARGS=( $DRUPAL_TI_BEHAT_ARGS )
+
 # First, run all the tests in Firefox.
-./bin/behat --config behat.travis.yml "${ARGS[@]}"
+./bin/behat "${ARGS[@]}"
 
 # Then run some Chrome-only tests.
-./bin/behat --config behat.travis.yml -p chrome "${ARGS[@]}"
+./bin/behat -p chrome "${ARGS[@]}"
