@@ -52,6 +52,7 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    */
   public function customizeThisPageIPE() {
    $this->getSession()->getDriver()->maximizeWindow();
+    $this->waitForIPEtoDeactivate();
     $this->getSession()->getPage()->clickLink('Customize this page');
     $this->waitForIPEtoActivate();
   }
