@@ -49,7 +49,7 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
           $controls.eq(0).addClass('active');
 
           // Bind the event for the slide numbers.
-          $controls.once('panopoly-spotlight').children('a').bind('click', function (event) {
+          $controls.once('panopoly-spotlight').children('a').bind('click.panopoly-widgets-spotlight', function (event) {
             var selector = $(this).attr('href');
             if (selector.indexOf('#') === 0) {
               event.preventDefault();
@@ -73,7 +73,7 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
           });
 
           // Bind events to all the extra buttonts.
-          $widget.find('.panopoly-spotlight-pause-play').once('panopoly-spotlight').bind('click', function(event) {
+          $widget.find('.panopoly-spotlight-pause-play').once('panopoly-spotlight').bind('click.panopoly-widgets-spotlight', function(event) {
             event.preventDefault();
             if ($(this).hasClass('paused')) {
               start();
@@ -87,28 +87,28 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
             }
           });
           if ($widget.find('.panopoly-spotlight-previous').length && $widget.find('.panopoly-spotlight-next').length) {
-            $widget.find('.panopoly-spotlight-previous').once('panopoly-spotlight').bind('click', function (event) {
+            $widget.find('.panopoly-spotlight-previous').once('panopoly-spotlight').bind('click.panopoly-widgets-spotlight', function (event) {
               event.preventDefault();
-              $widget.find('.panopoly-spotlight-pause-play:not(.paused)').trigger('click');
+              $widget.find('.panopoly-spotlight-pause-play:not(.paused)').trigger('click.panopoly-widgets-spotlight');
               var activeControl = $($controls.filter('.active'));
 
               if (activeControl.prev().length != 0) {
-                activeControl.prev().children('a').trigger('click');
+                activeControl.prev().children('a').trigger('click.panopoly-widgets-spotlight');
               }
               else {
-                $controls.last().children('a').trigger('click');
+                $controls.last().children('a').trigger('click.panopoly-widgets-spotlight');
               }
             });
-            $widget.find('.panopoly-spotlight-next').once('panopoly-spotlight').bind('click', function (event) {
+            $widget.find('.panopoly-spotlight-next').once('panopoly-spotlight').bind('click.panopoly-widgets-spotlight', function (event) {
               event.preventDefault();
-              $widget.find('.panopoly-spotlight-pause-play:not(.paused)').trigger('click');
+              $widget.find('.panopoly-spotlight-pause-play:not(.paused)').trigger('click.panopoly-widgets-spotlight');
               var activeControl = $($controls.filter('.active'));
 
               if (activeControl.next().length != 0) {
-                activeControl.next().children('a').trigger('click');
+                activeControl.next().children('a').trigger('click.panopoly-widgets-spotlight');
               }
               else {
-                $controls.first().children('a').trigger('click');
+                $controls.first().children('a').trigger('click.panopoly-widgets-spotlight');
               }
             });
           }
