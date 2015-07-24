@@ -31,6 +31,6 @@ projects[media][patch][2421589] = https://www.drupal.org/files/issues/media-libr
 projects[media_youtube][version] = 3.0
 projects[media_youtube][subdir] = contrib
 
-projects[media_vimeo][version] = 2.0
+projects[media_vimeo][version] = 2.1
 projects[media_vimeo][subdir] = contrib
 projects[media_vimeo][patch][2446199] = https://www.drupal.org/files/issues/no_exception_handling-2446199-1.patch

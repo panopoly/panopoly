@@ -415,6 +415,7 @@ function panopoly_widgets_file_default_displays_alter(&$default_displays) {
 
   // Set the default video configuration for videos
   if (!empty($default_displays['video__default__media_vimeo_video'])) {
+    $default_displays['video__default__media_vimeo_video']->weight = 0;
     $default_displays['video__default__media_vimeo_video']->settings['protocol_specify'] = FALSE;
   }
 
