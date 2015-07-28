@@ -37,7 +37,7 @@ Drupal.settings.spotlight_settings = Drupal.settings.spotlight_settings || {};
             }
 
             // Click the control for the next slide.
-            $controls.eq(current).children('a').click();
+            $controls.eq(current).children('a').trigger('click.panopoly-widgets-spotlight');
           }
 
           // Navigation is hidden by default, display it if JavaScript is enabled.
