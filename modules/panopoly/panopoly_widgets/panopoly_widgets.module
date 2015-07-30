@@ -187,7 +187,12 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#attributes']['placeholder'] = $form['title']['#title'];
     $form['title']['#title_display'] = 'invisible';
     $form['widget_settings']['title'] = $form['title'];
-    unset($form['title']);
+
+    // If the title hasn't been replaced by the title module then it's safe to
+    // unset it. Otherwise it's already been hidden by the title module.
+    if(!(module_exists('title') && isset($form['title']['#field_replacement']) && $form['title']['#field_replacement'])){
+      unset($form['title']);
+    }
 
     // Move the link field into the general settings tab.
     $form['widget_settings']['link'] = $form['link'];
