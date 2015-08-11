@@ -1,9 +1,6 @@
 api = 2
-core = 7.x
+core = 8.x
 
 ; Drupal Core
 projects[drupal][type] = core
-projects[drupal][version] = 7.38
-
-; Bug with image styles on database update
-projects[drupal][patch][1973278] = http://www.drupal.org/files/issues/image-accommodate_missing_definition-1973278-16.patch
+projects[drupal][version] = 8.0.0-beta14
