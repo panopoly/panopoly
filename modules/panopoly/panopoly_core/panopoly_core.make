@@ -7,7 +7,6 @@ core = 7.x
 
 projects[ctools][version] = 1.8
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2422123] = https://www.drupal.org/files/issues/ctools-fix_entity_view_hooks_invoked_twice-2422123-15.patch
 
 projects[panels][version] = 3.5
 projects[panels][subdir] = contrib
