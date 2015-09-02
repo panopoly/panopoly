@@ -115,6 +115,12 @@ env:
     - UPGRADE=7.x-1.9
     - UPGRADE=7.x-1.8
 
+# Cache Composer & Drush directories.
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.drush/cache
+
 mysql:
   database: drupal_travis_db
   username: root
