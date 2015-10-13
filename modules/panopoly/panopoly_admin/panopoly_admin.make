@@ -11,9 +11,8 @@ projects[backports][subdir] = contrib
 projects[module_filter][version] = 2.0
 projects[module_filter][subdir] = contrib
 
-projects[simplified_menu_admin][version] = 1.0-beta2
+projects[simplified_menu_admin][version] = 1.0
 projects[simplified_menu_admin][subdir] = contrib
-projects[simplified_menu_admin][patch][1256700] = https://www.drupal.org/files/issues/simplified_menu_admin-form-hierarchy-not-preserved-1256700-13.patch
 
 projects[date_popup_authored][version] = 1.x-dev
 projects[date_popup_authored][subdir] = contrib
