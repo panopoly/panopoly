@@ -25,6 +25,7 @@ projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/paneliz
 projects[fieldable_panels_panes][version] = 1.7
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][patch][2562717] = https://www.drupal.org/files/issues/fpp-empty-admin-title-2562717-2.patch
+projects[fieldable_panels_panes][patch][2381433] = https://www.drupal.org/files/issues/fieldable_panels_panes_patch-2381433-1_0.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
