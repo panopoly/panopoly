@@ -67,8 +67,9 @@ projects[transliteration][subdir] = contrib
 
 ; Field modules
 
-projects[date][version] = 2.9-rc1
+projects[date][version] = 2.9
 projects[date][subdir] = contrib
+projects[date][patch][2375235] = https://www.drupal.org/files/issues/calendar_pager_broken-2375235-35.patch
 
 projects[entityreference][version] = 1.1
 projects[entityreference][subdir] = contrib
