@@ -86,7 +86,7 @@ projects[link][subdir] = contrib
 projects[apps][version] = 1.0
 projects[apps][subdir] = contrib
 
-projects[features][version] = 2.6
+projects[features][version] = 2.7
 projects[features][subdir] = contrib
 
 projects[strongarm][version] = 2.0
@@ -122,7 +122,7 @@ projects[devel][subdir] = contrib
 projects[distro_update][version] = 1.0-beta4
 projects[distro_update][subdir] = contrib
 
-projects[features_override][version] = 2.0-rc2
+projects[features_override][version] = 2.0-rc3
 projects[features_override][subdir] = contrib
 
 projects[uuid][version] = 1.0-alpha6
