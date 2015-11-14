@@ -1,0 +1,10 @@
+type: module
+name: 'Panopoly Core'
+description: 'The magical core of the Panopoly framework.'
+core: 8.x
+package: Panopoly
+dependencies:
+  - panels
+  - page_manager
+features:
+  bundle: panopoly

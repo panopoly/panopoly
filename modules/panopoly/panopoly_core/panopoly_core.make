@@ -11,6 +11,9 @@ projects[ctools][subdir] = contrib
 projects[panels][version] = 3.0-alpha18
 projects[panels][subdir] = contrib
 
+projects[page_manager][version] = 1.0-alpha18
+projects[page_manager][subdir] = contrib
+
 projects[layout_plugin][version] = 1.0-alpha18
 projects[layout_plugin][subdir] = contrib
 
