@@ -4,7 +4,7 @@ core = 8.x
 ; The Panopoly Foundation
 
 projects[panopoly_core][version] = 2.x-dev
-projects[panopoly_coer][type] = module
+projects[panopoly_core][type] = module
 projects[panopoly_core][subdir] = panopoly
 projects[panopoly_core][download][type] = git
 projects[panopoly_core][download][revision] = 16bd82b
