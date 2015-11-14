@@ -138,6 +138,11 @@ script:
 after_script:
   - drupal-ti after_script
 
+# For now, only test 7.x-1.x.
+branches:
+  only:
+    - 7.x-1.x
+
 notifications:
   email:
     recipients:
