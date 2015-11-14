@@ -8,24 +8,8 @@
  * Implements hook_install().
  */
 function panopoly_install() {
-  _panopoly_install_help_block();
-}
-
-/**
- * Enable the Distribution Update Status Manager (distro_update) module.
- */
-function panopoly_update_7101() {
-  module_enable(array('distro_update'));
-}
-
-/**
- * Enable the core Block module and place the Help block.
- */
-function panopoly_update_7102() {
-  if (!module_exists('block')) {
-    module_enable(array('block'));
-  }
-  _panopoly_install_help_block();
+  // @todo: Left over from Drupal 7.
+  //_panopoly_install_help_block();
 }
 
 /**

@@ -1,0 +1,68 @@
+name: Panopoly
+type: profile
+description: 'A magical framework for building Drupal products based on the Panels module.'
+core: 8.x
+exclusive: true
+dependencies:
+  # Drupal Core
+  - node
+  - history
+  - block
+  - breakpoint
+  - ckeditor
+  - color
+  - config
+  - comment
+  - contextual
+  - contact
+  - menu_link_content
+  - datetime
+  - block_content
+  - quickedit
+  - editor
+  - help
+  - image
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - search
+  - shortcut
+  - toolbar
+  - field_ui
+  - file
+  - rdf
+  - views
+  - views_ui
+  - tour
+  - automated_cron
+
+  # Panopoly Foundation
+  - panopoly_core
+  #- panopoly_images
+  - panopoly_theme
+  #- panopoly_magic
+  - panopoly_widgets
+  #- panopoly_admin
+  #- panopoly_users
+
+  # Panopoly Toolset
+  #- panopoly_pages
+  #- panopoly_search
+  #- panopoly_wysiwyg
+
+  # Panopoly Recommended - Admin & UI
+  #- simplified_menu_admin
+  #- save_draft
+
+  # Panopoly Recommended - Other
+  #- devel
+  #- distro_update
+  #- uuid
+  #- apps
+themes:
+  - bartik
+  - seven
