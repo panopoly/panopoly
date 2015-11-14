@@ -24,10 +24,13 @@ function panopoly_theme_ctools_plugin_directory($module, $plugin) {
  * Implementation hook_theme_registry_alter()
  */
 function panopoly_theme_theme_registry_alter(&$theme_registry) {
+  // @todo: Left over from Drupal 7.
+  /*
   $mod_path = drupal_get_path('module', 'panopoly_theme') . '/templates';
   $theme_registry_copy = $theme_registry;
   _theme_process_registry($theme_registry_copy, 'phptemplate', 'theme_engine', 'pow', $mod_path);
   $theme_registry += array_diff_key($theme_registry_copy, $theme_registry);
+  */
 }
 
 /**
