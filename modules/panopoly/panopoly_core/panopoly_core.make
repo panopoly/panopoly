@@ -5,16 +5,16 @@ core = 8.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 3.0-alpha18
+projects[ctools][version] = 3.0-alpha19
 projects[ctools][subdir] = contrib
 
-projects[panels][version] = 3.0-alpha18
+projects[panels][version] = 3.0-alpha19
 projects[panels][subdir] = contrib
 
-projects[page_manager][version] = 1.0-alpha18
+projects[page_manager][version] = 1.0-alpha19
 projects[page_manager][subdir] = contrib
 
-projects[layout_plugin][version] = 1.0-alpha18
+projects[layout_plugin][version] = 1.0-alpha19
 projects[layout_plugin][subdir] = contrib
 
 ;projects[panels_breadcrumbs][version] = 2.2
