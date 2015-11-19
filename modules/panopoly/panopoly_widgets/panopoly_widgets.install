@@ -346,3 +346,14 @@ function panopoly_widgets_update_7013() {
 function panopoly_widgets_update_7014() {
   drupal_theme_rebuild();
 }
+
+/**
+ * Unset the default image for the image widget.
+ */
+function panopoly_widgets_update_7015() {
+  if ($image_field = field_info_field('field_basic_image_image')) {
+    $image_field['settings']['default_image'] = 0;
+    field_update_field($image_field);
+    field_info_cache_clear();
+  }
+}
