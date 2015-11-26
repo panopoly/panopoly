@@ -81,6 +81,7 @@ features[defaultconfig][] = user_default_permissions:edit own audio files
 features[defaultconfig][] = user_default_permissions:edit own document files
 features[defaultconfig][] = user_default_permissions:edit own image files
 features[defaultconfig][] = user_default_permissions:edit own video files
+features[defaultconfig][] = user_default_permissions:use media wysiwyg
 features[defaultconfig][] = user_default_permissions:view files
 features[defaultconfig][] = user_default_permissions:view own files
 features[features_api][] = api:2
