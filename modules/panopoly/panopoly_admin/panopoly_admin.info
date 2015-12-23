@@ -36,4 +36,3 @@ features[page_manager_handlers][] = node_edit_panel_context
 features[page_manager_pages][] = panopoly_admin_layout_library
 features[page_manager_pages][] = panopoly_admin_page_library
 features[page_manager_pages][] = panopoly_admin_pane_library
-features[variable][] = user_admin_role
