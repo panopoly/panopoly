@@ -21,6 +21,7 @@ dependencies[] = wysiwyg_filter
 stylesheets[all][] = panopoly-wysiwyg.css
 features[ctools][] = linkit:linkit_profiles:1
 features[ctools][] = strongarm:strongarm:1
+features[defaultconfig][] = user_default_permissions:use media wysiwyg
 features[defaultconfig][] = user_default_permissions:use text format panopoly_html_text
 features[defaultconfig][] = user_default_permissions:use text format panopoly_wysiwyg_text
 features[features_api][] = api:2
