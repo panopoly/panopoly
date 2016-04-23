@@ -5,25 +5,23 @@ core = 8.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 3.0-alpha19
+projects[ctools][version] = 3.0-alpha25
 projects[ctools][subdir] = contrib
 
-projects[panels][version] = 3.0-alpha19
+projects[panels][version] = 3.0-beta4
 projects[panels][subdir] = contrib
 
-projects[page_manager][version] = 1.0-alpha19
+projects[page_manager][version] = 1.0-alpha23
 projects[page_manager][subdir] = contrib
 
-projects[layout_plugin][version] = 1.0-alpha19
+projects[layout_plugin][version] = 1.0-alpha22
 projects[layout_plugin][subdir] = contrib
 
 ;projects[panels_breadcrumbs][version] = 2.2
 ;projects[panels_breadcrumbs][subdir] = contrib
 
-;projects[panelizer][version] = 3.1
-;projects[panelizer][subdir] = contrib
-;projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
-;projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
+projects[panelizer][version] = 3.0-alpha2
+projects[panelizer][subdir] = contrib
 
 ;projects[fape][version] = 1.2
 ;projects[fape][subdir] = contrib
@@ -60,7 +58,7 @@ projects[layout_plugin][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[features][version] = 3.0-alpha4
+projects[features][version] = 3.0-beta3
 projects[features][subdir] = contrib
 
 ;projects[apps][version] = 1.0
