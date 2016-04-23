@@ -1,0 +1,15 @@
+uuid: 80ed307b-91b7-4d26-997f-6cd0a40e98f4
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_quarter
+label: 'Quarter width (of the containing region - could upscale small images)'
+effects:
+  a5b44e06-4017-4465-9245-f3d371e16423:
+    uuid: a5b44e06-4017-4465-9245-f3d371e16423
+    id: image_scale
+    weight: 1
+    data:
+      width: 240
+      height: null
+      upscale: false

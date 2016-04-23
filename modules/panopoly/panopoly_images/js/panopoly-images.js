@@ -1,7 +1,7 @@
 (function($) {
-  Drupal.behaviors.panopolyImagesModule = {
+  Drupal.behaviors.panopoly_images = {
     attach: function (context, settings) {
-      var captions = $('.caption', context).has('img');
+      var captions = $('figure.caption-img', context).has('img');
       $(captions).once('panopoly-images').imagesLoaded(function () {
         panopolyImagesResizeCaptionBox(captions);
       });
@@ -10,9 +10,7 @@
         captions.each(function() {
           var imageSet = $('img', this),
               imgBoxWidth = getImgWidth(imageSet),
-              wrapperBoxWidth =
-                  getWrapperSpacing($('.caption-inner', this))
-                + getWrapperSpacing($('.caption-width-container', this)),
+              wrapperBoxWidth = getWrapperSpacing($('figcaption', this)),
               totalWidth = imgBoxWidth + wrapperBoxWidth;
           $(this).width(totalWidth);
         });
