@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_featured
+label: Featured
+effects:
+  82b647f0-5219-43f8-81bb-4e053feee22f:
+    uuid: 82b647f0-5219-43f8-81bb-4e053feee22f
+    id: image_scale
+    weight: 1
+    data:
+      width: 480
+      height: null
+      upscale: false
+  ae711df7-6afe-411d-8855-3a3e29ff4756:
+    uuid: ae711df7-6afe-411d-8855-3a3e29ff4756
+    id: image_crop
+    weight: 2
+    data:
+      width: 480
+      height: 260
+      anchor: center-center

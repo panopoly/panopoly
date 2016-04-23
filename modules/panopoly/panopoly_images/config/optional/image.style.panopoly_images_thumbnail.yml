@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_thumbnail
+label: Thumbnail
+effects:
+  db27fe58-0ba7-47e5-b47b-21190025d577:
+    uuid: db27fe58-0ba7-47e5-b47b-21190025d577
+    id: image_scale
+    weight: 1
+    data:
+      width: 80
+      height: 80
+      upscale: false

@@ -1,0 +1,6 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_original
+label: 'Original size'
+effects: {  }

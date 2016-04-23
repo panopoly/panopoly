@@ -1,0 +1,7 @@
+panopoly_images:
+  version: 2.x
+  css:
+    theme:
+      css/panopoly-images.css: {}
+#  js:
+#    js/panopoly-images.js: {}

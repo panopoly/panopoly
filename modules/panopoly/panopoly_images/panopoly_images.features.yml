@@ -1,0 +1,7 @@
+bundle: panopoly
+excluded:
+  - core.entity_form_display.node.article.default
+  - core.entity_form_display.user.user.default
+  - core.entity_view_display.user.user.compact
+  - core.entity_view_display.user.user.default
+required: true

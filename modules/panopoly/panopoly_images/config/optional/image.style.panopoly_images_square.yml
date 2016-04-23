@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_square
+label: Square
+effects:
+  0cfe4141-1ffb-4dd5-8952-bf3328525503:
+    uuid: 0cfe4141-1ffb-4dd5-8952-bf3328525503
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 200
+      height: 200
