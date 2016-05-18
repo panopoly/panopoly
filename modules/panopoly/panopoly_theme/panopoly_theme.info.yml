@@ -1,0 +1,7 @@
+type: module
+name: 'Panopoly Theme'
+description: 'Helps with theming and provides many layouts.'
+core: 8.x
+package: Panopoly
+dependencies:
+  - radix_layouts
