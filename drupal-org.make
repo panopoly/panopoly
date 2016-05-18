@@ -10,24 +10,18 @@ projects[panopoly_core][download][type] = git
 projects[panopoly_core][download][revision] = 25754dd
 projects[panopoly_core][download][branch] = 8.x-2.x
 
-;projects[panopoly_images][version] = 1.x-dev
-;projects[panopoly_images][subdir] = panopoly
-;projects[panopoly_images][download][type] = git
-;projects[panopoly_images][download][revision] = 915e9dc
-;projects[panopoly_images][download][branch] = 7.x-1.x
+projects[panopoly_images][version] = 2.x-dev
+projects[panopoly_images][subdir] = panopoly
+projects[panopoly_images][download][type] = git
+projects[panopoly_images][download][revision] = e0be3fa
+projects[panopoly_images][download][branch] = 8.x-2.x
 
 projects[panopoly_theme][version] = 2.x-dev
 projects[panopoly_theme][type] = module
 projects[panopoly_theme][subdir] = panopoly
 projects[panopoly_theme][download][type] = git
-projects[panopoly_theme][download][revision] = e8e6114
+projects[panopoly_theme][download][revision] = 332baf6
 projects[panopoly_theme][download][branch] = 8.x-2.x
-
-;projects[panopoly_magic][version] = 1.x-dev
-;projects[panopoly_magic][subdir] = panopoly
-;projects[panopoly_magic][download][type] = git
-;projects[panopoly_magic][download][revision] = 0e5ffba
-;projects[panopoly_magic][download][branch] = 7.x-1.x
 
 projects[panopoly_widgets][version] = 2.x-dev
 projects[panopoly_widgets][type] = module
@@ -50,11 +44,11 @@ projects[panopoly_widgets][download][branch] = 8.x-2.x
 
 ; The Panopoly Toolset
 
-;projects[panopoly_pages][version] = 1.x-dev
-;projects[panopoly_pages][subdir] = panopoly
-;projects[panopoly_pages][download][type] = git
-;projects[panopoly_pages][download][revision] = 7676b91
-;projects[panopoly_pages][download][branch] = 7.x-1.x
+projects[panopoly_pages][version] = 2.x-dev
+projects[panopoly_pages][subdir] = panopoly
+projects[panopoly_pages][download][type] = git
+projects[panopoly_pages][download][revision] = 7676b91
+projects[panopoly_pages][download][branch] = 8.x-2.x
 
 ;projects[panopoly_wysiwyg][version] = 1.x-dev
 ;projects[panopoly_wysiwyg][subdir] = panopoly
