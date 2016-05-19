@@ -1,0 +1,14 @@
+name: 'Panopoly Pages'
+type: module
+core: 8.x
+dependencies:
+  - field
+  - image
+  - menu_ui
+  - node
+  - panopoly_core
+  - panopoly_images
+  - path
+  - text
+  - user
+package: Panopoly
