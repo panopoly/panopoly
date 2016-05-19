@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.panopoly_landing_page.panelizer
+    - node.type.panopoly_landing_page
+  module:
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: true
+    custom: true
+    displays:
+      default:
+        blocks: {  }
+        id: panels_variant
+        uuid: e1997e13-80d5-42f0-8864-5d4ab3ba6ab5
+        label: ''
+        weight: 0
+        layout: radix_boxton
+        layout_settings: {  }
+        page_title: '[node:title]'
+        storage_type: panelizer_default
+        storage_id: 'node:panopoly_landing_page:full:default'
+        builder: ipe
+id: node.panopoly_landing_page.full
+targetEntityType: node
+bundle: panopoly_landing_page
+mode: full
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  panelizer: true
