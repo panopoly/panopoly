@@ -10,5 +10,3 @@ dependencies:
   - link
   - text
   - views
-features:
-  bundle: panopoly
