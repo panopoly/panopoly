@@ -78,7 +78,7 @@ third_party_settings:
         weight: 0
         layout: radix_boxton
         layout_settings: {  }
-        page_title: '[node:title]'
+        page_title: ''
         storage_type: panelizer_default
         storage_id: 'node:panopoly_content_page:featured:default'
         builder: standard
