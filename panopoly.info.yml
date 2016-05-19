@@ -42,15 +42,14 @@ dependencies:
 
   # Panopoly Foundation
   - panopoly_core
-  #- panopoly_images
+  - panopoly_images
   - panopoly_theme
-  #- panopoly_magic
   - panopoly_widgets
   #- panopoly_admin
   #- panopoly_users
 
   # Panopoly Toolset
-  #- panopoly_pages
+  - panopoly_pages
   #- panopoly_search
   #- panopoly_wysiwyg
 
