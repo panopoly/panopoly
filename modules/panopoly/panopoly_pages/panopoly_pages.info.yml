@@ -6,8 +6,10 @@ dependencies:
   - image
   - menu_ui
   - node
+  - panelizer
   - panopoly_core
   - panopoly_images
+  - panopoly_theme
   - path
   - text
   - user

@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.full
     - field.field.node.panopoly_content_page.body
     - field.field.node.panopoly_content_page.field_panopoly_categories
     - field.field.node.panopoly_content_page.field_panopoly_featured_image
@@ -16,7 +17,7 @@ dependencies:
 third_party_settings:
   panelizer:
     enable: true
-    custom: false
+    custom: true
     displays:
       default:
         blocks:
@@ -71,20 +72,31 @@ third_party_settings:
             region: contentmain
             weight: 1
             uuid: e320bacb-3bde-4e92-b506-728e9f5a418d
+          642c6f89-36a3-437b-b224-6633c25c9fd1:
+            id: 'system_menu_block:main'
+            label: 'Main navigation'
+            provider: system
+            label_display: '0'
+            level: 2
+            depth: 2
+            context_mapping: {  }
+            region: sidebar
+            uuid: 642c6f89-36a3-437b-b224-6633c25c9fd1
+            weight: 1
         id: panels_variant
         uuid: 96c72d79-eb6b-4631-8dff-97276897842e
         label: ''
         weight: 0
-        layout: radix_boxton
+        layout: radix_bryant
         layout_settings: {  }
         page_title: '[node:title]'
         storage_type: panelizer_default
-        storage_id: 'node:panopoly_content_page:default:default'
-        builder: standard
-id: node.panopoly_content_page.default
+        storage_id: 'node:panopoly_content_page:full:default'
+        builder: ipe
+id: node.panopoly_content_page.full
 targetEntityType: node
 bundle: panopoly_content_page
-mode: default
+mode: full
 content:
   body:
     label: hidden

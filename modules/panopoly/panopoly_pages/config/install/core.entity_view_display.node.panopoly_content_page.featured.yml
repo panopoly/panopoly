@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.featured
     - field.field.node.panopoly_content_page.body
     - field.field.node.panopoly_content_page.field_panopoly_categories
     - field.field.node.panopoly_content_page.field_panopoly_featured_image
@@ -10,34 +10,34 @@ dependencies:
     - field.field.node.panopoly_content_page.panelizer
     - node.type.panopoly_content_page
   module:
+    - image
     - panelizer
     - text
     - user
 third_party_settings:
   panelizer:
     enable: true
-    custom: true
+    custom: false
     displays:
       default:
         blocks:
-          6572fe04-f4be-40ef-ac2f-7575fabc4f71:
+          1df355e5-ec62-4011-b5e0-da664a4bb535:
             id: 'entity_field:node:body'
             label: Body
             provider: ctools_block
             label_display: '0'
             formatter:
               label: hidden
-              type: text_summary_or_trimmed
-              settings:
-                trim_length: 600
+              type: text_default
+              settings: {  }
               third_party_settings: {  }
               weight: 0
             context_mapping:
               entity: '@panelizer.entity_context:entity'
             region: contentmain
-            weight: 2
-            uuid: 6572fe04-f4be-40ef-ac2f-7575fabc4f71
-          f6390623-5da5-420a-b33e-d1fa83c4ece9:
+            weight: 3
+            uuid: 1df355e5-ec62-4011-b5e0-da664a4bb535
+          e320bacb-3bde-4e92-b506-728e9f5a418d:
             id: 'entity_field:node:field_panopoly_featured_image'
             label: 'Primary image'
             provider: ctools_block
@@ -46,43 +46,80 @@ third_party_settings:
               label: hidden
               type: image
               settings:
-                image_style: panopoly_images_quarter
-                image_link: content
+                image_style: panopoly_images_half
+                image_link: ''
               third_party_settings: {  }
               weight: 0
             context_mapping:
               entity: '@panelizer.entity_context:entity'
             region: contentmain
-            uuid: f6390623-5da5-420a-b33e-d1fa83c4ece9
             weight: 1
+            uuid: e320bacb-3bde-4e92-b506-728e9f5a418d
+          f54e1319-fce3-49b9-9d62-4aef629f658c:
+            id: 'entity_field:node:title'
+            label: Title
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: true
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: contentmain
+            uuid: f54e1319-fce3-49b9-9d62-4aef629f658c
+            weight: 2
         id: panels_variant
-        uuid: 6bddaee6-7035-42b7-b84b-1c30837cb4fb
+        uuid: 96c72d79-eb6b-4631-8dff-97276897842e
         label: ''
         weight: 0
         layout: radix_boxton
         layout_settings: {  }
         page_title: '[node:title]'
         storage_type: panelizer_default
-        storage_id: 'node:panopoly_content_page:teaser:default'
+        storage_id: 'node:panopoly_content_page:featured:default'
         builder: standard
-id: node.panopoly_content_page.teaser
+id: node.panopoly_content_page.featured
 targetEntityType: node
 bundle: panopoly_content_page
-mode: teaser
+mode: featured
 content:
   body:
     label: hidden
-    type: text_summary_or_trimmed
+    type: text_default
     weight: 101
-    settings:
-      trim_length: 600
+    settings: {  }
     third_party_settings: {  }
+  field_panopoly_categories:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_panopoly_featured_image:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_panopoly_featured_status:
+    weight: 104
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_panopoly_categories: true
-  field_panopoly_featured_image: true
-  field_panopoly_featured_status: true
   panelizer: true
