@@ -1,10 +1,13 @@
-type: module
 name: 'Panopoly Core'
 description: 'The magical core of the Panopoly framework.'
+type: module
 core: 8.x
-package: Panopoly
 dependencies:
-  - panels
-  - page_manager
-features:
-  bundle: panopoly
+  - field
+  - file
+  - image
+  - path
+  - taxonomy
+  - text
+  - user
+package: Panopoly

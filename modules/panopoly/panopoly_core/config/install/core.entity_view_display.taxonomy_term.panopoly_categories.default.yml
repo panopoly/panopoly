@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.panopoly_categories.field_panopoly_featured_image
+    - taxonomy.vocabulary.panopoly_categories
+  module:
+    - image
+    - text
+id: taxonomy_term.panopoly_categories.default
+targetEntityType: taxonomy_term
+bundle: panopoly_categories
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  field_panopoly_featured_image:
+    weight: 1
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden: {  }
