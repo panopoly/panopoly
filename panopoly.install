@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall hooks.
@@ -8,66 +9,17 @@
  * Implements hook_install().
  */
 function panopoly_install() {
-  // @todo: Left over from Drupal 7.
-  //_panopoly_install_help_block();
+  _panopoly_install_remove_image_styles();
 }
 
 /**
- * Helper function: add Help block to default/admin theme Help region.
+ * Remove unnecessary image styles.
  */
-function _panopoly_install_help_block() {
-  $default_theme = variable_get('theme_default', 'responsive_bartik');
-  $admin_theme = variable_get('admin_theme', $default_theme);
-
-  // Add the help block to the main theme help region.
-  $blocks = array(
-    array(
-      'module' => 'system',
-      'delta' => 'help',
-      'theme' => $default_theme,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'help',
-      'pages' => '',
-      'cache' => -1,
-    ),
-  );
-  // If the admin theme is different than default theme, add the help
-  // block to the admin them help region.
-  if ($admin_theme != $default_theme) {
-    $blocks[] = array(
-      'module' => 'system',
-      'delta' => 'help',
-      'theme' => $admin_theme,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'help',
-      'pages' => '',
-      'cache' => -1,
-    );
-  }
-
-  // Add the blocks if they aren't already placed.
-  foreach ($blocks as $block) {
-    $region = db_select('block', 'b')
-      ->fields('b', array('region'))
-      ->condition('theme', $block['theme'])
-      ->condition('module', $block['module'])
-      ->condition('delta', $block['delta'])
-      ->execute()
-      ->fetchField();
-    if (empty($region) || $region == -1) {
-      db_merge('block')
-        ->key(array(
-          'theme' => $block['theme'],
-          'module' => $block['module'],
-          'delta' => $block['delta'],
-        ))
-        ->fields($block)
-        ->execute();
-    }
-  }
-
-  // Update the menu router information.
-  menu_rebuild();
+function _panopoly_install_remove_image_styles() {
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::service('entity_type.manager');
+  $image_style_storage = $entity_type_manager->getStorage('image_style');
+  $image_styles = $image_style_storage->loadMultiple(['thumbnail', 'medium', 'large']);
+  $image_style_storage->delete($image_styles);
 }
+
