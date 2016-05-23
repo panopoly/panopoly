@@ -21,6 +21,6 @@ settings:
   file_extensions: 'txt doc docx xls xlsx pdf ppt pptx pps ppsx odt ods odp'
   max_filesize: ''
   description_field: false
-  handler: 'default:node'
+  handler: 'default:file'
   handler_settings: {  }
 field_type: file
