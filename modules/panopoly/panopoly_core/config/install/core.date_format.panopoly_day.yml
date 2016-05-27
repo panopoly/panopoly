@@ -1,0 +1,8 @@
+uuid: 79224954-e44e-47e3-bfe7-f3d34c4e0dfa
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_day
+label: Day
+locked: false
+pattern: 'F j, Y'
