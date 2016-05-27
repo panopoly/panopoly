@@ -39,18 +39,14 @@ projects[panelizer][subdir] = contrib
 
 ; The Usual Suspects
 
-;projects[pathauto][version] = 1.2
-;projects[pathauto][subdir] = contrib
-;projects[pathauto][patch][936222] = http://drupal.org/files/issues/pathauto-persist-936222-195-pathauto-state.patch
+projects[pathauto][version] = 1.0-alpha3
+projects[pathauto][subdir] = contrib
 
-;projects[token][version] = 1.6
-;projects[token][subdir] = contrib
+projects[token][version] = 1.0-alpha2
+projects[token][subdir] = contrib
 
 ;projects[libraries][version] = 2.2
 ;projects[libraries][subdir] = contrib
-
-;projects[transliteration][version] = 3.2
-;projects[transliteration][subdir] = contrib
 
 ; Field modules
 
