@@ -60,6 +60,9 @@ dependencies:
   #- distro_update
   #- uuid
   #- apps
+
+  # Remove this once we have real Apps support
+  - panopoly_demo
 themes:
   - bartik
   - seven
