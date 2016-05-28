@@ -1,0 +1,62 @@
+uuid: 422bda6a-8fc3-48e6-84e9-5145c48ff455
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.panopoly_demo_home
+    - views.view.panopoly_demo
+  module:
+    - panels
+    - search
+    - views
+id: panopoly_demo_home_panel
+label: 'Demo Panel'
+variant: panels_variant
+variant_settings:
+  blocks:
+    a3933257-d163-4250-b666-de452781b928:
+      id: 'views_block:panopoly_demo-demo_listing'
+      label: ''
+      provider: views
+      label_display: '0'
+      views_label: ''
+      items_per_page: none
+      region: contentmain
+      weight: 0
+      uuid: a3933257-d163-4250-b666-de452781b928
+      context_mapping: {  }
+    cbb898bc-49d3-4d46-b077-110efbb6fa1b:
+      id: search_form_block
+      label: Search
+      provider: search
+      label_display: '0'
+      region: sidebar
+      weight: -10
+      uuid: cbb898bc-49d3-4d46-b077-110efbb6fa1b
+      context_mapping: {  }
+    4db6e6d0-487f-4605-b3fa-716c79891d67:
+      id: 'views_block:panopoly_demo-list_featured_demo_items'
+      label: ''
+      provider: views
+      label_display: '0'
+      views_label: ''
+      items_per_page: '10'
+      region: sidebar
+      weight: -9
+      uuid: 4db6e6d0-487f-4605-b3fa-716c79891d67
+      context_mapping: {  }
+  id: panels_variant
+  uuid: 5b0813f0-3159-40d0-ac7f-a27e884faabf
+  label: null
+  weight: 0
+  layout: radix_burr_flipped
+  layout_settings: {  }
+  page_title: 'Homepage Demo'
+  storage_type: page_manager
+  storage_id: panopoly_demo_home_panel
+  builder: ipe
+page: panopoly_demo_home
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

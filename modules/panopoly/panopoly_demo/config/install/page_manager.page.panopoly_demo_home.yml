@@ -1,0 +1,11 @@
+uuid: 72da69f5-bb57-4f68-92ef-92e3dcac5fed
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_demo_home
+label: 'Homepage Demo'
+use_admin_theme: false
+path: /demo
+access_logic: and
+access_conditions: {  }
+parameters: {  }

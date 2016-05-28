@@ -1,0 +1,45 @@
+id: panopoly_demo_menu
+label: 'Import menu for Panopoly Demo'
+migration_group: 'Panopoly Demo'
+migration_tags:
+  - 'Panopoly Demo'
+migration_dependencies:
+  required:
+    - panopoly_demo_node
+source:
+  plugin: embedded_data
+  ids:
+    mlid:
+      type: integer
+  data_rows:
+    # @todo: this menu link should come from page_manager once that's supported.
+    - mlid: 1
+      path: 'internal:/demo'
+      title: 'Homepage Demo'
+      parent: 0
+      weight: -10
+    - mlid: 2
+      path: 'internal:/content/content-demo'
+      title: 'Content Demo'
+      parent: 0
+      weight: 0
+    - mlid: 3
+      path: 'internal:/content/great-vegetables'
+      title: 'Great Vegetables'
+      parent: 0
+      weight: 0
+    - mlid: 4
+      path: 'internal:/content/lovely-vegetables'
+      title: 'Lovely Vegetables'
+      parent: 0
+      weight: 0
+destination:
+  plugin: entity:menu_link_content
+process:
+  title: title
+  'link/uri': path
+  weight: weight
+  menu_name:
+    plugin: default_value
+    default_value: main
+
