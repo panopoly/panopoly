@@ -20,10 +20,9 @@ projects[panels][patch][2405733] = https://www.drupal.org/files/issues/panels-ip
 projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
 
-projects[panelizer][version] = 3.1
+projects[panelizer][version] = 3.2
 projects[panelizer][subdir] = contrib
-projects[panelizer][patch][1623536] = http://drupal.org/files/issues/array-to-object-on-update-1623536-26.patch
-projects[panelizer][patch][2416505] = http://www.drupal.org/files/issues/panelizer-search_api-2416505-3.patch
+projects[panelizer][patch][1549608] = https://www.drupal.org/files/issues/panelizer-n1549608-26.patch
 
 projects[fieldable_panels_panes][version] = 1.10
 projects[fieldable_panels_panes][subdir] = contrib
