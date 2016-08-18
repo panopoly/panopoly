@@ -45,6 +45,8 @@ function panopoly_users_panelizer_defaults() {
   $display->cache = array();
   $display->title = '';
   $display->uuid = '51ca002d-c24e-4ba7-b2dd-d966ff32e4a3';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'user:user:default';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -152,6 +154,8 @@ function panopoly_users_panelizer_defaults() {
   $display->cache = array();
   $display->title = '';
   $display->uuid = '7e27b449-64aa-41ce-86bd-4267def0c988';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'user:user:default:default';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -244,6 +248,8 @@ function panopoly_users_panelizer_defaults() {
   $display->cache = array();
   $display->title = '';
   $display->uuid = '693a059f-078d-41ef-8c11-053b70a597d2';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'user:user:default:featured';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
