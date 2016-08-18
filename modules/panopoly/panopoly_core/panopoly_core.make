@@ -13,6 +13,7 @@ projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-cl
 projects[panels][version] = 3.6
 projects[panels][subdir] = contrib
 projects[panels][patch][2785915] = https://www.drupal.org/files/issues/panels-storage-backcompat-2785915-18.patch
+projects[panels][patch][2785917] = https://www.drupal.org/files/issues/panels-underscores-in-ids-2785917-4.patch
 
 projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
