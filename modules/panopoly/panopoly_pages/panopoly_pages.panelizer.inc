@@ -41,6 +41,8 @@ function panopoly_pages_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = '5464da8b-9174-42e0-9e98-90cca0a8c98f';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'node:panopoly_landing_page:default';
   $display->content = array();
   $display->panels = array();
   $display->hide_title = PANELS_TITLE_FIXED;
@@ -82,6 +84,8 @@ function panopoly_pages_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = '16346c80-6fcf-4cee-bf7a-9c0173fc2916';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'node:panopoly_page:default';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -272,6 +276,8 @@ function panopoly_pages_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = '10c9e351-f69c-4629-b191-77b8b01f4f1c';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'node:panopoly_page:default:default';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -430,6 +436,8 @@ function panopoly_pages_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = '5b7d08f9-c351-427e-8015-14433221537b';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'node:panopoly_page:default:featured';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
@@ -583,6 +591,8 @@ function panopoly_pages_panelizer_defaults() {
   $display->cache = array();
   $display->title = '%node:title';
   $display->uuid = 'f76cbd0c-d182-4bd2-96f2-f1759b4e69d8';
+  $display->storage_type = 'panelizer_default';
+  $display->storage_id = 'node:panopoly_page:default:teaser';
   $display->content = array();
   $display->panels = array();
   $pane = new stdClass();
