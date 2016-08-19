@@ -14,6 +14,7 @@ projects[panels][version] = 3.6
 projects[panels][subdir] = contrib
 projects[panels][patch][2785915] = https://www.drupal.org/files/issues/panels-storage-backcompat-2785915-18.patch
 projects[panels][patch][2785843] = https://www.drupal.org/files/issues/panels-underscores-in-ids-2785843-16.patch
+projects[panels][patch][2462331] = https://www.drupal.org/files/issues/panels-ipe-insufficient-2462331-21.patch
 
 projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
