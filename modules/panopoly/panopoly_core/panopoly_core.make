@@ -12,6 +12,7 @@ projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-cl
 
 projects[panels][version] = 3.7
 projects[panels][subdir] = contrib
+projects[panels][patch][2787637] = https://www.drupal.org/files/issues/panels-storage-alt-task-2787637-6.patch
 
 projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
