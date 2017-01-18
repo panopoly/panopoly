@@ -44,5 +44,5 @@ Feature: Add spotlight widget
   #       from in a default install
   @api @javascript @panopoly_widgets @panopoly_wysiwig
   Scenario: Linkit is enabled on the link field
-    When I click "Search for existing content" in the "CTools modal" region
+    When I click the 2nd "Search for existing content" in the "CTools modal" region
     Then I should see "Linkit"

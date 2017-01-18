@@ -772,4 +772,30 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
 
   }
 
+  /**
+   * @When /^I click the (?P<count>\d+)(?:st|nd|rd|th) "(?P<link>[^"]*)" in the "(?P<region>[^"]*)" region$/
+   */
+  public function clickNthLink($count, $link, $region) {
+    $session = $this->getSession();
+    $region = $session->getPage()->find('region', $region);
+
+    // We index from zero, rather than one.
+    $index = $count - 1;
+
+    foreach ($region->findAll('xpath', '//a[text()="' . $link . '"]') as $element) {
+      if ($index == 0) {
+        $element->click();
+        return;
+      }
+      elseif ($index < 0) {
+        break;
+      }
+      else {
+        $index--;
+      }
+    }
+
+    throw new \Exception(sprintf("Cannot find link with text '%s' and index %d", $link, $count));
+  }
+
 }
