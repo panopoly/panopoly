@@ -5,14 +5,14 @@ core = 7.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 1.12
+projects[ctools][version] = 1.9
 projects[ctools][subdir] = contrib
+projects[ctools][patch][2209775] = https://www.drupal.org/files/issues/ctools-readd_access_callback_params-2209775-24.patch
 projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-close-modal-2607626-5.patch
-projects[ctools][patch][2787045] = https://www.drupal.org/files/issues/ctools-jquery_compatibility-2787045-14.patch
 
-projects[panels][version] = 3.8
+projects[panels][version] = 3.7
 projects[panels][subdir] = contrib
-projects[panels][patch][2790075] = https://www.drupal.org/files/issues/not_authorized_when-2790075-26.patch
+projects[panels][patch][2787637] = https://www.drupal.org/files/issues/panels-storage-alt-task-2787637-6.patch
 
 projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
