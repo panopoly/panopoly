@@ -110,10 +110,6 @@ env:
     - UPGRADE=7.x-1.33
     - UPGRADE=7.x-1.32
     - UPGRADE=7.x-1.31
-    - UPGRADE=7.x-1.30
-    - UPGRADE=7.x-1.29
-    - UPGRADE=7.x-1.28
-    - UPGRADE=7.x-1.27
 
 # Cache Composer & Drush directories.
 cache:
