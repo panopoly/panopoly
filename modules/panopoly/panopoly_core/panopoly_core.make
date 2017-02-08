@@ -9,7 +9,7 @@ projects[ctools][version] = 3.0-alpha25
 projects[ctools][subdir] = contrib
 projects[ctools][patch][2672110] = https://www.drupal.org/files/issues/entityfieldderiver-2672110-2.patch
 
-projects[panels][version] = 3.0-beta4
+projects[panels][version] = 3.0-beta5
 projects[panels][subdir] = contrib
 
 projects[page_manager][version] = 1.0-alpha23
