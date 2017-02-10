@@ -1,13 +1,14 @@
+uuid: 252d04ec-0dff-48e4-8c9e-358062ad5dbf
 langcode: en
 status: true
 dependencies:
   module:
     - file
     - image
-    - taxonomy
-id: taxonomy_term.field_panopoly_featured_image
+    - node
+id: node.field_panopoly_featured_image
 field_name: field_panopoly_featured_image
-entity_type: taxonomy_term
+entity_type: node
 type: image
 settings:
   uri_scheme: public
