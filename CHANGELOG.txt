@@ -1,3 +1,174 @@
+Panopoly 7.x-1.41, 2016-11-17
+----------------------
+- Upgrade to Drupal 7.52.
+- Update Panopoly Widgets and Test for Issue #2340811 by dsnopek, mcrittenden:
+  Switch Image widget to use Media Browser.
+- Update Panopoly Magic for Issue #2748813 by dsnopek, adamsro: Redirected to
+  ajax endpoint when editing with IPE.
+- Incorrect storage_id in panopoly_test breaks some child distributions tests.
+- Update Panopoly Search for Issue #2790595 by mpotter, humansky: SolrPhpClient
+  cannot be downloaded.
+- Update Panopoly Core for Issue #2788861: Add Panelizer patch to make
+  'administer panelizer' permission work correctly.
+- Start testing upgrades from the 1.40 release.
+- Restored drupal-org.make after the 1.40 release.
+
+Panopoly 7.x-1.40, 2016-08-20
+----------------------
+- Update Panopoly Core for Issue #2787195 by byronveale, dsnopek: Update to
+  Panels 7.x-3.7 and Panelizer 7.x-3.4.
+- Update Panopoly Core for Issue #2786553 by cboyden: Data loss: Saving in IPE
+  without changes can cause previous change to be lost.
+- Update Panopoly Core for Issue #2786249 by dsnopek: Panels 3.6 converts user
+  configured CSS IDs from underscores to dashes and makes CSS classes lover-
+  case.
+- Start testing upgrades from the 1.39 release.
+- Restored drupal-org.make after the 1.39 release.
+
+Panopoly 7.x-1.39, 2016-08-18
+----------------------
+- Update Panopoly Core for Issue #2786249: Panels 3.5 converts user configured
+  CSS IDs from underscores to dashes.
+- Update Panopoly Core, Admin, Pages, Search, Test, Users for Issue #2785825 by
+  dsnopek: Update Panels and Panelizer for SA-CONTRIB-2016-047 and SA-
+  CONTRIB-2016-048.
+- Drop support for upgrading from Panopoly versions older than 1 year.
+- Update Panopoly Core, Users and Pages for Issue #2429549 by HaiNguyen007,
+  dsnopek, DamienMcKenna, mglaman, hefox, mpotter: Update to latest Panelizer.
+- Update Panopoly Core for Issue #2753091 by cboyden: Patch Views Autocomplete
+  Filters for clunky autocomplete message.
+- Fix grammar in readme.
+- Start testing upgrades from the 1.37 release.
+- Restored drupal-org.make after the 1.38 release.
+
+Panopoly 7.x-1.38, 2016-08-03
+----------------------
+- Update Panopoly Admin for Issue #2778555 by chrisgross: Update Admin Views to
+  1.6 for SA-CONTRIB-2016-041.
+- Update Panopoly Magic and Test for Issue #2773683 by cboyden, dsnopek: Can't
+  distinguish Add links on Add Content dialog.
+- Update Panopoly Widgets and Test for Issue #2013965 by dsnopek, caschbre,
+  lsolesen, Andrew_Mallis: ability to link images placed with image widget.
+- Revert "Issue #2765427: Update to Drupal 7.50".
+- Update to Drupal 7.50.
+- Assign UID 1 to 'administrator' role on install.
+- Update Panopoly Search for Issue #2418861 by dsnopek: Don't enable
+  pantheon_apachesolr on panopoly sites hosted on Pantheon by default.
+- Start testing upgrades from the 1.37 release.
+- Restored drupal-org.make after the 1.37 release.
+
+Panopoly 7.x-1.37, 2016-06-16
+----------------------
+- Update Panopoly Core for Issue #2750185: Update Views to 3.14 for SA-
+  CONTRIB-2016-036.
+- Start testing upgrades from the 1.36 release.
+- Restored drupal-org.make after the 1.36 release.
+
+Panopoly 7.x-1.36, 2016-06-16
+----------------------
+- Update to Drupal 7.44 for SA-CORE-2016-002.
+- Update Panopoly Core for Issue #2063541 by lsolesen: Remove Open Sans?.
+- Update Panopoly Core for Issue #2728569 by dsnopek: CTools modal positioned
+  incorrectly in Bootstrap theme when message is present.
+- Start testing upgrades from the 1.35 release.
+- Restored drupal-org.make after the 1.35 release.
+
+Panopoly 7.x-1.35, 2016-05-04
+----------------------
+- Update Panopoly Magic and Test for Issue #2483295 by dsnopek, humansky,
+  mglaman, cboyden: Title in FPP is double encoded when making a link.
+- Update Panopoly Core and Magic for Issue #2717509 by dsnopek: Update to
+  Fieldable Panels Panes 1.10 for SA-CONTRIB-2016-025.
+- Start testing upgrades from the 1.34 release.
+- Merge branch '7.x-1.35' of git.drupal.org:project/panopoly into 7.x-1.35.
+- Drop support for upgrading from Panopoly versions older than 1 year.
+- Restored drupal-org.make after the 1.34 release.
+
+Panopoly 7.x-1.34, 2016-04-20
+----------------------
+- Update Panopoly Search for Issue #2710389 by dsnopek: Update to search_api
+  1.18 for SA-CONTRIB-2016-022.
+- Update Panopoly Search and Test for Issue #2561737 by cboyden, mpotter: Update
+  search_api to 1.17, search_api_db to 1.5, search_api_solr to 1.10.
+- Update Panopoly Core for Issue #2708733 by mpotter: Update Features to 2.10.
+- Start testing upgrades from the 1.33 release.
+- Restored drupal-org.make after the 1.33 release.
+
+Panopoly 7.x-1.33, 2016-04-14
+----------------------
+- Update Panopoly Theme for Issue #2706279 by dsnopek: Remove the Respondjs
+  library from Panopoly.
+- Update Panopoly Core for Issue #2706259: Update to Features 2.9 for SA-
+  CONTRIB-2016-020.
+- Update Panopoly Search for Issue #2694253 by dsnopek, cboyden: Don't log
+  searches for empty keywords.
+- Update Panopoly Core for Issue #2695563 by dsnopek: Remove debug code from
+  Panels IPE.
+- Update Panopoly Magic and Test for Issue #2467073 by cboyden, dsnopek,
+  segovia94: Preview fieldset overflows in Firefox if using a very large image.
+- Start testing upgrades from the 1.32 release.
+- Restored drupal-org.make after the 1.32 release.
+
+Panopoly 7.x-1.32, 2016-03-03
+----------------------
+- Update Panopoly Core for Issue #2679947 by cboyden: Security update to
+  fieldable panels panes 1.8.
+- Start testing upgrades from the 1.31 release.
+- Restored drupal-org.make after the 1.31 release.
+
+Panopoly 7.x-1.31, 2016-02-25
+----------------------
+- Update to Drupal 7.43 for SA-CORE-2016-001.
+- Update Panopoly Widgets and WYSIWYG for Issue #2646372 by dsnopek:
+  Panopoly_widgets Schema Update 7016 Integrity constraint violation.
+- Phing build exposes too much to the public.
+- Update Panopoly Widgets for Issue #2653834 by dsnopek: Pass entity to
+  'panopoly_spotlight_wrapper' and 'panopoly_spotlight_view' theme functions.
+- Start testing upgrades from the 1.30 release.
+- Restored drupal-org.make after the 1.30 release.
+
+Panopoly 7.x-1.30, 2016-01-06
+----------------------
+- Update Panopoly Test for Issue #2645668: "Use an image from elsewhere on the
+  web" test failing.
+- Assign UID 1 to 'administrator' role on install.
+- Update Panopoly Core for Issue #2645654: Update field_group to 1.5 for SA-
+  CONTRIB-2016-001.
+- Update Panopoly Admin for Issue #2637004 by humansky: Default admin role.
+- Update Panopoly Widgets for Issue #2623662 by dsnopek: Access denied when
+  adding Media in WYSIWYG.
+- Update Panopoly Widgets for Issue #2617618 by dsnopek: Don't set default image
+  for image widget.
+- Start testing upgrades from the 1.29 release.
+- Restored drupal-org.make after the 1.29 release.
+
+Panopoly 7.x-1.29, 2015-11-18
+----------------------
+- Update Panopoly Widgets for Issue #2618206 by mpotter: Patching media for
+  opening multiple media browser popups.
+- Bah! We don't want to test only 7.x-1.29, but skip testing 8.x-2.x (otherwise
+  we lose the issue branch tests).
+- Update Panopoly Admin for Issue #2616342 by rajarju: User base_url for showing
+  site url over permalink field (label).
+- Update Panopoly Core for Issue #2610366 by mpotter: Panels patches for Atrium.
+- Update Panopoly Images for Issue #2573877 by Andrew_Mallis: tighten up media
+  browser thumbnails.
+- Merge branch '7.x-1.29' of git.drupal.org:project/panopoly into 7.x-1.29.
+- For now, only test the 7.x-1.29 branch.
+- Update Panopoly Widgets for Issue #2533688 by dsnopek: Update to Media
+  2.0-beta1 and File Entity 2.0-beta2.
+- Update Panopoly Core for Issue #2592731 by mpotter: Update Features 2.7 (and
+  Features Override).
+- Update Panopoly Core for Issue #2578219 by mglaman: Update defaultconfig to
+  version 1.0-alpha11.
+- Revert "Update Panopoly Core for Issue #2597273: Update to Pathauto 1.3".
+- Update Panopoly Core for Issue #2567483 by humansky: Update to Date 2.9.
+- Update Panopoly Core for Issue #2597273: Update to Pathauto 1.3.
+- Update Panopoly Core for Issue #2561733: Update to CTools 1.9.
+- Update Panopoly WYSIWYG for Issue #2553903: Update to Linkit 3.4.
+- Start testing upgrades from the 1.28 release.
+- Restored drupal-org.make after the 1.28 release.
+
 Panopoly 7.x-1.28, 2015-10-21
 ----------------------
 - Update to Drupal 7.41 for SA-CORE-2015-004 and jquery_update for SA-
