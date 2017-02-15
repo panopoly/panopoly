@@ -6,9 +6,11 @@ dependencies:
   - field
   - file
   - image
+  - node
+  - panelizer
+  - panopoly_images
   - path
   - pathauto
-  - panelizer
   - taxonomy
   - text
   - user

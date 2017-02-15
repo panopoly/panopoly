@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.panopoly_categories.field_panopoly_featured_image
-    - image.style.thumbnail
+    - image.style.panopoly_images_thumbnail
     - taxonomy.vocabulary.panopoly_categories
   module:
     - image
@@ -15,17 +15,17 @@ bundle: panopoly_categories
 mode: default
 content:
   description:
-    type: text_textfield
+    type: text_textarea
     weight: 0
     settings:
-      size: 60
       placeholder: ''
+      rows: 5
     third_party_settings: {  }
   field_panopoly_featured_image:
     weight: 31
     settings:
+      preview_image_style: panopoly_images_thumbnail
       progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
   name:
