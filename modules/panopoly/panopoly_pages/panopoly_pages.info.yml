@@ -12,6 +12,7 @@ dependencies:
   - panopoly_images
   - panopoly_theme
   - path
+  - pathauto
   - text
   - user
 package: Panopoly

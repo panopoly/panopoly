@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.panopoly_landing_page.panelizer
     - node.type.panopoly_landing_page
   module:
     - panelizer
@@ -19,4 +20,5 @@ content:
     weight: 100
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  panelizer: true

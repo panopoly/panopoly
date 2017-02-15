@@ -3,6 +3,7 @@ status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.panopoly_landing_page.panelizer
     - node.type.panopoly_landing_page
   module:
     - user
@@ -13,4 +14,5 @@ mode: teaser
 content:
   links:
     weight: 100
-hidden: {  }
+hidden:
+  panelizer: true

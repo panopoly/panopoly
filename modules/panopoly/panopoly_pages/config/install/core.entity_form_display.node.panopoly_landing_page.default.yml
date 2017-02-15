@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.panopoly_landing_page.panelizer
     - node.type.panopoly_landing_page
   module:
     - path
@@ -47,4 +48,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  panelizer: true

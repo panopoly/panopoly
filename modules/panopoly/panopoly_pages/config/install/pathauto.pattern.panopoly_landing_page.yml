@@ -1,4 +1,3 @@
-uuid: 51d92e8f-5d71-49d6-bdaa-b20cfb47a6f4
 langcode: en
 status: true
 dependencies:
@@ -20,4 +19,3 @@ selection_criteria:
 selection_logic: and
 weight: -5
 relationships: {  }
-
