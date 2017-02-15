@@ -1,0 +1,18 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.panopoly_test_landing_page.panelizer
+    - node.type.panopoly_test_landing_page
+  module:
+    - user
+id: node.panopoly_test_landing_page.teaser
+targetEntityType: node
+bundle: panopoly_test_landing_page
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  panelizer: true

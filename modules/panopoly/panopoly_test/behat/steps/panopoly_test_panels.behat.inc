@@ -33,8 +33,8 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    * @When I wait for the Panels IPE to activate
    */
   public function waitForIPEtoActivate() {
-    $this->getSession()->wait(5000, 'jQuery(".panels-ipe-editing").length > 0');
-  }
+    // @todo: Implement for Drupal 8!
+ }
 
   /**
    * Wait until the Panels IPE is deactivated.
@@ -42,7 +42,7 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    * @When I wait for the Panels IPE to deactivate
    */
   public function waitForIPEtoDeactivate() {
-    $this->getSession()->wait(5000, 'jQuery(".panels-ipe-editing").length === 0');
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -51,10 +51,7 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    * @When I customize this page with the Panels IPE
    */
   public function customizeThisPageIPE() {
-    $this->getSession()->getDriver()->maximizeWindow();
-    $this->waitForIPEtoDeactivate();
-    $this->getSession()->getPage()->clickLink('Customize this page');
-    $this->waitForIPEtoActivate();
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -63,9 +60,36 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    * @When I change layout with the Panels IPE
    */
   public function changeLayoutIPE() {
-    $this->getSession()->wait(5000, 'jQuery(".panels-choose-layout").length === 0');
-    $this->getSession()->getPage()->clickLink('Change layout');
-    $this->getSession()->wait(5000, 'jQuery(".panels-choose-layout").length > 0');
+    // @todo: Implement for Drupal 8!
+  }
+
+  protected function checkVisible($selector) {
+    $this->getSession()->wait(5000, "jQuery('$selector').length > 0 && jQuery('$selector').get(0).offsetParent !== null");
+  }
+
+  /**
+   * @When I create new :widget content in the Panels IPE
+   */
+  public function createNewContent($widget) {
+    $page = $this->getSession()->getPage();
+    $page->clickLink('Manage Content');
+    $this->checkVisible(".ipe-block-picker-list.active");
+    $page->clickLink('Create Content');
+    $this->checkVisible(".ipe-category-picker-top.active");
+    if ($create_link = $page->find('xpath', "//a[@data-block-type and div/h5/text() = '$widget']")) {
+      $create_link->click();
+    }
+    else {
+      throw new \Exception("Unable to find widget called '$widget'");
+    }
+    $this->checkVisible("form.block-content-form");
+  }
+
+  /**
+   * @When I wait for the block form to load in the Panels IPE
+   */
+  public function waitForBlockFormInIPE() {
+    $this->checkVisible("form.panels-ipe-block-plugin-form");
   }
 
 }

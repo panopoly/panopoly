@@ -99,20 +99,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @api&&@drupal_private_files
    */
   public function configurePrivateFiles($event) {
-    $file_private_path = variable_get('file_private_path', '');
-    if (empty($file_private_path)) {
-      $file_public_path = variable_get('file_public_path', conf_path() . '/files');
-      if (empty($file_public_path)) {
-        throw new \Exception('Files must be configured for @drupal_private_files tests to work!');
-      }
-
-      // Set flag for later cleanup.
-      $this->private_path_overridden = TRUE;
-
-      // Create and setup the private path.
-      $file_private_path = $file_public_path . '/' . 'private';
-      variable_set('file_private_path', $file_private_path);
-    }
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -121,9 +108,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @AfterScenario @api&&@drupal_private_files
    */
   public function cleanupPrivateFiles($event) {
-    if ($this->private_path_overridden) {
-      variable_del('file_private_path');
-    }
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -266,18 +251,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   public function fileCreate($source_path, $destination = NULL) {
     $data = file_get_contents($source_path);
 
-    // Before working with files, we need to change our current directory to
-    // DRUPAL_ROOT so that the relative paths that define the stream wrappers
-    // (like public:// or temporary://) actually work.
-    $cwd = getcwd();
-    chdir(DRUPAL_ROOT);
-
-    if ($file = file_save_data($data, $destination)) {
-      $this->files[] = $file;
-    }
-
-    // Then change back.
-    chdir($cwd);
+    // @todo: Implement for Drupal 8!
 
     return $file;
   }
@@ -319,26 +293,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     $uids = $this->getUIDs();
     if (!empty($uids)) {
 
-      // Add any files created by test users to the $files variable.
-      $file_ids = db_query('SELECT fid FROM {file_managed} WHERE uid IN (:uids)', array(':uids' => $uids))->fetchAll();
-      if (!empty($file_ids)) {
-        // The file_delete() function expects an object.
-        foreach ($file_ids as $fid) {
-          $file = file_load($fid->fid);
-          $this->files[] = $file;
-        }
-      }
+      // @todo: Implement for Drupal 8!
     }
-
-    // Delete any files that were created by test users or our Given step.
-    if (!empty($this->files)) {
-      foreach ($this->files as $file) {
-        $this->fileDelete($file);
-      }
-    }
-
-    // Reset the arrays to empty after deletion.
-    $this->files = array();
   }
 
   /**
@@ -348,20 +304,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    *   A file object to delete.
    */
   public function fileDelete($file) {
-    // Figure out if there's usage in any nodes.
-    $fid = $file->fid;
-    $node_usage = db_query('SELECT id AS nid FROM {file_usage} WHERE fid = (:fid) AND module = (:module) and type = (:node)', array(':fid' => $fid, ':module' => 'media', ':node' => 'node'))->fetchAll();
-    // If there is, it should be safe to unregister it, because we already know the file is owned by a current test user.
-    if (!empty($node_usage)) {
-      foreach ($node_usage as $nid) {
-        file_usage_delete($file, 'media', 'node', $nid->nid);
-      }
-    }
-    // See PanopolyContext::fileCreate() for information on why we do this.
-    $cwd = getcwd();
-    chdir(DRUPAL_ROOT);
-    file_delete($file);
-    chdir($cwd);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -370,8 +313,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are disabled
    */
   public function disablePanopolyMagicLivePreview() {
-    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 0 --yes');
-    variable_set('panopoly_magic_live_preview', 0);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -380,8 +322,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are automatic
    */
   public function enableAutomaticPanopolyMagicLivePreview() {
-    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 1 --yes');
-    variable_set('panopoly_magic_live_preview', 1);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -390,8 +331,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are manual
    */
   public function enableManualPanopolyMagicLivePreview() {
-    //$this->getDriver('drush')->vset('panopoly_magic_live_preview 2 --yes');
-    variable_set('panopoly_magic_live_preview', 2);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -400,7 +340,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * Disable add content previews via Panopoly Magic.
    */
   public function disablePanopolyMagicAddContentPreview() {
-    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_DISABLED);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -409,7 +349,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * Enable automatic add content previews via Panopoly Magic.
    */
   public function enableAutomaticPanopolyMagicAddContentPreview() {
-    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_AUTOMATIC);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -418,7 +358,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * Enable manual add content previews via Panopoly Magic.
    */
   public function enableManualPanopolyMagicAddContentPreview() {
-    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_MANUAL);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -427,7 +367,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * Enable single add content previews via Panopoly Magic.
    */
   public function enableSinglePanopolyMagicAddContentPreview() {
-    variable_set('panopoly_magic_pane_add_preview', PANOPOLY_ADD_PREVIEW_SINGLE);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -436,7 +376,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly admin "Use Advanced Panel Plugins" is disabled
    */
   public function disablePanopolyAdminAdvanacedPanelPlugins() {
-    variable_set('panopoly_admin_advanced_plugins', FALSE);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -445,7 +385,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly admin "Use Advanced Panel Plugins" is enabled
    */
   public function enablePanopolyAdminAdvanacedPanelPlugins() {
-    variable_set('panopoly_admin_advanced_plugins', TRUE);
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -472,9 +412,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @When I wait for live preview to finish
    */
   public function waitForLivePreview() {
-    // Make sure the live preview has triggered by bluring the current focus.
-    $this->getSession()->executeScript("document.activeElement.blur()");
-    $this->getSession()->wait(5000, 'typeof jQuery !== "undefined" && jQuery.active === 0 && jQuery("#panopoly-form-widget-preview").length > 0 && !jQuery("#panopoly-form-widget-preview").hasClass("panopoly-magic-loading")');
+    // @todo: Implement for Drupal 8!
   }
 
   /**
@@ -772,7 +710,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given the dblog is empty
    */
   public function clearDblog() {
-    db_delete('watchdog')->execute();
+    // @todo: Implement for Drupal 8!
   }
   
   /**
@@ -827,19 +765,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given :module has the :dependency dependency at position :key
    */
   public function moduleHasDependencyAtKey($module, $dependency, $key) {
-    if (!module_exists($module)) {
-      throw new \Exception("$module is not enabled.");
-    }
-    if (!module_exists($dependency)) {
-      throw new \Exception("$dependency is not enabled.");
-    }
-
-    $info = drupal_parse_info_file(drupal_get_path('module', $module) . '/' . $module . '.info');
-
-    if ($info['dependencies'][$key] != $dependency) {
-      throw new \Exception("$module did not have $dependency dependency at $key position");
-    }
-
+    // @todo: Implement for Drupal 8!
   }
 
   /**

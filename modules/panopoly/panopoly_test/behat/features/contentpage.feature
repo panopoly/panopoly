@@ -6,18 +6,19 @@ Feature: Add content page
   Background: 
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
-    When I visit "/node/add/panopoly-page"
+	# @todo Make a Drupal agnostic rule!
+    When I visit "/node/add/panopoly_content_page"
       And I fill in the following:
-        | Title               | Testing title |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
+        | Title       | Testing title   |
+        | Text format | restricted_html |
+        | Body        | Testing body    |
 
-  @api @panopoly_pages
+  @api @panopoly_pages @panopoly2
   Scenario: Add a content page
     # Normally, here we'd press "Publish", however some child distribtions
     # don't use 'save_draft', and this makes this test compatible with them.
     #When I press "Publish"
-    When I press "edit-submit"
+    When I press "Save and publish"
     Then the "h1" element should contain "Testing title"
 
   @api @javascript @panopoly_pages @local_files

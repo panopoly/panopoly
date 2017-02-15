@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.panopoly_test_landing_page.panelizer
+    - node.type.panopoly_test_landing_page
+  module:
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+id: node.panopoly_test_landing_page.default
+targetEntityType: node
+bundle: panopoly_test_landing_page
+mode: default
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  panelizer: true

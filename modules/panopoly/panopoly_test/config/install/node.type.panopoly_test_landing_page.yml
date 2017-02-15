@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Test landing page'
+type: panopoly_test_landing_page
+description: 'A landing page for testing.'
+help: "<p>Here you can set the <em>Landing Page's</em> metadata, for example the title, path and menu options.</p>\r\n<p>To add content to the page, first save this form and then use the tray at the bottom of the page.</p>"
+new_revision: false
+preview_mode: 0
+display_submitted: false

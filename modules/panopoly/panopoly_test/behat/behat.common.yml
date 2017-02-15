@@ -4,7 +4,7 @@ default:
       paths: 
         features: 'features'
       filters:
-        tags: "~@chrome"
+        tags: "@panopoly2&&~@chrome"
       contexts:
         - FeatureContext
         - Drupal\DrupalExtension\Context\DrupalContext
@@ -35,6 +35,7 @@ default:
         Bryant Flipped Content: ".bryant-flipped .radix-layouts-content"
         Bryant Flipped Sidebar: ".bryant-flipped .radix-layouts-sidebar"
         # For Panels / Panopoly specific regions.
+        IPE: "#panels-ipe-tray"
         CTools modal: "#modalContent"
         Live preview: ".panopoly-magic-preview"
         Linkit modal: "#linkit-modal"
@@ -68,7 +69,7 @@ chrome:
   suites:
     default:
       filters:
-        tags: "@chrome"
+        tags: "@panopoly2&&@chrome"
   extensions:
     Behat\MinkExtension:
       selenium2:

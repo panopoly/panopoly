@@ -1,0 +1,88 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.panopoly_test_content_page.body
+    - field.field.node.panopoly_test_content_page.field_panopoly_categories
+    - field.field.node.panopoly_test_content_page.field_panopoly_featured_image
+    - field.field.node.panopoly_test_content_page.field_panopoly_featured_status
+    - field.field.node.panopoly_test_content_page.panelizer
+    - node.type.panopoly_test_content_page
+  module:
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: true
+    custom: true
+    displays:
+      default:
+        blocks:
+          78f274cf-5d47-45e5-a762-0b67d9290988:
+            id: 'entity_field:node:body'
+            label: Body
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: text_summary_or_trimmed
+              settings:
+                trim_length: 600
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: contentmain
+            weight: 2
+            uuid: 78f274cf-5d47-45e5-a762-0b67d9290988
+          2ef654ab-d829-4dc5-952f-22e8ea552542:
+            id: 'entity_field:node:field_panopoly_featured_image'
+            label: 'Primary image'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: image
+              settings:
+                image_style: panopoly_images_quarter
+                image_link: content
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: contentmain
+            uuid: 2ef654ab-d829-4dc5-952f-22e8ea552542
+            weight: 1
+        id: panels_variant
+        uuid: 233cdeb6-3293-4f85-b9fd-69a477c4cf6c
+        label: ''
+        weight: 0
+        layout: radix_boxton
+        layout_settings: {  }
+        page_title: '[node:title]'
+        storage_type: panelizer_default
+        storage_id: 'node:panopoly_test_content_page:teaser:default'
+        builder: standard
+id: node.panopoly_test_content_page.teaser
+targetEntityType: node
+bundle: panopoly_test_content_page
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_panopoly_categories: true
+  field_panopoly_featured_image: true
+  field_panopoly_featured_status: true
+  panelizer: true
