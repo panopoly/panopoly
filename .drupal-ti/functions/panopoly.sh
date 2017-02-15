@@ -61,9 +61,6 @@ function panopoly_build_distribution() {
 	cd drupal
 	drush make --yes profiles/panopoly/drupal-org-core.make --prepare-install
 	drush make --yes profiles/panopoly/drupal-org.make --no-core --contrib-destination=profiles/panopoly
-	if [[ "$INSTALL_PANOPOLY_DEMO_FROM_APPS" != 1 ]]; then
-		drush dl panopoly_demo-1.x-dev
-	fi
 	drush dl diff
 	mkdir -p sites/default/private/files
 	mkdir -p sites/default/private/temp
@@ -121,14 +118,6 @@ function drupal_ti_ensure_drupal() {
 # Overwrite environments/drupal-7.sh install function
 #
 function drupal_ti_install_drupal() {
-	# Hack to get the correct version of Panopoly Demo (there was no 1.0-rc4 or 1.0-rc5)
-	UPGRADE_DEMO_VERSION=`echo $UPGRADE | sed -e s/^7.x-//`
-	case $UPGRADE_DEMO_VERSION in
-		1.0-rc[45])
-			UPGRADE_DEMO_VERSION=1.0-rc3
-		;;
-	esac
-
 	# Do the site install (either the current revision or old for the upgrade).
 	panopoly_header Installing Drupal
 	if [[ "$UPGRADE" == none ]]
@@ -136,15 +125,13 @@ function drupal_ti_install_drupal() {
 		cd drupal
 	else
 		cd panopoly-$UPGRADE
-		if [[ "$INSTALL_PANOPOLY_DEMO_FROM_APPS" != 1 ]]; then
-			drush dl panopoly_demo-$UPGRADE_DEMO_VERSION
-		fi
 		# Relax checks as drush site-install has errors for update 1.13.
 		set +e
 	fi
 	php -d sendmail_path=$(which true) ~/.composer/vendor/bin/drush.php --yes site-install panopoly --db-url="$DRUPAL_TI_DB_URL" --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="Panopoly"
-	drush vset -y file_private_path "sites/default/private/files"
-	drush vset -y file_temporary_path "sites/default/private/temp"
+	# @todo: How to do this in Drupal 8?
+	#drush vset -y file_private_path "sites/default/private/files"
+	#drush vset -y file_temporary_path "sites/default/private/temp"
 
 	# Switch to the Panopoly platform built from Git (if we aren't there already).
 	cd ../drupal
