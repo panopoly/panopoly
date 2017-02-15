@@ -55,8 +55,11 @@ projects[token][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[features][version] = 3.0-beta3
+projects[features][version] = 3.2
 projects[features][subdir] = contrib
+
+projects[config_update][version] = 1.3
+projects[config_update][subdir] = contrib
 
 ;projects[apps][version] = 1.0
 ;projects[apps][subdir] = contrib
