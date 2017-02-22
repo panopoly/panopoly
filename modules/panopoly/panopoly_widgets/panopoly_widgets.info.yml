@@ -5,9 +5,14 @@ core: 8.x
 package: Panopoly
 dependencies:
   - block_content
+  - ctools_views
   - field
   - file
   - image
   - link
+  - node
+  - panopoly_core
   - panopoly_images
   - text
+  - user
+  - views
