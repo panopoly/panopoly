@@ -5,9 +5,9 @@ core = 8.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 3.0-alpha25
+projects[ctools][version] = 3.0-alpha27
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2672110] = https://www.drupal.org/files/issues/entityfieldderiver-2672110-2.patch
+projects[ctools][patch][2657060] = https://www.drupal.org/files/issues/2657060-44.exposed_filter_block_config.patch
 
 projects[panels][version] = 3.0-beta5
 projects[panels][subdir] = contrib
