@@ -7,7 +7,7 @@ projects[panopoly_core][version] = 2.x-dev
 projects[panopoly_core][type] = module
 projects[panopoly_core][subdir] = panopoly
 projects[panopoly_core][download][type] = git
-projects[panopoly_core][download][revision] = e76f56a
+projects[panopoly_core][download][revision] = bfcd69e
 projects[panopoly_core][download][branch] = 8.x-2.x
 
 projects[panopoly_images][version] = 2.x-dev
@@ -27,7 +27,7 @@ projects[panopoly_widgets][version] = 2.x-dev
 projects[panopoly_widgets][type] = module
 projects[panopoly_widgets][subdir] = panopoly
 projects[panopoly_widgets][download][type] = git
-projects[panopoly_widgets][download][revision] = 384b803
+projects[panopoly_widgets][download][revision] = 485d1ee
 projects[panopoly_widgets][download][branch] = 8.x-2.x
 
 ;projects[panopoly_admin][version] = 1.x-dev
