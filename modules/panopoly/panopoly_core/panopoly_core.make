@@ -21,7 +21,7 @@ projects[layout_plugin][subdir] = contrib
 ;projects[panels_breadcrumbs][version] = 2.2
 ;projects[panels_breadcrumbs][subdir] = contrib
 
-projects[panelizer][version] = 3.0-alpha2
+projects[panelizer][version] = 3.0-beta1
 projects[panelizer][subdir] = contrib
 
 ;projects[fape][version] = 1.2
