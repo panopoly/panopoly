@@ -3,7 +3,7 @@
 : ${DRUSH:=drush}
 : ${DRUSH_ARGS:=}
 
-PANOPOLY_FEATURES="panopoly_core panopoly_demo panopoly_images panopoly_pages panopoly_theme panopoly_widgets"
+PANOPOLY_FEATURES="panopoly_core panopoly_demo panopoly_images panopoly_pages panopoly_theme panopoly_users panopoly_widgets"
 
 # TODO: We should make sure that 'diff' is downloaded first!
 $DRUSH $DRUSH_ARGS en -y diff features

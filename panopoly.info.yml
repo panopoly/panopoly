@@ -44,7 +44,7 @@ dependencies:
   - panopoly_theme
   - panopoly_widgets
   #- panopoly_admin
-  #- panopoly_users
+  - panopoly_users
 
   # Panopoly Toolset
   - panopoly_pages
