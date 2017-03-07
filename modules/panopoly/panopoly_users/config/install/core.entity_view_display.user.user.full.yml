@@ -1,0 +1,79 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.full
+    - field.field.user.user.field_panopoly_users_about
+    - field.field.user.user.panelizer
+    - field.field.user.user.user_picture
+  module:
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: true
+    custom: true
+    allow: false
+    default: default
+    displays:
+      default:
+        blocks:
+          bc212799-869d-4cb4-b685-bec33f4156d0:
+            id: 'entity_field:user:user_picture'
+            label: Picture
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: image
+              settings:
+                image_style: panopoly_images_full
+                image_link: ''
+              third_party_settings: {  }
+              weight: 0
+            region: column2
+            weight: 0
+            uuid: bc212799-869d-4cb4-b685-bec33f4156d0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+          513c90b4-828b-48b5-8c8f-854984378afb:
+            id: 'entity_field:user:field_panopoly_users_about'
+            label: About
+            provider: ctools_block
+            label_display: visible
+            formatter:
+              label: hidden
+              type: text_default
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+            region: column1
+            weight: 0
+            uuid: 513c90b4-828b-48b5-8c8f-854984378afb
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+        id: panels_variant
+        label: Default
+        uuid: b779e895-090e-4f53-8ef9-f1eb6b3c107e
+        weight: 0
+        layout: radix_phelan
+        layout_settings: {  }
+        page_title: '[user:name]'
+        storage_type: panelizer_default
+        storage_id: 'user:user:full:default'
+        builder: ipe
+        pattern: panelizer
+        static_context: {  }
+id: user.user.full
+targetEntityType: user
+bundle: user
+mode: full
+content:
+  member_for:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_panopoly_users_about: true
+  panelizer: true
+  user_picture: true

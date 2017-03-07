@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_panopoly_users_about
+    - field.field.user.user.panelizer
+    - field.field.user.user.user_picture
+  module:
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+    displays:
+      default:
+        blocks: {  }
+        id: panels_variant
+        label: Default
+        uuid: b779e895-090e-4f53-8ef9-f1eb6b3c107e
+        weight: 0
+        layout: onecol
+        layout_settings: {  }
+        page_title: '[user:name]'
+        storage_type: ''
+        storage_id: ''
+        builder: ipe
+        pattern: panelizer
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  field_panopoly_users_about:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  member_for:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  panelizer: true
+  user_picture: true

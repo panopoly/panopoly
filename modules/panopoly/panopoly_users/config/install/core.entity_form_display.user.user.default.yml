@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_panopoly_users_about
+    - field.field.user.user.panelizer
+    - field.field.user.user.user_picture
+    - image.style.panopoly_images_thumbnail
+  module:
+    - image
+    - path
+    - text
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  contact:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+  field_panopoly_users_about:
+    weight: 3
+    settings:
+      rows: 9
+      placeholder: ''
+      summary_rows: 3
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+  language:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  timezone:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+  user_picture:
+    type: image_image
+    weight: 4
+    settings:
+      preview_image_style: panopoly_images_thumbnail
+      progress_indicator: throbber
+    third_party_settings: {  }
+hidden:
+  panelizer: true
