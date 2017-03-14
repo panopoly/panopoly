@@ -1,0 +1,88 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - ckeditor
+format: basic_html
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Strike
+        -
+          name: 'Lists and Quotes'
+          items:
+            - BulletedList
+            - NumberedList
+            - Blockquote
+        -
+          name: 'Text Align'
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+        -
+          name: Linking
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Tools
+          items:
+            - DrupalImage
+            - Maximize
+            - Source
+      -
+        -
+          name: 'Block Formatting'
+          items:
+            - Format
+        -
+          name: Underline
+          items:
+            - Underline
+        -
+          name: Justify
+          items:
+            - JustifyBlock
+        -
+          name: 'Clear Formatting'
+          items:
+            - PasteText
+            - PasteFromWord
+            - RemoveFormat
+        -
+          name: 'Special Characters'
+          items:
+            - SpecialChar
+        -
+          name: Indentation
+          items:
+            - Outdent
+            - Indent
+        -
+          name: Undo/Redo
+          items:
+            - Undo
+            - Redo
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: ''
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: 0
+    height: 0

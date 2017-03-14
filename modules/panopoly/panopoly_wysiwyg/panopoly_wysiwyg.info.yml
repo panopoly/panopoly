@@ -1,0 +1,9 @@
+name: 'Panopoly WYSIWYG'
+description: 'Integrates a WYSIWYG into Drupal.'
+type: module
+core: 8.x
+dependencies:
+  - ckeditor
+  - editor
+  - filter
+package: Panopoly
