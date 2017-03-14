@@ -10,7 +10,6 @@ dependencies:
   - history
   - block
   - breakpoint
-  - ckeditor
   - color
   - config
   - contact
@@ -49,7 +48,7 @@ dependencies:
   # Panopoly Toolset
   - panopoly_pages
   #- panopoly_search
-  #- panopoly_wysiwyg
+  - panopoly_wysiwyg
 
   # Panopoly Recommended - Admin & UI
   #- simplified_menu_admin

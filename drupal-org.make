@@ -50,11 +50,11 @@ projects[panopoly_pages][download][type] = git
 projects[panopoly_pages][download][revision] = ca3c671
 projects[panopoly_pages][download][branch] = 8.x-2.x
 
-;projects[panopoly_wysiwyg][version] = 1.x-dev
-;projects[panopoly_wysiwyg][subdir] = panopoly
-;projects[panopoly_wysiwyg][download][type] = git
-;projects[panopoly_wysiwyg][download][revision] = 4c587af
-;projects[panopoly_wysiwyg][download][branch] = 7.x-1.x
+projects[panopoly_wysiwyg][version] = 2.x-dev
+projects[panopoly_wysiwyg][subdir] = panopoly
+projects[panopoly_wysiwyg][download][type] = git
+projects[panopoly_wysiwyg][download][revision] = 6a8b732
+projects[panopoly_wysiwyg][download][branch] = 8.x-2.x
 
 ;projects[panopoly_search][version] = 1.x-dev
 ;projects[panopoly_search][subdir] = panopoly
