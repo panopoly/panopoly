@@ -30,6 +30,7 @@ stylesheets[all][] = panopoly-widgets-spotlight.css
 features[ctools][] = file_entity:file_default_displays:1
 features[ctools][] = linkit:linkit_profiles:1
 features[ctools][] = views:views_default:3.0
+features[defaultconfig][] = strongarm:media_wysiwyg_alignment
 features[defaultconfig][] = strongarm:media_wysiwyg_default_render
 features[defaultconfig][] = user_default_permissions:access media browser
 features[defaultconfig][] = user_default_permissions:add media from remote sources
