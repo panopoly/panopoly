@@ -26,6 +26,7 @@ Feature: Add spotlight widget
     Then I should see "Destination"
     When I select the radio button "Public local files served by the webserver."
       And I press "Next"
+      And I wait 2 seconds
     Then I should see a "#edit-submit" element
       And I should see the "Crop" button
     When I press "Save"

@@ -33,6 +33,7 @@ Feature: Add media using the rich text editor
     # Select the destination (public/private files).
     When I select the radio button "Public local files served by the webserver."
       And I press "Next"
+      And I wait 2 seconds
     Then I should see a "#edit-submit" element
       And I should see the "Crop" button
     # Fields for the image.
@@ -67,6 +68,7 @@ Feature: Add media using the rich text editor
     Then I should see "Destination"
     When I select the radio button "Public local files served by the webserver."
       And I press "Next"
+      And I wait 2 seconds
     Then I should see a "#edit-submit" element
     # We need to set the alt/title text differently in the two steps that ask
     # for it - so, that we can test that the 2nd overrides.
@@ -110,6 +112,7 @@ Feature: Add media using the rich text editor
     Then I should see "Destination"
     When I select the radio button "Public local files served by the webserver."
       And I press "Next"
+      And I wait 2 seconds
     Then I should see a "#edit-submit" element
     # We need to set the alt/title text differently in the two steps that ask
     # for it - so, that we can test that the 2nd overrides.
@@ -149,6 +152,7 @@ Feature: Add media using the rich text editor
     # Select the destination (public/private files).
     When I select the radio button "Public local files served by the webserver."
       And I press "Next" in the "Media web tab" region
+      And I wait 2 seconds
     Then I should see a "#edit-submit" element
       And I should see the "Crop" button
     # Fields for the image.
