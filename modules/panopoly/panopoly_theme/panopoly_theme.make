@@ -4,9 +4,8 @@ api = 2
 core = 8.x
 
 ; Radix Layouts
-projects[radix_layouts][version] = 3.0-rc1
+projects[radix_layouts][version] = 4.0
 projects[radix_layouts][subdir] = contrib
-projects[radix_layouts][patch][2875034] = https://www.drupal.org/files/issues/2875034-radix-layouts-drupal-8-3-1-panels-4-compatibility-3.0.patch
 
 ; Bundle a Few Panopoly Approved Themes
 
