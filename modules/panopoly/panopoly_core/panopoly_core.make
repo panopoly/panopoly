@@ -10,10 +10,9 @@ projects[ctools][subdir] = contrib
 projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-close-modal-2607626-5.patch
 projects[ctools][patch][2787045] = https://www.drupal.org/files/issues/ctools-jquery_compatibility-2787045-14.patch
 
-projects[panels][version] = 3.8
+projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
-projects[panels][patch][2790075] = https://www.drupal.org/files/issues/not_authorized_when-2790075-26.patch
-projects[panels][patch][2479879] = https://www.drupal.org/files/issues/panels-revert_allowed_types_to_variable-2479879-37.patch
+projects[panels][patch][1570120] = https://www.drupal.org/files/issues/move-image-1570120-31.patch
 
 projects[panels_breadcrumbs][version] = 2.2
 projects[panels_breadcrumbs][subdir] = contrib
