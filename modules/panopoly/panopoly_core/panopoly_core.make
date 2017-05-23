@@ -5,23 +5,20 @@ core = 8.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 3.0-alpha27
+projects[ctools][version] = 3.0
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2657060] = https://www.drupal.org/files/issues/2657060-44.exposed_filter_block_config.patch
+projects[ctools][patch][2657060] = https://www.drupal.org/files/issues/ctools-exposed-filter-block-config-2657060-56.patch
 
-projects[panels][version] = 3.0-beta5
+projects[panels][version] = 4.1
 projects[panels][subdir] = contrib
 
-projects[page_manager][version] = 1.0-alpha23
+projects[page_manager][version] = 4.0-beta2
 projects[page_manager][subdir] = contrib
-
-projects[layout_plugin][version] = 1.0-alpha22
-projects[layout_plugin][subdir] = contrib
 
 ;projects[panels_breadcrumbs][version] = 2.2
 ;projects[panels_breadcrumbs][subdir] = contrib
 
-projects[panelizer][version] = 3.0-beta1
+projects[panelizer][version] = 4.0
 projects[panelizer][subdir] = contrib
 
 ;projects[fape][version] = 1.2
