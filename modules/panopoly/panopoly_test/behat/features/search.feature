@@ -7,8 +7,10 @@ Feature: Search
   Scenario: Trying an empty search should yield a message
     Given I am on the homepage
     When I press "Search" in the "Search" region
-    Then I should see "Search Results"
+    Then I should not see "Search Results"
+      And I should see "Search"
       And I should see "Enter your keywords"
+      And I should see "Please enter some keywords"
 
   @panopoly_search
   Scenario: Trying a search with no results
@@ -19,7 +21,7 @@ Feature: Search
       And I should see "0 items matched TkyXNk9NG2U7FjqtMvNvHXpv2xnfVv7Q"
       And I should see "Your search did not return any results."
 
-  @api @panopoly_search @wip
+  @api @panopoly_search
   Scenario: Performing a search with results
     Given I am on the homepage
     And "panopoly_test_page" content:
