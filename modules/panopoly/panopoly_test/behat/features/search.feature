@@ -50,7 +50,7 @@ Feature: Search
         | Title   | Text widget title |
         | Editor  | plain_text        |
         | Text    | Undominable       |
-      And I press "Save" in the "CTools modal" region
+      And I press "Add" in the "CTools modal" region
       And I press "Save as custom"
       And I wait for the Panels IPE to deactivate
       # Run cron to make sure the page is indexed.

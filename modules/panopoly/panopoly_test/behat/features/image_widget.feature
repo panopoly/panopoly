@@ -32,7 +32,7 @@ Feature: Add image widget
       And I press "Save"
       And I switch out of all frames
       And I wait 2 seconds
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing image widget title"
@@ -69,7 +69,7 @@ Feature: Add image widget
       And I press "Save"
       And I switch out of all frames
       And I wait 2 seconds
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing image widget title"
