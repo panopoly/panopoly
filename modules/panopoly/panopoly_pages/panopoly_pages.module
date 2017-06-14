@@ -87,6 +87,19 @@ function panopoly_pages_panels_ipe_blocks_alter(array &$blocks, PanelsDisplayVar
       ]);
     }
 
+    // Add all the default fields when it's a landing page.
+    if ($entity->getEntityTypeId() == 'node' && $entity->bundle() == 'panopoly_landing_page') {
+      $hide_ids = array_merge($hide_ids, [
+        'entity_field:node:uid',
+        'entity_field:node:created',
+        'entity_field:node:changed',
+        'entity_field:node:body',
+        'entity_field:node:field_panopoly_categories',
+        'entity_field:node:field_panopoly_featured_image',
+        'entity_field:node:field_panopoly_featured_status',
+      ]);
+    }
+
     // Add 'entity_view:node' when the only entity context is the Panelizer
     // context.
     $contexts = $panels_display->getContexts();
