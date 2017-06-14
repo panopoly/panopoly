@@ -12,6 +12,8 @@ projects[ctools][patch][2657060] = https://www.drupal.org/files/issues/ctools-ex
 projects[panels][version] = 4.1
 projects[panels][subdir] = contrib
 projects[panels][patch][2878650] = https://www.drupal.org/files/issues/panels-ipe-layout-picker-styling.patch
+projects[panels][patch][2886230] = https://www.drupal.org/files/issues/panels-hook-blocks-alter-context-2886230-2.patch
+projects[panels][patch][2849219] = https://www.drupal.org/files/issues/panels-hook-layouts-alter-2849219-17.patch
 
 projects[page_manager][version] = 4.0-beta2
 projects[page_manager][subdir] = contrib
