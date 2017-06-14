@@ -25,7 +25,7 @@ Feature: Add media using the rich text editor
   Scenario: Upload an image with format and alt text
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
-    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaBrowser"
       And I attach the file "test-sm.png" to "files[upload]"
       And I press "Next"
@@ -61,7 +61,7 @@ Feature: Add media using the rich text editor
   @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_image @panopoly_images @drupal_private_files
   Scenario: The second alt/title text sticks
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
-    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaBrowser"
       And I attach the file "test-sm.png" to "files[upload]"
       And I press "Next"
@@ -94,7 +94,7 @@ Feature: Add media using the rich text editor
     # alt text will load when editing the image again.
     When I click "Edit" in the "Tabs" region
       And I click the "img" element in the "edit-body-und-0-value" WYSIWYG editor
-      And I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaStyleSelector"
     Then the "Alt Text" field should contain "Second Alt text"
       And the "Title Text" field should contain "Second Title text"
@@ -105,7 +105,7 @@ Feature: Add media using the rich text editor
   @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_image @panopoly_images @drupal_private_files
   Scenario: HTML entities in alt/title text get decoded/encoded correctly
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
-    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaBrowser"
       And I attach the file "test-sm.png" to "files[upload]"
       And I press "Next"
@@ -133,7 +133,7 @@ Feature: Add media using the rich text editor
     # alt text will load when editing the image again.
     When I click "Edit" in the "Tabs" region
       And I click the "img" element in the "edit-body-und-0-value" WYSIWYG editor
-      And I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaStyleSelector"
     Then the "Alt Text" field should contain "Alt & some > \"character's\" <"
       And the "Title Text" field should contain "Title & some > \"character's\" <"
@@ -142,7 +142,7 @@ Feature: Add media using the rich text editor
   @api @javascript @chrome @panopoly_wysiwyg @panopoly_wysiwyg_image @panopoly_images @drupal_private_files
   Scenario: Use an image from elsewhere on the web
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
-      And I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+      And I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaBrowser"
       And I click "Web"
     Then I should see "File URL or media resource"
@@ -179,7 +179,7 @@ Feature: Add media using the rich text editor
   Scenario: Add a YouTube video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
-    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaBrowser"
       And I click "Web"
       And I fill in "File URL or media resource" with "https://www.youtube.com/watch?v=W_-vFa-IyB8"
@@ -202,7 +202,7 @@ Feature: Add media using the rich text editor
   Scenario: Add a Vimeo video
     When I type "Testing body" in the "edit-body-und-0-value" WYSIWYG editor
     # Upload the file.
-    When I click the "Add media" button in the "edit-body-und-0-value" WYSIWYG editor
+    When I click the "Media browser" button in the "edit-body-und-0-value" WYSIWYG editor
       And I switch to the frame "mediaBrowser"
       And I click "Web"
       And I fill in "File URL or media resource" with "http://vimeo.com/59482983"
