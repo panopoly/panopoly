@@ -15,6 +15,7 @@ projects[panels][patch][2878650] = https://www.drupal.org/files/issues/panels-ip
 projects[panels][patch][2886230] = https://www.drupal.org/files/issues/panels-hook-blocks-alter-context-2886230-2.patch
 projects[panels][patch][2849219] = https://www.drupal.org/files/issues/panels-hook-layouts-alter-2849219-17.patch
 projects[panels][patch][2824508] = https://www.drupal.org/files/issues/panels-ipe-search-2824508-8.patch
+projects[panels][patch][2822390] = https://www.drupal.org/files/issues/panels-toolbar-vertical-2822390-7.patch
 
 projects[page_manager][version] = 4.0-beta2
 projects[page_manager][subdir] = contrib
