@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.image_full
+    - field.field.media.image.field_media_image
+    - image.style.panopoly_images_full
+    - media.type.image
+  module:
+    - image
+id: media.image.image_full
+targetEntityType: media
+bundle: image
+mode: image_full
+content:
+  field_media_image:
+    label: hidden
+    settings:
+      image_style: panopoly_images_full
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    weight: 0
+    region: content
+hidden:
+  created: true
+  thumbnail: true
+  uid: true

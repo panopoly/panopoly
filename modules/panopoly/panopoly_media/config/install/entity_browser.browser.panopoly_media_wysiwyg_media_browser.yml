@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.image
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - views
+name: panopoly_media_wysiwyg_media_browser
+label: 'Panopoly Media WYSIWYG Media Browser'
+display: iframe
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select media'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  a1ed5dca-2adc-478d-a9b0-014a7df6bb6e:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_1
+      submit_text: 'Select media'
+      auto_select: false
+    uuid: a1ed5dca-2adc-478d-a9b0-014a7df6bb6e
+    weight: 1
+    label: View
+    id: view
+  ee69e597-8710-4b89-8a6b-d74989ffb91b:
+    settings:
+      media_type: image
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drop files here to upload them'
+      max_filesize: 10M
+      extensions: 'jpg jpeg gif png'
+      submit_text: 'Select media'
+      auto_select: false
+    uuid: ee69e597-8710-4b89-8a6b-d74989ffb91b
+    weight: 2
+    label: 'Upload images'
+    id: dropzonejs_media_entity
