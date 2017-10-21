@@ -11,7 +11,8 @@
         "drupal/features": "^3.5",
         "drupal/media_entity_browser": "1.x-dev",
         "drupal/media_entity_slideshow": "^2",
-        "drupal/video_embed_field": "2.x-dev"
+        "drupal/video_embed_field": "2.x-dev",
+        "drupal/panopoly_images": "2.x-dev"
     },
     "extra": {
         "patches": {
@@ -21,7 +22,7 @@
             },
             "drupal/media_entity_browser": {
                 "#2906068 - Create a new branch compatible with the new Media in core API":
-                "https://www.drupal.org/files/issues/media_entity_browser-2906068-2.patch"
+                "https://www.drupal.org/files/issues/create_a_new_branch-2906068-9_0.patch"
             },
             "drupal/dropzonejs": {
                 "#2897255 - Support Media core module (Drupal core 8.4.x-dev)":

@@ -3,6 +3,10 @@ status: true
 dependencies:
   config:
     - media.type.image
+    - core.entity_view_mode.media.image_full
+    - core.entity_view_mode.media.image_half
+    - core.entity_view_mode.media.image_original
+    - core.entity_view_mode.media.image_quarter
   module:
     - entity_embed
     - media
