@@ -14,7 +14,6 @@ dependencies:
   - image
   - media
   - media_entity_browser
-  - media_entity_slideshow
   - node
   - panopoly_images
   - path
