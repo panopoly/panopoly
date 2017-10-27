@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Panopoly WYSIWYG.
+ */
+
+/**
+ *  Enable the modules necessary for the teaser break button.
+ */
+function panopoly_wysiwyg_update_8201() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install([
+    'ckeditor_drupalbreaks',
+    'fakeobjects',
+  ]);
+}
