@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Hooks implementations for the Panopoly Wysiwyg module.
+ */
+
+use Drupal\panopoly_wysiwyg\Plugin\Filter\FilterHtml;
+
+/**
+ * Implements hook_filter_info_alter().
+ */
+function panopoly_wysiwyg_filter_info_alter(&$definitions) {
+  if (isset($definitions['filter_html'])) {
+    $definitions['filter_html']['class'] = FilterHtml::class;
+  }
+}
