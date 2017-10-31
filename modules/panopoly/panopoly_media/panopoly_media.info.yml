@@ -16,6 +16,7 @@ dependencies:
   - media_entity_browser
   - node
   - panopoly_images
+  - panopoly_media
   - path
   - user
   - video_embed_field

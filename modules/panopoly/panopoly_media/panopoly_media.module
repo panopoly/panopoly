@@ -16,5 +16,8 @@ function panopoly_media_theme() {
     'media__file' => [
       'base hook' => 'media',
     ],
+    'media__video' => [
+      'base hook' => 'media',
+    ],
   ];
 }

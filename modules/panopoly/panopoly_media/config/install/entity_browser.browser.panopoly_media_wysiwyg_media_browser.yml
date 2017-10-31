@@ -56,3 +56,11 @@ widgets:
     weight: 3
     label: 'Upload files'
     id: panopoly_media_file_upload
+  0da62598-d7a1-4f21-97a4-0f9c1111eb91:
+    settings:
+      media_type: video
+      submit_text: 'Select entities'
+    uuid: 0da62598-d7a1-4f21-97a4-0f9c1111eb91
+    weight: 4
+    label: 'Add video'
+    id: panopoly_media_video_add
