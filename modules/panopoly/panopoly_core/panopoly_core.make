@@ -75,6 +75,7 @@ projects[entityreference][subdir] = contrib
 
 projects[field_group][version] = 1.5
 projects[field_group][subdir] = contrib
+projects[field_group][patch][2649648] = https://www.drupal.org/files/issues/php7_uniform_variable-2649648-5.patch
 
 projects[link][version] = 1.4
 projects[link][subdir] = contrib
