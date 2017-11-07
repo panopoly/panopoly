@@ -2,11 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - media.type.file
     - media.type.image
-    - core.entity_view_mode.media.image_full
-    - core.entity_view_mode.media.image_half
-    - core.entity_view_mode.media.image_original
-    - core.entity_view_mode.media.image_quarter
+    - media.type.video
   module:
     - entity_embed
     - media
@@ -16,12 +14,13 @@ type_id: entity
 type_settings:
   entity_type: media
   bundles:
+    - file
     - image
+    - video
   display_plugins:
-    - 'view_mode:media.image_full'
-    - 'view_mode:media.image_half'
-    - 'view_mode:media.image_original'
-    - 'view_mode:media.image_quarter'
+    - 'entity_reference:media_thumbnail'
+    - 'view_mode:media.full'
+    - 'view_mode:media.teaser'
   entity_browser: panopoly_media_wysiwyg_media_browser
   entity_browser_settings:
     display_review: false

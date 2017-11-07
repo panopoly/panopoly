@@ -5,6 +5,8 @@
  * Hook implementations for Panopoly Media.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -20,4 +22,47 @@ function panopoly_media_theme() {
       'base hook' => 'media',
     ],
   ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alters the display mode offerings of the embed entity module to be more
+ * user friendly, and reflect what is available.
+ */
+function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterface $form_state) {
+  if ($form_state->get('step') == 'embed') {
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    $entity = $form_state->get('entity');
+    switch ($entity->bundle()) {
+      case 'image':
+        $options =& $form['attributes']['data-entity-embed-display']['#options'];
+        if (array_key_exists('view_mode:media.full', $options)) {
+          $options['view_mode:media.full'] = t('Original size');
+        }
+        if (array_key_exists('view_mode:media.teaser', $options)) {
+          $options['view_mode:media.teaser'] = t('Quarter size');
+        }
+        if (array_key_exists('entity_reference:media_thumbnail', $options)) {
+          $options['entity_reference:media_thumbnail'] = t('Custom');
+        }
+
+        $embed_display_element =& $form['attributes']['data-entity-embed-display-settings'];
+        if (array_key_exists('image_style', $embed_display_element)) {
+          foreach ($embed_display_element['image_style']['#options'] as $key => $option) {
+            // @todo: Expose this as a setting in Panopoly settings.
+            if (strpos($key, 'panopoly_') === FALSE) {
+              unset($embed_display_element['image_style']['#options'][$key]);
+            }
+          }
+        }
+        break;
+      // There are no custom displays for files or videos. Force to default
+      // for now, until file (PDF preview) or video formatters (set size) added.
+      case 'video':
+      case 'file':
+        $form['attributes']['data-entity-embed-display']['#default_value'] = 'view_mode:media.full';
+        $form['attributes']['data-entity-embed-display']['#access'] = FALSE;
+    }
+  }
 }

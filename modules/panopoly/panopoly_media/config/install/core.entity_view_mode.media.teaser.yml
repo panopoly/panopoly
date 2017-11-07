@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - media
-id: media.image_original
-label: 'Image: Original'
+id: media.teaser
+label: Teaser
 targetEntityType: media
 cache: true

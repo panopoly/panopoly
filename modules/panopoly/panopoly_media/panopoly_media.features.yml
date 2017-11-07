@@ -3,6 +3,7 @@ excluded:
   - core.entity_form_display.media.file.default
   - core.entity_form_display.media.image.default
   - core.entity_view_display.media.image.default
+  - core.entity_view_display.media.video.teaser
   - field.field.media.file.field_media_file
   - field.field.media.image.field_media_image
   - field.storage.media.field_media_file

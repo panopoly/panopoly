@@ -2,22 +2,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.image_half
+    - core.entity_view_mode.media.teaser
     - field.field.media.image.field_media_image
-    - image.style.panopoly_images_half
+    - image.style.panopoly_images_quarter
     - media.type.image
   module:
     - image
-id: media.image.image_half
+id: media.image.teaser
 targetEntityType: media
 bundle: image
-mode: image_half
+mode: teaser
 content:
   field_media_image:
-    label: hidden
+    label: visually_hidden
     settings:
-      image_style: panopoly_images_half
-      image_link: ''
+      image_style: panopoly_images_quarter
+      image_link: file
     third_party_settings: {  }
     type: image
     weight: 0
