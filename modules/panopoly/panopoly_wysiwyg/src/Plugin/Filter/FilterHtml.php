@@ -7,6 +7,8 @@ use Drupal\filter\Plugin\Filter\FilterHtml as CoreFilterHtml;
 
 /**
  * Replacement for core FilterHtml that respects <!--break-->.
+ *
+ * @see https://www.drupal.org/node/2903733
  */
 class FilterHtml extends CoreFilterHtml {
 
