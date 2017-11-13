@@ -3,6 +3,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
-        "drupal/ckeditor_drupalbreaks": "1.x-dev"
+        "drupal/ckeditor_drupalbreaks": "1.x-dev",
+        "drupal/panopoly_media": "2.x-dev"
     }
 }

@@ -6,5 +6,9 @@ dependencies:
   - ckeditor
   - ckeditor_drupalbreaks
   - editor
+  - embed
+  - entity_embed
   - filter
+  - media
+  - panopoly_media
 package: Panopoly

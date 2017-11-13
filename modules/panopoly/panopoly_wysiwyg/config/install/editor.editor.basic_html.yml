@@ -38,7 +38,7 @@ settings:
         -
           name: Tools
           items:
-            - DrupalImage
+            - panopoly_media_wysiwyg_media_embed
             - Maximize
             - Source
       -
