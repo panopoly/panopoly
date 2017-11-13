@@ -13,7 +13,7 @@ name: panopoly_media_wysiwyg_media_browser
 label: 'Panopoly Media WYSIWYG Media Browser'
 display: iframe
 display_configuration:
-  width: '650'
+  width: '100%'
   height: '500'
   link_text: 'Select media'
   auto_open: true
