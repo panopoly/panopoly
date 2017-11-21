@@ -150,7 +150,9 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
       'full_html',
     ];
     foreach ($old_formats as $old_format) {
-      \Drupal\filter\Entity\FilterFormat::load($old_format)->delete();
+      if ($format = \Drupal\filter\Entity\FilterFormat::load($old_format)) {
+        $format->delete();
+      }
     }
   }
 }
