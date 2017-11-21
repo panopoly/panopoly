@@ -5,6 +5,9 @@
  * Install hooks for Panopoly WYSIWYG.
  */
 
+use Drupal\Core\Config\ExtensionInstallStorage;
+use Drupal\Core\Config\InstallStorage;
+
 /**
  *  Enable the modules necessary for the teaser break button.
  */
@@ -16,3 +19,128 @@ function panopoly_wysiwyg_update_8201() {
     'fakeobjects',
   ]);
 }
+
+/**
+ * Add the new text formats.
+ */
+function panopoly_wysiwyg_update_8202() {
+  $config = [
+    'filter_format' => [
+      'filter.format.panopoly_wysiwyg_basic',
+      'filter.format.panopoly_wysiwyg_full',
+    ],
+    'editor' => [
+      'editor.editor.panopoly_wysiwyg_basic',
+      'editor.editor.panopoly_wysiwyg_full',
+    ],
+  ];
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  /** @var \Drupal\Core\Config\StorageInterface $active_config_storage */
+  $active_config_storage = \Drupal::getContainer()->get('config.storage');
+  $extension_config_storage = new ExtensionInstallStorage($active_config_storage, InstallStorage::CONFIG_INSTALL_DIRECTORY);
+
+  foreach ($config as $entity_type_name => $config_list) {
+    foreach ($config_list as $config_name) {
+      $config_data = $extension_config_storage->read($config_name);
+      if ($active_config_storage->read($config_name)) {
+        // Exists.
+        continue;
+      }
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $entity_storage */
+      $entity_storage = $entity_type_manager->getStorage($entity_type_name);
+      $entity = $entity_storage->createFromStorageRecord($config_data);
+      $entity->save();
+    }
+  }
+
+  \Drupal::service('module_installer')->install(['panopoly_media']);
+}
+
+/**
+ * Rename the text formats on existing entities.
+ */
+function panopoly_wysiwyg_update_8203(&$sandbox) {
+  $entity_manager = \Drupal::entityManager();
+
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = 0;
+    $sandbox['entities'] = [];
+
+    // Find all fields and entity types that are affected.
+    foreach ($entity_manager->getFieldMap() as $entity_type_id => $entity_field_map) {
+      $sandbox['entities'][$entity_type_id] = [
+        'fields' => [],
+        'ids' => [],
+      ];
+      foreach ($entity_manager->getFieldStorageDefinitions($entity_type_id) as $field_storage_definition) {
+        $field_name = $field_storage_definition->getName();
+        if (!isset($entity_field_map[$field_name])) {
+          continue;
+        }
+
+        if (in_array($field_storage_definition->getType(), ['text_with_summary', 'text_long', 'text'])) {
+          $sandbox['entities'][$entity_type_id]['fields'][] = $field_name;
+        }
+      }
+
+      if (!empty($sandbox['entities'][$entity_type_id]['fields'])) {
+        $sandbox['entities'][$entity_type_id]['ids'] = \Drupal::entityQuery($entity_type_id)->execute();
+        $sandbox['max'] += count($sandbox['entities'][$entity_type_id]['ids']);
+      }
+
+      if (empty($sandbox['entities'][$entity_type_id]['fields']) || empty($sandbox['entities'][$entity_type_id]['ids'])) {
+        unset($sandbox['entities'][$entity_type_id]);
+      }
+    }
+  }
+  else {
+    $batch_count = 0;
+    foreach ($sandbox['entities'] as $entity_type_id => &$entity_info) {
+      $storage = $entity_manager->getStorage($entity_type_id);
+      foreach ($entity_info['ids'] as $id) {
+        $entity = $storage->load($id);
+        if (!$entity) {
+          $sandbox['progress']++;
+          continue;
+        }
+
+        foreach ($entity_info['fields'] as $field_name) {
+          $value = ($entity->$field_name)->getValue();
+          foreach ($value as &$item) {
+            if ($item['format'] == 'basic_html') {
+              $item['format'] = 'panopoly_wysiwyg_basic';
+            }
+            elseif ($item['format'] == 'full_html') {
+              $item['format'] = 'panopoly_wysiwyg_full';
+            }
+          }
+          ($entity->$field_name)->setValue($value);
+        }
+        $entity->save();
+
+        $batch_count++;
+        $sandbox['progress']++;
+
+        if ($batch_count > 50) {
+          break 2;
+        }
+      }
+    }
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($sandbox['#finished']) {
+    // Delete the old formats.
+    $old_formats = [
+      'basic_html',
+      'full_html',
+    ];
+    foreach ($old_formats as $old_format) {
+      \Drupal\filter\Entity\FilterFormat::load($old_format)->delete();
+    }
+  }
+}
+
