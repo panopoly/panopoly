@@ -21,9 +21,20 @@ function panopoly_wysiwyg_update_8201() {
 }
 
 /**
- * Add the new text formats.
+ * Enable panopoly_media module.
  */
 function panopoly_wysiwyg_update_8202() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install([
+    'panopoly_media',
+  ]);
+}
+
+/**
+ * Add the new text formats.
+ */
+function panopoly_wysiwyg_update_8203() {
   $config = [
     'filter_format' => [
       'filter.format.panopoly_wysiwyg_basic',
@@ -60,7 +71,7 @@ function panopoly_wysiwyg_update_8202() {
 /**
  * Rename the text formats on existing entities.
  */
-function panopoly_wysiwyg_update_8203(&$sandbox) {
+function panopoly_wysiwyg_update_8204(&$sandbox) {
   $entity_manager = \Drupal::entityManager();
 
   if (!isset($sandbox['progress'])) {
