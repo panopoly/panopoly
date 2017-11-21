@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.basic_html
+    - filter.format.panopoly_wysiwyg_basic
   module:
     - ckeditor
-format: basic_html
+format: panopoly_wysiwyg_basic
 editor: ckeditor
 settings:
   toolbar:

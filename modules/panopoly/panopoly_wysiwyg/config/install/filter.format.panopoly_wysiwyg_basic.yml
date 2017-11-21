@@ -4,9 +4,11 @@ dependencies:
   module:
     - editor
     - entity_embed
-name: Basic
-format: basic_html
+name: Standard
+format: panopoly_wysiwyg_basic
 weight: 0
+roles:
+  - authenticated
 filters:
   filter_html:
     id: filter_html
