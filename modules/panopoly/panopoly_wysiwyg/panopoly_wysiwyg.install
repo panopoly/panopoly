@@ -118,16 +118,19 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
         }
 
         foreach ($entity_info['fields'] as $field_name) {
-          $value = ($entity->$field_name)->getValue();
-          foreach ($value as &$item) {
-            if ($item['format'] == 'basic_html') {
-              $item['format'] = 'panopoly_wysiwyg_basic';
+          $field = $entity->$field_name;
+          if ($field && !$field->isEmpty()) {
+            $value = ($entity->$field_name)->getValue();
+            foreach ($value as &$item) {
+              if ($item['format'] == 'basic_html') {
+                $item['format'] = 'panopoly_wysiwyg_basic';
+              }
+              elseif ($item['format'] == 'full_html') {
+                $item['format'] = 'panopoly_wysiwyg_full';
+              }
             }
-            elseif ($item['format'] == 'full_html') {
-              $item['format'] = 'panopoly_wysiwyg_full';
-            }
+            ($entity->$field_name)->setValue($value);
           }
-          ($entity->$field_name)->setValue($value);
         }
         $entity->save();
 
