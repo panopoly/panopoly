@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Panopoly Media.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\embed\Entity\EmbedButton;
+use Drupal\Core\Config\ExtensionInstallStorage;
+use Drupal\Core\Config\InstallStorage;
+use Drupal\Core\Utility\UpdateException;
+
+define('PANOPOLY_MEDIA_ICON_UUID', 'a55d8d13-8e8f-406f-ba43-d3765f450325');
+define('PANOPOLY_MEDIA_EMBED_BUTTON', 'panopoly_media_wysiwyg_media_embed');
+
+function panopoly_media_install() {
+  // If we're able to create the icon, but the button doesn't exist, create it.
+  if (_panopoly_media_create_embed_icon() && !EmbedButton::load(PANOPOLY_MEDIA_EMBED_BUTTON)) {
+    $entity_type_manager = \Drupal::entityTypeManager();
+    /** @var \Drupal\Core\Config\StorageInterface $active_config_storage */
+    $active_config_storage = \Drupal::getContainer()->get('config.storage');
+    $extension_config_storage = new ExtensionInstallStorage($active_config_storage, InstallStorage::CONFIG_OPTIONAL_DIRECTORY);
+
+    $config_data = $extension_config_storage->read('embed.button.' . PANOPOLY_MEDIA_EMBED_BUTTON);
+    /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $entity_storage */
+    $entity_storage = $entity_type_manager->getStorage('embed_button');
+    $entity = $entity_storage->createFromStorageRecord($config_data);
+    $entity->save();
+  }
+}
+
+/**
+ * Create media embed icon.
+ *
+ * @return \Drupal\Core\Entity\EntityInterface|null
+ */
+function _panopoly_media_create_embed_icon() {
+  /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
+  $entity_repository = \Drupal::service('entity.repository');
+  $file = $entity_repository->loadEntityByUuid('file', PANOPOLY_MEDIA_ICON_UUID);
+  if ($file) {
+    return $file;
+  }
+
+  $source = drupal_get_path('module', 'panopoly_media') . '/images/drupalimage.png';
+  $destination = 'public://panopoly_media_icon.png';
+  if ($uri = file_unmanaged_copy($source, $destination)) {
+    $file = File::create([
+      'uid' => 1,
+      'filename' => basename($uri),
+      'uri' => $uri,
+      'status' => 1,
+      'uuid' => PANOPOLY_MEDIA_ICON_UUID,
+    ]);
+    $file->save();
+    return $file;
+  }
+
+  return NULL;
+}
+
+/**
+ * Set WYSIWYG embed button icon.
+ */
+function panopoly_media_update_8201() {
+  if (!_panopoly_media_create_embed_icon()) {
+    throw new UpdateException("Unable to create media embed icon");
+  }
+
+  if ($embed_button = EmbedButton::load(PANOPOLY_MEDIA_EMBED_BUTTON)) {
+    $embed_button->set('icon_uuid', PANOPOLY_MEDIA_ICON_UUID);
+    $embed_button->save();
+  }
+  else {
+    throw new UpdateException("Unable to load media embed button");
+  }
+}
+
