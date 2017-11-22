@@ -709,7 +709,6 @@ function panopoly_magic_form_post_render_preview($output, $form) {
  */
 function panopoly_magic_render_fieldable_panels_pane_preview($type, $subtype, $conf, $keywords, $args, $context) {
   $entity = $conf['fieldable_panels_pane'];
-  unset($conf['fieldable_panels_pane']);
   // Prevents PHP notice when not admin user (see issue #2463389).
   if (!isset($entity->view_access)) {
     $entity->view_access = NULL;
