@@ -110,7 +110,8 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
     $batch_count = 0;
     foreach ($sandbox['entities'] as $entity_type_id => &$entity_info) {
       $storage = $entity_manager->getStorage($entity_type_id);
-      foreach ($entity_info['ids'] as $id) {
+      while (count($entity_info['ids']) > 0) {
+        $id = array_shift($entity_info['ids']);
         $entity = $storage->load($id);
         if (!$entity) {
           $sandbox['progress']++;
