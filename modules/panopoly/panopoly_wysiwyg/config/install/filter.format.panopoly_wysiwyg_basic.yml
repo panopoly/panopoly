@@ -6,7 +6,7 @@ dependencies:
     - entity_embed
 name: Standard
 format: panopoly_wysiwyg_basic
-weight: 0
+weight: -10
 roles:
   - authenticated
 filters:

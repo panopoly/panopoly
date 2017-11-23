@@ -5,7 +5,7 @@ dependencies:
     - editor
 name: Full (dangerous!)
 format: panopoly_wysiwyg_full
-weight: 0
+weight: -5
 roles:
   - administrator
 filters:

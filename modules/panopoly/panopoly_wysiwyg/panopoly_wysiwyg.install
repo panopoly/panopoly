@@ -7,6 +7,7 @@
 
 use Drupal\Core\Config\ExtensionInstallStorage;
 use Drupal\Core\Config\InstallStorage;
+use Drupal\filter\Entity\FilterFormat;
 
 /**
  *  Enable the modules necessary for the teaser break button.
@@ -154,9 +155,25 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
       'full_html',
     ];
     foreach ($old_formats as $old_format) {
-      if ($format = \Drupal\filter\Entity\FilterFormat::load($old_format)) {
+      if ($format = FilterFormat::load($old_format)) {
         $format->delete();
       }
+    }
+  }
+}
+
+/**
+ * Re-order the text formats.
+ */
+function panopoly_wysiwyg_update_8205() {
+  $format_weights = [
+    'panopoly_wysiwyg_basic' => -10,
+    'panopoly_wysiwyg_full' => -5,
+  ];
+  foreach ($format_weights as $format_id => $weight) {
+    if ($format = FilterFormat::load($format_id)) {
+      $format->set('weight', $weight);
+      $format->save();
     }
   }
 }
