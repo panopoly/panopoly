@@ -681,7 +681,19 @@ function panopoly_magic_form_post_render_preview($output, $form) {
   if (empty($preview_callback)) {
     $preview_callback = 'ctools_content_render';
   }
+
+  // If there is a 'destination', temporarily change the 'q' parameter so the
+  // pane renders as if we are on that path.
+  // @see https://www.drupal.org/node/2177417
+  $original_path = $_GET['q'];
+  if (!empty($_GET['destination'])) {
+    $_GET['q'] = $_GET['destination'];
+  }
+
   $content = $preview_callback($pane->type, $pane->subtype, $configuration, $keywords, $args, $context);
+
+  // Restore the 'q' to its original value.
+  $_GET['q'] = $original_path;
 
   if (!empty($content)) {
     // Wrap the widget content in the style plugin.
