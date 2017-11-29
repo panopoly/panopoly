@@ -4,6 +4,7 @@ description: 'Standard media configuration.'
 core: 8.x
 package: Panopoly
 dependencies:
+  - config_actions
   - dropzonejs_eb_widget
   - 'drupal:media (>= 8.4)'
   - embed

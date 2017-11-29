@@ -4,6 +4,7 @@
     "license": "GPL-2.0+",
     "require": {
         "drupal/core": "~8.4",
+        "drupal/config_actions": "~1.0-beta1",
         "drupal/ctools": "^3.0",
         "drupal/dropzonejs": "2.x-dev",
         "drupal/entity_browser": "^2.0",

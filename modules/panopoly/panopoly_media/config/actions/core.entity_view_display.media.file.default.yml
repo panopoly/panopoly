@@ -1,0 +1,6 @@
+path:
+  - content
+  - field_media_file
+  - label
+plugin: change
+value: hidden
