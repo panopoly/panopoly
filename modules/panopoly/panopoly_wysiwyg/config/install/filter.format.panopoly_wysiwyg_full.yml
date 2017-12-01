@@ -3,6 +3,7 @@ status: true
 dependencies:
   module:
     - editor
+    - entity_embed
 name: Full (dangerous!)
 format: panopoly_wysiwyg_full
 weight: -5
@@ -13,23 +14,29 @@ filters:
     id: filter_align
     provider: filter
     status: true
-    weight: 7
+    weight: -47
     settings: {  }
   filter_caption:
     id: filter_caption
     provider: filter
     status: true
-    weight: 8
+    weight: -46
     settings: {  }
   filter_html_image_secure:
     id: filter_html_image_secure
     provider: filter
     status: true
-    weight: 9
+    weight: -50
     settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
     status: true
-    weight: 11
+    weight: -45
+    settings: {  }
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
+    status: true
+    weight: -48
     settings: {  }
