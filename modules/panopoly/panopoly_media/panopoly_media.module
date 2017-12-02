@@ -66,3 +66,12 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
     }
   }
 }
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function panopoly_media_field_formatter_info_alter(&$definitions) {
+  if (isset($definitions['file_default']) && !in_array('image', $definitions['file_default']['field_types'])) {
+    $definitions['file_default']['field_types'][] = 'image';
+  }
+}
