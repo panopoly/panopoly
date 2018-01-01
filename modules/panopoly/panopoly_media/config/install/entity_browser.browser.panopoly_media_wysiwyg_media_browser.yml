@@ -13,9 +13,9 @@ name: panopoly_media_wysiwyg_media_browser
 label: 'Panopoly Media WYSIWYG Browser'
 display: iframe
 display_configuration:
-  width: '100%'
+  width: 100%
   height: '500'
-  link_text: 'Browse'
+  link_text: Browse
   auto_open: true
 selection_display: no_display
 selection_display_configuration: {  }
@@ -26,7 +26,7 @@ widgets:
     settings:
       view: media_entity_browser
       view_display: entity_browser_1
-      submit_text: 'Select'
+      submit_text: Select
       auto_select: false
     uuid: a1ed5dca-2adc-478d-a9b0-014a7df6bb6e
     weight: 1
@@ -45,7 +45,7 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      submit_text: 'Select'
+      submit_text: Select
       auto_select: false
     uuid: ee69e597-8710-4b89-8a6b-d74989ffb91b
     weight: 2
@@ -57,7 +57,7 @@ widgets:
       media_type: file
       upload_location: 'public://'
       multiple: '1'
-      submit_text: 'Select'
+      submit_text: Select
     uuid: a9609bc6-0d7d-47ca-84f1-62e76c37372a
     weight: 3
     label: 'Upload files'
@@ -65,7 +65,7 @@ widgets:
   0da62598-d7a1-4f21-97a4-0f9c1111eb91:
     settings:
       media_type: video
-      submit_text: 'Select'
+      submit_text: Select
     uuid: 0da62598-d7a1-4f21-97a4-0f9c1111eb91
     weight: 4
     label: 'Add video'

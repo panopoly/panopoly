@@ -19,6 +19,8 @@ dependencies:
   - panopoly_images
   - panopoly_media
   - path
+  - taxonomy
+  - text
   - user
   - video_embed_field
   - 'video_embed_field:video_embed_media'

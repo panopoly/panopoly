@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_form_mode.media.entity_browser
     - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_panopoly_media_description
+    - field.field.media.video.field_panopoly_media_tags
     - media.type.video
   module:
     - video_embed_field
@@ -28,6 +30,8 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_panopoly_media_description: true
+  field_panopoly_media_tags: true
   path: true
   status: true
   uid: true

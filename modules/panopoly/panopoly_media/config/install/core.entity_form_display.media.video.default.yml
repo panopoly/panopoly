@@ -3,9 +3,12 @@ status: true
 dependencies:
   config:
     - field.field.media.video.field_media_video_embed_field
+    - field.field.media.video.field_panopoly_media_description
+    - field.field.media.video.field_panopoly_media_tags
     - media.type.video
   module:
     - path
+    - text
     - video_embed_field
 id: media.video.default
 targetEntityType: media
@@ -22,7 +25,25 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: video_embed_field_textfield
-    weight: 101
+    weight: 26
+    region: content
+  field_panopoly_media_description:
+    weight: 27
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_panopoly_media_tags:
+    weight: 28
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
     region: content
   name:
     type: string_textfield

@@ -1,0 +1,22 @@
+plugin: add
+path:
+  - content
+value:
+  field_panopoly_media_description:
+    weight: 27
+    settings:
+      rows: 9
+      placeholder: ''
+      summary_rows: 3
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_panopoly_media_tags:
+    weight: 28
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
