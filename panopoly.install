@@ -6,24 +6,6 @@
  */
 
 /**
- * Implements hook_install().
- */
-function panopoly_install() {
-  _panopoly_install_remove_image_styles();
-}
-
-/**
- * Remove unnecessary image styles.
- */
-function _panopoly_install_remove_image_styles() {
-  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
-  $entity_type_manager = \Drupal::service('entity_type.manager');
-  $image_style_storage = $entity_type_manager->getStorage('image_style');
-  $image_styles = $image_style_storage->loadMultiple(['thumbnail', 'medium', 'large']);
-  $image_style_storage->delete($image_styles);
-}
-
-/**
  * Implements hook_install_tasks().
  */
 function panopoly_install_tasks(&$install_state) {
