@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.embed_large
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_panopoly_media_description
+    - field.field.media.image.field_panopoly_media_tags
+    - image.style.panopoly_images_original
+    - media.type.image
+  module:
+    - image
+id: media.image.embed_large
+targetEntityType: media
+bundle: image
+mode: embed_large
+content:
+  field_media_image:
+    label: hidden
+    settings:
+      image_style: panopoly_images_original
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    weight: 1
+    region: content
+hidden:
+  created: true
+  field_panopoly_media_description: true
+  field_panopoly_media_tags: true
+  name: true
+  thumbnail: true
+  uid: true

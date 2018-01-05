@@ -3,26 +3,23 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.teaser
-    - field.field.media.image.field_media_image
-    - field.field.media.image.field_panopoly_media_description
-    - field.field.media.image.field_panopoly_media_tags
-    - image.style.panopoly_images_original
-    - media.type.image
+    - field.field.media.file.field_media_file
+    - field.field.media.file.field_panopoly_media_description
+    - field.field.media.file.field_panopoly_media_tags
+    - media.type.file
   module:
-    - image
+    - file
     - text
-id: media.image.teaser
+id: media.file.teaser
 targetEntityType: media
-bundle: image
+bundle: file
 mode: teaser
 content:
-  field_media_image:
+  field_media_file:
     label: hidden
-    settings:
-      image_style: panopoly_images_original
-      image_link: file
+    settings: {  }
     third_party_settings: {  }
-    type: image
+    type: file_default
     weight: 1
     region: content
   field_panopoly_media_description:
@@ -45,7 +42,7 @@ content:
     type: string
     weight: 0
     region: content
-    label: hidden
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }

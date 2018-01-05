@@ -20,8 +20,9 @@ type_settings:
     - image
     - video
   display_plugins:
-    - 'view_mode:media.full'
-    - 'view_mode:media.teaser'
+    - 'view_mode:media.embed_large'
+    - 'view_mode:media.embed_medium'
+    - 'view_mode:media.embed_small'
     - 'entity_reference:media_thumbnail'
   entity_browser: panopoly_media_wysiwyg_media_browser
   entity_browser_settings:

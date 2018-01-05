@@ -37,14 +37,19 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
     switch ($entity->bundle()) {
       case 'image':
         $options =& $form['attributes']['data-entity-embed-display']['#options'];
-        if (array_key_exists('view_mode:media.full', $options)) {
-          $options['view_mode:media.full'] = t('Original size');
-        }
-        if (array_key_exists('view_mode:media.teaser', $options)) {
-          $options['view_mode:media.teaser'] = t('Quarter size');
-        }
-        if (array_key_exists('entity_reference:media_thumbnail', $options)) {
-          $options['entity_reference:media_thumbnail'] = t('Custom');
+        $enabled_options = [
+          'view_mode:media.embed_large' => t('Original size'),
+          'view_mode:media.embed_medium' => t('Quarter size'),
+          'view_mode:media.embed_small' => t('Thumbnail'),
+          'entity_reference:media_thumbnail' => t('Custom'),
+        ];
+        foreach ($options as $key => $option) {
+          if (isset($enabled_options)) {
+            $options[$key] = $enabled_options[$key];
+          }
+          else {
+            unset($options[$key]);
+          }
         }
 
         $embed_display_element =& $form['attributes']['data-entity-embed-display-settings'];
@@ -61,7 +66,7 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
       // for now, until file (PDF preview) or video formatters (set size) added.
       case 'video':
       case 'file':
-        $form['attributes']['data-entity-embed-display']['#default_value'] = 'view_mode:media.full';
+        $form['attributes']['data-entity-embed-display']['#default_value'] = 'view_mode:media.embed_large';
         $form['attributes']['data-entity-embed-display']['#access'] = FALSE;
     }
   }

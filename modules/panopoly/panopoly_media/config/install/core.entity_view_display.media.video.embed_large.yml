@@ -2,16 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.embed_large
     - field.field.media.video.field_media_video_embed_field
     - field.field.media.video.field_panopoly_media_description
     - field.field.media.video.field_panopoly_media_tags
     - media.type.video
   module:
     - video_embed_field
-id: media.video.default
+id: media.video.embed_large
 targetEntityType: media
 bundle: video
-mode: default
+mode: embed_large
 content:
   field_media_video_embed_field:
     label: hidden
