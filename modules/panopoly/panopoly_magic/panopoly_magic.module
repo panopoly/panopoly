@@ -1549,7 +1549,7 @@ function panopoly_magic_preview_callback_fpp($type, $subtype, $plugin, $renderer
   // in a preview, for example, in the template.
   $fpp->panopoly_magic_preview = TRUE;
 
-  $content = fieldable_panels_pane_view($fpp, 'full');
+  $content = fieldable_panels_pane_view($fpp, 'full', NULL);
   if ($content) {
     $block = (object)array(
       'title' => check_plain($fpp->title),
