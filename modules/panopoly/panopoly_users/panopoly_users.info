@@ -10,6 +10,7 @@ dependencies[] = image
 dependencies[] = page_manager
 dependencies[] = panelizer
 dependencies[] = pm_existing_pages
+dependencies[] = radix_layouts
 dependencies[] = strongarm
 dependencies[] = user_picture_field
 features[ctools][] = field_group:field_group:1
