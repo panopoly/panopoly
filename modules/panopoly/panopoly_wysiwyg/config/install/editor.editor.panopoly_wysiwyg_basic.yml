@@ -55,15 +55,15 @@ settings:
           items:
             - JustifyBlock
         -
+          name: Table
+          items:
+            - Table
+        -
           name: 'Clear Formatting'
           items:
             - PasteText
             - PasteFromWord
             - RemoveFormat
-        -
-          name: Table
-          items:
-            - Table
         -
           name: 'Special Characters'
           items:
