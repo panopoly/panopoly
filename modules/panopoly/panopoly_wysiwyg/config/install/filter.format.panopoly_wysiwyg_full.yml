@@ -4,7 +4,7 @@ dependencies:
   module:
     - editor
     - entity_embed
-name: Full (dangerous!)
+name: 'Full (dangerous!)'
 format: panopoly_wysiwyg_full
 weight: -5
 roles:
