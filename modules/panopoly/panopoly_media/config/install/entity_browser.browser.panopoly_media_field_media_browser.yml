@@ -34,14 +34,14 @@ widgets:
   142ec9fc-2b14-4df0-a688-519e571085d2:
     settings:
       media_type: image
-      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
-      max_filesize: 2M
-      extensions: 'jpg jpeg gif png'
+      max_filesize: 20M
+      extensions: 'jpg jpeg gif png txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
       clientside_resize: false
       resize_width: null
       resize_height: null
-      resize_quality: 1
+      resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
       submit_text: Select

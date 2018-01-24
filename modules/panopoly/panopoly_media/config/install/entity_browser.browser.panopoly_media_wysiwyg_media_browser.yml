@@ -35,7 +35,7 @@ widgets:
   ee69e597-8710-4b89-8a6b-d74989ffb91b:
     settings:
       media_type: image
-      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
       max_filesize: 10M
       extensions: 'jpg jpeg gif png'
@@ -55,7 +55,7 @@ widgets:
     settings:
       extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
       media_type: file
-      upload_location: 'public://'
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
       multiple: '1'
       submit_text: Select
     uuid: a9609bc6-0d7d-47ca-84f1-62e76c37372a
