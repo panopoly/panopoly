@@ -7,6 +7,7 @@ dependencies:
   module:
     - dropzonejs_eb_widget
     - media
+    - panopoly_media
     - views
 name: panopoly_media_field_media_browser
 label: 'Panopoly Media Field Browser'
@@ -36,8 +37,8 @@ widgets:
       media_type: image
       upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
-      max_filesize: 20M
-      extensions: 'jpg jpeg gif png txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
+      max_filesize: 10M
+      extensions: 'jpg jpeg gif png'
       clientside_resize: false
       resize_width: null
       resize_height: null
@@ -47,6 +48,17 @@ widgets:
       submit_text: Select
       auto_select: false
     uuid: 142ec9fc-2b14-4df0-a688-519e571085d2
-    weight: 3
-    label: Upload
+    weight: -9
+    label: 'Upload images'
     id: dropzonejs_media_entity
+  ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e:
+    settings:
+      extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
+      media_type: file
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
+      multiple: '1'
+      submit_text: Select
+    uuid: ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e
+    weight: -8
+    label: 'Upload files'
+    id: panopoly_media_file_upload
