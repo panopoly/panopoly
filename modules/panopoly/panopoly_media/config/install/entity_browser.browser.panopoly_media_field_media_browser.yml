@@ -32,8 +32,20 @@ widgets:
     weight: -10
     label: View
     id: view
-  142ec9fc-2b14-4df0-a688-519e571085d2:
+  ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e:
     settings:
+      extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
+      media_type: file
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
+      multiple: '1'
+      submit_text: Select
+    uuid: ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e
+    weight: -7
+    label: 'Upload files'
+    id: panopoly_media_file_upload
+  a36a243c-e298-4b28-9eb2-4a9976879176:
+    settings:
+      form_mode: entity_browser
       media_type: image
       upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop files here to upload them'
@@ -46,19 +58,7 @@ widgets:
       resize_method: contain
       thumbnail_method: contain
       submit_text: Select
-      auto_select: false
-    uuid: 142ec9fc-2b14-4df0-a688-519e571085d2
-    weight: -9
-    label: 'Upload images'
-    id: dropzonejs_media_entity
-  ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e:
-    settings:
-      extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
-      media_type: file
-      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
-      multiple: '1'
-      submit_text: Select
-    uuid: ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e
+    uuid: a36a243c-e298-4b28-9eb2-4a9976879176
     weight: -8
-    label: 'Upload files'
-    id: panopoly_media_file_upload
+    label: 'Upload images'
+    id: dropzonejs_media_entity_inline_entity_form

@@ -1,0 +1,6 @@
+img_data:
+  js:
+    js/img_data.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

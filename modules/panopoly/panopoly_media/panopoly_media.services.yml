@@ -1,0 +1,3 @@
+services:
+  panopoly_media.img_data:
+    class: \Drupal\panopoly_media\ImgData

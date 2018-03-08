@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\panopoly_media\Plugin\Field\FieldWidget\ImageWidget;
 
 /**
  * Implements hook_theme().
@@ -79,4 +80,11 @@ function panopoly_media_field_formatter_info_alter(&$definitions) {
   if (isset($definitions['file_default']) && !in_array('image', $definitions['file_default']['field_types'])) {
     $definitions['file_default']['field_types'][] = 'image';
   }
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function panopoly_media_field_widget_info_alter(array &$info) {
+  $info['image_image']['class'] = ImageWidget::class;
 }
