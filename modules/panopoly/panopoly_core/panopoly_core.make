@@ -5,11 +5,8 @@ core = 7.x
 
 ; Panels and Chaos Tools Magic
 
-projects[ctools][version] = 1.12
+projects[ctools][version] = 1.14
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2607626] = https://www.drupal.org/files/issues/ctools-close-modal-2607626-5.patch
-projects[ctools][patch][2787045] = https://www.drupal.org/files/issues/ctools-jquery_compatibility-2787045-14.patch
-projects[ctools][patch][2897965] = https://www.drupal.org/files/issues/ctools-wizard-destination-2897965-2.patch
 
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
