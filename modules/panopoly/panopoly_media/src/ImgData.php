@@ -67,7 +67,10 @@ class ImgData {
       }
 
       if (count($iptc[$field]) === 1) {
-        $data[$name] = reset($iptc[$field]);
+        $val = trim(reset($iptc[$field]));
+        if (!empty($val)) {
+          $data[$name] = reset($iptc[$field]);
+        }
       }
       else {
         $data[$name] = $iptc[$field];
