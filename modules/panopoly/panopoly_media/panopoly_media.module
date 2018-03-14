@@ -88,3 +88,15 @@ function panopoly_media_field_formatter_info_alter(&$definitions) {
 function panopoly_media_field_widget_info_alter(array &$info) {
   $info['image_image']['class'] = ImageWidget::class;
 }
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function panopoly_media_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  // Only deal with media.
+  if ($entity_form['#entity_type'] != 'media') {
+    return;
+  }
+
+  $entity_form['revision_log_message']['#access'] = FALSE;
+}
