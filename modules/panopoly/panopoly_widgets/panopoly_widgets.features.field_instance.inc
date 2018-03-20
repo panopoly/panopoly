@@ -263,6 +263,7 @@ function panopoly_widgets_field_default_field_instances() {
         'module' => 'simple_gmap',
         'settings' => array(
           'iframe_height' => 400,
+          'iframe_title' => 'Google Map of [address]',
           'iframe_width' => 600,
           'include_link' => 0,
           'include_map' => 1,
@@ -272,6 +273,7 @@ function panopoly_widgets_field_default_field_instances() {
           'langcode' => 'en',
           'link_text' => 'View larger map',
           'map_type' => 'm',
+          'static_scale' => 1,
           'zoom_level' => 14,
         ),
         'type' => 'simple_gmap',

@@ -9,8 +9,9 @@ projects[tablefield][version] = 3.1
 projects[tablefield][subdir] = contrib
 projects[tablefield][patch][2923462] = https://www.drupal.org/files/issues/tablefield-7.x-3.1-duplicate-ids-2923462-14.patch
 
-projects[simple_gmap][version] = 1.2
+projects[simple_gmap][version] = 1.4
 projects[simple_gmap][subdir] = contrib
+projects[simple_gmap][patch][2902178] = https://www.drupal.org/files/issues/simple_gmap-iframe-title-2902178-15.patch
 
 ; Panopoly - Contrib - Widgets
 
