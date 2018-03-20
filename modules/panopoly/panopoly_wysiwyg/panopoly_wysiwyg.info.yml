@@ -8,6 +8,7 @@ dependencies:
   - editor
   - embed
   - entity_embed
+  - fakeobjects
   - filter
   - media
   - panopoly_media

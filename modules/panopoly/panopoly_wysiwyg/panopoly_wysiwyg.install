@@ -7,6 +7,7 @@
 
 use Drupal\Core\Config\ExtensionInstallStorage;
 use Drupal\Core\Config\InstallStorage;
+use Drupal\editor\Entity\Editor;
 use Drupal\filter\Entity\FilterFormat;
 
 /**
@@ -178,3 +179,88 @@ function panopoly_wysiwyg_update_8205() {
   }
 }
 
+
+/**
+ * Add anchor plugin to standard and full input format and WYSIWYG.
+ */
+function panopoly_wysiwyg_update_8206() {
+  // Tweak allowed HTML config.
+  $format = FilterFormat::load('panopoly_wysiwyg_basic');
+  $filter = $format->filters('filter_html');
+
+  $val = $filter->settings['allowed_html'];
+  if (preg_match('/<a(| [^>]+)>/', $val, $matches)) {
+    $attrs = array_filter(explode(' ', $matches[1]));
+    if (!in_array('name', $attrs)) {
+      $attrs[] = 'name';
+    }
+    $attrs = ' ' . implode(' ', $attrs);
+
+    // Only replace if the original tag had attributes defined.
+    if ($matches[1]) {
+      $new_tag = str_replace($matches[1], $attrs, $matches[0]);
+      $val = str_replace($matches[0], $new_tag, $val);
+    }
+  }
+  else {
+    // No <a> tag set, append to the end.
+    $val = trim($val) . ' <a name>';
+  }
+  if ($val != $filter->settings['allowed_html']) {
+    $filter->settings['allowed_html'] = $val;
+    $format->save();
+  }
+
+  // Set anchor in editors.
+  _panopoly_wysiwyg_set_editor_anchor('panopoly_wysiwyg_basic');
+  _panopoly_wysiwyg_set_editor_anchor('panopoly_wysiwyg_full');
+}
+
+/**
+ * Sets the anchor plugin into the editor.
+ *
+ * @param string $editor_id
+ *   The editor ID.
+ */
+function _panopoly_wysiwyg_set_editor_anchor($editor_id) {
+  if (!$editor = Editor::load($editor_id)) {
+    return;
+  }
+
+  // Only update ckeditor.
+  if ($editor->getEditor() != 'ckeditor') {
+    return;
+  }
+
+  $settings = $editor->get('settings');
+  if (!empty($settings['toolbar']['rows'])) {
+    // Iterate through all the rows and groups to ensure we don't already have
+    // the anchor plugin.
+    foreach ($settings['toolbar']['rows'] as $rowId => $row) {
+      foreach ($row as $groupId => $group) {
+        if (in_array('panopoly_wysiwyg_anchor', $group['items'])) {
+          return;
+        }
+      }
+    }
+
+    foreach ($settings['toolbar']['rows'] as $rowId => $row) {
+      foreach ($row as $groupId => $group) {
+        // Look for link and unlink plugins in the same group, place after last
+        // of those two.
+        $lpos = array_search('DrupalLink', $group['items']);
+        $upos = array_search('DrupalUnlink', $group['items']);
+        if ($lpos === FALSE || $upos === FALSE) {
+          continue;
+        }
+
+        $pos = max($lpos, $upos) + 1;
+        array_splice($group['items'], $pos, 0, ['panopoly_wysiwyg_anchor']);
+        $settings['toolbar']['rows'][$rowId][$groupId] = $group;
+        $editor->setSettings($settings);
+        $editor->save();
+        return;
+      }
+    }
+  }
+}
