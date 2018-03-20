@@ -217,6 +217,55 @@ function panopoly_wysiwyg_update_8206() {
 }
 
 /**
+ * Installs and configures editor_advanced_link and linkit.
+ */
+function panopoly_wysiwyg_update_8207() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install(['editor_advanced_link', 'linkit']);
+
+  // Tweak allowed HTML config.
+  $format = FilterFormat::load('panopoly_wysiwyg_basic');
+  $filter = $format->filters('filter_html');
+
+  $val = $filter->settings['allowed_html'];
+  $new_attrs = [
+    'data-entity-type',
+    'data-entity-uuid',
+    'title',
+    'target',
+    'rel',
+  ];
+  if (preg_match('/<a(| [^>]+)>/', $val, $matches)) {
+    $attrs = array_filter(explode(' ', $matches[1]));
+    $attrs = array_unique(array_merge($attrs, $new_attrs));
+    $attrs = ' ' . implode(' ', $attrs);
+
+    // Only replace if the original tag had attributes defined.
+    if ($matches[1]) {
+      $new_tag = str_replace($matches[1], $attrs, $matches[0]);
+      $val = str_replace($matches[0], $new_tag, $val);
+    }
+  }
+  else {
+    // No <a> tag set, append to the end.
+    $val = trim($val) . ' <a ' . implode(' ', $new_attrs) . '>';
+  }
+  if ($val != $filter->settings['allowed_html']) {
+    $filter->settings['allowed_html'] = $val;
+    $format->save();
+  }
+
+  // Add linkit to text formats.
+  _panopoly_wysiwyg_set_text_format_linkit('panopoly_wysiwyg_basic');
+  _panopoly_wysiwyg_set_text_format_linkit('panopoly_wysiwyg_full');
+
+  // Add linkit to editors.
+  _panopoly_wysiwyg_set_editor_linkit('panopoly_wysiwyg_basic');
+  _panopoly_wysiwyg_set_editor_linkit('panopoly_wysiwyg_full');
+}
+
+/**
  * Sets the anchor plugin into the editor.
  *
  * @param string $editor_id
@@ -263,4 +312,50 @@ function _panopoly_wysiwyg_set_editor_anchor($editor_id) {
       }
     }
   }
+}
+
+/**
+ * Sets the linkit filter into the text format.
+ *
+ * @param string $format_name
+ *   The text format ID.
+ */
+function _panopoly_wysiwyg_set_text_format_linkit($format_name) {
+  if (!$format = FilterFormat::load($format_name)) {
+    return;
+  }
+
+  $format->setFilterConfig('linkit', [
+    'id' => 'linkit',
+    'provider' => 'linkit',
+    'status' => true,
+    'weight' => 100,
+    'settings' => [
+      'title' => true
+    ],
+  ]);
+  $format->save();
+}
+
+/**
+ * Sets the linkit plugin into the editor.
+ *
+ * @param string $editor_id
+ *   The editor ID.
+ */
+function _panopoly_wysiwyg_set_editor_linkit($editor_id) {
+  if (!$editor = Editor::load($editor_id)) {
+    return;
+  }
+
+  // Only update ckeditor.
+  if ($editor->getEditor() != 'ckeditor') {
+    return;
+  }
+
+  $settings = $editor->get('settings');
+  $settings['plugins']['drupallink']['linkit_enabled'] = true;
+  $settings['plugins']['drupallink']['linkit_profile'] = 'default';
+  $editor->setSettings($settings);
+  $editor->save();
 }

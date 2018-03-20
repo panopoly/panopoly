@@ -80,6 +80,9 @@ settings:
             - Undo
             - Redo
   plugins:
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: default
     language:
       language_list: un
     stylescombo:

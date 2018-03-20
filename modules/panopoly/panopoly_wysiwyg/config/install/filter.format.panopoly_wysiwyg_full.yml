@@ -4,6 +4,7 @@ dependencies:
   module:
     - editor
     - entity_embed
+    - linkit
 name: 'Full (dangerous!)'
 format: panopoly_wysiwyg_full
 weight: -5
@@ -34,3 +35,10 @@ filters:
     status: true
     weight: -48
     settings: {  }
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: 100
+    settings:
+      title: true

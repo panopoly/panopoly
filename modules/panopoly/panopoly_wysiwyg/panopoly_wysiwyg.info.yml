@@ -6,10 +6,12 @@ dependencies:
   - ckeditor
   - ckeditor_drupalbreaks
   - editor
+  - editor_advanced_link
   - embed
   - entity_embed
   - fakeobjects
   - filter
+  - linkit (>=8.x-5.x)
   - media
   - panopoly_media
 package: Panopoly
