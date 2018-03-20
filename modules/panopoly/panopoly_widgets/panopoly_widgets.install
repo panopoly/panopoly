@@ -107,6 +107,10 @@ function panopoly_widgets_update_dependencies() {
       'linkit' => 7301,
     );
   }
+  $deps['panopoly_widgets'][7021] = array(
+    // Wait for tablefield to update itself.
+    'tablefield' => 7006,
+  );
   return $deps;
 }
 
@@ -441,4 +445,22 @@ function panopoly_widgets_update_7020() {
         ->execute();
     }
   }
+}
+
+/**
+ * Grant new tablefield permission to admin roles. Update field settings.
+ */
+function panopoly_widgets_update_7021() {
+  // Make sure new permissions from tablefield get added to the admin role.
+  if (function_exists('user_modules_installed')) {
+    user_modules_installed(array('tablefield'));
+  }
+
+  $instance_info = field_info_instance('fieldable_panels_pane', 'field_basic_table_table', 'table');
+  $instance_info['display']['default']['settings']['sticky_header'] = 1;
+  $instance_info['display']['default']['settings']['striping'] = 1;
+  $instance_info['display']['default']['settings']['trim_trailing_cols'] = 1;
+  $instance_info['display']['default']['settings']['trim_trailing_rows'] = 1;
+  
+  field_update_instance($instance_info);
 }

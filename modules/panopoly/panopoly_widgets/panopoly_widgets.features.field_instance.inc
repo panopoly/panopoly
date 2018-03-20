@@ -500,20 +500,30 @@ function panopoly_widgets_field_default_field_instances() {
     'default_value' => array(
       0 => array(
         'tablefield' => array(
-          'cell_0_0' => '',
-          'cell_0_1' => '',
-          'cell_1_0' => '',
-          'cell_1_1' => '',
-          'cell_2_0' => '',
-          'cell_2_1' => '',
+          'caption' => NULL,
           'import' => array(
             'rebuild_field_basic_table_table_0' => 'Upload CSV',
             'tablefield_csv_field_basic_table_table_0' => '',
           ),
+          'paste' => NULL,
           'rebuild' => array(
             'count_cols' => 2,
             'count_rows' => 3,
             'rebuild' => 'Rebuild Table',
+          ),
+          'tabledata' => array(
+            'row_0' => array(
+              'col_0' => '',
+              'col_1' => '',
+            ),
+            'row_1' => array(
+              'col_0' => '',
+              'col_1' => '',
+            ),
+            'row_2' => array(
+              'col_0' => '',
+              'col_1' => '',
+            ),
           ),
         ),
       ),
@@ -524,7 +534,19 @@ function panopoly_widgets_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'tablefield',
-        'settings' => array(),
+        'settings' => array(
+          'export_csv' => 0,
+          'header_orientation' => 'Horizontal',
+          'hide_cols_skip_head' => 0,
+          'hide_empty_cols' => 0,
+          'hide_empty_rows' => 0,
+          'hide_header' => 0,
+          'sortable' => FALSE,
+          'sticky_header' => 1,
+          'striping' => 1,
+          'trim_trailing_cols' => 1,
+          'trim_trailing_rows' => 1,
+        ),
         'type' => 'tablefield_default',
         'weight' => 0,
       ),
@@ -539,7 +561,11 @@ function panopoly_widgets_field_default_field_instances() {
     'widget' => array(
       'active' => 0,
       'module' => 'tablefield',
-      'settings' => array(),
+      'settings' => array(
+        'cell_processing' => 0,
+        'lock_values' => 0,
+        'restrict_rebuild' => 0,
+      ),
       'type' => 'tablefield',
       'weight' => -4,
     ),
