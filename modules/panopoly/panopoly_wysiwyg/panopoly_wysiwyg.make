@@ -12,6 +12,7 @@ projects[wysiwyg][patch][1786732] = http://drupal.org/files/wysiwyg-arbitrary_im
 projects[wysiwyg][patch][2884691] = https://www.drupal.org/files/issues/wysiwyg-theme-css-v24-2884691-8.patch
 projects[wysiwyg][patch][2884761] = https://www.drupal.org/files/issues/wysiwyg-tinymce-css-array-2884761-5.patch
 projects[wysiwyg][patch][2890066] = https://www.drupal.org/files/issues/wysiwyg-isnode-2890066-2.patch
+projects[wysiwyg][patch][2903753] = https://www.drupal.org/files/issues/wysiwyg.tinymce_fullscreen.2903753.6.patch
 
 projects[wysiwyg_filter][version] = 1.6-rc2
 projects[wysiwyg_filter][subdir] = contrib
