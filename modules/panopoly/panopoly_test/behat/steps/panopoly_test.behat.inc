@@ -23,6 +23,13 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   private $drupal = NULL;
 
   /**
+   * Tracks if we're in a Javascript scenario or not.
+   *
+   * @var bool
+   */
+  private $javascript = FALSE;
+
+  /**
    * Contains the name of the currently selected iframe.
    *
    * @var string
