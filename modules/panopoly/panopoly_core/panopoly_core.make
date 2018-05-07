@@ -58,7 +58,7 @@ projects[token][subdir] = contrib
 projects[entity][version] = 1.9
 projects[entity][subdir] = contrib
 
-projects[libraries][version] = 2.2
+projects[libraries][version] = 2.3
 projects[libraries][subdir] = contrib
 
 projects[transliteration][version] = 3.2
