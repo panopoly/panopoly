@@ -12,7 +12,7 @@ projects[panopoly_core][download][branch] = 7.x-1.x
 projects[panopoly_images][version] = 1.x-dev
 projects[panopoly_images][subdir] = panopoly
 projects[panopoly_images][download][type] = git
-projects[panopoly_images][download][revision] = a64ba15
+projects[panopoly_images][download][revision] = eb4af1a
 projects[panopoly_images][download][branch] = 7.x-1.x
 
 projects[panopoly_theme][version] = 1.x-dev
