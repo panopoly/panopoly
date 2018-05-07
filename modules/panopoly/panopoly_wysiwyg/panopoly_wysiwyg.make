@@ -14,9 +14,8 @@ projects[wysiwyg][patch][2884761] = https://www.drupal.org/files/issues/wysiwyg-
 projects[wysiwyg][patch][2890066] = https://www.drupal.org/files/issues/wysiwyg-isnode-2890066-2.patch
 projects[wysiwyg][patch][2903753] = https://www.drupal.org/files/issues/wysiwyg.tinymce_fullscreen.2903753.6.patch
 
-projects[wysiwyg_filter][version] = 1.6-rc2
+projects[wysiwyg_filter][version] = 1.6-rc9
 projects[wysiwyg_filter][subdir] = contrib
-projects[wysiwyg_filter][patch][1687794] = https://www.drupal.org/files/wysiwyg_filter-1687794-1-skip-validation-if-filter-disabled.patch
 
 ; The WYSIWYG Helpers
 
