@@ -20,17 +20,16 @@ projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
 
-projects[file_entity][version] = 2.12
+projects[file_entity][version] = 2.21
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.13
+projects[media][version] = 2.19
 projects[media][subdir] = contrib
-projects[media][patch][2372907] = https://www.drupal.org/files/issues/media-replace-fake-button-2372907-2.patch
-projects[media][patch][2966109] = https://www.drupal.org/files/issues/2018-04-25/media--sa-contrib-2018-020.patch
 
-projects[media_youtube][version] = 3.0
+projects[media_youtube][version] = 3.7
 projects[media_youtube][subdir] = contrib
 
 projects[media_vimeo][version] = 2.1
 projects[media_vimeo][subdir] = contrib
 projects[media_vimeo][patch][2446199] = https://www.drupal.org/files/issues/no_exception_handling-2446199-1.patch
+projects[media_vimeo][patch][2913855] = https://www.drupal.org/files/issues/media_vimeo_https-2913855-3.patch
