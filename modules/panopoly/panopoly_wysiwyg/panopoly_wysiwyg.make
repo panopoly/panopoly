@@ -6,7 +6,7 @@ core = 7.x
 ; The WYSIWYG Module Family
 
 projects[wysiwyg][subdir] = contrib
-projects[wysiwyg][version] = 2.4
+projects[wysiwyg][version] = 2.5
 projects[wysiwyg][patch][1489096] = http://drupal.org/files/wysiwyg-table-format.patch
 projects[wysiwyg][patch][1786732] = http://drupal.org/files/wysiwyg-arbitrary_image_paths_markitup-1786732-3.patch
 projects[wysiwyg][patch][2884691] = https://www.drupal.org/files/issues/wysiwyg-theme-css-v24-2884691-8.patch
