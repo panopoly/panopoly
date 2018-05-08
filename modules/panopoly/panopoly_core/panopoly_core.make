@@ -81,9 +81,8 @@ projects[link][patch][2666912] = https://www.drupal.org/files/issues/revert-url-
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[apps][version] = 1.0
+projects[apps][version] = 1.1
 projects[apps][subdir] = contrib
-projects[apps][patch][2753413] = https://www.drupal.org/files/issues/apps-manifest-2753413-3.patch
 
 projects[features][version] = 2.10
 projects[features][subdir] = contrib
