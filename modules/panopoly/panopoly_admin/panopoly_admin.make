@@ -37,9 +37,8 @@ projects[navbar][download][branch] = 7.x-1.x
 projects[navbar][patch][1757466] = http://drupal.org/files/navbar-conflict-1757466-14.patch
 projects[navbar][patch][2050559] = http://drupal.org/files/z-index-heart-cools-2050559-1.patch
 
-projects[breakpoints][version] = 1.3
+projects[breakpoints][version] = 1.4
 projects[breakpoints][subdir] = contrib
-projects[breakpoints][patch][2415363] = https://www.drupal.org/files/issues/2415363-breakpoints-menu_rebuild-13.patch
 
 projects[admin_menu][version] = 3.0-rc5
 projects[admin_menu][subdir] = contrib
