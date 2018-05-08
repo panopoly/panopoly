@@ -24,8 +24,8 @@ class MediaVideoAdd extends WidgetBase {
    */
   public function defaultConfiguration() {
     return [
-        'media_type' => NULL,
-      ] + parent::defaultConfiguration();
+      'media_type' => NULL,
+    ] + parent::defaultConfiguration();
   }
 
   /**
@@ -42,6 +42,9 @@ class MediaVideoAdd extends WidgetBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   protected function prepareEntities(array $form, FormStateInterface $form_state) {
     $form_display = entity_get_form_display('media', $this->configuration['media_type'], 'entity_browser');
     $media = $this->entityTypeManager->getStorage('media')->create([

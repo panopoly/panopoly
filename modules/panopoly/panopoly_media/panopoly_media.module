@@ -64,6 +64,7 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
           }
         }
         break;
+
       // There are no custom displays for files or videos. Force to default
       // for now, until file (PDF preview) or video formatters (set size) added.
       case 'video':

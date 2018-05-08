@@ -30,7 +30,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class PanopolyMediaResponsiveThumbnail extends MediaThumbnailFormatter {
 
   /**
-   * @var EntityStorageInterface
+   * The image style entity storage handler.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $responsiveImageStyleStorage;
 
@@ -150,7 +152,7 @@ class PanopolyMediaResponsiveThumbnail extends MediaThumbnailFormatter {
       $summary[0] = t('Responsive image style: @responsive_image_style', ['@responsive_image_style' => $responsive_image_style->label()]);
     }
     else {
-      $summary = [ t('Select a responsive image style.') ];
+      $summary = [t('Select a responsive image style.')];
     }
 
     return $summary;

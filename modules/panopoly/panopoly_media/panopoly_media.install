@@ -14,6 +14,9 @@ use Drupal\Core\Utility\UpdateException;
 define('PANOPOLY_MEDIA_ICON_UUID', 'a55d8d13-8e8f-406f-ba43-d3765f450325');
 define('PANOPOLY_MEDIA_EMBED_BUTTON', 'panopoly_media_wysiwyg_media_embed');
 
+/**
+ * Implements hook_install().
+ */
 function panopoly_media_install() {
   // If we're able to create the icon, but the button doesn't exist, create it.
   if (_panopoly_media_create_embed_icon() && !EmbedButton::load(PANOPOLY_MEDIA_EMBED_BUTTON)) {
@@ -34,6 +37,8 @@ function panopoly_media_install() {
  * Create media embed icon.
  *
  * @return \Drupal\Core\Entity\EntityInterface|null
+ *   The file entity for the icon, or NULL if there was a problem creating the
+ *   icon.
  */
 function _panopoly_media_create_embed_icon() {
   /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
