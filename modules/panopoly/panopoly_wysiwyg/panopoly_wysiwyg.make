@@ -26,12 +26,7 @@ projects[linkit][patch][2651404] = https://www.drupal.org/files/issues/linkit-ad
 projects[image_resize_filter][version] = 1.16
 projects[image_resize_filter][subdir] = contrib
 
-projects[caption_filter][version] = 1.x-dev
-projects[caption_filter][subdir] = contrib
-projects[caption_filter][download][type] = git
-projects[caption_filter][download][revision] = b8097ee
-projects[caption_filter][download][branch] = 7.x-1.x
-projects[caption_filter][patch][2455253] = https://www.drupal.org/files/issues/caption_filter-single-quotes-to-entities.patch
+projects[caption_filter][version] = 1.3
 
 ; Include our Editors
 
