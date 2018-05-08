@@ -115,7 +115,7 @@ projects[jquery_update][version] = 2.7
 projects[jquery_update][subdir] = contrib
 
 ; Recommended Modules
-projects[devel][version] = 1.5
+projects[devel][version] = 1.6
 projects[devel][subdir] = contrib
 
 projects[distro_update][version] = 1.0-beta4
