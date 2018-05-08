@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
 use Drupal\panopoly_media\Plugin\Field\FieldWidget\ImageWidget;
 
 /**
@@ -99,4 +100,122 @@ function panopoly_media_inline_entity_form_entity_form_alter(&$entity_form, &$fo
   }
 
   $entity_form['revision_log_message']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function panopoly_media_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $widgets = ['file_generic', 'image_image'];
+  if (in_array($context['widget']->getPluginId(), $widgets)) {
+    $element['#process'][] = 'panopoly_media_field_widget_process';
+    $element['#element_validate'][] = 'panopoly_media_widget_duplicate_validate';
+  }
+}
+
+/**
+ * Process callback for file and image widgets to add duplicate acknowledgement.
+ */
+function panopoly_media_field_widget_process(&$element, FormStateInterface $form_state, $form) {
+  $parents = $element['#parents'];
+  $values = $form_state->getValue($parents);
+
+  $files = File::loadMultiple($values['fids']);
+  $duplicate = panopoly_media_duplicate_files($files, TRUE);
+  $element['#panopoly_media_is_duplicate'] = $duplicate;
+
+  if ($duplicate) {
+    $element['panopoly_media_duplicate'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Acknowledge duplicate upload'),
+      '#default_value' => FALSE,
+    ];
+  }
+
+  return $element;
+}
+
+/**
+ * Determines if a file is or if set of files has a duplicate.
+ *
+ * @param \Drupal\file\FileInterface|\Drupal\file\FileInterface[] $files
+ *   The file or files.
+ * @param bool $new_only
+ *   Optional. Indicates if only new files should be checked for duplicity.
+ *
+ * @return bool
+ *   Indicates if there is a duplicate.
+ */
+function panopoly_media_duplicate_files($files, $new_only = FALSE) {
+  // Soft dependency on filehash.
+  if (!\Drupal::moduleHandler()->moduleExists('filehash')) {
+    return FALSE;
+  }
+
+  // Normalize into an array.
+  if (!is_array($files)) {
+    $files = [$files];
+  }
+
+  // Check only newly-created files.
+  if ($new_only) {
+    $files = array_filter($files, function ($file) {
+      /** @var \Drupal\file\FileInterface $file */
+      return $file->isTemporary();
+    });
+  }
+
+  // If no files, we've got nothing to do.
+  if (empty($files)) {
+    return FALSE;
+  }
+
+  // Gather file IDs.
+  $fids = array_map(function ($file) {
+    /** @var \Drupal\file\FileInterface $file */
+    return $file->id();
+  }, $files);
+
+  // Check each used algorithm for duplicate.
+  foreach (filehash_algos() as $algo) {
+    $hashes = array_map(function ($file) use ($algo) {
+      return $file->filehash[$algo];
+    }, $files);
+    if (!$hashes) {
+      break;
+    }
+
+    // Query for duplicates.
+    $query = \Drupal::database()->select('filehash');
+    $query->addField('filehash', 'fid');
+    $query->condition('fid', $fids, 'NOT IN');
+    $query->condition($algo, $hashes, 'IN');
+    $query->range(0, 1);
+    if ($fid = $query->execute()->fetchField()) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Validation handler for duplicate file uploads.
+ */
+function panopoly_media_widget_duplicate_validate(&$element, FormStateInterface &$form_state) {
+  // Only validate on submit.
+  $triggering_element = $form_state->getTriggeringElement();
+  if (!empty($triggering_element['#submit']) && in_array('file_managed_file_submit', $triggering_element['#submit'])) {
+    if (strpos($triggering_element['#name'], '_upload_button') === FALSE) {
+      return;
+    }
+  }
+
+  $parents = $element['#parents'];
+  $values = $form_state->getValue($parents);
+
+  // If there is a duplicate, verify "Acknowledge duplicate upload" box checked.
+  if (!empty($element['#panopoly_media_is_duplicate']) && empty($values['panopoly_media_duplicate'])) {
+    $form_state->setError($element, t('Duplicate file uploaded. Please check the media library for an existing file or check the "Acknowledge duplicate upload" box to continue with this upload.'));
+  }
 }
