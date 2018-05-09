@@ -66,7 +66,7 @@ class FileDeleteForm extends ContentEntityDeleteForm {
       $form['warning'] = [
         '#theme' => 'status_messages',
         // @todo Improve when https://www.drupal.org/node/2278383 lands.
-        '#message_list' => ['warning' => [$this->t('Blerp')]],
+        '#message_list' => ['warning' => [$this->t('This file has usages recorded. Deleting it may affect content that attempts to reference it.')]],
         '#status_headings' => [
           'status' => $this->t('Status message'),
           'error' => $this->t('Error message'),
