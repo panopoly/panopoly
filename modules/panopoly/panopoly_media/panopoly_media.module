@@ -252,3 +252,16 @@ function panopoly_media_entity_type_alter(array &$entity_types) {
     $entity_types['file']->setHandlerClass('route_provider', ['html' => FileRouteProvider::class]);
   }
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function panopoly_media_views_data_alter(&$data) {
+  $data['file_managed']['panopoly_media_file_managed_bulk_form'] = [
+    'title' => t('File operations bulk form'),
+    'help' => t('Add a form element that lets you run operations on multiple files.'),
+    'field' => [
+      'id' => 'panopoly_media_file_managed_bulk_form',
+    ],
+  ];
+}
