@@ -5,9 +5,12 @@
  * Hook implementations for Panopoly Media.
  */
 
+use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Drupal\panopoly_media\Form\FileDeleteForm;
 use Drupal\panopoly_media\Plugin\Field\FieldWidget\ImageWidget;
+use Drupal\panopoly_media\Routing\FileRouteProvider;
 
 /**
  * Implements hook_theme().
@@ -218,5 +221,34 @@ function panopoly_media_widget_duplicate_validate(&$element, FormStateInterface 
   // If there is a duplicate, verify "Acknowledge duplicate upload" box checked.
   if (!empty($element['#panopoly_media_is_duplicate']) && empty($values['panopoly_media_duplicate'])) {
     $form_state->setError($element, t('Duplicate file uploaded. Please check the media library for an existing file or check the "Acknowledge duplicate upload" box to continue with this upload.'));
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function panopoly_media_entity_type_alter(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
+
+  // Allows "operations" on file entities.
+  if (!$entity_types['file']->hasHandlerClass('list_builder')) {
+    $entity_types['file']->setListBuilderClass(EntityListBuilder::class);
+  }
+
+  // Provides a delete form.
+  $forms = $entity_types['file']->hasHandlerClass('form') ?: [];
+  if (empty($forms['delete'])) {
+    $forms['delete'] = FileDeleteForm::class;
+    $entity_types['file']->setHandlerClass('form', $forms);
+  }
+
+  // Provides a delete form link template.
+  if (!$entity_types['file']->hasLinkTemplate('delete-form')) {
+    $entity_types['file']->setLinkTemplate('delete-form', '/file/{file}/delete');
+  }
+
+  // Provides routes.
+  if (!$entity_types['file']->hasHandlerClass('route_provider')) {
+    $entity_types['file']->setHandlerClass('route_provider', ['html' => FileRouteProvider::class]);
   }
 }
