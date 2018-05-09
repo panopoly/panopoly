@@ -60,9 +60,6 @@ class FileDeleteForm extends ContentEntityDeleteForm {
 
     /** @var \Drupal\file\FileInterface $file */
     if ($this->fileUsage->listUsage($this->entity)) {
-      //drupal_set_message($this->t('Blerp'), 'warning', FALSE);
-
-
       $form['warning'] = [
         '#theme' => 'status_messages',
         // @todo Improve when https://www.drupal.org/node/2278383 lands.
