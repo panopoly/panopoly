@@ -10,6 +10,7 @@ use Drupal\embed\Entity\EmbedButton;
 use Drupal\Core\Config\ExtensionInstallStorage;
 use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\Utility\UpdateException;
+use Drupal\system\Entity\Action;
 
 define('PANOPOLY_MEDIA_ICON_UUID', 'a55d8d13-8e8f-406f-ba43-d3765f450325');
 define('PANOPOLY_MEDIA_EMBED_BUTTON', 'panopoly_media_wysiwyg_media_embed');
@@ -31,6 +32,8 @@ function panopoly_media_install() {
     $entity = $entity_storage->createFromStorageRecord($config_data);
     $entity->save();
   }
+
+  _panopoly_media_set_delete_config();
 }
 
 /**
@@ -66,6 +69,32 @@ function _panopoly_media_create_embed_icon() {
 }
 
 /**
+ * Adds the configuration entity for the file delete action.
+ */
+function _panopoly_media_set_delete_config() {
+  if ($action = Action::load('panopoly_media_file_delete_action')) {
+    return;
+  }
+
+  $action = Action::create([
+    'langcode' => 'en',
+    'status' => TRUE,
+    'dependencies' => [
+      'module' => [
+        'file',
+        'panopoly_media',
+      ],
+    ],
+    'id' => 'panopoly_media_file_delete_action',
+    'label' => 'Delete file',
+    'type' => 'file',
+    'plugin' => 'panopoly_media_file_delete_action',
+    "configuration" => [],
+  ]);
+  $action->save();
+}
+
+/**
  * Set WYSIWYG embed button icon.
  */
 function panopoly_media_update_8201() {
@@ -87,4 +116,11 @@ function panopoly_media_update_8201() {
  */
 function panopoly_media_update_8202() {
   \Drupal::service('module_installer')->install(['inline_entity_form']);
+}
+
+/**
+ * Add file delete action configuration.
+ */
+function panopoly_media_update_8203() {
+  _panopoly_media_set_delete_config();
 }
