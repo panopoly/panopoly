@@ -5,7 +5,7 @@ namespace Drupal\panopoly_media\Plugin\Action;
 use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\TempStore\PrivateTempStoreFactory;
+use Drupal\user\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -30,7 +30,7 @@ class DeleteFile extends ActionBase implements ContainerFactoryPluginInterface {
   /**
    * The tempstore object.
    *
-   * @var \Drupal\Core\TempStore\PrivateTempStore
+   * @var \Drupal\user\PrivateTempStore
    */
   protected $tempStore;
 
@@ -43,7 +43,7 @@ class DeleteFile extends ActionBase implements ContainerFactoryPluginInterface {
    *   The plugin ID for the plugin instance.
    * @param array $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
+   * @param \Drupal\user\PrivateTempStoreFactory $temp_store_factory
    *   The tempstore factory.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
@@ -62,7 +62,7 @@ class DeleteFile extends ActionBase implements ContainerFactoryPluginInterface {
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('tempstore.private'),
+      $container->get('user.private_tempstore'),
       $container->get('current_user')
     );
   }
