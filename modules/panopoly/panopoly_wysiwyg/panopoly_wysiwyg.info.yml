@@ -5,6 +5,7 @@ core: 8.x
 dependencies:
   - ckeditor
   - ckeditor_drupalbreaks
+  - colorbutton
   - editor
   - editor_advanced_link
   - embed

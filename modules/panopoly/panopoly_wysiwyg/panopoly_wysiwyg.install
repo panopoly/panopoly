@@ -266,6 +266,92 @@ function panopoly_wysiwyg_update_8207() {
 }
 
 /**
+ * Installs and configures colorbutton plugin.
+ */
+function panopoly_wysiwyg_update_8208() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install(['colorbutton']);
+
+  if (!$editor = Editor::load('panopoly_wysiwyg_full')) {
+    return;
+  }
+
+  // Only update ckeditor.
+  if ($editor->getEditor() != 'ckeditor') {
+    return;
+  }
+
+  $settings = $editor->get('settings');
+
+  // Find occurrences of the buttons and groups.
+  $text = $bg = $cg = $fg = NULL;
+  if (!empty($settings['toolbar']['rows'])) {
+    // Look for the "Formatting" group.
+    foreach ($settings['toolbar']['rows'] as $rowId => $row) {
+      foreach ($row as $groupId => $group) {
+        // Find groups.
+        if ($cg === NULL && $group['name'] == 'Colors') {
+          $cg = [$rowId, $groupId];
+        }
+        if ($cg === NULL && $group['name'] == 'Formatting') {
+          $fg = [$rowId, $groupId];
+        }
+        // Find items in group.
+        foreach ($group['items'] as $item) {
+          if ($text === NULL && $item == 'TextColor') {
+            $text = [$rowId, $groupId];
+          }
+          elseif ($bg === NULL && $item == 'BGColor') {
+            $bg = [$rowId, $groupId];
+          }
+        }
+      }
+    }
+  }
+
+  // If buttons are already set, bail.
+  if ($text && $bg) {
+    return;
+  }
+
+  if (!$text && !$bg) {
+    // Neither button exists, create or add to existing group.
+    $items = ['TextColor', 'BGColor'];
+    if (!$cg) {
+      $group = [
+        'name' => 'Colors',
+        'items' => $items,
+      ];
+      if (!$fg) {
+        // No formatting group, just add the color group.
+        $settings['toolbar']['rows'][0][] = $group;
+      } else {
+        // Add color group after formatting group.
+        array_splice($settings['toolbar']['rows'][$fg[0]], $fg[1] + 1, 0, [$group]);
+      }
+    }
+    else {
+      // Merge button into existing group.
+      $settings['toolbar']['rows'][$cg[0]][$cg[1]]['items'] = array_merge(
+        $settings['toolbar']['rows'][$cg[0]][$cg[1]]['items'],
+        $items
+      );
+    }
+  } elseif (!$text) {
+    // Add text color button with bg color button.
+    $settings['toolbar']['rows'][$bg[0]][$bg[1]]['items'][] = 'TextColor';
+  }
+  else {
+    // Add bg color button with text color button.
+    $settings['toolbar']['rows'][$text[0]][$text[1]]['items'][] = 'BGColor';
+  }
+
+  $editor->set('settings', $settings);
+  $editor->save();
+}
+
+/**
  * Sets the anchor plugin into the editor.
  *
  * @param string $editor_id

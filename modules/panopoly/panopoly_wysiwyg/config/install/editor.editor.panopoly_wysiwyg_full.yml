@@ -18,6 +18,11 @@ settings:
             - Italic
             - Strike
         -
+          name: Colors
+          items:
+            - TextColor
+            - BGColor
+        -
           name: 'Lists and Quotes'
           items:
             - BulletedList
@@ -87,6 +92,8 @@ settings:
       language_list: un
     stylescombo:
       styles: ''
+    colorbutton:
+      colors: ''
 image_upload:
   status: true
   scheme: public
