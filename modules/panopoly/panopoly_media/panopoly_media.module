@@ -8,6 +8,7 @@
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Drupal\panopoly_media\FileAccessControlHandler;
 use Drupal\panopoly_media\Form\FileDeleteForm;
 use Drupal\panopoly_media\Plugin\Field\FieldWidget\ImageWidget;
 use Drupal\panopoly_media\Routing\FileRouteProvider;
@@ -251,6 +252,9 @@ function panopoly_media_entity_type_alter(array &$entity_types) {
   if (!$entity_types['file']->hasHandlerClass('route_provider')) {
     $entity_types['file']->setHandlerClass('route_provider', ['html' => FileRouteProvider::class]);
   }
+
+  // Set access handler.
+  $entity_types['file']->setAccessClass(FileAccessControlHandler::class);
 }
 
 /**
