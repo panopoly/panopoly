@@ -63,7 +63,7 @@ projects[features][subdir] = contrib
 projects[config_actions][version] = 1.0-beta4
 projects[config_actions][subdir] = contrib
 
-projects[config_update][version] = 1.3
+projects[config_update][version] = 1.5
 projects[config_update][subdir] = contrib
 
 ;projects[apps][version] = 1.0
