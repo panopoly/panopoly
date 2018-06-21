@@ -55,7 +55,7 @@ projects[token][subdir] = contrib
 
 ; Harness the Power of Features and Apps with Default Content
 
-projects[features][version] = 3.2
+projects[features][version] = 3.7
 projects[features][subdir] = contrib
 
 projects[config_actions][version] = 1.0-beta4
