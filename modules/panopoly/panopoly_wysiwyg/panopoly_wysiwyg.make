@@ -23,3 +23,12 @@ projects[linkit][subdir] = contrib
 projects[panelbutton][version] = 1.1
 projects[panelbutton][subdir] = contrib
 
+libraries[colorbutton][download][type] = get
+libraries[colorbutton][download][url] = https://download.ckeditor.com/colorbutton/releases/colorbutton_4.8.0.zip
+
+libraries[fakeobjects][download][type] = get
+libraries[fakeobjects][download][url] = https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.8.0.zip
+
+libraries[panelbutton][download][type] = get
+libraries[panelbutton][download][url] = https://download.ckeditor.com/panelbutton/releases/panelbutton_4.8.0.zip
+
