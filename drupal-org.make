@@ -83,6 +83,6 @@ projects[panopoly_demo][version] = 2.x-dev
 projects[panopoly_demo][type] = module
 projects[panopoly_demo][subdir] = panopoly
 projects[panopoly_demo][download][type] = git
-projects[panopoly_demo][download][revision] = d92ca40
+projects[panopoly_demo][download][revision] = 2b4deef
 projects[panopoly_demo][download][branch] = 8.x-2.x
 
