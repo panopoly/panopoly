@@ -25,6 +25,12 @@ projects[panopoly_theme][download][branch] = 7.x-1.x
 ;projects[panopoly_magic][download][type] = git
 ;projects[panopoly_magic][download][branch] = 7.x-1.x
 
+projects[panopoly_media][version] = 2.x-dev
+projects[panopoly_media][type] = module
+projects[panopoly_media][subdir] = panopoly
+projects[panopoly_media][download][type] = git
+projects[panopoly_media][download][branch] = 8.x-2.x
+
 projects[panopoly_widgets][version] = 2.x-dev
 projects[panopoly_widgets][type] = module
 projects[panopoly_widgets][subdir] = panopoly
