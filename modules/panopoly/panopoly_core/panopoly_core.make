@@ -17,7 +17,7 @@ projects[panels][patch][2849219] = https://www.drupal.org/files/issues/panels-ho
 projects[panels][patch][2824508] = https://www.drupal.org/files/issues/panels-ipe-search-2824508-8.patch
 projects[panels][patch][2822390] = https://www.drupal.org/files/issues/panels-toolbar-vertical-2822390-7.patch
 
-projects[page_manager][version] = 4.0-beta2
+projects[page_manager][version] = 4.0-beta3
 projects[page_manager][subdir] = contrib
 
 ;projects[panels_breadcrumbs][version] = 2.2
@@ -59,6 +59,9 @@ projects[token][subdir] = contrib
 
 projects[features][version] = 3.2
 projects[features][subdir] = contrib
+
+projects[config_actions][version] = 1.0-beta4
+projects[config_actions][subdir] = contrib
 
 projects[config_update][version] = 1.3
 projects[config_update][subdir] = contrib
