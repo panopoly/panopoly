@@ -60,7 +60,7 @@ projects[panopoly_pages][download][branch] = 8.x-2.x
 projects[panopoly_wysiwyg][version] = 2.x-dev
 projects[panopoly_wysiwyg][subdir] = panopoly
 projects[panopoly_wysiwyg][download][type] = git
-projects[panopoly_wysiwyg][download][revision] = f8ba6d3
+projects[panopoly_wysiwyg][download][revision] = 8f5f01c
 projects[panopoly_wysiwyg][download][branch] = 8.x-2.x
 
 ;projects[panopoly_search][version] = 1.x-dev
