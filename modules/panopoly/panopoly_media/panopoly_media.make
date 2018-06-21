@@ -25,3 +25,6 @@ projects[video_embed_field][version] = 2.x-dev
 projects[video_embed_field][subdir] = contrib
 projects[video_embed_field][patch][2973246] = https://www.drupal.org/files/issues/2018-05-30/video_embed_field-youtube_nocookie-2973246-21.patch
 
+libraries[dropzone][download][type] = get
+libraries[dropzone][download][url] = https://github.com/enyo/dropzone/archive/v5.1.1.tar.gz
+
