@@ -69,8 +69,7 @@ process:
   'body/value': body
   'body/format':
     plugin: default_value
-    # @todo Change after https://www.drupal.org/node/2732395
-    default_value: 'basic_html'
+    default_value: 'panopoly_wysiwyg_basic'
   field_panopoly_featured_status: featured
   created: created
   field_panopoly_featured_image:
