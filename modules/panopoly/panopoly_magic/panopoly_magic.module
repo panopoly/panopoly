@@ -1548,7 +1548,7 @@ function panopoly_magic_preview_callback_fpp($type, $subtype, $plugin, $renderer
     return NULL;
   }
 
-  // Set a property to it's possible to tell that the FPP is being rendered
+  // Set a property so it's possible to tell that the FPP is being rendered
   // in a preview, for example, in the template.
   $fpp->panopoly_magic_preview = TRUE;
 
@@ -1567,7 +1567,10 @@ function panopoly_magic_preview_callback_fpp($type, $subtype, $plugin, $renderer
  * Default 'preview callback' for when a 'preview image' is used.
  */
 function panopoly_magic_preview_callback_image($type, $subtype, $plugin, $renderer) {
-  return theme('image', array('path' => $plugin['preview image']));
+  if (empty($plugin['preview image alt'])) {
+    $plugin['preview image alt'] = NULL;
+  }
+  return theme('image', array('path' => $plugin['preview image'], 'alt' => $plugin['preview image alt']));
 }
 
 /**
