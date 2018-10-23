@@ -21,6 +21,8 @@ matrix:
   allow_failures:
     - php: "hhvm"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
+    - php: "7.2"
+      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
   include:
     - php: "7"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
