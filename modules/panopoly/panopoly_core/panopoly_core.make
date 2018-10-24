@@ -82,6 +82,7 @@ projects[link][patch][2666912] = https://www.drupal.org/files/issues/revert-url-
 
 projects[apps][version] = 1.1
 projects[apps][subdir] = contrib
+projects[apps][patch][2945929] = https://www.drupal.org/files/issues/apps-php7-compat-2945929.patch
 
 projects[features][version] = 2.10
 projects[features][subdir] = contrib
