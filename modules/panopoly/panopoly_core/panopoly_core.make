@@ -126,5 +126,5 @@ projects[distro_update][subdir] = contrib
 projects[features_override][version] = 2.0-rc3
 projects[features_override][subdir] = contrib
 
-projects[uuid][version] = 1.1
+projects[uuid][version] = 1.2
 projects[uuid][subdir] = contrib
