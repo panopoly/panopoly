@@ -102,6 +102,7 @@ projects[defaultcontent][version] = 1.0-alpha9
 projects[defaultcontent][subdir] = contrib
 projects[defaultcontent][patch][1754428] = http://drupal.org/files/1754428-allow-node-export-alter.patch
 projects[defaultcontent][patch][1757782] = http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch
+projects[defaultcontent][patch][2946138] = https://www.drupal.org/files/issues/defaultcontent-php7-compat-2946138.patch
 
 projects[migrate][version] = "2.11"
 projects[migrate][type] = "module"
