@@ -159,7 +159,7 @@ function panopoly_widgets_field_formatter_view($entity_type, $entity, $field, $i
     $duration = $duration_field['value'];
   }
   if (empty($duration)) {
-    $duration = variable_get('panopoly_widgets_spotlight_rotation_time', 4);
+    $duration = variable_get('panopoly_widgets_spotlight_rotation_time', 5);
   }
 
   $pager_style = 'full'; // Default to the Full pager if field isn't filled out (i.e., legacy data).
