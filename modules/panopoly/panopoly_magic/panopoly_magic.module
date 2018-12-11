@@ -492,6 +492,7 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'button',
         '#value' => t('Update Preview'),
         '#attributes' => $preview_attributes,
+        '#weight' => -100,
         '#ajax' => array(
           'callback' => 'panopoly_magic_ajax_update_preview',
           'wrapper' => 'panopoly-form-widget-preview',
