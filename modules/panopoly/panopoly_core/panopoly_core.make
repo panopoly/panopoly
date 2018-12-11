@@ -7,6 +7,7 @@ core = 7.x
 
 projects[ctools][version] = 1.14
 projects[ctools][subdir] = contrib
+projects[ctools][patch][1000146] = https://www.drupal.org/files/issues/2018-03-26/views_panes-more_link_text-1000146-28.patch
 
 projects[panels][version] = 3.9
 projects[panels][subdir] = contrib
