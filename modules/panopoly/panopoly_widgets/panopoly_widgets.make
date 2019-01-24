@@ -5,9 +5,8 @@ core = 7.x
 
 ; Panopoly - Contrib - Fields
 
-projects[tablefield][version] = 3.1
+projects[tablefield][version] = 3.2
 projects[tablefield][subdir] = contrib
-projects[tablefield][patch][2923462] = https://www.drupal.org/files/issues/tablefield-7.x-3.1-duplicate-ids-2923462-14.patch
 
 projects[simple_gmap][version] = 1.4
 projects[simple_gmap][subdir] = contrib
