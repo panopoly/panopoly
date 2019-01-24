@@ -15,7 +15,7 @@ projects[simple_gmap][patch][2902178] = https://www.drupal.org/files/issues/simp
 
 ; Panopoly - Contrib - Widgets
 
-projects[menu_block][version] = 2.7
+projects[menu_block][version] = 2.8
 projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
