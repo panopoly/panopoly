@@ -20,7 +20,7 @@ projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
 
-projects[file_entity][version] = 2.22
+projects[file_entity][version] = 2.25
 projects[file_entity][subdir] = contrib
 
 projects[media][version] = 2.21
