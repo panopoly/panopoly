@@ -87,9 +87,8 @@ projects[apps][version] = 1.1
 projects[apps][subdir] = contrib
 projects[apps][patch][2945929] = https://www.drupal.org/files/issues/apps-php7-compat-2945929.patch
 
-projects[features][version] = 2.10
+projects[features][version] = 2.11
 projects[features][subdir] = contrib
-projects[features][patch][2931464] = "https://www.drupal.org/files/issues/features-create_function-is-deprecated-2931464-5.patch"
 
 projects[strongarm][version] = 2.0
 projects[strongarm][subdir] = contrib
