@@ -25,6 +25,7 @@ projects[panelizer][patch][2788851] = https://www.drupal.org/files/issues/paneli
 projects[fieldable_panels_panes][version] = 1.11
 projects[fieldable_panels_panes][subdir] = contrib
 projects[fieldable_panels_panes][patch][2826205] = https://www.drupal.org/files/issues/fieldable_panels_panes-n2826205-39.patch
+projects[fieldable_panels_panes][patch][3019270] = https://www.drupal.org/files/issues/2018-12-10/2848997-cant-access-admin-too-many-redirects.patch
 
 projects[pm_existing_pages][version] = 1.4
 projects[pm_existing_pages][subdir] = contrib
