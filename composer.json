@@ -1,16 +1,28 @@
 {
-  "repositories": [
-    {
-      "type": "pear",
-      "url": "http://pear.php.net"
-    }
-  ],
-  "require-dev": {
-    "phing/phing": "2.*",
-    "pear/versioncontrol_git": "@dev",
-    "pear-pear.php.net/HTTP_Request2": "2.2.x"
-  },
-  "config": {
-    "bin-dir": "bin/"
-  }
+    "name": "drupal/panopoly",
+    "description": "Panopoly is a powerful Drupal base-distribution with a powerful editorial experience",
+    "type": "drupal-profile",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "drupal/panopoly_core": "self.version",
+		"drupal/panopoly_images": "self.version",
+		"drupal/panopoly_theme": "self.version",
+		"drupal/panopoly_widgets": "self.version",
+		"drupal/panopoly_users": "self.version",
+		"drupal/panopoly_pages": "self.version",
+		"drupal/panopoly_wysiwyg": "self.version"
+    },
+	"extra": {
+		"branch-alias": {
+			"dev-8.x-2.x": "2.x-dev"
+		}
+	}
 }
