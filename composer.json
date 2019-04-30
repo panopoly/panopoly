@@ -12,7 +12,8 @@
         }
     ],
     "require": {
-        "drupal/panopoly_core": "self.version",
+		"drupal/core": "^8.6.15",
+		"drupal/panopoly_core": "self.version",
 		"drupal/panopoly_images": "self.version",
 		"drupal/panopoly_theme": "self.version",
 		"drupal/panopoly_widgets": "self.version",
@@ -23,6 +24,11 @@
 	"extra": {
 		"branch-alias": {
 			"dev-8.x-2.x": "2.x-dev"
+		},
+		"patches": {
+			"drupal/drupal": {
+				"Issue #2653938": "https://www.drupal.org/files/issues/drupal-views-filter-default-all-2653938-11.patch"
+			}
 		}
 	}
 }
