@@ -54,7 +54,7 @@ projects[panopoly_users][download][branch] = 8.x-2.x
 projects[panopoly_pages][version] = 2.x-dev
 projects[panopoly_pages][subdir] = panopoly
 projects[panopoly_pages][download][type] = git
-projects[panopoly_pages][download][revision] = b0493f2
+projects[panopoly_pages][download][revision] = eea71b6
 projects[panopoly_pages][download][branch] = 8.x-2.x
 
 projects[panopoly_wysiwyg][version] = 2.x-dev
