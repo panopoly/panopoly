@@ -26,7 +26,10 @@ function panopoly_pages_get_panelizer_entity(PanelsDisplayVariant $panels_displa
 /**
  * Implements hook_panels_ipe_layouts_alter().
  */
-function panopoly_pages_panels_ipe_layouts_alter(array &$layouts, PanelsDisplayVariant $panels_display) {
+function panopoly_pages_panels_ipe_layouts_alter(array &$layouts, PanelsDisplayVariant $panels_display = NULL) {
+  if (!$panels_display) {
+    return;
+  }
   if ($entity = panopoly_pages_get_panelizer_entity($panels_display)) {
     // Only modify the results for our content types.
     if ($entity->getEntityTypeId() !== 'node' || !in_array($entity->bundle(), ['panopoly_content_page', 'panopoly_landing_page'])) {
@@ -121,4 +124,3 @@ function panopoly_pages_panels_ipe_blocks_alter(array &$blocks, PanelsDisplayVar
     }
   }
 }
-
