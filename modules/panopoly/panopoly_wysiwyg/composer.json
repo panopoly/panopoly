@@ -9,6 +9,13 @@
         "drupal/fakeobjects": "~1.0",
         "drupal/linkit": "~5.0-beta7",
         "drupal/panelbutton": "~1.1",
-        "drupal/panopoly_media": "2.x-dev"
+        "drupal/panopoly_media": "2.x-dev",
+        "drupal-ckeditor-plugin/colorbutton": "4.*",
+        "drupal-ckeditor-plugin/fakeobjects": "4.*",
+        "drupal-ckeditor-plugin/panelbutton": "4.*",
+        "drupal-ckeditor-plugin/tableresize": "4.*",
+        "drupal-ckeditor-plugin/tableselection": "4.*",
+        "drupal-ckeditor-plugin/tabletoolstoolbar": "4.*",
+        "drupal-ckeditor-plugin/texttransform": "4.*"
     }
 }
