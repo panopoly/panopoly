@@ -15,7 +15,7 @@
         "drupal-ckeditor-plugin/panelbutton": "4.*",
         "drupal-ckeditor-plugin/tableresize": "4.*",
         "drupal-ckeditor-plugin/tableselection": "4.*",
-        "drupal-ckeditor-plugin/tabletoolstoolbar": "4.*",
+        "drupal-ckeditor-plugin/tabletoolstoolbar": "^0.0.1",
         "drupal-ckeditor-plugin/texttransform": "4.*"
     }
 }
