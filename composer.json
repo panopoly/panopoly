@@ -1,5 +1,5 @@
 {
-    "name": "drupal/panopoly",
+    "name": "panopoly/panopoly",
     "description": "Panopoly is a powerful Drupal base-distribution with a powerful editorial experience",
     "type": "drupal-profile",
     "license": "GPL-2.0-or-later",
