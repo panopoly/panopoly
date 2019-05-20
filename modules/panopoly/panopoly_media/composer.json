@@ -3,6 +3,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
+        "bower-asset/dropzone": "^5.1",
         "drupal/core": "~8.4",
         "drupal/config_actions": "~1.0-beta1",
         "drupal/ctools": "^3.0",
