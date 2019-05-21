@@ -19,10 +19,12 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_panopoly_widgets_file:
     weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: file_default
+    region: content
 hidden: {  }

@@ -22,6 +22,7 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_panopoly_widgets_image:
     weight: 0
     settings:
@@ -29,5 +30,6 @@ content:
       preview_image_style: panopoly_images_thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
 hidden:
   info: true

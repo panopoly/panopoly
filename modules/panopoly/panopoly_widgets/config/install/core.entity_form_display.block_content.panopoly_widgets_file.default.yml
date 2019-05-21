@@ -21,11 +21,13 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   field_panopoly_widgets_file:
     weight: 0
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
+    region: content
 hidden:
   info: true

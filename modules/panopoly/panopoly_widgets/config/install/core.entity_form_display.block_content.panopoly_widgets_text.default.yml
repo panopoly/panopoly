@@ -19,5 +19,6 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden:
   info: true
