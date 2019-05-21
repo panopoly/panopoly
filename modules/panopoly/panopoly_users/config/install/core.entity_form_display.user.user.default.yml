@@ -20,10 +20,12 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
   contact:
     weight: 5
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_panopoly_users_about:
     weight: 3
     settings:
@@ -32,19 +34,23 @@ content:
       summary_rows: 3
     third_party_settings: {  }
     type: text_textarea_with_summary
+    region: content
   language:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
   path:
     type: path
     weight: 1
     settings: {  }
     third_party_settings: {  }
+    region: content
   timezone:
     weight: 6
     settings: {  }
     third_party_settings: {  }
+    region: content
   user_picture:
     type: image_image
     weight: 4
@@ -52,5 +58,6 @@ content:
       preview_image_style: panopoly_images_thumbnail
       progress_indicator: throbber
     third_party_settings: {  }
+    region: content
 hidden:
   panelizer: true

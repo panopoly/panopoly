@@ -40,10 +40,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
   member_for:
     weight: 5
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   panelizer: true
   user_picture: true
