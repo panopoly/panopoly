@@ -12,7 +12,8 @@ dependencies:
   - entity_embed
   - fakeobjects
   - filter
-  - linkit (>=8.x-5.x)
+  - linkit
+  - 'linkit (>=8.x-5.x)'
   - media
   - panopoly_media
 package: Panopoly

@@ -8,8 +8,6 @@ dependencies:
 name: Standard
 format: panopoly_wysiwyg_basic
 weight: -10
-roles:
-  - authenticated
 filters:
   filter_html:
     id: filter_html

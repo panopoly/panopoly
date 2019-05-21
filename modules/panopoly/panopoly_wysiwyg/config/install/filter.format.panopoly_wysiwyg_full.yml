@@ -8,8 +8,6 @@ dependencies:
 name: 'Full (dangerous!)'
 format: panopoly_wysiwyg_full
 weight: -5
-roles:
-  - administrator
 filters:
   filter_align:
     id: filter_align
