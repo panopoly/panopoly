@@ -4,5 +4,4 @@ dependencies: {  }
 name: Categories
 vid: panopoly_categories
 description: 'This is a sitewide taxonomy of categories to organize the content on your site!'
-hierarchy: 0
 weight: 0

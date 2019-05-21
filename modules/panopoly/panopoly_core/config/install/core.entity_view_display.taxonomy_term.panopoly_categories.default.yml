@@ -18,6 +18,7 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_panopoly_featured_image:
     weight: 1
     label: above
@@ -26,4 +27,5 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
 hidden: {  }
