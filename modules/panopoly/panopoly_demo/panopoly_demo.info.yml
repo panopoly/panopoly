@@ -1,10 +1,18 @@
 type: module
-name: Panopoly Demo
+name: 'Panopoly Demo'
 description: 'Demo functionality and content to help show the power of Panopoly'
 core: 8.x
-package: Panopoly Demos
+package: Panopoly
 dependencies:
-  - drupal:migrate (>= 8.1)
+  - 'drupal:migrate (>= 8.1)'
+  - image
+  - node
   - page_manager
-  - panopoly_pages
+  - panels
   - panopoly_core
+  - panopoly_images
+  - panopoly_pages
+  - search
+  - text
+  - user
+  - views
