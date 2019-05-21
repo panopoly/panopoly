@@ -46,7 +46,7 @@ projects[panopoly_widgets][download][branch] = 8.x-2.x
 projects[panopoly_users][version] = 2.x-dev
 projects[panopoly_users][subdir] = panopoly
 projects[panopoly_users][download][type] = git
-projects[panopoly_users][download][revision] = e7b62c1
+projects[panopoly_users][download][revision] = edf43db
 projects[panopoly_users][download][branch] = 8.x-2.x
 
 ; The Panopoly Toolset
@@ -83,6 +83,6 @@ projects[panopoly_demo][version] = 2.x-dev
 projects[panopoly_demo][type] = module
 projects[panopoly_demo][subdir] = panopoly
 projects[panopoly_demo][download][type] = git
-projects[panopoly_demo][download][revision] = 2b4deef
+projects[panopoly_demo][download][revision] = 6e3eadd
 projects[panopoly_demo][download][branch] = 8.x-2.x
 
