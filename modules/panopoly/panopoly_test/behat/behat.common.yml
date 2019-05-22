@@ -2,7 +2,7 @@ default:
   suites:
     default:
       paths: 
-        features: 'features'
+        features: './features'
       filters:
         tags: "@panopoly2&&~@chrome"
       contexts:
