@@ -4,7 +4,7 @@
   "type": "drupal-module",
   "license": "GPL-2.0-or-later",
   "minimum-stability": "dev",
-  "require-dev": {
+  "require": {
     "drupal/drupal-extension": "^3.2.2"
   }
 }
