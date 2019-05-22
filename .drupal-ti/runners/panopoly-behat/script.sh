@@ -25,16 +25,18 @@ fi
 # This replaces environment vars from $DRUPAL_TI_BEHAT_YML into 'behat.yml'.
 drupal_ti_replace_behat_vars
 
+BEHAT="$DRUPAL_TI_DRUPAL_BASE/drupal/vendor/bin/behat"
+
 ARGS=( $DRUPAL_TI_BEHAT_ARGS )
 
 # First, run all the tests in Firefox.
-if ! ./vendor/bin/behat --rerun "${ARGS[@]}"; then
+if ! $BEHAT --rerun "${ARGS[@]}"; then
 	echo "Failures detected. Re-running failed scenarios."
-	./vendor/bin/behat --rerun "${ARGS[@]}"
+	$BEHAT --rerun "${ARGS[@]}"
 fi
 
 # Then run some Chrome-only tests.
-if ! ./vendor/bin/behat -p chrome --rerun "${ARGS[@]}"; then
+if ! $BEHAT -p chrome --rerun "${ARGS[@]}"; then
 	echo "Failures detected. Re-running failed scenarios."
-	./vendor/bin/behat -p chrome --rerun "${ARGS[@]}"
+	$BEHAT -p chrome --rerun "${ARGS[@]}"
 fi
