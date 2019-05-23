@@ -18,7 +18,7 @@ Feature: Add content page
     # Normally, here we'd press "Publish", however some child distribtions
     # don't use 'save_draft', and this makes this test compatible with them.
     #When I press "Publish"
-    When I press "Save and publish"
+    When I press "Save"
     Then the "h1" element should contain "Testing title"
 
   @api @javascript @panopoly_pages @local_files

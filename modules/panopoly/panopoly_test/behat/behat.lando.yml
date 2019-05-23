@@ -8,8 +8,6 @@ default:
       # For example: http://mydrupalsite.com
       base_url: 'http://appserver'
       files_path: './profiles/panopoly/modules/panopoly/panopoly_test/tests'
-      selenium2:
-        wd_host: http://chromedriver:4444/wd/hub
     Drupal\DrupalExtension:
       drush:
         # Set 'root' to the full path to your Drupal code base.
