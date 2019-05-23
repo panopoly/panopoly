@@ -74,7 +74,7 @@ projects[panopoly_wysiwyg][download][branch] = 8.x-2.x
 projects[panopoly_test][version] = 2.x-dev
 projects[panopoly_test][subdir] = panopoly
 projects[panopoly_test][download][type] = git
-projects[panopoly_test][download][revision] = 551fdb1
+projects[panopoly_test][download][revision] = 512e5da
 projects[panopoly_test][download][branch] = 8.x-2.x
 
 ; The Panopoly Apps (remove once there's true Apps support)
