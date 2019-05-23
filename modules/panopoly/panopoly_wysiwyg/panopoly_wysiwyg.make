@@ -17,18 +17,21 @@ projects[editor_advanced_link][subdir] = contrib
 projects[fakeobjects][version] = 1.0
 projects[fakeobjects][subdir] = contrib
 
-projects[linkit][version] = 5.0-beta7
+projects[linkit][version] = 5.0-beta8
 projects[linkit][subdir] = contrib
 
-projects[panelbutton][version] = 1.1
+projects[panelbutton][version] = 1.2
 projects[panelbutton][subdir] = contrib
 
 libraries[colorbutton][download][type] = get
-libraries[colorbutton][download][url] = http://download.ckeditor.com/colorbutton/releases/colorbutton_4.8.0.zip
+libraries[colorbutton][download][url] = https://download.ckeditor.com/colorbutton/releases/colorbutton_4.11.3.zip
 
 libraries[fakeobjects][download][type] = get
-libraries[fakeobjects][download][url] = http://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.8.0.zip
+libraries[fakeobjects][download][url] = https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.11.3.zip
 
 libraries[panelbutton][download][type] = get
-libraries[panelbutton][download][url] = http://download.ckeditor.com/panelbutton/releases/panelbutton_4.8.0.zip
+libraries[panelbutton][download][url] = https://download.ckeditor.com/panelbutton/releases/panelbutton_4.11.3.zip
+
+libraries[tabletoolstoolbar][download][type] = get
+libraries[tabletoolstoolbar][download][url] = https://download.ckeditor.com/tabletoolstoolbar/releases/tabletoolstoolbar_0.0.1.zip
 
