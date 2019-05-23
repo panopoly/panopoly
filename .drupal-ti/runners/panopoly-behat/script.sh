@@ -34,9 +34,3 @@ if ! $BEHAT --rerun "${ARGS[@]}"; then
 	echo "Failures detected. Re-running failed scenarios."
 	$BEHAT --rerun "${ARGS[@]}"
 fi
-
-# Then run some Chrome-only tests.
-if ! $BEHAT -p chrome --rerun "${ARGS[@]}"; then
-	echo "Failures detected. Re-running failed scenarios."
-	$BEHAT -p chrome --rerun "${ARGS[@]}"
-fi
