@@ -4,11 +4,11 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_panopoly_featured_image
-    - image.style.panopoly_images_quarter
     - node.type.panopoly_content_page
+    - responsive_image.styles.panopoly_images_quarter
   module:
-    - image
     - node
+    - responsive_image
     - text
     - user
 id: panopoly_demo
@@ -119,9 +119,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: alt
-          type: image
+          type: responsive_image
           settings:
-            image_style: panopoly_images_quarter
+            responsive_image_style: panopoly_images_quarter
             image_link: content
           group_column: ''
           group_columns: {  }
@@ -393,7 +393,7 @@ display:
           plugin_id: field
       filters:
         status:
-          value: true
+          value: '1'
           table: node_field_data
           field: status
           plugin_id: boolean
@@ -554,7 +554,7 @@ display:
           offset: 0
       filters:
         status:
-          value: true
+          value: '1'
           table: node_field_data
           field: status
           plugin_id: boolean
@@ -612,7 +612,7 @@ display:
           group_type: group
           admin_label: ''
           operator: '='
-          value: true
+          value: '1'
           group: 1
           exposed: false
           expose:

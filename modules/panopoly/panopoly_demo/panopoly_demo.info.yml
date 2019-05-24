@@ -12,6 +12,7 @@ dependencies:
   - panopoly_core
   - panopoly_images
   - panopoly_pages
+  - responsive_image
   - search
   - text
   - user
