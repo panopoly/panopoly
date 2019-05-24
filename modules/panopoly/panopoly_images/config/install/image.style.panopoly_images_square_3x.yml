@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_square_3x
+label: 'Square (3x)'
+effects:
+  b266b075-3b0e-4720-b812-0aae31656dd9:
+    uuid: b266b075-3b0e-4720-b812-0aae31656dd9
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 600
+      anchor: center-center

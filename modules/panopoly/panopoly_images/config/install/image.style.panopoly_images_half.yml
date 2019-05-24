@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies: {  }
 name: panopoly_images_half
-label: 'Half width (of the containing region - could upscale small images)'
+label: 'Half (1x)'
 effects:
-  ac21d97a-fa7a-4697-9ea9-35b5d50a41f8:
-    uuid: ac21d97a-fa7a-4697-9ea9-35b5d50a41f8
+  9b8f04d8-be91-4ce2-88bc-aab1edf43e96:
+    uuid: 9b8f04d8-be91-4ce2-88bc-aab1edf43e96
     id: image_scale
     weight: 1
     data:
-      width: 480
+      width: 630
       height: null
-      upscale: false
+      upscale: true

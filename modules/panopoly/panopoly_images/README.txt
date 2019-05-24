@@ -1,11 +1,6 @@
 Panopoly Images
 ===============
-Provides common image styles and helps make them responsive!
-
-Key Features
-* Several image style presets of various sizes
-* Integration with Media.module for style presets
-* Responsive CSS logic for image styles
+Provides some standard responsive image styles.
 
 Image Styles
 * Featured - Integrated with the featured view mode provided by Panopoly Theme

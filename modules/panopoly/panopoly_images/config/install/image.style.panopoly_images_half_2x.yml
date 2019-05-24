@@ -1,11 +1,11 @@
 langcode: en
 status: true
 dependencies: {  }
-name: panopoly_images_full
-label: 'Full (1x)'
+name: panopoly_images_half_2x
+label: 'Half (2x)'
 effects:
-  8a7dcef0-818f-4794-a280-7df6161310d8:
-    uuid: 8a7dcef0-818f-4794-a280-7df6161310d8
+  89c8fa74-65e0-4e67-a42f-d2a584aed52e:
+    uuid: 89c8fa74-65e0-4e67-a42f-d2a584aed52e
     id: image_scale
     weight: 1
     data:

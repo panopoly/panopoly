@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_full_2x
+label: 'Full (2x)'
+effects:
+  009f5f30-1927-41b0-a252-09d530dec460:
+    uuid: 009f5f30-1927-41b0-a252-09d530dec460
+    id: image_scale
+    weight: 1
+    data:
+      width: 2520
+      height: null
+      upscale: true

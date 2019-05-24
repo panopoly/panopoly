@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies: {  }
 name: panopoly_images_square
-label: Square
+label: 'Square (1x)'
 effects:
-  0cfe4141-1ffb-4dd5-8952-bf3328525503:
-    uuid: 0cfe4141-1ffb-4dd5-8952-bf3328525503
+  8c1d1776-091a-4d20-ac71-317c1115a0e4:
+    uuid: 8c1d1776-091a-4d20-ac71-317c1115a0e4
     id: image_scale_and_crop
     weight: 1
     data:

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.panopoly_images_featured
+    - image.style.panopoly_images_featured_2x
+    - image.style.panopoly_images_featured_3x
+id: panopoly_images_featured
+label: Featured
+image_style_mappings:
+  -
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(min-width:767px) 480px, 100vw'
+      sizes_image_styles:
+        - panopoly_images_featured
+        - panopoly_images_featured_2x
+        - panopoly_images_featured_3x
+breakpoint_group: responsive_image
+fallback_image_style: panopoly_images_featured_3x
