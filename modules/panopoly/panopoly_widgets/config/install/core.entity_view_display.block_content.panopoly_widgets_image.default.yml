@@ -5,9 +5,9 @@ dependencies:
     - block_content.type.panopoly_widgets_image
     - field.field.block_content.panopoly_widgets_image.body
     - field.field.block_content.panopoly_widgets_image.field_panopoly_widgets_image
-    - image.style.panopoly_images_full
+    - responsive_image.styles.panopoly_images_full
   module:
-    - image
+    - responsive_image
     - text
 id: block_content.panopoly_widgets_image.default
 targetEntityType: block_content
@@ -25,9 +25,9 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: panopoly_images_full
+      responsive_image_style: panopoly_images_full
       image_link: ''
     third_party_settings: {  }
-    type: image
+    type: responsive_image
     region: content
 hidden: {  }
