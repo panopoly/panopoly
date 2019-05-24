@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_featured_3x
+label: 'Featured (3x)'
+effects:
+  939a3015-88a1-4741-952d-55c6e8d2c75e:
+    uuid: 939a3015-88a1-4741-952d-55c6e8d2c75e
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1440
+      height: 790
+      anchor: center-center

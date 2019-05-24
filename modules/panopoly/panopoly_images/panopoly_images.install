@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for Panopoly Images.
+ */
+
+/**
+ * Enable responsive image styles.
+ */
+function panopoly_images_update_8201() {
+  \Drupal::service('module_installer')->install(['responsive_image']);
+}

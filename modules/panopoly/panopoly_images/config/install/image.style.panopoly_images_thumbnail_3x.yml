@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_thumbnail_3x
+label: 'Thumbnail (3x)'
+effects:
+  34e1e391-f14f-463a-8035-31cf0f8cc348:
+    uuid: 34e1e391-f14f-463a-8035-31cf0f8cc348
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 240
+      height: 240
+      anchor: center-center

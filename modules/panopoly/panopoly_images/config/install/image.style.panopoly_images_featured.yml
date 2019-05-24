@@ -2,20 +2,12 @@ langcode: en
 status: true
 dependencies: {  }
 name: panopoly_images_featured
-label: Featured
+label: 'Featured (1x)'
 effects:
-  82b647f0-5219-43f8-81bb-4e053feee22f:
-    uuid: 82b647f0-5219-43f8-81bb-4e053feee22f
-    id: image_scale
+  f8ed5eaa-8e73-4c35-a1d8-6724a406cb01:
+    uuid: f8ed5eaa-8e73-4c35-a1d8-6724a406cb01
+    id: image_scale_and_crop
     weight: 1
-    data:
-      width: 480
-      height: null
-      upscale: false
-  ae711df7-6afe-411d-8855-3a3e29ff4756:
-    uuid: ae711df7-6afe-411d-8855-3a3e29ff4756
-    id: image_crop
-    weight: 2
     data:
       width: 480
       height: 260

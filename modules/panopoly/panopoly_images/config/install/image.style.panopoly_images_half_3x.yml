@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_half_3x
+label: 'Half (3x)'
+effects:
+  9b783819-01a0-4f40-8f37-bf55cbb16b17:
+    uuid: 9b783819-01a0-4f40-8f37-bf55cbb16b17
+    id: image_scale
+    weight: 1
+    data:
+      width: 1890
+      height: null
+      upscale: true

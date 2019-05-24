@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_quarter_3x
+label: 'Quarter (3x)'
+effects:
+  5f0c984a-08ef-420a-a0a6-8dc5a343b146:
+    uuid: 5f0c984a-08ef-420a-a0a6-8dc5a343b146
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 945
+      height: 945
+      anchor: center-center
