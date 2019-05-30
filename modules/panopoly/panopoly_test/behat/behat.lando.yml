@@ -7,7 +7,7 @@ default:
       # Set 'base_url' to the URL to view your Drupal site.
       # For example: http://mydrupalsite.com
       base_url: 'http://appserver'
-      files_path: './modules/contrib/panopoly_test/tests'
+      files_path: './modules/contrib/panopoly_test/behat'
       selenium2:
         wd_host: http://chromedriver:4444/wd/hub
     Drupal\DrupalExtension:
