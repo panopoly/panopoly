@@ -12,12 +12,19 @@ bundle: panopoly_widgets_links
 mode: default
 content:
   field_panopoly_widgets_links:
-    weight: 0
+    weight: 1
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
     region: content
-hidden:
-  info: true
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
