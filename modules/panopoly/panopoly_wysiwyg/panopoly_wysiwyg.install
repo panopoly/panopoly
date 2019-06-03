@@ -445,3 +445,25 @@ function _panopoly_wysiwyg_set_editor_linkit($editor_id) {
   $editor->setSettings($settings);
   $editor->save();
 }
+
+/**
+ * Enable the 'kitchensink' plugin.
+ */
+function panopoly_wysiwyg_update_8209() {
+  $editor_names = ['panopoly_wysiwyg_basic', 'panopoly_wysiwyg_full'];
+  foreach ($editor_names as $editor_name) {
+    if ($editor = Editor::load($editor_name)) {
+      $settings = $editor->getSettings();
+
+      foreach ($settings['toolbar']['rows'][0] as &$group) {
+        if ($group['name'] === 'Tools') {
+          $group['items'][] = 'panopoly_wysiwyg_kitchensink';
+        }
+      }
+
+      $editor->setSettings($settings);
+      $editor->save();
+    }
+  }
+}
+

@@ -42,6 +42,7 @@ settings:
             - panopoly_media_wysiwyg_media_embed
             - Maximize
             - Source
+            - panopoly_wysiwyg_kitchensink
       -
         -
           name: 'Block Formatting'
@@ -80,13 +81,15 @@ settings:
             - Undo
             - Redo
   plugins:
+    stylescombo:
+      styles: ''
     drupallink:
       linkit_enabled: true
       linkit_profile: default
     language:
       language_list: un
-    stylescombo:
-      styles: ''
+    colorbutton:
+      colors: ''
 image_upload:
   status: true
   scheme: public
