@@ -5,9 +5,10 @@ dependencies:
     - block_content.type.panopoly_widgets_image
     - field.field.block_content.panopoly_widgets_image.body
     - field.field.block_content.panopoly_widgets_image.field_panopoly_widgets_image
-    - responsive_image.styles.panopoly_images_full
+    - field.field.block_content.panopoly_widgets_image.field_panopoly_widgets_link
   module:
-    - responsive_image
+    - image
+    - link
     - text
 id: block_content.panopoly_widgets_image.default
 targetEntityType: block_content
@@ -25,9 +26,21 @@ content:
     weight: 0
     label: hidden
     settings:
-      responsive_image_style: panopoly_images_full
-      image_link: ''
+      image_style: ''
+      image_link: file
     third_party_settings: {  }
-    type: responsive_image
+    type: image
     region: content
+  field_panopoly_widgets_link:
+    type: link
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
 hidden: {  }

@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Panopoly Widgets.
+ */
+
+define('PANOPOLY_WIDGETS_MODULE', 'panopoly_widgets');
+
+/**
+ * Re-import config for panopoly_widgets.
+ */
+function panopoly_widgets_update_8201() {
+  \Drupal::service('config.installer')->installDefaultConfig('module', PANOPOLY_WIDGETS_MODULE);
+}
+
