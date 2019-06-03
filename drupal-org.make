@@ -34,7 +34,7 @@ projects[panopoly_widgets][version] = 2.x-dev
 projects[panopoly_widgets][type] = module
 projects[panopoly_widgets][subdir] = panopoly
 projects[panopoly_widgets][download][type] = git
-projects[panopoly_widgets][download][revision] = 95779f5
+projects[panopoly_widgets][download][revision] = efc9641
 projects[panopoly_widgets][download][branch] = 8.x-2.x
 
 ;projects[panopoly_admin][version] = 1.x-dev
