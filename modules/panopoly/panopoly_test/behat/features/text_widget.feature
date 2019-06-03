@@ -11,8 +11,9 @@ Feature: Add text widget
     When I create new "Text" content in the Panels IPE
     Then I should see "Create new Text content"
     When I fill in the following:
-      | Text format | restricted_html         |
-      | Text        | Testing text body field |
+	  | Block description | Test block              |
+      | Text format       | restricted_html         |
+      | Text              | Testing text body field |
       And I press "Create and Place" in the "IPE" region
       And I wait for the block form to load in the Panels IPE
     When I fill in the following:
