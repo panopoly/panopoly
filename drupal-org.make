@@ -62,7 +62,7 @@ projects[panopoly_wysiwyg][download][branch] = 7.x-1.x
 projects[panopoly_search][version] = 1.x-dev
 projects[panopoly_search][subdir] = panopoly
 projects[panopoly_search][download][type] = git
-projects[panopoly_search][download][revision] = c9ac080
+projects[panopoly_search][download][revision] = 3a2a46d
 projects[panopoly_search][download][branch] = 7.x-1.x
 
 ; For running the automated tests.
