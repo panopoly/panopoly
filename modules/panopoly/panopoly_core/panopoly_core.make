@@ -33,7 +33,7 @@ projects[fape][subdir] = contrib
 
 ; Views Magic
 
-projects[views][version] = 3.21
+projects[views][version] = 3.22
 projects[views][subdir] = contrib
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
 projects[views][patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
