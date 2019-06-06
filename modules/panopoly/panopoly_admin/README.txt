@@ -9,5 +9,3 @@ Key Features
 * Creates Panopoly Administrative Section (admin/panopoly) for Panopoly Configuration
 * Provides Pane Library, Layout Library, and Page Library Administrative Pages
 * Packages Several Different Administrative Toolbar Options (Admin Menu, Admin, Navbar, Toolbar)
-
-Test change.
