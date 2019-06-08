@@ -1,0 +1,19 @@
+name: 'Panopoly Test'
+description: 'Provides configuration and functionality for use in the Panopoly automated tests.'
+type: module
+core: 8.x
+package: Panopoly
+hidden: true
+dependencies:
+  - field
+  - image
+  - menu_ui
+  - node
+  - panelizer
+  - panopoly_core
+  - panopoly_images
+  - panopoly_theme
+  - path
+  - pathauto
+  - text
+  - user

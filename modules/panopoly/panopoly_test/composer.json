@@ -1,0 +1,10 @@
+{
+  "name": "drupal/panopoly_test",
+  "description": "Provides configuration and functionality for use in the Panopoly automated tests.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "require": {
+    "drupal/drupal-extension": "^3.2.2"
+  }
+}

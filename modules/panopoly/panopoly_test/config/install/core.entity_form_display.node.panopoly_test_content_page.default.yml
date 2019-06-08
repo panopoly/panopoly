@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.panopoly_test_content_page.body
+    - field.field.node.panopoly_test_content_page.field_panopoly_categories
+    - field.field.node.panopoly_test_content_page.field_panopoly_featured_image
+    - field.field.node.panopoly_test_content_page.field_panopoly_featured_status
+    - field.field.node.panopoly_test_content_page.panelizer
+    - image.style.panopoly_images_thumbnail
+    - node.type.panopoly_test_content_page
+  module:
+    - image
+    - path
+    - text
+id: node.panopoly_test_content_page.default
+targetEntityType: node
+bundle: panopoly_test_content_page
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 31
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  field_panopoly_categories:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+  field_panopoly_featured_image:
+    weight: 32
+    settings:
+      preview_image_style: panopoly_images_thumbnail
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+  field_panopoly_featured_status:
+    weight: 34
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  panelizer: true
