@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_quarter_2x
+label: 'Quarter (2x)'
+effects:
+  96979b3a-1f20-45be-bf9c-9a4059efc061:
+    uuid: 96979b3a-1f20-45be-bf9c-9a4059efc061
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 630
+      height: 630
+      anchor: center-center

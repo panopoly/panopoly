@@ -1,0 +1,4 @@
+administer files:
+  title: 'Administer files'
+  description: 'Administer all files in the site.'
+  restrict access: true

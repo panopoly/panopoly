@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_time
+label: Time
+locked: false
+pattern: 'g:ia'

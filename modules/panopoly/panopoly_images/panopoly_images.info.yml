@@ -1,0 +1,8 @@
+type: module
+name: 'Panopoly Images'
+description: 'Provides some standard responsive image styles.'
+core: 8.x
+package: Panopoly
+dependencies:
+  - image
+  - responsive_image

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_square_2x
+label: 'Square (2x)'
+effects:
+  239b51ee-0587-48ff-9bb0-924c3adca46a:
+    uuid: 239b51ee-0587-48ff-9bb0-924c3adca46a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 400
+      anchor: center-center

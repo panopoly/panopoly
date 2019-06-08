@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for Panopoly Demo.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function panopoly_demo_install() {
+  $migration_ids = [
+    'panopoly_demo_node',
+    'panopoly_demo_menu',
+  ];
+  /** @var \Drupal\panopoly_core\MigrateHelper $migrate_helper */
+  $migrate_helper = \Drupal::service('panopoly_core.migrate_helper');
+  $migrate_helper->import($migration_ids);
+
+  // Point the front page to our demo one (if the site doesn't already have
+  // a custom front page).
+  $site_config = \Drupal::configFactory()->getEditable('system.site');
+  $site_page_settings = $site_config->get('page');
+  if (in_array($site_page_settings['front'], ['', '/user/login', '/node'])) {
+    $site_page_settings['front'] = '/demo';
+    $site_config->set('page', $site_page_settings);
+    $site_config->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function panopoly_demo_uninstall() {
+  $migration_ids = [
+    'panopoly_demo_node',
+    'panopoly_demo_menu',
+  ];
+  /** @var \Drupal\panopoly_core\MigrateHelper $migrate_helper */
+  $migrate_helper = \Drupal::service('panopoly_core.migrate_helper');
+  $migrate_helper->rollback($migration_ids);
+}
+

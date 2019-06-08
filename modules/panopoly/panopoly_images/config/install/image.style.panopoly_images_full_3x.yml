@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_full_3x
+label: 'Full (3x)'
+effects:
+  13c602a2-284f-4cd2-8463-15be52053c48:
+    uuid: 13c602a2-284f-4cd2-8463-15be52053c48
+    id: image_scale
+    weight: 1
+    data:
+      width: 3780
+      height: null
+      upscale: true

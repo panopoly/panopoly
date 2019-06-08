@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: panopoly_content_page
+label: 'Panopoly Content Page'
+type: 'canonical_entities:node'
+pattern: 'content/[node:title]'
+selection_criteria:
+  efe64862-df05-4371-a4ce-2599603b5305:
+    id: node_type
+    bundles:
+      panopoly_content_page: panopoly_content_page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: efe64862-df05-4371-a4ce-2599603b5305
+selection_logic: and
+weight: -5
+relationships: {  }

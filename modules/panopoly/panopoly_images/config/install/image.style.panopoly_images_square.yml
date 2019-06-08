@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_square
+label: 'Square (1x)'
+effects:
+  8c1d1776-091a-4d20-ac71-317c1115a0e4:
+    uuid: 8c1d1776-091a-4d20-ac71-317c1115a0e4
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 200
+      height: 200
+      anchor: center-center

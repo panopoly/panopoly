@@ -1,0 +1,126 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for Panopoly Pages.
+ */
+
+use Drupal\panels\Plugin\DisplayVariant\PanelsDisplayVariant;
+
+/**
+ * Gets the Panelizer entity from a Panels display.
+ *
+ * @param \Drupal\panels\Plugin\DisplayVariant\PanelsDisplayVariant $panels_display
+ *   The Panels display.
+ *
+ * @return \Drupal\Core\Entity\EntityInterface|null
+ *   The entity if this is a Panelizer display; NULL otherwise.
+ */
+function panopoly_pages_get_panelizer_entity(PanelsDisplayVariant $panels_display) {
+  $contexts = $panels_display->getContexts();
+  if (isset($contexts['@panelizer.entity_context:entity'])) {
+    return $contexts['@panelizer.entity_context:entity']->getContextValue();
+  }
+}
+
+/**
+ * Implements hook_panels_ipe_layouts_alter().
+ */
+function panopoly_pages_panels_ipe_layouts_alter(array &$layouts, PanelsDisplayVariant $panels_display = NULL) {
+  if (!$panels_display) {
+    return;
+  }
+  if ($entity = panopoly_pages_get_panelizer_entity($panels_display)) {
+    // Only modify the results for our content types.
+    if ($entity->getEntityTypeId() !== 'node' || !in_array($entity->bundle(), ['panopoly_content_page', 'panopoly_landing_page'])) {
+      return;
+    }
+
+    // Hide the panels layouts.
+    foreach ($layouts as $index => $layout) {
+      if (strpos($layout['id'], 'layout_') === 0) {
+        unset($layouts[$index]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_panels_ipe_blocks_alter().
+ */
+function panopoly_pages_panels_ipe_blocks_alter(array &$blocks, PanelsDisplayVariant $panels_display) {
+  if ($entity = panopoly_pages_get_panelizer_entity($panels_display)) {
+    // Start the list with all the blocks we want to hide always for Panelizer.
+    $hide_ids = [
+      'help_block',
+      'system_powered_by_block',
+      'system_main_block',
+      'system_messages_block',
+      'system_breadcrumb_block',
+      'system_branding_block',
+      'page_title_block',
+      'local_actions_block',
+      'local_tasks_block',
+      'shortcuts',
+      'system_menu_block:account',
+      'system_menu_block:admin',
+      'system_menu_block:devel',
+      'system_menu_block:footer',
+      'system_menu_block:tools',
+    ];
+
+    // Add these to the list when it's one of our types.
+    if ($entity->getEntityTypeId() == 'node' && in_array($entity->bundle(), ['panopoly_landing_page', 'panopoly_content_page'])) {
+      $hide_ids = array_merge($hide_ids, [
+        'entity_field:node:nid',
+        'entity_field:node:uuid',
+        'entity_field:node:vid',
+        'entity_field:node:panelizer',
+        'entity_field:node:langcode',
+        'entity_field:node:type',
+        'entity_field:node:status',
+        'entity_field:node:title',
+        'entity_field:node:promote',
+        'entity_field:node:sticky',
+        'entity_field:node:revision_timestamp',
+        'entity_field:node:revision_uid',
+        'entity_field:node:revision_log',
+        'entity_field:node:revision_translation_affected',
+        'entity_field:node:default_langcode',
+      ]);
+    }
+
+    // Add all the default fields when it's a landing page.
+    if ($entity->getEntityTypeId() == 'node' && $entity->bundle() == 'panopoly_landing_page') {
+      $hide_ids = array_merge($hide_ids, [
+        'entity_field:node:uid',
+        'entity_field:node:created',
+        'entity_field:node:changed',
+        'entity_field:node:body',
+        'entity_field:node:field_panopoly_categories',
+        'entity_field:node:field_panopoly_featured_image',
+        'entity_field:node:field_panopoly_featured_status',
+      ]);
+    }
+
+    // Add 'entity_view:node' when the only entity context is the Panelizer
+    // context.
+    $contexts = $panels_display->getContexts();
+    $entity_contexts = [];
+    foreach ($contexts as $context) {
+      if (strpos($context->getContextDefinition()->getDataType(), 'entity:') === 0) {
+        $entity_contexts[] = $context;
+      }
+    }
+    if (count($entity_contexts) == 1) {
+      $hide_ids[] = 'entity_view:node';
+    }
+
+    // Hide all the blocks on the list.
+    foreach ($blocks as $index => $block) {
+      if (in_array($block['plugin_id'], $hide_ids)) {
+        unset($blocks[$index]);
+      }
+    }
+  }
+}

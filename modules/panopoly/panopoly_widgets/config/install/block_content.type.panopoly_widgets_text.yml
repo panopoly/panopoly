@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_widgets_text
+label: Text
+revision: 1
+description: 'A simple widget containing text.'

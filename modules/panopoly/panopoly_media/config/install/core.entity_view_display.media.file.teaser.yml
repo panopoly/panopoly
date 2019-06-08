@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser
+    - field.field.media.file.field_media_file
+    - field.field.media.file.field_panopoly_media_description
+    - field.field.media.file.field_panopoly_media_tags
+    - media.type.file
+  module:
+    - file
+    - text
+id: media.file.teaser
+targetEntityType: media
+bundle: file
+mode: teaser
+content:
+  field_media_file:
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+    weight: 1
+    region: content
+  field_panopoly_media_description:
+    type: text_summary_or_trimmed
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings: {  }
+  field_panopoly_media_tags:
+    type: entity_reference_label
+    weight: 3
+    region: content
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+  name:
+    type: string
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  created: true
+  thumbnail: true
+  uid: true

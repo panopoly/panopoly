@@ -1,0 +1,29 @@
+type: module
+name: 'Panopoly Media'
+description: 'Standard media configuration.'
+core: 8.x
+package: Panopoly
+dependencies:
+  - config_actions
+  - dropzonejs_eb_widget
+  - 'drupal:media (>= 8.4)'
+  - embed
+  - entity_browser
+  - entity_embed
+  - field
+  - file
+  - image
+  - inline_entity_form
+  - media
+  - media_entity_browser
+  - node
+  - panopoly_images
+  - panopoly_media
+  - path
+  - taxonomy
+  - text
+  - user
+  - video_embed_field
+  - 'video_embed_field:video_embed_media'
+  - video_embed_media
+  - views

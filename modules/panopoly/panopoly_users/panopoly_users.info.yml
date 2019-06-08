@@ -1,0 +1,14 @@
+name: 'Panopoly Users'
+description: 'Maintains user accounts and user workflows.'
+type: module
+core: 8.x
+dependencies:
+  - field
+  - file
+  - image
+  - panelizer
+  - panopoly_images
+  - path
+  - text
+  - user
+package: Panopoly

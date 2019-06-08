@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_widgets_file
+    - field.storage.block_content.field_panopoly_widgets_file
+  module:
+    - file
+id: block_content.panopoly_widgets_file.field_panopoly_widgets_file
+field_name: field_panopoly_widgets_file
+entity_type: block_content
+bundle: panopoly_widgets_file
+label: File
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: file
+  file_extensions: 'txt doc docx xls xlsx pdf ppt pptx pps ppsx odt ods odp'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

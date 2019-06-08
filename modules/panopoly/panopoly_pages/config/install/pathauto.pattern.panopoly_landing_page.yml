@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: panopoly_landing_page
+label: 'Panopoly Landing Page'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parents:join-path]/[node:title]'
+selection_criteria:
+  6c23920b-bde5-4206-8019-ea13967f8ef7:
+    id: node_type
+    bundles:
+      panopoly_landing_page: panopoly_landing_page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 6c23920b-bde5-4206-8019-ea13967f8ef7
+selection_logic: and
+weight: -5
+relationships: {  }

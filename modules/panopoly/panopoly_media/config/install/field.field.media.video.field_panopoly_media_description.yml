@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_panopoly_media_description
+    - media.type.video
+  module:
+    - text
+id: media.video.field_panopoly_media_description
+field_name: field_panopoly_media_description
+entity_type: media
+bundle: video
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

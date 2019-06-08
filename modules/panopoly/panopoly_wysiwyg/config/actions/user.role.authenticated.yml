@@ -1,0 +1,6 @@
+path:
+  - permissions
+plugin: add
+actions:
+  'use text format panopoly_wysiwyg_basic':
+    value: 'use text format panopoly_wysiwyg_basic'

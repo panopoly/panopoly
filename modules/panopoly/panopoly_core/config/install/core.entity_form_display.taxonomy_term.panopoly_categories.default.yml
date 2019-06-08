@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.panopoly_categories.field_panopoly_featured_image
+    - image.style.panopoly_images_thumbnail
+    - taxonomy.vocabulary.panopoly_categories
+  module:
+    - image
+    - path
+    - text
+id: taxonomy_term.panopoly_categories.default
+targetEntityType: taxonomy_term
+bundle: panopoly_categories
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 0
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+    region: content
+  field_panopoly_featured_image:
+    weight: 31
+    settings:
+      preview_image_style: panopoly_images_thumbnail
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  name:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

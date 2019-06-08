@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_demo_home
+label: 'Homepage Demo'
+description: null
+use_admin_theme: false
+path: /demo
+access_logic: and
+access_conditions: {  }
+parameters: {  }

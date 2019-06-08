@@ -1,0 +1,6 @@
+path:
+  - permissions
+plugin: add
+actions:
+  'use text format restricted_html':
+    value: 'use text format restricted_html'

@@ -1,0 +1,271 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for Panopoly Media.
+ */
+
+use Drupal\Core\Entity\EntityListBuilder;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+use Drupal\panopoly_media\FileAccessControlHandler;
+use Drupal\panopoly_media\Form\FileDeleteForm;
+use Drupal\panopoly_media\Plugin\Field\FieldWidget\ImageWidget;
+use Drupal\panopoly_media\Routing\FileRouteProvider;
+
+/**
+ * Implements hook_theme().
+ */
+function panopoly_media_theme() {
+  return [
+    'media__image' => [
+      'base hook' => 'media',
+    ],
+    'media__file' => [
+      'base hook' => 'media',
+    ],
+    'media__video' => [
+      'base hook' => 'media',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alters the display mode offerings of the embed entity module to be more
+ * user friendly, and reflect what is available.
+ */
+function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterface $form_state) {
+  if ($form_state->get('step') == 'embed') {
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    $entity = $form_state->get('entity');
+    switch ($entity->bundle()) {
+      case 'image':
+        $options =& $form['attributes']['data-entity-embed-display']['#options'];
+        $enabled_options = [
+          'view_mode:media.embed_large' => t('Original size'),
+          'view_mode:media.embed_medium' => t('Quarter size'),
+          'view_mode:media.embed_small' => t('Thumbnail'),
+          'entity_reference:media_thumbnail' => t('Custom'),
+        ];
+        foreach ($options as $key => $option) {
+          if (isset($enabled_options)) {
+            $options[$key] = $enabled_options[$key];
+          }
+          else {
+            unset($options[$key]);
+          }
+        }
+
+        $embed_display_element =& $form['attributes']['data-entity-embed-display-settings'];
+        if (array_key_exists('image_style', $embed_display_element)) {
+          foreach ($embed_display_element['image_style']['#options'] as $key => $option) {
+            // @todo: Expose this as a setting in Panopoly settings.
+            if (strpos($key, 'panopoly_') === FALSE) {
+              unset($embed_display_element['image_style']['#options'][$key]);
+            }
+          }
+        }
+        break;
+
+      // There are no custom displays for files or videos. Force to default
+      // for now, until file (PDF preview) or video formatters (set size) added.
+      case 'video':
+      case 'file':
+        $form['attributes']['data-entity-embed-display']['#default_value'] = 'view_mode:media.embed_large';
+        $form['attributes']['data-entity-embed-display']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function panopoly_media_field_formatter_info_alter(&$definitions) {
+  if (isset($definitions['file_default']) && !in_array('image', $definitions['file_default']['field_types'])) {
+    $definitions['file_default']['field_types'][] = 'image';
+  }
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function panopoly_media_field_widget_info_alter(array &$info) {
+  $info['image_image']['class'] = ImageWidget::class;
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function panopoly_media_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  // Only deal with media.
+  if ($entity_form['#entity_type'] != 'media') {
+    return;
+  }
+
+  $entity_form['revision_log_message']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function panopoly_media_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  $widgets = ['file_generic', 'image_image'];
+  if (in_array($context['widget']->getPluginId(), $widgets)) {
+    $element['#process'][] = 'panopoly_media_field_widget_process';
+    $element['#element_validate'][] = 'panopoly_media_widget_duplicate_validate';
+  }
+}
+
+/**
+ * Process callback for file and image widgets to add duplicate acknowledgement.
+ */
+function panopoly_media_field_widget_process(&$element, FormStateInterface $form_state, $form) {
+  $parents = $element['#parents'];
+  $values = $form_state->getValue($parents);
+
+  $files = File::loadMultiple($values['fids']);
+  $duplicate = panopoly_media_duplicate_files($files, TRUE);
+  $element['#panopoly_media_is_duplicate'] = $duplicate;
+
+  if ($duplicate) {
+    $element['panopoly_media_duplicate'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Acknowledge duplicate upload'),
+      '#default_value' => FALSE,
+    ];
+  }
+
+  return $element;
+}
+
+/**
+ * Determines if a file is or if set of files has a duplicate.
+ *
+ * @param \Drupal\file\FileInterface|\Drupal\file\FileInterface[] $files
+ *   The file or files.
+ * @param bool $new_only
+ *   Optional. Indicates if only new files should be checked for duplicity.
+ *
+ * @return bool
+ *   Indicates if there is a duplicate.
+ */
+function panopoly_media_duplicate_files($files, $new_only = FALSE) {
+  // Soft dependency on filehash.
+  if (!\Drupal::moduleHandler()->moduleExists('filehash')) {
+    return FALSE;
+  }
+
+  // Normalize into an array.
+  if (!is_array($files)) {
+    $files = [$files];
+  }
+
+  // Check only newly-created files.
+  if ($new_only) {
+    $files = array_filter($files, function ($file) {
+      /** @var \Drupal\file\FileInterface $file */
+      return $file->isTemporary();
+    });
+  }
+
+  // If no files, we've got nothing to do.
+  if (empty($files)) {
+    return FALSE;
+  }
+
+  // Gather file IDs.
+  $fids = array_map(function ($file) {
+    /** @var \Drupal\file\FileInterface $file */
+    return $file->id();
+  }, $files);
+
+  // Check each used algorithm for duplicate.
+  foreach (filehash_algos() as $algo) {
+    $hashes = array_map(function ($file) use ($algo) {
+      return $file->filehash[$algo];
+    }, $files);
+    if (!$hashes) {
+      break;
+    }
+
+    // Query for duplicates.
+    $query = \Drupal::database()->select('filehash');
+    $query->addField('filehash', 'fid');
+    $query->condition('fid', $fids, 'NOT IN');
+    $query->condition($algo, $hashes, 'IN');
+    $query->range(0, 1);
+    if ($fid = $query->execute()->fetchField()) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Validation handler for duplicate file uploads.
+ */
+function panopoly_media_widget_duplicate_validate(&$element, FormStateInterface &$form_state) {
+  // Only validate on submit.
+  $triggering_element = $form_state->getTriggeringElement();
+  if (!empty($triggering_element['#submit']) && in_array('file_managed_file_submit', $triggering_element['#submit'])) {
+    if (strpos($triggering_element['#name'], '_upload_button') === FALSE) {
+      return;
+    }
+  }
+
+  $parents = $element['#parents'];
+  $values = $form_state->getValue($parents);
+
+  // If there is a duplicate, verify "Acknowledge duplicate upload" box checked.
+  if (!empty($element['#panopoly_media_is_duplicate']) && empty($values['panopoly_media_duplicate'])) {
+    $form_state->setError($element, t('Duplicate file uploaded. Please check the media library for an existing file or check the "Acknowledge duplicate upload" box to continue with this upload.'));
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function panopoly_media_entity_type_alter(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
+
+  // Allows "operations" on file entities.
+  if (!$entity_types['file']->hasHandlerClass('list_builder')) {
+    $entity_types['file']->setListBuilderClass(EntityListBuilder::class);
+  }
+
+  // Provides a delete form.
+  $forms = $entity_types['file']->hasHandlerClass('form') ?: [];
+  if (empty($forms['delete'])) {
+    $forms['delete'] = FileDeleteForm::class;
+    $entity_types['file']->setHandlerClass('form', $forms);
+  }
+
+  // Provides a delete form link template.
+  if (!$entity_types['file']->hasLinkTemplate('delete-form')) {
+    $entity_types['file']->setLinkTemplate('delete-form', '/file/{file}/delete');
+  }
+
+  // Provides routes.
+  if (!$entity_types['file']->hasHandlerClass('route_provider')) {
+    $entity_types['file']->setHandlerClass('route_provider', ['html' => FileRouteProvider::class]);
+  }
+
+  // Set access handler.
+  $entity_types['file']->setAccessClass(FileAccessControlHandler::class);
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function panopoly_media_views_data_alter(&$data) {
+  $data['file_managed']['panopoly_media_file_managed_bulk_form'] = [
+    'title' => t('File operations bulk form'),
+    'help' => t('Add a form element that lets you run operations on multiple files.'),
+    'field' => [
+      'id' => 'panopoly_media_file_managed_bulk_form',
+    ],
+  ];
+}

@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.file
+    - media.type.image
+    - media.type.video
+  content:
+    - 'file:file:a55d8d13-8e8f-406f-ba43-d3765f450325'
+  module:
+    - entity_embed
+    - media
+label: 'Panopoly Media WYSIWYG Media Embed'
+id: panopoly_media_wysiwyg_media_embed
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles:
+    - file
+    - image
+    - video
+  display_plugins:
+    - 'view_mode:media.embed_large'
+    - 'view_mode:media.embed_medium'
+    - 'view_mode:media.embed_small'
+    - 'entity_reference:media_thumbnail'
+  entity_browser: panopoly_media_wysiwyg_media_browser
+  entity_browser_settings:
+    display_review: false
+icon_uuid: a55d8d13-8e8f-406f-ba43-d3765f450325

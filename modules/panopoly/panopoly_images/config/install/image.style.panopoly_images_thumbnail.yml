@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_thumbnail
+label: 'Thumbnail (1x)'
+effects:
+  2f2a6652-e44e-4e38-aa59-4bd355a8876a:
+    uuid: 2f2a6652-e44e-4e38-aa59-4bd355a8876a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 80
+      height: 80
+      anchor: center-center

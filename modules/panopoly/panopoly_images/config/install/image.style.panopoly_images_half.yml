@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_half
+label: 'Half (1x)'
+effects:
+  9b8f04d8-be91-4ce2-88bc-aab1edf43e96:
+    uuid: 9b8f04d8-be91-4ce2-88bc-aab1edf43e96
+    id: image_scale
+    weight: 1
+    data:
+      width: 630
+      height: null
+      upscale: true

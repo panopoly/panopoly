@@ -1,0 +1,4 @@
+services:
+  panopoly_core.migrate_helper:
+    class: Drupal\panopoly_core\MigrateHelper
+    arguments: ['@?plugin.manager.migration']

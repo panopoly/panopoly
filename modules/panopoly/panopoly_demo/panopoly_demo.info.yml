@@ -1,0 +1,19 @@
+type: module
+name: 'Panopoly Demo'
+description: 'Demo functionality and content to help show the power of Panopoly'
+core: 8.x
+package: Panopoly
+dependencies:
+  - 'drupal:migrate (>= 8.1)'
+  - image
+  - node
+  - page_manager
+  - panels
+  - panopoly_core
+  - panopoly_images
+  - panopoly_pages
+  - responsive_image
+  - search
+  - text
+  - user
+  - views

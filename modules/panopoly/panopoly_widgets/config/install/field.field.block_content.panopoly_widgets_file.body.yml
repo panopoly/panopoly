@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_widgets_file
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.panopoly_widgets_file.body
+field_name: body
+entity_type: block_content
+bundle: panopoly_widgets_file
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

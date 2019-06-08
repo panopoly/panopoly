@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.link
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_panopoly_media_description
+    - field.field.media.image.field_panopoly_media_tags
+    - media.type.image
+  module:
+    - file
+id: media.image.link
+targetEntityType: media
+bundle: image
+mode: link
+content:
+  field_media_image:
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_panopoly_media_description: true
+  field_panopoly_media_tags: true
+  name: true
+  thumbnail: true
+  uid: true

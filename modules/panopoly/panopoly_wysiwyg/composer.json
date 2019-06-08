@@ -1,0 +1,18 @@
+{
+    "name": "drupal/panopoly_wysiwyg",
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/ckeditor_drupalbreaks": "1.x-dev",
+        "drupal/colorbutton": "~1.1",
+        "drupal/editor_advanced_link": "~1.4",
+        "drupal/fakeobjects": "~1.0",
+        "drupal/linkit": "~5.0-beta7",
+        "drupal/panelbutton": "~1.1",
+        "drupal/panopoly_media": "2.x-dev",
+        "drupal-ckeditor-plugin/colorbutton": "4.*",
+        "drupal-ckeditor-plugin/fakeobjects": "4.*",
+        "drupal-ckeditor-plugin/panelbutton": "4.*",
+        "drupal-ckeditor-plugin/tabletoolstoolbar": "^0.0.1"
+    }
+}

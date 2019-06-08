@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_featured
+label: 'Featured (1x)'
+effects:
+  f8ed5eaa-8e73-4c35-a1d8-6724a406cb01:
+    uuid: f8ed5eaa-8e73-4c35-a1d8-6724a406cb01
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 260
+      anchor: center-center

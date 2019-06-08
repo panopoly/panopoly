@@ -1,0 +1,469 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Panopoly WYSIWYG.
+ */
+
+use Drupal\Core\Config\ExtensionInstallStorage;
+use Drupal\Core\Config\InstallStorage;
+use Drupal\editor\Entity\Editor;
+use Drupal\filter\Entity\FilterFormat;
+
+/**
+ *  Enable the modules necessary for the teaser break button.
+ */
+function panopoly_wysiwyg_update_8201() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install([
+    'ckeditor_drupalbreaks',
+    'fakeobjects',
+  ]);
+}
+
+/**
+ * Enable panopoly_media module.
+ */
+function panopoly_wysiwyg_update_8202() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install([
+    'panopoly_media',
+  ]);
+}
+
+/**
+ * Add the new text formats.
+ */
+function panopoly_wysiwyg_update_8203() {
+  $config = [
+    'filter_format' => [
+      'filter.format.panopoly_wysiwyg_basic',
+      'filter.format.panopoly_wysiwyg_full',
+    ],
+    'editor' => [
+      'editor.editor.panopoly_wysiwyg_basic',
+      'editor.editor.panopoly_wysiwyg_full',
+    ],
+  ];
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  /** @var \Drupal\Core\Config\StorageInterface $active_config_storage */
+  $active_config_storage = \Drupal::getContainer()->get('config.storage');
+  $extension_config_storage = new ExtensionInstallStorage($active_config_storage, InstallStorage::CONFIG_INSTALL_DIRECTORY);
+
+  foreach ($config as $entity_type_name => $config_list) {
+    foreach ($config_list as $config_name) {
+      $config_data = $extension_config_storage->read($config_name);
+      if ($active_config_storage->read($config_name)) {
+        // Exists.
+        continue;
+      }
+      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $entity_storage */
+      $entity_storage = $entity_type_manager->getStorage($entity_type_name);
+      $entity = $entity_storage->createFromStorageRecord($config_data);
+      $entity->save();
+    }
+  }
+
+  \Drupal::service('module_installer')->install(['panopoly_media']);
+}
+
+/**
+ * Rename the text formats on existing entities.
+ */
+function panopoly_wysiwyg_update_8204(&$sandbox) {
+  $entity_manager = \Drupal::entityManager();
+
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = 0;
+    $sandbox['entities'] = [];
+
+    // Find all fields and entity types that are affected.
+    foreach ($entity_manager->getFieldMap() as $entity_type_id => $entity_field_map) {
+      $sandbox['entities'][$entity_type_id] = [
+        'fields' => [],
+        'ids' => [],
+      ];
+      foreach ($entity_manager->getFieldStorageDefinitions($entity_type_id) as $field_storage_definition) {
+        $field_name = $field_storage_definition->getName();
+        if (!isset($entity_field_map[$field_name])) {
+          continue;
+        }
+
+        if (in_array($field_storage_definition->getType(), ['text_with_summary', 'text_long', 'text'])) {
+          $sandbox['entities'][$entity_type_id]['fields'][] = $field_name;
+        }
+      }
+
+      if (!empty($sandbox['entities'][$entity_type_id]['fields'])) {
+        $sandbox['entities'][$entity_type_id]['ids'] = \Drupal::entityQuery($entity_type_id)->execute();
+        $sandbox['max'] += count($sandbox['entities'][$entity_type_id]['ids']);
+      }
+
+      if (empty($sandbox['entities'][$entity_type_id]['fields']) || empty($sandbox['entities'][$entity_type_id]['ids'])) {
+        unset($sandbox['entities'][$entity_type_id]);
+      }
+    }
+  }
+  else {
+    $batch_count = 0;
+    foreach ($sandbox['entities'] as $entity_type_id => &$entity_info) {
+      $storage = $entity_manager->getStorage($entity_type_id);
+      while (count($entity_info['ids']) > 0) {
+        $id = array_shift($entity_info['ids']);
+        $entity = $storage->load($id);
+        if (!$entity) {
+          $sandbox['progress']++;
+          continue;
+        }
+
+        foreach ($entity_info['fields'] as $field_name) {
+          $field = $entity->$field_name;
+          if ($field && !$field->isEmpty()) {
+            $value = ($entity->$field_name)->getValue();
+            foreach ($value as &$item) {
+              if ($item['format'] == 'basic_html') {
+                $item['format'] = 'panopoly_wysiwyg_basic';
+              }
+              elseif ($item['format'] == 'full_html') {
+                $item['format'] = 'panopoly_wysiwyg_full';
+              }
+            }
+            ($entity->$field_name)->setValue($value);
+          }
+        }
+        $entity->save();
+
+        $batch_count++;
+        $sandbox['progress']++;
+
+        if ($batch_count > 50) {
+          break 2;
+        }
+      }
+    }
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($sandbox['#finished']) {
+    // Delete the old formats.
+    $old_formats = [
+      'basic_html',
+      'full_html',
+    ];
+    foreach ($old_formats as $old_format) {
+      if ($format = FilterFormat::load($old_format)) {
+        $format->delete();
+      }
+    }
+  }
+}
+
+/**
+ * Re-order the text formats.
+ */
+function panopoly_wysiwyg_update_8205() {
+  $format_weights = [
+    'panopoly_wysiwyg_basic' => -10,
+    'panopoly_wysiwyg_full' => -5,
+  ];
+  foreach ($format_weights as $format_id => $weight) {
+    if ($format = FilterFormat::load($format_id)) {
+      $format->set('weight', $weight);
+      $format->save();
+    }
+  }
+}
+
+
+/**
+ * Add anchor plugin to standard and full input format and WYSIWYG.
+ */
+function panopoly_wysiwyg_update_8206() {
+  // Tweak allowed HTML config.
+  $format = FilterFormat::load('panopoly_wysiwyg_basic');
+  $filter = $format->filters('filter_html');
+
+  $val = $filter->settings['allowed_html'];
+  if (preg_match('/<a(| [^>]+)>/', $val, $matches)) {
+    $attrs = array_filter(explode(' ', $matches[1]));
+    if (!in_array('name', $attrs)) {
+      $attrs[] = 'name';
+    }
+    $attrs = ' ' . implode(' ', $attrs);
+
+    // Only replace if the original tag had attributes defined.
+    if ($matches[1]) {
+      $new_tag = str_replace($matches[1], $attrs, $matches[0]);
+      $val = str_replace($matches[0], $new_tag, $val);
+    }
+  }
+  else {
+    // No <a> tag set, append to the end.
+    $val = trim($val) . ' <a name>';
+  }
+  if ($val != $filter->settings['allowed_html']) {
+    $filter->settings['allowed_html'] = $val;
+    $format->save();
+  }
+
+  // Set anchor in editors.
+  _panopoly_wysiwyg_set_editor_anchor('panopoly_wysiwyg_basic');
+  _panopoly_wysiwyg_set_editor_anchor('panopoly_wysiwyg_full');
+}
+
+/**
+ * Installs and configures editor_advanced_link and linkit.
+ */
+function panopoly_wysiwyg_update_8207() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install(['editor_advanced_link', 'linkit']);
+
+  // Tweak allowed HTML config.
+  $format = FilterFormat::load('panopoly_wysiwyg_basic');
+  $filter = $format->filters('filter_html');
+
+  $val = $filter->settings['allowed_html'];
+  $new_attrs = [
+    'data-entity-type',
+    'data-entity-uuid',
+    'title',
+    'target',
+    'rel',
+  ];
+  if (preg_match('/<a(| [^>]+)>/', $val, $matches)) {
+    $attrs = array_filter(explode(' ', $matches[1]));
+    $attrs = array_unique(array_merge($attrs, $new_attrs));
+    $attrs = ' ' . implode(' ', $attrs);
+
+    // Only replace if the original tag had attributes defined.
+    if ($matches[1]) {
+      $new_tag = str_replace($matches[1], $attrs, $matches[0]);
+      $val = str_replace($matches[0], $new_tag, $val);
+    }
+  }
+  else {
+    // No <a> tag set, append to the end.
+    $val = trim($val) . ' <a ' . implode(' ', $new_attrs) . '>';
+  }
+  if ($val != $filter->settings['allowed_html']) {
+    $filter->settings['allowed_html'] = $val;
+    $format->save();
+  }
+
+  // Add linkit to text formats.
+  _panopoly_wysiwyg_set_text_format_linkit('panopoly_wysiwyg_basic');
+  _panopoly_wysiwyg_set_text_format_linkit('panopoly_wysiwyg_full');
+
+  // Add linkit to editors.
+  _panopoly_wysiwyg_set_editor_linkit('panopoly_wysiwyg_basic');
+  _panopoly_wysiwyg_set_editor_linkit('panopoly_wysiwyg_full');
+}
+
+/**
+ * Installs and configures colorbutton plugin.
+ */
+function panopoly_wysiwyg_update_8208() {
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install(['colorbutton']);
+
+  if (!$editor = Editor::load('panopoly_wysiwyg_full')) {
+    return;
+  }
+
+  // Only update ckeditor.
+  if ($editor->getEditor() != 'ckeditor') {
+    return;
+  }
+
+  $settings = $editor->get('settings');
+
+  // Find occurrences of the buttons and groups.
+  $text = $bg = $cg = $fg = NULL;
+  if (!empty($settings['toolbar']['rows'])) {
+    // Look for the "Formatting" group.
+    foreach ($settings['toolbar']['rows'] as $rowId => $row) {
+      foreach ($row as $groupId => $group) {
+        // Find groups.
+        if ($cg === NULL && $group['name'] == 'Colors') {
+          $cg = [$rowId, $groupId];
+        }
+        if ($cg === NULL && $group['name'] == 'Formatting') {
+          $fg = [$rowId, $groupId];
+        }
+        // Find items in group.
+        foreach ($group['items'] as $item) {
+          if ($text === NULL && $item == 'TextColor') {
+            $text = [$rowId, $groupId];
+          }
+          elseif ($bg === NULL && $item == 'BGColor') {
+            $bg = [$rowId, $groupId];
+          }
+        }
+      }
+    }
+  }
+
+  // If buttons are already set, bail.
+  if ($text && $bg) {
+    return;
+  }
+
+  if (!$text && !$bg) {
+    // Neither button exists, create or add to existing group.
+    $items = ['TextColor', 'BGColor'];
+    if (!$cg) {
+      $group = [
+        'name' => 'Colors',
+        'items' => $items,
+      ];
+      if (!$fg) {
+        // No formatting group, just add the color group.
+        $settings['toolbar']['rows'][0][] = $group;
+      } else {
+        // Add color group after formatting group.
+        array_splice($settings['toolbar']['rows'][$fg[0]], $fg[1] + 1, 0, [$group]);
+      }
+    }
+    else {
+      // Merge button into existing group.
+      $settings['toolbar']['rows'][$cg[0]][$cg[1]]['items'] = array_merge(
+        $settings['toolbar']['rows'][$cg[0]][$cg[1]]['items'],
+        $items
+      );
+    }
+  } elseif (!$text) {
+    // Add text color button with bg color button.
+    $settings['toolbar']['rows'][$bg[0]][$bg[1]]['items'][] = 'TextColor';
+  }
+  else {
+    // Add bg color button with text color button.
+    $settings['toolbar']['rows'][$text[0]][$text[1]]['items'][] = 'BGColor';
+  }
+
+  $editor->set('settings', $settings);
+  $editor->save();
+}
+
+/**
+ * Sets the anchor plugin into the editor.
+ *
+ * @param string $editor_id
+ *   The editor ID.
+ */
+function _panopoly_wysiwyg_set_editor_anchor($editor_id) {
+  if (!$editor = Editor::load($editor_id)) {
+    return;
+  }
+
+  // Only update ckeditor.
+  if ($editor->getEditor() != 'ckeditor') {
+    return;
+  }
+
+  $settings = $editor->get('settings');
+  if (!empty($settings['toolbar']['rows'])) {
+    // Iterate through all the rows and groups to ensure we don't already have
+    // the anchor plugin.
+    foreach ($settings['toolbar']['rows'] as $rowId => $row) {
+      foreach ($row as $groupId => $group) {
+        if (in_array('panopoly_wysiwyg_anchor', $group['items'])) {
+          return;
+        }
+      }
+    }
+
+    foreach ($settings['toolbar']['rows'] as $rowId => $row) {
+      foreach ($row as $groupId => $group) {
+        // Look for link and unlink plugins in the same group, place after last
+        // of those two.
+        $lpos = array_search('DrupalLink', $group['items']);
+        $upos = array_search('DrupalUnlink', $group['items']);
+        if ($lpos === FALSE || $upos === FALSE) {
+          continue;
+        }
+
+        $pos = max($lpos, $upos) + 1;
+        array_splice($group['items'], $pos, 0, ['panopoly_wysiwyg_anchor']);
+        $settings['toolbar']['rows'][$rowId][$groupId] = $group;
+        $editor->setSettings($settings);
+        $editor->save();
+        return;
+      }
+    }
+  }
+}
+
+/**
+ * Sets the linkit filter into the text format.
+ *
+ * @param string $format_name
+ *   The text format ID.
+ */
+function _panopoly_wysiwyg_set_text_format_linkit($format_name) {
+  if (!$format = FilterFormat::load($format_name)) {
+    return;
+  }
+
+  $format->setFilterConfig('linkit', [
+    'id' => 'linkit',
+    'provider' => 'linkit',
+    'status' => true,
+    'weight' => 100,
+    'settings' => [
+      'title' => true
+    ],
+  ]);
+  $format->save();
+}
+
+/**
+ * Sets the linkit plugin into the editor.
+ *
+ * @param string $editor_id
+ *   The editor ID.
+ */
+function _panopoly_wysiwyg_set_editor_linkit($editor_id) {
+  if (!$editor = Editor::load($editor_id)) {
+    return;
+  }
+
+  // Only update ckeditor.
+  if ($editor->getEditor() != 'ckeditor') {
+    return;
+  }
+
+  $settings = $editor->get('settings');
+  $settings['plugins']['drupallink']['linkit_enabled'] = true;
+  $settings['plugins']['drupallink']['linkit_profile'] = 'default';
+  $editor->setSettings($settings);
+  $editor->save();
+}
+
+/**
+ * Enable the 'kitchensink' plugin.
+ */
+function panopoly_wysiwyg_update_8209() {
+  $editor_names = ['panopoly_wysiwyg_basic', 'panopoly_wysiwyg_full'];
+  foreach ($editor_names as $editor_name) {
+    if ($editor = Editor::load($editor_name)) {
+      $settings = $editor->getSettings();
+
+      foreach ($settings['toolbar']['rows'][0] as &$group) {
+        if ($group['name'] === 'Tools') {
+          $group['items'][] = 'panopoly_wysiwyg_kitchensink';
+        }
+      }
+
+      $editor->setSettings($settings);
+      $editor->save();
+    }
+  }
+}
+

@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Hooks for Panopoly Widgets module.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * The default list of allowed file extensions in file widgets.
+ */
+define('PANOPOLY_WIDGETS_FILE_EXTENSIONS_DEFAULT', 'txt doc docx xls xlsx pdf ppt pptx pps ppsx odt ods odp');
+
+define('PANOPOLY_WIDGETS_IMAGE_BUNDLE', 'panopoly_widgets_image');
+
+/**
+ * Implements hook_apps_app_info()
+ */
+function panopoly_widgets_apps_app_info() {
+  return array(
+    'configure form' => 'panopoly_widgets_configure_form',
+  );
+}
+
+/**
+ * Configuration Form for Panopoly Magic
+ */
+function panopoly_widgets_configure_form($form, &$form_state) {
+  $form = array();
+
+  $file_extensions = variable_get('panopoly_widgets_file_extensions', PANOPOLY_WIDGETS_FILE_EXTENSIONS_DEFAULT);
+  $file_extensions = str_replace(' ', ', ', $file_extensions);
+  $form['panopoly_widgets_file_extensions'] = array(
+    '#title' => t('Allowed file extensions in file widgets.'),
+    '#type' => 'textfield',
+    '#default_value' => $file_extensions,
+    '#element_validate' => array('_file_generic_settings_extensions'),
+    '#description' => t('Separate extensions with a space or comma and do not include the leading dot.'),
+  );
+
+  $form = system_settings_form($form);
+  $form['#submit'][] = 'panopoly_widgets_configure_form_submit';
+  return $form;
+}
+
+/**
+ * Form submissions callback for panopoly_widgets_configure_form().
+ */
+function panopoly_widgets_configure_form_submit($form, &$form_state) {
+  if ($file_instance = field_info_instance('fieldable_panels_pane', 'field_basic_file_file', 'basic_file')) {
+    $file_extensions = $form_state['values']['panopoly_widgets_file_extensions'];
+    $file_instance['settings']['file_extensions'] = $file_extensions;
+    field_update_instance($file_instance);
+  }
+}
+
+/**
+ * Implements hook_preprocess_block()
+ */
+function panopoly_widgets_preprocess_block(&$variables) {
+  $content = $variables['elements']['content'];
+  if (isset($content['#block_content']) && $content['#block_content']->bundle() == PANOPOLY_WIDGETS_IMAGE_BUNDLE) {
+    $panopoly_widgets_link_url = $variables["content"]["field_panopoly_widgets_link"][0]["#url"];
+    if (!is_null($panopoly_widgets_link_url)) {
+      $url = Url::fromUri($panopoly_widgets_link_url->getUri());
+      $variables["content"]["field_panopoly_widgets_image"][0]["#url"] = $url;
+      unset($variables["content"]["field_panopoly_widgets_link"]);
+    }
+  }
+
+}

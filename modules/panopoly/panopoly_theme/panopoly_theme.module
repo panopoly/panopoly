@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for Panopoly Theme.
+ */
+
+use Drupal\Core\Layout\LayoutDefinition;
+
+/**
+ * Implements hook_layout_alter().
+ */
+function panopoly_theme_layout_alter(&$definitions) {
+  // The IPE interface is super cramped with all the Radix layouts together,
+  // so, we're gonna re-organize them by number of columns.
+  $category_labels = [
+    1 => t('Columns: 1'),
+    2 => t('Columns: 2'),
+    3 => t('Columns: 3'),
+    4 => t('Columns: 4'),
+  ];
+
+  $radix_categories = [
+    'radix_boxton' => 1,
+    'radix_bryant_flipped' => 2,
+    'radix_brenham_flipped' => 2,
+    'radix_brenham' => 2,
+    'radix_bryant' => 2,
+    'radix_burr_flipped' => 2,
+    'radix_burr' => 2,
+    'radix_moscone_flipped' => 2,
+    'radix_moscone' => 2,
+    'radix_phelan' => 2,
+    'radix_sutro' => 2,
+    'radix_sutro_double' => 2,
+    'radix_bartlett_flipped' => 3,
+    'radix_bartlett' => 3,
+    'radix_brown' => 3,
+    'radix_geary' => 3,
+    'radix_harris' => 3,
+    'radix_hewston_flipped' => 3,
+    'radix_hewston' => 3,
+    'radix_mccoppin' => 3,
+    'radix_pond' => 3,
+    'radix_sanderson' => 3,
+    'radix_sanderson_flipped' => 3,
+    'radix_selby' => 3,
+    'radix_selby_flipped' => 3,
+    'radix_taylor_flipped' => 3,
+    'radix_taylor' => 3,
+    'radix_webb' => 3,
+    'radix_webb_flipped' => 3,
+    'radix_whelan' => 3,
+    'radix_rolph' => 4,
+  ];
+
+  /**
+   * @var string $id
+   * @var \Drupal\Core\Layout\LayoutDefinition $definition
+   */
+  foreach ($definitions as $id => &$definition) {
+    if ($definition->getProvider() == 'radix_layouts') {
+      $definition->setCategory($category_labels[$radix_categories[$id]]);
+    }
+  }
+
+  // Layouts can get sorted all wonky! Put in category, then provider, then
+  // id order.
+  uasort($definitions, function (LayoutDefinition $a, LayoutDefinition $b) {
+    if ($a->getCategory() == $b->getCategory()) {
+      if ($a->getProvider() == $b->getProvider()) {
+        return strcmp($a->id(), $b->id());
+      }
+      return strcmp($a->getProvider(), $b->getProvider());
+    }
+    return strcmp($a->getCategory(), $b->getCategory());
+  });
+}

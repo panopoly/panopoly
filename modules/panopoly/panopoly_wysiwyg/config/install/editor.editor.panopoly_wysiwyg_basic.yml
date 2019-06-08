@@ -1,0 +1,100 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.panopoly_wysiwyg_basic
+  module:
+    - ckeditor
+format: panopoly_wysiwyg_basic
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Strike
+        -
+          name: 'Lists and Quotes'
+          items:
+            - BulletedList
+            - NumberedList
+            - Blockquote
+        -
+          name: 'Text Align'
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+        -
+          name: 'Linking and Break'
+          items:
+            - DrupalLink
+            - DrupalUnlink
+            - panopoly_wysiwyg_anchor
+            - DrupalBreak
+        -
+          name: Tools
+          items:
+            - panopoly_media_wysiwyg_media_embed
+            - Maximize
+            - Source
+            - panopoly_wysiwyg_kitchensink
+      -
+        -
+          name: 'Block Formatting'
+          items:
+            - Format
+        -
+          name: Underline
+          items:
+            - Underline
+        -
+          name: Justify
+          items:
+            - JustifyBlock
+        -
+          name: Table
+          items:
+            - Table
+        -
+          name: 'Clear Formatting'
+          items:
+            - PasteText
+            - PasteFromWord
+            - RemoveFormat
+        -
+          name: 'Special Characters'
+          items:
+            - SpecialChar
+        -
+          name: Indentation
+          items:
+            - Outdent
+            - Indent
+        -
+          name: Undo/Redo
+          items:
+            - Undo
+            - Redo
+  plugins:
+    stylescombo:
+      styles: ''
+    drupallink:
+      linkit_enabled: true
+      linkit_profile: default
+    language:
+      language_list: un
+    colorbutton:
+      colors: ''
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

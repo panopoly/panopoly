@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.image
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - panopoly_media
+    - views
+name: panopoly_media_field_media_browser
+label: 'Panopoly Media Field Browser'
+display: modal
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: Browse
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  828212e6-5506-4f23-a333-4b56a08ac85b:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_1
+      submit_text: Select
+      auto_select: false
+    uuid: 828212e6-5506-4f23-a333-4b56a08ac85b
+    weight: -10
+    label: View
+    id: view
+  ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e:
+    settings:
+      extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
+      media_type: file
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
+      multiple: '1'
+      submit_text: Select
+    uuid: ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e
+    weight: -7
+    label: 'Upload files'
+    id: panopoly_media_file_upload
+  a36a243c-e298-4b28-9eb2-4a9976879176:
+    settings:
+      form_mode: entity_browser
+      media_type: image
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drop files here to upload them'
+      max_filesize: 10M
+      extensions: 'jpg jpeg gif png'
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Select
+    uuid: a36a243c-e298-4b28-9eb2-4a9976879176
+    weight: -8
+    label: 'Upload images'
+    id: dropzonejs_media_entity_inline_entity_form

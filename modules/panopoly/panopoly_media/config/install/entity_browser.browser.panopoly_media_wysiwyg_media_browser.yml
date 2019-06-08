@@ -1,0 +1,72 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.image
+    - views.view.media_entity_browser
+  module:
+    - dropzonejs_eb_widget
+    - media
+    - panopoly_media
+    - views
+name: panopoly_media_wysiwyg_media_browser
+label: 'Panopoly Media WYSIWYG Browser'
+display: iframe
+display_configuration:
+  width: 100%
+  height: '500'
+  link_text: Browse
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  a1ed5dca-2adc-478d-a9b0-014a7df6bb6e:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_1
+      submit_text: Select
+      auto_select: false
+    uuid: a1ed5dca-2adc-478d-a9b0-014a7df6bb6e
+    weight: -10
+    label: View
+    id: view
+  a9609bc6-0d7d-47ca-84f1-62e76c37372a:
+    settings:
+      extensions: 'txt rtf doc docx ppt pptx xls xlsx pdf odf odg odp ods odt fodt fods fodp fodg key numbers pages'
+      media_type: file
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
+      multiple: '1'
+      submit_text: Select
+    uuid: a9609bc6-0d7d-47ca-84f1-62e76c37372a
+    weight: -7
+    label: 'Upload files'
+    id: panopoly_media_file_upload
+  0da62598-d7a1-4f21-97a4-0f9c1111eb91:
+    settings:
+      media_type: video
+      submit_text: Select
+    uuid: 0da62598-d7a1-4f21-97a4-0f9c1111eb91
+    weight: -6
+    label: 'Add video'
+    id: panopoly_media_video_add
+  5864d273-3a0b-4019-b5e2-257bb6faa387:
+    settings:
+      form_mode: entity_browser
+      media_type: image
+      upload_location: 'public://upload/[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drop files here to upload them'
+      max_filesize: 10M
+      extensions: 'jpg jpeg gif png'
+      clientside_resize: false
+      resize_width: null
+      resize_height: null
+      resize_quality: !!float 1
+      resize_method: contain
+      thumbnail_method: contain
+      submit_text: Select
+    uuid: 5864d273-3a0b-4019-b5e2-257bb6faa387
+    weight: -8
+    label: 'Upload images'
+    id: dropzonejs_media_entity_inline_entity_form

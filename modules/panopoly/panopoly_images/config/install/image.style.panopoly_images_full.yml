@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_images_full
+label: 'Full (1x)'
+effects:
+  8a7dcef0-818f-4794-a280-7df6161310d8:
+    uuid: 8a7dcef0-818f-4794-a280-7df6161310d8
+    id: image_scale
+    weight: 1
+    data:
+      width: 1260
+      height: null
+      upscale: true

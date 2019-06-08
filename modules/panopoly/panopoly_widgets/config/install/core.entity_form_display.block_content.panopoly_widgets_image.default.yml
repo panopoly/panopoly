@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_widgets_image
+    - field.field.block_content.panopoly_widgets_image.body
+    - field.field.block_content.panopoly_widgets_image.field_panopoly_widgets_image
+    - field.field.block_content.panopoly_widgets_image.field_panopoly_widgets_link
+    - image.style.panopoly_images_thumbnail
+  module:
+    - image
+    - link
+    - text
+id: block_content.panopoly_widgets_image.default
+targetEntityType: block_content
+bundle: panopoly_widgets_image
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 3
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_panopoly_widgets_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: panopoly_images_thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_panopoly_widgets_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

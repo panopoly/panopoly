@@ -1,0 +1,17 @@
+name: 'Panopoly Core'
+description: 'The magical core of the Panopoly framework.'
+type: module
+core: 8.x
+dependencies:
+  - field
+  - file
+  - image
+  - node
+  - panelizer
+  - panopoly_images
+  - path
+  - pathauto
+  - taxonomy
+  - text
+  - user
+package: Panopoly
