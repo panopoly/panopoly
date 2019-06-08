@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_NAMES="panopoly_core panopoly_demo panopoly_images panopoly_media panopoly_pages panopoly_theme panopoly_users panopoly_widgets panopoly_wysiwyg"
+REPO_NAMES="panopoly_core panopoly_demo panopoly_images panopoly_media panopoly_pages panopoly_test panopoly_theme panopoly_users panopoly_widgets panopoly_wysiwyg"
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if [ x$BRANCH != x8.x-2.x ]; then
