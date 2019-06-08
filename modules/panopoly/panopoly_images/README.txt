@@ -10,3 +10,4 @@ Image Styles
 * Spotlight - Integrated with the spotlight entity provided by Panopoly Widgets
 * Square - Provides images cropped to a square ratios
 * Thumbnail - Provides a small thumbnail of the image, suitable for previewing
+
