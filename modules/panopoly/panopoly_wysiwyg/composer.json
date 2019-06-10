@@ -3,6 +3,7 @@
     "type": "drupal-module",
     "license": "GPL-2.0+",
     "require": {
+        "drupal/core": "^8.6.16",
         "drupal/ckeditor_drupalbreaks": "1.x-dev",
         "drupal/colorbutton": "~1.1",
         "drupal/editor_advanced_link": "~1.4",

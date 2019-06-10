@@ -1,0 +1,10 @@
+{
+    "name": "drupal/panopoly_theme",
+    "type": "drupal-module",
+	"description": "Helps with theming and provides many layouts.",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6.16",
+        "drupal/radix_layotus": "~4.0"
+    }
+}

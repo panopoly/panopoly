@@ -1,6 +1,6 @@
 type: module
 name: 'Panopoly Media'
-description: 'Standard media configuration.'
+description: 'Advanced multimedia configuration.'
 core: 8.x
 package: Panopoly
 dependencies:

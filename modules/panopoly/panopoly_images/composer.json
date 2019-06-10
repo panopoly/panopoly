@@ -1,0 +1,9 @@
+{
+    "name": "drupal/panopoly_images",
+    "type": "drupal-module",
+	"description": "Provides some standard responsive image styles.",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6.16"
+    }
+}

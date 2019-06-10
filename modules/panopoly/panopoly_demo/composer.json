@@ -1,0 +1,12 @@
+{
+    "name": "drupal/panopoly_demo",
+    "type": "drupal-module",
+	"description": "Demo functionality and content to help show the power of Panopoly",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6.16",
+		"drupal/panopoly_core": "2.x-dev",
+		"drupal/panopoly_images": "2.x-dev",
+		"drupal/panopoly_pages": "2.x-dev"
+    }
+}

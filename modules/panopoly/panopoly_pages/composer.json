@@ -1,0 +1,12 @@
+{
+    "name": "drupal/panopoly_pages",
+    "type": "drupal-module",
+	"description": "Provides a basic page, suitable for Panelizing.",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6.16",
+		"drupal/panopoly_core": "2.x-dev",
+		"drupal/panopoly_theme": "2.x-dev",
+        "drupal/panopoly_images": "2.x-dev"
+    }
+}
