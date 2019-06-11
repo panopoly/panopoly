@@ -19,7 +19,7 @@ mv -f "$TRAVIS_BUILD_DIR"/behat.travis.yml.dist .
 # If this isn't an upgrade, we test if any features are overridden.
 if [[ "$UPGRADE" == none ]]
 then
-	DRUSH_ARGS="--root=$DRUPAL_TI_DRUPAL_DIR --uri=$DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT" "$TRAVIS_BUILD_DIR"/scripts/check-overridden.sh
+	DRUSH_ARGS="--root=$DRUPAL_TI_DRUPAL_DIR/web --uri=$DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT" "$TRAVIS_BUILD_DIR"/scripts/check-overridden.sh
 fi
 
 # This replaces environment vars from $DRUPAL_TI_BEHAT_YML into 'behat.yml'.

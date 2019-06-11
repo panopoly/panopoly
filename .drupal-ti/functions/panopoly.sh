@@ -51,17 +51,13 @@ function panopoly_build_distribution() {
 	cd "$DRUPAL_TI_DRUPAL_BASE"
 
 	# Build Codebase
-	mkdir profiles
-	mv panopoly profiles/
-	mkdir drupal
-	mv profiles drupal/
-
-	# Build the current branch.
-	panopoly_header Building Panopoly from current branch
+	panopoly_header Building Panopoly with Composer template
+	composer create-project panopoly/panopoly-composer-template:8.x-dev drupal --no-interaction --no-install
 	cd drupal
-	drush make --yes profiles/panopoly/drupal-org-core.make --prepare-install
-	drush make --yes profiles/panopoly/drupal-org.make --no-core --contrib-destination=profiles/panopoly
-	drush dl diff
+	composer config repositories.panopoly path ../panopoly
+	composer install
+	composer require drupal/diff 'drupal/drupal-extension:^3.2.2'
+	cd web
 	mkdir -p sites/default/private/files
 	mkdir -p sites/default/private/temp
 
@@ -122,9 +118,9 @@ function drupal_ti_install_drupal() {
 	panopoly_header Installing Drupal
 	if [[ "$UPGRADE" == none ]]
 	then
-		cd drupal
+		cd drupal/web
 	else
-		cd panopoly-$UPGRADE
+		cd panopoly-$UPGRADE/web
 		# Relax checks as drush site-install has errors for update 1.13.
 		set +e
 	fi
@@ -134,7 +130,7 @@ function drupal_ti_install_drupal() {
 	#drush vset -y file_temporary_path "sites/default/private/temp"
 
 	# Switch to the Panopoly platform built from Git (if we aren't there already).
-	cd ../drupal
+	cd ../../drupal/web
 
 	# If we're an upgrade test, run the upgrade process.
 	if [[ "$UPGRADE" != none ]]
