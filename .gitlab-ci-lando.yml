@@ -1,0 +1,5 @@
+services:
+  appserver:
+    overrides:
+      volumes:
+        - CI_PROJECT_DIR:/src/panopoly

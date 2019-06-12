@@ -2,6 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.embed_large
+    - core.entity_view_mode.media.embed_medium
+    - core.entity_view_mode.media.embed_small
+    - entity_browser.browser.panopoly_media_wysiwyg_media_browser
     - media.type.file
     - media.type.image
     - media.type.video

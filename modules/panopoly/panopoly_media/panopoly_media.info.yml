@@ -20,6 +20,8 @@ dependencies:
   - panopoly_images
   - panopoly_media
   - path
+  - responsive_image
+  - system
   - taxonomy
   - text
   - user

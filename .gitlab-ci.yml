@@ -1,0 +1,63 @@
+image: registry.gitlab.com/mydropwizard/lando-docker
+
+variables:
+  DOCKER_HOST: 'tcp://docker:2375/'
+
+services:
+  - docker:dind
+
+build:
+  stage: build
+  script:
+    # GitLab CI checks out the commit unattached from any branch. We need to
+    # put it in a branch for the Composer repository to work.
+    - git checkout -b $CI_COMMIT_REF_NAME
+
+    # Create new Lando home directory within $CI_SHARED_DIR so that it can be
+    # mounted by the docker:dind service.
+    - export CI_SHARED_DIR=$(dirname $CI_PROJECT_DIR)
+    - cp -r /home/lando $CI_SHARED_DIR/
+    - cp .gitlab-ci-global-lando-config.yml $CI_SHARED_DIR/lando/.lando/config.yml
+    - export HOME=$CI_SHARED_DIR/lando
+    - cd $CI_SHARED_DIR
+
+    # Setup hostname for Panopoly site.
+    - echo $(getent hosts docker | awk '{ print $1 }') panopoly-2.docker | sudo tee -a /etc/hosts
+
+    # This is roughly equivalent to:
+    #
+    #   composer create-project panopoly/panopoly-composer-template:8.x-dev drupal --no-interaction --no-install
+    #
+    # We don't want to run composer  here, because we want Lando to run it,
+    # so that, the PHP version used by Lando is used.
+    - mkdir drupal
+    - curl https://gitlab.com/panopoly/panopoly-composer-template/-/archive/8.x/panopoly-composer-template-8.x.tar.bz2 | tar -xj -C drupal --strip-components=1
+
+    # Use Lando to run composer.
+    - cd drupal
+    - cat $CI_PROJECT_DIR/.gitlab-ci-lando.yml | sed -e "s,CI_PROJECT_DIR,$CI_PROJECT_DIR,g" > .lando.yml
+    # NOTE: the .lando.yml specially mounts the $CI_PROJECT_DIR as /src/panopoly
+    # in the appserver, so we can point the repository there.
+    - lando composer config repositories.panopoly path /src/panopoly
+    - lando composer require "panopoly/panopoly:dev-$CI_COMMIT_REF_NAME as 2.x-dev" --no-update
+    - lando composer install
+    - lando composer require drupal/diff 'drupal/drupal-extension:^3.2.2'
+    - cd web
+
+    # Install Drupal.
+    - lando start
+    - lando drush si panopoly --db-url=mysql://drupal8:drupal8@database/drupal8 -y
+    - lando drush en -y panopoly_test
+
+    # Check our .make files.
+    - lando drush dl -y drupalorg_drush-7.x-1.x-dev --destination=/var/www/.drush
+    - lando drush cc drush
+    - lando drush verify-makefile profiles/panopoly/drupal-org.make
+    - lando ssh -c 'find profiles/panopoly/modules -name \*.make -print0 | xargs -0 -n1 drush verify-makefile'
+
+    # Check if any modules are overridden.
+    - lando ssh -c profiles/panopoly/scripts/check-overridden.sh
+
+    # Run the Behat tests
+    - lando ssh -c 'cd profiles/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'
+
