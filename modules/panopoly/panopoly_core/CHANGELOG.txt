@@ -1,3 +1,8 @@
+Panopoly Core 8.x-2.0-alpha14, 2019-06-25
+-------------------
+- This is a really long commit in order to test our release scripts,
+  including the word wrapping functionality for CHANGELOG.txt.
+
 Panopoly Core 7.x-1.28, 2015-10-21
 ---------------------------
 - Update to Drupal 7.41 for SA-CORE-2015-004 and jquery_update for SA-

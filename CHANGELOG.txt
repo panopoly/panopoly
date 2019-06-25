@@ -1,3 +1,1463 @@
+Panopoly 8.x-2.0-alpha14, 2019-06-25
+-------------------
+- This is a really long commit in order to test our release scripts,
+  including the word wrapping functionality for CHANGELOG.txt.
+- Issue #2954654: Consider using GitLab CI rather than Travis?.
+- Issue #3056745: Tests on Travis CI should use Composer to build Drupal
+  site.
+- Remove outdated build and release scripts.
+- Fix type-o in drupal/radix_layouts in composer.json.
+- Issue #2851122: Update the top-level composer.json for 'monorepo'
+  layout.
+- Issue #2851122 by dsnopek: Forgot to merge panopoly_test into the 8.x-2.x
+  monorepo.
+- Merge multiple repositories into a monorepo.
+- Issue #2851122 by dsnopek: Move Panopoly from 'manyrepos' to 'monorepo'
+  with a subtree split.
+- Merge commit to realign panopoly_images on monorepo with subtree split
+  (take two).
+- Merge commit to realign panopoly_images on monorepo with subtree split.
+- Update Panopoly Test for Fix text widget test for "Block description".
+- Fix text widget test for "Block description".
+- Update Panopoly WYSIWYG for Issue #2859707 by dsnopek: Allow
+  hiding/showing of "advanced" WYSIWYG buttons.
+- Issue #2859707 by dsnopek: Allow hiding/showing of "advanced" WYSIWYG
+  buttons.
+- Update Panopoly Widgets for Don't hide the "Block description" field on
+  the form.
+- Don't hide the "Block description" field on the form.
+- Update Panopoly Widgets for Issue #2013965 by dsnopek, mfrausto,
+  caschbre, lsolesen: ability to link images placed with image widget.
+- Issue #2013965 by dsnopek, mfrausto, caschbre, lsolesen: ability to link
+  images placed with image widget.
+- Update Panopoly Test for Issue #3055905: Get tests actually passing on
+  Lando.
+- Issue #3055905: Get Behat tests actually passing in Lando.
+- Update Panopoly Test for Issue #3055905: Provide Lando configuration for
+  running Behat tests.
+- Issue #3055905: Update the behat.lando.yml to actually working with Lando
+  from the Composer template.
+- Update Panopoly Images, Media, Widgets and Demo for Issue #3053230 by
+  arshadcn, dsnopek: Implement responsive image styles that fit with our
+  selection of styles.
+- Issue #3053230 by arshadcn, dsnopek: Implement responsive image styles
+  that fit with our selection of styles.
+- Issue #3056744: Remove unneeded plugins and synchronize .make file with
+  composer.json.
+- Minor test updates for Drupal 8.
+- Issue #2971200 by dsnopek, cboyden: Fix issues with waiting for AJAX in
+  an iframe (Behat).
+- Issue #2969375 by dsnopek: Declare $javascript property in
+  panopoly_test.behat.inc.
+- Issue #2874638 by dsnopek, cboyden: Add a Behat step to manually take a
+  screenshot.
+- Issue #2875018 by cboyden: Abstract screenshot step so it can be used
+  without Imgur.
+- Issue #2914229 by cboyden: Switch to headless Chrome for Travis testing.
+- Make Behat dependency a normal require (not require-dev).
+- Add composer.json.
+- Update Behat configuration for Lando and Drupal 8.
+- Update Feature so its not marked as overridden.
+- Issue #3055880: Install 'enyo/dropzone' library via Composer.
+- Fix version for texttransform plugin.
+- Fix version for CKEditor tabletoolstoolbark plugin.
+- Experiment with the drupal-ckeditor-plugin repository.
+- Fix hook_panels_ipe_layouts_alter() for optional 3rd argument.
+- Switch text format to current "Standard" from Panopoly WYSIWYG.
+- Update .make file to match package whitelist.
+- Update features to 3.7.
+- Add dropzone library to the .make file.
+- Add ckeditor plugins to .make file.
+- Update dependencies.
+- Add .make file for building on Drupal.org.
+- Update to config_update 1.5.
+- Update dependencies in .make file so it's actually installable.
+- Added image and file media types which were removed from core between 8.4
+  and 8.5.
+- Added video embed field patch for youtube privacy mode.
+- Added custom file access control handler and administer files
+  permission.
+- Fixed reference to bulk form views plugin for 8.4.x compatability.
+- Added ckeditor colorbutton plugin integration.
+- Updated additional tempstore references for 8.4.x compatability.
+- Fixed typehint to tempstore.
+- Converted to use user tempstore for 8.4.x compatability.
+- Added install/update hook to add config entity for delete action.
+- Added action and confirm form for multiple file deletion.
+- Coding standards fix.
+- Added file bulk operation views plugin.
+- Changed file delete warning message.
+- Added file deletion capability.
+- Code style cleanup.
+- Added duplicate file upload messaging and acknowledgement.
+- Issue #2953693 by kerasai: WYSIWYG Advanced Linking.
+- Issue #2939911 by kerasai, dsnopek: Anchor support in Drupal 8.
+- Fix to apply trim to prevent using "empty" iptc values.
+- Added hook to hide revision log message while creating media in ief.
+- Fixes duplicate config introduced in fa41fe4 on #2948440.
+- Issue #2948440 by kerasai: Media Edit in Entity Browser.
+- Fix file upload on entity browser for fields.
+- Minor fixes to entity browsers: extension list for fields and upload
+  location on both.
+- Add "Table" button to the full editor too.
+- Allow tables in the "Standard" text format.
+- Remove 'token' view mode from Feature.
+- Added 'embed_*' view modes so that 'full' and 'teaser' can be used for
+  entity pages and listings.
+- Add description and tags to media entities.
+- Don't restrict images to site on the "Full" text format.
+- Use a better field formatter for image links.
+- Add link view mode to Media and display for images.
+- Oops! Forgot to put entity embed filter on 'Full' text format.
+- Remove config object that is included in core media module.
+- Made sure all the necessary config was included.
+- Add a field formatter for making responsive thumbnails of Media
+  references.
+- Re-order the text formats.
+- Issue #2925652 by kerasai, dsnopek: WYSIWYG Update Hook 8204 Does Not
+  Complete (take two).
+- Issue #2925652 by kerasai: WYSIWYG Update Hook 8204 Does Not Complete.
+- Issue #2925626: Icon for Media button in WYSIWYG.
+- Make the 8204 update hook re-runnable.
+- Make sure panopoly_media is enabled and re-number update hooks.
+- Issue #2922004 by dsnopek: Update hooks for Panopoly WYSIWYG text format
+  id changes.
+- Issue #2922004 by dsnopek: Allow Panopoly WYSIWYG to work on Drupal 8
+  'standard' profile.
+- Issue #2919902 by mglaman: Use Panopoly Media and provide WYSIWYG media
+  embed.
+- Issue #2923144 by mglaman: Entity browser needs to go full width for the
+  iframe.
+- Issue #2923140 by mglaman: Use 2.x branch of Entity Browser.
+- Issue #2923137 by mglaman: Use 2.x branch of Media Entity Browser.
+- Add reference to core issue for the FilterHtml bug.
+- Issue #2921730 by mglaman: Image view mode should have the label
+  completely hidden, not just visually.
+- Issue #2919908 by mglaman, dsnopek: Need to provide an embed button
+  specifically for files.
+- Issue #2919909 by mglaman: Create an entity browser widget for creating
+  video media entities.
+- Issue #2919907 by mglaman: Create a file upload widget for entity
+  browser.
+- Add update hook to enable the new dependencies.
+- Add support for the Drupal teaser break plugin.
+- Prevent <!--break--> from getting filtered out of text.
+- Drop the patch for dropzonejs it was committed:
+  https://www.drupal.org/node/2897255.
+- Issue #2917548 by mglaman: Remove slideshow module.
+- Issue #2917546 by mglaman: Resolve config dependency conflicts so module
+  is installable.
+- Initial commit.
+- Remove the old Drupal 7 plugin files.
+- Issue #2732387: Fix IPE tray scrolling breaks with toolbar menu in
+  vertical orientation.
+- Issue #2732387: Fix broken block search in the IPE.
+- Issue #2732387: Remove all default node fields when on a landing page.
+- Issue #2732387: Filter available blocks and layouts for better UX.
+- Issue #2732387: Fix the way the Radix Layouts icons look.
+- Issue #2880751: Update to Radix Layouts 4.0 for Panels 4.0
+  compatibility.
+- Issue #2880751: Update to Drupal 8.3.2.
+- Issue #2732395: Implement bare minimum WYSIWYG configuration for Panopoly
+  2.0 MVP.
+- Issue #2854958: Implement bare minimum panopoly_users for Panopoly 2.0
+  MVP.
+- Issue #2858533: Type-o in panopoly-images.css: 'syle' vs 'style'.
+- Updated CHANGELOG.txt for 7.x-1.43 release.
+- Issue #2729249 by dsnopek: Implement "Content item" and "Content list"
+  widgets in Drupal 8.
+- Updated CHANGELOG.txt for 7.x-1.42 release.
+- Issue #2852999: Get tests working on Travis for Drupal 8 in a minimal
+  way.
+- Issue #2852982: Update to features 3.2 and add config_update 1.3 (update
+  feature).
+- Issue #2852982: Update to features 3.2 and add config_update 1.3.
+- Issue #2851621: Move field storage for categories, featured image and
+  status from panopoly_pages to panopoly_core.
+- Issue #2850972: Rename 'tests' directory to 'behat'.
+- Issue #2850954: Add composer.lock to .gitignore in panopoly_test.
+- Issue #2850923: Update to Panels 8.x-3.0-beta5.
+- Issue #2717277 by dsnopek: Upload screenshots to imgur on failed tests.
+- Issue #2803347 by dsnopek, cboyden: Update Behat Drupal extension to
+  3.2.2.
+- Issue #2771333 by dsnopek: Use linkit on path for "Make title a link" for
+  all FPP widgets.
+- Issue #2173535 by dsnopek: Use linkit on Spotlight.
+- Updated CHANGELOG.txt for 7.x-1.41 release.
+- Issue #2340811 by dsnopek, mcrittenden: Switch Image widget to use Media
+  Browser.
+- Issue #2755621 by dsnopek: Optionally enable/disable demo content during
+  install.
+- Issue #2803171 by dsnopek: Incorrect storage_id in panopoly_test breaks
+  some child distributions tests.
+- Updated CHANGELOG.txt for 7.x-1.40 release.
+- Updated CHANGELOG.txt for 7.x-1.39 release.
+- Issue #2785825 by dsnopek: Update Panels and Panelizer for
+  SA-CONTRIB-2016-047 and SA-CONTRIB-2016-048.
+- Issue #2429549 by HaiNguyen007, dsnopek, DamienMcKenna, mglaman, hefox,
+  mpotter: Update to latest Panelizer.
+- Updated CHANGELOG.txt for 7.x-1.38 release.
+- Issue #2773683 by cboyden, dsnopek: Can't distinguish Add links on Add
+  Content dialog.
+- Issue #2013965 by dsnopek, caschbre, lsolesen, Andrew_Mallis: ability to
+  link images placed with image widget.
+- Updated CHANGELOG.txt for 7.x-1.37 release.
+- Updated CHANGELOG.txt for 7.x-1.36 release.
+- For now, remove jQuery UI theme - we may add it back in Issue #2729429.
+- Issue #2732417 by dsnopek: Port Panopoly Demo to Drupal 8!.
+- Issue #2729415: Port custom date/time formats to Drupal 8.
+- Issue #2729443: Include pathauto configuration for panopoly_pages in
+  Drupal 8.
+- Updated widget output to match the Panopoly 1.x widgets.
+- Include CTools patch from #2672110 to prevent PHP notices.
+- Add back description from the D7 module.
+- Moved config from 'optional' to 'install'.
+- Add the field storage for all the fields.
+- Field storage for node panelizer field.
+- Added the "Landing page" content type.
+- Fix the preview and default promote value for "Content page".
+- Remove title from the Featured view mode.
+- Added Panelizer defaults for "Content page".
+- Added 'Content page' to Feature and removed old D7 code.
+- Update feature to include 'Categories' taxonomy, 'Editor' role and remove
+  old D7 code.
+- Issue #2063541 by lsolesen: Remove Open Sans?.
+- Cleaned out the old D7 code that we don't intend to port.
+- Merge branch '8.x-2.x' of git.drupal.org:project/panopoly_theme into
+  8.x-2.x.
+- Include 'Featured' view mode and remove old Drupal 7 code.
+- Updated CHANGELOG.txt for 7.x-1.35 release.
+- Issue #2483295 by dsnopek, humansky, mglaman, cboyden: Title in FPP is
+  double encoded when making a link.
+- First pass at porting to Drupal 8.
+- Update to the latest versions and add Panelizer.
+- Updated CHANGELOG.txt for 7.x-1.34 release.
+- Issue #2561737 by cboyden, dsnopek: Update search_api to 1.17,
+  search_api_db to 1.5, search_api_solr to 1.10.
+- Fix incorrect revision for symfony/config 2.7.1.
+- Updated CHANGELOG.txt for 7.x-1.33 release.
+- Issue #2467073 by cboyden, dsnopek, segovia94: Preview fieldset overflows
+  in Firefox if using a very large image.
+- Issue #2683973 by miromarchi: missing comma in panopoly-images.css.
+- Updated CHANGELOG.txt for 7.x-1.32 release.
+- Updated CHANGELOG.txt for 7.x-1.31 release.
+- Issue #2646372 by dsnopek: Panopoly_widgets Schema Update 7016 Integrity
+  constraint violation.
+- Updated CHANGELOG.txt for 7.x-1.30 release.
+- Merge branch '7.x-1.x' of git.drupal.org:project/panopoly_test into
+  7.x-1.x.
+- Issue #2645668: "Use an image from elsewhere on the web" test failing.
+- Update the Panels eco-system modules to -alpha19.
+- Updated CHANGELOG.txt for 7.x-1.29 release.
+- Issue #2573877 by Andrew_Mallis: tighten up media browser thumbnails.
+- Made the smallest number of changes necessary to allow installing this
+  module.
+- Update panopoly_core.make for Drupal 8.
+- Update panopoly_theme.make file for Drupal 8.
+- Update panopoly_widgets.make file for Drupal 8.
+- Issue #2592731 by mpotter: Update Features 2.7 (and Features Override).
+- Issue #2578219 by mglaman: Update defaultconfig to version 1.0-alpha11.
+- Revert "Issue #2597273: Update to Pathauto 1.3".
+- Issue #2567483 by humansky: Update to Date 2.9.
+- Issue #2597273: Update to Pathauto 1.3.
+- Issue #2561733: Update to CTools 1.9.
+- Issue #2553903: Update to Linkit 3.4.
+- Updated CHANGELOG.txt for 7.x-1.28 release.
+- Issue #2598606: Update to Drupal 7.41 for SA-CORE-2015-004 and
+  jquery_update for SA-CONTRIB-2015-158.
+- Issue #2583449 by LCM: Missing file access checks for private files
+  attached to Fieldable Panel Panes.
+- Issue #2574491 by Alex Bukach: Don't rebuild accordions on AJAX
+  requests.
+- Issue #2541838 by hart0554: Convert accordion "heightAuto" to
+  "heightStyle" for jQuery UI >= 1.9.
+- Issue #2562983 by kekkis: Incorporate patch that eases creating new text
+  formats.
+- Issue #2562157: Can't distinguish reusable content without admin title
+  when previews are in single mode.
+- Issue #2559617 by mglaman: CTools "Undefined index: access callback in
+  ctools_entity_from_field_context()".
+- Issue #2558367 by uttamkotekar: Type-o findthe in watchdog() text
+  panopoly_images module.
+- Issue #2532134 by dsnopek, Fabianx: Migrate to new Travis
+  infrastructure.
+- Updated CHANGELOG.txt for 7.x-1.27 release.
+- Issue #2562017: Update to fieldable_panels_panes version 1.7 for
+  SA-CONTRIB-2015-145.
+- Issue #2492877 by RobLoach, Albert Volkman: Move jQuery version from
+  strongarm to defaultconfig so it can be overridden.
+- Updated CHANGELOG.txt for 7.x-1.26 release.
+- Revert "Issue #2474563 by mglaman: Need ctools patch for calling
+  node_view more than once".
+- Issue #2554189: Update to CTools 1.8 for SA-CONTRIB-2015-141.
+- Issue #2497297 by jfrederick, dsnopek: Errors on non-interactive install
+  with drush site-install.
+- Issue #2456255 by dsnopek, mglaman: Update views_autocomplete_filters to
+  version 1.2.
+- Added file and links widget.
+- Added the 'Text' and 'Image' widgets.
+- First pass at a D8 port.
+- Issue #2474563 by mglaman: Need ctools patch for calling node_view more
+  than once.
+- Issue #2504829 by dsnopek, mglaman, mpotter, Elijah Lynn: Update Vimeo
+  configuration export.
+- Issue #2528924 by dsnopek: Spotlight accessibility regressions.
+- Issue #2532908 by dsnopek: Panopoly Widgets overridden after upgrade to
+-dev.
+- Issue #2510944 by hefox, mglaman: Update Apps to 1.0.
+- Issue #2334041 by Andrew Edwards: Move rendering of Spotlight formatter
+  into theme template.
+- Issue #2530966 by hart0554, Lowell: Accordion style setting "-1" on
+  active doesn't work with jquery ui => 1.9.
+- Issue #2183937 by mglaman, tom friedhof, fastangel, mcrittenden: Error on
+  install of Panopoly-based install profile: "Column 'module' cannot be null"
+  when profile starts with "e".
+- Issue #1980348 by elliotc, ivymy, lsolesen: The breadcrumb for create
+  text & image shows ampersand as" &amp; ".
+- Issue #2479569 by dsnopek, mglaman: Update tablefield to version 2.4.
+- Issue #2509988 by mglaman: Update to image_resize_filter 1.15.
+- Issue #2272721 by mglaman: Image Resize Filter never utilized.
+- Updated CHANGELOG.txt for 7.x-1.25 release.
+- Issue #2525208 by dsnopek, hfarrier: Media dialog broken (possible bug).
+- Issue #2509166 by dsnopek: Add phing-based build system to make it easier
+  for contributors to build, install and run tests.
+- Issue #2526330 by Andrew Edwards: Split spotlight JS into it's own file.
+- Issue #2521644 by dsnopek: Allow video_widget.feature to run under
+  Firefox.
+- Updated CHANGELOG.txt for 7.x-1.24 release.
+- Issue #2506371 by dsnopek, chrisgross, humansky: Media dialog missing
+  styles.
+- Issue #2516868 by dsnopek: Update to views_bulk_operations 3.3 for
+  SA-CONTRIB-2015-131.
+- Issue #2516872 by dsnopek: Update to Migrate 2.8 for
+  SA-CONTRIB-2015-130.
+- Issue #2510910 by humansky: Update to media_youtube 3.0.
+- Issue #2514518 by dsnopek: Update to menu_block 2.7.
+- Issue #2477391 by hefox, mpotter: Update Features to version 2.6.
+- Issue #2093009 by dsnopek: Undefined index: active in
+  theme_panopoly_theme_panopoly_accordion_style_render_region(.
+- Updated CHANGELOG.txt for 7.x-1.23 release.
+- Issue #2507897: Commit composer.lock to increase test performance and
+  consistancy.
+- Issue #2507781: Update to jquery_update 2.6 for SA-CONTRIB-2015-123.
+- Issue #2496027 by dsnopek: Generate preview markup in a theme
+  function/template.
+- Issue #2235081 by dsnopek, RobLoach, hefox: Update jquery_update to
+  version 2.5.
+- Issue #2477391 by hefox, mpotter: Update Features to version 2.6-rc1.
+- Issue #2503921 by joegraduate: Update to radix_layouts 3.4.
+- Issue #2499289 by dsnopek, lsolesen, cboyden: Spotlight titles without
+  descriptions wrapping to a second line.
+- Issue #2499979 by joegraduate, mglaman: Update menu_block to version
+  2.6.
+- Issue #2500351 by mglaman: SQL Integrity constraint thrown for Panopoly
+  Landing Page permissions on upgrade.
+- Updated CHANGELOG.txt for 7.x-1.22 release.
+- Issue #2401473 by dsnopek: Update to latest ManualCrop 7.x-1.x-dev.
+- Issue #2155377 by dsnopek, sylus, mpotter, cboyden: Only show one widget
+  preview at a time when adding content in panels.
+- Issue #2499273: Include Panels and CTools patches for improved keyboard
+  accessibility.
+- Issue #2483265 by dsnopek: Update to latest Fieldable Panels Panes
+  (FPP).
+- Issue #2371247 by dsnopek, cboyden: Upgrade to Behat 3 / Drupal Extension
+  3.
+- Issue #2492811 by RobLoach, dsnopek: Move jquery_update to
+  panopoly_core.make and .info.
+- Issue #2458677 by mglaman: Add locale language filter to "Add content
+  item" widget View.
+- Issue #2374827 by dsnopek, Shawn DeArmond: Write Behat test for
+  autocomplete on "Add content item" widget.
+- Issue #2492841 by RobLoach: Switch from hook_pre_render_styles() to
+  hook_library_alter().
+- Issue #2459163 by mglaman, dsnopek: Editing body of node in FAPE via the
+  IPE doesn't save changes.
+- Issue #2491521 by dsnopek: Warning when content includes duplicate IDs
+  and a user defined text format that allows them.
+- Issue #2445119 by dsnopek: Update Media to 2.0-alpha4.
+- Issue #2477469 by dsnopek, mglaman: Style settings form breaks
+  'managed_file' elements, puts 'Cancel' button in 'General Settings'
+  fieldset, and gives PHP notices on region style settings.
+- Issue #2430975 by Shawn DeArmond: Add Behat tests for demo content pulled
+  in via panopoly_demo and Migrate.
+- Revert "Issue #2456255 by dsnopek: Update views_autocomplete_filters to
+  version 1.2".
+- Issue #2316531 by cornifex: Update Date to 2.9-rc1.
+- Issue #2489630 by mglaman: "@Then /^I should see the "([^"]*)" button$/"
+  notice on $region.
+- Issue #2489354 by caschbre: Write Behat test for hiding seldom used pane
+  styles via Panopoly Magic.
+- Issue #2466935 by mglaman, hefox: Update apps to rc1.
+- Issue #2424709 by joegraduate: Update 'menu_block' module to 2.5.
+- Issue #2456255 by dsnopek: Update views_autocomplete_filters to version
+  1.2.
+- Issue #2486713 by ergophobe: Caption filter doesn't select the correct
+  image size when an image's size is manually adjusted.
+- Issue #2489320 by junaidpv: panopoly_images module pass incorrect
+  arguments when calling watchdog() inside hook_init() implementaion.
+- Issue #2481145 by hefox: Undefined events don't have definition but
+  afterStep still called, errors out.
+- Issue #2480835 by dsnopek: Spotlight widget shouldn't assume that image
+  exists when rendering.
+- Revert "Issue #2479569: Update tablefield to version 2.4".
+- Issue #2468371 by dsnopek, cboyden: Provide a way for Views to opt out of
+  allowing the "Display type" to be changed on the pane settings.
+- Issue #2479569: Update tablefield to version 2.4.
+- Issue #2453093: Update respondjs to version 1.5.
+- Updated CHANGELOG.txt for 7.x-1.21 release.
+- Issue #2480383: Update Views to version 3.11 for SA-CONTRIB-2015-103.
+- Issue #2236815 by segovia94, dsnopek: Set human-readable names for all of
+  Panopoly's image styles.
+- Issue #2477319: Clean up instances of deprecated panpoly_theme layouts.
+- Issue #2473365 by dsnopek: WYSIWYG format shouldn't use "Convert line
+  breaks into HTML" filter.
+- Issue #1962642 by Sheldon Rampton: Undefined index: default_filename in
+  defaultconfig_defaultconfig_components() (line 418.
+- Issue #2468989 by hanoii: Include views patch to fix destination query
+  string on ajax calls from views.
+- Issue #2476723 by dsnopek: Remove 'Radix' from the label of each of the
+  layouts.
+- Issue #2476227 by dsnopek: Page full of variables after changing layout.
+- Issue #2476543 by dsnopek: <meta> tag getting added to the WYSIWYG
+  output.
+- Issue #2444361 by mglaman: Update token module to version 1.6.
+- Issue #2451691 by mglaman: Update TinyMCE library to 3.5.11.
+- Issue #2472693: Make theming FPPs sane.
+- Issue #2471995 by hefox: menu_rebuild removed, but not variable that
+  tracked if had been done.
+- Issue #2468273 by dsnopek: Update to Drupal 7.36.
+- Issue #2446165: Update Features module to version 2.5.
+- Issue #2460217 by mcrittenden: LinkIt is broken when changing to WYSIWYG
+  editor after save.
+- Issue #2468445 by RobLoach, dsnopek: Panopoly Images targets img
+  elements.
+- Issue #2287805 by ergophobe, dsnopek, cornifex, mglaman: Caption filter
+  does not work with Quarter Size image format - or with floated captions.
+- Issue #2456919 by ergophobe: Caption filter not properly converting singe
+  quotes to entities.
+- Issue #2463395 by dsnopek: Content Item widget initial preview is
+  confusing.
+- Issue #2455789: Errors when viewing pages with fieldable panels panes
+  with visibility rules.
+- Issue #2459229 by dsnopek: Document names in the Media "Library" overflow
+  outside of their boxes.
+- Issue #2459195 by dsnopek: "File name" filter in Media "Library" loses
+  focus after each keystroke.
+- Issue #2458747 by dsnopek: Media browser tabs give little indication that
+  a tab is selected.
+- Updated CHANGELOG.txt for 7.x-1.20 release.
+- Issue #2456635 by candelas, dsnopek: SQLSTATE[23000]: Integrity
+  constraint violation: 1048 Column 'rid' cannot be null.
+- Issue #2455191: CHANGELOG.txt updates for 1.19 went wrong.
+- Updated CHANGELOG.txt for 7.x-1.19 release.
+- Issue #2455073: Update to CTools 1.7 for SA-CONTRIB-2015-079.
+- Issue #2443499 by dsnopek: User profile: Unable to chage image field
+  style formatter options because they don't get saved.
+- Issue #2453837 by dsnopek: Authenticated users should have full
+  permission to all test content types.
+- Issue #2423841 by dsnopek: "Top search phrases" report not showing any
+  data.
+- Issue #2432625 by dsnopek: panopoly_widgets makes it hard/impossible to
+  implement responsive tables strategy for the whole site.
+- Issue #2449357 by dsnopek: Relabeled view modes baffles.
+- Issue #2293947 by caschbre, dsnopek, mglaman: Make "Landing Page" into
+  node + Panelizer (rather than a Page Manager page)?.
+- Issue #2449495 by dsnopek: livepreview.feature is super slow.
+- Issue #2447591 by bwood: Perform coding style fixes on panopoly_users.
+- Issue #2448757: Features exports including Panels stuff
+  (*.pages_default.inc, *.panelizer.inc, etc) use incorrect indentation.
+- Issue #2446219 by mglaman: Media Vimeo patch to fix improper Exception
+  handling.
+- Issue #2398347 by dsnopek, mglaman: Panopoly Magic abuses FPP revisions.
+- Issue #2447839 by dsnopek: Audit Behat code for slowness and optimize.
+- Issue #2447475 by dsnopek: YouTube test fails on Chrome 41.
+- Issue #2420281 by dsnopek: Administration menu: errors when enabling it.
+- Issue #2317467 by dsnopek: Allow live preview to work with WYSIWYG.
+- Updated CHANGELOG.txt for 7.x-1.18 release.
+- Issue #2438281 by dsnopek: Update to Entity API 1.6 for
+  SA-CONTRIB-2015-053.
+- Issue #2430889 by dsnopek: Hide 'preview' and 'diff_standard' view modes
+  when adding FPPs.
+- Issue #2170695 by dsnopek, whastings, mglaman: Make view modes removed
+  from pane configuration a setting.
+- Issue #2430921: Failing to download 'panopoly_demo' when installing via
+  'drush si': "Downloading updates failed:Failed to download from ".
+- Issue #2430225 by artem.kolotilkin: Update Panopoly Demo content import
+  to Migrate 2.7 format.
+- Issue #2412317 by artem.kolotilkin: Update to Migrate 2.7.
+- Issue #2422163 by ergophobe: Panopoly CSS causes issues with WYSIWYG
+  image because of image style class names.
+- Updated CHANGELOG.txt for 7.x-1.17 release.
+- Issue #2181263 by ivanjaros: HP Fatal error:  [] operator not supported
+  for strings in panopoly_images/panopoly_images.module on line 90.
+- Revert "Issue #2424709 by joegraduate: Update 'menu_block' module to
+  2.5".
+- Issue #2424829 by cboyden: Submenu widget test depends on
+  panopoly_pages.
+- Updated CHANGELOG.txt for 7.x-1.16 release.
+- Issue #2424627: Update Views to version 3.10 for SA-CONTRIB-2015-039.
+- Issue #2418885 by lsolesen: Makefile downloads master of respondjs
+  library instead of tag/hash.
+- Issue #2424327 by dsnopek: Overriding title in "Content Item" widget
+  doesn't work for "Featured" view mode of Content Pages.
+- Issue #2334439 by dsnopek: Switch "Content Item" widget to use some kind
+  of entity reference field rather than title with autocomplete filter.
+- Issue #2191069 by dsnopek, arshadcn, caschbre, klu: Have Panopoly Theme
+  depend on Radix Layouts - forgot some layout changes.
+- Issue #2416525 by dsnopek: Allow users to search for content added to a
+  node via Panelizer.
+- Issue #2421569 by dsnopek: Allow the title of "Content item" widgets to
+  be overridden.
+- Issue #2421593 by dsnopek: Remove empty ("no results") message from
+  "Content list" and "Content item" widgets.
+- Issue #2395719 by cboyden, dsnopek: Add option to support sorting by
+  updated date to Content List.
+- Issue #2418769: Notice: Undefined variable: id in
+  ctools_argument_entity_id_context() (line 73 of
+  /prj/ctools/plugins/arguments/entity_id.inc).
+- Issue #2416775 by ivanjaros: Warning: Illegal offset type in
+  views_add_contextual_links() (line 816 of
+  ~/prj/panopoly/panopoly/modules/contrib/views/views.module).
+- Issue #2417293: Submenu widget broken - Fatal error:  Call to undefined
+  function menu_block_configure_form_follow_validate() - take 2!.
+- Issue #2149171 by dsnopek, lsolesen: Write Behat tests for Panopoly
+  "submenu" widget.
+- Issue #2417293: Submenu widget broken - Fatal error:  Call to undefined
+  function menu_block_configure_form_follow_validate().
+- Issue #2403539 by fastangel: Makefile downloads master of markitup
+  library instead of tag/hash.
+- Issue #2416035 by ivanjaros: Update to Panels 3.5 and Ctools 1.6.
+- Issue #2373495 by cboyden: Write Behat test for Media Web tab; move to
+  new feature.
+- Issue #2268647 by cboyden, dsnopek: File upload tests do not clean up
+  after themselves.
+- Issue #2312827: Widget 'title' isn't shown admin pages for Fieldable
+  Panel Panes.
+- Revert "Issue #2268647 by cboyden, dsnopek: File upload tests do not
+  clean up after themselves".
+- Issue #2276089 by dsnopek, maustyle: Allow configuring file types for
+  "File" widget without overriding the Feature.
+- Issue #2411920: @ rule for wysiwyg_filter needs to come first, rather
+  than last.
+- Issue #2411755 by mcrittenden: Spotlight Pause/Pause/Prev/Next buttons
+  stop working after opening or saving Panels IPE.
+- Revert "Issue #2312827 by dsnopek: Widget 'title' isn't shown admin pages
+  for Fieldable Panel Panes".
+- Issue #2312827 by dsnopek: Widget 'title' isn't shown admin pages for
+  Fieldable Panel Panes.
+- Updated CHANGELOG.txt for 7.x-1.15 release.
+- Issue #2398801 by cornifex: Map widget pane-content should hide overflow
+  as opposed to entire pane.
+- Issue #2402199 by hefox: Update to features 2.3.
+- #2404209 - Updating to latest version of LinkIt.
+- Issue #2385861 by mglaman, mcrittenden: Spotlight: Allow hiding of pager,
+  replace with previous/next controls.
+- Issue #2354253 by mglaman: Spotlight should allow an empty title field.
+- Issue #2262363 by artem.kolotilkin, dsnopek, ergophobe: Allow WYSIWYG
+  Button Order to work in Panopoly.
+- Revert "Issue #2013965 by dsnopek: ability to link images placed with
+  image widget.".
+- Issue #2379131: Update to CTools 1.5.
+- Issue #2013965 by dsnopek: ability to link images placed with image
+  widget.
+- Updated CHANGELOG.txt for 7.x-1.14 release.
+- Issue #2374727 by hefox: update to apps beta20.
+- Issue #2378487 by dsnopek: Update all Panels in the database to use Radix
+  Layouts.
+- Issue #2329387 by cboyden, jessehs: Write Behat tests to ensure search
+  works after install and provides facets.
+- Issue #2334055 by jessehs: Write Behat tests to verify that submission
+  guidelines appear on node edit form.
+- Issue #2377713 by dsnopek: panopoly_test shouldn't put "use text format
+  panopoly_(html|wysiwyg)_text" in user_permission.
+- Issue #2191069 by dsnopek, arshadcn, caschbre, klu: Have Panopoly Theme
+  depend on Radix Layouts (rather than providing it's own).
+- Issue #2374715 by dsnopek: Fixed "Content Type" filter on the "Add
+  content item" widget is broken.
+- Issue #2374697 by dsnopek: Fixed views_autocomplete_filters 'dependent'
+  feature doesn't work in Pane settings.
+- Issue #2374121 by mpotter: Fixed Patch needed to Views Bulk Operations
+  (VBO).
+- Issue #2369627 by dsnopek: Update 'link' module to version 1.3 (fix
+  overridden Features).
+- Issue #2369629 by dsnopek: Update distro_update to version 1.0-beta4.
+- Issue #2369627 by dsnopek: Update 'link' module to version 1.3.
+- Issue #2369609 by dsnopek: Update responsive_bartik to version 1.0.
+- Issue #2163985 by lsolesen: Added Too narrow Spotlight headline area.
+- Issue #2334143 by jessehs | dsnopek: Write Behat tests for pathauto for
+  'editor' role.
+- Revert "Issue #2334055 by jessehs | dsnopek: Write Behat tests to verify
+  that submission guidelines appear on node edit form.".
+- Issue #2329387 by jessehs | dsnopek: Write Behat tests to ensure search
+  works after install and provides facets.
+- Issue #2334055 by jessehs | dsnopek: Write Behat tests to verify that
+  submission guidelines appear on node edit form.
+- Issue #2370539 by arshadcn: Fixed Hide hidden themes from Panopoly theme
+  selection.
+- Issue #2369967 by mpotter | dsnopek: Consider CTools modal resize patch
+  (#2055785) for inclusion in Panopoly?.
+- Issue #2370527 by cboyden: Use 'imports' in behat.yml files to share
+  common configuration.
+- Issue #2361927 by hefox | lsolesen: Fixed Strict warning: Only variables
+  should be passed by reference in apps_retrieve_app_image().
+- Issue #2058917 by dsnopek, scottalan | kmonty: Fixed Kitchen Sink WYSIWYG
+  plug-in breaks non-panopoly_wysiwyg input format editors (using CKEditor).
+- Updated CHANGELOG.txt for 7.x-1.13 release.
+- Issue #2357405 by hefox: Fixed Patch for tablefield not needed.
+- Updated CHANGELOG.txt for 7.x-1.12 release.
+- Issue #2354303 by dsnopek: Fixed Remove field_featured_categories and
+  field_featured_status from panopoly_test.
+- Issue #2354297 by dsnopek: Fixed Include CTools patch to prevent error in
+  IPE when field doesn't exist.
+- Issue #2186541 by caschbre, dsnopek: Added Upgrade linkit module 3.1+.
+- Issue #2353385 by dsnopek: Update 'panels_breadcrumbs' to version 2.2.
+- Issue #2353381 by dsnopek: Update 'uuid' to version 1.0-alpha6.
+- Issue #2212695 by dsnopek | lsolesen: Fixed Disabling "Advanced Panel
+  Plugins" breaks some Panes (ex. Panels Everywhere).
+- Issue #2283223 by caschbre, dsnopek | carsonblack: Fixed Old content
+  aliases should be preserved by default.
+- Issue #2303783 by hefox | cboyden: Update Apps to latest beta.
+- Issue #2063541 by lsolesen | populist: Remove Open Sans?.
+- Issue #2335809 by humansky: Fixed On Views "Content Panes", exclude
+  hidden fields (on "Field Settings") by default.
+- Issue #2306771 by trevjs | cboyden: Fixed One-time login link test does
+  not delete its user.
+- Issue #2337593 by caschbre | lsolesen: Added only show number and play on
+  spotlight if pics no >= 2.
+- Issue #2316067 by dsnopek, mglaman, cboyden: Fixed panopoly_test should
+  not depend on panopoly_pages.
+- Issue #2209661 by scottalan: Fixed Panopoly Users - Default body classes
+  not added to feature.
+- Issue #2058917 by kmonty: Fixed Kitchen Sink WYSIWYG plug-in breaks
+  non-panopoly_wysiwyg input format editors.
+- Issue #2330841 by dsnopek: Update respondjs to version 1.4.
+- Issue #2160731 by mglaman, dsnopek, whastings: Added Panopoly Magic
+  should respect a view's configured view mode. (take 2).
+- Issue #2280589 by trevjs, mglaman | ergophobe: Patch Panelizer to avoid
+  fatal error in Features.
+- Issue #2334141 by mglaman: Added Behat feature for Panopoly Magic and
+  view pane configuration.
+- Issue #2078839 by trevjs, Sheldon Rampton: Fixed Error notice after
+  overriding WYSIWYG feature.
+- Issue #2334043 by mglaman | dsnopek: Check that Spotlight 'Slide
+  Duration' field is present and settable in Behat tests.
+- Issue #2050909 by cornifex, trevjs, mglaman | christowm: Fixed The user
+  profile page shows an uploaded image twice in very large formats.
+- Issue #2283531 by caschbre | dsnopek: Fixed Path alias isn't preserved if
+  the user doesn't have "create url alias" permission.
+- Issue #2208783 by dsnopek, mrfelton | lsolesen: Added features override.
+- Revert "Issue #2208783 by mrfelton | lsolesen: Added features
+  override.".
+- Issue #2208783 by mrfelton | lsolesen: Added features override.
+- Issue #2274877 by mglaman | dsnopek: Added Spotlight image should link to
+  URL.
+- Issue #2330667 by mcrittenden: Added per-spotlight setting for slide
+  rotation duration.
+- Issue #2293745 by mglaman | dsnopek: Investigate why tests now take twice
+  as long to run.
+- Issue #2329143 by dsnopek: Fixed Default permissions only allow
+  'administrator' to add media.
+- Issue #2328751 by dsnopek: Fixed panopoly_widgets_update_7003() fails to
+  properly update 'Video' widgets.
+- Issue #2328023 by dsnopek: Fixed Table 'field_data_field_user_picture'
+  not found in panopoly_users_update_7001() when updating from very old
+  Panopoly.
+- Issue #2128959 by caschbre, dsnopek: Replace default "update" module
+  behavior with something that makes sense for distributions.
+- Issue #2122797 by kmonty: Add WYSIWYG Patch #934976 to Panopoly (Allows
+  for hiding input format fields).
+- Issue #2307337 by mrfelton: Fixed Double-encoding of ampersands in page
+  title on node add form.
+- Issue #2229297 by dsnopek: Update 'media_vimeo' to version 2.0.
+- Issue #2324879 by cboyden: Fixed Video widget test looks for "youtube"
+  text both times.
+- Issue #2257727 by dsnopek | rodrigoaguilera: Fixed update 7007 fails if
+  field exists.
+- Revert "Issue #2128959 by caschbre | dsnopek: Replace default "update"
+  module behavior with something that makes sense for distributions.".
+- Issue #2128959 by caschbre | dsnopek: Replace default "update" module
+  behavior with something that makes sense for distributions.
+- Issue #2316513 by mrfelton: Update Features to 2.2.
+- Issue #2268641 by dsnopek | cboyden: Fixed WYSIWYG image insert test
+  fails if private file path not set.
+- Updated CHANGELOG.txt for 7.x-1.11 release.
+- Issue #2320997 by mrfelton: Fixed Tabs region is defined twice in
+  behat.yml which is causing tests to fail in child distributions.
+- Issue #2320987 by mrfelton: Fixed Demo Homepage test fails on child
+  distributions.
+- Issue #2320851 by dsnopek: Update TableField to version 2.3 for
+  SA-CONTRIB-2014-077.
+- Issue #2209441 by dsnopek: Update respondjs to version 1.3.
+- Issue #2293293 by cboyden: Added highlighting to Add Table widget to
+  distinguish header row.
+- Issue #2316157 by cboyden: Fixed Case sensitivity in live preview test.
+- Updated CHANGELOG.txt for 7.x-1.10 release.
+- Updated CHANGELOG.txt for 7.x-1.9 release.
+- Issue #2312787 by dsnopek: Update to Date 2.8 for SA-CONTRIB-2014-073.
+- Issue #2312509 by dsnopek: Fixed Previews for new Views widgets don't
+  show "more link" even when it should be enabled by default.
+- Issue #2308325 by dsnopek: Write Behat test for alt/title text on images
+  in the WYSIWYG. (update for quotes).
+- Updated CHANGELOG.txt for 7.x-1.8 release.
+- Issue #2306225 by dsnopek: Packaging error with Panopoly 1.7 release:
+  Unable to download tinymce. (take two).
+- Issue #2308325 by dsnopek: Write Behat test for alt/title text on images
+  in the WYSIWYG.
+- Issue #2308487 by dsnopek: Fixed Alt and Title double encoded in
+  WYSIWYG.
+- Issue #2307007 by dsnopek: Fixed When inserting Image in WYSIWYG, the
+  second set of alt/title fields is ignored. (take two).
+- Issue #2307007 by dsnopek: Fixed When inserting Image in WYSIWYG, the
+  second set of alt/title fields is ignored.
+- Issue #2213769 by caschbre | lsolesen: Added transliteration.
+- Revert "Updated CHANGELOG.txt for 7.x-1.8 release.".
+- Revert "Issue #2306225 by dsnopek: Packaging error with Panopoly 1.7
+  release: Unable to download tinymce.".
+- Issue #2306225 by dsnopek: Packaging error with Panopoly 1.7 release:
+  Unable to download tinymce.
+- Updated CHANGELOG.txt for 7.x-1.7 release.
+- Added an empty CHANGELOG.txt file for the release scripts.
+- Issue #2304465 by dsnopek: Fixed Autocomplete loses item selected via
+  keyboard in CTools dialog.
+- Issue #2303477 by dsnopek: Fixed views_autocomplete_filter 1.1 is broken
+  on Pantheon.
+- Issue #2299157 by cboyden: Fixed Login test depends on known
+  credentials.
+- Issue #2294515 by cboyden: Fixed Behat template for local testing needs
+  Chrome profile.
+- Issue #2293747 by cboyden | dsnopek: Move our FeatureContext and
+  *.features into panopoly_test so that child distributions can reuse them.
+- Issue #2295353 by dsnopek: Disable "Nody body" pane in favor of "Field:
+  Body" (which FAPE supports).
+- Issue #2294097 by dsnopek: Move panopoly_page's
+  hook_menu_block_tree_alter() to panopoly_widgets.
+- Issue #2159149 by dsnopek: Fixed 'file_display' components are always
+  overridden (update Media / File Entity).
+- Issue #2289407 by cboyden: Add visual indicator of tab focus on to IPE
+  customize page screen.
+- Issue #2285267 by dsnopek: Test if Features are Overridden after install
+  on Travis-CI.
+- Issue #2280887 by cboyden: Fixed Accessibility issues for link markup on
+  Add Content overlay.
+- Issue #2285263 by dsnopek: Update field_group to version 1.4.
+- Issue #2284269 by dsnopek: Added WYSIWYG should show 'outdent' then
+  'indent' buttons (rather than reverse) like OpenOffice, LibreOffice, Word,
+  etc.
+- Issue #1846322 by cboyden, vtldevops: Fixed Switching between TinyMCE
+  text formats causes textarea to disappear.
+- Issue #2153941 by elliotc | lsolesen: Fixed Descriptions of views not
+  accurate.
+- Issue #2269027 by dsnopek: Fixed Cropped image not being served in
+  WYSIWYG as "Original Size".
+- Updated CHANGELOG.txt for 7.x-1.6 release.
+- Issue #2272091 by dsnopek: Update Views to 3.8 for
+  DRUPAL-SA-CONTRIB-2014-054.
+- Issue #2239847 by dsnopek: Update "persist" patch to pathauto.
+- Issue #2110183 by Mark Vincent Verallo: Could not find "Fixed parent
+  item" when adding Menu Block.
+- Issue #2259793 by dsnopek: Update 'menu_block' module to 2.4.
+- Issue #2259797 by dsnopek: Update 'responsive_bartik' theme to 1.0-rc1.
+- Issue #2259791 by dsnopek: Update 'devel' module to 1.5.
+- Updated CHANGELOG.txt for 7.x-1.5 release.
+- Issue #2251989: Crop on spotlight widget does nothing when Spotlight is
+  new.
+- Oops, prematurely added the 7.x-1.5 entry to the CHANGELOG.txt.
+- Created a CHANGELOG.txt.
+- Issue #2254999: Update FAPE to version 1.2 for SA-CONTRIB-2014-048.
+- Updated CHANGELOG.txt.
+- Issue #2248587: Update manualcrop.make to match Drupal.org Whitelist.
+- Issue #2247561: Improve compatibility with focal_point.
+- Issue #2245127: Manualcrop breaks Video widget.
+- Issue #2173079: Crop pictures when inserting them.
+- Issue #2192711: Update 'libraries' module to 2.2.
+- Issue #2223985: Update 'entity' module to version 1.5.
+- Issue #2209455: Update views_autocomplete_filters to version 1.1.
+- Issue #2229919: Spotlight Accessibility Improvements.
+- Issue #2228095: Classes wrong on "moscone" layouts.
+- Issue #2171121: Update Media to at least 7.x-2.0-alpha3+37-dev for
+  PSA-2014-001.
+- Issue #2220669: Radix span* classes on selby and selby_flipped are
+  incorrect.
+- Add CHANGELOG.txt.
+- Issue #2199779 by lsolesen: Errors in widget.css.
+- Issue #2198839 by lsolesen: Remove font-family from spotlight.
+- Issue #2176805 by mglaman, loopduplicate: Escape HTML entities in
+  Panopoly Users settings help.
+- Issue #2196661: Use stable Fieldable Panels Panes release.
+- Issue #2153291: The "Sort by" won't save in the "Content list" widget
+  (switch from ctools patch to views patch).
+- Issue #2196337: Reduce the minimum user profile picture dimensions to
+  80x80 (to match our thumbnail size).
+- Issue #2195307: Update image_resize_filter to version 1.14 (security
+  vulnerability!).
+- Issue #2194641: Update to actual CTools 1.4 (security vulnerablity!) and
+  Panels 3.4 releases!.
+- Issue #2050651 by mrfelton, arshadcn: Make Panels layout from Panopoly
+  Theme work with Radix.
+- Issue #2188597: Provide feature module updates for ctools / panels
+  upgrade.
+- Issue #2161429: Update date module to latest version 2.7.
+- Issue #2190789: Update 'devel' module to version 1.4.
+- Issue #2186405: Revert: Installing 'ctools' (1.4) before 'uuid' during
+  Panopoly install causes fatal error.
+- Issue #2186485: Error upgrading from 1.0-rc5 or lower: SQLSTATE[42S02]:
+  Base table or view not found: Table 'cache_panels' doesn't exist.
+- Issue #2163447: Update views_bulk_operations to version 3.2.
+- Issue #2184743: Test changes to Ctools (1.4) and Panels (3.4) comming on
+  Feb 5th.
+- Issue #2175729: Panopoly_users_update_7001 will be skipped due to missing
+  dependency on fieldable_panel_panes_update_7107.
+- Issue #2180047: "Format" selector overlaps vertical tabs below it.
+- Issue #2164193: Upgrade from 1.0-rc3 fails: Table 'pathauto_state'
+  doesn't exist (2nd attempt!).
+- Issue #2172093: Upgrade from 1.0-rc3 or 1.0-rc2 fails: Table
+  'cache_entity_fieldable_panels_pane' doesn't exist.
+- Issue #2164193: Upgrade from 1.0-rc3 or 1.0-rc2 fails: Table
+  'pathauto_state' doesn't exist.
+- Issue #2164193: Upgrade from 1.0-rc3 or 1.0-rc2 fails: Table
+  'pathauto_state' doesn't exist.
+- Issue #2171125: Update Entity API to 1.3 for security vulnerablity.
+- Issue #2171127: Update simple_gmap to version 1.2.
+- Issue #2165793: Add projects[apps][version] = 1.x-dev to makefile.
+- Add helper functions for modules that implement demo content using
+  Migrate.
+- Issue #1869972: Implement Migrate Module for Panopoly Demo Content.
+- Issue #2145405: Change 'user_picture' support to save field_user_picture
+  value to {user}.picture.
+- Issue #2154689: Spotlight widget breaks with jquery_update to jQuery UI
+  >= 1.9.
+- Issue #2159119: Update all features.
+- Issue #2154521: Add AJAX bug fix patch to 'tablefield'.
+- Issue #2151657: Use #title_display rather than unsetting #title.
+- Issue 31981494: FAPE causing "Illegal string offset 'field_name'.
+- Issue #2058931: Incorrect implementation of CSS 'clearfix' in
+  panopoly_wysiwyg.module.
+- Issue #2080925: Update field_group to version 1.3.
+- Issue #2153291: The "Sort by" won't save in the "Content list" widget.
+- Issue #2146727: Update 'link' module to version 1.2.
+- Issue #2125231: Update simple_gmap to version 1.1.
+- Issue #2087075: Update file_entity and media to version 2.0-alpha3.
+- Issue #2151571: Separate field_base from field_instance in Panopoly
+  Pages.
+- Issue #2075903: Spotlight gives an ajax error and title does not ever
+  change.
+- Issue #2031673: Move file_entity permissions from panopoly_admin to
+  panopoly_widgets.
+- Issue #2023433: Fixed bugs in should set 'user_picture' to work with
+  themes that customize 'user-picture.tpl.php'.
+- #2101013 - Defaultconfig issues in installation profiles that extend
+  panopoly.
+- #2097487 - Accessibility improvement - support for aria properties.
+- #2055091 - Update Caption Filter to latest dev.
+- #2105433 - Add Migrate modules to Panopoly Core to help facilitate better
+  demo content patterns.
+- 2008762 - Panopoly Pages has missing dependencies.
+- #2097861 - Update Apps module so that Apps can be used in offline mode.
+- #1837312 - Troubles Implementing Default Permissions for Panelizer.
+- Issue #2062377: Update features to 2.0.
+- Undo last commit - sorry.
+- --author=dsnopek <dsnopek@266527.no-reply.drupal.org>.
+- Issue #2068489: Update 'entity' module to version 1.2 (for security
+  advisory!).
+- Issue #2141069: Update 'entityreference' module to version 1.1 (for
+  security advisory!).
+- #2053225 - Updating Tablefield to 2.2.
+- #2053223 - Updating Patch URLs to HTTP instead of HTTPS.
+- #2028793 - Updating to Views Autocomplete Filters 1.0.
+- #2050555 - Updating Tablefield to Use Differnet Click Event.
+- #2050555 - Updating WYSIWYG Patches: Part Two.
+- #2050555 - Updating WYSIWYG Patches.
+- #2047953 - Updating Media and File Entity to Lates Devs: Part Four.
+- #2047953 - Updating Media and File Entity to Lates Devs: Part Three.
+- #2047953 - Updating Media and File Entity to Lates Devs: Part Two.
+- #2038267 - CSS Updates to WYSIWYG Body Area in Case Themes Override: Part
+  Two.
+- #2033441 - Fixing OpenSans support for IE 6 to 8.
+- #2023433 by dsnopek - Allow user_picture to work with themes that
+  customize the picture.
+- #2004520 - Updating Linkit Profile to Work with UID 1.
+- #2038267 - CSS Updates to WYSIWYG Body Area in Case Themes Override.
+- #1979558 - Updating the Pathauto Path Persistence Patch.
+- #1816688 - Remove hard dependecy on Apps.module.
+- #2044425 - Move Default Content Dependency into Profile info File.
+- #2037911 - Updating RespondJS to 1.2.
+- #2002084 - Removing Views UI as Dependency of Panopoly Core.
+- #2047953 - Updating Media Vimeo to RC1 Release.
+- #2047953 - Updating Responsive Bartik Theme.
+- #2047953 - Updating Media and File Entity to Lates Devs.
+- #2047953 - Updating UUID, Features, Panels Breadcrumbs, Panels, Views
+  Autocompelte Filters Modules: Part Two.
+- #2047953 - Updating UUID, Features, Panels Breadcrumbs, Panels, Views
+  Autocompelte Filters Modules.
+- #2046195 - Allow Block Format Items to Be Centered in WYSIWYG.
+- #2027667 by webcultist - Making user register and user login form text
+  translatable.
+- #1997968 - Making FPP Widgets translatable.
+- #1995064 - Adding patch to CTools from #1925018.
+- #1995064 - Updating File Entity to latest dev.
+- #1995064 - Updating Media Youtube to 2.0 RC3.
+- #1995064 - Updating UUID to Alpha 4.
+- #1995064 - Updating Fieldable Panels Panes to latest dev.
+- #1995064 - Updating Responsive Bartik to latest dev.
+- #1995064 - Updating Entity API to 1.1.
+- #1994786 - Enable helpful entity form fields by default.
+- #1831578 - Patching entity.module to handle access checks for deletions
+  when file_entity is enabled.
+- #1967304 - Updating File Display Settings to Use New Techniques: Part
+  Three.
+- #1967304 - Updating File Display Settings to Use New Techniques: Part
+  Two.
+- #1967304 - Updating File Display Settings to Use New Techniques: Part
+  One.
+- #1970262 by designar - Update to use render() method instead of #markup.
+- #1974200 by ultimike - Expanding Panopoly WYSIWYG use of
+  extended_valid_elements.
+- #339714 by sylus - Removing _field_info_collate_fields() workaround since
+  it is fixed in Drupal 7.22.
+- #1972178 - Updating Panopoly Pages to Reflect New Ctools Structure. Fixes
+  bug with landing page creation.
+- #1966012 - Improving look of Media module modal popup: Part Five.
+- #1966198 - Patching width auto considerations for Responsive Bartik.
+- #1966012 - Improving look of Media module modal popup: Part Four.
+- #1966012 - Improving look of Media module modal popup: Part Three.
+- #1966012 - Improving the media experience with better image previews for
+  videos.
+- #1966012 - Improving look of Media module modal popup: Part Two.
+- #1966012 - Improving look of Media module modal popup: Part One.
+- #1899368 by brantwynn - Do not require Panopoly Core for Panopoly Magic:
+  Moving CTools Modal Settings.
+- #1937810 - Fixed bug with adding a menu option to landing page after
+  initial creation.
+- #1841956 - Updating Video Responsive CSS for Media 2.x Options.
+- #1964086 - Updating Views to 3.7.
+- #1841956 - Updating Media Youtube and Media Vimeo to the 2.x Branch.
+- #1899368 by brantwynn - Do not require Panopoly Core for Panopoly
+  Magic--author=brantwynn <brantwynn@252788.no-reply.drupal.org>.
+- #1942588 by redndahead - Do not formally require editor and administer
+  roles.
+- #1937068 - Allowing elements without titles to be in accordians.
+- #1953428 by stylus - Namespacing the PHP memory requirement for
+  Panopoly.
+- #1928148 from gmclelland - Adding JS through hook_page_build() instead of
+  hook_init().
+- #1946762 - Improving inline documentation for Panopoly Pages.
+- #1964086 - Updating FPP to Latest Development Release.
+- #1964086 - Updating Media and File Entity module to latest development
+  releases.
+- #1961780 by Pancho - Handling version dependency in installation
+  process.
+- Updating Default Content to 1.0 Alpha 9.
+- #1964086 - Updating Entity to 1.0.
+- #1964086 - Updating Ctools to 1.3, Panels to latest dev version, Panels
+  Breadcrumbs to 2.0, Panelizer to 3.1, and FPP to 1.4.
+- #1964086 - Updating Responsive Bartik to Latest Dev: Part Two.
+- #1964086 - Updating Responsive Bartik to Latest Dev.
+- #1964086 - Updating Token to 1.5.
+- #1964086 - Updating LinkIt to 2.6.
+- #1964086 - Updating Link to 1.1.
+- #1964086 - Updating Libraries API to 2.1.
+- #1964086 - Updating Features to 2.0 Beta 2.
+- #1964086 - Updating Views to 3.6.
+- #1955212 by Mschudders - Fix debugging logic in Panopoly Widgets Dev JS.
+- #1883422 - Updating Panels, Panelizer, Fieldable Panels Panes, Entity,
+  Ctools, and Panels Breadcrumbs to latest version: Part Two.
+- #1897992 - Allow add content item to have any content type.
+- #1890140 - Fixing autosubmit functionality with Media Browser.
+- #1859874 - Adding patch for Ctools access things.
+- #1860552 - Fixing issue with max-width and Google Maps.
+- #1847912 - Updating to latest File Entity and Media Modules for Alt and
+  Title Support: Part Three.
+- Updating Panopoly Widgets for #1847912 - Updating to latest File Entity
+  and Media Modules for Alt and Title Support: Part Two.
+- #1847912 - Updating to latest File Entity and Media Modules for Alt and
+  Title Support.
+- #1857998 - Fixing handling of image attributes with Media Module and
+  WYSIWYG.
+- #1860638 - Setting correct permissions on files.
+- #1883422 - Updating Panels, Panelizer, Fieldable Panels Panes, Entity,
+  Ctools, and Panels Breadcrumbs to latest version.
+- Updating to TinyMCE 3.5.8.
+- #1866302 by joelcollinsdc - Only modify WYSIWYG settings done by
+  Panopoly.
+- #1883540 - Show the Label on the User Picture Field: Part Two.
+- #1883540 - Show the Label on the User Picture Field.
+- #1878704 - Cleanup in Linkit profile for user role considerations.
+- #1885628 - Removing Default Content for Widgets.
+- Updating VBO to 3.1 and Views Autocomplete Filters to Beta 2.
+- Updating Fieldable Panels Panes to 1.3.
+- Updating Media and File Entity to 2.0-unstable7. Updating Tablefield to
+  2.1.
+- Updating Entity and Entity Reference to 1.0.
+- #1839832 - Fixing build with Panopoly Widgets Recursive Dependency.
+- #1839832 - Support link option for media files.
+- #1432092 - Reroll of Caption Filter Patch for Better Image Handling.
+- #1852878 - Improve Pane, Page, and Layout Library.
+- Updating Panels, Panelizer, and Chaos Tools to Latest Dev Versions.
+- #1840880 - Reduce Reliance on Panopoly Core, but Moving Make File
+  Considerations Here.
+- #1840880 - Reduce Reliance on Panopoly Core: Part Two.
+- #1840880 - Reduce Reliance on Panopoly Core.
+- #1840880 - Reduce Reliance on Panopoly Core for Panopoly Pages: Part
+  Two.
+- #1840880 - Reduce Reliance on Panopoly Core for Panopoly Pages.
+- #1833692 by fabsor - Removing dependency on Panopoly Core for Panopoly
+  Theme.
+- #1833726 - Remove Panopoly Core Dependency. Move Image Resize Filter to
+  Panopoly WYWISYWG.
+- #1840880 - Reduce Reliance on Panopoly Core. Move Image Resize Filter to
+  Panopoly WYSIWYG.
+- #1757782 - Updating path to Default Content to better address sorting of
+  imported items.
+- #1839784 - Fix for bryant flipped layout min-height on content region.
+- #1757782 - Patch for Default Content to Maintain Menu Heirarchy.
+- #1655296 - Updating patch for Panels Breadcrumbs to handle default
+  Panelizer breadcrumb state.
+- #1838602 - Patching Responsive Bartik to Better Handle Inline Links in
+  Taxonomy.
+- Updating Features Export for 2.0 Compatibility.
+- #1838084 - Fix Fixing Notice Errors in Link Alter Function by Defining
+  path in Default Content menu specification.
+- #1836930 - Patch to Media, Media YouTube, Media Vimeo to have clean
+  upgrade path: Part Two.
+- ##1835794 - Make Video Widget as Responsive As Possible with CSS: Part
+  Two.
+- #1836930 - Patch to Media, Media YouTube, Media Vimeo to have clean
+  upgrade path.
+- #1432092 - Updating Caption Filter Patch for French Support.
+- #1780672 - Adding Permission Schema and Pattern: Part Seven.
+- #1780672 - Adding Permission Schema and Pattern: Part Six.
+- #1837312 - Adding permissions for control of panelized content page
+  node.
+- #1837312 - Adding permissions for control of panelized categories
+  taxonomy.
+- #1829114 by beeradb - Making default content in widgets optional.
+- #1837914 - Adjusting Image Resize + WYSIWYG Filter Ordering.
+- #1780672 - Adding Permission Schema and Pattern: Part Two.
+- #1780672 - Adding Permission Schema and Pattern: Part Five.
+- #1780672 - Adding Permission Schema and Pattern: Part Four.
+- Adding back in the name to the .info File.
+- #1780672 - Adding Permission Schema and Pattern: Part Three.
+- #1780672 - Adding Permission Schema and Pattern.
+- #1836026 - Make sure all features export cleanly for RC3.
+- #1836020 - Patch to Media Module to Make the Install Process Cleaner.
+- #1835968 - Patching Responsive Bartik to Have Appropriate Content Width
+  When there are No Sidebars.
+- Updating Default Config and Features to Latest Versions.
+- #1835794 - Make Video Widget as Responsive As Possible with CSSS.
+- #1835798 - Fixing problem with loading images in Markitup for separator
+  element.
+- #1832574 - Adding logic to support update to Media and File entity dev
+  versions.
+- #1832574 - Updating Media and File Entity to Latest Devs to Adddress
+  Known Bug Fixes.
+- #1832758 - Moving Field UI Modules to Panopoly Core's Makefile: Part
+  Two.
+- #1832758 by fabsor - Moving Field UI Modules to Panopoly Core's
+  Makefile.
+- Updating Panopoly Core for #1835012 - Proper Drush Make Patch for Panels
+  Breadcrumbs: Part Two.
+- #1835012 - Proper Drush Make Patch for Panels Breadcrumbs.
+- #1828246 - Updating Features to 2.0-alpha2.
+- #1655296 - Patches to Panels Breadcrumbs and Panelizer to support
+  Breadcrumbs with Panelizer displays.
+- #1772844 - Patching Panelizer to better respect Node Access Permissions
+  for the IPE.
+- #1824566 - Updating Panelizer Patch to Use Defaults for Content Types and
+  Layouts.
+- #1828684 - Patching Panels Module to properly include Layout Code.
+- #1827574 - Expose Content Type for Content Item.
+- #1828256 - Fixing Visibility Rules in Panels Patch.
+- #1826434 - Use Default Functionality in Panelizer to Set Allowed Content
+  Types and Layouts: Part Two.
+- #1826528 - Make Responsive Bartik the Default Panopoly Theme: Part Two.
+- #1826528 - Make Responsive Bartik the Default Panopoly Theme.
+- #1821254 - Limiting Image Styles Displayed in Configuration Screen.
+- #1826434 - Use Default Functionality in Panelizer to Set Allowed Content
+  Types and Layouts.
+- #1824566 - Patch to Panelizer to allow defaults to be set for layouts and
+  content types.
+- #1754428 - Let other modules alter export of nodes with
+  defaultcontent.module.
+- #1824508 - Make UUID Module Optional.
+- #1822506 - Fixing problems with Video Embedding in WYSIWYG: Part Two.
+- #1822506 - Fixing problems with Video Embedding in WYSIWYG.
+- #1822222 - Fixing Bug with Filter Tips and Auto Submnit.
+- #1822472 - Prevent Auto Submit on Ctools Patch.
+- Updating README to Mention Caption Filter.
+- #1715658 - Support for WYSIWYG Caption: Part Two.
+- #1715658 - Support for WYSIWYG Caption: Part One.
+- Update to Media Style Labeling for Clarify Purposes.
+- #1820156 - Fixing image resizing properties with Media module.
+- #1820262 - Applying patch to Entity API Module to Fix PHP 5.4
+  Installation Errors.
+- #1791692 - Create a Featured View Mode for Taxonomy.
+- #1791692 - Creating a Featured View Mode for Taxonomy Terms.
+- Removing Drupalcode references for Drush Make. Rolling on dev releases of
+  Panelizer, Panels, and Chaos Tools.
+- Keeping up to date with the latest changes for RC1.
+- #1818138 - Allowing Remove Video Content to Be Added Again.
+- #1818132 - Prevent FPP's from getting uuid style subtypes.
+- #1795032 - No Longer Require Mediafield in Panopoly Widgets.
+- Removing Media Patch for Installation Building Testing.
+- Updating File Entity and Media Modules. Cleaning up Update Language.
+- #1817172 - Updating Video Display for Height Issues and File Entity/Media
+  Dev Compatibility: Part Two.
+- #1817172 - Updating Video Display for Height Issues and File Entity/Media
+  Dev Compatibility.
+- #1817082 - Standardize Way Content Types are Defined: Part Two.
+- #1817082 - Standardize Way Content Types are Defined.
+- #1813278 - Adding patch to Default Config for Easier Exporting.
+- Updating strongarm definitions in info files to prevent features
+  overriden status.
+- #1813180 by zoo33 - Fix for jQuery UI Themeroller Theme in Seven Theme.
+- Updating Panels Module to Latest Dev Release.
+- #1814670 by tedbow - Fix moscone and moscone_flipped footer classes.
+- #1811108 - Properly setting default values in settings form.
+- #1810266 - Update Panopoly Images to Be in Sync with Media: Part Two.
+- #1810266 - Update Panopoly Images to Be in Sync with Media.
+- #1702700 - Improving media module's default display handling.
+- #1810564 - Update Panopoly WYSIWYG Toggle CSS to Fit Width.
+- Updating for cleaner media installation patch.
+- Upgrading to latest version of Media and File Entity Modules.
+- #1810270 - Update Dependency and Code Style on All Modules: Part Two.
+- #1810270 - Update Dependency and Code Style on All Modules.
+- #1810270 - Update Dependency and Code Style on All Modules: Part Three.
+- #1810270 - Update Dependency and Code Style on All Modules: Part One.
+- Updating Panels and Chaos Tools to latest development status.
+- #1795032 by beeradb - Switch to using File fields for Video content
+  instead of Mediafield.
+- #1804918 by beeradb - Cleaning up notices in Accordion.
+- #1771002 - Solving notices on FPP interactions.
+- #1806720 - Patch to UUID to improve token support.
+- #1801370 - Making sure WYSIWYG code is included for features
+  installation.
+- Updating WYSIWYG to 2.2.
+- #1800594 - Adding patch to fix error with admin panes and proper
+  settings.
+- #1801422 - Updating Panels Module to Fix Context Caching Issue.
+- #1802098 - Simplfying Submenu Option to Work around Menu Block.
+- #1803752 - Make Default the Default Media Style in WYSIWYG.
+- #1764208 - Adding Panopoly Image Styles through the WYSIWYG.
+- Updating WYSIWYG to latest Development Version.
+- Updating to Simple GMAP 1.0.
+- #1800448 - Removing Entity Reference Patch Since it is in RC5.
+- #1800560 - Patch to Default Config to Allow Drush Features Components.
+- #1800448 from sylus - Adding patch for entity reference entity selection
+  mode handling.
+- #1800544 - Support for Default Config Module. Migration of Settings for
+  Panels Panes and Layouts.
+- Adjusting CSS for WYSIWYG Toggle.
+- #1798354 - Updating to TinymCE 3.5.7.
+- #1734772 - Adding form caching fixing patch to Panels.
+- #1792908 - Handle DO Drush Make Version Packaging for App Server
+  Selection.
+- Updating UUID module with token fix patch from #1605284.
+- Updating entityreference.module.
+- Updating token.module.
+- Taking a step back with the dream. Info files and git patch are not
+  always friends.
+- Updating patches to several modules. Implementing new development + patch
+  structure.
+- Updating patch from #1772834 to fix lost context.
+- Adjusting Panelizer Layouts for user Page.
+- #1572202 - Fixing Double Editing Problem with Panelizer.
+- Updating hook_update_N() hook to adjust Panopoly's icon.
+- A.
+- #1771002 from beeradb - Fixing notices with FPP.
+- Updating CSS/JS File Names to Use Dashes instead of Underscores.
+- Making Spotlight Icon Transperant.
+- Fixing bug with reusable setting and auto updating FPP.
+- Reverting back Lazy Loading WYSIWYG scripts due to Loading Errors.
+- #356480 - Updating Lazy Loading Script to Get Media Browser Working and
+  Other Things.
+- Updating WYSIWYG Module to the Latest Development Version.
+- #1772834 - Adding patch to Panels to deal with lost contexts.
+- Updating FAPE to run latest -dev release.
+- Commenting out Radix Theme for Now.
+- Updating Views Bulk Operations to 3.0.
+- #1772824 - Adding patch by beeradb to Panels for Context Handling.
+- #1772824 by beeradb - Updating Field Rearrangement Logic.
+- #1772824 - Adding patch to FAPE from beeradb.
+- #1764204 by beeradb - Force Height on Sidebars to Make Layouts Impose
+  Their Will on Float.
+- #1788028 by mirzu - Fixing Rolf layout output to render correctly.
+- Updating text format for empty text and view description for generic item
+  selection view.
+- Updating default text formatter for empty text to plain text for Taxonomy
+  listing.
+- #1763394 - Adding patch to Apps to fix last-modified notice.
+- Reverting to using Media Field due to Default Content Issues with File
+  Based Approach.
+- Revert "#1311828 - Fixing Media Errors During Install".
+- Moving Panopoly module make file build to main profile.
+- Adding default display values to video default.
+- Updating to latest version of Token.
+- Updating Display Formatter for Video Widget.
+- Making Video Widget Not Require Video Field.
+- Updating Video Widget Type to use File Field Instead of Deprecated Media
+  Field.
+- #1311828 - Fixing Media Errors During Install.
+- Adding JS Behavior to Help Fix Video Size: Part One.
+- Adding Panopoly WYSIWYG File.
+- Adding Panopoly Widgets JS File.
+- Updating README. Code Cleanup.
+- Updating README. General Code Cleanup.
+- Adding Panopoly Accordian JS to Panopoly Theme.
+- Moving Panopoly Accordian CSS File.
+- Updating README. Expanding Settings. Cleanup.
+- Updating README. Removing Unecessary Templates.
+- Adding information on Profile Expandability to README.
+- Updating README. Removing CSS definition.
+- Updating README.
+- Improved README.txt File. More Code Documentation. Adding Custom Settings
+  Form.
+- Removing Browsecap Access Plugins and Dependency.
+- Adding Radix Theme. Removing Layout Builder Modules. Removing Browsecap.
+- Removing Jquery Update. Updating Make File Comments.
+- Updating to fix Core Issue #985642 to Clean up Profile.
+- Adding installation profile specific code to Panopoly Core. Helps keep
+  our profile lean.
+- #1780020 - Moving Logic to Set Permissions on Search to Panopoly Search.
+- Updating Panopoly Theme Features Export.
+- #1754770 - Allowing CTools to Work without Block.module.
+- Updating Panopoly Pages Features Export.
+- Updating Panopoly Images Features Export.
+- Updating Panopoly Core Features Export.
+- #1772728 - Fixing Reusable Settings on Fieldable Panel Panes.
+- #1764214 - Fix to Height/Width Settings on Videos.
+- #1774214 by beeradb - Support for Linkit Module.
+- #1774072 by beeradb - Make Table Widget Responsive.
+- Update to the JSON module.
+- #1775494 from webflo - Fix to Jquery UI Theme.
+- #1774434 - Adding Patch to Chaos Tools to Have String Contexts.
+- Don't show existing voting information.
+- Add variable condition to prevent voting on Apps.
+- Even more updating to Dropbutton CSS.
+- Updates to Dropbutton CSS Style.
+- Moving Pages into Toolset Land.
+- Quick Fix to CSS of Drop Button.
+- Adding support for translation of Fieldable Panel Panes.
+- Updating Landing Page Description. Updating Hiding of Layout Category.
+- Adding FAPE Module to the Make File.
+- Updating to the latest version of Views.
+- Updating Make File to Build of General -dev Versions.
+- Adding the Region Content Class to the Entire Page.
+- Moving Panopoly Demo to Panopoly Apps.
+- #1772620 - Removing Features Handling of Default Permissions.
+- Updating Weight Setting in Hook requirements.
+- Updating Revision Information on Panopoly Apps.
+- Tweak to Chaos Tools Dropbutton Style.
+- Consolidating the app servers down to just one.
+- Removing Blur Patch for Chaos Tools Since It is Unneeded.
+- Updating Dependency Information for Panopoly Images.
+- Updating Dependency Information for Panopoly Widgets.
+- Adding Theme Selection Profile Task Adder. Updating Dependency
+  Information.
+- Adding a PHP Memory Requirements Check. Moving More Modules into
+  Dependencies.
+- Adding Browser Detection and Chaos Tools Access Rules.
+- Updating Make file to have Devel in correct subfolder.
+- #1764136 - Updating core make file to include Panopoly things.
+- #1764136 - Adding a make file for core things.
+- #1764136 - Adding a make file for Image things.
+- #1764136 - Adding a make file for Widget things.
+- #1764136 - Adding a make file for Theme things.
+- #1764136 - Adding a make file for WYSIWYG things.
+- Removing the caption filter module.
+- #1764136 - Adding a makefile for Panopoly Core.
+- #1737762 - Removing legacy field definitions.
+- Moving Wizard Creation Page to Panopoly Pages.
+- Refactoring of default content logic. Minor CSS update. Fix to video
+  install process.
+- Removing the Title for the Tablefield.
+- Cleaning up Table Field Widget Setting Form.
+- Slightly More Aggressive CSS Wrapper Settings.
+- Flipping the Sanderson Icons since they were out of order.
+- Fixing CSS Issue with Option Text Aligner.
+- Simplifying Widget Install Process.
+- Removing default video duplicated code.
+- #1734926 - Updating Default Video Content.
+- Moving rotation time for spotlight to Apps configuration.
+- Better comments in CSS.
+- #1734916 by beeradb - Adding dragger to WYSIWYG.
+- #1734912 by beeradb - Map Widget Doesn't Respect Column Width.
+- #1734926 by beeradb - Provide Default Content for Video.
+- #1733672 - Adding in Preview File.
+- Better Checking for Videw Mode Options.
+- Updating Modal Styling. Pulling from Panopoly Admin.
+- Moving WYSIWYG Toggle CSS Here.
+- Quick CSS Fix for Image Width in Firefox.
+- #1728772 by beeradb - Default Content for Image, File, and Spotlight
+  Widgets.
+- Updating the README.
+- Updating the README: Part Two.
+- Adding preview watermark to image.
+- Code cleanup. Mostly the Panopoly Accordian File: Part Two.
+- Code cleanup. Mostly the Panopoly Accordian File.
+- General code style cleanup: Part Two.
+- Basic Code Cleanup.
+- General code style cleanup.
+- Minor coder review style updates: Part Two.
+- Minor coder review style updates.
+- Updating default layouts to allow for new Layout module.
+- Updating default layouts to allow for new Layout module: Part Two.
+- Adding clearfix on WYSIWYG setting.
+- Updating dropbutton style for best style.
+- Update to user panelization default. Better options.
+- Removing did for panelizer support as per #1387634.
+- Updates for Featurization and Simplicity.
+- Better Categorizsation for Panel Panes.
+- Minor panelizer exports for Panelizer Page Settings.
+- Minor panelizer exports for Panelizer User Settings.
+- #1727684 - Panelizer CLeanup.
+- #1727684 - Panelizer Cleanup for Panels Pages: Part Three.
+- #1727684 - Panelizer Cleanup for Panels Pages: Part Two.
+- #1727684 - Panelizer Cleanup for Panels Pages.
+- #1727684 - Cleaning back up Taxonomy Panel Settings: No Entity Field V1.
+- #1727684 - Cleaning back up Taxonomy Panel Settings.
+- #1727684 - Cleanup the Taxonomy Panelizer Settings.
+- Let's show some entitie views.
+- #1727684 - Moving main panels variable strongarming to Panopoly Core.
+- #1724298 by beeradb - Code Cleanup.
+- Much better styling for text format toggle.
+- Right align buttons in Modal.
+- #1711484 - Start on Adding Default Content to FPP: Adding Image.
+- #1711484 - Start on Adding Default Content to FPP.
+- OK. Plain Text is now Possible.
+- Adjusting the size on title fields.
+- #1724076 - Improving Modal Settings Forms CSS Change.
+- #1489096 - CSS to Help IE9 Render TinyMce Better.
+- Believe in the Panels Context: Part Two.
+- Believe in the Panels Context.
+- Removing the Read More Link on the Text Widget Since it Is Not Super
+  USeful.
+- Adding new icons! Choosing sides in the FPP vs Views War.
+- Stripping IMG Tag in Teasers.
+- Update for Panelizer Featured View.
+- Customizing Media Tabs in Media Popup.
+- Improving Width on Video Things.
+- Fixing Typo with Light Blue Region Theme Function.
+- #1716072 and #1716074 - Drupal Approved Demonstration Pane and Region
+  Plugins.
+- Update to Featured CSS for Certain Themes with Margins.
+- Panelizer and Views Needed for Taxonomy Magic.
+- #1716040 - Fixing the Media Module Corners.
+- Properly Exported View Mode for Main Display.
+- Adding Taxonomy Term Pattern.
+- #1713534 - Adding the Webb Layout to Panopoly.
+- Updating taxonomy field information in be in the plural.
+- Changing Name of Field to The Plural.
+- Adding taxonomy term support for Panelizer.
+- Adding Panelization for Taxonomy Terms.
+- Adding Panelizer View Modes Back In.
+- Updates to Demo Content to Display a Bit Better.
+- Adding configuration form + redirection option.
+- Merge branch '7.x-1.x' of http://git.drupal.org/project/panopoly_images
+  into 7.x-1.x.
+- Adding Category. Updating Name. Improving.
+- Removing User Menu Featureization.
+- Changing Taxonomy Term from Topic to Category.
+- Stronger Definitions for CSS on Images.
+- Additional menu options. Updating PM Existing Pages.
+- #1715642 - Add more buttons to the Markitup! Editor.
+- Better Targetted CSS for Images.
+- Removing Image CSS Treatement from Panopoly Demo Since it is Confusing.
+- Removing the Panopoly Image Teaser Style. Adding CSS Margins to Images.
+- Updating Panelizer Content Settings.
+- Improvement to Widget Preview CSS and CSS Cleaning.
+- Additional Consideration for Height of Preview Pane.
+- #1717644 by kmonty - Adding Content in IPE doesn't look good in
+  minimalist themes.
+- Abusing hook_entity_info_alter() ordering and related
+  _field_info_collate_fields() calling to resolve #1400256 without a core
+  patch.
+- Adding Chaos Tools Modal Override to Panopoly Core.
+- Adjusting Select Widget for WYSIWYG Type.
+- Standard Casing for Style Option Naming.
+- Improvements to Accordian Style Plugin to work with the IPE.
+- Better language around Form Content in Panes.
+- No requirements. No rules.
+- #1716060 - Allow for General Content to Be Added.
+- Moving View Mode Styling to Panopoly Magic.
+- CSS Magic for the View Setting.
+- Changing Width Consideration to Max Width to Not Break Widths Set to be
+  Small.
+- Updating Modal Sizing a Bit More. Tweak Tweak Tweak.
+- Bumping up the Modal Padding a Bit.
+- Updating View Machine Names to Be Better.
+- #1716050 from kmonty - General Panels IPE Preview Cleanup.
+- Update for Panelizing New Fields.
+- Panelizing User Edit Form. Updating Picture Field.
+- Update to Available Pane Settings in User Profile.
+- Adding additional panelization for user profiles.
+- Improvements to User Profile with Awesome Panelization.
+- Adding Default User Picture.
+- Front End Consolidation. Fonts Moved from Panopoly Theme. jQuery UI Moved
+  from Panopoly Theme.
+- Front End Consolidation. Fonts Moved to Panopoly Core. Jquery UI Moved to
+  Panopoly Core.
+- Adding Panelization to User View Modes.
+- Adding featured view mode for users.
+- Hiding the New Admin Panels from Panelizer.
+- Exporting of Panelizer Settings Wide and Far.
+- Update to Panelizer All View Modes for Panopoly Pages.
+- #1715650 - Implementing Support for Panopoly Wide Taxonomy.
+- #1703042 by beeradb - Create Generic Existing Content Options.
+- Adding Global Function to Get Panopoly Approved View Modes.
+- Properly Export PM Existing Pages with Features.
+- Adding Both App Servers to Panopoly Core.
+- Adding Much Stronger Dropbutton Style.
+- Adding Panopoly Apps Server for General Use Apps.
+- Adding User Login Link to Users Module.
+- Updates to naming of layout files in comments.
+- #1708574 from beeradb - Fixing Bundle Argument Problem with Fieldable
+  Panel Panes Interface.
+- Remove the DID for Panelizer Export as per #1555194.
+- Removing UUID Support from Panopoly Demo.
+- Adding Default Panelized Mode for Panelizer.
+- Update to Demo Content. Adding Title Override. Removing Slideshow.
+- Adding Modal Styles to Panopoly Core.
+- Updating WYSIWYG Styles. Consolidating from Other Places.
+- Addition of Four New Layouts - Rolph, Sutro Double, Taylor, and Taylor
+  Flipped.
+- Update to Sanderson and Sutro Images for Correct padding.
+- Updating Export to Include Rotation Time Field.
+- Cleaner Export for Panopoly Users.
+- Updating Panopoly Demo for New Title Override Consideration.
+- Update to Demo to Showcase Featured Status.
+- Small Change to Language on Featured/Primary Image.
+- Adding Featured Status Bit to Panopoly Pages.
+- Adding Markitup WYSIWYG Styles.
+- Moving WYSIWYG Styling from Panopoly Admin.
+- Updating Full Display Panelizer View Mode.
+- Adding Panelizer Support for Featured View Mode.
+- Adding CSS styles for Featured View Mode.
+- Tweaks to Demo Page Content Setup.
+- Update to Panopoly Demo to Take Advantage of New Patch for Field/Content
+  Pane Switching in Panopoly Magic.
+- #1705746 by beeradb - Improve UI for Make Title Link on Fieldable Panels
+  Panes.
+- Update to Fieldable Panel Pane Entity Declaration to Convert _ to -.
+- #1703366 from stylus - Update Fieldable Panel Pane Paths for FPP 1.1
+  Compatibiltiy.
+- #1691636 from mrf - Fix to Panopoly Spotlight Settings.
+- #1567704 from beeradb - Fix handling of fieldsets to allow images to be
+  removed.
+- #1672404 from Arshad Chummun - Adding image style formatter settings to
+  Spotlight Widget.
+- #1655546 from beeradb - Fixing drag and drop on spotlight functionality.
+- #1690204 - Adding demonstration exposed filters.
+- #1685486 - Correctly Setting 'install_task' variable to done.
+- Initial Commit of Panopoly WYSIWYG to Drupal.org.
+- Initial Commit of Panopoly Widgets to Drupal.org.
+- Initial Commit of Panopoly Users to Drupal.org.
+- Initial Commit of Panopoly Theme to Drupal.org.
+- Initial Commit of Panopoly Pages to Drupal.org.
+- Initial Commit of Panopoly Images to Drupal.org.
+- Initial Commit of Panopoly Demo to Drupal.org.
+- Removing the Status URL and Version Specification.
+- Initial Commit of Panopoly Core to Drupal.org.
+
 7.x-1.45, 2017-05-11
 -------------------
 - Update Panopoly WYSIWYG for Issue #2876031 by dsnopek, NicholasS, cboyden:
