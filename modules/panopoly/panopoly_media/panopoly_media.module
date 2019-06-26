@@ -237,10 +237,10 @@ function panopoly_media_entity_type_alter(array &$entity_types) {
   }
 
   // Provides a delete form.
-  $forms = $entity_types['file']->hasHandlerClass('form') ?: [];
-  if (empty($forms['delete'])) {
-    $forms['delete'] = FileDeleteForm::class;
-    $entity_types['file']->setHandlerClass('form', $forms);
+  if (!$entity_types['file']->hasHandlerClass('form', 'delete')) {
+    $handlers = $entity_types['file']->getHandlerClasses();
+    $handlers['form']['delete'] = FileDeleteForm::class;
+    $entity_types['file']->setHandlerClass('form', $handlers['form']);
   }
 
   // Provides a delete form link template.
