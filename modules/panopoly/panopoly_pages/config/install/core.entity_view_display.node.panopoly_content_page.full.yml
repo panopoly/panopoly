@@ -7,92 +7,94 @@ dependencies:
     - field.field.node.panopoly_content_page.field_panopoly_categories
     - field.field.node.panopoly_content_page.field_panopoly_featured_image
     - field.field.node.panopoly_content_page.field_panopoly_featured_status
-    - field.field.node.panopoly_content_page.panelizer
+    - field.field.node.panopoly_content_page.layout_builder__layout
     - node.type.panopoly_content_page
+    - system.menu.main
   module:
     - image
-    - panelizer
+    - layout_builder
+    - radix_layouts
+    - system
     - text
     - user
 third_party_settings:
-  panelizer:
-    enable: true
-    custom: true
-    displays:
-      default:
-        blocks:
-          1df355e5-ec62-4011-b5e0-da664a4bb535:
-            id: 'entity_field:node:body'
-            label: Body
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: text_default
-              settings: {  }
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: contentmain
-            weight: 2
-            uuid: 1df355e5-ec62-4011-b5e0-da664a4bb535
-          3b409f1a-8a22-4ada-83fd-ba5fc27e03f6:
-            id: 'entity_field:node:field_panopoly_categories'
-            label: Categories
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: above
-              type: entity_reference_label
-              settings:
-                link: true
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: contentmain
-            weight: 3
-            uuid: 3b409f1a-8a22-4ada-83fd-ba5fc27e03f6
-          e320bacb-3bde-4e92-b506-728e9f5a418d:
-            id: 'entity_field:node:field_panopoly_featured_image'
-            label: 'Primary image'
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: image
-              settings:
-                image_style: panopoly_images_half
-                image_link: ''
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: contentmain
-            weight: 1
-            uuid: e320bacb-3bde-4e92-b506-728e9f5a418d
-          642c6f89-36a3-437b-b224-6633c25c9fd1:
-            id: 'system_menu_block:main'
-            label: 'Main navigation'
-            provider: system
-            label_display: '0'
-            level: 2
-            depth: 2
-            context_mapping: {  }
-            region: sidebar
-            uuid: 642c6f89-36a3-437b-b224-6633c25c9fd1
-            weight: 1
-        id: panels_variant
-        uuid: 96c72d79-eb6b-4631-8dff-97276897842e
-        label: ''
-        weight: 0
-        layout: radix_bryant
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: radix_bryant
         layout_settings: {  }
-        page_title: '[node:title]'
-        storage_type: panelizer_default
-        storage_id: 'node:panopoly_content_page:full:default'
-        builder: ipe
+        components:
+          7a831f56-44a0-46a4-bf80-550d2ebbfffc:
+            uuid: 7a831f56-44a0-46a4-bf80-550d2ebbfffc
+            region: sidebar
+            configuration:
+              id: 'system_menu_block:main'
+              label: 'Main navigation'
+              provider: system
+              label_display: '0'
+              level: 2
+              depth: 2
+              expand_all_items: false
+              context_mapping: {  }
+            additional: {  }
+            weight: 0
+          c367b459-e342-4629-9b04-45b6958c9503:
+            uuid: c367b459-e342-4629-9b04-45b6958c9503
+            region: contentmain
+            configuration:
+              id: 'field_block:node:panopoly_content_page:field_panopoly_featured_image'
+              label: 'Primary image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: responsive_image
+                settings:
+                  responsive_image_style: panopoly_images_half
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          4138ba1c-f51a-4f5b-b6f9-b95e5aa7a17b:
+            uuid: 4138ba1c-f51a-4f5b-b6f9-b95e5aa7a17b
+            region: contentmain
+            configuration:
+              id: 'field_block:node:panopoly_content_page:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+          b874637b-4754-4836-8fa5-ad045ea13b5e:
+            uuid: b874637b-4754-4836-8fa5-ad045ea13b5e
+            region: contentmain
+            configuration:
+              id: 'field_block:node:panopoly_content_page:field_panopoly_categories'
+              label: Categories
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
 id: node.panopoly_content_page.full
 targetEntityType: node
 bundle: panopoly_content_page
@@ -138,4 +140,4 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  panelizer: true
+  layout_builder__layout: true

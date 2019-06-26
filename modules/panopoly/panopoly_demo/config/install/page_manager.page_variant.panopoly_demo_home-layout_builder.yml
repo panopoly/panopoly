@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.panopoly_demo_home
+id: panopoly_demo_home-layout_builder
+label: 'Layout Builder'
+variant: layout_builder
+variant_settings:
+  id: layout_builder
+  uuid: 5a0fda3b-7f81-463b-8759-27078f3da2b0
+  label: null
+  weight: 0
+  sections:
+    -
+      layout_id: radix_burr_flipped
+      layout_settings: {  }
+      components:
+        0e93a7b0-839c-4037-aab0-56fd1a9c19da:
+          uuid: 0e93a7b0-839c-4037-aab0-56fd1a9c19da
+          region: contentmain
+          configuration:
+            id: 'views_block:panopoly_demo-demo_listing'
+            label: ''
+            provider: views
+            label_display: '0'
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+          additional: {  }
+          weight: 0
+        f3683a73-c6a6-4148-8ddf-eb14fe74aa7c:
+          uuid: f3683a73-c6a6-4148-8ddf-eb14fe74aa7c
+          region: sidebar
+          configuration:
+            id: search_form_block
+            label: 'Search form'
+            provider: search
+            label_display: '0'
+            context_mapping: {  }
+          additional: {  }
+          weight: 0
+        37c6d591-bb9f-4ec0-be8e-ba32a5d2a99f:
+          uuid: 37c6d591-bb9f-4ec0-be8e-ba32a5d2a99f
+          region: sidebar
+          configuration:
+            id: 'views_block:panopoly_demo-list_featured_demo_items'
+            label: ''
+            provider: views
+            label_display: '0'
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+          additional: {  }
+          weight: 1
+      third_party_settings: {  }
+page: panopoly_demo_home
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

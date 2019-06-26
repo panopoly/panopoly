@@ -9,20 +9,9 @@ projects[ctools][version] = 3.0
 projects[ctools][subdir] = contrib
 projects[ctools][patch][2657060] = https://www.drupal.org/files/issues/ctools-exposed-filter-block-config-2657060-56.patch
 
-projects[panels][version] = 4.3
-projects[panels][subdir] = contrib
-projects[panels][patch][2849219] = https://www.drupal.org/files/issues/panels-hook-layouts-alter-2849219-17.patch
-projects[panels][patch][2824508] = https://www.drupal.org/files/issues/panels-ipe-search-2824508-8.patch
-projects[panels][patch][2822390] = https://www.drupal.org/files/issues/panels-toolbar-vertical-2822390-7.patch
-
-projects[page_manager][version] = 4.0-beta3
+projects[page_manager][version] = 4.x-dev
 projects[page_manager][subdir] = contrib
-
-;projects[panels_breadcrumbs][version] = 2.2
-;projects[panels_breadcrumbs][subdir] = contrib
-
-projects[panelizer][version] = 4.1
-projects[panelizer][subdir] = contrib
+projects[page_manager][patch][2960739] = https://www.drupal.org/files/issues/2019-06-20/page_manager-layout-builder-variant-2960739-41.patch
 
 ;projects[fape][version] = 1.2
 ;projects[fape][subdir] = contrib

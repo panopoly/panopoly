@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.panopoly_landing_page.panelizer
+    - field.field.node.panopoly_landing_page.layout_builder__layout
     - node.type.panopoly_landing_page
   module:
-    - panelizer
+    - layout_builder
     - user
 third_party_settings:
-  panelizer:
-    enable: false
-    custom: false
+  layout_builder:
+    allow_custom: false
+    enabled: false
 id: node.panopoly_landing_page.default
 targetEntityType: node
 bundle: panopoly_landing_page
@@ -22,4 +22,4 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  panelizer: true
+  layout_builder__layout: true

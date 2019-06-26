@@ -8,7 +8,6 @@
         "drupal/ctools": "~3.0",
         "drupal/panels": "~4.3",
         "drupal/page_manager": "~4.0-beta3",
-        "drupal/panelizer": "~4.1",
         "drupal/panopoly_images": "2.x-dev",
         "drupal/pathauto": "~1.2",
         "drupal/token": "~1.3",

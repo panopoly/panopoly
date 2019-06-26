@@ -5,6 +5,10 @@
  * Install and update hooks for Panopoly Demo.
  */
 
+use Drupal\layout_builder\Section;
+use Drupal\layout_builder\SectionComponent;
+use Drupal\pathauto\PathautoState;
+
 /**
  * Implements hook_install().
  */
@@ -17,15 +21,8 @@ function panopoly_demo_install() {
   $migrate_helper = \Drupal::service('panopoly_core.migrate_helper');
   $migrate_helper->import($migration_ids);
 
-  // Point the front page to our demo one (if the site doesn't already have
-  // a custom front page).
-  $site_config = \Drupal::configFactory()->getEditable('system.site');
-  $site_page_settings = $site_config->get('page');
-  if (in_array($site_page_settings['front'], ['', '/user/login', '/node'])) {
-    $site_page_settings['front'] = '/demo';
-    $site_config->set('page', $site_page_settings);
-    $site_config->save();
-  }
+  // Point the front page to our landing page demo.
+  _panopoly_demo_set_front_page('/demo');
 }
 
 /**
@@ -39,5 +36,26 @@ function panopoly_demo_uninstall() {
   /** @var \Drupal\panopoly_core\MigrateHelper $migrate_helper */
   $migrate_helper = \Drupal::service('panopoly_core.migrate_helper');
   $migrate_helper->rollback($migration_ids);
+
+  // Reset the homepage.
+  _panopoly_demo_set_front_page('/node');
 }
 
+/**
+ * Helper to set the front page.
+ *
+ * @param string $path
+ *   The path for the front page.
+ */
+function _panopoly_demo_set_front_page($path) {
+  $site_config = \Drupal::configFactory()->getEditable('system.site');
+  $site_page_settings = $site_config->get('page');
+
+  // Only set the homepage if the site does not doesn't already have custom
+  // front page.
+  if (in_array($site_page_settings['front'], ['', '/user/login', '/node'])) {
+    $site_page_settings['front'] = $path;
+    $site_config->set('page', $site_page_settings);
+    $site_config->save();
+  }
+}

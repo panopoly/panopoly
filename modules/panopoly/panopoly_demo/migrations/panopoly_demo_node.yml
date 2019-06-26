@@ -76,4 +76,3 @@ process:
     plugin: panopoly_demo_image
     filename_property: image
     alt_property: image_alt
-

@@ -6,7 +6,7 @@ dependencies:
     - field.field.node.panopoly_content_page.field_panopoly_categories
     - field.field.node.panopoly_content_page.field_panopoly_featured_image
     - field.field.node.panopoly_content_page.field_panopoly_featured_status
-    - field.field.node.panopoly_content_page.panelizer
+    - field.field.node.panopoly_content_page.layout_builder__layout
     - image.style.panopoly_images_thumbnail
     - node.type.panopoly_content_page
   module:
@@ -99,4 +99,4 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  panelizer: true
+  layout_builder__layout: true

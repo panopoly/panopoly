@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies: {  }
 id: panopoly_demo_home
-label: 'Homepage Demo'
-description: null
+label: 'Homepage demo'
+description: ''
 use_admin_theme: false
 path: /demo
 access_logic: and

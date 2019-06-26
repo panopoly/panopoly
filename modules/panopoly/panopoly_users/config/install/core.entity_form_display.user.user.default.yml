@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_panopoly_users_about
-    - field.field.user.user.panelizer
     - field.field.user.user.user_picture
     - image.style.panopoly_images_thumbnail
   module:
@@ -59,5 +58,4 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     region: content
-hidden:
-  panelizer: true
+hidden: {  }

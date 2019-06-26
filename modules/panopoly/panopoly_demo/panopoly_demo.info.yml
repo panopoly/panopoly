@@ -8,7 +8,6 @@ dependencies:
   - image
   - node
   - page_manager
-  - panels
   - panopoly_core
   - panopoly_images
   - panopoly_pages

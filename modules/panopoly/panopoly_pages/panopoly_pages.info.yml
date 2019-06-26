@@ -5,9 +5,9 @@ core: 8.x
 dependencies:
   - field
   - image
+  - layout_builder
   - menu_ui
   - node
-  - panelizer
   - panopoly_core
   - panopoly_images
   - panopoly_theme

@@ -42,4 +42,3 @@ process:
   menu_name:
     plugin: default_value
     default_value: main
-

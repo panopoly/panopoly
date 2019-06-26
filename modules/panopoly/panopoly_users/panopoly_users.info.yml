@@ -6,7 +6,6 @@ dependencies:
   - field
   - file
   - image
-  - panelizer
   - panopoly_images
   - path
   - text
