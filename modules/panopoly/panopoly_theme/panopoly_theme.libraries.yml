@@ -1,0 +1,5 @@
+selection_form:
+  version: VERSION
+  css:
+    theme:
+      css/panopoly_theme.selection-form.css: {}

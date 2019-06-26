@@ -5,19 +5,26 @@
  * Install, update and uninstall hooks.
  */
 
+use Drupal\panopoly\Installer\Form\PanopolyDemoInstallerForm;
 use Drupal\user\Entity\User;
 use Drupal\shortcut\Entity\Shortcut;
 
 /**
  * Implements hook_install_tasks().
  */
-function panopoly_install_tasks(&$install_state) {
-  $tasks = array();
-  $tasks['panopoly_demo_installer_form'] = array(
+function panopoly_install_tasks(&$install_tasks) {
+  $tasks = [];
+
+  // Add a task to install demo content.
+  $tasks[PanopolyDemoInstallerForm::class] = [
     'display_name' => t('Install demo content'),
     'type' => 'form',
-    'function' => 'Drupal\panopoly\Installer\Form\PanopolyDemoInstallerForm',
-  );
+  ];
+
+  // Add the Panopoly theme selection to the installation process
+  module_load_include('inc', 'panopoly_theme', 'panopoly_theme.profile');
+  $tasks += panopoly_theme_profile_theme_selection_install_task($install_state);
+
   return $tasks;
 }
 
