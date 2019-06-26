@@ -56,7 +56,8 @@ build:
     - lando ssh -c 'find profiles/panopoly/modules -name \*.make -print0 | xargs -0 -n1 drush verify-makefile'
 
     # Check if any modules are overridden.
-    - lando ssh -c profiles/panopoly/scripts/check-overridden.sh
+    - lando drush en -y features diff
+    - lando ssh -c 'cd profiles/panopoly && /app/vendor/bin/robo check-overridden'
 
     # Run the Behat tests
     - lando ssh -c 'cd profiles/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'
