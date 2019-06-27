@@ -41,7 +41,6 @@ build:
     - lando composer config repositories.panopoly path /src/panopoly
     - lando composer require "panopoly/panopoly:dev-$CI_COMMIT_REF_NAME as 2.x-dev" --no-update
     - lando composer install
-    - lando composer require drupal/diff 'drupal/drupal-extension:^3.2.2'
     - cd web
 
     # Install Drupal.
@@ -57,7 +56,7 @@ build:
 
     # Check if any modules are overridden.
     - lando drush en -y features diff
-    - lando ssh -c 'cd profiles/panopoly && /app/vendor/bin/robo check-overridden'
+    - lando ssh -c 'cd profiles/panopoly && /app/vendor/bin/robo check:overridden'
 
     # Run the Behat tests
     - lando ssh -c 'cd profiles/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'

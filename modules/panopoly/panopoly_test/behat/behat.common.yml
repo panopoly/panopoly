@@ -45,7 +45,7 @@ default:
         Bryant Flipped Content: ".bryant-flipped .radix-layouts-content"
         Bryant Flipped Sidebar: ".bryant-flipped .radix-layouts-sidebar"
         # For Panels / Panopoly specific regions.
-        IPE: "#panels-ipe-tray"
+        Settings tray: "#drupal-off-canvas"
         CTools modal: "#modalContent"
         Live preview: ".panopoly-magic-preview"
         Linkit modal: "#linkit-modal"

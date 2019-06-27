@@ -21,7 +21,6 @@ panopoly_build_distribution
 # Install the behat extension.
 panopoly_header Installing Behat
 cd "$DRUPAL_TI_DRUPAL_BASE/drupal"
-composer require drupal/drupal-extension:^3.2.2 --no-interaction
 
 # Disable sendmail
 # @todo Move upstream.

@@ -6,7 +6,7 @@ dependencies:
     - field.field.node.panopoly_test_content_page.field_panopoly_categories
     - field.field.node.panopoly_test_content_page.field_panopoly_featured_image
     - field.field.node.panopoly_test_content_page.field_panopoly_featured_status
-    - field.field.node.panopoly_test_content_page.panelizer
+    - field.field.node.panopoly_test_content_page.layout_builder__layout
     - image.style.panopoly_images_thumbnail
     - node.type.panopoly_test_content_page
   module:
@@ -26,16 +26,19 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   created:
     type: datetime_timestamp
     weight: 10
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_panopoly_categories:
     weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
   field_panopoly_featured_image:
     weight: 32
     settings:
@@ -43,22 +46,33 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
+    region: content
   field_panopoly_featured_status:
     weight: 34
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
   path:
     type: path
     weight: 30
     settings: {  }
     third_party_settings: {  }
+    region: content
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 15
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 120
+    region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
@@ -66,6 +80,7 @@ content:
       display_label: true
     weight: 16
     third_party_settings: {  }
+    region: content
   title:
     type: string_textfield
     weight: -5
@@ -73,6 +88,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 5
@@ -81,5 +97,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden:
+  layout_builder__layout: true
   panelizer: true

@@ -8,18 +8,16 @@ Feature: Add text widget
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
       And I am viewing a landing page
-    When I create new "Text" content in the Panels IPE
-    Then I should see "Create new Text content"
+	When I click "Layout"
+	  And I click "Add Block"
+	  And I click "Create custom block"
+	  And I click "Text"
+    Then I should see "Configure block"
     When I fill in the following:
-	  | Block description | Test block              |
-      | Text format       | restricted_html         |
-      | Text              | Testing text body field |
-      And I press "Create and Place" in the "IPE" region
-      And I wait for the block form to load in the Panels IPE
-    When I fill in the following:
-      | Title   | Text widget title |
-      | Region  | contentmain       |
-      And I press "Add"
-      And I click "Save" in the "IPE" region
+	  | Title       | Text widget title       |
+      | Text format | restricted_html         |
+      | Text        | Testing text body field |
+      And I press "Add Block" in the "Settings tray" region
+	  And I press "Save layout"
     Then I should see "Text widget title"
       And I should see "Testing text body field"

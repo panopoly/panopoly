@@ -7,13 +7,16 @@ hidden: true
 dependencies:
   - field
   - image
+  - layout_builder
   - menu_ui
   - node
-  - panelizer
   - panopoly_core
   - panopoly_images
+  - panopoly_pages
   - panopoly_theme
   - path
   - pathauto
+  - radix_layouts
+  - system
   - text
   - user

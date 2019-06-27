@@ -6,81 +6,78 @@ dependencies:
     - field.field.node.panopoly_test_content_page.field_panopoly_categories
     - field.field.node.panopoly_test_content_page.field_panopoly_featured_image
     - field.field.node.panopoly_test_content_page.field_panopoly_featured_status
-    - field.field.node.panopoly_test_content_page.panelizer
+    - field.field.node.panopoly_test_content_page.layout_builder__layout
     - node.type.panopoly_test_content_page
   module:
     - image
-    - panelizer
+    - layout_builder
+    - radix_layouts
     - text
     - user
 third_party_settings:
-  panelizer:
-    enable: true
-    custom: false
-    displays:
-      default:
-        blocks:
-          9a827cea-dea4-4c59-9ec8-d403f10a7860:
-            id: 'entity_field:node:body'
-            label: Body
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: text_default
-              settings: {  }
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: contentmain
-            weight: 2
-            uuid: 9a827cea-dea4-4c59-9ec8-d403f10a7860
-          01ebc48b-329e-4c30-bc59-d136c08e4413:
-            id: 'entity_field:node:field_panopoly_categories'
-            label: Categories
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: above
-              type: entity_reference_label
-              settings:
-                link: true
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: contentmain
-            weight: 3
-            uuid: 01ebc48b-329e-4c30-bc59-d136c08e4413
-          1024d132-1593-4897-b16a-72f9c7f85691:
-            id: 'entity_field:node:field_panopoly_featured_image'
-            label: 'Primary image'
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: image
-              settings:
-                image_style: panopoly_images_half
-                image_link: ''
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: contentmain
-            weight: 1
-            uuid: 1024d132-1593-4897-b16a-72f9c7f85691
-        id: panels_variant
-        uuid: a975d7a8-9a40-4a8b-a3d8-55136079196b
-        label: ''
-        weight: 0
-        layout: radix_boxton
+  layout_builder:
+    allow_custom: true
+    enabled: true
+    sections:
+      -
+        layout_id: radix_boxton
         layout_settings: {  }
-        page_title: '[node:title]'
-        storage_type: panelizer_default
-        storage_id: 'node:panopoly_test_content_page:default:default'
-        builder: standard
+        components:
+          4cf4cefb-3f19-41b2-b9fd-1856f7940bb2:
+            uuid: 4cf4cefb-3f19-41b2-b9fd-1856f7940bb2
+            region: contentmain
+            configuration:
+              id: 'field_block:node:panopoly_test_content_page:field_panopoly_featured_image'
+              label: 'Primary image'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: responsive_image
+                settings:
+                  responsive_image_style: panopoly_images_half
+                  image_link: ''
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 0
+          29d22574-851f-4519-aadf-549d9322a1a5:
+            uuid: 29d22574-851f-4519-aadf-549d9322a1a5
+            region: contentmain
+            configuration:
+              id: 'field_block:node:panopoly_test_content_page:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 1
+          55a6b4eb-c44a-4771-9888-ec4a8d67efb6:
+            uuid: 55a6b4eb-c44a-4771-9888-ec4a8d67efb6
+            region: contentmain
+            configuration:
+              id: 'field_block:node:panopoly_test_content_page:field_panopoly_categories'
+              label: Categories
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: entity_reference_label
+                settings:
+                  link: true
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+            additional: {  }
+            weight: 2
+        third_party_settings: {  }
 id: node.panopoly_test_content_page.default
 targetEntityType: node
 bundle: panopoly_test_content_page
@@ -92,6 +89,7 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_panopoly_categories:
     weight: 103
     label: above
@@ -99,6 +97,7 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   field_panopoly_featured_image:
     weight: 102
     label: above
@@ -107,6 +106,7 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
   field_panopoly_featured_status:
     weight: 104
     label: above
@@ -116,9 +116,11 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
-  panelizer: true
+  layout_builder__layout: true

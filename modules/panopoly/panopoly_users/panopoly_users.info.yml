@@ -6,8 +6,10 @@ dependencies:
   - field
   - file
   - image
+  - layout_builder
   - panopoly_images
   - path
+  - radix_layouts
   - text
   - user
 package: Panopoly

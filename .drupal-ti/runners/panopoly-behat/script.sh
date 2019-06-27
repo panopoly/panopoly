@@ -13,7 +13,7 @@ panopoly_header Running tests
 if [[ "$UPGRADE" == none ]]
 then
 	drush --root=$DRUPAL_TI_DRUPAL_DIR/web --uri=$DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT en -y features diff
-	DRUSH_ARGS="--root=$DRUPAL_TI_DRUPAL_DIR/web --uri=$DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT" "$DRUPAL_TI_DRUPAL_BASE"/drupal/vendor/bin/robo check-overridden
+	DRUSH_ARGS="--root=$DRUPAL_TI_DRUPAL_DIR/web --uri=$DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT" "$DRUPAL_TI_DRUPAL_BASE"/drupal/vendor/bin/robo check:overridden
 fi
 
 # Now go to the local behat tests, being within the module installation is
