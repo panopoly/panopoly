@@ -10,6 +10,7 @@ use Drupal\embed\Entity\EmbedButton;
 use Drupal\Core\Config\ExtensionInstallStorage;
 use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\Utility\UpdateException;
+use Drupal\panopoly_media\Update\ContentModelUpdater;
 use Drupal\system\Entity\Action;
 
 define('PANOPOLY_MEDIA_ICON_UUID', 'a55d8d13-8e8f-406f-ba43-d3765f450325');
@@ -133,7 +134,7 @@ function panopoly_media_update_8204() {
     'media.image.embed_large' => [
       'type' => 'image',
       'settings' => [
-        'image_style' => ''
+        'image_style' => '',
       ],
     ],
     'media.image.embed_medium' => [
@@ -155,5 +156,43 @@ function panopoly_media_update_8204() {
   foreach ($displays as $display) {
     $display->setComponent('field_media_image', $options[$display->id()])
       ->save();
+  }
+}
+
+/**
+ * Media content model conversion.
+ */
+function panopoly_media_update_8205(&$context) {
+  $updater = new ContentModelUpdater();
+
+  // Set state first time through.
+  if (empty($context['sandbox']['state'])) {
+    $context['sandbox']['state'] = 'init';
+  }
+
+  $context['#finished'] = 0;
+
+  // Update data.
+  switch ($context['sandbox']['state']) {
+    case 'init':
+      $context['message'] = 'Updating config';
+      $updater->init();
+      $context['sandbox']['state'] = 'convert_fields';
+      break;
+
+    case 'convert_fields':
+      $context['message'] = 'Converting media reference fields';
+      $updater->convertFields();
+      $context['sandbox']['state'] = 'convert_entities';
+      break;
+
+    case 'convert_entities':
+      $context['message'] = 'Converting media entities';
+      $context['#finished'] = $updater->convertMedia($context);
+      // Clean up when done.
+      if ($context['#finished'] == 1) {
+        $updater->cleanup();
+      }
+      break;
   }
 }

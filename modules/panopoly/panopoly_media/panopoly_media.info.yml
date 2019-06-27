@@ -4,28 +4,18 @@ description: 'Advanced multimedia configuration.'
 core: 8.x
 package: Panopoly
 dependencies:
-  - config_actions
-  - dropzonejs_eb_widget
-  - 'drupal:media (>= 8.4)'
+  - 'dropzonejs:dropzonejs_eb_widget'
+  - 'drupal:media (>= 8.6)'
   - embed
   - entity_browser
+  - 'entity_browser:entity_browser_entity_form'
   - entity_embed
   - field
   - file
   - image
-  - inline_entity_form
-  - media
   - media_entity_browser
-  - node
   - panopoly_images
-  - panopoly_media
-  - path
-  - responsive_image
   - system
   - taxonomy
   - text
-  - user
-  - video_embed_field
-  - 'video_embed_field:video_embed_media'
-  - video_embed_media
   - views

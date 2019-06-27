@@ -8,6 +8,7 @@
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Drupal\media\IFrameMarkup;
 use Drupal\panopoly_media\FileAccessControlHandler;
 use Drupal\panopoly_media\Form\FileDeleteForm;
 use Drupal\panopoly_media\Plugin\Field\FieldWidget\ImageWidget;
@@ -41,7 +42,7 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
     /** @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $form_state->get('entity');
     switch ($entity->bundle()) {
-      case 'image':
+      case 'panopoly_media_image':
         $options =& $form['attributes']['data-entity-embed-display']['#options'];
         $enabled_options = [
           'view_mode:media.embed_large' => t('Original size'),
@@ -71,8 +72,8 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
 
       // There are no custom displays for files or videos. Force to default
       // for now, until file (PDF preview) or video formatters (set size) added.
-      case 'video':
-      case 'file':
+      case 'panopoly_media_video':
+      case 'panopoly_media_file':
         $form['attributes']['data-entity-embed-display']['#default_value'] = 'view_mode:media.embed_large';
         $form['attributes']['data-entity-embed-display']['#access'] = FALSE;
     }
@@ -268,4 +269,48 @@ function panopoly_media_views_data_alter(&$data) {
       'id' => 'panopoly_media_file_managed_bulk_form',
     ],
   ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function panopoly_media_preprocess_media_oembed_iframe(&$variables) {
+  $config = \Drupal::config('panopoly_media.settings');
+  if ($config->get('youtube_nocookie')) {
+    /** @var \Drupal\media\IFrameMarkup $media */
+    $html = (string) $variables['media'];
+    $html = str_replace('youtube.com', 'youtube-nocookie.com', $html);
+    $variables['media'] = IFrameMarkup::create($html);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_media_form_media_settings_form_alter(&$form) {
+  $config = \Drupal::config('panopoly_media.settings');
+
+  $form['panopoly_media'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Panopoly Media'),
+  ];
+
+  $form['panopoly_media']['panopoly_media_youtube_nocookie'] = [
+    '#type' => 'checkbox',
+    '#title' => t('YouTube no-cookie'),
+    '#description' => t("Use YouTube's privacy-enhanced mode."),
+    '#default_value' => $config->get('youtube_nocookie'),
+  ];
+
+  $form['actions']['#weight'] = 101;
+  $form['#submit'][] = '_panopoly_media_media_settings_form_submit';
+}
+
+/**
+ * Submit handler for media_settings_form.
+ */
+function _panopoly_media_media_settings_form_submit($form, FormStateInterface $form_state) {
+  $config = \Drupal::configFactory()->getEditable('panopoly_media.settings');
+  $config->set('youtube_nocookie', $form_state->getValue('panopoly_media_youtube_nocookie'));
+  $config->save();
 }

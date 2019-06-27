@@ -6,9 +6,9 @@ dependencies:
     - core.entity_view_mode.media.embed_medium
     - core.entity_view_mode.media.embed_small
     - entity_browser.browser.panopoly_media_wysiwyg_media_browser
-    - media.type.file
-    - media.type.image
-    - media.type.video
+    - media.type.panopoly_media_file
+    - media.type.panopoly_media_image
+    - media.type.panopoly_media_remote_video
   content:
     - 'file:file:a55d8d13-8e8f-406f-ba43-d3765f450325'
   module:
@@ -20,9 +20,9 @@ type_id: entity
 type_settings:
   entity_type: media
   bundles:
-    - file
-    - image
-    - video
+    - panopoly_media_file
+    - panopoly_media_image
+    - panopoly_media_remote_video
   display_plugins:
     - 'view_mode:media.embed_large'
     - 'view_mode:media.embed_medium'

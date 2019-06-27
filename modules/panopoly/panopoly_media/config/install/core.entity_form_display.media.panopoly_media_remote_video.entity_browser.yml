@@ -1,0 +1,49 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.entity_browser
+    - field.field.media.panopoly_media_remote_video.field_media_oembed_video
+    - field.field.media.panopoly_media_remote_video.field_panopoly_media_description
+    - field.field.media.panopoly_media_remote_video.field_panopoly_media_tags
+    - media.type.panopoly_media_remote_video
+  module:
+    - media
+    - text
+id: media.panopoly_media_remote_video.entity_browser
+targetEntityType: media
+bundle: panopoly_media_remote_video
+mode: entity_browser
+content:
+  field_media_oembed_video:
+    type: oembed_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_panopoly_media_description:
+    region: content
+    settings:
+      placeholder: ''
+      rows: 9
+      summary_rows: 3
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    weight: 1
+  field_panopoly_media_tags:
+    region: content
+    settings:
+      match_operator: CONTAINS
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    weight: 2
+hidden:
+  created: true
+  name: true
+  path: true
+  status: true
+  uid: true

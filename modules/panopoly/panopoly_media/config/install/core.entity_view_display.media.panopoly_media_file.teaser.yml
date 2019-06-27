@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.teaser
+    - field.field.media.panopoly_media_file.field_media_file
+    - field.field.media.panopoly_media_file.field_panopoly_media_description
+    - field.field.media.panopoly_media_file.field_panopoly_media_tags
+    - image.style.medium
+    - media.type.panopoly_media_file
+  module:
+    - image
+id: media.panopoly_media_file.teaser
+targetEntityType: media
+bundle: panopoly_media_file
+mode: teaser
+content:
+  name:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+  thumbnail:
+    label: hidden
+    region: content
+    settings:
+      image_link: file
+      image_style: medium
+    third_party_settings: {  }
+    type: image
+    weight: 0
+hidden:
+  created: true
+  field_media_file: true
+  field_panopoly_media_description: true
+  field_panopoly_media_tags: true
+  uid: true

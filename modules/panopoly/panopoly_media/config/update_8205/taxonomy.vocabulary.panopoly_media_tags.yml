@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Media tags'
+vid: panopoly_media_tags
+description: 'Tags used to categorize media however you see fit!'
+weight: 0

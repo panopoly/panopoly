@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.panopoly_media_remote_video.field_media_oembed_video
+    - field.field.media.panopoly_media_remote_video.field_panopoly_media_description
+    - field.field.media.panopoly_media_remote_video.field_panopoly_media_tags
+    - media.type.panopoly_media_remote_video
+  module:
+    - media
+    - text
+id: media.panopoly_media_remote_video.default
+targetEntityType: media
+bundle: panopoly_media_remote_video
+mode: default
+content:
+  field_media_oembed_video:
+    type: oembed
+    weight: 0
+    label: hidden
+    settings:
+      max_width: 854
+      max_height: 480
+    third_party_settings: {  }
+    region: content
+  field_panopoly_media_description:
+    label: hidden
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    weight: 1
+  field_panopoly_media_tags:
+    label: inline
+    region: content
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    weight: 2
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

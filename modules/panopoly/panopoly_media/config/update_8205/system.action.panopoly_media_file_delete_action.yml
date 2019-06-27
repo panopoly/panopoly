@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - panopoly_media
+id: panopoly_media_file_delete_action
+label: 'Delete file'
+type: file
+plugin: panopoly_media_file_delete_action
+configuration: {  }

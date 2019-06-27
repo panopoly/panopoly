@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: panopoly_media_entity_browser_thumbnail
+label: 'Entity Browser Thumbnail'
+effects:
+  384c8fe8-d61d-42df-a0ac-f006a5f9b232:
+    uuid: 384c8fe8-d61d-42df-a0ac-f006a5f9b232
+    id: image_scale
+    weight: 1
+    data:
+      width: 220
+      height: 220
+      upscale: false

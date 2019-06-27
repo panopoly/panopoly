@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.embed_large
+label: 'Embed: Large'
+targetEntityType: media
+cache: true
