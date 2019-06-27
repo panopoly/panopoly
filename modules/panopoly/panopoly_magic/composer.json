@@ -1,0 +1,9 @@
+{
+    "name": "drupal/panopoly_magic",
+    "type": "drupal-module",
+	"description": "Incubator for magical extensions to Layout Builder.",
+    "license": "GPL-2.0+",
+    "require": {
+        "drupal/core": "^8.6.16"
+    }
+}

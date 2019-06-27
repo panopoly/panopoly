@@ -1,0 +1,4 @@
+services:
+  panopoly_magic.alterations.reusable_blocks:
+    class: Drupal\panopoly_magic\Alterations\ReusableBlocks
+    arguments: ['@layout_builder.tempstore_repository', '@entity_type.manager', '@plugin.manager.block', '@current_user', '@string_translation']

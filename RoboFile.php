@@ -21,6 +21,7 @@ class RoboFile extends RoboTasks {
     'panopoly_core' => 'Panopoly Core',
     'panopoly_demo' => 'Panopoly Demo',
     'panopoly_images' => 'Panopoly Images',
+    'panopoly_magic' => 'Panopoly Magic',
     'panopoly_media' => 'Panopoly Media',
     'panopoly_pages' => 'Panopoly Pages',
     'panopoly_test' => 'Panopoly Test',

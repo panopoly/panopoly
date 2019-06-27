@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Hook implementations for panopoly_magic.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_magic_form_layout_builder_add_block_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  \Drupal::service('panopoly_magic.alterations.reusable_blocks')->alterForm($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_magic_form_layout_builder_update_block_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  \Drupal::service('panopoly_magic.alterations.reusable_blocks')->alterForm($form, $form_state, $form_id);
+}
+
