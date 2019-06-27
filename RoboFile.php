@@ -345,13 +345,10 @@ EOF;
         $this->say("Performing subtree split for {$panopoly_feature}...");
       });
 
-      $collection->taskExec("splitsh-lite --prefix=modules/panopoly/{$panopoly_feature} --target=refs/heads/{$panopoly_feature}-{$branch}");
-
-      $collection->taskExec("git checkout {$panopoly_feature}-{$branch}")
-        ->setVerbosityThreshold(VerbosityThresholdInterface::VERBOSITY_VERBOSE);
-
-      $collection->taskExec("git branch --set-upstream-to {$panopoly_feature}/{$branch}")
-        ->setVerbosityThreshold(VerbosityThresholdInterface::VERBOSITY_VERBOSE);
+      $collection->taskExecStack()
+        ->exec("splitsh-lite --prefix=modules/panopoly/{$panopoly_feature} --target=refs/heads/{$panopoly_feature}-{$branch}")
+        ->exec("git checkout {$panopoly_feature}-{$branch}")
+        ->exec("git branch --set-upstream-to {$panopoly_feature}/{$branch}");
 
       if (isset($this->SUBTREE_MERGE_COMMITS[$panopoly_feature])) {
         # TODO: This works, but generates the wrong commit hashes for some reason!
@@ -362,12 +359,10 @@ EOF;
         #fi
 
         # This scares me, but the hashes come out OK...
-        $collection->taskExec("git pull {$panopoly_feature} {$branch} --rebase")
-          ->setVerbosityThreshold(VerbosityThresholdInterface::VERBOSITY_VERBOSE);
+        $collection->taskExec("git pull {$panopoly_feature} {$branch} --rebase");
       }
 
-      $collection->taskExec("git checkout {$branch}")
-        ->setVerbosityThreshold(VerbosityThresholdInterface::VERBOSITY_VERBOSE);
+      $collection->taskExec("git checkout {$branch}");
     }
 
     if ($opts['push']) {
@@ -376,10 +371,9 @@ EOF;
           $this->say("Pushing {$panopoly_feature}...");
         });
 
-        $collection->taskExec("git checkout {$panopoly_feature}-{$branch}")
-          ->setVerbosityThreshold(VerbosityThresholdInterface::VERBOSITY_VERBOSE);
-
-        $collection->taskExec("git push {$panopoly_feature} {$panopoly_feature}-{$branch}:{$branch}");
+        $collection->taskExecStack()
+          ->exec("git checkout {$panopoly_feature}-{$branch}")
+          ->exec("git push {$panopoly_feature} {$panopoly_feature}-{$branch}:{$branch}");
       }
     }
 
