@@ -52,6 +52,7 @@
         "drupal/panopoly_theme": "self.version",
         "drupal/panopoly_widgets": "self.version",
         "drupal/panopoly_demo": "self.version",
+        "drupal/panopoly_magic": "self.version",
         "drupal/panopoly_media": "self.version",
         "drupal/panopoly_test": "self.version",
         "drupal/panopoly_users": "self.version",
