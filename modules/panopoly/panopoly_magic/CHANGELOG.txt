@@ -1,0 +1,4 @@
+Panopoly Magic 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- No changes since last release.
+

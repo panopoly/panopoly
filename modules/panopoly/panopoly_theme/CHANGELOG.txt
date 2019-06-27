@@ -1,3 +1,7 @@
+Panopoly Theme 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Implement reusable theme selector for installer in Drupal 8.
+
 Panopoly Theme 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - No changes since last release.

@@ -1,3 +1,8 @@
+Panopoly Core 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Minor reorganization of .make and composer.json's.
+- Switch to using Layout Builder rather than Panels/Panelizer.
+
 Panopoly Core 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - This is a really long commit in order to test our release scripts,

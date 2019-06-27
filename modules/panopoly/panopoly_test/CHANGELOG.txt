@@ -1,3 +1,7 @@
+Panopoly Test 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Get tests passing again after switch to Layout Builder.
+
 Panopoly Test 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - No changes since last release.

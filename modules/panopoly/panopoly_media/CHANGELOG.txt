@@ -1,3 +1,11 @@
+Panopoly Media 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Moved media field storage config to install from optional.
+- Squashed commit of the following:.
+- Warning: class_exists() expects parameter 1 to be string, array given in
+  Drupal\Core\Entity\EntityType->hasHandlerClass() (line 491 of
+  core/lib/Drupal/Core/Entity/EntityType.php).
+
 Panopoly Media 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - No changes since last release.

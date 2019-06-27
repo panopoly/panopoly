@@ -1,3 +1,8 @@
+Panopoly Users 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Get tests passing again after switch to Layout Builder.
+- Switch to using Layout Builder rather than Panels/Panelizer.
+
 Panopoly Users 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - No changes since last release.

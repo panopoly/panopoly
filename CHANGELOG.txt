@@ -1,3 +1,25 @@
+Panopoly 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Issue #2971163 by dsnopek: Remove (almost) all the verbosity tricks from
+  'robo subtree-split'.
+- Minor reorganization of .make and composer.json's.
+- Issue #3056141: Allow creating reusable widgets in Layout Builder (enable
+  at install).
+- Issue #3056141: Allow creating reusable widgets in Layout Builder.
+- Issue #3064337: Get tests passing again after switch to Layout Builder.
+- Issue #3056515: Existing Configuration Conflict with Standard
+  Installation Profile.
+- Moved media field storage config to install from optional.
+- Squashed commit of the following:.
+- Issue #2728715 by arshadcn, dsnopek: Implement reusable theme selector
+  for installer in Drupal 8.
+- Issue #2971163: Replace all scripts and Phing build process with Robo.
+- Issue #3061339 by kerasai: Warning: class_exists() expects parameter 1 to
+  be string, array given in Drupal\Core\Entity\EntityType->hasHandlerClass()
+  (line 491 of core/lib/Drupal/Core/Entity/EntityType.php).
+- Issue #3051071 by arshadcn, dsnopek: Switch to using Layout Builder
+  rather than Panels/Panelizer.
+
 Panopoly 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - This is a really long commit in order to test our release scripts,

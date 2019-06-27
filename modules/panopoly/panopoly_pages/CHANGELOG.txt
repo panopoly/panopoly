@@ -1,3 +1,7 @@
+Panopoly Pages 8.x-2.0-alpha15, 2019-06-27
+-------------------
+- Switch to using Layout Builder rather than Panels/Panelizer.
+
 Panopoly Pages 8.x-2.0-alpha14, 2019-06-25
 -------------------
 - No changes since last release.
