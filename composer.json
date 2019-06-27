@@ -37,8 +37,7 @@
         "drupal/panels": "~4.3",
         "drupal/pathauto": "~1.2",
         "drupal/radix_layouts": "~4.0",
-        "drupal/token": "~1.3",
-        "drupal/video_embed_field": "2.x-dev"
+        "drupal/token": "~1.3"
     },
     "require-dev": {
         "consolidation/robo": "^1.4",
@@ -68,9 +67,6 @@
                 "Image Formatter Links When No Access (waiting for merge in 8.7 or 8.8?)": "https://www.drupal.org/files/issues/2019-05-02/drupal-image_formatter_links-2999235-7.patch",
                 "Filtering incorrectly on 'Summary or Trimmed' fields": "https://www.drupal.org/files/issues/2018-10-04/drupal-core-2922569-6.patch",
                 "Issue #2653938": "https://www.drupal.org/files/issues/drupal-views-filter-default-all-2653938-11.patch"
-            },
-            "drupal/page_manager": {
-                "Create a layout builder variant": "https://www.drupal.org/files/issues/2019-06-20/page_manager-layout-builder-variant-2960739-41.patch"
             }
         }
     }

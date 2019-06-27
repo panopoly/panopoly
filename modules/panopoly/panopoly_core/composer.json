@@ -20,11 +20,9 @@
             "drupal/ctools": {
                 "Issue #2657060": "https://www.drupal.org/files/issues/ctools-exposed-filter-block-config-2657060-56.patch"
             },
-			"drupal/panels": {
-				"Issue #2849219": "https://www.drupal.org/files/issues/panels-hook-layouts-alter-2849219-17.patch",
-				"Issue #2824508": "https://www.drupal.org/files/issues/panels-ipe-search-2824508-8.patch",
-				"Issue #2822390": "https://www.drupal.org/files/issues/panels-toolbar-vertical-2822390-7.patch"
-			}
+            "drupal/page_manager": {
+                "Create a layout builder variant": "https://www.drupal.org/files/issues/2019-06-20/page_manager-layout-builder-variant-2960739-41.patch"
+            }
         }
     }
 }
