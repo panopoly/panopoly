@@ -966,6 +966,7 @@ EOF;
         'username' => $opts['username'],
         'password' => $opts['password'],
         'totp-secret' => $opts['totp-secret'],
+        'wd-host' => $opts['wd-host'],
         'no-stop' => $opts['no-stop'],
         // We don't need to check because we just did in releasePush().
         'skip-checkout-repos' => TRUE
