@@ -418,7 +418,7 @@ EOF;
             }
           }
           if (!$component) {
-            $component = $this->PANOPOLY_COMPONENT_MAP[$node['field_issue_component']] ?? NULL;
+            $component = isset($this->PANOPOLY_COMPONENT_MAP[$node['field_issue_component']]) ? $this->PANOPOLY_COMPONENT_MAP[$node['field_issue_component']] : NULL;
           }
           if (!$component) {
             throw new \Exception("Unable to identify project for patch based on name '{$file['name']}' or issue component '{$node['field_issue_component']}'");
@@ -669,7 +669,7 @@ EOF;
 
       // @todo Probably should be a custom Task
       $collection->addCode(function () use ($old_version, $new_version, $branch, $panopoly_feature_name, $panopoly_feature_release_path, $panopoly_feature_source_path) {
-        $drush_rn = $this->runDrush("rn {$old_version} {$branch} --changelog", $panopoly_feature_release_path)->getOutput();
+        $drush_rn = $this->runDrush("rn {$old_version} {$branch} --changelog 2>/dev/null", $panopoly_feature_release_path)->getOutput();
         $this->updateChangelog("{$panopoly_feature_source_path}/CHANGELOG.txt", $panopoly_feature_name, $new_version, $drush_rn);
       });
 
@@ -680,7 +680,7 @@ EOF;
     // Do top-level CHANGELOG.txt too.
     // @todo Probably should be a custom Task
     $collection->addCode(function () use ($old_version, $new_version, $branch) {
-      $drush_rn = $this->runDrush("rn {$old_version} {$branch} --changelog")->getOutput();
+      $drush_rn = $this->runDrush("rn {$old_version} {$branch} --changelog 2>/dev/null")->getOutput();
       $this->updateChangelog("CHANGELOG.txt", 'Panopoly', $new_version, $drush_rn);
     });
     $collection->taskGitStack()
@@ -889,6 +889,7 @@ EOF;
     }
 
     $collection->addCode(function () use ($session, $opts) {
+      $session->start();
       $session->visit('https://drupal.org/user/login');
 
       $this->submitForm($session->getPage(), 'user-login', [
@@ -912,7 +913,7 @@ EOF;
           $panopoly_feature_release_path = "release/{$panopoly_feature}";
         }
 
-        $release_notes = $this->runDrush("rn {$old_version} {$new_version}", $panopoly_feature_release_path)->getOutput();
+        $release_notes = $this->runDrush("rn {$old_version} {$new_version} 2>/dev/null", $panopoly_feature_release_path)->getOutput();
         $this->createRelease($session, $panopoly_feature, $new_version, $release_notes);
       });
     }
