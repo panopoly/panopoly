@@ -912,6 +912,7 @@ EOF;
     }
 
     $collection->addCode(function () use ($session, $opts) {
+      $session->start();
       $session->visit('https://drupal.org/user/login');
 
       $this->submitForm($session->getPage(), 'user-login', [
