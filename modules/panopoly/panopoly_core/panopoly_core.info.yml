@@ -3,6 +3,7 @@ description: 'The magical core of the Panopoly framework.'
 type: module
 core: 8.x
 dependencies:
+  - ctools
   - field
   - file
   - image

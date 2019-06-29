@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: panopoly_categories
+label: Categories
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:vocabulary]/[term:name]'
+selection_criteria:
+  870bad05-4956-4a6d-816a-804fbe976c42:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      panopoly_categories: panopoly_categories
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 870bad05-4956-4a6d-816a-804fbe976c42
+selection_logic: and
+weight: -5
+relationships: {  }
