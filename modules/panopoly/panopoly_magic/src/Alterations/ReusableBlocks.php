@@ -113,8 +113,9 @@ class ReusableBlocks {
           '#access' => $this->currentUser->hasPermission('create and edit custom blocks'),
         ];
 
-        $form['#validate'][] = [$this, 'blockContentValidate'];
-        $form['#submit'][] = [$this, 'blockContentSubmit'];
+        $form['#validate'][] = [static::class, 'blockContentValidate'];
+        $form['#submit'][] = [static::class, 'blockContentSubmit'];
+
       }
     }
     elseif ($block->getBaseId() === 'inline_block') {
@@ -137,7 +138,7 @@ class ReusableBlocks {
         ],
       ];
 
-      $form['#submit'][] = [$this, 'inlineBlockSubmit'];
+      $form['#submit'][] = [static::class, 'staticInlineBlockSubmit'];
     }
 
     $form['actions']['#weight'] = 100;
@@ -171,7 +172,7 @@ class ReusableBlocks {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state.
    */
-  public function blockContentValidate($form, FormStateInterface $form_state) {
+  public static function blockContentValidate($form, FormStateInterface $form_state) {
     $block_form = $form['block_form'];
     /** @var \Drupal\block_content\BlockContentInterface $block_content */
     $block_content = $block_form['#block'];
@@ -193,7 +194,7 @@ class ReusableBlocks {
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function blockContentSubmit($form, FormStateInterface $form_state) {
+  public static function blockContentSubmit($form, FormStateInterface $form_state) {
     // @todo Remove when https://www.drupal.org/project/drupal/issues/2948549 is closed.
     $block_form = NestedArray::getValue($form, $form_state->getTemporaryValue('block_form_parents'));
     /** @var \Drupal\block_content\BlockContentInterface $block_content */
@@ -203,6 +204,20 @@ class ReusableBlocks {
     $form_display->extractFormValues($block_content, $block_form, $complete_form_state);
     $block_content->setInfo($form_state->getValue('label'));
     $block_content->save();
+  }
+
+  /**
+   * Static wrapper to call back into this service.
+   *
+   * @param array $form
+   *   The form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   *
+   * @return mixed
+   */
+  public static function staticInlineBlockSubmit($form, FormStateInterface $form_state) {
+    return \Drupal::service('panopoly_magic.alterations.reusable_blocks')->inlineBlockSubmit($form, $form_state);
   }
 
   /**
