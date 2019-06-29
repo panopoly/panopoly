@@ -70,3 +70,4 @@ function panopoly_widgets_preprocess_block(&$variables) {
   }
 
 }
+

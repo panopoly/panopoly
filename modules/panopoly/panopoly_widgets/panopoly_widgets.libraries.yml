@@ -1,0 +1,6 @@
+widget-actions:
+  js:
+    js/widget_actions.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

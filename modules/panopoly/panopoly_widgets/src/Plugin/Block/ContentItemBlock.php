@@ -2,12 +2,15 @@
 
 namespace Drupal\panopoly_widgets\Plugin\Block;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\Markup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -97,13 +100,32 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
+
+    $options = $this->getContentTypes();
+
+    $form['content_type'] = [
+      '#type' => 'select',
+      '#options' => $options,
+      '#title' => $this->t('Content type'),
+      '#default_value' => $this->configuration['page'],
+      '#ajax' => [
+        'callback' => [$this, 'autocompleteGetNodes'],
+      ]
+    ];
+
     $form['node'] = [
+      '#prefix' => '<div id="node-selector-wrapper">',
       '#type' => 'entity_autocomplete',
       '#title' => $this->t('Piece of content'),
       '#target_type' => 'node',
       '#default_value' => $this->loadEntity(),
       '#required' => TRUE,
+      '#selection_settings' => array(
+        'target_bundles' => array('panopoly_content_page', 'panopoly_landing_page'),
+      ),
+      '#suffix' => '</div>',
     ];
+
     $form['view_mode'] = [
       '#type' => 'select',
       '#options' => $this->entityDisplayRepository->getViewModeOptions('node'),
@@ -111,6 +133,25 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
       '#default_value' => $this->configuration['view_mode'],
     ];
     return $form;
+  }
+
+  private function getContentTypes() {
+    $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
+
+    $options = [];
+    foreach ($node_types as $node_type) {
+      $options[$node_type->id()] = $node_type->label();
+    }
+
+    $options = array_merge(['all' => 'Any'], $options);
+    return $options;
+  }
+
+  public function autocompleteGetNodes(array &$form, FormStateInterface $form_state){
+    $response = new AjaxResponse();
+    $response->addCommand(new InvokeCommand(NULL, 'cleanNodeAutoComplete', []));
+    return $response;
+
   }
 
   /**
@@ -136,6 +177,7 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
         ->applyTo($build);
     }
 
+    $build["#title"] = Markup::create($this->configuration['label']);
     return $build;
   }
 
