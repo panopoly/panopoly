@@ -26,12 +26,12 @@ widgets:
   a1ed5dca-2adc-478d-a9b0-014a7df6bb6e:
     settings:
       view: media_entity_browser
-      view_display: entity_browser_1
+      view_display: media_browser_all
       submit_text: Select
       auto_select: false
     uuid: a1ed5dca-2adc-478d-a9b0-014a7df6bb6e
     weight: -10
-    label: View
+    label: Library
     id: view
   a9609bc6-0d7d-47ca-84f1-62e76c37372a:
     settings:

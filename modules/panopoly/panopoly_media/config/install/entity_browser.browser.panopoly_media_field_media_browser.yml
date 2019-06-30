@@ -26,12 +26,12 @@ widgets:
   828212e6-5506-4f23-a333-4b56a08ac85b:
     settings:
       view: media_entity_browser
-      view_display: entity_browser_1
+      view_display: media_browser_all
       submit_text: Select
       auto_select: false
     uuid: 828212e6-5506-4f23-a333-4b56a08ac85b
     weight: -10
-    label: View
+    label: Library
     id: view
   ee8606e5-1b38-4c5d-9cc3-e71ae053cb4e:
     settings:
