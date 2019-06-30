@@ -11,7 +11,6 @@ core = 8.x
 
 projects[ctools][version] = 3.0
 projects[ctools][subdir] = contrib
-projects[ctools][patch][2657060] = https://www.drupal.org/files/issues/ctools-exposed-filter-block-config-2657060-56.patch
 
 projects[page_manager][version] = 4.x-dev
 projects[page_manager][subdir] = contrib
