@@ -265,20 +265,31 @@ EOF;
    * @todo This should probably be a custom task
    */
   public function buildComposerJson() {
-    $package_index = [];
+    $main_composer_json = $this->readJsonFile(__DIR__ . "/composer.json");
+    $main_composer_json['require'] = $this->COMPOSER_PROFILE_REQUIREMENTS;
+    $main_composer_json['extra']['patches'] = [];
 
+    $package_index = [];
     foreach ($this->COMPOSER_PROFILE_REQUIREMENTS as $package => $version) {
       $package_index[$package]['profile'] = $version;
     }
     foreach ($this->getPanopolyFeatures() as $module) {
       $module_composer_json = $this->readJsonFile(__DIR__ . "/modules/panopoly/{$module}/composer.json");
+
+      // Build up the package index.
       foreach ($module_composer_json['require'] as $package => $version) {
         $package_index[$package][$module] = $version;
       }
+
+      // Merge the patches too.
+      if (!empty($module_composer_json['extra']['patches'])) {
+        $main_composer_json['extra']['patches'] = array_merge_recursive(
+          $main_composer_json['extra']['patches'],
+          $module_composer_json['extra']['patches']
+        );
+      }
     }
 
-    $main_composer_json = $this->readJsonFile(__DIR__ . "/composer.json");
-    $main_composer_json['require'] = $this->COMPOSER_PROFILE_REQUIREMENTS;
     foreach ($package_index as $package => $versions) {
       // Skip any of the Panopoly modules.
       list ($vendor, $short_package_name) = explode('/', $package);
