@@ -416,7 +416,7 @@ EOF;
         else {
           if (preg_match('/^panopoly[_-]([^_-]+)[_-]/', $file['name'], $matches)) {
             $component = 'panopoly_' . $matches[1];
-            if (!in_array($component, $this->PANOPOLY_COMPONENT_MAP[$component])) {
+            if (!in_array($component, $this->PANOPOLY_COMPONENT_MAP)) {
               $component = NULL;
             }
           }
@@ -506,7 +506,7 @@ EOF;
     }
 
     // Regenerate the .make files (in case a patch changed them)
-    $collection->addCode([$this, 'createDrushMakeFiles']);
+    $collection->addCode([$this, 'buildDrupalOrgMake']);
 
     // Modify the .travis.yml file.
     $collection->addCode(function () use ($opts) {
