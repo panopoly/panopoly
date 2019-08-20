@@ -1119,6 +1119,14 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
       ),
     ),
   );
+
+  // If the View has opted out of 'View mode' then we hide it from the form.
+  // We do the is_a() check to not break things in the case the user has
+  // upgraded panopoly_magic, but hasn't yet rebuilt the Views cache.
+  $view_allow = $view_handler->get_option('allow');
+  if (is_a($view_handler, 'panopoly_magic_plugin_display_panel_pane') && empty($view_allow['panopoly_magic_view_mode'])) {
+    $form['content_settings']['view_mode']['#access'] = FALSE;
+  }
    
   // Define a general settings fieldset if we have exposed values
   if (!empty($form['exposed']) && count(_panopoly_magic_visible_element_children($form['exposed'])) > 0) {
