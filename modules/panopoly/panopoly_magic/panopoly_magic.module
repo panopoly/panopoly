@@ -1217,7 +1217,7 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
   $form['#pre_render'][] = 'panopoly_magic_panelizer_pre_render';
 
   // When moving backwards through form steps, ensure image widgets properly retain their value.
-  if (!empty($form_state['field_instance']) && $form_state['triggering_element']['#value'] == 'Back') {
+  if (!empty($form_state['field_instance']) && isset($form_state['triggering_element']['#value']) && $form_state['triggering_element']['#value'] == 'Back') {
     $field_name = $form_state['field_instance']['field_name'];
     $field_type = $form_state['field_instance']['widget']['module'];
     $entity = $form_state['entity'];
