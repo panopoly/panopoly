@@ -670,6 +670,16 @@ function panopoly_magic_ajax_update_preview($form, $form_state) {
   if (isset($form_state['values']) && isset($form['#panopoly_magic_preview_info']['configuration'])) {
     $form['#panopoly_magic_preview_info']['configuration'] = $form_state['values'] + $form['#panopoly_magic_preview_info']['configuration'];
   }
+
+  // If this is a preview for a View, and it's using any caching, then clear
+  // the cache before rendering the View.
+  if (isset($form_state['view']) && get_class($form_state['view']) == 'view') {
+    $view = $form_state['view'];
+    if ($cache = $view->display_handler->get_plugin('cache')) {
+      $cache->cache_flush();
+    }
+  }
+
   return panopoly_magic_form_post_render_preview('', $form);
 }
 
