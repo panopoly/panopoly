@@ -1074,7 +1074,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
 
   // Determine if this is a fielded view. If so, add magic display type changer
   $view_handler = $form_state['view']->display_handler;
-  if ($view_handler->options['row_plugin'] == 'fields') {
+  if ($view_handler->get_option('row_plugin') == 'fields') {
     // Set to default view settings if there isn't one.
     if (empty($conf['view_settings'])) {
       if ($form_state['view']->style_plugin->plugin_name == 'table') {
@@ -1147,9 +1147,10 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   $view_modes = panopoly_magic_view_mode_options(panopoly_magic_get_entity_type($form_state['view']));
 
   // Get the default view mode.
-  $options_default_view_mode = ($view_handler->options['row_plugin'] == 'fields') ? 'teaser' : 'full';
-  if (isset($form_state['view']->style_plugin->display->display_options['row_options']['view_mode'])) {
-    $options_default_view_mode = $form_state['view']->style_plugin->display->display_options['row_options']['view_mode'];
+  $options_default_view_mode = ($view_handler->get_option('row_plugin') == 'fields') ? 'teaser' : 'full';
+  $row_options = $view_handler->get_option('row_options');
+  if (isset($form_state['view']->style_plugin->row_plugin->options['view_mode'])) {
+    $options_default_view_mode = $form_state['view']->style_plugin->row_plugin->options['view_mode'];
   }
   if (!array_key_exists($options_default_view_mode, $view_modes)){
     $options_default_view_mode = current(array_keys($view_modes));
@@ -1167,6 +1168,17 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
     ),
   );
 
+  // Show view mode selection if the display type setting exists because the
+  // view mode will get shown/hidden by Javascript.
+  if (isset($form['display_settings']['view_settings'])) {
+    $form['content_settings']['view_mode']['#access'] = TRUE;
+  }
+  // Hide the view mode selection in situations where it'll have no effect.
+  // ex. when not on a node/entity row plugin (except when a table which
+  // inexplicably uses that row plugin).
+  elseif (!in_array($view_handler->get_option('row_plugin'), array('node', 'entity')) || $form_state['view']->style_plugin->plugin_name == 'table') {
+    $form['content_settings']['view_mode']['#access'] = FALSE;
+  }
   // If the View has opted out of 'View mode' then we hide it from the form.
   // We do the is_a() check to not break things in the case the user has
   // upgraded panopoly_magic, but hasn't yet rebuilt the Views cache.
@@ -1174,7 +1186,7 @@ function panopoly_magic_form_views_content_views_panes_content_type_edit_form_al
   if (is_a($view_handler, 'panopoly_magic_plugin_display_panel_pane') && empty($view_allow['panopoly_magic_view_mode'])) {
     $form['content_settings']['view_mode']['#access'] = FALSE;
   }
-   
+
   // Define a general settings fieldset if we have exposed values
   if (!empty($form['exposed']) && count(_panopoly_magic_visible_element_children($form['exposed'])) > 0) {
     $form['exposed']['#type'] = 'fieldset';
