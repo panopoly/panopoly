@@ -1237,7 +1237,7 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
 
   // Move the title for the label and formatter to be the field prefix
   foreach (array('label', 'formatter') as $field) {
-    if (!empty($form['general_settings'][$field])) {
+    if (!empty($form['general_settings'][$field]) && !empty($form['general_settings'][$field]['#title'])) {
       $form['general_settings'][$field]['#field_prefix'] = $form['general_settings'][$field]['#title'];
       $form['general_settings'][$field]['#title'] = '';
     }
