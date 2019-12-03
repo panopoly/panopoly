@@ -1248,7 +1248,8 @@ function panopoly_magic_form_ctools_entity_field_content_type_formatter_options_
     // Determine what entity type and field name we are editing based on the form subtype and URL args.
     $arg_parts = explode(':', arg(4));
     list($entity_type, $field_name) = explode(':', $form_state['subtype_name']);
-    $entity = reset(entity_load($entity_type, array($arg_parts[2])));
+    $entities = entity_load($entity_type, array($arg_parts[2]));
+    $entity = reset($entities);
 
     // Unfortunately the above code is not as reliable as we'd like. There are cases where the field we're editing
     // doesn't have an corrosponding entity (say, comments). Let's make sure we have an entity before adding FAPE specific
