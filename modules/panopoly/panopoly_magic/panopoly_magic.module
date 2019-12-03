@@ -909,7 +909,7 @@ function panopoly_magic_form_fieldable_panels_panes_fieldable_panels_pane_conten
 function _panopoly_magic_visible_element_children($element) {
   $children = array();
   foreach (element_children($element) as $name) {
-    if ($element[$name]['#type'] != 'hidden' && (!isset($element[$name]['#access']) || $element[$name]['#access'])) {
+    if (isset($element[$name]['#type']) && $element[$name]['#type'] != 'hidden' && (!isset($element[$name]['#access']) || $element[$name]['#access'])) {
       $children[] = $name;
     }
   }
