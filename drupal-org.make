@@ -95,11 +95,15 @@ projects[fape][subdir] = contrib
 
 ; Views Magic
 
-projects[views][version] = 3.22
+projects[views][version] = 3.23
 projects[views][subdir] = contrib
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
-projects[views][patch][2885660] = https://www.drupal.org/files/issues/2018-06-28/2885660-13.patch
-projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-03-13/2977851-views-php72-count-8.patch
+projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch
+projects[views][patch][2284423] = https://www.drupal.org/files/issues/2019-04-29/views-same_sort_twice-2284423-3.patch
+projects[views][patch][3065777] = https://www.drupal.org/files/issues/2019-07-03/views-3065777-2.patch
+projects[views][patch][3069508] = https://www.drupal.org/files/issues/2019-07-29/views-glossary-ajax-not-working-3069508-8-D7.patch
+projects[views][patch][3054091] = https://www.drupal.org/files/issues/2019-06-01/n3054091-14-hard.patch
+projects[views][patch][3076826] = https://www.drupal.org/files/issues/2019-08-23/views-php7-3076826-2.patch
 
 projects[views_autocomplete_filters][version] = 1.2
 projects[views_autocomplete_filters][subdir] = contrib
@@ -218,13 +222,13 @@ core = 7.x
 
 ; Search API and Facet API Modules
 
-projects[facetapi][version] = 1.5
+projects[facetapi][version] = 1.6
 projects[facetapi][subdir] = contrib
 
 projects[search_api][version] = 1.26
 projects[search_api][subdir] = contrib
 
-projects[search_api_solr][version] = 1.14
+projects[search_api_solr][version] = 1.15
 projects[search_api_solr][subdir] = contrib
 
 projects[search_api_db][version] = 1.7
