@@ -36,6 +36,7 @@ projects[fape][subdir] = contrib
 projects[views][version] = 3.23
 projects[views][subdir] = contrib
 projects[views][patch][2037469] = https://www.drupal.org/files/issues/views-exposed-sorts-2037469-26.patch
+projects[views][patch][2977851] = https://www.drupal.org/files/issues/2019-09-23/2977851-views-php72-count-14_0.patch
 projects[views][patch][2284423] = https://www.drupal.org/files/issues/2019-04-29/views-same_sort_twice-2284423-3.patch
 projects[views][patch][3065777] = https://www.drupal.org/files/issues/2019-07-03/views-3065777-2.patch
 projects[views][patch][3069508] = https://www.drupal.org/files/issues/2019-07-29/views-glossary-ajax-not-working-3069508-8-D7.patch
