@@ -265,6 +265,20 @@ EOF;
   }
 
   /**
+   * Makes a diff of a single module which can be used in a child distro.
+   *
+   * @option $module The module to make a diff of (ex. panopoly_search)
+   */
+  public function diff($module) {
+    $default_branch = static::PANOPOLY_DEFAULT_BRANCH;
+    $output = $this->runProcess("git diff {$default_branch}..")->getOutput();
+    $output = preg_replace("|^diff --git a/modules/panopoly/{$module}/(.*?) b/modules/panopoly/{$module}/(.*?)$|m", 'diff --git a/\1 b/\2', $output);
+    $output = preg_replace("|^--- a/modules/panopoly/{$module}/(.*?)$|m", '--- a/\1', $output);
+    $output = preg_replace("|^\\+\\+\\+ b/modules/panopoly/{$module}/(.*?)$|m", '+++ b/\1', $output);
+    print $output;
+  }
+
+  /**
    * Builds the profile's .make file to pull in modules, themes and libraries.
    */
   public function buildDependencies() {
