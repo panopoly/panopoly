@@ -262,11 +262,20 @@ EOF;
   /**
    * Makes a diff of a single module which can be used in a child distro.
    *
-   * @option $module The module to make a diff of (ex. panopoly_search)
+   * @param string $module
+   *   The module to make a diff of (ex. panopoly_search)
+   * @option bool $uncommitted
+   *   Uncommitted changes
    */
-  public function diff($module) {
-    $default_branch = static::PANOPOLY_DEFAULT_BRANCH;
-    $output = $this->runProcess("git diff {$default_branch}..")->getOutput();
+  public function diff($module, $opts = ['uncommitted' => FALSE]) {
+    $diff_spec = '';
+    if (!$opts['uncommitted']) {
+      $diff_spec = static::PANOPOLY_DEFAULT_BRANCH . '..';
+    }
+
+    $module_path = __DIR__ . "/modules/panopoly/{$module}";
+
+    $output = $this->runProcess("git diff {$diff_spec} -- {$module_path}")->getOutput();
     $output = preg_replace("|^diff --git a/modules/panopoly/{$module}/(.*?) b/modules/panopoly/{$module}/(.*?)$|m", 'diff --git a/\1 b/\2', $output);
     $output = preg_replace("|^--- a/modules/panopoly/{$module}/(.*?)$|m", '--- a/\1', $output);
     $output = preg_replace("|^\\+\\+\\+ b/modules/panopoly/{$module}/(.*?)$|m", '+++ b/\1', $output);
