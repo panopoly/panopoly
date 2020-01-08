@@ -142,9 +142,9 @@ projects[entityreference][subdir] = contrib
 projects[field_group][version] = 1.6
 projects[field_group][subdir] = contrib
 
-projects[link][version] = 1.6
+projects[link][version] = 1.7
 projects[link][subdir] = contrib
-projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-01-24/link-revert_url_validation-2666912-7.x-1.5.patch
+projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-revert-url-validation-2666912-54.patch
 
 ; Harness the Power of Features and Apps with Default Content
 
@@ -303,13 +303,13 @@ projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
 
-projects[file_entity][version] = 2.25
+projects[file_entity][version] = 2.27
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.21
+projects[media][version] = 2.24
 projects[media][subdir] = contrib
 
-projects[media_youtube][version] = 3.8
+projects[media_youtube][version] = 3.9
 projects[media_youtube][subdir] = contrib
 
 projects[media_vimeo][version] = 2.1
@@ -325,13 +325,9 @@ core = 7.x
 ; The WYSIWYG Module Family
 
 projects[wysiwyg][subdir] = contrib
-projects[wysiwyg][version] = 2.5
-projects[wysiwyg][patch][1489096] = http://drupal.org/files/wysiwyg-table-format.patch
-projects[wysiwyg][patch][1786732] = http://drupal.org/files/wysiwyg-arbitrary_image_paths_markitup-1786732-3.patch
-projects[wysiwyg][patch][2884691] = https://www.drupal.org/files/issues/wysiwyg-theme-css-v24-2884691-8.patch
-projects[wysiwyg][patch][2884761] = https://www.drupal.org/files/issues/wysiwyg-tinymce-css-array-2884761-5.patch
-projects[wysiwyg][patch][2890066] = https://www.drupal.org/files/issues/wysiwyg-isnode-2890066-2.patch
-projects[wysiwyg][patch][2903753] = https://www.drupal.org/files/issues/wysiwyg.tinymce_fullscreen.2903753.6.patch
+projects[wysiwyg][version] = 2.6
+projects[wysiwyg][patch][1489096] = https://www.drupal.org/files/issues/2019-11-16/wysiwyg-table-format-1489096-10.patch
+projects[wysiwyg][patch][1786732] = https://www.drupal.org/files/issues/2019-11-16/wysiwyg-arbitrary_image_paths_markitup-1786732-6.patch
 
 projects[wysiwyg_filter][version] = 1.6-rc9
 projects[wysiwyg_filter][subdir] = contrib
