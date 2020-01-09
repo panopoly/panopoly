@@ -172,6 +172,19 @@ class RoboFile extends RoboTasks {
   }
 
   /**
+   * Encodes JSON to string with some standard options.
+   *
+   * @param mixed $data
+   *   The data to encode.
+   *
+   * @return string
+   *   The encoded JSON data.
+   */
+  protected function jsonEncode($data) {
+    return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  }
+
+  /**
    * Writes a composer JSON file.
    *
    * This tries to format the JSON in the way a composer.json would be, which
@@ -183,7 +196,7 @@ class RoboFile extends RoboTasks {
    *   The data to put in the file.
    */
   protected function writeComposerJsonFile($filename, $data) {
-    file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    file_put_contents($filename, $this->jsonEncode($data));
   }
 
   /**
@@ -287,6 +300,9 @@ EOF;
     if (file_get_contents(__DIR__ . '/drupal-org.make') !== $this->getDrupalOrgMakeContents()) {
       throw new \Exception("drupal-org.make contents out-of-date! Run 'robo build:drupal-org-make'");
     }
+    if (file_get_contents(__DIR__ . '/composer.json') !== $this->jsonEncode($this->getComposerJsonContent())) {
+      throw new \Exception("composer.json contents out-of-date! Run 'robo build:composer-json'");
+    }
   }
 
   /**
@@ -313,11 +329,9 @@ EOF;
   }
 
   /**
-   * Builds the top-level composer.json file from the panopoly_* features.
-   *
-   * @todo This should probably be a custom task
+   * Gets the contents for the top-level composer.json file from the features.
    */
-  public function buildComposerJson() {
+  public function getComposerJsonContent() {
     $main_composer_json = $this->readJsonFile(__DIR__ . "/composer.json");
     $main_composer_json['require'] = $this->COMPOSER_PROFILE_REQUIREMENTS;
     $main_composer_json['extra']['patches'] = [];
@@ -360,7 +374,16 @@ EOF;
 
     ksort($main_composer_json['require']);
 
-    $this->writeComposerJsonFile(__DIR__ . '/composer.json', $main_composer_json);
+    return $main_composer_json;
+  }
+
+  /**
+   * Builds the top-level composer.json file from the panopoly_* features.
+   *
+   * @todo This should probably be a custom task
+   */
+  public function buildComposerJson() {
+    $this->writeComposerJsonFile(__DIR__ . '/composer.json', $this->getComposerJsonContent());
   }
 
   /**
