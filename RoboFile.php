@@ -242,11 +242,9 @@ class RoboFile extends RoboTasks {
   }
 
   /**
-   * Builds the top-level drupal-org.make file from the panopoly_* features.
-   *
-   * @todo This should probably use $this->taskConcat()
+   * Gets the contents for the top-level drupal-org.make file from the features.
    */
-  public function buildDrupalOrgMake() {
+  protected function getDrupalOrgMakeContents() {
     $drupal_org_make = <<<EOF
 ;
 ; GENERATED FILE - DO NOT EDIT!
@@ -261,7 +259,39 @@ EOF;
       }
     }
 
-    file_put_contents(__DIR__ . '/drupal-org.make', $drupal_org_make);
+    return $drupal_org_make;
+  }
+
+  /**
+   * Builds the top-level drupal-org.make file from the panopoly_* features.
+   */
+  public function buildDrupalOrgMake() {
+    file_put_contents(__DIR__ . '/drupal-org.make', $this->getDrupalOrgMakeContents());
+  }
+
+  /**
+   * Setup git for use by maintainers.
+   */
+  public function gitSetup() {
+    $pre_commit_script = <<<EOF
+#!/bin/bash
+
+exec ./vendor/bin/robo git:pre-commit
+EOF;
+
+    $pre_commit_filename = __DIR__ . '/.git/hooks/pre-commit';
+    file_put_contents($pre_commit_filename, $pre_commit_script);
+    chmod($pre_commit_filename, 0774);
+  }
+
+  /**
+   * Perform pre-commit checks. Intended to be run as a Git pre-commit hook.
+   */
+  public function gitPreCommit() {
+    // @todo This should really use 'git show :FILE' to get the current file from the index rather than disk
+    if (file_get_contents(__DIR__ . '/drupal-org.make') !== $this->getDrupalOrgMakeContents()) {
+      throw new \Exception("drupal-org.make contents out-of-date! Run 'robo build:drupal-org-make'");
+    }
   }
 
   /**
