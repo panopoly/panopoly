@@ -13,6 +13,8 @@ dependencies:
   - panopoly_theme
   - path
   - pathauto
+  - radix_layouts
+  - system
   - text
   - user
 package: Panopoly
