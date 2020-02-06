@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default theme implementation for Panopoly magic previews.
+ *
+ * @ingroup themeable
+ */
+#}
+<div {{ attributes.addClass('panopoly-magic-preview-wrapper').addClass('clearfix') }}>
+  <div class="panopoly-magic-preview-title-wrapper clearfix">
+    {% if add_link %}
+      <div class="panopoly-magic-preview-add-link">{{ add_link }}</div>
+    {% endif %}
+    <span class="panopoly-magic-preview-title-inner">{{ title }}</span>
+  </div>
+  <div class="panopoly-magic-preview-inner">
+    {{ preview }}
+  </div>
+</div>
+

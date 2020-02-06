@@ -1,0 +1,47 @@
+<?php
+/**
+ * @file
+ * Hooks for panopoly_magic_preview_test.
+ */
+
+/**
+ * Implements hook_block_alter().
+ */
+function panopoly_magic_preview_test_block_alter(&$definitions) {
+  if (!empty($definitions['panopoly_magic_preview_test_altered_settings'])) {
+    $definitions['panopoly_magic_preview_test_altered_settings']['preview_settings'] = [
+      'message' => 'The altered message',
+    ];
+  }
+
+  if (!empty($definitions['panopoly_magic_preview_test_altered_image'])) {
+    $definitions['panopoly_magic_preview_test_altered_image']['preview_image'] = drupal_get_path('module', 'panopoly_magic_preview_test') . '/images/block-preview.png';
+    $definitions['panopoly_magic_preview_test_altered_image']['preview_alt'] = t("panopoly_magic_preview_test: altered preview image");
+  }
+
+  if (!empty($definitions['panopoly_magic_preview_test_altered_preview'])) {
+    $definitions['panopoly_magic_preview_test_altered_preview']['preview_callback'] = '_panopoly_magic_preview_test_preview_callback';
+  }
+
+  if (!empty($definitions['inline_block:panopoly_magic_preview_test'])) {
+    $definitions['inline_block:panopoly_magic_preview_test']['preview_settings'] = [
+      'body' => "panopoly_magic_preview_test: content entity preview field value",
+    ];
+  }
+}
+
+/**
+ * Block preview callback.
+ *
+ * @param \Drupal\Core\Block\BlockPluginInterface $block_plugin
+ *   The block plugin
+ *
+ * @return array
+ *   The render array.
+ */
+function _panopoly_magic_preview_test_preview_callback(\Drupal\Core\Block\BlockPluginInterface $block_plugin) {
+  return [
+    '#markup' => t("panopoly_magic_preview_test: block preview from a callback"),
+  ];
+}
+

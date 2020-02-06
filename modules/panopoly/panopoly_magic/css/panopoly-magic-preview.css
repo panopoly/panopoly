@@ -1,0 +1,37 @@
+/**
+ * @file
+ * Styles for the Panopoly previews.
+ */
+
+#drupal-off-canvas .panopoly-magic-preview-wrapper {
+  margin: .5em 0;
+  border: 1px solid darkgray;
+}
+
+#drupal-off-canvas .panopoly-magic-preview-title-wrapper {
+  color: black;
+  background-color: lightgray;
+  border-bottom: 1px solid darkgray;
+  padding: 2px;
+}
+#drupal-off-canvas .panopoly-magic-preview-title-inner {
+  color: black;
+  background-color: lightgray;
+  margin: 0 2px;
+}
+
+#drupal-off-canvas .panopoly-magic-preview-add-link {
+  float: right;
+  background-color: green;
+  color: white;
+  border: 1px solid darkgreen;
+  padding: 2px;
+}
+#drupal-off-canvas .panopoly-magic-preview-add-link * {
+  color: white;
+  background-color: green;
+}
+
+#drupal-off-canvas .panopoly-magic-preview-inner {
+  padding: .5em;
+}

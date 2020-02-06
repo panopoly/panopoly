@@ -1,0 +1,10 @@
+name: 'Panopoly Magic Preview Test'
+description: 'Test module for Panopoly Magic block previews'
+type: module
+core: 8.x
+dependencies:
+  - block_content
+  - field
+  - panopoly_magic
+  - text
+package: Testing

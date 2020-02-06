@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.panopoly_magic_preview_test
+    - field.field.block_content.panopoly_magic_preview_test.body
+  module:
+    - text
+id: block_content.panopoly_magic_preview_test.default
+targetEntityType: block_content
+bundle: panopoly_magic_preview_test
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

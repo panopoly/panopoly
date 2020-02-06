@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: panopoly_magic_preview_test
+label: 'Panopoly Magic Preview Test'
+revision: 0
+description: 'For testing the Panopoly Magic Preview.'

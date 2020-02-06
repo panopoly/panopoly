@@ -1,0 +1,5 @@
+preview:
+  version: VERSION
+  css:
+    theme:
+      css/panopoly-magic-preview.css: {}

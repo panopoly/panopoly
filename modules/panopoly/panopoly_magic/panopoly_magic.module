@@ -18,3 +18,24 @@ function panopoly_magic_form_layout_builder_update_block_alter(&$form, \Drupal\C
   \Drupal::service('panopoly_magic.alterations.reusable_blocks')->alterForm($form, $form_state, $form_id);
 }
 
+/**
+ * Implements hook_theme().
+ */
+function panopoly_magic_theme() {
+  return [
+    'panopoly_magic_preview' => [
+      'render element' => 'preview',
+    ]
+  ];
+}
+
+/**
+ * Default preprocess hook for panopoly-magic-theme.html.twig template.
+ */
+function template_preprocess_panopoly_magic_preview(&$vars) {
+  $preview =& $vars['preview'];
+  $vars['title'] = $preview['#title'];
+  $vars['add_link'] = $preview['add_link'];
+  unset($preview['add_link']);
+}
+
