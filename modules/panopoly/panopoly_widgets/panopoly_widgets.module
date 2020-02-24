@@ -281,9 +281,10 @@ function panopoly_widgets_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'fieldable_panels_panes_fieldable_panels_pane_content_type_edit_form') {
 
     // Add fields to the FPP object if we are adding a reusable object for the first time
-    if ($form_state['entity']->reusable && $form_state['op'] == 'add' && $form_state['rebuild'] == FALSE) {
+    if ($form_state['entity']->reusable && $form_state['op'] == 'add') {
       if (fieldable_panels_panes_access('update', $form_state['entity'])) {
         $form = fieldable_panels_panes_entity_edit_form($form, $form_state);
+        $form_state['no update entity'] = FALSE;
       }
       else {
         $form['message']['#markup'] = '<p>' . t("You don't have permission to edit this widget.") . '</p>';
