@@ -3,3 +3,8 @@ preview:
   css:
     theme:
       css/panopoly-magic-preview.css: {}
+  js:
+    js/panopoly-magic-preview.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

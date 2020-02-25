@@ -27,6 +27,19 @@ class RouteSubscriber extends RouteSubscriberBase {
         '_title' => $route->getDefault('title'),
       ]);
     }
+
+    // Replace the layout builder add block route with our own.
+    if ($route = $collection->get('layout_builder.add_block')) {
+      $route->setDefaults([
+        '_controller' => '\Drupal\panopoly_magic\Controller\LayoutBuilderAddBlockController::addBlock',
+        '_title' => $route->getDefault('title'),
+      ]);
+    }
+
+    // Replace the layout builder update block form with our own.
+    if ($route = $collection->get('layout_builder.update_block')) {
+      $route->setDefault('_form', '\Drupal\panopoly_magic\Form\LayoutBuilderUpdateBlockForm');
+    }
   }
 
 }
