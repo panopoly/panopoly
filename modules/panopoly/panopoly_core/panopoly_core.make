@@ -83,6 +83,7 @@ projects[field_group][subdir] = contrib
 projects[link][version] = 1.7
 projects[link][subdir] = contrib
 projects[link][patch][2666912] = https://www.drupal.org/files/issues/2019-11-18/link-revert-url-validation-2666912-54.patch
+projects[link][patch][3120382] = https://www.drupal.org/files/issues/2020-03-17/link-panopoly-magic-notice-3120382-2.patch
 
 ; Harness the Power of Features and Apps with Default Content
 
