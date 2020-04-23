@@ -476,6 +476,13 @@ function panopoly_magic_form_alter(&$form, &$form_state, $form_id) {
 
     // only render preview for Panes and not Regions
     if (isset($pane)) {
+      // If there is no context mapping, use the default.
+      ctools_include('content');
+      $plugin = ctools_content_get_subtype($pane->type, $pane->subtype);
+      if (!isset($configuration['context']) && !empty($plugin['required context'])) {
+        $configuration['context'] = _panopoly_magic_default_context_mapping($context, $plugin['required context']);
+      }
+
       // Creates preview outside of form itself to fix various bugs, like form
       // inside form and double rendering.
       $form['#post_render'][] = 'panopoly_magic_form_post_render_preview';
@@ -1588,6 +1595,28 @@ function panopoly_magic_views_pre_view(&$view) {
 }
 
 /**
+ * Gets the default context mapping given the requirements.
+ */
+function _panopoly_magic_default_context_mapping($contexts, $requirements) {
+  $mapping = array();
+
+  if (!is_array($requirements)) {
+    $requirements = array($requirements);
+  }
+
+  foreach ($requirements as $id => $required) {
+    // Choose the first matching context.
+    $options = ctools_context_filter($contexts, $required);
+    if (count($options) > 0) {
+      $option_ids = array_keys($options);
+      $mapping[$id] = $option_ids[0];
+    }
+  }
+
+  return $mapping;
+}
+
+/**
  * Default 'preview callback' for widgets when we can't find something more specific.
  */
 function panopoly_magic_preview_callback_default($type, $subtype, $plugin, $renderer) {
@@ -1596,6 +1625,10 @@ function panopoly_magic_preview_callback_default($type, $subtype, $plugin, $rend
   // Mix in requested settings.
   if (!empty($plugin['preview settings'])) {
     $pane->configuration = array_merge($pane->configuration, $plugin['preview settings']);
+  }
+
+  if (!isset($pane->configuration['context']) && !empty($plugin['required context'])) {
+    $pane->configuration['context'] = _panopoly_magic_default_context_mapping($renderer->display->context, $plugin['required context']);
   }
 
   $display = $renderer->display;
