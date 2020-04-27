@@ -544,6 +544,7 @@ function panopoly_widgets_field_default_field_instances() {
           'rebuild' => array(
             'count_cols' => 2,
             'count_rows' => 3,
+            'header_orientation' => 'Horizontal',
             'rebuild' => 'Rebuild Table',
           ),
           'tabledata' => array(
@@ -571,7 +572,6 @@ function panopoly_widgets_field_default_field_instances() {
         'module' => 'tablefield',
         'settings' => array(
           'export_csv' => 0,
-          'header_orientation' => 'Horizontal',
           'hide_cols_skip_head' => 0,
           'hide_empty_cols' => 0,
           'hide_empty_rows' => 0,
