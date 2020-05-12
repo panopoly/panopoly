@@ -71,7 +71,7 @@ Feature: Add table widget
       And I wait for the Panels IPE to deactivate
     Then I should see "Widget title"
       And I should see "c-3-r-2"
-      And I should see "c-1-r-2" in the "th" element with the "scope" attribute set to "row" in the "Boxton Content" region
+      And I should see "c-1-r-2" in the "th" element in the "Boxton Content" region
 
   @api @javascript @panopoly_widgets
   Scenario: Set header orientation to Both
@@ -94,5 +94,5 @@ Feature: Add table widget
       And I wait for the Panels IPE to deactivate
     Then I should see "Widget title"
       And I should see "c-3-r-2"
-      And I should see "c-1-r-2" in the "th" element with the "scope" attribute set to "row" in the "Boxton Content" region
+      And I should see "c-1-r-2" in the "th" element in the "Boxton Content" region
       And I should see "c-2-r-1" in the "th" element with the "scope" attribute set to "col" in the "Boxton Content" region
