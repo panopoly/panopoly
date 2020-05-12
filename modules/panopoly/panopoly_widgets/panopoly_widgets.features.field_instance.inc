@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * panopoly_widgets.features.field_instance.inc
@@ -291,6 +292,7 @@ function panopoly_widgets_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'simple_gmap',
         'settings' => array(
+          'apikey' => '',
           'iframe_height' => 400,
           'iframe_title' => 'Google Map of [address]',
           'iframe_width' => 600,
@@ -373,7 +375,9 @@ function panopoly_widgets_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'link',
-        'settings' => array(),
+        'settings' => array(
+          'custom_title' => '',
+        ),
         'type' => 'link_default',
         'weight' => 0,
       ),
@@ -544,6 +548,7 @@ function panopoly_widgets_field_default_field_instances() {
           'rebuild' => array(
             'count_cols' => 2,
             'count_rows' => 3,
+            'header_orientation' => 'Horizontal',
             'rebuild' => 'Rebuild Table',
           ),
           'tabledata' => array(

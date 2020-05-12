@@ -7,6 +7,7 @@ core = 7.x
 
 projects[tablefield][version] = 3.5
 projects[tablefield][subdir] = contrib
+projects[tablefield][patch][3128030] = https://www.drupal.org/files/issues/2020-04-22/tablefield-header-orientation-3128030-5.patch
 
 projects[simple_gmap][version] = 1.4
 projects[simple_gmap][subdir] = contrib

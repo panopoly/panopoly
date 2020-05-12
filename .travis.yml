@@ -1,172 +1,36 @@
-# @file
-# .travis.yml - Drupal for Travis CI Integration
-#
-# Template provided by https://github.com/LionsAd/drupal_ti.
-#
-# Based for simpletest upon:
-#   https://github.com/sonnym/travis-ci-drupal-module-example
-
 language: php
-
 sudo: false
-
 services:
-  - mysql
-
+    - mysql
 php:
-  - 5.6
-
+    - 5.6
 matrix:
-  fast_finish: true
-  allow_failures:
-    - php: "hhvm"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-    - php: "7.2"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-  include:
-    - php: "7"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-    - php: "5.5"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-    - php: "5.4"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-    - php: "hhvm"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-
+    fast_finish: true
+    allow_failures: [{ php: hhvm, env: 'UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1' }, { php: '7.2', env: 'UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1' }]
 env:
-  global:
-    # add composer's global bin directory to the path
-    # see: https://github.com/drush-ops/drush#install---composer
-    - PATH="$PATH:$HOME/.composer/vendor/bin"
-
-    # Configuration variables.
-    - DRUPAL_TI_DISTRIBUTION_NAME="panopoly"
-    #- DRUPAL_TI_MODULE_NAME="[[[FILL THIS OUT]]]"
-    #- DRUPAL_TI_SIMPLETEST_GROUP="[[[FILL THIS OUT]]]"
-
-    # Define runners and environment vars to include before and after the
-    # main runners / environment vars.
-    #- DRUPAL_TI_SCRIPT_DIR_BEFORE="./.drupal_ti/before"
-    - DRUPAL_TI_SCRIPT_DIR_AFTER="./.drupal-ti"
-
-    # The environment to use, supported are: drupal-7, drupal-8
-    - DRUPAL_TI_ENVIRONMENT="drupal-7"
-
-    # Drupal specific variables.
-    - DRUPAL_TI_DB="drupal_travis_db"
-    - DRUPAL_TI_DB_URL="mysql://root:@127.0.0.1/drupal_travis_db"
-    # Note: Do not add a trailing slash here.
-    - DRUPAL_TI_WEBSERVER_URL="http://127.0.0.1"
-    # Note: http://cgit.drupalcode.org/panopoly_test/tree/behat/behat.travis.yml depends on that port.
-    - DRUPAL_TI_WEBSERVER_PORT="8888"
-
-    # Simpletest specific commandline arguments, the DRUPAL_TI_SIMPLETEST_GROUP is appended at the end.
-    - DRUPAL_TI_SIMPLETEST_ARGS="--verbose --color --concurrency 4 --url $DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT"
-
-    # === Behat specific variables.
-    # This is relative to $TRAVIS_BUILD_DIR
-    - DRUPAL_TI_BEHAT_DIR="./profiles/panopoly/modules/panopoly/panopoly_test/behat"
-    # These arguments are passed to the bin/behat command.
-    - DRUPAL_TI_BEHAT_ARGS=""
-    # Specify the filename of the behat.yml with the $DRUPAL_TI_DRUPAL_DIR variables.
-    # @todo This is ignored right now.
-    - DRUPAL_TI_BEHAT_YML="behat.travis.yml.dist"
-    # This is used to setup Xvfb.
-    - DRUPAL_TI_BEHAT_SCREENSIZE_COLOR="1920x1080x24"
-    # The version of selenium that should be used.
-    - DRUPAL_TI_BEHAT_SELENIUM_VERSION="2.47.1"
-    - DRUPAL_TI_BEHAT_DRIVER="selenium"
-    # We use both chrome and firefox, but this makes chromedriver available.
-    - DRUPAL_TI_BEHAT_BROWSER="chrome"
-    # Pin to Chrome 56.
-    - DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/lnx/chrome64_56.0.2924.87.deb"
-    - DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="2.27"
-
-    # PHPUnit specific commandline arguments.
-    - DRUPAL_TI_PHPUNIT_ARGS=""
-
-    # Code coverage via coveralls.io
-    - DRUPAL_TI_COVERAGE="satooshi/php-coveralls:0.6.*"
-    # This needs to match your .coveralls.yml file.
-    - DRUPAL_TI_COVERAGE_FILE="build/logs/clover.xml"
-
-    # Debug options
-    #- DRUPAL_TI_DEBUG="-x -v"
-    # Set to "all" to output all files, set to e.g. "xvfb selenium" or "selenium",
-    # etc. to only output those channels.
-    #- DRUPAL_TI_DEBUG_FILE_OUTPUT="xvfb selenium webserver"
-
-    # Use a custom runner for now.
-    # @todo Move functionality back upstream.
-    - DRUPAL_TI_RUNNERS="panopoly-behat"
-    # [[[ SELECT ANY OR MORE OPTIONS ]]]
-    #- DRUPAL_TI_RUNNERS="phpunit"
-    #- DRUPAL_TI_RUNNERS="simpletest"
-    #- DRUPAL_TI_RUNNERS="behat"
-    #- DRUPAL_TI_RUNNERS="phpunit simpletest behat"
-  matrix:
-    - UPGRADE=none     INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-    - UPGRADE=7.x-1.72
-    - UPGRADE=7.x-1.71
-    - UPGRADE=7.x-1.70
-    - UPGRADE=7.x-1.69
-    - UPGRADE=7.x-1.68
-    - UPGRADE=7.x-1.67
-    - UPGRADE=7.x-1.66
-    - UPGRADE=7.x-1.65
-    - UPGRADE=7.x-1.64
-    - UPGRADE=7.x-1.63
-    - UPGRADE=7.x-1.62
-    - UPGRADE=7.x-1.61
-    - UPGRADE=7.x-1.60
-    - UPGRADE=7.x-1.59
-    - UPGRADE=7.x-1.58
-    - UPGRADE=7.x-1.57
-    - UPGRADE=7.x-1.56
-    - UPGRADE=7.x-1.55
-
-# Cache Composer & Drush directories.
+    global: ['PATH="$PATH:$HOME/.composer/vendor/bin"', 'DRUPAL_TI_DISTRIBUTION_NAME="panopoly"', 'DRUPAL_TI_SCRIPT_DIR_AFTER="./.drupal-ti"', 'DRUPAL_TI_ENVIRONMENT="drupal-7"', 'DRUPAL_TI_DB="drupal_travis_db"', 'DRUPAL_TI_DB_URL="mysql://root:@127.0.0.1/drupal_travis_db"', 'DRUPAL_TI_WEBSERVER_URL="http://127.0.0.1"', 'DRUPAL_TI_WEBSERVER_PORT="8888"', 'DRUPAL_TI_SIMPLETEST_ARGS="--verbose --color --concurrency 4 --url $DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT"', 'DRUPAL_TI_BEHAT_DIR="./profiles/panopoly/modules/panopoly/panopoly_test/behat"', 'DRUPAL_TI_BEHAT_ARGS=""', 'DRUPAL_TI_BEHAT_YML="behat.travis.yml.dist"', 'DRUPAL_TI_BEHAT_SCREENSIZE_COLOR="1920x1080x24"', 'DRUPAL_TI_BEHAT_SELENIUM_VERSION="2.47.1"', 'DRUPAL_TI_BEHAT_DRIVER="selenium"', 'DRUPAL_TI_BEHAT_BROWSER="chrome"', 'DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/lnx/chrome64_56.0.2924.87.deb"', 'DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="2.27"', 'DRUPAL_TI_PHPUNIT_ARGS=""', 'DRUPAL_TI_COVERAGE="satooshi/php-coveralls:0.6.*"', 'DRUPAL_TI_COVERAGE_FILE="build/logs/clover.xml"', 'DRUPAL_TI_RUNNERS="panopoly-behat"']
+    matrix: ['UPGRADE=none     INSTALL_PANOPOLY_DEMO_FROM_APPS=1', UPGRADE=7.x-1.72]
 cache:
-  directories:
-    - $HOME/.composer/cache
-    - $HOME/.drush/cache
-
+    directories: [$HOME/.composer/cache, $HOME/.drush/cache]
 mysql:
-  database: drupal_travis_db
-  username: root
-  encoding: utf8
-
+    database: drupal_travis_db
+    username: root
+    encoding: utf8
 before_install:
-  - composer self-update
-  - composer global require "lionsad/drupal_ti:dev-master"
-  - sudo apt-get install -y libgconf-2-4
-  - drupal-ti before_install
-
+    - 'composer self-update'
+    - 'composer global require "lionsad/drupal_ti:dev-master"'
+    - 'sudo apt-get install -y libgconf-2-4'
+    - 'drupal-ti before_install'
 install:
-  - drupal-ti install
-
+    - 'drupal-ti install'
 before_script:
-  - drupal-ti before_script
-
+    - 'drupal-ti before_script'
 script:
-  - drupal-ti script
-
+    - 'drupal-ti script'
 after_script:
-  - drupal-ti after_script
-
-# For now, don't test 8.x-2.x.
+    - 'drupal-ti after_script'
 branches:
-  except:
-    - 8.x-2.x
-
+    except: [8.x-2.x]
 notifications:
-  email:
-    recipients:
-      - panopoly-ci@googlegroups.com
-    on_success: always
-    on_failure: always
-  irc:
-    channels:
-      - "chat.freenode.net#panopoly"
-    on_success: always
-    on_failure: always
+    email: { recipients: [panopoly-ci@googlegroups.com], on_success: always, on_failure: always }
+    irc: { channels: ['chat.freenode.net#panopoly'], on_success: always, on_failure: always }
