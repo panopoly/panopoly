@@ -5,7 +5,7 @@ core = 7.x
 
 ; Panopoly - Contrib - Fields
 
-projects[tablefield][version] = 3.5
+projects[tablefield][version] = 3.6
 projects[tablefield][subdir] = contrib
 projects[tablefield][patch][3128030] = https://www.drupal.org/files/issues/2020-04-22/tablefield-header-orientation-3128030-5.patch
 
