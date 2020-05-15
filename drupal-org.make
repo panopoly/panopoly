@@ -310,7 +310,7 @@ projects[menu_block][subdir] = contrib
 projects[file_entity][version] = 2.27
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.24
+projects[media][version] = 2.26
 projects[media][subdir] = contrib
 
 projects[media_youtube][version] = 3.9
