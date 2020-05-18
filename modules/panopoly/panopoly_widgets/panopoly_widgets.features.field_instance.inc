@@ -576,7 +576,6 @@ function panopoly_widgets_field_default_field_instances() {
         'module' => 'tablefield',
         'settings' => array(
           'export_csv' => 0,
-          'header_orientation' => 'Horizontal',
           'hide_cols_skip_head' => 0,
           'hide_empty_cols' => 0,
           'hide_empty_rows' => 0,
