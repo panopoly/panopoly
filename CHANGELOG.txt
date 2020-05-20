@@ -1,3 +1,7 @@
+Panopoly 7.x-1.73, 2020-05-20
+-------------------
+- Issue #3138388: Update to Drupal 7.70 for SA-CORE-2020-002 and SA-CORE-2020-003
+
 Panopoly 7.x-1.72, 2019-12-19
 -------------------
 - Issue #3102147: Update to Drupal 7.69 for SA-CORE-2019-012.
