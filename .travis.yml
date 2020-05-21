@@ -100,7 +100,6 @@ env:
   matrix:
     - UPGRADE=none     INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - UPGRADE=7.x-1.74
-    - UPGRADE=7.x-1.73
     - UPGRADE=7.x-1.72
     - UPGRADE=7.x-1.71
     - UPGRADE=7.x-1.70
