@@ -83,6 +83,9 @@ env:
     # This needs to match your .coveralls.yml file.
     - DRUPAL_TI_COVERAGE_FILE="build/logs/clover.xml"
 
+    # Print out PHP notices that come up during Behat tests.
+    - PANOPOLY_BEHAT_FLAG_PHP_NOTICES=1
+
     # Debug options
     #- DRUPAL_TI_DEBUG="-x -v"
     # Set to "all" to output all files, set to e.g. "xvfb selenium" or "selenium",
