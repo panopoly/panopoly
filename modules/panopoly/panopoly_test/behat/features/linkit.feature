@@ -11,7 +11,7 @@ Feature: Link to page on the site
         | Title  | Testing Linkit       |
         | Editor | panopoly_wysiwyg_text |
 
-  @api @javascript @panopoly_wysiwyg @wip
+  @api @javascript @panopoly_wysiwyg
   Scenario: Add a link to an internal page
     When I click the "Link to content" button in the "edit-body-und-0-value" WYSIWYG editor
       And I type "target" into "edit-linkit-search" field
