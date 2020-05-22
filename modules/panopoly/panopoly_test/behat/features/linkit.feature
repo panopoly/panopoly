@@ -11,16 +11,15 @@ Feature: Link to page on the site
         | Title  | Testing Linkit       |
         | Editor | panopoly_wysiwyg_text |
 
-  @api @javascript @panopoly_wysiwyg
+  @api @javascript @panopoly_wysiwyg @wip
   Scenario: Add a link to an internal page
     When I click the "Link to content" button in the "edit-body-und-0-value" WYSIWYG editor
       And I fill in "edit-linkit-search" with "target"
-      And I wait 1 seconds
+      And I wait 3 seconds
       And I press the "Tab" key in the "edit-linkit-search" field
     When I click "Options" in the "Linkit modal" region
       And I fill in "edit-linkit-title" with "Testing title"
       And I press "Insert link"
-      And I wait 3 seconds
       # Normally, here we'd press "Publish", however some child distribtions
       # don't use 'save_draft', and this makes this test compatible with them.
       #And I press "Publish"
