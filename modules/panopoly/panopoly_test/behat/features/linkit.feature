@@ -20,6 +20,7 @@ Feature: Link to page on the site
     When I click "Options" in the "Linkit modal" region
       And I fill in "edit-linkit-title" with "Testing title"
       And I press "Insert link"
+      And I wait 3 seconds
       # Normally, here we'd press "Publish", however some child distribtions
       # don't use 'save_draft', and this makes this test compatible with them.
       #And I press "Publish"
