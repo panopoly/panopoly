@@ -699,7 +699,14 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     // Create a new user.
     $this->getDriver()->userCreate($user);
 
-    $this->users[$user->name] = $this->user = $user;
+    if (method_exists($this, 'getUserManager')) {
+      $user_manager = $this->getUserManager();
+      $user_manager->addUser($user);
+      $user_manager->setCurrentUser($user);
+    }
+    else {
+      $this->users[$user->name] = $this->user = $user;
+    }
 
     $base_url = rtrim($this->locatePath('/'), '/');
     $login_link = $this->getDriver('drush')->drush('uli', array(
