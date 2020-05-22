@@ -772,6 +772,20 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * @When I type :text into :field field
+   */
+  public function iTypeIntoField($text, $field) {
+    // The builtin "I fill in..." step will immediately move focus out of the
+    // field, which makes it impossible to test autocomplete. This step puts the
+    // value in without changing focus.
+    $this->getSession()
+      ->getDriver()
+      ->getWebDriverSession()
+      ->element('xpath', $this->getSession()->getSelectorsHandler()->selectorToXpath('named_exact', array('field', $field)))
+      ->postValue(array('value' => array($text)));
+  }
+
+  /**
    * @Then I should see :text in the :tag element in the :region region
    */
   public function assertRegionElementText($text, $tag, $region) {
