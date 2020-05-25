@@ -699,7 +699,14 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     // Create a new user.
     $this->getDriver()->userCreate($user);
 
-    $this->users[$user->name] = $this->user = $user;
+    if (method_exists($this, 'getUserManager')) {
+      $user_manager = $this->getUserManager();
+      $user_manager->addUser($user);
+      $user_manager->setCurrentUser($user);
+    }
+    else {
+      $this->users[$user->name] = $this->user = $user;
+    }
 
     $base_url = rtrim($this->locatePath('/'), '/');
     $login_link = $this->getDriver('drush')->drush('uli', array(
@@ -762,6 +769,20 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     }
 
     throw new \Exception(sprintf('The link or button "%s" was not found on the page %s', $text, $this->getSession()->getCurrentUrl()));
+  }
+
+  /**
+   * @When I type :text into :field field
+   */
+  public function iTypeIntoField($text, $field) {
+    // The builtin "I fill in..." step will immediately move focus out of the
+    // field, which makes it impossible to test autocomplete. This step puts the
+    // value in without changing focus.
+    $this->getSession()
+      ->getDriver()
+      ->getWebDriverSession()
+      ->element('xpath', $this->getSession()->getSelectorsHandler()->selectorToXpath('named_exact', array('field', $field)))
+      ->postValue(array('value' => array($text)));
   }
 
   /**
