@@ -50,8 +50,9 @@ projects[admin_menu][subdir] = contrib
 ; jQuery Update was moved to Panopoly Core, but is left in Panopoly Admin's
 ; .make file to retain a stable 1.x branch of Panopoly. See the following URL
 ; for more information: http://drupal.org/node/2492811
-projects[jquery_update][version] = 2.7
+projects[jquery_update][version] = 3.0-alpha5
 projects[jquery_update][subdir] = contrib
+projects[jquery_update][patch][2939759] = https://www.drupal.org/files/issues/2018-11-28/jquery_update-3.x-latest-safe-jquery-jquery_ui-cookie-2939759-12-2197253-12-binary_0.patch
 
 ; Libraries
 libraries[backbone][download][type] = get
@@ -182,8 +183,9 @@ projects[migrate_extras][subdir] = "contrib"
 ; jQuery Update was moved to Panopoly Core, but is left in Panopoly Admin's
 ; .make file to retain a stable 1.x branch of Panopoly. See the following URL
 ; for more information: http://drupal.org/node/2492811
-projects[jquery_update][version] = 2.7
+projects[jquery_update][version] = 3.0-alpha5
 projects[jquery_update][subdir] = contrib
+projects[jquery_update][patch][2939759] = https://www.drupal.org/files/issues/2018-11-28/jquery_update-3.x-latest-safe-jquery-jquery_ui-cookie-2939759-12-2197253-12-binary_0.patch
 
 ; Recommended Modules
 projects[devel][version] = 1.7
