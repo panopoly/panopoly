@@ -14,7 +14,7 @@ services:
   - mysql
 
 php:
-  - 7.2
+  - 7.4
 
 matrix:
   fast_finish: true
@@ -36,7 +36,7 @@ env:
     - DRUPAL_TI_DISTRIBUTION_NAME="panopoly"
     #- DRUPAL_TI_MODULE_NAME="[[[FILL THIS OUT]]]"
     #- DRUPAL_TI_SIMPLETEST_GROUP="[[[FILL THIS OUT]]]"
-    - DRUPAL_TI_DRUSH_VERSION="drush/drush:8.1.*"
+    - DRUPAL_TI_DRUSH_VERSION="drush/drush:8.4.*"
 
     # Define runners and environment vars to include before and after the
     # main runners / environment vars.
