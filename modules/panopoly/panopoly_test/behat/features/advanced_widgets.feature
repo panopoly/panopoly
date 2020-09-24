@@ -3,13 +3,12 @@ Feature: Hide/show advanced widgets
   As a site administrator
   I need to be able to hide or show advanced widgets
  
-  @api @javascript @panopoly_admin @wip
+  @api @javascript @panopoly_admin
   Scenario: Configure "Use Advanced Panel Plugins"
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
       And Panopoly admin "Use Advanced Panel Plugins" is disabled
       And I am viewing a landing page
-      And I take a screenshot
     When I customize this page with the Panels IPE
       And I click "Add new pane"
     Then I should not see "Panopoly Test Advanced" in the "CTools modal" region
