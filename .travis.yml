@@ -13,18 +13,17 @@ sudo: false
 services:
   - mysql
 
-# @todo Default to PHP 7.4 once all the upgrade tests will work with it.
 php:
-  - 7.2
+  - 7.4
 
 matrix:
   fast_finish: true
   include:
-    - php: "7.4"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - php: "7.3"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - php: "7.1"
+      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
+    - php: "7.2"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - php: "7.0"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
