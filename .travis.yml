@@ -8,7 +8,7 @@
 
 language: php
 
-sudo: false
+dist: bionic
 
 services:
   - mysql
@@ -71,14 +71,18 @@ env:
     - DRUPAL_TI_BEHAT_YML="behat.travis.yml.dist"
     # This is used to setup Xvfb.
     - DRUPAL_TI_BEHAT_SCREENSIZE_COLOR="1920x1080x24"
+    # This shouldn't be necessary, but the generic maximizeWindow() method seems not to be working.
+    - PANOPOLY_BEHAT_WINDOW_SIZE="1920x1080"
     # The version of selenium that should be used.
-    - DRUPAL_TI_BEHAT_SELENIUM_VERSION="2.47.1"
+    - DRUPAL_TI_BEHAT_SELENIUM_VERSION="2.53.1"
     - DRUPAL_TI_BEHAT_DRIVER="selenium"
     # We use both chrome and firefox, but this makes chromedriver available.
     - DRUPAL_TI_BEHAT_BROWSER="chrome"
     # Pin to Chrome 56.
-    - DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/lnx/chrome64_56.0.2924.87.deb"
-    - DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="2.27"
+    #- DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/lnx/chrome64_56.0.2924.87.deb"
+    #- DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="2.27"
+    - DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/files/80.0.3987.149/google-chrome-stable_current_amd64.deb"
+    - DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="80.0.3987.106"
 
     # PHPUnit specific commandline arguments.
     - DRUPAL_TI_PHPUNIT_ARGS=""
