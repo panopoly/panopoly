@@ -72,14 +72,15 @@ Feature: Add image widget
     When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
+    # Switch to Phelan layout so image isn't stretched so big.
     When I change layout with the Panels IPE
       And I click "Phelan"
       And I press "Save" in the "CTools modal" region
       And I wait for the Panels IPE to deactivate
     Then I should see "Testing image widget title"
-      And I should see the image alt "Testing alt text" in the "Boxton Content" region
-      And I should see the link "Testing alt text" in the "Boxton Content" region
-    When I follow "Testing alt text" in the "Boxton Content" region
+      And I should see the image alt "Testing alt text" in the "Phelan Column 1" region
+      And I should see the link "Testing alt text" in the "Phelan Column 1" region
+    When I follow "Testing alt text" in the "Phelan Column 1" region
     Then the url should match "/project/panopoly"
 
   # TODO: we use the @panopoly_wysiwyg tag because that is where Linkit comes

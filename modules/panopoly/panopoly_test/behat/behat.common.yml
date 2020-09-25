@@ -42,6 +42,8 @@ default:
         Bryant Sidebar: ".bryant .radix-layouts-sidebar"
         Bryant Flipped Content: ".bryant-flipped .radix-layouts-content"
         Bryant Flipped Sidebar: ".bryant-flipped .radix-layouts-sidebar"
+        Phelan Column 1: ".phelan .radix-layouts-column1"
+        Phelan Column 2: ".phelan .radix-layouts-column2"
         # For Panels / Panopoly specific regions.
         CTools modal: "#modalContent"
         Live preview: ".panopoly-magic-preview"
