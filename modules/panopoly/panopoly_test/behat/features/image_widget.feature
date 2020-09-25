@@ -72,6 +72,10 @@ Feature: Add image widget
     When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
+    When I change layout with the Panels IPE
+      And I click "Phelan"
+      And I press "Save" in the "CTools modal" region
+      And I wait for the Panels IPE to deactivate
     Then I should see "Testing image widget title"
       And I should see the image alt "Testing alt text" in the "Boxton Content" region
       And I should see the link "Testing alt text" in the "Boxton Content" region
