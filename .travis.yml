@@ -81,8 +81,6 @@ env:
     # Pin to Chrome 56.
     #- DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/lnx/chrome64_56.0.2924.87.deb"
     #- DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="2.27"
-    - DRUPAL_TI_BEHAT_CHROME_URL="http://www.slimjetbrowser.com/chrome/files/80.0.3987.149/google-chrome-stable_current_amd64.deb"
-    - DRUPAL_TI_BEHAT_CHROMEDRIVER_VERSION="80.0.3987.106"
 
     # PHPUnit specific commandline arguments.
     - DRUPAL_TI_PHPUNIT_ARGS=""
