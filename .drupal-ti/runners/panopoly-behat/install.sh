@@ -11,9 +11,6 @@ drupal_ti_ensure_php_for_drush_webserver
 panopoly_header Installing Drush
 panopoly_ensure_drush
 
-# Patch drush for runserver issue.
-(cd $HOME/.composer/vendor/drush/drush/ && curl -L https://github.com/drush-ops/drush/pull/4553.diff | patch -p1)
-
 # Ensure the distribution is linked into the code base.
 # @todo Use drupal_ti_ensure_distribution once available.
 panopoly_ensure_distribution
