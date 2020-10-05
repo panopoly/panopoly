@@ -32,7 +32,7 @@ BEHAT="$TRAVIS_BUILD_DIR/vendor/bin/behat"
 ARGS=( $DRUPAL_TI_BEHAT_ARGS )
 
 # First, run all the tests in Firefox.
-if ! $BEHAT --tags wip --rerun "${ARGS[@]}"; then
+if ! $BEHAT --rerun "${ARGS[@]}"; then
 	echo "Failures detected. Re-running failed scenarios."
-	$BEHAT --tags wip --rerun "${ARGS[@]}"
+	$BEHAT --rerun "${ARGS[@]}"
 fi
