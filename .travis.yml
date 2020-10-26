@@ -14,16 +14,16 @@ services:
   - mysql
 
 php:
-  - 7.4
+  - 7.2
 
 matrix:
   fast_finish: true
   include:
+    - php: "7.4"
+      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - php: "7.3"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - php: "7.1"
-      env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
-    - php: "7.2"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
     - php: "7.0"
       env: UPGRADE=none INSTALL_PANOPOLY_DEMO_FROM_APPS=1
