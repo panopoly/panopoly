@@ -34,7 +34,7 @@ class MediaVideoAdd extends WidgetBase {
   public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
     $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
 
-    $form_display = entity_get_form_display('media', $this->configuration['media_type'], 'entity_browser');
+    $form_display = \Drupal::service('entity_display.repository')->getFormDisplay('media', $this->configuration['media_type'], 'entity_browser');
     $media = $this->entityTypeManager->getStorage('media')->create([
       'bundle' => $this->configuration['media_type'],
     ]);
@@ -46,7 +46,7 @@ class MediaVideoAdd extends WidgetBase {
    * {@inheritdoc}
    */
   protected function prepareEntities(array $form, FormStateInterface $form_state) {
-    $form_display = entity_get_form_display('media', $this->configuration['media_type'], 'entity_browser');
+    $form_display = \Drupal::service('entity_display.repository')->getFormDisplay('media', $this->configuration['media_type'], 'entity_browser');
     $media = $this->entityTypeManager->getStorage('media')->create([
       'bundle' => $this->configuration['media_type'],
     ]);

@@ -5,9 +5,10 @@ namespace Drupal\panopoly_media\Form;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\Url;
 use Drupal\file\FileUsage\FileUsageInterface;
-use Drupal\user\PrivateTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -33,9 +34,16 @@ class FileDeleteMultiple extends ConfirmFormBase {
   /**
    * The tempstore factory.
    *
-   * @var \Drupal\user\PrivateTempStoreFactory
+   * @var \Drupal\Core\TempStore\PrivateTempStoreFactory
    */
   protected $tempStoreFactory;
+
+  /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
 
   /**
    * The node storage.
@@ -47,17 +55,20 @@ class FileDeleteMultiple extends ConfirmFormBase {
   /**
    * Constructs a DeleteMultiple form object.
    *
-   * @param \Drupal\user\PrivateTempStoreFactory $temp_store_factory
+   * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
    *   The tempstore factory.
    * @param \Drupal\Core\Entity\EntityTypeManager $manager
    *   The entity manager.
    * @param \Drupal\file\FileUsage\FileUsageInterface $file_usage
    *   The file usage service.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
    */
-  public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityTypeManager $manager, FileUsageInterface $file_usage) {
+  public function __construct(PrivateTempStoreFactory $temp_store_factory, EntityTypeManager $manager, FileUsageInterface $file_usage, MessengerInterface $messenger) {
     $this->tempStoreFactory = $temp_store_factory;
     $this->storage = $manager->getStorage('file');
     $this->fileUsage = $file_usage;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -65,9 +76,10 @@ class FileDeleteMultiple extends ConfirmFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('user.private_tempstore'),
+      $container->get('tempstore.private'),
       $container->get('entity_type.manager'),
-      $container->get('file.usage')
+      $container->get('file.usage'),
+      $container->get('messenger')
     );
   }
 
@@ -161,7 +173,7 @@ class FileDeleteMultiple extends ConfirmFormBase {
 
       $this->logger('file')->notice('Deleted @count files.', ['@count' => $count]);
       if ($count) {
-        drupal_set_message($this->formatPlural($count, 'Deleted 1 file.', 'Deleted @count files.'));
+        $this->messenger->addMessage($this->formatPlural($count, 'Deleted 1 file.', 'Deleted @count files.'));
       }
     }
 

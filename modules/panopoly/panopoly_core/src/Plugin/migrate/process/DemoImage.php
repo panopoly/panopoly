@@ -159,9 +159,9 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
     // Apparently, file_prepare_directory() can't deal with a protocol but no
     // path, so we convert it to the real path.
     if (substr($dir, -3) == '://') {
-      $dir = $this->fileSystem->realpath($dir);
+      $dir = $this->filesystem->realpath($dir);
     }
-    if (file_prepare_directory($dir, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+    if ($this->filesystem->prepareDirectory($dir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS)) {
       return @copy($source_path, $destination_path);
     }
     return FALSE;

@@ -5,6 +5,7 @@ namespace Drupal\panopoly_media\Form;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Entity\ContentEntityDeleteForm;
 use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
@@ -26,7 +27,7 @@ class FileDeleteForm extends ContentEntityDeleteForm {
   /**
    * Constructs a FileDeleteForm object.
    *
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
    *   The entity manager.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    *   The entity type bundle service.
@@ -35,8 +36,8 @@ class FileDeleteForm extends ContentEntityDeleteForm {
    * @param \Drupal\file\FileUsage\FileUsageInterface $fileUsage
    *   The file usage service.
    */
-  public function __construct(EntityManagerInterface $entity_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, FileUsageInterface $fileUsage) {
-    parent::__construct($entity_manager, $entity_type_bundle_info, $time);
+  public function __construct(EntityRepositoryInterface $entity_repository, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, FileUsageInterface $fileUsage) {
+    parent::__construct($entity_repository, $entity_type_bundle_info, $time);
     $this->fileUsage = $fileUsage;
   }
 
@@ -45,7 +46,7 @@ class FileDeleteForm extends ContentEntityDeleteForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity.manager'),
+      $container->get('entity.repository'),
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
       $container->get('file.usage')

@@ -52,9 +52,9 @@ function _panopoly_media_create_embed_icon() {
     return $file;
   }
 
-  $source = drupal_get_path('module', 'panopoly_media') . '/images/drupalimage.png';
+  $source = __DIR__ . '/images/drupalimage.png';
   $destination = 'public://panopoly_media_icon.png';
-  if ($uri = file_unmanaged_copy($source, $destination)) {
+  if ($uri = \Drupal::service('file_system')->copy($source, $destination)) {
     $file = File::create([
       'uid' => 1,
       'filename' => basename($uri),

@@ -10,7 +10,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 /**
  * Define application features from the specific context.
  */
-class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext {
+class FeatureContext extends RawDrupalContext {
   /**
    * Initializes context.
    * Every scenario gets its own context object.

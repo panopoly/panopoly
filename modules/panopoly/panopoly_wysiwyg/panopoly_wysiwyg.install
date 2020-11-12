@@ -74,7 +74,10 @@ function panopoly_wysiwyg_update_8203() {
  * Rename the text formats on existing entities.
  */
 function panopoly_wysiwyg_update_8204(&$sandbox) {
-  $entity_manager = \Drupal::entityManager();
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::service('entity_type.manager');
 
   if (!isset($sandbox['progress'])) {
     $sandbox['progress'] = 0;
@@ -82,12 +85,12 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
     $sandbox['entities'] = [];
 
     // Find all fields and entity types that are affected.
-    foreach ($entity_manager->getFieldMap() as $entity_type_id => $entity_field_map) {
+    foreach ($entity_field_manager->getFieldMap() as $entity_type_id => $entity_field_map) {
       $sandbox['entities'][$entity_type_id] = [
         'fields' => [],
         'ids' => [],
       ];
-      foreach ($entity_manager->getFieldStorageDefinitions($entity_type_id) as $field_storage_definition) {
+      foreach ($entity_field_manager->getFieldStorageDefinitions($entity_type_id) as $field_storage_definition) {
         $field_name = $field_storage_definition->getName();
         if (!isset($entity_field_map[$field_name])) {
           continue;
@@ -111,7 +114,7 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
   else {
     $batch_count = 0;
     foreach ($sandbox['entities'] as $entity_type_id => &$entity_info) {
-      $storage = $entity_manager->getStorage($entity_type_id);
+      $storage = $entity_type_manager->getStorage($entity_type_id);
       while (count($entity_info['ids']) > 0) {
         $id = array_shift($entity_info['ids']);
         $entity = $storage->load($id);
