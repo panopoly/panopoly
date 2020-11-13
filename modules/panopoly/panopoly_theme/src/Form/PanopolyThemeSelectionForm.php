@@ -95,7 +95,7 @@ class PanopolyThemeSelectionForm extends FormBase {
     foreach ($this->themeHandler->rebuildThemeData() as $theme) {
       // Filter hidden, test and incompatible themes.
       // This assumes test themes has 'test' in their name.
-      if (!empty($theme->info['hidden']) || strpos($theme->getName(), 'test') !== FALSE || $theme->info['core'] != \DRUPAL::CORE_COMPATIBILITY) {
+      if (!empty($theme->info['hidden']) || strpos($theme->getName(), 'test') !== FALSE) {
         continue;
       }
 
