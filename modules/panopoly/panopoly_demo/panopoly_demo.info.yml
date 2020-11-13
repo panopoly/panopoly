@@ -2,6 +2,7 @@ type: module
 name: 'Panopoly Demo'
 description: 'Demo functionality and content to help show the power of Panopoly'
 core: 8.x
+core_version_requirement: ^8.8 || ^9
 package: Panopoly
 dependencies:
   - 'drupal:migrate (>= 8.1)'

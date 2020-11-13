@@ -2,6 +2,7 @@ name: Panopoly
 type: profile
 description: 'A magical framework for building Drupal product.'
 core: 8.x
+core_version_requirement: ^8.8 || ^9
 distribution:
   name: Panopoly
 dependencies:

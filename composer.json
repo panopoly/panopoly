@@ -22,7 +22,7 @@
         "drupal/colorbutton": "~1.1",
         "drupal/config_actions": "~1.0-beta4",
         "drupal/config_update": "~1.5",
-        "drupal/core": "^8.6.16",
+        "drupal/core": "^8.8 || ^9",
         "drupal/ctools": "~3.0",
         "drupal/dropzonejs": "2.x-dev",
         "drupal/editor_advanced_link": "~1.4",

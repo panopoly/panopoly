@@ -2,6 +2,7 @@ name: 'Panopoly Magic'
 description: 'Incubator for magical extensions to Layout Builder.'
 type: module
 core: 8.x
+core_version_requirement: ^8.8 || ^9
 dependencies:
   - layout_builder
 package: Panopoly
