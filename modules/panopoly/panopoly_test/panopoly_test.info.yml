@@ -1,7 +1,6 @@
 name: 'Panopoly Test'
 description: 'Provides configuration and functionality for use in the Panopoly automated tests.'
 type: module
-core: 8.x
 core_version_requirement: ^8.8 || ^9
 package: Panopoly
 hidden: true

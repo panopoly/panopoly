@@ -1,7 +1,6 @@
 name: 'Panopoly Core'
 description: 'The magical core of the Panopoly framework.'
 type: module
-core: 8.x
 core_version_requirement: ^8.8 || ^9
 dependencies:
   - ctools
