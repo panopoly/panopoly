@@ -18,7 +18,7 @@
         "drupal-ckeditor-plugin/fakeobjects": "4.*",
         "drupal-ckeditor-plugin/panelbutton": "4.*",
         "drupal-ckeditor-plugin/tabletoolstoolbar": "^0.0.1",
-        "drupal/ckeditor_drupalbreaks": "1.x-dev",
+        "drupal/ckeditor_drupalbreaks": "^2.0.0",
         "drupal/colorbutton": "~1.1",
         "drupal/config_actions": "~1.0-beta4",
         "drupal/config_update": "~1.5",
