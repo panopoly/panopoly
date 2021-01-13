@@ -1,3 +1,8 @@
 services:
   panopoly_media.img_data:
-    class: \Drupal\panopoly_media\ImgData
+    class: Drupal\panopoly_media\ImgData
+  panopoly_media.route_subscriber:
+    class: Drupal\panopoly_media\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
