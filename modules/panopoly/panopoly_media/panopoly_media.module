@@ -32,6 +32,23 @@ function panopoly_media_theme() {
 }
 
 /**
+ * Implements hook_theme_registry_alter().
+ */
+function panopoly_media_theme_registry_alter(&$theme_registry) {
+  // If in Bartik, replace the template for html--entity-browser--iframe.twig.html.
+  if (isset($theme_registry['block']['preprocess functions']) && in_array('bartik_preprocess_block', $theme_registry['block']['preprocess functions'])) {
+    // Ensure that we're using the module version of the template, and not
+    // one overridden in a sub-theme.
+    $entity_browser_iframe =& $theme_registry['html__entity_browser__iframe'];
+    if ($entity_browser_iframe['path'] === drupal_get_path('module', 'entity_browser') . '/templates') {
+      $entity_browser_iframe['template'] = 'html--entity-browser--iframe-bartik';
+      $entity_browser_iframe['theme path'] = drupal_get_path('module', 'panopoly_media');
+      $entity_browser_iframe['path'] = $entity_browser_iframe['theme path'] . '/templates';
+    }
+  }
+}
+
+/**
  * Implements hook_form_FORM_ID_alter().
  *
  * Alters the display mode offerings of the embed entity module to be more
