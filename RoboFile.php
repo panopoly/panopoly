@@ -49,7 +49,7 @@ class RoboFile extends RoboTasks {
 
   protected $COMPOSER_PROFILE_REQUIREMENTS = [
     "cweagans/composer-patches" => "^1.6.5",
-    "drupal/core" => "^8.6.16",
+    "drupal/core" => "^8.8 || ^9",
     "drupal/features" => "~3.7",
   ];
 

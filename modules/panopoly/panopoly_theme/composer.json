@@ -4,7 +4,7 @@
 	"description": "Helps with theming and provides many layouts.",
     "license": "GPL-2.0+",
     "require": {
-        "drupal/core": "^8.6.16",
+        "drupal/core": "^8.8 || ^9",
         "drupal/radix_layouts": "~4.0"
     }
 }
