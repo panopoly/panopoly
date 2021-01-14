@@ -13,60 +13,11 @@ use Drupal\Core\Utility\UpdateException;
 use Drupal\panopoly_media\Update\ContentModelUpdater;
 use Drupal\system\Entity\Action;
 
-define('PANOPOLY_MEDIA_ICON_UUID', 'a55d8d13-8e8f-406f-ba43-d3765f450325');
-define('PANOPOLY_MEDIA_EMBED_BUTTON', 'panopoly_media_wysiwyg_media_embed');
-
 /**
  * Implements hook_install().
  */
 function panopoly_media_install() {
-  // If we're able to create the icon, but the button doesn't exist, create it.
-  if (_panopoly_media_create_embed_icon() && !EmbedButton::load(PANOPOLY_MEDIA_EMBED_BUTTON)) {
-    $entity_type_manager = \Drupal::entityTypeManager();
-    /** @var \Drupal\Core\Config\StorageInterface $active_config_storage */
-    $active_config_storage = \Drupal::getContainer()->get('config.storage');
-    $extension_config_storage = new ExtensionInstallStorage($active_config_storage, InstallStorage::CONFIG_OPTIONAL_DIRECTORY, '', true, \Drupal::installProfile());
-
-    $config_data = $extension_config_storage->read('embed.button.' . PANOPOLY_MEDIA_EMBED_BUTTON);
-    /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $entity_storage */
-    $entity_storage = $entity_type_manager->getStorage('embed_button');
-    $entity = $entity_storage->createFromStorageRecord($config_data);
-    $entity->save();
-  }
-
   _panopoly_media_set_delete_config();
-}
-
-/**
- * Create media embed icon.
- *
- * @return \Drupal\Core\Entity\EntityInterface|null
- *   The file entity for the icon, or NULL if there was a problem creating the
- *   icon.
- */
-function _panopoly_media_create_embed_icon() {
-  /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
-  $entity_repository = \Drupal::service('entity.repository');
-  $file = $entity_repository->loadEntityByUuid('file', PANOPOLY_MEDIA_ICON_UUID);
-  if ($file) {
-    return $file;
-  }
-
-  $source = __DIR__ . '/images/drupalimage.png';
-  $destination = 'public://panopoly_media_icon.png';
-  if ($uri = \Drupal::service('file_system')->copy($source, $destination)) {
-    $file = File::create([
-      'uid' => 1,
-      'filename' => basename($uri),
-      'uri' => $uri,
-      'status' => 1,
-      'uuid' => PANOPOLY_MEDIA_ICON_UUID,
-    ]);
-    $file->save();
-    return $file;
-  }
-
-  return NULL;
 }
 
 /**

@@ -9,8 +9,6 @@ dependencies:
     - media.type.panopoly_media_file
     - media.type.panopoly_media_image
     - media.type.panopoly_media_remote_video
-  content:
-    - 'file:file:a55d8d13-8e8f-406f-ba43-d3765f450325'
   module:
     - entity_embed
     - media
@@ -31,4 +29,7 @@ type_settings:
   entity_browser: panopoly_media_wysiwyg_media_browser
   entity_browser_settings:
     display_review: false
-icon_uuid: a55d8d13-8e8f-406f-ba43-d3765f450325
+icon:
+  data: iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAA2FBMVEUAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAAAAAAAGBgYAAAAAAABaWlpgYGAHBwcODg4KCgoAAAAAAAAdHR0JCQn///8VFRUZGRkZGRn///8mJiYAAAAMDAwODg4PDw8SEhITExMUFBQXFxcaGhocHBweHh4fHx8iIiIjIyMlJSUpKSkqKiotLS02NjY4ODg5OTk7Ozs8PDw+Pj5AQEBBQUFCQkJERERHR0dJSUlKSkpLS0tMTExOTk5PT09QUFBRUVFSUlJVVVVZWVl33uIHAAAAIHRSTlMACAgKFSEqTFBVYHR2fpygqq2tztXb5ebm6urv8vX4/sE9S38AAACNSURBVBgZhcFXF4FgAIDhV7bskc0XKrIyS1b2//9HnKMLXXke+E8EAIvODwuYSOlqWvKNABNlr+AzAINirYBPA/rIDZmPeAZ0QOUr2uwmMAEVUvkIodLz1YrNAY1Ye11PZg+P+7ViAeNw2bt50+XldDxvZ4CZ27jOznUd27ZXQ0AIQ9e+Bj0BdAIAKYA3G08S5VN3OnoAAAAASUVORK5CYII=
+  uri: 'public://panopoly_media_icon.png'
+
