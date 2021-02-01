@@ -1,7 +1,7 @@
 {
     "name": "drupal/panopoly_core",
     "type": "drupal-module",
-	"description": "The magical core of the Panopoly framework.",
+    "description": "The magical core of the Panopoly framework.",
     "license": "GPL-2.0+",
     "require": {
         "drupal/core": "^8.8 || ^9",
@@ -21,7 +21,8 @@
                 "Issue #2010132: Forum term canonical links": "https://www.drupal.org/files/issues/2020-10-24/2010132-132.patch",
                 "Issue #2999235: Image Formatter Links When No Access": "https://www.drupal.org/files/issues/2019-05-02/drupal-image_formatter_links-2999235-7.patch",
                 "Issue #2922569: Filtering incorrectly on 'Summary or Trimmed' fields": "https://www.drupal.org/files/issues/2019-12-10/drupal-core-2922569-9.patch",
-                "Issue #2653938: Views filter default values overridden": "https://www.drupal.org/files/issues/2021-02-01/drupal-views-filter-default-all-2653938-22.patch"
+                "Issue #2653938: Views filter default values overridden": "https://www.drupal.org/files/issues/2021-02-01/drupal-views-filter-default-all-2653938-22.patch",
+                "Issue #2958588: Off-canvas style resets are overriding styles": "https://www.drupal.org/files/issues/2021-01-06/off-canvas-style-resets-2958588-13.patch"
             }
         }
     }
