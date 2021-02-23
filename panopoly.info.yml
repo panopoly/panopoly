@@ -4,7 +4,7 @@ description: 'A magical framework for building Drupal product.'
 core_version_requirement: ^8.8 || ^9
 distribution:
   name: Panopoly
-dependencies:
+install:
   # Drupal Core
   - drupal:node
   - drupal:history
