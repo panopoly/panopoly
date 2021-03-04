@@ -55,6 +55,25 @@ class LayoutBuilderUpdateBlockForm extends UpdateBlockForm {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Suppress form validation errors when Preview is clicked, allowing partial
+    // previews and removing error messages when a block has multiple required
+    // fields.
+    // Supporess form validation errors when Cancel is clicked, allowing the
+    // dialog to be dismissed discarding changes if there are validation errors.
+    $submit_button_name = end($form_state->getTriggeringElement()['#parents']);
+    if ($submit_button_name == 'preview' || $submit_button_name == 'cancel') {
+      // Suppress all future validation errors from parent::validateForm().
+      $form_state->setLimitValidationErrors([]);
+      // Clear any existing validation errors from the Field API.
+      $form_state->clearErrors();
+    }
+    parent::validateForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Handle preview mode.
     if ($form_state->getValue('op') == $form['actions']['preview']['#value']) {
