@@ -116,7 +116,7 @@
       });
 
       // Text input.
-      $form.find('[type="text"], textarea').on('keyup', function (e) {
+      $form.find('[type="text"], textarea, [type="number"]').on('keyup', function (e) {
         // Filter out discarded keys.
         if ($.inArray(e.keyCode, discardKeyCode) !== -1) {
           return;
@@ -134,10 +134,19 @@
         });
       }
 
-      // Checkboxes and radios.
-      $form.find('[type="checkbox"], [type="radio"]').on('change', function () {
+      // Checkboxes, radios, colors, ranges, selects.
+      $form.find('[type="checkbox"], [type="radio"], [type="number"], [type="color"], [type="range"], select').on('change', function () {
         triggerSubmit();
       });
+
+      // Media Library widget.
+      var trackChange = function(index, element) {
+        var observer = new MutationObserver(function(mutations, observer) {
+          triggerSubmit();
+        });
+        observer.observe(element, { childList: true });
+      }
+      $form.find('.media-library-widget, .js-media-library-widget').parent().each(trackChange);
 
     }
   }
