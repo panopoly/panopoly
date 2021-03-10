@@ -185,3 +185,23 @@ function panopoly_media_update_8206() {
   $config->setData($data);
   $config->save();
 }
+
+/**
+ * Add missing embed displays for File and Remote video.
+ */
+function panopoly_media_update_8207() {
+  $new_config_entities = [
+    'core.entity_view_display.media.panopoly_media_file.embed_medium',
+    'core.entity_view_display.media.panopoly_media_file.embed_small',
+    'core.entity_view_display.media.panopoly_media_remote_video.embed_medium',
+    'core.entity_view_display.media.panopoly_media_remote_video.embed_small',
+  ];
+  foreach ($new_config_entities as $config_name) {
+    $config_path = drupal_get_path('module', 'panopoly_media') . '/config/install';
+    $source = new FileStorage($config_path);
+    /** @var \Drupal\Core\Config\StorageInterface $config_storage */
+    $config_storage = \Drupal::service('config.storage');
+    $config_storage->write($config_name, $source->read($config_name));
+  }
+
+}
