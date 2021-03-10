@@ -331,3 +331,24 @@ function _panopoly_media_media_settings_form_submit($form, FormStateInterface $f
   $config->set('youtube_nocookie', $form_state->getValue('panopoly_media_youtube_nocookie'));
   $config->save();
 }
+
+/**
+ * Implements hook_form_FORM_ID_form_alter().
+ */
+function panopoly_media_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+  /** @var \Drupal\views\Entity\View $view */
+  $view = $form_state->get('view');
+  if ($view->id() === 'panopoly_media_browser') {
+    // Reduce size from 60 to 30, so it fits better.
+    $form['tags']['#size'] = 30;
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view().
+ */
+function panopoly_media_preprocess_views_view(&$variables) {
+  if ($variables['view']->id() === 'panopoly_media_browser') {
+    $variables['view_array']['#attached']['library'][] = 'panopoly_media/panopoly_media_browser';
+  }
+}

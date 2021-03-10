@@ -4,3 +4,12 @@ img_data:
   dependencies:
     - core/jquery
     - core/drupal
+panopoly_media_browser:
+  css:
+    theme:
+      css/panopoly_media_browser.css: {}
+  js:
+    js/panopoly_media_browser.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

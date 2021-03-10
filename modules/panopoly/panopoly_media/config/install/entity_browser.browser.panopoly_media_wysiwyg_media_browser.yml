@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - media.type.panopoly_media_image
-    - views.view.media_entity_browser
+    - views.view.panopoly_media_browser
   module:
     - dropzonejs_eb_widget
     - entity_browser_entity_form
@@ -25,7 +25,7 @@ widget_selector_configuration: {  }
 widgets:
   a1ed5dca-2adc-478d-a9b0-014a7df6bb6e:
     settings:
-      view: media_entity_browser
+      view: panopoly_media_browser
       view_display: media_browser_all
       submit_text: Select
       auto_select: false

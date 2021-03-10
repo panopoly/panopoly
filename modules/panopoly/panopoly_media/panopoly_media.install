@@ -5,11 +5,7 @@
  * Install hooks for Panopoly Media.
  */
 
-use Drupal\file\Entity\File;
-use Drupal\embed\Entity\EmbedButton;
-use Drupal\Core\Config\ExtensionInstallStorage;
-use Drupal\Core\Config\InstallStorage;
-use Drupal\Core\Utility\UpdateException;
+use Drupal\Core\Config\FileStorage;
 use Drupal\panopoly_media\Update\ContentModelUpdater;
 use Drupal\system\Entity\Action;
 
@@ -50,17 +46,7 @@ function _panopoly_media_set_delete_config() {
  * Set WYSIWYG embed button icon.
  */
 function panopoly_media_update_8201() {
-  if (!_panopoly_media_create_embed_icon()) {
-    throw new UpdateException("Unable to create media embed icon");
-  }
-
-  if ($embed_button = EmbedButton::load(PANOPOLY_MEDIA_EMBED_BUTTON)) {
-    $embed_button->set('icon_uuid', PANOPOLY_MEDIA_ICON_UUID);
-    $embed_button->save();
-  }
-  else {
-    throw new UpdateException("Unable to load media embed button");
-  }
+  // We no longer set the embed button in this way.
 }
 
 /**
@@ -146,4 +132,56 @@ function panopoly_media_update_8205(&$context) {
       }
       break;
   }
+}
+
+/**
+ * Update config to use our custom entity browser view.
+ */
+function panopoly_media_update_8206() {
+  // Import new entity browser view.
+  $view_config_name = 'views.view.panopoly_media_browser';
+  $config_path = drupal_get_path('module', 'panopoly_media') . '/config/install';
+  $source = new FileStorage($config_path);
+  /** @var \Drupal\Core\Config\StorageInterface $config_storage */
+  $config_storage = \Drupal::service('config.storage');
+  $config_storage->write($view_config_name, $source->read($view_config_name));
+
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $config_factory */
+  $config_factory = \Drupal::service('config.factory');
+
+  // Update our two entity browsers to use it.
+  $media_browsers_to_update = [
+    'entity_browser.browser.panopoly_media_field_media_browser' => '828212e6-5506-4f23-a333-4b56a08ac85b',
+    'entity_browser.browser.panopoly_media_wysiwyg_media_browser' => 'a1ed5dca-2adc-478d-a9b0-014a7df6bb6e',
+  ];
+  foreach ($media_browsers_to_update as $config_name => $widget_uuid) {
+    $config = $config_factory->getEditable($config_name);
+    // Only update this value if it hasn't been changed by the site admin.
+    if ($config->get("widgets.{$widget_uuid}.settings.view") === 'media_entity_browser') {
+      $config->set("widgets.{$widget_uuid}.settings.view", 'panopoly_media_browser');
+      $config->save();
+    }
+  }
+
+  // Update the media entity browser thumbnail image style.
+  $config = $config_factory->getEditable('image.style.panopoly_media_entity_browser_thumbnail');
+  $data = $config->getRawData();
+  if ($data['label'] === 'Entity Browser Thumbnail') {
+    $data['label'] = 'Media Entity Browser Thumbnail';
+  }
+  if (isset($data['effects']['384c8fe8-d61d-42df-a0ac-f006a5f9b232'])) {
+    unset($data['effects']['384c8fe8-d61d-42df-a0ac-f006a5f9b232']);
+    $data['effects']['793bbd62-5859-4049-8b02-967dd91084c4'] = [
+      'uuid' => '793bbd62-5859-4049-8b02-967dd91084c4',
+      'id' => 'image_scale_and_crop',
+      'weight' => 1,
+      'data' => [
+        'width' => 350,
+        'height' => 200,
+        'anchor' => 'center-center',
+      ],
+    ];
+  }
+  $config->setData($data);
+  $config->save();
 }

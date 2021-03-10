@@ -41,7 +41,6 @@ class ConfigInstallTest extends KernelTestBase {
       'embed',
       'entity_embed',
       'entity_browser',
-      'media_entity_browser',
       'dropzonejs',
       'dropzonejs_eb_widget',
       'video_embed_field',

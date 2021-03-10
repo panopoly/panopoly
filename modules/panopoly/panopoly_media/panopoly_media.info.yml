@@ -1,7 +1,7 @@
 type: module
 name: 'Panopoly Media'
 description: 'Advanced multimedia configuration.'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: '^8.8 || ^9'
 package: Panopoly
 dependencies:
   - 'dropzonejs:dropzonejs_eb_widget'
@@ -13,9 +13,11 @@ dependencies:
   - field
   - file
   - image
-  - media_entity_browser
+  - media
   - panopoly_images
+  - responsive_image
   - system
   - taxonomy
   - text
+  - user
   - views

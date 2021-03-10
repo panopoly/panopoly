@@ -3,9 +3,6 @@ excluded:
   - media.settings
   - entity_embed.settings
   - embed.settings
-  - entity_browser.browser.media_entity_browser
-  - image.style.media_entity_browser_thumbnail
-  - views.view.media_entity_browser
   - embed.button.media_entity_embed
 required:
   - core.entity_form_mode.media.entity_browser
