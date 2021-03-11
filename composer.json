@@ -30,6 +30,7 @@
         "drupal/entity_embed": "^1.0@beta",
         "drupal/fakeobjects": "~1.0",
         "drupal/features": "~3.7",
+        "drupal/inline_entity_form": "^1.0@RC",
         "drupal/linkit": "~5.0-beta7",
         "drupal/page_manager": "~4.0-beta3",
         "drupal/panelbutton": "~1.1",
