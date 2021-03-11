@@ -2,45 +2,35 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.user.compact
     - field.field.user.user.field_panopoly_users_about
     - field.field.user.user.layout_builder__layout
     - field.field.user.user.user_picture
-    - responsive_image.styles.panopoly_images_quarter
+    - responsive_image.styles.panopoly_images_thumbnail
   module:
     - layout_builder
     - responsive_image
-    - text
     - user
 third_party_settings:
   layout_builder:
     allow_custom: false
     enabled: false
-id: user.user.default
+id: user.user.compact
 targetEntityType: user
 bundle: user
-mode: default
+mode: compact
 content:
-  field_panopoly_users_about:
-    weight: 1
-    label: above
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    type: text_summary_or_trimmed
-    region: content
-  member_for:
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   user_picture:
     type: responsive_image
     weight: 0
     region: content
     label: above
     settings:
-      responsive_image_style: panopoly_images_quarter
-      image_link: ''
+      responsive_image_style: panopoly_images_thumbnail
+      image_link: content
     third_party_settings: {  }
 hidden:
+  field_panopoly_users_about: true
   layout_builder__layout: true
+  member_for: true
+
