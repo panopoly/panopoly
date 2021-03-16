@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video
+    - entity_browser.browser.panopoly_media_field_video_browser
+    - field.field.block_content.video.field_panopoly_media_video_video
+  module:
+    - entity_browser
+id: block_content.video.default
+targetEntityType: block_content
+bundle: video
+mode: default
+content:
+  field_panopoly_media_video_video:
+    weight: 26
+    settings:
+      entity_browser: panopoly_media_field_video_browser
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: embed_small
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

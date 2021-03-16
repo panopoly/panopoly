@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.panopoly_media_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: panopoly_media_field_video_browser
+label: 'Panopoly Media Video Browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: Browse
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  e403d0b9-5774-40f8-b1b0-dbb91dd6cf4d:
+    settings:
+      entity_type: media
+      bundle: panopoly_media_remote_video
+      form_mode: entity_browser
+      submit_text: Select
+    uuid: e403d0b9-5774-40f8-b1b0-dbb91dd6cf4d
+    weight: -10
+    label: 'Add remote video'
+    id: entity_form
+  00198b1d-1f88-48e2-85d2-105c111eee55:
+    settings:
+      view: panopoly_media_browser
+      view_display: media_browser_all
+      submit_text: Select
+      auto_select: false
+    uuid: 00198b1d-1f88-48e2-85d2-105c111eee55
+    weight: -9
+    label: Library
+    id: view

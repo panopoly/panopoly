@@ -4,6 +4,7 @@ description: 'Advanced multimedia configuration.'
 core_version_requirement: '^8.8 || ^9'
 package: Panopoly
 dependencies:
+  - block_content
   - 'dropzonejs:dropzonejs_eb_widget'
   - 'drupal:media (>= 8.6)'
   - embed

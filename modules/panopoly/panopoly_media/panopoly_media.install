@@ -5,6 +5,7 @@
  * Install hooks for Panopoly Media.
  */
 
+use Drupal\Core\Config\Entity\ConfigEntityStorageInterface;
 use Drupal\Core\Config\FileStorage;
 use Drupal\panopoly_media\Update\ContentModelUpdater;
 use Drupal\system\Entity\Action;
@@ -205,3 +206,42 @@ function panopoly_media_update_8207() {
   }
 
 }
+
+/**
+ * Add video type block.
+ */
+function panopoly_media_update_8208() {
+  $new_config_entities = [
+    'block_content.type.video',
+    'entity_browser.browser.panopoly_media_field_video_browser',
+    'field.storage.block_content.field_panopoly_media_video_video',
+    'field.field.block_content.video.field_panopoly_media_video_video',
+    'core.entity_form_display.block_content.video.default',
+    'core.entity_view_display.block_content.video.default',
+  ];
+  /** @var \Drupal\Core\Config\StorageInterface $config_storage */
+  $config_storage = \Drupal::service('config.storage');
+  /** @var \Drupal\Core\Config\ConfigManagerInterface $config_manager */
+  $config_manager = \Drupal::service('config.manager');
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  foreach ($new_config_entities as $config_name) {
+    if ($config_storage->read($config_name)) {
+      // If this config already exists, skip it.
+      continue;
+    }
+
+    $config_path = drupal_get_path('module', 'panopoly_media') . '/config/install';
+    $source = new FileStorage($config_path);
+    $config_data = $source->read($config_name);
+
+    $type = $config_manager->getEntityTypeIdByName($config_name);
+    $entity_storage = $entity_type_manager->getStorage($type);
+    if ($entity_storage instanceof ConfigEntityStorageInterface) {
+      $entity = $entity_storage->createFromStorageRecord($config_data);
+      $entity->save();
+    }
+  }
+}
+
