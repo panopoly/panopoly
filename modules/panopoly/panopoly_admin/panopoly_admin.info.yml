@@ -1,0 +1,7 @@
+name: 'Panopoly Admin'
+description: 'The administrative heart of Panopoly.'
+type: module
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - layout_discovery
+package: Panopoly

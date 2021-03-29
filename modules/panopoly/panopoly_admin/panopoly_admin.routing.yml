@@ -1,0 +1,14 @@
+panopoly_admin.panopoly_admin_layouts_form:
+  path: '/admin/panopoly/layouts'
+  defaults:
+    _title: 'Layout Library'
+    _form: 'Drupal\panopoly_admin\Form\PanopolyAdminLayoutsForm'
+  requirements:
+    _permission: 'administer panopoly_admin settings'
+panopoly_admin.panopoly_admin_blocks_form:
+  path: '/admin/panopoly/blocks'
+  defaults:
+    _title: 'Block Library'
+    _form: 'Drupal\panopoly_admin\Form\PanopolyAdminBlocksForm'
+  requirements:
+    _permission: 'administer panopoly_admin settings'

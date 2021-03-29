@@ -31,33 +31,28 @@ build:
     # We don't want to run composer  here, because we want Lando to run it,
     # so that, the PHP version used by Lando is used.
     - mkdir drupal
-    - curl https://gitlab.com/panopoly/panopoly-composer-template/-/archive/8.x/panopoly-composer-template-8.x.tar.bz2 | tar -xj -C drupal --strip-components=1
+    - curl https://gitlab.com/panopoly/panopoly-composer-template/-/archive/9.x/panopoly-composer-template-9.x.tar.bz2 | tar -xj -C drupal --strip-components=1
 
     # Use Lando to run composer.
     - cd drupal
     - cat $CI_PROJECT_DIR/.gitlab-ci-lando.yml | sed -e "s,CI_PROJECT_DIR,$CI_PROJECT_DIR,g" > .lando.yml
     # NOTE: the .lando.yml specially mounts the $CI_PROJECT_DIR as /src/panopoly
     # in the appserver, so we can point the repository there.
+    - lando start
     - lando composer config repositories.panopoly path /src/panopoly
     - lando composer require "panopoly/panopoly:dev-$CI_COMMIT_REF_NAME as 2.x-dev" --no-update
+    - lando composer require drush/drush drupal/diff --no-update
     - lando composer install
     - cd web
 
     # Install Drupal.
-    - lando start
-    - lando drush si panopoly --db-url=mysql://drupal8:drupal8@database/drupal8 -y
+    - lando drush si panopoly --db-url=mysql://drupal9:drupal9@database/drupal9 -y
     - lando drush en -y panopoly_test
-
-    # Check our .make files.
-    - lando drush dl -y drupalorg_drush-7.x-1.x-dev --destination=/var/www/.drush
-    - lando drush cc drush
-    - lando drush verify-makefile profiles/panopoly/drupal-org.make
-    - lando ssh -c 'find profiles/panopoly/modules -name \*.make -print0 | xargs -0 -n1 drush verify-makefile'
 
     # Check if any modules are overridden.
     - lando drush en -y features diff
-    - lando ssh -c 'cd profiles/panopoly && /app/vendor/bin/robo check:overridden'
+    - lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo check:overridden'
 
     # Run the Behat tests
-    - lando ssh -c 'cd profiles/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'
+    - lando ssh -c 'cd profiles/contrib/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'
 

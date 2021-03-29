@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * Hooks for Panopoly Admin.
+ */
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ */
+function panopoly_admin_plugin_filter_layout__layout_builder_alter(array &$definitions, array $extra) {
+  // Don't do any filtering if this is being called by our admin form.
+  if (isset($extra['panopoly_admin_layouts_form']) && $extra['panopoly_admin_layouts_form']) {
+    return;
+  }
+
+  $config = \Drupal::config('panopoly_admin.settings');
+  $layouts = $config->get('layouts');
+
+  // Remove disabled layouts.
+  foreach ($definitions as $id => $definition) {
+    if (isset($layouts[$id]) && !$layouts[$id]) {
+      unset($definitions[$id]);
+    }
+  }
+}
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ */
+function panopoly_admin_plugin_filter_block__layout_builder_alter(array &$definitions, array $extra) {
+  // Don't do any filtering if this is being called by our admin form.
+  if (isset($extra['panopoly_admin_blocks_form']) && $extra['panopoly_admin_blocks_form']) {
+    return;
+  }
+
+  $config = \Drupal::config('panopoly_admin.settings');
+  $blocks = $config->get('blocks');
+
+  // Remove disabled blocks.
+  foreach ($definitions as $id => $definition) {
+    if (isset($blocks[$id]) && !$blocks[$id]) {
+      unset($definitions[$id]);
+    }
+  }
+}

@@ -14,7 +14,8 @@ variant_settings:
   sections:
     -
       layout_id: radix_burr_flipped
-      layout_settings: {  }
+      layout_settings:
+        label: ''
       components:
         0e93a7b0-839c-4037-aab0-56fd1a9c19da:
           uuid: 0e93a7b0-839c-4037-aab0-56fd1a9c19da

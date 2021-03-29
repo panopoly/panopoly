@@ -1,20 +1,20 @@
 name: 'Panopoly Pages'
 description: 'Provides a basic page, suitable for Panelizing.'
 type: module
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - field
-  - image
-  - layout_builder
-  - menu_ui
-  - node
-  - panopoly_core
-  - panopoly_images
-  - panopoly_theme
-  - path
-  - pathauto
-  - radix_layouts
-  - system
-  - text
-  - user
+  - 'drupal:field'
+  - 'drupal:image'
+  - 'drupal:layout_builder'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:system'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'panopoly_core:panopoly_core'
+  - 'panopoly_images:panopoly_images'
+  - 'panopoly_theme:panopoly_theme'
+  - 'pathauto:pathauto'
+  - 'radix_layouts:radix_layouts'
 package: Panopoly

@@ -9,15 +9,15 @@ Feature: Add text widget
       And Panopoly magic live previews are disabled
       And I am viewing a landing page
 	When I click "Layout"
-	  And I click "Add Block"
+	  And I click "Add block in Section 1, Content region"
 	  And I click "Create custom block"
 	  And I click "Text"
-    Then I should see "Configure block"
+    Then I should see "The title of the block as shown to the user."
     When I fill in the following:
 	  | Title       | Text widget title       |
       | Text format | restricted_html         |
       | Text        | Testing text body field |
-      And I press "Add Block" in the "Settings tray" region
+      And I press "Save" in the "Settings tray" region
 	  And I press "Save layout"
     Then I should see "Text widget title"
       And I should see "Testing text body field"

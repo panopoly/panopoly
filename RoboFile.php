@@ -131,13 +131,12 @@ class RoboFile extends RoboTasks {
    */
   protected function isModuleEnabled($module_or_modules) {
     $modules = is_array($module_or_modules) ? $module_or_modules : [ $module_or_modules ];
-    $modules_string = implode(' ', $modules);
 
-    $process = $this->runDrush("pmi {$modules_string} --format=json");
+    $process = $this->runDrush("pm:list --type=module --status=enabled --format=json");
     $info = json_decode($process->getOutput(), TRUE);
 
     foreach ($modules as $module) {
-      if ($info[$module]['status'] !== 'enabled') {
+      if (!isset($info[$module])) {
         return FALSE;
       }
     }

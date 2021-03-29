@@ -21,7 +21,8 @@ third_party_settings:
     sections:
       -
         layout_id: radix_bryant
-        layout_settings: {  }
+        layout_settings:
+          label: ''
         components:
           c87e7a48-822d-40c9-8e89-f57e9f1f09b9:
             uuid: c87e7a48-822d-40c9-8e89-f57e9f1f09b9

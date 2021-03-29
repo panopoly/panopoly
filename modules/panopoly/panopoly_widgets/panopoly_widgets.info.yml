@@ -1,18 +1,18 @@
 type: module
 name: 'Panopoly Widgets'
 description: 'A collection of generic widgets.'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: '^8.9 || ^9'
 package: Panopoly
 dependencies:
-  - block_content
-  - ctools_views
-  - field
-  - file
-  - image
-  - link
-  - node
-  - panopoly_core
-  - panopoly_images
-  - text
-  - user
-  - views
+  - 'ctools:ctools_views'
+  - 'drupal:block_content'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:link'
+  - 'drupal:node'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'panopoly_core:panopoly_core'
+  - 'panopoly_images:panopoly_images'

@@ -1,7 +1,10 @@
 type: module
 name: 'Panopoly Theme'
 description: 'Helps with theming and provides many layouts.'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: '^8.9 || ^9'
 package: Panopoly
 dependencies:
-  - radix_layouts
+  - 'drupal:node'
+  - 'drupal:taxonomy'
+  - 'drupal:user'
+  - 'radix_layouts:radix_layouts'

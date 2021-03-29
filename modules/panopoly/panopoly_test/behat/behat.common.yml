@@ -12,7 +12,8 @@ default:
         - Drupal\DrupalExtension\Context\MarkupContext
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
-    Behat\MinkExtension:
+    Drupal\MinkExtension:
+      ajax_timeout: 5
       goutte: ~
       selenium2:
         browser: chrome
@@ -26,7 +27,7 @@ default:
               - "--disable-gpu"
           version: ANY
       #base_url: http://mydrupalsite.com
-      #files_path: './profiles/panopoly/modules/panopoly/panopoly_test/tests'
+      #files_path: './profiles/contrib/panopoly/modules/panopoly/panopoly_test/tests'
     Drupal\DrupalExtension:
       blackbox: ~
       #drush:
