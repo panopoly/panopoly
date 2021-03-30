@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "bower-asset/dropzone": "^5.1",
+        "bower-asset/dropzone": "5.7.2",
         "cweagans/composer-patches": "^1.6.5",
         "drupal-ckeditor-plugin/colorbutton": "4.*",
         "drupal-ckeditor-plugin/fakeobjects": "4.*",
