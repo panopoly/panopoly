@@ -1,3 +1,42 @@
+Panopoly 7.x-1.80, 2021-04-26
+-------------------
+- Update to Drupal 7.80 for SA-CORE-2021-002.
+- Start testing upgrade from 1.79.
+
+Panopoly 7.x-1.79, 2021-01-20
+-------------------
+- Update to Drupal 7.78 for SA-CORE-2021-001.
+- Patch media_youtube to fix failing embeds.
+- Start testing upgrade from 1.78.
+
+Panopoly 7.x-1.78, 2020-11-30
+-------------------
+- Update to Drupal 7.75 for SA-CORE-2020-013.
+- Start testing upgrade from 1.77.
+
+Panopoly 7.x-1.77, 2020-11-19
+-------------------
+- Update to Drupal 7.74 for SA-CORE-2020-012.
+- Fix Travis builds with composer 2.x.
+- Patch contrib modules for PHP 7.4.
+- Start testing upgrade from 1.76.
+
+Panopoly 7.x-1.76, 2020-09-17
+-------------------
+- Update to Drupal 7.73 for SA-CORE-2020-007.
+- Start testing upgrade from 1.75.
+
+Panopoly 7.x-1.75, 2020-06-18
+-------------------
+- Update to Drupal 7.72 for SA-CORE-2020-004.
+- Update the Behat Drupal extension to 4.0.1.
+- Revert "Update the composer files for Travis".
+- Update the composer files for Travis.
+- Detect PHP notices/errors.
+- Removing 7.x-1.73 because it will fail for not having been a "complete"
+  release.
+- Start testing upgrades from 1.72 and 1.73.
+
 Panopoly 7.x-1.74, 2020-05-20
 -------------------
 - Merge tag '7.x-1.73' into 7.x-1.x.
