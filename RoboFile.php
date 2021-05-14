@@ -58,6 +58,20 @@ class RoboFile extends RoboTasks {
   ];
 
   /**
+   * Gets the full Drush command respecting optional environment variables.
+   *
+   * @param string $command
+   *   The Drush command to run.
+   *
+   * @return string
+   */
+  protected function getDrushCommand($command) {
+    $drush_path = getenv('DRUSH') ?: 'drush';
+    $drush_args = getenv('DRUSH_ARGS') ?: '';
+    return "{$drush_path} {$drush_args} {$command}";
+  }
+
+  /**
    * Runs Drush directly (not via Robo's ExecTask).
    *
    * This should primarily be used for gathering information, and not performing
@@ -84,7 +98,7 @@ class RoboFile extends RoboTasks {
     $drush_path = getenv('DRUSH') ?: 'drush';
     $drush_args = getenv('DRUSH_ARGS') ?: '';
 
-    $process = new Process("{$drush_path} {$drush_args} $command", $cwd, $env, $input, $timeout);
+    $process = new Process($this->getDrushCommand($command), $cwd, $env, $input, $timeout);
     $process->setPty(TRUE);
     $process->mustRun();
 
@@ -621,6 +635,72 @@ EOF;
       ->add('.')
       ->commit($commit_message);
     $collection->taskExec("git push -f origin {$new_branch}");
+
+    return $collection;
+  }
+
+  /**
+   * Walks up the directory tree looking for a Drupal site.
+   */
+  protected function findSiteRoot() {
+    $cwd = '.';
+    for ($i = 0; $i < 5; $i++) {
+      $cwd .= '/..';
+      if (file_exists("{$cwd}/composer.lock")) {
+        return realpath($cwd);
+      }
+    }
+
+    throw new \Exception("Unable to find the root of the Drupal site");
+  }
+
+  /**
+   * Install site dependencies for running the tests.
+   *
+   * @return $this|\Robo\Collection\CollectionBuilder
+   * @throws \Exception
+   */
+  public function testSetup() {
+    /** @var \Robo\Collection\CollectionBuilder|$this $collection */
+    $collection = $this->collectionBuilder();
+
+    if (!$this->isModuleEnabled('panopoly_test')) {
+      $collection->taskExec($this->getDrushCommand("en") . ' -y panopoly_test');
+    }
+
+    return $collection;
+  }
+
+  /**
+   * Runs the Behat test suite.
+   *
+   * @param array $arguments
+   *   Arguments to pass to Behat.
+   *
+   * @return $this|\Robo\Collection\CollectionBuilder
+   * @throws \Exception
+   */
+  public function testBehat(array $arguments) {
+    /** @var \Robo\Collection\CollectionBuilder|$this $collection */
+    $collection = $this->collectionBuilder();
+
+    $collection->addTask($this->testSetup());
+
+    $site_root = $this->findSiteRoot();
+    $behat = "{$site_root}/vendor/bin/behat";
+    if (!file_exists($behat)) {
+      throw new \Exception("Can't find Behat executeable at {$behat}");
+    }
+
+    if (getenv('LANDO') === 'ON') {
+      $arguments = array_merge([
+        '--config',
+        realpath('./modules/panopoly/panopoly_test/behat/behat.lando.yml'),
+      ], $arguments);
+    }
+
+    $argument_string = join(" ", $arguments);
+    $collection->taskExec("{$behat} {$argument_string}");
 
     return $collection;
   }
