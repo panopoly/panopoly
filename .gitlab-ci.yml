@@ -66,6 +66,10 @@ push:
     - apt-get update
     - DEBIAN_FRONTEND=noninteractive apt-get install -yq wget zip unzip git libpng-dev
 
+    # Configure Git.
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - git config --global user.name "$GITLAB_USER_NAME"
+
     # Install PHP extensions.
     - docker-php-ext-install gd
 
