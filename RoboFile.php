@@ -368,6 +368,14 @@ EOF;
           $module_composer_json['extra']['patches']
         );
       }
+
+      // And finally the repositories.
+      if (!empty($module_composer_json['repositories'])) {
+        $main_composer_json['repositories'] = array_merge(
+          $main_composer_json['repositories'],
+          $module_composer_json['repositories'],
+        );
+      }
     }
 
     foreach ($package_index as $package => $versions) {

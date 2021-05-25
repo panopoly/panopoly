@@ -5,12 +5,20 @@
     "license": "GPL-2.0-or-later",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
+    "repositories": {
+        "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        "drupal-ckeditor-plugins": {
+            "type": "composer",
+            "url": "https://panopoly.gitlab.io/drupal-ckeditor-plugins"
         }
-    ],
+    },
     "require": {
         "bower-asset/dropzone": "5.7.2",
         "cweagans/composer-patches": "^1.6.5",

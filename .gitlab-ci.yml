@@ -6,7 +6,10 @@ variables:
 services:
   - docker:dind
 
-build:
+stages:
+  - build
+
+test:
   stage: build
   script:
     # GitLab CI checks out the commit unattached from any branch. We need to
@@ -26,9 +29,9 @@ build:
 
     # This is roughly equivalent to:
     #
-    #   composer create-project panopoly/panopoly-composer-template:8.x-dev drupal --no-interaction --no-install
+    #   composer create-project panopoly/panopoly-composer-template:9.x-dev drupal --no-interaction --no-install
     #
-    # We don't want to run composer  here, because we want Lando to run it,
+    # We don't want to run composer here, because we want Lando to run it,
     # so that, the PHP version used by Lando is used.
     - mkdir drupal
     - curl https://gitlab.com/panopoly/panopoly-composer-template/-/archive/9.x/panopoly-composer-template-9.x.tar.bz2 | tar -xj -C drupal --strip-components=1
@@ -55,4 +58,36 @@ build:
 
     # Run the Behat tests
     - lando ssh -c 'cd profiles/contrib/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'
+
+push:
+  stage: build
+  image: php:7.4
+  before_script:
+    - apt-get update
+    - DEBIAN_FRONTEND=noninteractive apt-get install -yq zip unzip git libpng-dev
+
+    # Install PHP extensions.
+    - docker-php-ext-install gd
+
+    # Install composer
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+  script:
+    # Attach the current commit to its branch.
+    - git checkout -b $CI_COMMIT_REF_NAME
+
+    # Push code changes to main Drupal.org repo.
+    - mkdir -p ~/.ssh
+    - echo "$GIT_DEPLOY_KEY" >> ~/.ssh/id_rsa
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 0700 ~/.ssh
+    - chmod 0600 ~/.ssh/id_rsa
+    - chmod 0644 ~/.ssh/known_hosts
+    - git remote add drupalorg git@git.drupal.org:project/panopoly.git
+    - git push drupalorg $CI_COMMIT_REF_NAME
+
+    # Do subtree split and push.
+    - php composer.phar install
+    - ./vendor/bin/robo subtree-split --push
 

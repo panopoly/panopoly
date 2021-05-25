@@ -3,6 +3,12 @@
     "description": "Advanced multimedia configuration.",
     "type": "drupal-module",
     "license": "GPL-2.0+",
+    "repositories": {
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
     "require": {
         "bower-asset/dropzone": "5.7.2",
         "drupal/core": "^8.8 || ^9",
