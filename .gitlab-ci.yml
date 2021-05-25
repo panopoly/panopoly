@@ -64,7 +64,7 @@ push:
   image: php:7.4
   before_script:
     - apt-get update
-    - DEBIAN_FRONTEND=noninteractive apt-get install -yq zip unzip git libpng-dev
+    - DEBIAN_FRONTEND=noninteractive apt-get install -yq wget zip unzip git libpng-dev
 
     # Install PHP extensions.
     - docker-php-ext-install gd
@@ -73,6 +73,11 @@ push:
     - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     - php composer-setup.php
     - php -r "unlink('composer-setup.php');"
+
+    # Install splitsh-lite.
+    - wget https://github.com/splitsh/lite/releases/download/v1.0.1/lite_linux_amd64.tar.gz
+    - tar -zxpf lite_linux_amd64.tar.gz --directory /usr/local/bin/
+    - rm lite_linux_amd64.tar.gz
   script:
     # Attach the current commit to its branch.
     - git checkout -b $CI_COMMIT_REF_NAME
