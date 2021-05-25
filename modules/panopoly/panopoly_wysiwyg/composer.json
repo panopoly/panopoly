@@ -2,6 +2,12 @@
     "name": "drupal/panopoly_wysiwyg",
     "type": "drupal-module",
     "license": "GPL-2.0+",
+    "repositories": {
+        "drupal-ckeditor-plugins": {
+            "type": "composer",
+            "url": "https://panopoly.gitlab.io/drupal-ckeditor-plugins"
+        }
+    },
     "require": {
         "drupal/core": "^8.8 || ^9",
         "drupal/ckeditor_drupalbreaks": "^2.0.0",

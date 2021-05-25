@@ -3,12 +3,6 @@
     "type": "drupal-module",
     "description": "A collection of generic widgets.",
     "license": "GPL-2.0+",
-    "repositories": {
-        "drupal-ckeditor-plugins": {
-            "type": "composer",
-            "url": "https://panopoly.gitlab.io/drupal-ckeditor-plugins"
-        }
-    },
     "require": {
         "drupal/core": "^8.8 || ^9",
         "drupal/ctools": "~3.0",
