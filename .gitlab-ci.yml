@@ -99,4 +99,10 @@ push:
     # Do subtree split and push.
     - php composer.phar install
     - ./vendor/bin/robo subtree-split --push
+  only:
+    refs:
+      - 8.x-2.x
+    variables:
+      - $GIT_DEPLOY_KEY
+      - $SSH_KNOWN_HOSTS
 
