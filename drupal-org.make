@@ -310,15 +310,14 @@ projects[menu_block][subdir] = contrib
 
 ; Panopoly - Contrib - Files & Media
 
-projects[file_entity][version] = 2.27
+projects[file_entity][version] = 2.30
 projects[file_entity][subdir] = contrib
 
-projects[media][version] = 2.26
+projects[media][version] = 2.27
 projects[media][subdir] = contrib
 
-projects[media_youtube][version] = 3.9
+projects[media_youtube][version] = 3.10
 projects[media_youtube][subdir] = contrib
-projects[media_youtube][patch][1572550] = https://www.drupal.org/files/issues/2020-12-15/the_youtube_video_id_is_invalid_or_the_video_was_deleted-1572550-076.patch
 
 projects[media_vimeo][version] = 2.1
 projects[media_vimeo][subdir] = contrib
