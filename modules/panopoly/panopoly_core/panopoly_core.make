@@ -52,7 +52,7 @@ projects[views_bulk_operations][subdir] = contrib
 projects[pathauto][version] = 1.3
 projects[pathauto][subdir] = contrib
 
-projects[token][version] = 1.7
+projects[token][version] = 1.8
 projects[token][subdir] = contrib
 
 projects[entity][version] = 1.9
