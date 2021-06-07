@@ -156,10 +156,8 @@ projects[apps][version] = 1.1
 projects[apps][subdir] = contrib
 projects[apps][patch][2945929] = https://www.drupal.org/files/issues/apps-php7-compat-2945929.patch
 
-projects[features][version] = 2.11
+projects[features][version] = 2.13
 projects[features][subdir] = contrib
-projects[features][patch][3075578] = https://www.drupal.org/files/issues/2019-10-20/features-7.x-2.x-3075578-4-implode-arg-order.patch
-projects[features][patch][3086633] = https://www.drupal.org/files/issues/2020-03-18/features-7.x-2.11-3086633-array-offset-7.patch
 
 projects[strongarm][version] = 2.0
 projects[strongarm][subdir] = contrib
