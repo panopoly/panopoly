@@ -15,7 +15,9 @@
     },
     "require-dev": {
         "consolidation/robo": "^1.4",
-        "drupal/drupal-extension": "4.0.1"
+        "spomky-labs/otphp": "^9.0",
+        "drupal/drupal-extension": "^4.0.1",
+        "symfony/yaml": "~3.4"
     },
     "replace": {
         "drupal/panopoly_core": "self.version",
@@ -28,11 +30,6 @@
         "drupal/panopoly_test": "self.version",
         "drupal/panopoly_users": "self.version",
         "drupal/panopoly_wysiwyg": "self.version"
-    },
-    "config": {
-        "platform": {
-            "php": "5.6"
-        }
     },
     "extra": {
         "branch-alias": {
