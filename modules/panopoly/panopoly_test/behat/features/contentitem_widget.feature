@@ -6,7 +6,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Content item autocomplete should only offer nodes of the selected type
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
@@ -28,7 +27,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Add content item (as "Fields")
     Given I am logged in as a user with the "administrator" role
-    And Panopoly magic live previews are disabled
     And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
@@ -52,7 +50,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Add content item (as "Content")
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
@@ -86,7 +83,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Add content item with long title
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Very long title nunc nec posuere eros praesent malesuada ante vel nibh imperdiet volutpat aliquam tincidunt elementum sem in aliquet tellus semper ac proin | Very long body text | 01/01/2001 11:00am |      1 |
@@ -109,7 +105,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Title override should work for all view modes
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
@@ -146,7 +141,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Title override should work with non-Panelizer content types
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page_simple" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
@@ -183,7 +177,6 @@ Feature: Add content item
   @api @javascript @panopoly_widgets
   Scenario: Content item widget continues to work after renaming content
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
       And "panopoly_test_page" content:
       | title       | body      | created            | status |
       | Test Page 1 | Test body | 01/01/2001 11:00am |      1 |
