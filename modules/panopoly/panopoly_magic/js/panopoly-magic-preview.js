@@ -51,18 +51,24 @@
         };
       }
 
-      // Trigger "Cancel" button when off canvas tray closed using the close
-      // button.
-      $('.ui-dialog-off-canvas .ui-dialog-titlebar-close').once('panopoly-magic-preview').off('click').click(function (e) {
-        return triggerCancel(form_selector, e);
-      });
+      // Trigger "Cancel" button when off canvas tray closed using the close button.
+      $(form_selector)
+        .closest('.ui-dialog-off-canvas')
+        .find('.ui-dialog-titlebar-close')
+        .off('click')
+        .click(function (e) {
+          return triggerCancel(form_selector, e);
+        });
 
       // Trigger "Cancel" button when off canvas tray closed using the ESC key.
-      $('.ui-dialog-off-canvas').once('panopoly-magic-preview-esc').off('keydown').keydown(function (e) {
-        if (e.keyCode === 27) {
-          return triggerCancel(form_selector, e);
-        }
-      });
+      $(form_selector)
+        .closest('.ui-dialog-off-canvas')
+        .off('keydown')
+        .keydown(function (e) {
+          if (e.keyCode === 27) {
+            return triggerCancel(form_selector, e);
+          }
+        });
 
       function triggerCancel(form_selector, e) {
         // Rather than refer to $form, this sets this event handler only once, and then looks up if there is a cancel
