@@ -93,7 +93,7 @@ function panopoly_core_preprocess_page(&$variables) {
       // If it is the homepage, remove the breadcrumb.
       $breadcrumb = array();
     }
-    elseif (count($breadcrumb) && drupal_get_title()) {
+    elseif (is_array($breadcrumb) && count($breadcrumb) > 0 && drupal_get_title()) {
       // Set the current page title in the breadcrumb.
       $breadcrumb[] = drupal_get_title();
     }
