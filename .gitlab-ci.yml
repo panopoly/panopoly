@@ -11,6 +11,12 @@ stages:
 
 test:
   stage: build
+  artifacts:
+    when: on_failure
+    name: "screenshots-${CI_BUILD_STAGE}-${CI_BUILD_REF_NAME}"
+    expire_in: 1 week
+    paths:
+      - drupal/web/sites/default/files/screenshots
   script:
     # GitLab CI checks out the commit unattached from any branch. We need to
     # put it in a branch for the Composer repository to work.
@@ -35,6 +41,9 @@ test:
     # so that, the PHP version used by Lando is used.
     - mkdir drupal
     - curl https://gitlab.com/panopoly/panopoly-composer-template/-/archive/9.x/panopoly-composer-template-9.x.tar.bz2 | tar -xj -C drupal --strip-components=1
+
+    # Make symlink to the Drupal site so we can get our artifacts out.
+    - ln -s $CI_SHARED_DIR/drupal $CI_PROJECT_DIR/drupal
 
     # Use Lando to run composer.
     - cd drupal

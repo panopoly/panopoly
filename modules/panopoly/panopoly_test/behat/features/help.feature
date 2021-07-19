@@ -3,8 +3,8 @@ Feature: View system help
   As a site owner
   I need to be able to view content in the system help region
 
-  @api @panopoly_demo
+  @api @panopoly_demo @panopoly2
   Scenario: Create Test Page
     Given I am logged in as a user with the "administrator" role
-    When I visit "/node/add/panopoly-test-page"
+    When I visit "/node/add/panopoly_test_content_page"
     Then I should see "This message appears in the system help region when you create a node."

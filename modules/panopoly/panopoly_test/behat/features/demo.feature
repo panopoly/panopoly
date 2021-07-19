@@ -3,13 +3,13 @@ Feature: Demo content
   As a site owner
   I need to view demo content
 
-  @panopoly_demo
+  @panopoly_demo @panopoly2
   Scenario: Homepage
     Given I am an anonymous user
     When I visit "/demo"
     Then the "h1" element should contain "Homepage Demo"
 
-  @panopoly_demo
+  @panopoly_demo @panopoly2
   Scenario: Demo content is imported via Migrate
     Given I am an anonymous user
     When I visit "/demo"
@@ -20,9 +20,9 @@ Feature: Demo content
     When I click "Lovely Vegetables" in the "Main menu" region
     Then the "h1" element should contain "Lovely Vegetables"
 
-  @panopoly_demo @api
+  @panopoly_demo @api @panopoly2
   Scenario: Demo content menu items are created
     Given I am logged in as a user with the "administrator" role
-    When I visit "/admin/structure/menu/manage/main-menu/edit"
+    When I visit "/admin/structure/menu/manage/main"
     Then I should see "Great Vegetables" in the "Content" region
       And I should see "Lovely Vegetables" in the "Content" region

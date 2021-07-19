@@ -59,7 +59,7 @@ class ImageWidget extends CoreImageWidget {
 
       // Set IPTC data onto the backend form handling.
       foreach ($map as $mapData) {
-        if (isset($mapData['element'])) {
+        if (isset($mapData['element']) && !empty($iptc[$mapData['iptc']])) {
           // Set directly into the widget's element.
           $name = array_merge($mapData['element'], ['#default_value']);
           $val = NestedArray::getValue($element, $name);

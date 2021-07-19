@@ -11,7 +11,7 @@ third_party_settings:
 name: 'Test content page'
 type: panopoly_test_content_page
 description: 'A content page for testing.'
-help: ''
+help: 'This message appears in the system help region when you create a node.'
 new_revision: false
 preview_mode: 0
-display_submitted: false
+display_submitted: true

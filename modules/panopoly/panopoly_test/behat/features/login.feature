@@ -1,3 +1,4 @@
+# @todo: Port in https://www.drupal.org/project/panopoly/issues/3217286
 Feature: Anonymous user login
 In order to access content for authenticated users
 As an anonymous user
@@ -7,7 +8,7 @@ I want to be able to login
     Given users:
     | name     | pass      | mail             | roles    |
     | TestUser | ChangeMe! | foo@example.com  | editor   |
- 
+
   @standard_login @api
   Scenario: Editor is able to login
     Given I am on "/user"

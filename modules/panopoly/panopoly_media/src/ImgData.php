@@ -63,6 +63,7 @@ class ImgData {
     // Map attributes into sensible structure.
     foreach ($this->iptcMapping as $name => $field) {
       if (!isset($iptc[$field])) {
+        $data[$name] = NULL;
         continue;
       }
 

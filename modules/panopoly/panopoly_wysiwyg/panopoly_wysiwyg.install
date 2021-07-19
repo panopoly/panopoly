@@ -11,6 +11,26 @@ use Drupal\editor\Entity\Editor;
 use Drupal\filter\Entity\FilterFormat;
 
 /**
+ * Implements hook_install().
+ */
+function panopoly_wysiwyg_install() {
+  user_role_grant_permissions('editor', [
+    'use text format restricted_html',
+    'use text format panopoly_wysiwyg_basic',
+  ]);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function panopoly_wysiwyg_uninstall() {
+  user_role_revoke_permissions('editor', [
+    'use text format restricted_html',
+    'use text format panopoly_wysiwyg_basic',
+  ]);
+}
+
+/**
  *  Enable the modules necessary for the teaser break button.
  */
 function panopoly_wysiwyg_update_8201() {

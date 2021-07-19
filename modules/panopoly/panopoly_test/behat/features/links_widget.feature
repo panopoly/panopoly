@@ -3,25 +3,24 @@ Feature: Add links widget
   As a site administrator
   I need to be able to use the links widget
  
-  @api @javascript @panopoly_widgets
+  @api @javascript @panopoly_widgets @panopoly2
   Scenario: Add links
     Given I am logged in as a user with the "administrator" role
       And Panopoly magic live previews are disabled
       And I am viewing a landing page
-    When I customize this page with the Panels IPE
-      And I click "Add new pane"
-      And I click "Add links" in the "CTools modal" region
-    Then I should see "Configure new Add links"
+    When I click "Layout"
+      And I click "Add block in Section 1, Content region"
+      And I click "Create custom block"
+      And I click "Links"
+    Then I should see "Block description Links"
     When I fill in the following:
-      | title                                  | Testing link title  |      
-      | field_quick_links_links[und][0][title] | Testing url title   |
-      | field_quick_links_links[und][0][url]   | http://drupal.org   |
-      And I press "Save" in the "CTools modal" region
-      And I press "Save"
-      And I wait for the Panels IPE to deactivate
+      | Title     | Testing link title                 |
+      | Link text | Testing url title                  |
+      | URL       | http://drupal.org/project/panopoly |
+      And I press "Save" in the "Settings tray" region
+      And I press "Save layout"
     Then I should see "Testing link title"
       And I should see "Testing url title"
-      # Despite what the docs say, we the XPath for finding links as defined in
-      # Mink/Selector/NamedSelector.php doesn't search the 'href' attribute.
-      # @todo: We should find a way to test that the link is correct!
-      #And I should see the link "http://drupal.org"
+    When I follow "Testing url title" in the "Boxton Content" region
+    Then the url should match "/project/panopoly"
+

@@ -1,0 +1,15 @@
+<?php declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function panopoly_core_install($is_syncing) {
+  // If we're not being installed as part of a configuration sync, ensure that
+  // the Pathauto settings are as we would expect them to be.
+  if (!$is_syncing) {
+    $config_factory = \Drupal::configFactory();
+    $pathauto_settings = $config_factory->getEditable('pathauto.settings');
+    $pathauto_settings->set('update_action', 1);
+    $pathauto_settings->save();
+  }
+}

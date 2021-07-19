@@ -5,3 +5,9 @@ id: editor
 label: Editor
 weight: 3
 is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content'
+  - 'access content overview'
+  - 'access toolbar'
+  - 'view own unpublished content'

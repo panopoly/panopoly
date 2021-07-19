@@ -56,18 +56,16 @@ function panopoly_widgets_configure_form_submit($form, &$form_state) {
 }
 
 /**
- * Implements hook_preprocess_block()
+ * Implements hook_entity_view_alter().
  */
-function panopoly_widgets_preprocess_block(&$variables) {
-  $content = $variables['elements']['content'];
-  if (isset($content['#block_content']) && $content['#block_content']->bundle() == PANOPOLY_WIDGETS_IMAGE_BUNDLE) {
-    $panopoly_widgets_link_url = $variables["content"]["field_panopoly_widgets_link"][0]["#url"];
-    if (!is_null($panopoly_widgets_link_url)) {
-      $url = Url::fromUri($panopoly_widgets_link_url->getUri());
-      $variables["content"]["field_panopoly_widgets_image"][0]["#url"] = $url;
-      unset($variables["content"]["field_panopoly_widgets_link"]);
+function panopoly_widgets_entity_view_alter(array &$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+  if ($entity->getEntityTypeId() === 'block_content' && $entity->bundle() === PANOPOLY_WIDGETS_IMAGE_BUNDLE) {
+    $link_uri = $entity->field_panopoly_widgets_link->uri;
+    if (!empty($link_uri)) {
+      $url = Url::fromUri($link_uri);
+      $build["field_panopoly_widgets_image"][0]["#url"] = $url;
     }
   }
-
 }
+
 

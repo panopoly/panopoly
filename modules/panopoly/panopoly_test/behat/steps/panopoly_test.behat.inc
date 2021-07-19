@@ -4,6 +4,7 @@
  * Provide Behat step-definitions for generic Panopoly tests.
  */
 
+use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
 use Drupal\DrupalDriverManager;
 use Drupal\Component\Utility\Random;
@@ -217,7 +218,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
 
       $dimensions = getenv('PANOPOLY_BEHAT_WINDOW_SIZE');
       if (!empty($dimensions)) {
-        list ($width, $height) = explode('x', $dimensions);
+        [$width, $height] = explode('x', $dimensions);
         $session->resizeWindow((int) $width, (int) $height, 'current');
       }
       else {
@@ -442,7 +443,18 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   public function fileCreate($source_path, $destination = NULL) {
     $data = file_get_contents($source_path);
 
-    // @todo: Implement for Drupal 8!
+    // Before working with files, we need to change our current directory to
+    // DRUPAL_ROOT so that the relative paths that define the stream wrappers
+    // (like public:// or temporary://) actually work.
+    $cwd = getcwd();
+    chdir(DRUPAL_ROOT);
+
+    if ($file = file_save_data($data, $destination)) {
+      $this->files[] = $file;
+    }
+
+    // Then change back.
+    chdir($cwd);
 
     return $file;
   }
@@ -904,7 +916,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   public function clearDblog() {
     // @todo: Implement for Drupal 8!
   }
-  
+
   /**
    * @When I select the first autocomplete option for :text on the :field field
    */
@@ -954,10 +966,72 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Checks, that entity reference field with specified id|name|label|value has specified value.
+   *
+   * Entity references have the entity ID appended to the title. This step
+   * allows asserting the main text value without needing to know the entity ID.
+   *
+   * @Then /^the entity reference "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertEntityReferenceFieldContains($field, $value)
+  {
+    $node = $this->assertSession()->fieldExists($field);
+    $actual = $node->getValue();
+    $regex = '/^'.preg_quote($value, '/'). ' \(.\d*\)' . '$/ui';
+
+    $message = sprintf('The field "%s" value is "%s", but "%s" (%s) expected.', $field, $actual, $value, $regex);
+
+    if (preg_match($regex, $actual) !== 1) {
+      throw new ExpectationException($message, $this->getSession()->getDriver());
+    }
+  }
+
+  /**
+   * Checks, that entity reference field with specified id|name|label|value has specified value.
+   *
+   * Entity references have the entity ID appended to the title. This step
+   * allows asserting the main text value without needing to know the entity ID.
+   *
+   * @Then /^the entity reference "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertEntityReferenceFieldNotContains($field, $value)
+  {
+    $node = $this->assertSession()->fieldExists($field);
+    $actual = $node->getValue();
+    $regex = '/^'.preg_quote($value, '/').' \([0-9]+\)$/ui';
+
+    $message = sprintf('The field "%s" value is "%s", but it should not be.', $field, $actual);
+
+    if (preg_match($regex, $actual) === 1) {
+      throw new ExpectationException($message, $this->getSession()->getDriver());
+    }
+  }
+
+  /**
    * @Given :module has the :dependency dependency at position :key
    */
   public function moduleHasDependencyAtKey($module, $dependency, $key) {
-    // @todo: Implement for Drupal 8!
+    $module_handler = \Drupal::moduleHandler();
+    if (!$module_handler->moduleExists($module)) {
+      throw new \Exception("$module is not enabled.");
+    }
+
+    // Handle namespaced dependencies.
+    $dependency_extension_name = $dependency;
+    if (strpos($dependency, ':') !== FALSE) {
+      [, $dependency_extension_name] = explode(':', $dependency, 2);
+    }
+    if (!$module_handler->moduleExists($dependency_extension_name)) {
+      throw new \Exception("$dependency_extension_name is not enabled.");
+    }
+    $extension = $module_handler->getModule($module);
+    $info_parser = \Drupal::service('info_parser');
+    assert($info_parser instanceof \Drupal\Core\Extension\InfoParser);
+    $info = $info_parser->parse($extension->getPathname());
+    if ($info['dependencies'][$key] !== $dependency) {
+      var_export($info);
+      throw new \Exception("$module did not have $dependency dependency at $key position");
+    }
   }
 
   /**
@@ -984,6 +1058,84 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     }
 
     throw new \Exception(sprintf("Cannot find link with text '%s' and index %d", $link, $count));
+  }
+
+  /**
+   * @Given /^there are no files with uri "([^"]*)"$/
+   */
+  public function thereAreNoFilesNamed($uri) {
+    /** @var \Drupal\file\FileInterface[] $files */
+    $files = \Drupal::entityTypeManager()
+      ->getStorage('file')
+      ->loadByProperties(['uri' => $uri]);
+    foreach ($files as $file) {
+      $file->delete();
+    }
+  }
+
+  /**
+   * @When I hover over :selector
+   */
+  public function hoverOverElement($selector) {
+    $page = $this->getSession()->getPage();
+    $element = $page->find('css', $selector);
+    if ($element === null) {
+      throw new \Exception("Unable to find element '$selector'");
+    }
+    $element->mouseOver();
+  }
+
+  /**
+   * @Given I drop the file :path to :selector
+   *
+   * @see \Drupal\Tests\dropzonejs\FunctionalJavascript\DropzoneJsWebDriverTestBase::dropFile
+   * @see \Behat\MinkExtension\Context\MinkContext::attachFileToField
+   */
+  public function iDropTheFileTo($path, $selector) {
+    $input = <<<JS
+      jQuery('.form-type-dropzonejs').append('<input type="file" name="fakefile">');
+JS;
+    $this->getSession()->evaluateScript($input);
+
+    if ($this->getMinkParameter('files_path')) {
+      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
+      if (is_file($fullPath)) {
+        $path = $fullPath;
+      }
+    }
+
+    $this->getSession()->getPage()->attachFileToField('fakefile', $path);
+
+    $drop = <<<JS
+    (function(jQuery) {
+      var fakeFileInputs = jQuery('input[name=fakefile]' );
+      var fileList = fakeFileInputs.map(function (i, el) { return el.files[0] });
+      var e = jQuery.Event('drop', { dataTransfer : { files : fileList } });
+      document.getElementById('$selector').dropzone.listeners[0].events.drop(e);
+      fakeFileInputs.map(function (i, el) { return el.remove(); });
+    })(jQuery);
+JS;
+
+    $this->getSession()->evaluateScript($drop);
+  }
+
+  /**
+   * Verifies that a field has expected placeholder text.
+   *
+   * @Then /^the "(?P<field>(?:[^"]|\\")*)" field placeholder should contain "(?P<value>(?:[^"]|\\")*)"$/
+   */
+  public function assertFieldContains($field, $value)
+  {
+    $node = $this->assertSession()->fieldExists($field);
+    $actual = $node->getAttribute('placeholder');
+    $regex = '/^'.preg_quote($value, '/').'$/ui';
+
+    $message = sprintf('The field "%s" value is "%s", but "%s" expected.', $field, $actual, $value);
+
+    $result = (bool) preg_match($regex, $actual);
+    if (!$result) {
+      throw new ExpectationException($message, $this->getSession()->getDriver());
+    }
   }
 
 }

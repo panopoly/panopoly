@@ -2,13 +2,17 @@
 
 namespace Drupal\panopoly_widgets\Plugin\Block;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InsertCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\SubformState;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\Markup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -100,34 +104,44 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function blockForm($form, FormStateInterface $form_state) {
+    $entity = $this->loadEntity();
+    $content_types = $this->getContentTypes();
 
-    $options = $this->getContentTypes();
-
+    $form['#attached'] = ['library' => ['panopoly_widgets/widget-actions']];
     $form['content_type'] = [
       '#type' => 'select',
-      '#options' => $options,
+      '#options' => array_merge(['all' => 'Any'], $content_types),
       '#title' => $this->t('Content type'),
-      '#default_value' => $this->configuration['page'],
+      '#default_value' => $entity ? $entity->bundle() : 'all',
       '#ajax' => [
         'callback' => [$this, 'autocompleteGetNodes'],
       ]
     ];
-
     $form['node'] = [
       '#prefix' => '<div id="node-selector-wrapper">',
       '#type' => 'entity_autocomplete',
       '#title' => $this->t('Piece of content'),
       '#target_type' => 'node',
-      '#default_value' => $this->loadEntity(),
+      '#default_value' => $entity,
       '#required' => TRUE,
-      '#selection_settings' => array(
-        'target_bundles' => array('panopoly_content_page', 'panopoly_landing_page'),
-      ),
+      // @todo: Properly update this to any AJAX value for `content_type`.
+      //   There are some complications as $form_state->getValues() breaks due
+      //   to Layout Builder leveraging subform states. This requires us to
+      //   use a #process callback, but that does not seem to effect the
+      //   selection settings passed to the autocomplete, since AJAX was
+      //   triggered by a regular element and not a button. Without a button
+      //   triggering the rebuild, these changes are not respected.
+      //
+      //   This element needs to be rebuild with a new selection settings key in
+      //   its autocomplete-path property.
+      '#selection_settings' => [
+        'target_bundles' => array_keys($content_types),
+      ],
       '#suffix' => '</div>',
     ];
 
     $form['view_mode'] = [
-      '#type' => 'select',
+      '#type' => 'radios',
       '#options' => $this->entityDisplayRepository->getViewModeOptions('node'),
       '#title' => $this->t('View mode'),
       '#default_value' => $this->configuration['view_mode'],
@@ -142,8 +156,6 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     foreach ($node_types as $node_type) {
       $options[$node_type->id()] = $node_type->label();
     }
-
-    $options = array_merge(['all' => 'Any'], $options);
     return $options;
   }
 
@@ -151,14 +163,13 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     $response = new AjaxResponse();
     $response->addCommand(new InvokeCommand(NULL, 'cleanNodeAutoComplete', []));
     return $response;
-
   }
 
   /**
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['nid'] = $form_state->getValue('node')['target_id'];
+    $this->configuration['nid'] = $form_state->getValue('node');
     $this->configuration['view_mode'] = $form_state->getValue('view_mode');
   }
 

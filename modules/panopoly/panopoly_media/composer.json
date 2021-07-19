@@ -27,9 +27,13 @@
             "npm-asset"
         ],
         "patches": {
+            "drupal/entity_embed": {
+                "Issue #3069448: Array to string conversion for Media Image": "https://www.drupal.org/files/issues/2019-10-18/entity-embed-array-to-string--3069448-19.patch"
+            },
             "drupal/entity_browser": {
                 "Entity Browser Modal unusable in bartik theme": "https://www.drupal.org/files/issues/bartik-entity-browser.patch",
-                "Issue #3160482: Error with UntrustedCallbackException": "https://www.drupal.org/files/issues/2021-03-02/error-with-untrustedcallbackexception-3160482-5.patch"
+                "Issue #3160482: Error with UntrustedCallbackException": "https://www.drupal.org/files/issues/2021-03-02/error-with-untrustedcallbackexception-3160482-5.patch",
+                "Issue #3199269: Trying to access array offset on value of type null in EntityBrowserElement valueCallback": "https://git.drupalcode.org/project/entity_browser/-/merge_requests/7.patch"
             }
         }
     }

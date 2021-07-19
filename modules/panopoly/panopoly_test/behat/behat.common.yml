@@ -1,7 +1,7 @@
 default:
   suites:
     default:
-      paths: 
+      paths:
         features: './features'
       filters:
         tags: "@panopoly2"
@@ -25,6 +25,9 @@ default:
             switches:
               - "--headless"
               - "--disable-gpu"
+              # Try to prevent random crashes: https://stackoverflow.com/a/53970825/1949744
+              - "--no-sandbox"
+              - "--disable-dev-shm-usage"
           version: ANY
       #base_url: http://mydrupalsite.com
       #files_path: './profiles/contrib/panopoly/modules/panopoly/panopoly_test/tests'
@@ -50,12 +53,18 @@ default:
         CTools modal: "#modalContent"
         Live preview: ".panopoly-magic-preview"
         Linkit modal: "#linkit-modal"
+        # Drupal dialogs and modal
+        'Dialog': 'div[role="dialog"]'
+        'Drupal modal': '#drupal-modal'
+        'Dialog buttons': 'div[role="dialog"] .ui-dialog-buttonset.form-actions'
+        # For Layout Builder
+        Offcanvas dialog: '#drupal-off-canvas'
         # For the Media Browser
         Media web tab: '#media-tab-media_internet'
         Media upload tab: '#media-tab-upload'
         Media library tab: '#media-tab-media_default--media_browser_1'
         # These are the regions for responsive_bartik.
-        Main menu: "#main-menu"
+        Main menu: "nav.menu--main"
         Header: ".region-header"
         Featured: ".region-featured"
         Highlighted: ".region-highlighted"

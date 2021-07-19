@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ *
+ * Install hooks for panopoly_test.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function panopoly_test_install() {
+  user_role_grant_permissions('editor', [
+    'create panopoly_test_content_page content',
+    'create panopoly_test_landing_page content',
+    'delete any panopoly_test_content_page content',
+    'delete any panopoly_test_landing_page content',
+    'delete own panopoly_test_content_page content',
+    'delete own panopoly_test_landing_page content',
+    'edit own panopoly_test_content_page content',
+    'edit own panopoly_test_landing_page content',
+  ]);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function panopoly_test_uninstall() {
+  user_role_revoke_permissions('editor', [
+    'create panopoly_test_content_page content',
+    'create panopoly_test_landing_page content',
+    'delete any panopoly_test_content_page content',
+    'delete any panopoly_test_landing_page content',
+    'delete own panopoly_test_content_page content',
+    'delete own panopoly_test_landing_page content',
+    'edit own panopoly_test_content_page content',
+    'edit own panopoly_test_landing_page content',
+  ]);
+}

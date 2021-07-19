@@ -5,11 +5,11 @@ Feature: Add landing page
 
   Background:
     Given I am logged in as a user with the "administrator" role
-    When I visit "/node/add/panopoly-landing-page"
+    When I visit "/node/add/panopoly_landing_page"
       And I fill in the following:
         | Title         | Testing landing page title |
 
-  @api @panopoly_pages
+  @api @panopoly_pages @panopoly2
   Scenario: Add a landing page
     # Normally, here we'd press "Publish", however some child distribtions
     # don't use 'save_draft', and this makes this test compatible with them.
