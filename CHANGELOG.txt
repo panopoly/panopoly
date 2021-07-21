@@ -1,3 +1,7 @@
+Panopoly 7.x-1.83, 2021-07-21
+-------------------
+- Remove change that I accidentally committed.
+
 Panopoly 7.x-1.82, 2021-07-21
 -------------------
 - Update to Drupal 7.82 for SA-CORE-2021-004.

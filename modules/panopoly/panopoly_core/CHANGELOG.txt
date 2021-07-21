@@ -1,3 +1,7 @@
+Panopoly Core 7.x-1.83, 2021-07-21
+-------------------
+- No changes since last release.
+
 Panopoly Core 7.x-1.82, 2021-07-21
 -------------------
 - Warning: count(): Parameter must be an array or an object that implements
