@@ -1,3 +1,7 @@
+Panopoly Magic 7.x-1.82, 2021-07-21
+-------------------
+- No changes since last release.
+
 Panopoly Magic 7.x-1.81, 2021-06-10
 -------------------
 - Show descriptions when adding widgets and preview mode is "Automatic" or

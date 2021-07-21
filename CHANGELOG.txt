@@ -1,3 +1,12 @@
+Panopoly 7.x-1.82, 2021-07-21
+-------------------
+- Update to Drupal 7.82 for SA-CORE-2021-004.
+- Warning: count(): Parameter must be an array or an object that implements
+  Countable in panopoly_core_preprocess_page() (line 96 of
+  panopoly_core/panopoly_core.module).
+- Specify default configurations in Behat test suite.
+- Start testing upgrade from 1.80.
+
 Panopoly 7.x-1.81, 2021-06-10
 -------------------
 - Tests on Travis broken with warning: Invalid argument supplied for
