@@ -244,7 +244,11 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @api&&@drupal_private_files
    */
   public function configurePrivateFiles($event) {
-    // @todo: Implement for Drupal 8!
+    $file_public_path = \Drupal\Core\StreamWrapper\PublicStream::basePath();
+    $file_private_path = $file_public_path . '/' . 'private';
+    \Drupal::getContainer()->get('state')->set('panopoly_test_private_file_path', $file_private_path);
+
+    \Drupal::service('kernel')->invalidateContainer();
   }
 
   /**
@@ -253,7 +257,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @AfterScenario @api&&@drupal_private_files
    */
   public function cleanupPrivateFiles($event) {
-    // @todo: Implement for Drupal 8!
+    \Drupal::getContainer()->get('state')->delete('panopoly_test_private_file_path');
+    \Drupal::service('kernel')->invalidateContainer();
   }
 
   /**
