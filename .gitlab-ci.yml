@@ -37,7 +37,7 @@ test:
     name: "screenshots-${CI_BUILD_STAGE}-${CI_BUILD_REF_NAME}"
     expire_in: 1 week
     paths:
-      - sites/default/files/screenshots
+      - drupal/sites/default/files/screenshots
 
 push:
   stage: build

@@ -88,6 +88,9 @@ panopoly_header "Checking for overridden features..."
 lando drush en -y features diff
 lando ssh -c 'cd profiles/panopoly && ./vendor/bin/robo check:overridden'
 
+# Make symlink to the Drupal site so we can get our artifacts out.
+ln -s $CI_SHARED_DIR/drupal $CI_PROJECT_DIR/drupal
+
 # Run the Behat tests
 panopoly_header "Starting Behat tests..."
 BEHAT_CMD='cd profiles/panopoly/modules/panopoly/panopoly_test/behat && /app/profiles/panopoly/vendor/bin/behat --rerun --config behat.lando.yml'
