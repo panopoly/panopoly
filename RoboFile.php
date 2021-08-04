@@ -213,6 +213,14 @@ class RoboFile extends RoboTasks {
   }
 
   /**
+   * Checks if the .make file for Drupal.org compatibility.
+   */
+  public function checkMakefile() {
+    $process = $this->runDrush("verify-makefile drupal-org.make");
+    return $process->getExitCode();
+  }
+
+  /**
    * Checks if any of the features are overridden.
    */
   public function checkOverridden() {

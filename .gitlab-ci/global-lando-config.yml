@@ -1,0 +1,6 @@
+engineConfig:
+  host: 'docker'
+  port: 2375
+  socketPath: null
+proxyDomain: 'docker'
+domain: 'docker'
