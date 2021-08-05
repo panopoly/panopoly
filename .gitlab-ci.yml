@@ -11,62 +11,23 @@ stages:
 
 test:
   stage: build
+  script:
+    - .gitlab-ci/test.sh
+  parallel:
+    matrix:
+      - UPGRADE: 'no-upgrade'
+        PHP_VERSION:
+          - '7.4'
+          - '7.3'
+      - UPGRADE:
+          - '2.0.0-alpha16'
+        PHP_VERSION: '7.4'
   artifacts:
     when: on_failure
     name: "screenshots-${CI_BUILD_STAGE}-${CI_BUILD_REF_NAME}"
     expire_in: 1 week
     paths:
       - drupal/web/sites/default/files/screenshots
-  script:
-    # GitLab CI checks out the commit unattached from any branch. We need to
-    # put it in a branch for the Composer repository to work.
-    - git checkout -b $CI_COMMIT_REF_NAME
-
-    # Create new Lando home directory within $CI_SHARED_DIR so that it can be
-    # mounted by the docker:dind service.
-    - export CI_SHARED_DIR=$(dirname $CI_PROJECT_DIR)
-    - cp -r /home/lando $CI_SHARED_DIR/
-    - cp .gitlab-ci-global-lando-config.yml $CI_SHARED_DIR/lando/.lando/config.yml
-    - export HOME=$CI_SHARED_DIR/lando
-    - cd $CI_SHARED_DIR
-
-    # Setup hostname for Panopoly site.
-    - echo $(getent hosts docker | awk '{ print $1 }') panopoly-2.docker | sudo tee -a /etc/hosts
-
-    # This is roughly equivalent to:
-    #
-    #   composer create-project panopoly/panopoly-composer-template:9.x-dev drupal --no-interaction --no-install
-    #
-    # We don't want to run composer here, because we want Lando to run it,
-    # so that, the PHP version used by Lando is used.
-    - mkdir drupal
-    - curl https://gitlab.com/panopoly/panopoly-composer-template/-/archive/9.x/panopoly-composer-template-9.x.tar.bz2 | tar -xj -C drupal --strip-components=1
-
-    # Make symlink to the Drupal site so we can get our artifacts out.
-    - ln -s $CI_SHARED_DIR/drupal $CI_PROJECT_DIR/drupal
-
-    # Use Lando to run composer.
-    - cd drupal
-    - cat $CI_PROJECT_DIR/.gitlab-ci-lando.yml | sed -e "s,CI_PROJECT_DIR,$CI_PROJECT_DIR,g" > .lando.yml
-    # NOTE: the .lando.yml specially mounts the $CI_PROJECT_DIR as /src/panopoly
-    # in the appserver, so we can point the repository there.
-    - lando start
-    - lando composer config repositories.panopoly path /src/panopoly
-    - lando composer require "panopoly/panopoly:dev-$CI_COMMIT_REF_NAME as 2.x-dev" --no-update
-    - lando composer require drush/drush drupal/diff --no-update
-    - lando composer install
-    - cd web
-
-    # Install Drupal.
-    - lando drush si panopoly --db-url=mysql://drupal9:drupal9@database/drupal9 -y
-    - lando drush en -y panopoly_test
-
-    # Check if any modules are overridden.
-    - lando drush en -y features diff
-    - lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo check:overridden'
-
-    # Run the Behat tests
-    - lando ssh -c 'cd profiles/contrib/panopoly/modules/panopoly/panopoly_test/behat && /app/vendor/bin/behat --config behat.lando.yml'
 
 push:
   stage: build
