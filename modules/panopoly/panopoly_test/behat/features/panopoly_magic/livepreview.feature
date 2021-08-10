@@ -14,13 +14,14 @@ Feature: Live preview
     Then I should see "Configure new Add table"
     When I fill in "Title" with "Widget title"
       And I wait for live preview to finish
-    Then I should see "Widget title" in the "Live preview" region
-    When I fill in "field_basic_table_table[und][0][tablefield][cell_0_0]" with "c-1-r-1"
+    Then I should see "Table is a required field." in the "Live preview" region
+    When I fill in "field_basic_table_table[und][0][tablefield][tabledata][row_0][col_0]" with "c-1-r-1"
       And I wait for live preview to finish
+    Then I should see "Widget title" in the "Live preview" region
     # We need to check the table header case insensitively, because it's not
     # uncommon to make table headers capitalized.
-    Then I should see text matching "/c-1-r-1/i" in the "Live preview" region
-    When I fill in "field_basic_table_table[und][0][tablefield][cell_0_1]" with "c-2-r-1"
+      And I should see text matching "/c-1-r-1/i" in the "Live preview" region
+    When I fill in "field_basic_table_table[und][0][tablefield][tabledata][row_0][col_1]" with "c-2-r-1"
       And I wait for live preview to finish
     Then I should see text matching "/c-2-r-1/i" in the "Live preview" region
     # Test that we can make the title into a link
@@ -30,7 +31,7 @@ Feature: Live preview
       And I fill in "path" with "http://drupal.org"
       And I wait for live preview to finish
     Then I should see the link "Widget title" in the "Live preview" region
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
     Then I should see "Widget title"
@@ -113,6 +114,34 @@ Feature: Live preview
       And I wait for live preview to finish
     Then I should not see "Posted by" in the "Live preview" region
 
+@api @javascript @panopoly_magic
+  Scenario: Live preview should work with cached views
+    Given I am logged in as a user with the "administrator" role
+      And "panopoly_test_page" content:
+      | title       | body      | created            | status |
+      | Test Page 3 | Test body | 01/01/2001 11:00am |      1 |
+      | Test Page 1 | Test body | 01/02/2001 11:00am |      1 |
+      | Test Page 2 | Test body | 01/03/2001 11:00am |      1 |
+      And Panopoly magic live previews are automatic
+      And I am viewing a landing page
+    When I customize this page with the Panels IPE
+      And I click "Add new pane"
+      And I click "Panopoly Test" in the "CTools modal" region
+      And I click "View: Magic Views Cache: Cached Content" in the "CTools modal" region
+      And I click "Add View: Magic Views Cache: Cached Content" in the "Live preview" region
+      And I fill in "widget_title" with "Test Cached Content"
+      And I wait for live preview to finish
+    Then I should see "Test Cached Content" in the "Live preview" region
+    When I select "Test Page" from "exposed[type]"
+      And I wait for live preview to finish
+    Then I should see the link "Test Page 1" in the "Live preview" region
+      And I should see the link "Test Page 2" in the "Live preview" region
+      And I should see the link "Test Page 3" in the "Live preview" region
+    When I uncheck the box "fields_override[name]"
+      And I wait for live preview to finish
+    Then I should not see "Posted by" in the "Live preview" region
+
+
   @api @javascript @panopoly_magic @panopoly_widgets
   Scenario: Manual live preview should show changes when requested
     Given I am logged in as a user with the "administrator" role
@@ -126,7 +155,12 @@ Feature: Live preview
     Then I should not see "Widget title" in the "Live preview" region
     When I press "Update Preview"
       And I wait for live preview to finish
+    Then I should see "Text field is required." in the "Live preview" region
+    When I fill in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor with "Hello Text"
+      And I press "Update Preview"
+      And I wait for live preview to finish
     Then I should see "Widget title" in the "Live preview" region
+      And I should see "Hello Text" in the "Live preview" region
 
   @api @javascript @panopoly_magic @panopoly_widgets
   Scenario: Automatic live preview should validation errors immediately
@@ -158,6 +192,7 @@ Feature: Live preview
     Then I should see "Testing WYSIWYG preview" in the "Live preview" region
     # Try with MarkItUp
     When I select "HTML" from "Editor"
+      And I confirm the popup
       And I type "Using HTML editor" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
       And I wait for live preview to finish
     Then I should see "Using HTML editor" in the "Live preview" region
@@ -174,6 +209,7 @@ Feature: Live preview
     Then I should see "Testing plain text" in the "Live preview" region
     # And verify that switching back to TinyMCE will still work.
     When I select "WYSIWYG" from "Editor"
+      And I confirm the popup
       And I type "Testing WYSIWYG again" in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor
       And I wait for live preview to finish
     Then I should see "Testing WYSIWYG again" in the "Live preview" region
@@ -192,7 +228,7 @@ Feature: Live preview
       And I press "Update Preview"
     Then I should see "Widget title 1" in the "Live preview" region
       And I should see "Widget content 1" in the "Live preview" region
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
     Then I should see "Widget title 1" in the "h2" element in the "Boxton Content" region
       And I should see "Widget content 1"
     # Now try saving the page, and doing the same test, but with an existing widget.
@@ -227,7 +263,7 @@ Feature: Live preview
       And I press "Update Preview"
     Then I should see "Widget title 1" in the "Live preview" region
       And I should see "Widget content 1" in the "Live preview" region
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
     Then I should see "Widget title 1" in the "h2" element in the "Boxton Content" region
       And I should see "Widget content 1"
     # Now try saving the page, and doing the same test, but with an existing widget.
@@ -264,7 +300,7 @@ Feature: Live preview
       And I should see "Widget content 1" in the "Live preview" region
       And I should see "Widget title 1" in the "a" element with the "href" attribute set to "http://google.com" in the "Live preview" region
     # Now try saving the page, and doing the same test, but with an existing widget.
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
     When I customize this page with the Panels IPE
@@ -325,7 +361,7 @@ Feature: Live preview
     Then I should not see "ONLY IN PREVIEW" in the "Live preview" region
       And I should see "Widget content 1" in the "Live preview" region
     # Save for real, and then start editing again.
-    When I press "Save" in the "CTools modal" region
+    When I press "Add" in the "CTools modal" region
       And I press "Save"
       And I wait for the Panels IPE to deactivate
       And I customize this page with the Panels IPE
@@ -334,7 +370,7 @@ Feature: Live preview
       And I press "Update Preview"
     Then I should not see "Widget content 1" in the "Live preview" region
       And I should see "THIS WILL BE CANCELLED" in the "Live preview" region
-    When I click "Close Window"
+    When I click "Close Window" link or button
       And I click "Edit" in the "Boxton Content" region
     Then I should see "Widget content 1" in the "Live preview" region
     When I fill in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor with "Widget content 2"
@@ -444,6 +480,7 @@ Feature: Live preview
       Then I should see "Configure new Add text"
       When I fill in the following:
         | Title   | Here's a title & then some |
+        And I fill in the "edit-field-basic-text-text-und-0-value" WYSIWYG editor with "Hello Text"
         And I check the box "Make title a link"
         And I wait for AJAX to finish
       Then I should see "Here's a title & then some"

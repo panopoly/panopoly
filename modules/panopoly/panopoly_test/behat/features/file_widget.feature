@@ -7,7 +7,6 @@ Feature: Add a file to a page
   Scenario: Add a file widget
     Given I am logged in as a user with the "administrator" role
       And there are no files with uri "public://file/test.txt"
-      And Panopoly magic live previews are disabled
       And I am viewing a landing page
 	When I click "Layout"
 	  And I click "Add block in Section 1, Content region"

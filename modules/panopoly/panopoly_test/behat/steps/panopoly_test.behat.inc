@@ -53,16 +53,16 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   protected $files = array();
 
   /**
-   * Set to TRUE if we overrid the private files path during this scenario.
-   *
-   * @var bool
-   */
-  protected $private_path_overridden = FALSE;
-
-  /**
    * Set to TRUE after the window has been resized.
    */
   protected $window_resized = FALSE;
+
+  /**
+   * Store variables so they can be reset to previous values.
+   *
+   * @var array
+   */
+  protected $configVariables = array();
 
   const PANOPOLY_BEHAT_FLAG_PHP_NOTICES_OFF = 0;
   const PANOPOLY_BEHAT_FLAG_PHP_NOTICES_PRINT = 1;
@@ -91,6 +91,35 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
       throw new \Exception(sprintf('No region "%s" found on the page %s.', $region, $session->getCurrentUrl()));
     }
     return $regionObj;
+  }
+
+  /**
+   * Save existing preview configurations.
+   *
+   * @BeforeScenario @api
+   */
+  public function saveConfig() {
+      // @todo: Implement for Drupal 8!
+
+      // This should capture any config that we want to change to defaults for
+      // the tests, so we can restore the original config later.
+      // In Panopoly 1.x, this disabled live previews and set the add content
+      // preview mode to 'Single'.
+  }
+
+  /**
+   * Restore saved preview configurations or other variables.
+   *
+   * @AfterScenario @api
+   */
+  public function restoreConfig() {
+    if (count($this->configVariables) > 0) {
+      foreach ($this->configVariables as $key => $value) {
+        // @todo: Implement for Drupal 8!
+
+        // This should restore any saved config to it's original values.
+      }
+    }
   }
 
   /**

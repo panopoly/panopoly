@@ -5,8 +5,6 @@ Feature: Add content page
 
   Background:
     Given I am logged in as a user with the "administrator" role
-      And Panopoly magic live previews are disabled
-	# @todo Make a Drupal agnostic rule!
     When I visit "/node/add/panopoly_content_page"
       And I fill in the following:
         | Title       | Testing title   |
