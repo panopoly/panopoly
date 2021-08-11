@@ -13,6 +13,7 @@ use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
+use Drupal\Core\Link;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\Markup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -107,7 +108,7 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     $entity = $this->loadEntity();
     $content_types = $this->getContentTypes();
 
-    $form['#attached'] = ['library' => ['panopoly_widgets/widget-actions']];
+    $form['#attached'] = ['library' => ['panopoly_widgets/content-item']];
     $form['content_type'] = [
       '#type' => 'select',
       '#options' => array_merge(['all' => 'Any'], $content_types),
@@ -138,6 +139,9 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
         'target_bundles' => array_keys($content_types),
       ],
       '#suffix' => '</div>',
+      '#attributes' => [
+        'class' => ['js-panopoly-widgets-content-item-autocomplete'],
+      ],
     ];
 
     $form['view_mode'] = [
@@ -148,6 +152,15 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     ];
     return $form;
   }
+
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildConfigurationForm($form, $form_state);
+    $form['label']['#attributes'] = [
+      'class' => ['js-panopoly-widgets-content-item-label'],
+    ];
+    return $form;
+  }
+
 
   private function getContentTypes() {
     $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
@@ -161,7 +174,7 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
 
   public function autocompleteGetNodes(array &$form, FormStateInterface $form_state){
     $response = new AjaxResponse();
-    $response->addCommand(new InvokeCommand(NULL, 'cleanNodeAutoComplete', []));
+    $response->addCommand(new InvokeCommand(NULL, 'panopolyWidgetsCleanNodeAutoComplete', []));
     return $response;
   }
 
@@ -182,13 +195,17 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     $build = [];
 
     if ($entity = $this->loadEntity()) {
+      // Hide the node title because we're putting it in the block title.
+      $entity->title = '';
+
       $build = $view_builder->view($entity, $this->configuration['view_mode']);
 
       CacheableMetadata::createFromObject($entity)
         ->applyTo($build);
+
+      $build['#title'] = Link::fromTextAndUrl($this->configuration['label'], $entity->toUrl());
     }
 
-    $build["#title"] = Markup::create($this->configuration['label']);
     return $build;
   }
 

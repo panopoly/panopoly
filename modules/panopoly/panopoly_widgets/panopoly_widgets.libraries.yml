@@ -1,6 +1,6 @@
-widget-actions:
+content-item:
   js:
-    js/widget_actions.js: {}
+    js/panopoly-widgets-content-item.js: {}
   dependencies:
     - core/jquery
     - core/drupal

@@ -154,6 +154,11 @@
       }
       $form.find('.media-library-widget, .js-media-library-widget').parent().each(trackChange);
 
+      // Autocomplete fields.
+      $form.find('.form-autocomplete').on('autocompleteclose', function (e, ui) {
+        triggerSubmit();
+      });
+
     }
   }
 

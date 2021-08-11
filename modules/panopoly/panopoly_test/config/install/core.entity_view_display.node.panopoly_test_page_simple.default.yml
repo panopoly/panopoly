@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.panopoly_test_page_simple.body
+    - node.type.panopoly_test_page_simple
+  module:
+    - text
+    - user
+id: node.panopoly_test_page_simple.default
+targetEntityType: node
+bundle: panopoly_test_page_simple
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
