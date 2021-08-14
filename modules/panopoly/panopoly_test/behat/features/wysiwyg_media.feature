@@ -33,12 +33,6 @@ Feature: Add media using the rich text editor
       And I wait for AJAX to finish
       And I wait 1 second
       And I press "Select"
-#    Then I should see "Destination"
-    # Select the destination (public/private files).
-#    When I select the radio button "Public local files served by the webserver."
-#      And I press "Next"
-#    Then I should see a "#edit-submit" element
-#      And I should see the "Crop" button
     # Fields for the image.
     And I fill in "Alternative text" with "Sample alt text"
       And I press "Select"
@@ -69,10 +63,6 @@ Feature: Add media using the rich text editor
       And I wait for AJAX to finish
       And I wait 1 second
       And I press "Select"
-#    Then I should see "Destination"
-#    When I select the radio button "Public local files served by the webserver."
-#      And I press "Next"
-#    Then I should see a "#edit-submit" element
     # We need to set the alt/title text differently in the two steps that ask
     # for it - so, that we can test that the 2nd overrides.
     When I fill in "Alternative text" with "Sample alt text"
@@ -108,10 +98,6 @@ Feature: Add media using the rich text editor
       And I wait for AJAX to finish
       And I wait 1 second
       And I press "Select"
-#    Then I should see "Destination"
-#    When I select the radio button "Public local files served by the webserver."
-#      And I press "Next"
-#    Then I should see a "#edit-submit" element
     # We need to set the alt/title text differently in the two steps that ask
     # for it - so, that we can test that the 2nd overrides.
     When I fill in "Alternative text" with "Alt & some > \"character's\" <"
