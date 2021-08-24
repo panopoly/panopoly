@@ -57,6 +57,7 @@ fi
 lando composer config repositories.panopoly path /src/panopoly
 lando composer require "panopoly/panopoly:dev-$CI_COMMIT_REF_NAME as 2.x-dev" --no-update
 lando composer require drush/drush drupal/diff --no-update
+lando composer require drupal/panopoly_widgets_table:2.x-dev --no-update
 lando composer update
 cd web
 
@@ -72,6 +73,10 @@ fi
 
 # Post installation setup.
 lando drush en -y panopoly_test
+
+
+# Install Panopoly Widgets modules
+lando drush en -y panopoly_widgets_table
 
 # Check if any modules are overridden.
 panopoly_header "Checking for overridden features..."

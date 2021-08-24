@@ -675,6 +675,17 @@ EOF;
       ], $arguments);
     }
 
+    $panopoly_widgets_modules = [
+      'panopoly_widgets_table',
+    ];
+    foreach ($panopoly_widgets_modules as $module) {
+      if (!$this->isModuleEnabled($module)) {
+        $this->say("Excluding scenarios for `$module` since it is not installed.");
+        $arguments[] = '--tags';
+        $arguments[] = '~@' . $module;
+      }
+    }
+
     $argument_string = join(" ", $arguments);
     $collection->taskExec("{$behat} {$argument_string}");
 
