@@ -32,7 +32,10 @@ function panopoly_pages_panels_ipe_layouts_alter(array &$layouts, PanelsDisplayV
   }
   if ($entity = panopoly_pages_get_panelizer_entity($panels_display)) {
     // Only modify the results for our content types.
-    if ($entity->getEntityTypeId() !== 'node' || !in_array($entity->bundle(), ['panopoly_content_page', 'panopoly_landing_page'])) {
+    if ($entity->getEntityTypeId() !== 'node' || !in_array($entity->bundle(), [
+      'panopoly_content_page',
+      'panopoly_landing_page',
+    ])) {
       return;
     }
 
@@ -70,7 +73,10 @@ function panopoly_pages_panels_ipe_blocks_alter(array &$blocks, PanelsDisplayVar
     ];
 
     // Add these to the list when it's one of our types.
-    if ($entity->getEntityTypeId() == 'node' && in_array($entity->bundle(), ['panopoly_landing_page', 'panopoly_content_page'])) {
+    if ($entity->getEntityTypeId() == 'node' && in_array($entity->bundle(), [
+      'panopoly_landing_page',
+      'panopoly_content_page',
+    ])) {
       $hide_ids = array_merge($hide_ids, [
         'entity_field:node:nid',
         'entity_field:node:uuid',

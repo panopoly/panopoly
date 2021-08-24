@@ -35,7 +35,7 @@ function panopoly_media_theme() {
  * Implements hook_theme_registry_alter().
  */
 function panopoly_media_theme_registry_alter(&$theme_registry) {
-  // If in Bartik, replace the template for html--entity-browser--iframe.twig.html.
+  // In Bartik, replace the template for html--entity-browser--iframe.twig.html.
   if (isset($theme_registry['block']['preprocess functions']) && in_array('bartik_preprocess_block', $theme_registry['block']['preprocess functions'])) {
     // Ensure that we're using the module version of the template, and not
     // one overridden in a sub-theme.
@@ -79,7 +79,7 @@ function panopoly_media_form_entity_embed_dialog_alter(&$form, FormStateInterfac
         $embed_display_element =& $form['attributes']['data-entity-embed-display-settings'];
         if (array_key_exists('image_style', $embed_display_element)) {
           foreach ($embed_display_element['image_style']['#options'] as $key => $option) {
-            // @todo: Expose this as a setting in Panopoly settings.
+            // @todo Expose this as a setting in Panopoly settings.
             if (strpos($key, 'panopoly_') === FALSE) {
               unset($embed_display_element['image_style']['#options'][$key]);
             }

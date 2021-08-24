@@ -71,7 +71,7 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
     return new static(
@@ -131,7 +131,8 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
    * @param string $uri
    *   The file URI (path).
    *
-   * @return \Drupal\file\FileInterface|NULL
+   * @return \Drupal\file\FileInterface|null
+   *   The file or NULL.
    */
   protected function findExistingFile($uri) {
     $files = $this->fileStorage->loadByProperties([
@@ -146,9 +147,9 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
   /**
    * Copy the file.
    *
-   * @param $source_path
+   * @param string $source_path
    *   The source path.
-   * @param $destination_path
+   * @param string $destination_path
    *   The destination path.
    *
    * @return bool
@@ -170,9 +171,9 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
   /**
    * Creates a new file from the source path.
    *
-   * @param $source_path
+   * @param string $source_path
    *   The source path.
-   * @param $destination_path
+   * @param string $destination_path
    *   The destination path.
    *
    * @return \Drupal\file\FileInterface
@@ -197,9 +198,9 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
   /**
    * Finds existing or creates a new file.
    *
-   * @param $source_path
+   * @param string $source_path
    *   The source path.
-   * @param $destination_path
+   * @param string $destination_path
    *   The destination path.
    *
    * @return \Drupal\file\FileInterface
@@ -233,12 +234,12 @@ class DemoImage extends ProcessPluginBase implements ContainerFactoryPluginInter
   /**
    * Gets the value of an optional property.
    *
-   * @param $config_name
+   * @param string $config_name
    *   The configuration key that holds the name of the source property.
    * @param \Drupal\migrate\Row $row
    *   The row.
    *
-   * @return mixed|NULL
+   * @return mixed|null
    *   Returns the value of the property or NULL if not found.
    */
   protected function getOptionalProperty($config_name, Row $row) {

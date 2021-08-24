@@ -2,24 +2,13 @@
 
 namespace Drupal\panopoly_widgets\Controller;
 
-use Drupal\Core\KeyValueStore\KeyValueStoreInterface;
-use Drupal\panopoly_widgets\EntityAutocompleteMatcher;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\system\Controller\EntityAutocompleteController as CoreEntityAutocompleteController;
 
-class EntityAutocompleteController extends \Drupal\system\Controller\EntityAutocompleteController {
-
-  /**
-   * The autocomplete matcher for entity references.
-   */
-  protected $matcher;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(EntityAutocompleteMatcher $matcher, KeyValueStoreInterface $key_value) {
-    $this->matcher = $matcher;
-    $this->keyValue = $key_value;
-  }
+/**
+ * Controller for entity autocomplete.
+ */
+class EntityAutocompleteController extends CoreEntityAutocompleteController {
 
   /**
    * {@inheritdoc}

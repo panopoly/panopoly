@@ -3,7 +3,6 @@
 namespace Drupal\panopoly_magic_preview_test\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * A block that takes a setting that'll be displayed.

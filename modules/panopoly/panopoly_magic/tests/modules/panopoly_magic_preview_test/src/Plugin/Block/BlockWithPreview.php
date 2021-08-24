@@ -2,7 +2,6 @@
 
 namespace Drupal\panopoly_magic_preview_test\Plugin\Block;
 
-use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Block\BlockBase;
 use Drupal\panopoly_magic\BlockPreviewInterface;
 

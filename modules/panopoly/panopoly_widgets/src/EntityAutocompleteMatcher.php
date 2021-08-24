@@ -4,8 +4,12 @@ namespace Drupal\panopoly_widgets;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Tags;
+use Drupal\Core\Entity\EntityAutocompleteMatcher as CoreEntityAutocompleteMatcher;
 
-class EntityAutocompleteMatcher extends \Drupal\Core\Entity\EntityAutocompleteMatcher {
+/**
+ * Extended entity autocomplete matcher.
+ */
+class EntityAutocompleteMatcher extends CoreEntityAutocompleteMatcher {
 
   /**
    * Gets matched labels based on a given search string.
@@ -19,8 +23,8 @@ class EntityAutocompleteMatcher extends \Drupal\Core\Entity\EntityAutocompleteMa
     if (isset($autocomplete_type) && !empty($autocomplete_type) && $autocomplete_type != 'all') {
       $selection_settings = [
         'target_bundles' => [
-          $autocomplete_type
-        ]
+          $autocomplete_type,
+        ],
       ];
     }
 

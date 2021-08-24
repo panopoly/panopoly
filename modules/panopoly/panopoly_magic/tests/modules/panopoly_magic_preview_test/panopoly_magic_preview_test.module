@@ -1,8 +1,11 @@
 <?php
+
 /**
  * @file
  * Hooks for panopoly_magic_preview_test.
  */
+
+use Drupal\Core\Block\BlockPluginInterface;
 
 /**
  * Implements hook_block_alter().
@@ -34,14 +37,13 @@ function panopoly_magic_preview_test_block_alter(&$definitions) {
  * Block preview callback.
  *
  * @param \Drupal\Core\Block\BlockPluginInterface $block_plugin
- *   The block plugin
+ *   The block plugin.
  *
  * @return array
  *   The render array.
  */
-function _panopoly_magic_preview_test_preview_callback(\Drupal\Core\Block\BlockPluginInterface $block_plugin) {
+function _panopoly_magic_preview_test_preview_callback(BlockPluginInterface $block_plugin) {
   return [
     '#markup' => t("panopoly_magic_preview_test: block preview from a callback"),
   ];
 }
-

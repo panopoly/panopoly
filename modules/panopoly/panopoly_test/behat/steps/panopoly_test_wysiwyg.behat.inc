@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Provide Behat step-definitions for WYSIWYG editor.
@@ -8,6 +9,9 @@
 
 use Drupal\DrupalExtension\Context\DrupalSubContextBase;
 
+/**
+ * Behat subcontext for testing WYSIWYG.
+ */
 class WysiwygSubContext extends DrupalSubContextBase {
 
   /**
@@ -27,7 +31,8 @@ class WysiwygSubContext extends DrupalSubContextBase {
 
     if ($editorType === 'ckeditor') {
       $instance = "CKEDITOR.instances['$instanceId']";
-    } else {
+    }
+    else {
       throw new \Exception("Cannot determine how to get editor instance for '$instanceId'");
     }
 
@@ -38,16 +43,27 @@ class WysiwygSubContext extends DrupalSubContextBase {
     return $instance;
   }
 
+  /**
+   * Gets the type of the WYSIWYG editor.
+   *
+   * @param string $instanceId
+   *   The WYSIWYG editor instance id.
+   *
+   * @return string
+   *   The editor type.
+   */
   protected function getEditorType(string $instanceId) {
     try {
       $script = "document.getElementById('$instanceId').dataset.editorActiveTextFormat";
       $editorActiveTextFormat = $this->getSession()->evaluateScript("return $script");
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       throw new \Exception("Could not edit active text format for '$instanceId'.");
     }
     try {
       $editorType = $this->getSession()->evaluateScript("return drupalSettings.editor.formats['$editorActiveTextFormat'].editor");
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       throw new \Exception(sprintf('The editor type for text format "%s" could not be found.', $editorActiveTextFormat));
     }
     return $editorType;
@@ -73,9 +89,10 @@ class WysiwygSubContext extends DrupalSubContextBase {
     $toolbarElement = NULL;
     switch ($editorType) {
       case 'ckeditor':
-        $toolbarElement = $driver->find("//div[@id='cke_$instanceId']//span[contains(@class, 'cke_top')]" );
+        $toolbarElement = $driver->find("//div[@id='cke_$instanceId']//span[contains(@class, 'cke_top')]");
         $toolbarElement = !empty($toolbarElement) ? $toolbarElement[0] : NULL;
         break;
+
       case 'tinymce':
         $toolbarElement = $driver->find("//div[@id='{$instanceId}_toolbargroup']");
         $toolbarElement = !empty($toolbarElement) ? $toolbarElement[0] : NULL;
@@ -96,6 +113,8 @@ class WysiwygSubContext extends DrupalSubContextBase {
   }
 
   /**
+   * Types into WYSIWYG editor.
+   *
    * @When I type :text in the :instanceId WYSIWYG editor
    */
   public function iTypeInTheWysiwygEditor($text, $instanceId) {
@@ -106,12 +125,15 @@ class WysiwygSubContext extends DrupalSubContextBase {
     $this->getSession()->executeScript("jQuery('#$instanceId').focus();");
     if ($editorType === 'ckeditor') {
       $this->getSession()->executeScript("$instance.insertText(\"$text\");");
-    } else {
+    }
+    else {
       $this->getSession()->executeScript("$instance.insert(\"$text\");");
     }
   }
 
   /**
+   * Selects text in the WYSIWYG editor.
+   *
    * @When I select the text in the :instanceId WYSIWYG editor
    */
   public function iSelectTheTextInTheWysiwygEditor($instanceId) {
@@ -126,12 +148,15 @@ const sel = $instance.getSelection();
 sel.selectElement(sel.getStartElement());
 JS;
       $this->getSession()->executeScript($javascript);
-    } else {
+    }
+    else {
       throw new \RuntimeException("The editor '$editorType' is not supported for this step.");
     }
   }
 
   /**
+   * Presses a key in the WYSIWYG editor.
+   *
    * @When I press the enter key in the :instanceId WYSIWYG editor
    *
    * @todo this could be a generic "send a command" step?
@@ -144,12 +169,15 @@ JS;
     $this->getSession()->executeScript("jQuery('#$instanceId').focus();");
     if ($editorType === 'ckeditor') {
       $this->getSession()->executeScript("$instance.execCommand('enter');");
-    } else {
+    }
+    else {
       throw new \RuntimeException("Unknown editor '$editorType' to send commands to.");
     }
   }
 
   /**
+   * Fills in the WYSIWYG editor with text.
+   *
    * @When I fill in the :instanceId WYSIWYG editor with :text
    */
   public function iFillInTheWysiwygEditor($instanceId, $text) {
@@ -158,6 +186,8 @@ JS;
   }
 
   /**
+   * Clicks a button in a WYSIWYG editor.
+   *
    * @When I click the :action button in the :instanceId WYSIWYG editor
    */
   public function iClickTheButtonInTheWysiwygEditor($action, $instanceId) {
@@ -176,6 +206,8 @@ JS;
   }
 
   /**
+   * Clicks the given CSS selector in a WYSIWYG editor.
+   *
    * @When I click the :cssSelector element in the :instanceId WYSIWYG editor
    */
   public function iClickTheElementInTheWysiwygEditor($cssSelector, $instanceId) {
@@ -189,7 +221,7 @@ const element = {$instance}.document.findOne('{$cssSelector}').getParent();
 JS;
     }
     else {
-      // TODO: This is tinyMCE specific. We should probably do a switch statement
+      // @todo This is tinyMCE specific. We should probably do a switch statement
       // based on $editorType.
       $editor_iframe_id = $instanceId . '_ifr';
 
@@ -203,13 +235,15 @@ JS;
   }
 
   /**
+   * Expands the toolbar in the WYSIWYG editor.
+   *
    * @When I expand the toolbar in the :instanceId WYSIWYG editor
    */
   public function iExpandTheToolbarInTheWysiwygEditor($instanceId) {
     $editorType = $this->getEditorType($instanceId);
     $toolbarElement = $this->getWysiwygToolbar($instanceId, $editorType);
 
-    // TODO: This is tinyMCE specific. We should probably switch on
+    // @todo This is tinyMCE specific. We should probably switch on
     // $editorType.
     $action = 'Show/hide toolbars';
 
@@ -224,6 +258,8 @@ JS;
   }
 
   /**
+   * Asserts the text in a WYSIWYG editor.
+   *
    * @Then I should see :text in the :instanceId WYSIWYG editor
    */
   public function assertContentInWysiwygEditor($text, $instanceId) {
@@ -235,6 +271,8 @@ JS;
   }
 
   /**
+   * Asserts that the given text isn't present in a WYSIWYG editor.
+   *
    * @Then I should not see :text in the :instanceId WYSIWYG editor
    */
   public function assertContentNotInWysiwygEditor($text, $instanceId) {
@@ -244,4 +282,5 @@ JS;
       throw new \Exception(sprintf('The text "%s" was found in the "%s" WYSWIYG editor on the page %s', $text, $instanceId, $this->getSession()->getCurrentUrl()));
     }
   }
+
 }

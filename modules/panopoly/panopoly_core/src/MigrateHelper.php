@@ -40,6 +40,7 @@ class MigrateHelper {
    * Gets the migrate message object.
    *
    * @return \Drupal\migrate\MigrateMessageInterface
+   *   The migrate message object.
    */
   protected function getMessageObject() {
     if (!$this->migrateMessage) {

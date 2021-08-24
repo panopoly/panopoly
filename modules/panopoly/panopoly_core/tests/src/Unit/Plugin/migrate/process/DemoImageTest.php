@@ -8,7 +8,6 @@ use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Image\ImageInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileStorageInterface;
-use Drupal\KernelTests\KernelTestBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
@@ -65,8 +64,8 @@ class DemoImageTest extends UnitTestCase {
   public function setUp() {
     parent::setUp();
 
-    // @todo: This seems wrong. We just need the FILE_STATUS_PERMANENT constant.
-    //        Should this be a kernel test instead?
+    // @todo This seems wrong. We just need the FILE_STATUS_PERMANENT constant.
+    //   Should this be a kernel test instead?
     require_once './includes/file.inc';
 
     $this->migration = $this->prophesize(MigrationInterface::class);
@@ -81,10 +80,11 @@ class DemoImageTest extends UnitTestCase {
    *
    * @param array $configuration
    *   The plugin configuration.
-   * @param array|NULL $methods
+   * @param array|null $methods
    *   The list of methods to mock.
    *
    * @return \Drupal\panopoly_core\Plugin\migrate\process\DemoImage|\PHPUnit_Framework_MockObject_MockObject
+   *   A mock plugin to test.
    */
   protected function createPlugin(array $configuration, array $methods = NULL) {
     return $this->getMockBuilder(DemoImage::class)
@@ -98,7 +98,7 @@ class DemoImageTest extends UnitTestCase {
         $this->filesystem->reveal(),
         $this->imageFactory->reveal(),
       ])
-      ->setMethods($methods)
+      ->onlyMethods($methods)
       ->getMock();
   }
 
@@ -141,13 +141,13 @@ class DemoImageTest extends UnitTestCase {
       ->willReturn('image.jpg');
 
     $plugin = $this->createPlugin([
-      'filename_property' => 'image_filename'
+      'filename_property' => 'image_filename',
     ], [
       'getSourcePath',
       'getDestinationPath',
       'checkFile',
       'findOrCreateFile',
-      'getOptionalProperty'
+      'getOptionalProperty',
     ]);
 
     $plugin->method('getSourcePath')
@@ -214,7 +214,7 @@ class DemoImageTest extends UnitTestCase {
       ->willReturn('image.jpg');
 
     $plugin = $this->createPlugin([
-      'filename_property' => 'image_filename'
+      'filename_property' => 'image_filename',
     ], [
       'getSourcePath',
       'getDestinationPath',
@@ -247,6 +247,9 @@ class DemoImageTest extends UnitTestCase {
     $row->getSourceProperty('source_property_name')
       ->willReturn('test_value');
 
-    $this->assertEquals('test_value', $this->invokeMethod($plugin, 'getOptionalProperty', ['test_property', $row->reveal()]));
+    $this->assertEquals('test_value', $this->invokeMethod($plugin, 'getOptionalProperty', [
+      'test_property', $row->reveal(),
+    ]));
   }
+
 }

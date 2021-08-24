@@ -5,10 +5,6 @@
  * Install and update hooks for Panopoly Demo.
  */
 
-use Drupal\layout_builder\Section;
-use Drupal\layout_builder\SectionComponent;
-use Drupal\pathauto\PathautoState;
-
 /**
  * Implements hook_install().
  */

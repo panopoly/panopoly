@@ -21,21 +21,29 @@ class ReusableBlocks {
   use StringTranslationTrait;
 
   /**
+   * The layout tempstore repository.
+   *
    * @var \Drupal\layout_builder\LayoutTempstoreRepositoryInterface
    */
   protected $layoutTempstoreRepository;
 
   /**
+   * The entity type manager.
+   *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
   /**
+   * The block manager.
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
+   * The current user service.
+   *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
@@ -44,10 +52,15 @@ class ReusableBlocks {
    * ReusableBlocks constructor.
    *
    * @param \Drupal\layout_builder\LayoutTempstoreRepositoryInterface $layout_tempstore_repository
+   *   The layout tempstore repository.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    * @param \Drupal\Core\Block\BlockManagerInterface $block_manager
+   *   The block manager.
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
+   *   The current user service.
    * @param \Drupal\Core\StringTranslation\TranslationInterface $string_translation
+   *   The string translation service.
    */
   public function __construct(LayoutTempstoreRepositoryInterface $layout_tempstore_repository, EntityTypeManagerInterface $entity_type_manager, BlockManagerInterface $block_manager, AccountProxyInterface $current_user, TranslationInterface $string_translation) {
     $this->layoutTempstoreRepository = $layout_tempstore_repository;
@@ -70,7 +83,7 @@ class ReusableBlocks {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function alterForm(&$form, FormStateInterface $form_state, $form_id) {
+  public function alterForm(array &$form, FormStateInterface $form_state, $form_id) {
     $form_args = $form_state->getBuildInfo()['args'];
     /** @var \Drupal\layout_builder\SectionStorageInterface $section_storage */
     $section_storage = $form_args[0];
@@ -98,7 +111,7 @@ class ReusableBlocks {
     if ($block->getBaseId() === 'block_content') {
       // Show the block content form here.
       /** @var \Drupal\block_content\Plugin\Derivative\BlockContent[] $block_contents */
-      $block_contents = $this->entityTypeManager->getStorage('block_content')->loadByProperties([ 'uuid' => $block->getDerivativeId() ]);
+      $block_contents = $this->entityTypeManager->getStorage('block_content')->loadByProperties(['uuid' => $block->getDerivativeId()]);
       if (count($block_contents) === 1) {
         $form['messages'] = [
           '#theme' => 'status_messages',
@@ -133,7 +146,7 @@ class ReusableBlocks {
         '#description' => $this->t('The title used to find and reuse this block later.'),
         '#states' => [
           'visible' => [
-            ':input[name="reusable"]' => [ 'checked' => TRUE ],
+            ':input[name="reusable"]' => ['checked' => TRUE],
           ],
         ],
       ];
@@ -172,7 +185,7 @@ class ReusableBlocks {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state.
    */
-  public static function blockContentValidate($form, FormStateInterface $form_state) {
+  public static function blockContentValidate(array $form, FormStateInterface $form_state) {
     $block_form = $form['block_form'];
     /** @var \Drupal\block_content\BlockContentInterface $block_content */
     $block_content = $block_form['#block'];
@@ -194,7 +207,7 @@ class ReusableBlocks {
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public static function blockContentSubmit($form, FormStateInterface $form_state) {
+  public static function blockContentSubmit(array $form, FormStateInterface $form_state) {
     // @todo Remove when https://www.drupal.org/project/drupal/issues/2948549 is closed.
     $block_form = NestedArray::getValue($form, $form_state->getTemporaryValue('block_form_parents'));
     /** @var \Drupal\block_content\BlockContentInterface $block_content */
@@ -215,8 +228,9 @@ class ReusableBlocks {
    *   The form state.
    *
    * @return mixed
+   *   The result of submitting the inline block.
    */
-  public static function staticInlineBlockSubmit($form, FormStateInterface $form_state) {
+  public static function staticInlineBlockSubmit(array $form, FormStateInterface $form_state) {
     return \Drupal::service('panopoly_magic.alterations.reusable_blocks')->inlineBlockSubmit($form, $form_state);
   }
 
@@ -231,7 +245,7 @@ class ReusableBlocks {
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function inlineBlockSubmit($form, FormStateInterface $form_state) {
+  public function inlineBlockSubmit(array $form, FormStateInterface $form_state) {
     if (!$form_state->getValue('reusable')) {
       return;
     }

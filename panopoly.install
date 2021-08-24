@@ -21,7 +21,7 @@ function panopoly_install_tasks(&$install_tasks) {
     'type' => 'form',
   ];
 
-  // Add the Panopoly theme selection to the installation process
+  // Add the Panopoly theme selection to the installation process.
   module_load_include('inc', 'panopoly_theme', 'panopoly_theme.profile');
   $tasks += panopoly_theme_profile_theme_selection_install_task($install_state);
 

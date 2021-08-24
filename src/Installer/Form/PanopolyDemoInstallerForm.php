@@ -2,7 +2,6 @@
 
 namespace Drupal\panopoly\Installer\Form;
 
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ModuleInstallerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -82,7 +81,7 @@ class PanopolyDemoInstallerForm extends FormBase {
 
     // We have to use ->getUserInput() to supercede ->getValue() because that
     // isn't correctly set when passing the form value to drush si like:
-    // "drush si panopoly panopoly_demo_installer_form.enable=0"
+    // "drush si panopoly panopoly_demo_installer_form.enable=0".
     $input = $form_state->getUserInput();
     if (isset($input['enable'])) {
       $enable = !empty($input['enable']);

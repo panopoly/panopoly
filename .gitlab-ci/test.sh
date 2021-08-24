@@ -83,6 +83,14 @@ panopoly_header "Checking for overridden features..."
 lando drush en -y features diff
 lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo check:overridden'
 
+# Check for code style issues.
+panopoly_header "Checking for code style issues..."
+lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo phpcs'
+
+# Perform static code analysis.
+panopoly_header "Performing static code analysis..."
+lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo phpstan'
+
 # Make symlink to the Drupal site so we can get our artifacts out.
 ln -s $CI_SHARED_DIR/drupal $CI_PROJECT_DIR/drupal
 

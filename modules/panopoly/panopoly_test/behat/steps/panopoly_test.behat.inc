@@ -1,20 +1,26 @@
 <?php
+
 /**
  * @file
  * Provide Behat step-definitions for generic Panopoly tests.
  */
 
+use Drupal\Core\Extension\InfoParser;
+use Drupal\Core\StreamWrapper\PublicStream;
 use Behat\Mink\Exception\ExpectationException;
 use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
 use Drupal\DrupalDriverManager;
 use Drupal\Component\Utility\Random;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Drupal\DrupalExtension\Hook\Scope\AfterUserCreateScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Behat\Mink\Selector\Xpath\Escaper;
 
+/**
+ * Behat sub-context for Panopoly.
+ */
 class TestSubContext extends RawDrupalContext implements DrupalSubContextInterface {
 
   /**
@@ -43,26 +49,28 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    *
    * @var array
    */
-  protected $external_users = array();
+  protected $externalUsers = [];
 
   /**
    * Keep track of files added by tests so they can be cleaned up.
    *
    * @var array
    */
-  protected $files = array();
+  protected $files = [];
 
   /**
    * Set to TRUE after the window has been resized.
+   *
+   * @var bool
    */
-  protected $window_resized = FALSE;
+  protected $windowResized = FALSE;
 
   /**
    * Store variables so they can be reset to previous values.
    *
    * @var array
    */
-  protected $configVariables = array();
+  protected $configVariables = [];
 
   const PANOPOLY_BEHAT_FLAG_PHP_NOTICES_OFF = 0;
   const PANOPOLY_BEHAT_FLAG_PHP_NOTICES_PRINT = 1;
@@ -99,12 +107,11 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @api
    */
   public function saveConfig() {
-      // @todo: Implement for Drupal 8!
-
-      // This should capture any config that we want to change to defaults for
-      // the tests, so we can restore the original config later.
-      // In Panopoly 1.x, this disabled live previews and set the add content
-      // preview mode to 'Single'.
+    // @todo Implement for Drupal 8!
+    // This should capture any config that we want to change to defaults for
+    // the tests, so we can restore the original config later.
+    // In Panopoly 1.x, this disabled live previews and set the add content
+    // preview mode to 'Single'.
   }
 
   /**
@@ -115,8 +122,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   public function restoreConfig() {
     if (count($this->configVariables) > 0) {
       foreach ($this->configVariables as $key => $value) {
-        // @todo: Implement for Drupal 8!
-
+        // @todo Implement for Drupal 8!
         // This should restore any saved config to it's original values.
       }
     }
@@ -128,18 +134,18 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @javascript
    */
   public function setJavascript() {
-    $this->javascript = true;
+    $this->javascript = TRUE;
   }
 
   /**
-   * @BeforeSuite
-   *
    * If we will flag PHP errors, clear all of them before we run a suite.
+   *
+   * @BeforeSuite
    */
   public static function clearPhpBehatNoticeLogs() {
     if (!empty(getenv('PANOPOLY_BEHAT_FLAG_PHP_NOTICES'))) {
       \Drupal::database()->delete('watchdog')
-        ->condition('type', array('php', 'behat'), 'IN')
+        ->condition('type', ['php', 'behat'], 'IN')
         ->execute();
       $local_file_path = getenv('PANOPOLY_BEHAT_SCREENSHOT_PATH');
       if (empty($local_file_path)) {
@@ -178,6 +184,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
       foreach ($result as $entry) {
         $variables = unserialize($entry->variables);
         $time = date('Ymd-Hi', $entry->timestamp);
+        // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
         $errors[] = "$scenarioName|$time|" . strip_tags(t($entry->message, $variables));
       }
 
@@ -189,7 +196,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
         if (empty($local_file_path)) {
           print "Environment variable PANOPOLY_BEHAT_SCREENSHOT_PATH is not set, unable to save errors\n";
         }
-        else if (!is_dir($local_file_path)) {
+        elseif (!is_dir($local_file_path)) {
           print "Directory $local_file_path does not exist, unable to save errors\n";
         }
         else {
@@ -203,7 +210,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
         }
         // Clear the log for the next scenario.
         \Drupal::database()->update('watchdog')
-          ->fields(array('type' => 'behat'))
+          ->fields(['type' => 'behat'])
           ->condition('type', 'php')
           ->execute();
         if ($flagPhp == self::PANOPOLY_BEHAT_FLAG_PHP_NOTICES_FAIL) {
@@ -239,7 +246,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @javascript
    */
   public function resizeWindow($event) {
-    if (!$this->window_resized) {
+    if (!$this->windowResized) {
       $session = $this->getSession();
       if (!$session->isStarted()) {
         $session->start();
@@ -254,7 +261,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
         $session->getDriver()->maximizeWindow();
       }
 
-      $this->window_resized = TRUE;
+      $this->windowResized = TRUE;
     }
   }
 
@@ -264,7 +271,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @AfterScenario @javascript
    */
   public function unsetJavascript() {
-    $this->javascript = false;
+    $this->javascript = FALSE;
   }
 
   /**
@@ -273,8 +280,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @BeforeScenario @api&&@drupal_private_files
    */
   public function configurePrivateFiles($event) {
-    $file_public_path = \Drupal\Core\StreamWrapper\PublicStream::basePath();
-    $file_private_path = $file_public_path . '/' . 'private';
+    $file_public_path = PublicStream::basePath();
+    $file_private_path = $file_public_path . '/private';
     \Drupal::getContainer()->get('state')->set('panopoly_test_private_file_path', $file_private_path);
 
     \Drupal::service('kernel')->invalidateContainer();
@@ -291,8 +298,9 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
-   * After every step in a @javascript scenario, we want to wait for AJAX
-   * loading to finish.
+   * After every step, we want to wait for AJAX loading to finish.
+   *
+   * Only for @javascript scenarios.
    *
    * @AfterStep
    */
@@ -338,15 +346,15 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
 
     // Save the file locally, if a path is available. Variable can be set in
     // .travis.yml or in local working environment.
-    $local_screenshot_path =  getenv('PANOPOLY_BEHAT_SCREENSHOT_PATH');
+    $local_screenshot_path = getenv('PANOPOLY_BEHAT_SCREENSHOT_PATH');
     if (empty($local_screenshot_path)) {
       print "Environment variable PANOPOLY_BEHAT_SCREENSHOT_PATH is not set, unable to save screenshot\n";
     }
-    else if (!is_dir($local_screenshot_path)) {
+    elseif (!is_dir($local_screenshot_path)) {
       print "Directory $local_screenshot_path does not exist, unable to save screenshot\n";
     }
     else {
-      $file_location =  "$local_screenshot_path/$title.png";
+      $file_location = "$local_screenshot_path/$title.png";
       if (@file_put_contents($file_location, $image) !== FALSE) {
         print "Screenshot saved to $file_location\n";
       }
@@ -372,7 +380,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @AfterStep
    */
   public function afterStepTakeScreenshot($event) {
-    if ($event->getTestResult()->getResultCode() === TestResult::FAILED)  {
+    if ($event->getTestResult()->getResultCode() === TestResult::FAILED) {
       $this->takeScreenshot($event->getStep()->getText());
     }
   }
@@ -385,28 +393,28 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @param string $title
    *   The image title.
    * @param string $imgur_client_id
-   *   The Client ID for your application registered with imgur
+   *   The Client ID for your application registered with imgur.
    *
    * @see https://api.imgur.com/oauth2
    */
   protected function uploadScreenshot($image, $title, $imgur_client_id) {
     // @todo This should use Guzzle rather than curl directly
     $curl = curl_init();
-    curl_setopt_array($curl, array(
+    curl_setopt_array($curl, [
       CURLOPT_URL => "https://api.imgur.com/3/image",
-      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
       CURLOPT_TIMEOUT => 30,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => "image=".urlencode(base64_encode($image))."&title=$title",
-      CURLOPT_HTTPHEADER => array(
+      CURLOPT_POSTFIELDS => "image=" . urlencode(base64_encode($image)) . "&title=$title",
+      CURLOPT_HTTPHEADER => [
         "authorization: Client-ID $imgur_client_id",
         "cache-control: no-cache",
-        "content-type: application/x-www-form-urlencoded"
-      ),
-    ));
+        "content-type: application/x-www-form-urlencoded",
+      ],
+    ]);
 
     $response = curl_exec($curl);
     $error = curl_error($curl);
@@ -453,7 +461,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
       if (!is_file($source_path)) {
         throw new \Exception(sprintf("Cannot find the file at '%s'", $source_path));
       }
-    } else {
+    }
+    else {
       throw new \Exception("files_path not set");
     }
 
@@ -466,12 +475,12 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   /**
    * Create a managed Drupal file.
    *
-   * @param $source_path
+   * @param string $source_path
    *   A file object passed in with the URI already set.
-   * @param $destination
+   * @param string $destination
    *   (Optional) The desired URI where the file will be uploaded.
    *
-   * @return
+   * @return object
    *   A single Drupal file object.
    */
   public function fileCreate($source_path, $destination = NULL) {
@@ -503,18 +512,19 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    */
   public function afterUserCreate(AfterUserCreateScope $scope) {
     $user = $scope->getEntity();
-    $this->external_users[$user->name] = $user;
+    $this->externalUsers[$user->name] = $user;
   }
 
   /**
    * Get a list of UIDs.
    *
-   * @return
-   *   An array of numeric UIDs of users created by Given... steps during this scenario.
+   * @return array
+   *   An array of numeric UIDs of users created by Given steps during this
+   *   scenario.
    */
-  public function getUIDs() {
-    $uids = array();
-    foreach ($this->external_users as $user) {
+  public function getUids() {
+    $uids = [];
+    foreach ($this->externalUsers as $user) {
       $uids[] = $user->uid;
     }
     return $uids;
@@ -527,21 +537,21 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    */
   public function cleanFiles($event) {
     // Get UIDs of users created during this scenario.
-    $uids = $this->getUIDs();
+    $uids = $this->getUids();
     if (!empty($uids)) {
 
-      // @todo: Implement for Drupal 8!
+      // @todo Implement for Drupal 8!
     }
   }
 
   /**
    * Delete a managed Drupal file.
    *
-   * @param $file
+   * @param object $file
    *   A file object to delete.
    */
   public function fileDelete($file) {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -550,7 +560,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are disabled
    */
   public function disablePanopolyMagicLivePreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -559,7 +569,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are automatic
    */
   public function enableAutomaticPanopolyMagicLivePreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -568,43 +578,43 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly magic live previews are manual
    */
   public function enableManualPanopolyMagicLivePreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
-   * @Given Panopoly magic add content previews are disabled
+   * Disables add content previews via Panopoly Magic.
    *
-   * Disable add content previews via Panopoly Magic.
+   * @Given Panopoly magic add content previews are disabled
    */
   public function disablePanopolyMagicAddContentPreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
-   * @Given Panopoly magic add content previews are automatic
+   * Enables automatic add content previews via Panopoly Magic.
    *
-   * Enable automatic add content previews via Panopoly Magic.
+   * @Given Panopoly magic add content previews are automatic
    */
   public function enableAutomaticPanopolyMagicAddContentPreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
-   * @Given Panopoly magic add content previews are manual
+   * Enables manual add content previews via Panopoly Magic.
    *
-   * Enable manual add content previews via Panopoly Magic.
+   * @Given Panopoly magic add content previews are manual
    */
   public function enableManualPanopolyMagicAddContentPreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
-   * @Given Panopoly magic add content previews are single
+   * Enables single add content previews via Panopoly Magic.
    *
-   * Enable single add content previews via Panopoly Magic.
+   * @Given Panopoly magic add content previews are single
    */
   public function enableSinglePanopolyMagicAddContentPreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -613,7 +623,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly admin "Use Advanced Panel Plugins" is disabled
    */
   public function disablePanopolyAdminAdvanacedPanelPlugins() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -622,7 +632,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @Given Panopoly admin "Use Advanced Panel Plugins" is enabled
    */
   public function enablePanopolyAdminAdvanacedPanelPlugins() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -649,7 +659,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    * @When I wait for live preview to finish
    */
   public function waitForLivePreview() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -662,6 +672,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Logs in with the one time login URL.
+   *
    * @Given I log in with the One Time Login Url
    */
   public function iLogInWithTheOneTimeLoginUrl() {
@@ -669,14 +681,14 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
       $this->logOut();
     }
 
-    $random = new Random;
+    $random = new Random();
 
     // Create user (and project)
-    $user = (object) array(
+    $user = (object) [
       'name' => $random->name(8),
       'pass' => $random->name(16),
       'role' => 'authenticated user',
-    );
+    ];
     $user->mail = "{$user->name}@example.com";
 
     // Create a new user.
@@ -685,11 +697,11 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     $this->users[$user->name] = $this->user = $user;
 
     $base_url = rtrim($this->locatePath('/'), '/');
-    $login_link = $this->getDriver('drush')->drush('uli', array(
+    $login_link = $this->getDriver('drush')->drush('uli', [
       "'$user->name'",
       '--browser=0',
       "--uri=${base_url}",
-    ));
+    ]);
     // Trim EOL characters. Required or else visiting the link won't work.
     $login_link = trim($login_link);
     $login_link = str_replace("/login", '', $login_link);
@@ -698,13 +710,15 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Creates and views a landing page.
+   *
    * @Given I am viewing a landing page
    */
-  public function iAmViewingALandingPage() {
-    $node = (object)array(
+  public function iAmViewingLandingPage() {
+    $node = (object) [
       'type' => 'panopoly_test_landing_page',
       'title' => $this->getRandom()->name(8),
-    );
+    ];
     $saved = $this->nodeCreate($node);
 
     // Set internal page on the new node.
@@ -712,6 +726,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Switches to frame.
+   *
    * @When I switch to the frame :frame
    */
   public function iSwitchToTheFrame($frame) {
@@ -721,6 +737,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Switches out of all frames.
+   *
    * @When I switch out of all frames
    */
   public function iSwitchOutOfAllFrames() {
@@ -729,6 +747,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Tests for element content in region.
+   *
    * @Then I should see :text in the :tag element in the :region region
    */
   public function assertRegionElementText($text, $tag, $region) {
@@ -751,6 +771,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Tests for element content and attributes in region.
+   *
    * @Then I should not see :text in the :tag element with the :attribute attribute set to :value in the :region region
    */
   public function assertNotRegionElementTextAttribute($text, $tag, $attribute, $value, $region) {
@@ -773,11 +795,10 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    *
    * @Then I should see text matching :pattern in the :region region
    */
-  public function assertRegionMatchesText($pattern, $region)
-  {
+  public function assertRegionMatchesText($pattern, $region) {
     $regionObj = $this->getRegion($region);
 
-    // Find the text within the region
+    // Find the text within the region.
     $regionText = $regionObj->getText();
     if (!preg_match($pattern, $regionText)) {
       throw new \Exception(sprintf("No text matching '%s' was found in the region '%s' on the page %s", $pattern, $region, $this->getSession()->getCurrentUrl()));
@@ -789,11 +810,10 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
    *
    * @Then I should not see text matching :pattern in the :region region
    */
-  public function assertNotRegionMatchesText($pattern, $region)
-  {
+  public function assertNotRegionMatchesText($pattern, $region) {
     $regionObj = $this->getRegion($region);
 
-    // Find the text within the region
+    // Find the text within the region.
     $regionText = $regionObj->getText();
     if (preg_match($pattern, $regionText)) {
       throw new \Exception(sprintf("Text matching '%s' was found in the region '%s' on the page %s", $pattern, $region, $this->getSession()->getCurrentUrl()));
@@ -813,7 +833,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     }
 
     if ($src = $elements[0]->getAttribute('src')) {
-      $params = array('http' => array('method' => 'HEAD'));
+      $params = ['http' => ['method' => 'HEAD']];
       $context = stream_context_create($params);
       $fp = @fopen($src, 'rb', FALSE, $context);
       if (!$fp) {
@@ -845,8 +865,9 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     }
   }
 
-
   /**
+   * Asserts the image alt text in a region.
+   *
    * @Then /^I should see the image alt "(?P<text>(?:[^"]|\\")*)" in the "(?P<region>[^"]*)" region$/
    *
    * NOTE: We specify a regex to allow escaped quotes in the alt text.
@@ -864,6 +885,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Asserts the selected radio button option.
+   *
    * @Then the :field radio button should be set to :option
    *
    * @link: https://www.drupal.org/node/1891584 @endlink
@@ -878,23 +901,32 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
         if (!$checkedRadio) {
           throw new \Exception(sprintf('We found the radio buttons for "%s", but "%s" was not selected.', $field, $option));
         }
-      } elseif (!$radios) {
+      }
+      elseif (!$radios) {
         throw new \Exception(sprintf('We found "%s", but it did not contain any radio buttons".', $field));
       }
-    } elseif (!$div) {
+    }
+    elseif (!$div) {
       throw new \Exception(sprintf('We couldn\'nt find "%s" on the page', $field));
-    } else {
-      throw new \Exception('General exception from '.__FUNCTION__);
+    }
+    else {
+      throw new \Exception('General exception from ' . __FUNCTION__);
     }
   }
 
   /**
+   * Asserts the radio button option.
+   *
    * @Then I should see the radio button :field with the id :id
    * @Then I should see the radio button :field
    */
   public function assertSeeRadioById($field, $id = FALSE) {
+    $escaper = new Escaper();
     $element = $this->getSession()->getPage();
-    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($field)));
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', [
+      'radio',
+      $escaper->escapeLiteral($field),
+    ]);
     if ($radiobutton === NULL) {
       throw new \Exception(sprintf('The radio button with "%s" was not found on the page %s', $id ? $id : $field, $this->getSession()->getCurrentUrl()));
     }
@@ -908,18 +940,26 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Asserts that a radio button is present.
+   *
    * @Then I should not see the radio button :field with the id :id
    * @Then I should not see the radio button :field
    */
   public function assertNotSeeRadioById($field, $id = FALSE) {
+    $escaper = new Escaper();
     $element = $this->getSession()->getPage();
-    $radiobutton = $id ? $element->findById($id) : $element->find('named', array('radio', $this->getSession()->getSelectorsHandler()->xpathLiteral($field)));
+    $radiobutton = $id ? $element->findById($id) : $element->find('named', [
+      'radio',
+      $escaper->escapeLiteral($field),
+    ]);
     if ($radiobutton !== NULL) {
       throw new \Exception(sprintf('The radio button with "%s" was found on the page %s', $id ? $id : $field, $this->getSession()->getCurrentUrl()));
     }
   }
 
   /**
+   * Asserts select field value.
+   *
    * @Then the :field select should be set to :value
    */
   public function theSelectShouldBeSetTo($field, $value) {
@@ -945,13 +985,17 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Asserts that the dblog is empty.
+   *
    * @Given the dblog is empty
    */
   public function clearDblog() {
-    // @todo: Implement for Drupal 8!
+    // @todo Implement for Drupal 8!
   }
 
   /**
+   * Selects the first autocomplete option.
+   *
    * @When I select the first autocomplete option for :text on the :field field
    */
   public function iSelectFirstAutocomplete($text, $field) {
@@ -967,7 +1011,6 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     $driver = $session->getDriver();
 
     // autocomplete.js uses key down/up events directly.
-
     // Press the backspace key.
     $driver->keyDown($xpath, 8);
     $driver->keyUp($xpath, 8);
@@ -991,7 +1034,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     $driver->keyDown($xpath, 40);
     $driver->keyUp($xpath, 40);
 
-    // Press the Enter key to confirm selection, copying the value into the field.
+    // Press the Enter key to confirm selection, copying the value into the
+    // field.
     $driver->keyDown($xpath, 13);
     $driver->keyUp($xpath, 13);
 
@@ -1000,18 +1044,17 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
-   * Checks, that entity reference field with specified id|name|label|value has specified value.
+   * Checks, that entity reference field has specified value.
    *
    * Entity references have the entity ID appended to the title. This step
    * allows asserting the main text value without needing to know the entity ID.
    *
    * @Then /^the entity reference "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/
    */
-  public function assertEntityReferenceFieldContains($field, $value)
-  {
+  public function assertEntityReferenceFieldContains($field, $value) {
     $node = $this->assertSession()->fieldExists($field);
     $actual = $node->getValue();
-    $regex = '/^'.preg_quote($value, '/'). ' \(.\d*\)' . '$/ui';
+    $regex = '/^' . preg_quote($value, '/') . ' \(.\d*\)$/ui';
 
     $message = sprintf('The field "%s" value is "%s", but "%s" (%s) expected.', $field, $actual, $value, $regex);
 
@@ -1021,18 +1064,17 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
-   * Checks, that entity reference field with specified id|name|label|value has specified value.
+   * Checks, that entity reference field with has specified value.
    *
    * Entity references have the entity ID appended to the title. This step
    * allows asserting the main text value without needing to know the entity ID.
    *
    * @Then /^the entity reference "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/
    */
-  public function assertEntityReferenceFieldNotContains($field, $value)
-  {
+  public function assertEntityReferenceFieldNotContains($field, $value) {
     $node = $this->assertSession()->fieldExists($field);
     $actual = $node->getValue();
-    $regex = '/^'.preg_quote($value, '/').' \([0-9]+\)$/ui';
+    $regex = '/^' . preg_quote($value, '/') . ' \([0-9]+\)$/ui';
 
     $message = sprintf('The field "%s" value is "%s", but it should not be.', $field, $actual);
 
@@ -1042,6 +1084,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Checks that module has given dependency.
+   *
    * @Given :module has the :dependency dependency at position :key
    */
   public function moduleHasDependencyAtKey($module, $dependency, $key) {
@@ -1060,7 +1104,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
     }
     $extension = $module_handler->getModule($module);
     $info_parser = \Drupal::service('info_parser');
-    assert($info_parser instanceof \Drupal\Core\Extension\InfoParser);
+    assert($info_parser instanceof InfoParser);
     $info = $info_parser->parse($extension->getPathname());
     if ($info['dependencies'][$key] !== $dependency) {
       var_export($info);
@@ -1069,6 +1113,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Click the nth link in a region.
+   *
    * @When /^I click the (?P<count>\d+)(?:st|nd|rd|th) "(?P<link>[^"]*)" in the "(?P<region>[^"]*)" region$/
    */
   public function clickNthLink($count, $link, $region) {
@@ -1095,6 +1141,8 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Deletes files with a particular URI.
+   *
    * @Given /^there are no files with uri "([^"]*)"$/
    */
   public function thereAreNoFilesNamed($uri) {
@@ -1108,18 +1156,22 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Hovers over the given CSS selector.
+   *
    * @When I hover over :selector
    */
   public function hoverOverElement($selector) {
     $page = $this->getSession()->getPage();
     $element = $page->find('css', $selector);
-    if ($element === null) {
+    if ($element === NULL) {
       throw new \Exception("Unable to find element '$selector'");
     }
     $element->mouseOver();
   }
 
   /**
+   * Drops a file into the given CSS selector.
+   *
    * @Given I drop the file :path to :selector
    *
    * @see \Drupal\Tests\dropzonejs\FunctionalJavascript\DropzoneJsWebDriverTestBase::dropFile
@@ -1132,7 +1184,7 @@ JS;
     $this->getSession()->evaluateScript($input);
 
     if ($this->getMinkParameter('files_path')) {
-      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
+      $fullPath = rtrim(realpath($this->getMinkParameter('files_path')), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $path;
       if (is_file($fullPath)) {
         $path = $fullPath;
       }
@@ -1158,11 +1210,10 @@ JS;
    *
    * @Then /^the "(?P<field>(?:[^"]|\\")*)" field placeholder should contain "(?P<value>(?:[^"]|\\")*)"$/
    */
-  public function assertFieldContains($field, $value)
-  {
+  public function assertFieldContains($field, $value) {
     $node = $this->assertSession()->fieldExists($field);
     $actual = $node->getAttribute('placeholder');
-    $regex = '/^'.preg_quote($value, '/').'$/ui';
+    $regex = '/^' . preg_quote($value, '/') . '$/ui';
 
     $message = sprintf('The field "%s" value is "%s", but "%s" expected.', $field, $actual, $value);
 

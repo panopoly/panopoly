@@ -1,5 +1,10 @@
 <?php
 
+use OTPHP\TOTP;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Session;
+use Behat\Mink\Element\DocumentElement;
+use Symfony\Component\Yaml\Yaml;
 use Robo\Contract\VerbosityThresholdInterface;
 use Robo\Tasks as RoboTasks;
 use Symfony\Component\Process\Process;
@@ -17,7 +22,7 @@ class RoboFile extends RoboTasks {
 
   const PANOPOLY_GITHUB_REPO = 'git@github.com:panopoly/panopoly.git';
 
-  protected $PANOPOLY_FEATURES = [
+  const PANOPOLY_FEATURES = [
     'panopoly_core' => 'Panopoly Core',
     'panopoly_demo' => 'Panopoly Demo',
     'panopoly_images' => 'Panopoly Images',
@@ -31,7 +36,7 @@ class RoboFile extends RoboTasks {
     'panopoly_wysiwyg' => 'Panopoly WYSIWYG',
   ];
 
-  protected $PANOPOLY_COMPONENT_MAP = [
+  const PANOPOLY_COMPONENT_MAP = [
     'Admin' => 'panopoly_admin',
     'Core' => 'panopoly_core',
     'Demo' => 'panopoly_demo',
@@ -47,13 +52,13 @@ class RoboFile extends RoboTasks {
     'WYSIWYG' => 'panopoly_wysiwyg',
   ];
 
-  protected $COMPOSER_PROFILE_REQUIREMENTS = [
+  const COMPOSER_PROFILE_REQUIREMENTS = [
     "cweagans/composer-patches" => "^1.6.5",
     "drupal/core" => "^8.8 || ^9",
     "drupal/features" => "~3.7",
   ];
 
-  protected $SUBTREE_MERGE_COMMITS = [
+  const SUBTREE_MERGE_COMMITS = [
     'panopoly_images' => 'e48a65f',
   ];
 
@@ -64,6 +69,7 @@ class RoboFile extends RoboTasks {
    *   The Drush command to run.
    *
    * @return string
+   *   The full Drush command.
    */
   protected function getDrushCommand($command) {
     $drush_path = getenv('DRUSH') ?: 'drush';
@@ -144,7 +150,7 @@ class RoboFile extends RoboTasks {
    *   TRUE if all modules are enabled; FALSE otherwise.
    */
   protected function isModuleEnabled($module_or_modules) {
-    $modules = is_array($module_or_modules) ? $module_or_modules : [ $module_or_modules ];
+    $modules = is_array($module_or_modules) ? $module_or_modules : [$module_or_modules];
 
     $process = $this->runDrush("pm:list --type=module --status=enabled --format=json");
     $info = json_decode($process->getOutput(), TRUE);
@@ -162,6 +168,7 @@ class RoboFile extends RoboTasks {
    * Gets the Git branch that is currently checked out.
    *
    * @return string
+   *   The Git branch name.
    */
   protected function getCurrentBranch() {
     $process = new Process('git rev-parse --abbrev-ref HEAD');
@@ -208,7 +215,7 @@ class RoboFile extends RoboTasks {
    * @param array $data
    *   The data to put in the file.
    */
-  protected function writeComposerJsonFile($filename, $data) {
+  protected function writeComposerJsonFile($filename, array $data) {
     file_put_contents($filename, $this->jsonEncode($data));
   }
 
@@ -219,7 +226,7 @@ class RoboFile extends RoboTasks {
    *   The machine names of the panopoly_* features.
    */
   protected function getPanopolyFeatures() {
-    return array_keys($this->PANOPOLY_FEATURES);
+    return array_keys(static::PANOPOLY_FEATURES);
   }
 
   /**
@@ -230,7 +237,40 @@ class RoboFile extends RoboTasks {
    *   machine name.
    */
   protected function getPanopolyFeaturesNames() {
-    return $this->PANOPOLY_FEATURES;
+    return static::PANOPOLY_FEATURES;
+  }
+
+  /**
+   * Static code analysis.
+   */
+  public function phpstan(array $args) {
+    $cwd = dirname(__FILE__);
+    $site_root = $this->findSiteRoot();
+    return $this->taskExec("cd {$site_root} && ./vendor/bin/phpstan analyze -c {$cwd}/phpstan.neon.dist {$cwd}")
+      ->args($args)
+      ->run();
+  }
+
+  /**
+   * Check coding standards.
+   */
+  public function phpcs(array $args) {
+    $cwd = dirname(__FILE__);
+    $site_root = $this->findSiteRoot();
+    return $this->taskExec("{$site_root}/vendor/bin/phpcs --runtime-set installed_paths {$site_root}/vendor/drupal/coder/coder_sniffer --standard=Drupal --extensions=php,module,inc,install,profile,theme --ignore=.git,vendor,assets {$cwd}")
+      ->args($args)
+      ->run();
+  }
+
+  /**
+   * Fix coding standards.
+   */
+  public function phpcbf(array $args) {
+    $cwd = dirname(__FILE__);
+    $site_root = $this->findSiteRoot();
+    return $this->taskExec("{$site_root}/vendor/bin/phpcbf --runtime-set installed_paths {$site_root}/vendor/drupal/coder/coder_sniffer --standard=Drupal --extensions=php,module,inc,install,profile,theme --ignore=.git,vendor,assets {$cwd}")
+      ->args($args)
+      ->run();
   }
 
   /**
@@ -285,6 +325,14 @@ EOF;
     if (file_get_contents(__DIR__ . '/composer.json') !== $this->jsonEncode($this->getComposerJsonContent())) {
       throw new \Exception("composer.json contents out-of-date! Run 'robo build:composer-json'");
     }
+
+    if ($this->phpcs([])->getExitCode() !== 0) {
+      throw new \Exception("Code style checks with 'robo phpcs' have failed.");
+    }
+
+    if ($this->phpstan([])->getExitCode() !== 0) {
+      throw new \Exception("Static analysis checks with 'robo phpstan' have failed.");
+    }
   }
 
   /**
@@ -292,10 +340,13 @@ EOF;
    *
    * @param string $module
    *   The module to make a diff of (ex. panopoly_search)
+   * @param array $opts
+   *   The options - see below.
+   *
    * @option bool $uncommitted
    *   Uncommitted changes
    */
-  public function diff($module, $opts = ['uncommitted' => FALSE]) {
+  public function diff($module, array $opts = ['uncommitted' => FALSE]) {
     $diff_spec = '';
     if (!$opts['uncommitted']) {
       $diff_spec = static::PANOPOLY_DEFAULT_BRANCH . '..';
@@ -315,11 +366,11 @@ EOF;
    */
   public function getComposerJsonContent() {
     $main_composer_json = $this->readJsonFile(__DIR__ . "/composer.json");
-    $main_composer_json['require'] = $this->COMPOSER_PROFILE_REQUIREMENTS;
+    $main_composer_json['require'] = static::COMPOSER_PROFILE_REQUIREMENTS;
     $main_composer_json['extra']['patches'] = [];
 
     $package_index = [];
-    foreach ($this->COMPOSER_PROFILE_REQUIREMENTS as $package => $version) {
+    foreach (static::COMPOSER_PROFILE_REQUIREMENTS as $package => $version) {
       $package_index[$package]['profile'] = $version;
     }
     foreach ($this->getPanopolyFeatures() as $module) {
@@ -426,15 +477,15 @@ EOF;
         ->exec("git checkout {$panopoly_feature}-{$branch}")
         ->exec("git branch --set-upstream-to {$panopoly_feature}/{$branch}");
 
-      if (isset($this->SUBTREE_MERGE_COMMITS[$panopoly_feature])) {
-        # TODO: This works, but generates the wrong commit hashes for some reason!
-
-        #if ! git branch --contains ${MERGE_COMMITS[$repo]} >/dev/null 2>&1; then
-        #  echo "Injecting the merge commit..."
-        #  git rebase ${MERGE_COMMITS[$repo]} || die "Unable to inject the merge commit for $repo"
-        #fi
-
-        # This scares me, but the hashes come out OK...
+      if (isset(static::SUBTREE_MERGE_COMMITS[$panopoly_feature])) {
+        // @todo This works, but generates the wrong commit hashes for some reason!
+        // if ! git branch --contains ${MERGE_COMMITS[$repo]} >/dev/null 2>&1;
+        // then
+        // echo "Injecting the merge commit..."
+        // git rebase ${MERGE_COMMITS[$repo]} \
+        // || die "Unable to inject the merge commit for $repo"
+        // fi
+        // This scares me, but the hashes come out OK...
         $collection->taskExec("git pull {$panopoly_feature} {$branch} --rebase");
       }
 
@@ -457,7 +508,7 @@ EOF;
   }
 
   /**
-   * Gets the individual patch files from an issue on Drupal.org
+   * Gets the individual patch files from an issue on Drupal.org.
    *
    * @param int $issue_number
    *   The Drupal.org issue number.
@@ -489,12 +540,12 @@ EOF;
         else {
           if (preg_match('/^panopoly[_-]([^_-]+)[_-]/', $file['name'], $matches)) {
             $component = 'panopoly_' . $matches[1];
-            if (!in_array($component, $this->PANOPOLY_COMPONENT_MAP[$component])) {
+            if (!in_array($component, static::PANOPOLY_COMPONENT_MAP[$component])) {
               $component = NULL;
             }
           }
           if (!$component) {
-            $component = isset($this->PANOPOLY_COMPONENT_MAP[$node['field_issue_component']]) ? $this->PANOPOLY_COMPONENT_MAP[$node['field_issue_component']] : NULL;
+            $component = isset(static::PANOPOLY_COMPONENT_MAP[$node['field_issue_component']]) ? static::PANOPOLY_COMPONENT_MAP[$node['field_issue_component']] : NULL;
           }
           if (!$component) {
             throw new \Exception("Unable to identify project for patch based on name '{$file['name']}' or issue component '{$node['field_issue_component']}'");
@@ -509,12 +560,16 @@ EOF;
   }
 
   /**
-   * Creates a branch which includes patches from a Drupal.org issue, in order to trigger Travis-CI to test them.
+   * Creates a branch which includes patches from a Drupal.org issue.
    *
-   * @command create-test-branch
+   * This is used to trigger Travis-CI to test the patches.
    *
    * @param int $issue_number
    *   The issue number to run the tests for.
+   * @param array $opts
+   *   The options - see below.
+   *
+   * @command create-test-branch
    *
    * @option string $git-repo
    *   The git repo to commit to.
@@ -523,15 +578,24 @@ EOF;
    * @option string $git-new-branch
    *   The branch in the git repo to create.
    * @option bool $skip-upgrade-tests
-   *   If passed, this will only run tests on the current -dev, skipping the tests against upgraded versions.
+   *   If passed, this will only run tests on the current -dev, skipping the
+   *   tests against upgraded versions.
    * @option bool $profile-patch
-   *   If passed, the discovered patch will be used against the profile, rather than individual components.
+   *   If passed, the discovered patch will be used against the profile, rather
+   *   than individual components.
    *
    * @return \Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
    *
    * @throws \Exception
    */
-  public function createTestBranch($issue_number, $opts = ['git-repo' => self::PANOPOLY_GITHUB_REPO, 'git-old-branch' => self::PANOPOLY_DEFAULT_BRANCH, 'git-new-branch' => NULL, 'skip-upgrade-tests' => FALSE, 'profile-patch' => FALSE]) {
+  public function createTestBranch($issue_number, array $opts = [
+    'git-repo' => self::PANOPOLY_GITHUB_REPO,
+    'git-old-branch' => self::PANOPOLY_DEFAULT_BRANCH,
+    'git-new-branch' => NULL,
+    'skip-upgrade-tests' => FALSE,
+    'profile-patch' => FALSE,
+  ]) {
     $patch_files = $this->getPatchFilesForDrupalIssue($issue_number, $opts['profile-patch']);
     if (empty($patch_files)) {
       throw new \Exception("Unable to find any patch files on issue {$issue_number}");
@@ -583,7 +647,7 @@ EOF;
 
     // Modify the .travis.yml file.
     $collection->addCode(function () use ($opts) {
-      $travis_yml = \Symfony\Component\Yaml\Yaml::parseFile('.travis.yml');
+      $travis_yml = Yaml::parseFile('.travis.yml');
 
       // We always drop the matrix -> include.
       if (isset($travis_yml['matrix']['include'])) {
@@ -599,7 +663,7 @@ EOF;
         $travis_yml['env']['matrix'] = array_slice($travis_yml['env']['matrix'], 0, 2);
       }
 
-      file_put_contents('.travis.yml', \Symfony\Component\Yaml\Yaml::dump($travis_yml));
+      file_put_contents('.travis.yml', Yaml::dump($travis_yml));
     });
 
     // Make commit message.
@@ -619,11 +683,25 @@ EOF;
    * Walks up the directory tree looking for a Drupal site.
    */
   protected function findSiteRoot() {
-    $cwd = '.';
+    // Prefer environment variables.
+    $env_names = ['SITE_ROOT', 'LANDO_MOUNT'];
+    foreach ($env_names as $env) {
+      $path = getenv($env);
+      if ($path !== FALSE) {
+        return $path;
+      }
+    }
+
+    // Otherwise, try to guess the path to the site root.
+    $path_parts = explode('/', getcwd());
     for ($i = 0; $i < 5; $i++) {
-      $cwd .= '/..';
-      if (file_exists("{$cwd}/composer.lock")) {
-        return realpath($cwd);
+      array_pop($path_parts);
+      if (count($path_parts) <= 1) {
+        break;
+      }
+      $path = implode('/', $path_parts);
+      if (file_exists("{$path}/composer.lock")) {
+        return realpath($path);
       }
     }
 
@@ -634,6 +712,8 @@ EOF;
    * Install site dependencies for running the tests.
    *
    * @return $this|\Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
+   *
    * @throws \Exception
    */
   public function testSetup() {
@@ -654,6 +734,8 @@ EOF;
    *   Arguments to pass to Behat.
    *
    * @return $this|\Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
+   *
    * @throws \Exception
    */
   public function testBehat(array $arguments) {
@@ -686,7 +768,7 @@ EOF;
       }
     }
 
-    $argument_string = join(" ", $arguments);
+    $argument_string = implode(" ", $arguments);
     $collection->taskExec("{$behat} {$argument_string}");
 
     return $collection;
@@ -741,6 +823,7 @@ EOF;
    *   to simply update the repos already there (if any).
    *
    * @return \Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
    */
   protected function checkoutManyreposForRelease($branch, $clean = FALSE) {
     /** @var \Robo\Collection\CollectionBuilder|$this $collection */
@@ -779,15 +862,18 @@ EOF;
    *   The previous version.
    * @param string $new_version
    *   The new version.
+   * @param array $opts
+   *   The options - see below.
    *
    * @option $clean
    *   If passed, the repos under `release/` will be cleaned up before starting.
    *
    * @return \Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
    *
    * @throws \Exception
    */
-  public function releaseCreate($old_version, $new_version, $opts = ['clean' => FALSE]) {
+  public function releaseCreate($old_version, $new_version, array $opts = ['clean' => FALSE]) {
     $branch = static::PANOPOLY_DEFAULT_BRANCH;
     if ($this->getCurrentBranch() !== $branch) {
       throw new \Exception("Only run this command on the {$branch} branch");
@@ -854,6 +940,7 @@ EOF;
    *   The new version that we are pushing.
    *
    * @return \Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
    *
    * @throws \Exception
    */
@@ -904,7 +991,7 @@ EOF;
    *
    * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
-  protected function submitForm(\Behat\Mink\Element\DocumentElement $page, $form_id, array $values, $op) {
+  protected function submitForm(DocumentElement $page, $form_id, array $values, $op) {
     $form = $page->findById($form_id);
     if (!$form) {
       throw new \Exception("Couldn't find form with id: $form_id");
@@ -921,7 +1008,7 @@ EOF;
       else {
         // We let individual fields fail, since some are not present depending
         // on configuration.
-        //throw new \Exception("Couldn't find field with name: $name");
+        // throw new \Exception("Couldn't find field with name: $name");.
       }
     }
     $button = $form->findButton($op);
@@ -945,7 +1032,7 @@ EOF;
    *
    * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
-  protected function createRelease(\Behat\Mink\Session $session, $module, $version, $release_notes) {
+  protected function createRelease(Session $session, $module, $version, $release_notes) {
     $session->visit("https://www.drupal.org/project/{$module}");
     $session->getPage()->clickLink('Add new release');
 
@@ -973,6 +1060,8 @@ EOF;
    *   The previous version.
    * @param string $new_version
    *   The new version.
+   * @param array $opts
+   *   The options - see below.
    *
    * @option string $username
    *   The Drupal.org username.
@@ -988,10 +1077,18 @@ EOF;
    *   The Webdriver (aka Selenium) end-point to connect to.
    *
    * @return $this|\Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
    *
    * @throws \Exception
    */
-  public function releasePublish($old_version, $new_version, $opts = ['username' => NULL, 'password' => NULL, 'totp-secret' => NULL, 'skip-checkout-repos' => FALSE, 'no-stop' => FALSE, 'wd-host' => 'http://chromedriver:4444/wd/hub']) {
+  public function releasePublish($old_version, $new_version, array $opts = [
+    'username' => NULL,
+    'password' => NULL,
+    'totp-secret' => NULL,
+    'skip-checkout-repos' => FALSE,
+    'no-stop' => FALSE,
+    'wd-host' => 'http://chromedriver:4444/wd/hub',
+  ]) {
     if (empty($opts['username']) || empty($opts['password'])) {
       throw new \Exception("Must pass in --username and --pasword");
     }
@@ -1003,11 +1100,11 @@ EOF;
     $collection = $this->collectionBuilder();
 
     // @todo Make this more configurable.
-    $session = new \Behat\Mink\Session(
-      new \Behat\Mink\Driver\Selenium2Driver('chrome', [
+    $session = new Session(
+      new Selenium2Driver('chrome', [
         'chrome' => [
           'switches' => [
-            //'--headless',
+            // '--headless',
             '--disable-gpu',
           ],
           // This hides the fact that Chrome is being driven by automation.
@@ -1052,7 +1149,7 @@ EOF;
 
       if (!empty($opts['totp-secret'])) {
         $this->submitForm($session->getPage(), 'tfa-form', [
-          'code' => \OTPHP\TOTP::create($opts['totp-secret'])->now(),
+          'code' => TOTP::create($opts['totp-secret'])->now(),
         ], 'edit-login');
       }
     });
@@ -1081,11 +1178,13 @@ EOF;
    *   The previous version.
    * @param string $new_version
    *   The new version.
+   * @param array $opts
+   *   The options - see below.
    *
    * @option bool $clean
    *   If passed, the repos under `release/` will be cleaned up before starting.
    * @option bool $push-and-publish
-   *   If passed, will not only create the release, but will also push and publish it.
+   *   If passed, will not only create the release, but also push and publish.
    * @option string $username
    *   The Drupal.org username.
    * @option string $password
@@ -1100,10 +1199,19 @@ EOF;
    *   The Webdriver (aka Selenium) end-point to connect to.
    *
    * @return \Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
    *
    * @throws \Exception
    */
-  public function release($old_version, $new_version, $opts = ['clean' => FALSE, 'push-and-publish' => FALSE, 'username' => NULL, 'password' => NULL, 'totp-secret' => NULL, 'no-stop' => FALSE, 'wd-host' => 'http://chromedriver:4444/wd/hub']) {
+  public function release($old_version, $new_version, array $opts = [
+    'clean' => FALSE,
+    'push-and-publish' => FALSE,
+    'username' => NULL,
+    'password' => NULL,
+    'totp-secret' => NULL,
+    'no-stop' => FALSE,
+    'wd-host' => 'http://chromedriver:4444/wd/hub',
+  ]) {
     /** @var \Robo\Collection\CollectionBuilder|$this $collection */
     $collection = $this->collectionBuilder();
 
@@ -1123,7 +1231,7 @@ EOF;
         'wd-host' => $opts['wd-host'],
         'no-stop' => $opts['no-stop'],
         // We don't need to check because we just did in releasePush().
-        'skip-checkout-repos' => TRUE
+        'skip-checkout-repos' => TRUE,
       ]));
     }
 

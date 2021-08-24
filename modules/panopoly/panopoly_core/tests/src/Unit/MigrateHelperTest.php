@@ -52,7 +52,7 @@ class MigrateHelperTest extends UnitTestCase {
   }
 
   /**
-   * Tests the import() method
+   * Tests the import() method.
    *
    * @covers ::import
    */
@@ -66,7 +66,7 @@ class MigrateHelperTest extends UnitTestCase {
 
     $migrate_helper = $this->getMockBuilder(MigrateHelper::class)
       ->setConstructorArgs([$this->migrationManager->reveal()])
-      ->setMethods(['createExecutable'])
+      ->onlyMethods(['createExecutable'])
       ->getMock();
     $executable = $this->prophesize(MigrateExecutableInterface::class);
     $executable->import()->shouldBeCalled();
@@ -77,7 +77,7 @@ class MigrateHelperTest extends UnitTestCase {
   }
 
   /**
-   * Tests the rollback() method
+   * Tests the rollback() method.
    *
    * @covers ::rollback
    */
@@ -91,7 +91,7 @@ class MigrateHelperTest extends UnitTestCase {
 
     $migrate_helper = $this->getMockBuilder(MigrateHelper::class)
       ->setConstructorArgs([$this->migrationManager->reveal()])
-      ->setMethods(['createExecutable'])
+      ->onlyMethods(['createExecutable'])
       ->getMock();
     $executable = $this->prophesize(MigrateExecutableInterface::class);
     $executable->rollback()->shouldBeCalled();

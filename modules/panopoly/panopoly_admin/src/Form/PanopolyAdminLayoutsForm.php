@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Drupal\panopoly_admin\Form;
-
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormBase;
@@ -10,19 +8,22 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutPluginManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Form to administer the available layouts.
+ */
 class PanopolyAdminLayoutsForm extends FormBase {
 
   /**
-   * @var \Drupal\Core\Layout\LayoutPluginManagerInterface
-   *
    * The layout plugin manager.
+   *
+   * @var \Drupal\Core\Layout\LayoutPluginManagerInterface
    */
   protected $layoutManager;
 
   /**
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   *
    * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
@@ -39,6 +40,9 @@ class PanopolyAdminLayoutsForm extends FormBase {
     $this->configFactory = $config_factory;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('plugin.manager.core.layout'),

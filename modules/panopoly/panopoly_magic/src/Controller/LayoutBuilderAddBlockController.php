@@ -18,6 +18,9 @@ use Drupal\layout_builder\SectionStorageInterface;
 use Drupal\panopoly_magic\Form\LayoutBuilderUpdateBlockForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Controller for adding blocks in layout builder.
+ */
 class LayoutBuilderAddBlockController extends ControllerBase {
 
   use AjaxHelperTrait;
@@ -60,6 +63,10 @@ class LayoutBuilderAddBlockController extends ControllerBase {
    *   The form builder service.
    * @param \Drupal\Component\Uuid\UuidInterface $uuid
    *   The uuid generator service.
+   * @param \Drupal\Core\Plugin\Context\ContextHandlerInterface $context_handler
+   *   The context handler service.
+   * @param \Drupal\Core\Block\BlockManagerInterface $block_plugin_manager
+   *   The block manager server.
    */
   public function __construct(FormBuilderInterface $form_builder, UuidInterface $uuid, ContextHandlerInterface $context_handler, BlockManagerInterface $block_plugin_manager) {
     $this->formBuilder = $form_builder;
@@ -107,7 +114,7 @@ class LayoutBuilderAddBlockController extends ControllerBase {
     if ($contexts && $plugin instanceof ContextAwarePluginInterface) {
       $context_mapping = [];
       foreach ($plugin->getContextDefinitions() as $context_slot => $definition) {
-        // If the context is required, we have to give it something to start with.
+        // If the context is required, we have to give it something.
         if ($definition->isRequired()) {
           $valid_contexts = $this->contextHandler->getMatchingContexts($contexts, $definition);
 

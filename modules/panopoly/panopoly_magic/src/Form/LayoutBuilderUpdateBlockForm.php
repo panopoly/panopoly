@@ -21,7 +21,7 @@ class LayoutBuilderUpdateBlockForm extends UpdateBlockForm {
     // Add a preview and cancel buttons.
     if ($this->isAjax()) {
       $plugin_id = $section_storage->getSection($delta)->getComponent($uuid)->getPluginId();
-      list($plugin_base_id, ) = explode(':', $plugin_id);
+      list($plugin_base_id,) = explode(':', $plugin_id);
       if ($plugin_base_id !== 'block_content') {
         $form['actions']['preview'] = [
           '#type' => 'submit',
@@ -40,7 +40,7 @@ class LayoutBuilderUpdateBlockForm extends UpdateBlockForm {
           '#type' => 'submit',
           '#value' => $this->t('Cancel'),
           '#ajax' => [
-            'callback' => '::ajaxSubmit'
+            'callback' => '::ajaxSubmit',
           ],
         ];
 

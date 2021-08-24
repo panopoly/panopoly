@@ -5,8 +5,7 @@
  * Install hooks for Panopoly WYSIWYG.
  */
 
-use Drupal\Core\Config\ExtensionInstallStorage;
-use Drupal\Core\Config\InstallStorage;
+use Drupal\Core\Config\FileStorage;
 use Drupal\editor\Entity\Editor;
 use Drupal\filter\Entity\FilterFormat;
 
@@ -31,7 +30,7 @@ function panopoly_wysiwyg_uninstall() {
 }
 
 /**
- *  Enable the modules necessary for the teaser break button.
+ * Enable the modules necessary for the teaser break button.
  */
 function panopoly_wysiwyg_update_8201() {
   /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
@@ -58,33 +57,23 @@ function panopoly_wysiwyg_update_8202() {
  */
 function panopoly_wysiwyg_update_8203() {
   $config = [
-    'filter_format' => [
-      'filter.format.panopoly_wysiwyg_basic',
-      'filter.format.panopoly_wysiwyg_full',
-    ],
-    'editor' => [
-      'editor.editor.panopoly_wysiwyg_basic',
-      'editor.editor.panopoly_wysiwyg_full',
-    ],
+    'filter.format.panopoly_wysiwyg_basic',
+    'filter.format.panopoly_wysiwyg_full',
+    'editor.editor.panopoly_wysiwyg_basic',
+    'editor.editor.panopoly_wysiwyg_full',
   ];
 
-  $entity_type_manager = \Drupal::entityTypeManager();
-  /** @var \Drupal\Core\Config\StorageInterface $active_config_storage */
-  $active_config_storage = \Drupal::getContainer()->get('config.storage');
-  $extension_config_storage = new ExtensionInstallStorage($active_config_storage, InstallStorage::CONFIG_INSTALL_DIRECTORY);
+  /** @var \Drupal\Core\Config\StorageInterface */
+  $config_storage = \Drupal::service('config.storage');
+  $config_path = drupal_get_path('module', 'panopoly_wysiwyg') . '/config/install';
+  $source = new FileStorage($config_path);
 
-  foreach ($config as $entity_type_name => $config_list) {
-    foreach ($config_list as $config_name) {
-      $config_data = $extension_config_storage->read($config_name);
-      if ($active_config_storage->read($config_name)) {
-        // Exists.
-        continue;
-      }
-      /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $entity_storage */
-      $entity_storage = $entity_type_manager->getStorage($entity_type_name);
-      $entity = $entity_storage->createFromStorageRecord($config_data);
-      $entity->save();
+  foreach ($config as $config_name) {
+    if ($config_storage->exists($config_name)) {
+      // Already exists.
+      continue;
     }
+    $config_storage->write($config_name, $source->read($config_name));
   }
 
   \Drupal::service('module_installer')->install(['panopoly_media']);
@@ -116,7 +105,11 @@ function panopoly_wysiwyg_update_8204(&$sandbox) {
           continue;
         }
 
-        if (in_array($field_storage_definition->getType(), ['text_with_summary', 'text_long', 'text'])) {
+        if (in_array($field_storage_definition->getType(), [
+          'text_with_summary',
+          'text_long',
+          'text',
+        ])) {
           $sandbox['entities'][$entity_type_id]['fields'][] = $field_name;
         }
       }
@@ -201,7 +194,6 @@ function panopoly_wysiwyg_update_8205() {
     }
   }
 }
-
 
 /**
  * Add anchor plugin to standard and full input format and WYSIWYG.
@@ -349,7 +341,8 @@ function panopoly_wysiwyg_update_8208() {
       if (!$fg) {
         // No formatting group, just add the color group.
         $settings['toolbar']['rows'][0][] = $group;
-      } else {
+      }
+      else {
         // Add color group after formatting group.
         array_splice($settings['toolbar']['rows'][$fg[0]], $fg[1] + 1, 0, [$group]);
       }
@@ -361,7 +354,8 @@ function panopoly_wysiwyg_update_8208() {
         $items
       );
     }
-  } elseif (!$text) {
+  }
+  elseif (!$text) {
     // Add text color button with bg color button.
     $settings['toolbar']['rows'][$bg[0]][$bg[1]]['items'][] = 'TextColor';
   }
@@ -437,10 +431,10 @@ function _panopoly_wysiwyg_set_text_format_linkit($format_name) {
   $format->setFilterConfig('linkit', [
     'id' => 'linkit',
     'provider' => 'linkit',
-    'status' => true,
+    'status' => TRUE,
     'weight' => 100,
     'settings' => [
-      'title' => true
+      'title' => TRUE,
     ],
   ]);
   $format->save();
@@ -463,7 +457,7 @@ function _panopoly_wysiwyg_set_editor_linkit($editor_id) {
   }
 
   $settings = $editor->get('settings');
-  $settings['plugins']['drupallink']['linkit_enabled'] = true;
+  $settings['plugins']['drupallink']['linkit_enabled'] = TRUE;
   $settings['plugins']['drupallink']['linkit_profile'] = 'default';
   $editor->setSettings($settings);
   $editor->save();
@@ -489,4 +483,3 @@ function panopoly_wysiwyg_update_8209() {
     }
   }
 }
-

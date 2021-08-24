@@ -19,28 +19,33 @@ use Drupal\Tests\UnitTestCase;
 class BlockPreviewRendererTest extends UnitTestCase {
 
   /**
+   * The block manager.
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface|\Prophecy\Prophecy\ObjectProphecy
    */
-  protected $block_manager;
+  protected $blockManager;
 
   /**
+   * The context handler.
+   *
    * @var \Drupal\Core\Plugin\Context\ContextHandlerInterface|\Prophecy\Prophecy\ObjectProphecy
    */
-  protected $context_handler;
+  protected $contextHandler;
 
   /**
+   * The block preview renderer.
+   *
    * @var \Drupal\panopoly_magic\BlockPreviewRenderer
    */
   protected $renderer;
-
 
   /**
    * {@inheritDoc}
    */
   public function setUp() {
-    $this->block_manager = $this->prophesize(BlockManagerInterface::class);
-    $this->context_handler = $this->prophesize(ContextHandlerInterface::class);
-    $this->renderer = new BlockPreviewRenderer($this->block_manager->reveal(), $this->context_handler->reveal());
+    $this->blockManager = $this->prophesize(BlockManagerInterface::class);
+    $this->contextHandler = $this->prophesize(ContextHandlerInterface::class);
+    $this->renderer = new BlockPreviewRenderer($this->blockManager->reveal(), $this->contextHandler->reveal());
     $this->renderer->setStringTranslation($this->getStringTranslationStub());
   }
 
@@ -60,9 +65,9 @@ class BlockPreviewRendererTest extends UnitTestCase {
     $block_plugin->build()
       ->willReturn(['#markup' => 'Powered by Drupal']);
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
     $rendered = $this->renderer->buildBlockPreview($block_id);
@@ -77,6 +82,7 @@ class BlockPreviewRendererTest extends UnitTestCase {
    *   Whether or not the context is required.
    *
    * @return \Drupal\Core\Plugin\Context\ContextDefinitionInterface|\Prophecy\Prophecy\ObjectProphecy
+   *   The mock context definition.
    */
   protected function mockContextDefinition($required = FALSE) {
     /** @var \Drupal\Core\Plugin\Context\ContextDefinitionInterface|\Prophecy\Prophecy\ObjectProphecy $context_definition */
@@ -121,21 +127,21 @@ class BlockPreviewRendererTest extends UnitTestCase {
     $block_plugin->getContextDefinitions()
       ->willReturn($block_context_definitions);
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
-    $this->context_handler->getMatchingContexts($contexts, $block_context_definitions['slot_2'])
+    $this->contextHandler->getMatchingContexts($contexts, $block_context_definitions['slot_2'])
       ->willReturn([
         '@service.context2' => $contexts['@service.context2'],
         '@service.context3' => $contexts['@service.context3'],
       ])
       ->shouldBeCalledTimes(1);
-    $this->context_handler->applyContextMapping($block_plugin->reveal(), $contexts, [
-        'slot_1' => '@service.context1',
-        'slot_2' => '@service.context2',
-      ])
+    $this->contextHandler->applyContextMapping($block_plugin->reveal(), $contexts, [
+      'slot_1' => '@service.context1',
+      'slot_2' => '@service.context2',
+    ])
       ->shouldBeCalledTimes(1);
 
     $rendered = $this->renderer->buildBlockPreview($block_id, $contexts);
@@ -153,8 +159,8 @@ class BlockPreviewRendererTest extends UnitTestCase {
       'admin_label' => 'Block with preview',
     ];
 
-    /** @var BlockWithPreview|\Prophecy\Prophecy\ObjectProphecy $block_plugin */
-    $block_plugin = $this->prophesize(BlockWithPreview::class);
+    /** @var BlockWithPreviewInterface|\Prophecy\Prophecy\ObjectProphecy $block_plugin */
+    $block_plugin = $this->prophesize(BlockWithPreviewInterface::class);
     $block_plugin->build()
       ->willReturn(['#markup' => 'Normal block content'])
       ->shouldNotBeCalled();
@@ -162,9 +168,9 @@ class BlockPreviewRendererTest extends UnitTestCase {
       ->willReturn(['#markup' => 'Block preview content'])
       ->shouldBeCalledTimes(1);
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
     $rendered = $this->renderer->buildBlockPreview($block_id);
@@ -202,9 +208,9 @@ class BlockPreviewRendererTest extends UnitTestCase {
       ->willReturn(['#markup' => 'Normal block content'])
       ->shouldNotBeCalled();
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
     $rendered = $this->renderer->buildBlockPreview($block_id);
@@ -230,9 +236,9 @@ class BlockPreviewRendererTest extends UnitTestCase {
       ->willReturn(['#markup' => 'Normal block content'])
       ->shouldNotBeCalled();
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
     $rendered = $this->renderer->buildBlockPreview($block_id);
@@ -267,12 +273,12 @@ class BlockPreviewRendererTest extends UnitTestCase {
     $block_plugin->getContextDefinitions()
       ->willReturn([]);
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
-    $this->context_handler->applyContextMapping($block_plugin->reveal(), [], [])
+    $this->contextHandler->applyContextMapping($block_plugin->reveal(), [], [])
       ->willThrow(new ContextException("TEST"));
 
     $rendered = $this->renderer->buildBlockPreview($block_id, []);
@@ -295,9 +301,9 @@ class BlockPreviewRendererTest extends UnitTestCase {
     $block_plugin->build()
       ->willThrow(new ContextException("TEST"));
 
-    $this->block_manager->getDefinition($block_id)
+    $this->blockManager->getDefinition($block_id)
       ->willReturn($block_definition);
-    $this->block_manager->createInstance($block_id)
+    $this->blockManager->createInstance($block_id)
       ->willReturn($block_plugin->reveal());
 
     $rendered = $this->renderer->buildBlockPreview($block_id);
@@ -310,5 +316,4 @@ class BlockPreviewRendererTest extends UnitTestCase {
 /**
  * Test interface for a block that provides its own preview.
  */
-interface BlockWithPreview extends BlockPluginInterface, BlockPreviewInterface { }
-
+interface BlockWithPreviewInterface extends BlockPluginInterface, BlockPreviewInterface {}

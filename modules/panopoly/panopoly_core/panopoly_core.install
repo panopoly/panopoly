@@ -1,4 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+/**
+ * @file
+ * Installation hooks for the panopoly_core module.
+ */
+
+declare(strict_types=1);
 
 /**
  * Implements hook_install().

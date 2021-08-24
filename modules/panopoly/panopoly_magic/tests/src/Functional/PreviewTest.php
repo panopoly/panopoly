@@ -19,11 +19,18 @@ class PreviewTest extends BrowserTestBase {
   public $profile = 'panopoly';
 
   /**
+   * The theme to use.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Disable strict config schema.
    *
-   * @todo Remove this! It's missing schema from contrib we use.
-   *
    * @var bool
+   *
+   * @todo Remove this! It's missing schema from contrib we use.
    */
   protected $strictConfigSchema = FALSE;
 

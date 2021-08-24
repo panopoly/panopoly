@@ -6,6 +6,9 @@ use Drupal\Core\Url;
 use Drupal\layout_builder\Controller\ChooseBlockController;
 use Drupal\layout_builder\SectionStorageInterface;
 
+/**
+ * Controller for choosing blocks in layout builder.
+ */
 class LayoutBuilderChooseBlockController extends ChooseBlockController {
 
   /**

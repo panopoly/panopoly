@@ -2,20 +2,16 @@
 
 namespace Drupal\panopoly_widgets\Plugin\Block;
 
-use Drupal\Component\Utility\NestedArray;
+use Drupal\node\Entity\NodeType;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\InsertCommand;
 use Drupal\Core\Ajax\InvokeCommand;
-use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Form\SubformState;
 use Drupal\Core\Link;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Render\Markup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -116,7 +112,7 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
       '#default_value' => $entity ? $entity->bundle() : 'all',
       '#ajax' => [
         'callback' => [$this, 'autocompleteGetNodes'],
-      ]
+      ],
     ];
     $form['node'] = [
       '#prefix' => '<div id="node-selector-wrapper">',
@@ -125,7 +121,7 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
       '#target_type' => 'node',
       '#default_value' => $entity,
       '#required' => TRUE,
-      // @todo: Properly update this to any AJAX value for `content_type`.
+      // @todo Properly update this to any AJAX value for `content_type`.
       //   There are some complications as $form_state->getValues() breaks due
       //   to Layout Builder leveraging subform states. This requires us to
       //   use a #process callback, but that does not seem to effect the
@@ -153,6 +149,9 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
     $form['label']['#attributes'] = [
@@ -161,9 +160,15 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     return $form;
   }
 
-
+  /**
+   * Gets content type options.
+   *
+   * @return array
+   *   An associative array of content types, with the machine names as the keys
+   *   and human-readable names as the values.
+   */
   private function getContentTypes() {
-    $node_types = \Drupal\node\Entity\NodeType::loadMultiple();
+    $node_types = NodeType::loadMultiple();
 
     $options = [];
     foreach ($node_types as $node_type) {
@@ -172,7 +177,13 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
     return $options;
   }
 
-  public function autocompleteGetNodes(array &$form, FormStateInterface $form_state){
+  /**
+   * Gets AJAX response for node autocomplete.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The AJAX response.
+   */
+  public function autocompleteGetNodes(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     $response->addCommand(new InvokeCommand(NULL, 'panopolyWidgetsCleanNodeAutoComplete', []));
     return $response;

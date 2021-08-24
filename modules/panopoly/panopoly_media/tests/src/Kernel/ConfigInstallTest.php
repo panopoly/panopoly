@@ -11,6 +11,11 @@ use Drupal\KernelTests\KernelTestBase;
  */
 class ConfigInstallTest extends KernelTestBase {
 
+  /**
+   * Array of modules that we depend on.
+   *
+   * @var array
+   */
   protected static $modules = [
     // Core.
     'system',

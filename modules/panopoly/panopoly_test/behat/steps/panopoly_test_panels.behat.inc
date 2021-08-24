@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Provide Behat step-definitions for Panels.
@@ -8,9 +9,11 @@
 
 use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
 use Drupal\DrupalDriverManager;
-use Drupal\Component\Utility\Random;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 
+/**
+ * Behat sub-context for Panels.
+ */
 class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInterface {
 
   /**
@@ -32,17 +35,17 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    *
    * @When I wait for the Panels IPE to activate
    */
-  public function waitForIPEtoActivate() {
-    // @todo: Implement for Drupal 8!
- }
+  public function waitForIpeToActivate() {
+    // @todo Implement for Drupal 8!
+  }
 
   /**
    * Wait until the Panels IPE is deactivated.
    *
    * @When I wait for the Panels IPE to deactivate
    */
-  public function waitForIPEtoDeactivate() {
-    // @todo: Implement for Drupal 8!
+  public function waitForIpeToDeactivate() {
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -50,8 +53,8 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    *
    * @When I customize this page with the Panels IPE
    */
-  public function customizeThisPageIPE() {
-    // @todo: Implement for Drupal 8!
+  public function customizeThisPageIpe() {
+    // @todo Implement for Drupal 8!
   }
 
   /**
@@ -59,15 +62,23 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
    *
    * @When I change layout with the Panels IPE
    */
-  public function changeLayoutIPE() {
-    // @todo: Implement for Drupal 8!
+  public function changeLayoutIpe() {
+    // @todo Implement for Drupal 8!
   }
 
+  /**
+   * Ensure the element identified by CSS selector is visible.
+   *
+   * @param string $selector
+   *   The CSS selector.
+   */
   protected function checkVisible($selector) {
     $this->getSession()->wait(5000, "jQuery('$selector').length > 0 && jQuery('$selector').get(0).offsetParent !== null");
   }
 
   /**
+   * Creates a new widget in the Panels IPE.
+   *
    * @When I create new :widget content in the Panels IPE
    */
   public function createNewContent($widget) {
@@ -86,9 +97,11 @@ class PanelsSubContext extends RawDrupalContext implements DrupalSubContextInter
   }
 
   /**
+   * Waits for IPE to load.
+   *
    * @When I wait for the block form to load in the Panels IPE
    */
-  public function waitForBlockFormInIPE() {
+  public function waitForBlockFormInIpe() {
     $this->checkVisible("form.panels-ipe-block-plugin-form");
   }
 

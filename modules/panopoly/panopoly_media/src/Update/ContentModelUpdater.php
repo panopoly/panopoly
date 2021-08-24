@@ -1196,7 +1196,7 @@ class ContentModelUpdater {
    *   The config file storage.
    */
   protected function getConfigFileStorage() {
-    // @TODO: Update this storage directory.
+    // @todo Update this storage directory.
     // As config updates over time, in order to run this update it will become
     // necessary to move this config in its current state to a different
     // location and utilize it from there.

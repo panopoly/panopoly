@@ -1,0 +1,10 @@
+parameters:
+  level: 0
+  ignoreErrors:
+    # Drupal widely uses 'new static' even though it's technically less safe.
+    - '|Unsafe usage of new static\(\)|'
+    # We're just not ready for this, although, we should do it eventually.
+    - '|\Drupal calls should be avoided in classes, use dependency injection instead|'
+    # This method is from optional dependency 'filehash'.
+    - '|Function filehash_algos not found.|'
+

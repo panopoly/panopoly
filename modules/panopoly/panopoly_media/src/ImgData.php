@@ -3,7 +3,7 @@
 namespace Drupal\panopoly_media;
 
 /**
- * Class ImgData.
+ * Reads IPTC image data.
  */
 class ImgData {
 
@@ -19,7 +19,7 @@ class ImgData {
    *
    * @var array
    *
-   * @TODO use plugin system to manage these properties.
+   * @todo use plugin system to manage these properties.
    */
   protected $iptcMapping = [
     'title' => '2#005',
@@ -90,7 +90,7 @@ class ImgData {
    * @return array
    *   The form element map.
    *
-   * @TODO: add persistent caching.
+   * @todo add persistent caching.
    */
   public function getElementMap($entityType) {
     if (!isset($this->elementMap[$entityType])) {

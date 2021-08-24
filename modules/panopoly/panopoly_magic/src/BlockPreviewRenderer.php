@@ -17,11 +17,15 @@ class BlockPreviewRenderer {
   use StringTranslationTrait;
 
   /**
+   * The block manager.
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
+   * The context handler.
+   *
    * @var \Drupal\Core\Plugin\Context\ContextHandlerInterface
    */
   protected $contextHandler;

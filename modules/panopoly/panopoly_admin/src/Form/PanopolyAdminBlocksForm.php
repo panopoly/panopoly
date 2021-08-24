@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Drupal\panopoly_admin\Form;
-
 
 use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -10,19 +8,22 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Form to administer available blocks.
+ */
 class PanopolyAdminBlocksForm extends FormBase {
 
   /**
-   * @var \Drupal\Core\Block\BlockManagerInterface
-   *
    * The block plugin manager.
+   *
+   * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   *
    * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
@@ -39,6 +40,9 @@ class PanopolyAdminBlocksForm extends FormBase {
     $this->configFactory = $config_factory;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('plugin.manager.block'),

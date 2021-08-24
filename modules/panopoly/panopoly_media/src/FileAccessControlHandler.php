@@ -8,7 +8,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\file\FileAccessControlHandler as CoreAccessControlHandler;
 
 /**
- * Class FileAccessControlHandler.
+ * File access control handler.
  */
 class FileAccessControlHandler extends CoreAccessControlHandler {
 
