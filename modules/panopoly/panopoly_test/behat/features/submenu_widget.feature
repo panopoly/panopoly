@@ -6,70 +6,63 @@ Feature: Add submenu widget
   Background:
     Given I am logged in as a user with the "administrator" role
     # Create two pages with a parent-child relationship in the menu.
-    When I visit "/node/add/panopoly-test-page"
+    When I visit "/node/add/panopoly_test_content_page"
       And I fill in the following:
-        | Title               | Parent page    |
-        | Editor              | plain_text     |
-        | body[und][0][value] | Testing body   |
+        | Title               | Parent page     |
+        | Text format         | restricted_html |
+        | body[0][value]      | Testing body    |
+      And I click "Menu settings"
       And I check the box "menu[enabled]"
-      And I fill in "Rodzic" for "menu[link_title]"
-      And I select "<Main menu>" from "menu[parent]"
+      And I fill in "Rodzic" for "menu[title]"
+      And I select "<Main navigation>" from "menu[menu_parent]"
       # Normally, here we'd press "Publish", however some child distribtions
       # don't use 'save_draft', and this makes this test compatible with them.
       #And I press "Publish"
       And I press "edit-submit"
-    When I visit "/node/add/panopoly-test-page"
+    When I visit "/node/add/panopoly_test_content_page"
       And I fill in the following:
-        | Title               | Child page    |
-        | Editor              | plain_text    |
-        | body[und][0][value] | Testing body  |
+        | Title               | Child page      |
+        | Text format         | restricted_html |
+        | body[0][value]      | Testing body    |
+      And I click "Menu settings"
       And I check the box "menu[enabled]"
-      And I fill in "Dziecko" for "menu[link_title]"
-      And I select "-- Rodzic" from "menu[parent]"
+      And I fill in "Dziecko" for "menu[title]"
+      And I select "-- Rodzic" from "menu[menu_parent]"
       And I press "edit-submit"
- 
-  @api @javascript @panopoly_widgets
+
+  @api @javascript @panopoly_widgets @panopoly_widgets_menu @panopoly2
   Scenario: Add submenu widget to page
     Given I am viewing a landing page
-    When I customize this page with the Panels IPE
-      And I click "Add new pane"
-      And I click "Add submenu"
-    Then I should see "Configure new Add submenu"
-    When I check the box "override_title"
+    When I click "Layout"
+      And I click "Add block in Section 1, Content region"
+      And I click "Add Main navigation"
       And I fill in the following:
-        | override_title_text | Submenu title |
-    When I select "1st level (primary)" from "edit-level"
-      And I check the box "edit-expanded"
-    When I press "Save" in the "CTools modal" region
-      And I press "Save"
-      And I wait for the Panels IPE to deactivate
-    # Because of #2177417 we have to reload the page for the correct output
-    # to be shown. @todo: Remove this when it's finally fixed!
-    #When I reload the page
+        | settings[label] | Submenu title |
+    When I press "Menu levels"
+    When I select "1" from "settings[level]"
+      And I check the box "settings[expand_all_items]"
+    And I press "Save" in the "Settings tray" region
+      And I press "Save layout"
     Then I should see "Rodzic"
       And I should see "Dziecko"
     # Change the starting level to show the parent too.
-    When I customize this page with the Panels IPE
-      And I click "Settings" in the "Boxton Content" region
-    When I select "1st level (primary)" from "edit-level"
-    When I press "Save" in the "CTools modal" region
-      And I press "Save"
-      And I wait for the Panels IPE to deactivate
+    When I click "Layout"
+      And I press "Open Submenu title configuration options" in the "Layout Builder"
+      And I click "Configure" in the "Layout Builder" region
+    When I select "1" from "settings[level]"
+    And I press "Save" in the "Settings tray" region
+      And I press "Save layout"
     Then I should see "Rodzic"
       And I should see "Dziecko"
-    # Verify that #2153277 is fixed by attempting to change the checkboxes
-    # after saving originally (see https://www.drupal.org/node/2153277).
-    When I customize this page with the Panels IPE
-      And I click "Settings" in the "Boxton Content" region
-    Then the "edit-follow" checkbox should not be checked
-      And the "edit-expanded" checkbox should be checked
-    When I check the box "edit-follow"
-      And I uncheck the box "edit-expanded"
-    When I press "Save" in the "CTools modal" region
-      And I press "Save"
-      And I wait for the Panels IPE to deactivate
-      And I customize this page with the Panels IPE
-      And I click "Settings" in the "Boxton Content" region
-    Then the "edit-follow" checkbox should be checked
-      And the "edit-expanded" checkbox should not be checked
+    When I click "Layout"
+      And I press "Open Submenu title configuration options" in the "Layout Builder"
+      And I click "Configure" in the "Layout Builder"
+      And the "settings[expand_all_items]" checkbox should be checked
+      And I uncheck the box "settings[expand_all_items]"
+    And I press "Save" in the "Settings tray" region
+      And I press "Save layout"
+    When I click "Layout"
+      And I press "Open Submenu title configuration options" in the "Layout Builder" region
+      And I click "Configure" in the "Boxton Content" region
+      And the "settings[expand_all_items]" checkbox should not be checked
 

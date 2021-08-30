@@ -83,3 +83,4 @@ default:
         Footer: ".region-footer"
         Search: "#search-form"
         Panopoly Magic Style Settings: "#panels-edit-style-settings-form #edit-general-settings"
+        Layout Builder: "#layout-builder"
