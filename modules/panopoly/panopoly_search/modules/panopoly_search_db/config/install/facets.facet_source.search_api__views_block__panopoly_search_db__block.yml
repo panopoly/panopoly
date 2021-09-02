@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: search_api__views_block__panopoly_search_db__block
+name: 'search_api:views_block__panopoly_search_db__block'
+filter_key: ''
+url_processor: query_string
+breadcrumb:
+  active: false
+  before: true
+  group: false

@@ -23,6 +23,9 @@
                 "Issue #2922569: Filtering incorrectly on 'Summary or Trimmed' fields": "https://www.drupal.org/files/issues/2019-12-10/drupal-core-2922569-9.patch",
                 "Issue #2653938: Views filter default values overridden": "https://www.drupal.org/files/issues/2021-02-01/drupal-views-filter-default-all-2653938-22.patch",
                 "Issue #2958588: Off-canvas style resets are overriding styles": "https://www.drupal.org/files/issues/2021-01-06/off-canvas-style-resets-2958588-13.patch"
+            },
+            "drupal/page_manager": {
+                "Issue #3176661: Allow to edit page title when using Layout Builder variant": "https://www.drupal.org/files/issues/2021-08-17/page_manager-lb-title-3176661-3.patch"
             }
         }
     }

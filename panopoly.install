@@ -6,6 +6,7 @@
  */
 
 use Drupal\panopoly\Installer\Form\PanopolyDemoInstallerForm;
+use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
 use Drupal\shortcut\Entity\Shortcut;
 
@@ -41,6 +42,11 @@ function panopoly_install() {
   $user->roles[] = 'administrator';
   $user->save();
 
+  // Grant the 'use panopoly_search' permission to anonymous users by default.
+  $role = Role::load(Role::ANONYMOUS_ID);
+  $role->grantPermission('use panopoly_search');
+  $role->save();
+
   // We install some menu links, so we have to rebuild the router, to ensure the
   // menu links are valid.
   \Drupal::service('router.builder')->rebuildIfNeeded();
@@ -61,4 +67,19 @@ function panopoly_install() {
     'link' => ['uri' => 'internal:/admin/content'],
   ]);
   $shortcut->save();
+}
+
+/**
+ * Enables Panopoly Search.
+ */
+function panopoly_update_8001() {
+  if (!\Drupal::moduleHandler()->moduleExists('panopoly_search')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+    $module_installer = \Drupal::service("module_installer");
+    $module_installer->install(['panopoly_search']);
+  }
+
+  $role = Role::load(Role::ANONYMOUS_ID);
+  $role->grantPermission('use panopoly_search');
+  $role->save();
 }

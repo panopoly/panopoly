@@ -1,0 +1,10 @@
+/**
+ * @file
+ * Styles for panopoly_search pages.
+ */
+
+.panopoly-search-view .view-empty,
+.panopoly-search-view .view-content {
+  margin-top: 1.2em;
+}
+

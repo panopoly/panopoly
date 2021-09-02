@@ -1,0 +1,5 @@
+view:
+  css:
+    theme:
+      css/panopoly-search.css: {}
+

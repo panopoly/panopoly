@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_db
+id: panopoly_search_db_server
+name: 'Database server'
+description: ''
+backend: search_api_db
+backend_config:
+  database: 'default:default'
+  min_chars: 3
+  matching: words

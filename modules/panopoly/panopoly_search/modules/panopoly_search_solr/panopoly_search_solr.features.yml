@@ -1,0 +1,3 @@
+bundle: panopoly
+excluded:
+  - page_manager.page.panopoly_search

@@ -8,7 +8,6 @@ dependencies:
   - 'drupal:migrate (>= 8.1)'
   - 'drupal:node'
   - 'drupal:responsive_image'
-  - 'drupal:search'
   - 'drupal:text'
   - 'drupal:user'
   - 'drupal:views'
@@ -16,3 +15,4 @@ dependencies:
   - 'panopoly_core:panopoly_core'
   - 'panopoly_images:panopoly_images'
   - 'panopoly_pages:panopoly_pages'
+  - 'panopoly_search:panopoly_search'

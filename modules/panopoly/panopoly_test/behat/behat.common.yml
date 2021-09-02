@@ -81,6 +81,6 @@ default:
         Footer third column: ".region-footer-thirdcolumn"
         Footer fourth column: ".region-footer-fourthcolumn"
         Footer: ".region-footer"
-        Search: "#search-form"
+        Search: "#panopoly-search-box-form"
         Panopoly Magic Style Settings: "#panels-edit-style-settings-form #edit-general-settings"
         Layout Builder: "#layout-builder"

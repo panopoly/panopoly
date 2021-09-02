@@ -1,0 +1,45 @@
+/**
+ * @file
+ * Styles for panopoly_images.
+ */
+
+img.panopoly-images-full,
+img.panopoly-images-half,
+img.panopoly-images-quarter,
+img.panopoly-images-featured,
+img.panopoly-images-thumbnail,
+img.panopoly-images-square,
+img.panopoly-images-original,
+img.panopoly-images-spotlight,
+img.panopoly-images-video {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+/**
+ * Image styling
+ */
+img.panopoly-images-full {
+    width: 100% !important;
+    margin-bottom: .5em;
+}
+
+img.panopoly-images-half {
+    max-width: 50%;
+    width: 50%;
+    float: left;
+    margin-right: .75em;
+    margin-bottom: .5em;
+    margin-top: .5em;
+}
+
+img.panopoly-images-quarter {
+    max-width: 25%;
+    width: 25%;
+    float: left;
+    margin-right: .5em;
+    margin-bottom: .25em;
+    margin-top: .25em;
+}
+

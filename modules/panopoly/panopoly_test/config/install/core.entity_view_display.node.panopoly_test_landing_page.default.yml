@@ -23,3 +23,4 @@ content:
     region: content
 hidden:
   layout_builder__layout: true
+  search_api_excerpt: true

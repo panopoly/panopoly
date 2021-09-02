@@ -1,0 +1,70 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.panopoly_search
+  module:
+    - panopoly_search
+id: panopoly_search-layout_builder-0
+label: 'Database search'
+variant: layout_builder
+variant_settings:
+  id: layout_builder
+  uuid: 4e07e9e5-4d23-4019-8b2a-182d7dfa120a
+  label: null
+  weight: 0
+  sections:
+    -
+      layout_id: radix_burr_flipped
+      layout_settings:
+        label: ''
+      components:
+        4a011a1a-c180-4447-b0e3-0d56d7c37920:
+          uuid: 4a011a1a-c180-4447-b0e3-0d56d7c37920
+          region: sidebar
+          configuration:
+            id: 'facet_block:panopoly_search_db_content_type'
+            label: 'Filter by type'
+            provider: facets
+            label_display: '1'
+            context_mapping: {  }
+          additional: {  }
+          weight: 0
+        6b7a17f8-198f-401e-8b20-7ceaf7bc0eb2:
+          uuid: 6b7a17f8-198f-401e-8b20-7ceaf7bc0eb2
+          region: sidebar
+          configuration:
+            id: 'facet_block:panopoly_search_db_authored_on'
+            label: 'Filter by year'
+            provider: facets
+            label_display: '1'
+            context_mapping: {  }
+          additional: {  }
+          weight: 1
+        695c7da0-c914-492e-8149-7d73d915653f:
+          uuid: 695c7da0-c914-492e-8149-7d73d915653f
+          region: contentmain
+          configuration:
+            id: 'views_block:panopoly_search_db-block'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+          additional: {  }
+          weight: 0
+      third_party_settings: {  }
+  title_type: block
+  manual_title: ''
+  title_from_block: 695c7da0-c914-492e-8149-7d73d915653f
+page: panopoly_search
+weight: 10
+selection_criteria:
+  -
+    id: panopoly_search
+    module: panopoly_search_db
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }

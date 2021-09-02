@@ -1,0 +1,5 @@
+services:
+  panopoly_search.route_subscriber:
+    class: Drupal\panopoly_search\Routing\PanopolySearchRouteSubscriber
+    tags:
+      - { name: event_subscriber }

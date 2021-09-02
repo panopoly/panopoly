@@ -19,6 +19,11 @@ function panopoly_demo_install() {
 
   // Point the front page to our landing page demo.
   _panopoly_demo_set_front_page('/demo');
+
+  // Install database search by default.
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+  $module_installer = \Drupal::service('module_installer');
+  $module_installer->install(['panopoly_search_db']);
 }
 
 /**
@@ -53,5 +58,53 @@ function _panopoly_demo_set_front_page($path) {
     $site_page_settings['front'] = $path;
     $site_config->set('page', $site_page_settings);
     $site_config->save();
+  }
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function panopoly_demo_update_dependencies() {
+  $dependencies = [];
+  $dependencies['panopoly_demo'][8001] = [
+    'panopoly' => 8001,
+  ];
+  return $dependencies;
+}
+
+/**
+ * Swap out core search form for Panopoly Search.
+ */
+function panopoly_demo_update_8001() {
+  if (!\Drupal::moduleHandler()->moduleExists('panopoly_search_db')) {
+    /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
+    $module_installer = \Drupal::service("module_installer");
+    $module_installer->install(['panopoly_search_db']);
+  }
+
+  $config = \Drupal::configFactory()->getEditable('page_manager.page_variant.panopoly_demo_home-layout_builder');
+  $data = $config->getRawData();
+  if (!empty($data['variant_settings']['sections'][0]['components']['f3683a73-c6a6-4148-8ddf-eb14fe74aa7c'])) {
+    unset($data['variant_settings']['sections'][0]['components']['f3683a73-c6a6-4148-8ddf-eb14fe74aa7c']);
+    $data['variant_settings']['sections'][0]['components']['98712ed7-96d2-4c77-886a-0c8b035d6704'] = [
+      'uuid' => '98712ed7-96d2-4c77-886a-0c8b035d6704',
+      'region' => 'sidebar',
+      'configuration' => [
+        'id' => 'panopoly_search_box',
+        'label' => 'Search box',
+        'provider' => 'panopoly_search',
+        'label_display' => '0',
+        'context_mapping' => [],
+      ],
+      'additional' => [],
+      'weight' => -1,
+    ];
+    if (!isset($data['variant_settings']['title_type'])) {
+      $data['variant_settings']['title_type'] = 'label';
+      $data['variant_settings']['manual_title'] = '';
+      $data['variant_settings']['title_from_block'] = '';
+    }
+    $config->setData($data);
+    $config->save(TRUE);
   }
 }

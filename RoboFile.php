@@ -22,13 +22,30 @@ class RoboFile extends RoboTasks {
 
   const PANOPOLY_GITHUB_REPO = 'git@github.com:panopoly/panopoly.git';
 
-  const PANOPOLY_FEATURES = [
+  const PANOPOLY_PROJECTS = [
     'panopoly_core' => 'Panopoly Core',
     'panopoly_demo' => 'Panopoly Demo',
     'panopoly_images' => 'Panopoly Images',
     'panopoly_magic' => 'Panopoly Magic',
     'panopoly_media' => 'Panopoly Media',
     'panopoly_pages' => 'Panopoly Pages',
+    'panopoly_test' => 'Panopoly Test',
+    'panopoly_theme' => 'Panopoly Theme',
+    'panopoly_search' => 'Panopoly Search',
+    'panopoly_users' => 'Panopoly Users',
+    'panopoly_widgets' => 'Panopoly Widgets',
+    'panopoly_wysiwyg' => 'Panopoly WYSIWYG',
+  ];
+
+  const PANOPOLY_FEATURES = [
+    'panopoly_core' => 'Panopoly Core',
+    'panopoly_demo' => 'Panopoly Demo',
+    'panopoly_images' => 'Panopoly Images',
+    'panopoly_media' => 'Panopoly Media',
+    'panopoly_pages' => 'Panopoly Pages',
+    'panopoly_search' => 'Panopoly Search (Base)',
+    'panopoly_search_db' => 'Panopoly Search (Database)',
+    'panopoly_search_solr' => 'Panopoly Search (SOLR)',
     'panopoly_test' => 'Panopoly Test',
     'panopoly_theme' => 'Panopoly Theme',
     'panopoly_users' => 'Panopoly Users',
@@ -220,6 +237,27 @@ class RoboFile extends RoboTasks {
   }
 
   /**
+   * Gets a list of the panopoly_* projects.
+   *
+   * @return string[]
+   *   The machine names of the panopoly_* projects.
+   */
+  protected function getPanopolyProjects() {
+    return array_keys(static::PANOPOLY_PROJECTS);
+  }
+
+  /**
+   * Gets a list of pretty names for the panopoly_* projects.
+   *
+   * @return string[]
+   *   The human-readable names of the panpoly_* projects, keyed by their
+   *   machine name.
+   */
+  protected function getPanopolyProjectNames() {
+    return static::PANOPOLY_PROJECTS;
+  }
+
+  /**
    * Gets a list of the panopoly_* features.
    *
    * @return string[]
@@ -284,6 +322,11 @@ class RoboFile extends RoboTasks {
     $overridden = FALSE;
     $first = TRUE;
     foreach ($this->getPanopolyFeatures() as $panopoly_feature) {
+      // Only check features which are enabled.
+      if (!$this->isModuleEnabled($panopoly_feature)) {
+        continue;
+      }
+
       // We prime something or other by running the first feature and discarding
       // the result before running it again.
       if ($first) {
@@ -373,7 +416,7 @@ EOF;
     foreach (static::COMPOSER_PROFILE_REQUIREMENTS as $package => $version) {
       $package_index[$package]['profile'] = $version;
     }
-    foreach ($this->getPanopolyFeatures() as $module) {
+    foreach ($this->getPanopolyProjects() as $module) {
       $module_composer_json = $this->readJsonFile(__DIR__ . "/modules/panopoly/{$module}/composer.json");
 
       // Build up the package index.
@@ -401,7 +444,7 @@ EOF;
     foreach ($package_index as $package => $versions) {
       // Skip any of the Panopoly modules.
       list ($vendor, $short_package_name) = explode('/', $package);
-      if ($vendor == 'drupal' && in_array($short_package_name, $this->getPanopolyFeatures())) {
+      if ($vendor == 'drupal' && in_array($short_package_name, $this->getPanopolyProjects())) {
         continue;
       }
 
@@ -450,7 +493,7 @@ EOF;
     /** @var \Robo\Collection\CollectionBuilder|$this $collection */
     $collection = $this->collectionBuilder();
 
-    foreach ($this->getPanopolyFeatures() as $panopoly_feature) {
+    foreach ($this->getPanopolyProjects() as $panopoly_feature) {
       $collection->addCode(function () use ($panopoly_feature) {
         $this->say("Fetching from individual repo for {$panopoly_feature}...");
       });
@@ -467,7 +510,7 @@ EOF;
 
     $collection->completion($this->taskExec("git checkout {$branch}"));
 
-    foreach ($this->getPanopolyFeatures() as $panopoly_feature) {
+    foreach ($this->getPanopolyProjects() as $panopoly_feature) {
       $collection->addCode(function () use ($panopoly_feature) {
         $this->say("Performing subtree split for {$panopoly_feature}...");
       });
@@ -493,7 +536,7 @@ EOF;
     }
 
     if ($opts['push']) {
-      foreach ($this->getPanopolyFeatures() as $panopoly_feature) {
+      foreach ($this->getPanopolyProjects() as $panopoly_feature) {
         $collection->addCode(function () use ($panopoly_feature) {
           $this->say("Pushing {$panopoly_feature}...");
         });
@@ -839,7 +882,7 @@ EOF;
     }
 
     // Check out the individual manyrepos for the child modules.
-    foreach ($this->getPanopolyFeatures() as $panopoly_feature) {
+    foreach ($this->getPanopolyProjects() as $panopoly_feature) {
       $panopoly_feature_release_path = "release/{$panopoly_feature}";
       if (!file_exists($panopoly_feature_release_path)) {
         $collection->taskExec("git clone git@git.drupal.org:project/{$panopoly_feature}.git --branch {$branch} {$panopoly_feature_release_path}");
@@ -902,7 +945,7 @@ EOF;
     $collection->addTask($this->checkoutManyreposForRelease($branch, $opts['clean']));
 
     // Update all the CHANGELOG.txt files in the monorepo.
-    foreach ($this->getPanopolyFeaturesNames() as $panopoly_feature => $panopoly_feature_name) {
+    foreach ($this->getPanopolyProjectNames() as $panopoly_feature => $panopoly_feature_name) {
       $panopoly_feature_release_path = "release/{$panopoly_feature}";
       $panopoly_feature_source_path = "modules/panopoly/{$panopoly_feature}";
 
@@ -967,7 +1010,7 @@ EOF;
     // Pull the commits down into our local checkouts of the manyrepos, so
     // we can tag and push those as well.
     $collection->addTask($this->checkoutManyreposForRelease($branch));
-    foreach ($this->getPanopolyFeatures() as $panopoly_feature) {
+    foreach ($this->getPanopolyProjects() as $panopoly_feature) {
       $panopoly_feature_release_path = "release/{$panopoly_feature}";
       $collection->taskExecStack()
         ->exec("git -C {$panopoly_feature_release_path} tag {$new_version}")
@@ -1121,7 +1164,7 @@ EOF;
       });
     }
 
-    $panopoly_features = array_merge(['panopoly'], $this->getPanopolyFeatures());
+    $panopoly_features = array_merge(['panopoly'], $this->getPanopolyProjects());
     foreach ($panopoly_features as $index => $panopoly_feature) {
       $panopoly_feature_releases = $this->runDrush("pm-releases {$panopoly_feature}-{$drupal_major}")->getOutput();
       if (strpos($panopoly_feature_releases, $new_version) !== FALSE) {

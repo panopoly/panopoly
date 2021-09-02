@@ -1,0 +1,8 @@
+type: module
+name: 'Panopoly Search (Base)'
+description: 'Base for search configurations: doesn''t do anything unless you enable the Database or SOLR sub-module.'
+core_version_requirement: '^8.9 || ^9'
+package: Panopoly
+dependencies:
+  - 'page_manager:page_manager'
+  - 'user_permission_condition:user_permission_condition'

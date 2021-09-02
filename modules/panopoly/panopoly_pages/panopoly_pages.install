@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Panopoly Pages.
+ */
+
+/**
+ * Changes layout on Content Page teasers to match Panopoly 1.x.
+ */
+function panopoly_pages_update_8001() {
+  $config = \Drupal::configFactory()->getEditable('core.entity_view_display.node.panopoly_content_page.teaser');
+  $data = $config->getRawData();
+  if ($data['third_party_settings']['layout_builder']['sections'][0]['layout_id'] !== 'radix_boxton') {
+    $data['third_party_settings']['layout_builder']['sections'][0]['layout_id'] = 'radix_boxton';
+    foreach ($data['third_party_settings']['layout_builder']['sections'][0]['components'] as $uuid => &$component) {
+      if ($component['region'] !== 'contentmain') {
+        $component['region'] = 'contentmain';
+      }
+      if ($uuid === 'c87e7a48-822d-40c9-8e89-f57e9f1f09b9') {
+        $component['weight'] = -1;
+      }
+    }
+    $config->setData($data);
+    $config->save(TRUE);
+  }
+}

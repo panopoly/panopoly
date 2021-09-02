@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.panopoly_search
+  module:
+    - panopoly_search
+id: panopoly_search-layout_builder-1
+label: 'SOLR Search'
+variant: layout_builder
+variant_settings:
+  id: layout_builder
+  uuid: f1c89126-fab0-4243-8cc2-cfe7e7d37aa8
+  label: null
+  weight: 0
+  title_type: block
+  manual_title: ''
+  title_from_block: 06d9654b-bcf1-43e3-b5fb-7b3a52a8422c
+  sections:
+    -
+      layout_id: radix_burr_flipped
+      layout_settings:
+        label: ''
+        context_mapping: {  }
+      components:
+        06d9654b-bcf1-43e3-b5fb-7b3a52a8422c:
+          uuid: 06d9654b-bcf1-43e3-b5fb-7b3a52a8422c
+          region: contentmain
+          configuration:
+            id: 'views_block:panopoly_search_solr-block'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+          additional: {  }
+          weight: 0
+        2061315a-5bd5-4ae4-9327-8fa2f6cb248a:
+          uuid: 2061315a-5bd5-4ae4-9327-8fa2f6cb248a
+          region: sidebar
+          configuration:
+            id: 'facet_block:panopoly_search_solr_content_type'
+            label: 'Content type'
+            provider: facets
+            label_display: visible
+            context_mapping: {  }
+          additional: {  }
+          weight: 0
+        86ef3b90-a152-4395-9282-5238535b3670:
+          uuid: 86ef3b90-a152-4395-9282-5238535b3670
+          region: sidebar
+          configuration:
+            id: 'facet_block:panopoly_search_solr_authored_on'
+            label: 'Authored on'
+            provider: facets
+            label_display: visible
+            context_mapping: {  }
+          additional: {  }
+          weight: 1
+      third_party_settings: {  }
+page: panopoly_search
+weight: 5
+selection_criteria:
+  -
+    id: panopoly_search
+    module: panopoly_search_solr
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }

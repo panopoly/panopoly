@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Hook implements for the panopoly_images module.
+ */
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function panopoly_images_preprocess_responsive_image(&$variables) {
+  $responsive_image_style_id = $variables['responsive_image_style_id'];
+  if (strpos($responsive_image_style_id, 'panopoly_images_') === 0) {
+    if (!isset($variables['img_element']['#attributes']['class'])) {
+      $variables['img_element']['#attributes']['class'] = [];
+    }
+    $variables['img_element']['#attributes']['class'][] = str_replace('_', '-', $responsive_image_style_id);
+    $variables['img_element']['#attached']['library'][] = 'panopoly_images/styles';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function panopoly_images_preprocess_image_style(&$variables) {
+  $style_name = $variables['style_name'];
+  if (strpos($style_name, 'panopoly_images_') === 0) {
+    if (!isset($variables['image']['#attributes'])) {
+      $variables['image']['#attributes'] = [];
+    }
+    if (!isset($variables['image']['#attributes']['class'])) {
+      $variables['image']['#attributes']['class'] = [];
+    }
+    $base_style_name = preg_replace('/_\dx$/', '', $style_name);
+    $variables['image']['#attributes']['class'][] = str_replace('_', '-', $base_style_name);
+    $variables['image']['#attached']['library'][] = 'panopoly_images/styles';
+  }
+}

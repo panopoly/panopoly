@@ -130,3 +130,12 @@ function panopoly_pages_panels_ipe_blocks_alter(array &$blocks, PanelsDisplayVar
     }
   }
 }
+
+/**
+ * Implements hook_page_attachments().
+ */
+function panopoly_pages_page_attachments(array &$attachments) {
+  if (\Drupal::service('theme.manager')->getActiveTheme()->getName() === 'bartik') {
+    $attachments['#attached']['library'][] = 'panopoly_pages/bartik';
+  }
+}

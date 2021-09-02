@@ -1,0 +1,16 @@
+/**
+ * @file
+ * Styling fixes for Bartik.
+ */
+
+.node--type-panopoly-content-page.node--view-mode-teaser .field--type-image {
+  float: none;
+}
+
+/* Re-assert the margins from panopoly-images.css. */
+.node--type-panopoly-content-page.node--view-mode-teaser .field--type-image img.panopoly-images-quarter {
+  margin-right: .5em;
+  margin-bottom: .25em;
+  margin-top: .25em;
+}
+

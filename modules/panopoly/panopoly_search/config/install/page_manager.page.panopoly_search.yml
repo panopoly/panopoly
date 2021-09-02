@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - user_permission_condition
+id: panopoly_search
+label: 'Panopoly Search'
+description: ''
+use_admin_theme: false
+path: /search/site
+access_logic: and
+access_conditions:
+  -
+    id: user_permission
+    permission: 'use panopoly_search'
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+parameters: {  }

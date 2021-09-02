@@ -30,17 +30,6 @@ variant_settings:
             context_mapping: {  }
           additional: {  }
           weight: 0
-        f3683a73-c6a6-4148-8ddf-eb14fe74aa7c:
-          uuid: f3683a73-c6a6-4148-8ddf-eb14fe74aa7c
-          region: sidebar
-          configuration:
-            id: search_form_block
-            label: 'Search form'
-            provider: search
-            label_display: '0'
-            context_mapping: {  }
-          additional: {  }
-          weight: 0
         37c6d591-bb9f-4ec0-be8e-ba32a5d2a99f:
           uuid: 37c6d591-bb9f-4ec0-be8e-ba32a5d2a99f
           region: sidebar
@@ -54,7 +43,21 @@ variant_settings:
             context_mapping: {  }
           additional: {  }
           weight: 1
+        98712ed7-96d2-4c77-886a-0c8b035d6704:
+          uuid: 98712ed7-96d2-4c77-886a-0c8b035d6704
+          region: sidebar
+          configuration:
+            id: panopoly_search_box
+            label: 'Search box'
+            provider: panopoly_search
+            label_display: '0'
+            context_mapping: {  }
+          additional: {  }
+          weight: -1
       third_party_settings: {  }
+  title_type: label
+  manual_title: ''
+  title_from_block: ''
 page: panopoly_demo_home
 weight: 0
 selection_criteria: {  }

@@ -1,0 +1,203 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the panopoly_search module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function panopoly_search_theme_registry_alter(&$theme_registry) {
+  // Replace the exposed form templates in Bartik, because it adds the
+  // 'form--inline' class.
+  if (isset($theme_registry['views_exposed_form'])) {
+    $module_path = drupal_get_path('module', 'panopoly_search');
+    foreach (['panopoly_search_db', 'panopoly_search_solr'] as $view_name) {
+      if (!isset($theme_registry["views_exposed_form__{$view_name}"])) {
+        $theme_registry["views_exposed_form__{$view_name}"] = array_merge(
+          $theme_registry["views_exposed_form"], [
+            'base hook' => 'views_exposed_form',
+            'template' => 'views-exposed-form--panopoly-search',
+            'theme path' => $module_path,
+            'path' => $module_path . '/templates',
+          ]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function panopoly_search_theme_suggestions_block(array $variables) {
+  $suggestions = [];
+
+  // Use the same template suggestions as the Drupal core search block.
+  // This applies the default styling in Bartik, and may work for other
+  // themes that have custom styled the search form.
+  $plugin_id = $variables['elements']['#plugin_id'];
+  if ($plugin_id === 'panopoly_search_box') {
+    $suggestions[] = 'block__search_form_block';
+  }
+
+  return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function panopoly_search_theme_suggestions_form(array $variables) {
+  $suggestions = [];
+
+  // Use the same template suggestions as the Drupal core search block.
+  // This applies the default styling in Bartik, and may work for other
+  // themes that have custom styled the search form.
+  $form_id = $variables['element']['#form_id'];
+  if ($form_id === 'panopoly_search_box_form') {
+    $suggestions[] = 'form__search_block_form';
+  }
+
+  return $suggestions;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_search_form_panopoly_search_box_form_alter(&$form, FormStateInterface $form_state) {
+  $form['form_build_id']['#access'] = FALSE;
+  $form['form_token']['#access'] = FALSE;
+  $form['form_id']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function panopoly_search_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+  /** @var \Drupal\views\Entity\View $view */
+  $view = $form_state->getStorage('view')['view'];
+  if (in_array($view->id(), ['panopoly_search_db', 'panopoly_search_solr'])) {
+    $form['keys']['#title'] = t('Enter your keywords');
+    $form['keys']['#type'] = 'search';
+
+    // Use the default styling from theme.
+    $form['#attributes']['class'][] = 'search-form';
+    // This one is specifically for Bartik.
+    $form['actions']['submit']['#attributes']['class'][] = 'search-form__submit';
+
+    // Wrap the keys and button in an inline container.
+    $form['container'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['container-inline'],
+      ],
+    ];
+    foreach (['keys', 'actions'] as $key) {
+      $form['container'][$key] = $form[$key];
+      unset($form[$key]);
+    }
+    $form['#attributes']['class'][] = 'clearfix';
+
+    // Add a validation callback.
+    $form['#validate'][] = '_panopoly_search_form_validate';
+  }
+}
+
+/**
+ * Validation callback for views_exposed_form() for our search views.
+ */
+function _panopoly_search_form_validate($form, FormStateInterface $form_state) {
+  // Don't do anything if 'keys' isn't specified at all.
+  $input = $form_state->getUserInput();
+  if ($input['keys'] === NULL) {
+    return;
+  }
+
+  // Show error if 'keys' is specified, but empty.
+  $keys = trim($form_state->getValue('keys'));
+  if (empty($keys)) {
+    $form_state->setErrorByName('keys', t('Please enter some keywords.'));
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function panopoly_search_views_pre_render(ViewExecutable $view) {
+  if (in_array($view->storage->id(), [
+    'panopoly_search_db',
+    'panopoly_search_solr',
+  ])) {
+    $view->element['#attached']['library'][] = 'panopoly_search/view';
+  }
+}
+
+/**
+ * Implements hook_views_post_render().
+ */
+function panopoly_search_views_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
+  if (!in_array($view->id(), [
+    'panopoly_search_db',
+    'panopoly_search_solr',
+  ])) {
+    return;
+  }
+
+  $keys = \Drupal::request()->query->get('keys');
+  if (!empty($keys)) {
+    $count = count($view->result);
+    $title = new TranslatableMarkup('Search results: @count matched %keys', [
+      '@count' => \Drupal::translation()
+        ->formatPlural($count, '1 item', '@count items'),
+      '%keys' => $keys,
+    ]);
+
+    // Set the view title.
+    $view->setTitle($title);
+
+    // Log the search so it can appear in 'Top search phrases' report.
+    \Drupal::logger('search')->notice('Searched %type for %keys.', [
+      '%keys' => $keys,
+      '%type' => 'Content',
+    ]);
+  }
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function panopoly_search_menu_links_discovered_alter(&$links) {
+  $module_handler = \Drupal::moduleHandler();
+  if ($module_handler->moduleExists('dblog') && !$module_handler->moduleExists('search')) {
+    $links['dblog.search'] = [
+      'title' => new TranslatableMarkup('Top search phrases'),
+      'route_name' => 'dblog.search',
+      'description' => new TranslatableMarkup('View most popular search phrases.'),
+      'parent' => 'system.admin_reports',
+    ];
+  }
+
+  return $links;
+}
+
+/**
+ * Gets the route to the search page.
+ *
+ * @return string|null
+ *   The route name.
+ */
+function panopoly_search_page_route() {
+  if (\Drupal::moduleHandler()->moduleExists('panopoly_search_solr')) {
+    return 'page_manager.page_view_panopoly_search_panopoly_search-layout_builder-0';
+  }
+  if (\Drupal::moduleHandler()->moduleExists('panopoly_search_db')) {
+    return 'page_manager.page_view_panopoly_search_panopoly_search-layout_builder-0';
+  }
+
+  return NULL;
+}

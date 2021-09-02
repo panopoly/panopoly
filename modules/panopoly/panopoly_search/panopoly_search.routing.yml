@@ -1,0 +1,14 @@
+panpoly_search.core_search_redirect:
+  path: '/search'
+  defaults:
+    _controller: '\Drupal\panopoly_search\Controller\PanopolySearchController::redirectToSearch'
+    _title: 'Search'
+  requirements:
+    _permission: 'use panopoly search'
+panpoly_search.core_node_search_redirect:
+  path: '/search/node'
+  defaults:
+    _controller: '\Drupal\panopoly_search\Controller\PanopolySearchController::redirectToSearch'
+    _title: 'Search'
+  requirements:
+    _permission: 'use panopoly search'

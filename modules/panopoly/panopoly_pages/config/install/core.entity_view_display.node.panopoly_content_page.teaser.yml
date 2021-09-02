@@ -20,13 +20,13 @@ third_party_settings:
     enabled: true
     sections:
       -
-        layout_id: radix_bryant
+        layout_id: radix_boxton
         layout_settings:
           label: ''
         components:
           c87e7a48-822d-40c9-8e89-f57e9f1f09b9:
             uuid: c87e7a48-822d-40c9-8e89-f57e9f1f09b9
-            region: sidebar
+            region: contentmain
             configuration:
               id: 'field_block:node:panopoly_content_page:field_panopoly_featured_image'
               label: 'Primary image'
@@ -42,7 +42,7 @@ third_party_settings:
               context_mapping:
                 entity: layout_builder.entity
             additional: {  }
-            weight: 0
+            weight: -1
           8119b412-0d80-471b-9571-f72b1a9e08c8:
             uuid: 8119b412-0d80-471b-9571-f72b1a9e08c8
             region: contentmain

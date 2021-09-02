@@ -26,7 +26,6 @@ install:
   - drupal:dynamic_page_cache
   - drupal:taxonomy
   - drupal:dblog
-  - drupal:search
   - drupal:shortcut
   - drupal:toolbar
   - drupal:field_ui
@@ -49,7 +48,7 @@ install:
   - panopoly_pages:panopoly_magic
   - panopoly_pages:panopoly_media
   - panopoly_pages:panopoly_pages
-  #- panopoly_search:panopoly_search
+  - panopoly_search:panopoly_search
   - panopoly_wysiwyg:panopoly_wysiwyg
 
   # Panopoly Recommended - Admin & UI

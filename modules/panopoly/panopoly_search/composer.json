@@ -1,0 +1,19 @@
+{
+    "name": "drupal/panopoly_search",
+    "description": "Indexes and searches site content, Solr or otherwise.",
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "repositories": {
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
+    "require": {
+        "drupal/core": "^8.8 || ^9",
+        "drupal/facets": "^1.8",
+        "drupal/search_api": "^1.20",
+        "drupal/search_api_solr": "~4.2.0",
+        "drupal/user_permission_condition": "^1.1"
+    }
+}
