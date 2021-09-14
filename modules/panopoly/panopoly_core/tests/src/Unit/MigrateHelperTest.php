@@ -15,6 +15,7 @@ use Drupal\Tests\UnitTestCase;
  * @coversDefaultClass \Drupal\panopoly_core\MigrateHelper
  *
  * @group PanopolyCore
+ * @group Panopoly
  */
 class MigrateHelperTest extends UnitTestCase {
 

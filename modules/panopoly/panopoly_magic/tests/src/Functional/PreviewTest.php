@@ -7,6 +7,7 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Functional tests for Panopoly previews.
  *
+ * @group PanopolyMagic
  * @group Panopoly
  */
 class PreviewTest extends BrowserTestBase {
@@ -16,7 +17,7 @@ class PreviewTest extends BrowserTestBase {
    *
    * @var string
    */
-  public $profile = 'panopoly';
+  protected $profile = 'panopoly';
 
   /**
    * The theme to use.
@@ -39,7 +40,7 @@ class PreviewTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'panopoly_magic_preview_test',
   ];
 
@@ -70,7 +71,8 @@ class PreviewTest extends BrowserTestBase {
 
     $this->drupalGet('node/1');
     $page->clickLink('Layout');
-    $page->clickLink('Add Block');
+    $page->find('css', '.layout-builder__region .layout-builder__link--add')
+      ->click();
 
     // BlockWithPreview.
     $assert_session->pageTextContains("BlockWithPreview: preview block content");

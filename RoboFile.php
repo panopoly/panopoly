@@ -818,6 +818,43 @@ EOF;
   }
 
   /**
+   * Runs the PHPUnit test suite.
+   *
+   * @param array $arguments
+   *   Arguments to pass to PHPUnit.
+   *
+   * @return $this|\Robo\Collection\CollectionBuilder
+   *   A Robo collection to perform the operation.
+   *
+   * @throws \Exception
+   */
+  public function testPhpunit(array $arguments) {
+    $site_root = $this->findSiteRoot();
+    $phpunit = "{$site_root}/vendor/bin/phpunit";
+    if (!file_exists($phpunit)) {
+      throw new \Exception("Can't find PHPUnit executeable at {$phpunit}");
+    }
+
+    $site_webroot = file_exists("$site_root/web/index.php") ?
+      "{$site_root}/web" : $site_root;
+
+    /** @var \Robo\Collection\CollectionBuilder|$this $collection */
+    $collection = $this->collectionBuilder();
+
+    if (getenv('LANDO') === 'ON') {
+      $collection->taskExec("cp phpunit.lando.xml {$site_webroot}/core/phpunit.lando.xml");
+      $arguments = array_merge([
+        '-c', "{$site_webroot}/core/phpunit.lando.xml",
+      ], $arguments);
+    }
+
+    $argument_string = implode(" ", $arguments);
+    $collection->taskExec("{$phpunit} {$argument_string}");
+
+    return $collection;
+  }
+
+  /**
    * Updates a CHANGELOG.txt file for a new release.
    *
    * @param string $filename

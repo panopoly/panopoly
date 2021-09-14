@@ -15,6 +15,9 @@ use Drupal\Tests\UnitTestCase;
 
 /**
  * Unit tests for the BlockPreviewRenderer.
+ *
+ * @group PanopolyMagic
+ * @group Panopoly
  */
 class BlockPreviewRendererTest extends UnitTestCase {
 

@@ -91,6 +91,13 @@ lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo phpcs'
 panopoly_header "Performing static code analysis..."
 lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo phpstan'
 
+# Run PHPUnit tests. Results should be the same for upgrade/no-upgrade so, we
+# only run on the non-upgrade build.
+if [[ "$UPGRADE" = "no-upgrade" ]]; then
+	panopoly_header "Starting PHPUnit tests..."
+	lando ssh -c 'cd profiles/contrib/panopoly && /app/vendor/bin/robo test:phpunit -- --group Panopoly'
+fi
+
 # Make symlink to the Drupal site so we can get our artifacts out.
 ln -s $CI_SHARED_DIR/drupal $CI_PROJECT_DIR/drupal
 
