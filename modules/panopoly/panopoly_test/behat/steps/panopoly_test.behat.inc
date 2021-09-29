@@ -958,6 +958,23 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   }
 
   /**
+   * Asserts that a field matches a regex.
+   *
+   * @Then the :field_name field should match regex :regex
+   */
+  public function theFieldShouldMatchRegex($field_name, $regex) {
+    $field = $this->getSession()->getPage()->findField($field_name);
+    if (empty($field)) {
+      throw new \Exception(sprintf('We couldn\'t find "%s" on the page', $field));
+    }
+
+    $value = $field->getValue();
+    if (!preg_match($regex, $value)) {
+      throw new \Exception(sprintf('The field "%s" is expected to match regex "%s", but instead contains "%s".', $field, $regex, $value));
+    }
+  }
+
+  /**
    * Asserts select field value.
    *
    * @Then the :field select should be set to :value
@@ -965,7 +982,7 @@ class TestSubContext extends RawDrupalContext implements DrupalSubContextInterfa
   public function theSelectShouldBeSetTo($field, $value) {
     $select = $this->getSession()->getPage()->findField($field);
     if (empty($select)) {
-      throw new \Exception(sprintf('We couldn\'nt find "%s" on the page', $field));
+      throw new \Exception(sprintf('We couldn\'t find "%s" on the page', $field));
     }
     $options = $select->findAll('xpath', '//option[@selected="selected"]');
     if (empty($select)) {

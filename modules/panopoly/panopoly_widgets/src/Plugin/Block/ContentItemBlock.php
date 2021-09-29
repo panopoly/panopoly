@@ -2,9 +2,8 @@
 
 namespace Drupal\panopoly_widgets\Plugin\Block;
 
+use Drupal\Core\Url;
 use Drupal\node\Entity\NodeType;
-use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
@@ -102,39 +101,37 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
    */
   public function blockForm($form, FormStateInterface $form_state) {
     $entity = $this->loadEntity();
-    $content_types = $this->getContentTypes();
 
-    $form['#attached'] = ['library' => ['panopoly_widgets/content-item']];
-    $form['content_type'] = [
-      '#type' => 'select',
-      '#options' => array_merge(['all' => 'Any'], $content_types),
-      '#title' => $this->t('Content type'),
-      '#default_value' => $entity ? $entity->bundle() : 'all',
-      '#ajax' => [
-        'callback' => [$this, 'autocompleteGetNodes'],
+    $form['#attached'] = [
+      'library' => [
+        'panopoly_widgets/content-item',
+      ],
+      'drupalSettings' => [
+        'panopoly_widgets_content_item' => [
+          'autocomplete_base_url' => Url::fromRoute('panopoly_widgets.content_item.autocomplete', [
+            'type' => '@TYPE@',
+          ])->toString(),
+        ],
       ],
     ];
-    $form['node'] = [
-      '#prefix' => '<div id="node-selector-wrapper">',
-      '#type' => 'entity_autocomplete',
-      '#title' => $this->t('Piece of content'),
-      '#target_type' => 'node',
-      '#default_value' => $entity,
-      '#required' => TRUE,
-      // @todo Properly update this to any AJAX value for `content_type`.
-      //   There are some complications as $form_state->getValues() breaks due
-      //   to Layout Builder leveraging subform states. This requires us to
-      //   use a #process callback, but that does not seem to effect the
-      //   selection settings passed to the autocomplete, since AJAX was
-      //   triggered by a regular element and not a button. Without a button
-      //   triggering the rebuild, these changes are not respected.
-      //
-      //   This element needs to be rebuild with a new selection settings key in
-      //   its autocomplete-path property.
-      '#selection_settings' => [
-        'target_bundles' => array_keys($content_types),
+
+    $form['content_type'] = [
+      '#type' => 'select',
+      '#options' => array_merge(['any' => t('Any')], $this->getContentTypes()),
+      '#title' => $this->t('Content type'),
+      '#default_value' => 'any',
+      '#attributes' => [
+        'class' => ['js-panopoly-widgets-content-item-type'],
       ],
-      '#suffix' => '</div>',
+    ];
+
+    $form['node'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Piece of content'),
+      '#default_value' => $entity ? "{$entity->label()} ({$entity->id()})" : '',
+      '#required' => TRUE,
+      '#autocomplete_route_name' => 'panopoly_widgets.content_item.autocomplete',
+      '#autocomplete_route_parameters' => ['type' => 'any'],
       '#attributes' => [
         'class' => ['js-panopoly-widgets-content-item-autocomplete'],
       ],
@@ -146,6 +143,7 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
       '#title' => $this->t('View mode'),
       '#default_value' => $this->configuration['view_mode'],
     ];
+
     return $form;
   }
 
@@ -178,22 +176,35 @@ class ContentItemBlock extends BlockBase implements ContainerFactoryPluginInterf
   }
 
   /**
-   * Gets AJAX response for node autocomplete.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   The AJAX response.
-   */
-  public function autocompleteGetNodes(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-    $response->addCommand(new InvokeCommand(NULL, 'panopolyWidgetsCleanNodeAutoComplete', []));
-    return $response;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['nid'] = $form_state->getValue('node');
+    $label = trim($form_state->getValue('node'));
+    $type = $form_state->getValue('content_type');
+    $nid = NULL;
+
+    if (preg_match("/.+\s\(([^\)]+)\)/", $label, $matches)) {
+      $nid = $matches[1];
+    }
+    else {
+      $node_storage = $this->entityTypeManager->getStorage('node');
+      $query = $node_storage->getQuery()
+        ->condition('title', $label, 'CONTAINS')
+        ->sort('title', 'ASC')
+        ->range(0, 1)
+        ->addTag('node_access');
+
+      if ($type !== 'any') {
+        $query->condition('type', $type);
+      }
+
+      $results = $query->execute();
+      if (!empty($results)) {
+        $nid = reset($results);
+      }
+    }
+
+    $this->configuration['nid'] = $nid;
     $this->configuration['view_mode'] = $form_state->getValue('view_mode');
   }
 

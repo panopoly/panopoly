@@ -1,0 +1,7 @@
+panopoly_widgets.content_item.autocomplete:
+  path: '/panopoly_widgets/content_item/{type}/autocomplete'
+  defaults:
+    _controller: '\Drupal\panopoly_widgets\Controller\ContentItemController::handleContentItemAutocomplete'
+    _format: json
+  requirements:
+    _permission: 'access content'
