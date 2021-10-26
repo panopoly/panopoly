@@ -45,8 +45,8 @@ install:
   - panopoly_users:panopoly_users
 
   # Panopoly Toolset
-  - panopoly_pages:panopoly_magic
-  - panopoly_pages:panopoly_media
+  - panopoly_magic:panopoly_magic
+  - panopoly_media:panopoly_media
   - panopoly_pages:panopoly_pages
   - panopoly_search:panopoly_search
   - panopoly_wysiwyg:panopoly_wysiwyg
