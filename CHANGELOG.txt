@@ -1,3 +1,13 @@
+Panopoly 7.x-1.84, 2022-01-05
+-------------------
+- Update to WYSIWYG 2.9.
+- Attempt to fix screenshot artifacts.
+- Drop support for updating from Panopoly version that were release more
+  than a year ago.
+- Bring testing and CI infrastructure for Panopoly 1.x and 2.x in line.
+- Views pagers don't work when Ajax is enabled.
+- Start testing upgrade from 1.81 and 1.83.
+
 Panopoly 7.x-1.83, 2021-07-21
 -------------------
 - Remove change that I accidentally committed.

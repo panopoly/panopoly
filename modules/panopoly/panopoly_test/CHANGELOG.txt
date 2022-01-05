@@ -1,3 +1,7 @@
+Panopoly Test 7.x-1.84, 2022-01-05
+-------------------
+- Bring testing and CI infrastructure for Panopoly 1.x and 2.x in line.
+
 Panopoly Test 7.x-1.83, 2021-07-21
 -------------------
 - No changes since last release.
